@@ -13,8 +13,9 @@
     "module": "es2015",
     "strict": true
   },
+
   "include": [
-    "src/**/*"
+    "src"
   ],
   "exclude": [
     "node_modules",
