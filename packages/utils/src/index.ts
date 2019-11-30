@@ -1,2 +1,3 @@
 export * from './alignment';
-export * from './sample';
+export * from './sample/sample';
+export * from './sampleb';

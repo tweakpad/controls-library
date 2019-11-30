@@ -1,4 +1,4 @@
-export default class Sample {
+export class Sample {
   working: Boolean;
 
   constructor() {

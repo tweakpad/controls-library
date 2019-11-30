@@ -1,22 +1,19 @@
-const path = require('path');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src'),
-  devtool: 'inline-source-map',
-  module: {
-    rules: [
-      { test: /\.(ts|js)x?$/, loader: 'babel-loader', exclude: /node_modules/ }
-    ],
+  mode: "development",
+  devtool: "inline-source-map",
+  entry: "./src/index.ts",
+  output: {
+    filename: "bundle.js"
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json'],
+    // Add `.ts` and `.tsx` as a resolvable extension.
+    extensions: [".ts", ".tsx", ".js"]
   },
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
-  plugins: [
-    new ForkTsCheckerWebpackPlugin(),
-  ],
+  module: {
+    rules: [
+      // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
+      { test: /\.tsx?$/, loader: "ts-loader" }
+    ]
+  }
 };
