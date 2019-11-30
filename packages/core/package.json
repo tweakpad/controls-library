@@ -1,6 +1,6 @@
 {
   "name": "@tweakpad/core",
-  "version": "0.0.2-alpha.3",
+  "version": "0.0.2-alpha.4",
   "description": "TweakPad core web components and utils",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -18,6 +18,9 @@
     "name": "Ivan Juarez",
     "email": "ivan@blindgazer.com"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
@@ -30,8 +33,8 @@
     "@stencil/sass": "^1.1.1"
   },
   "dependencies": {
-    "@tweakpad/utils": "^0.0.2-alpha.3"
+    "@tweakpad/utils": "^0.0.2-alpha.4"
   },
   "license": "MIT",
-  "gitHead": "6a8680481708490cd6c10aeb2681ccf02d054479"
+  "gitHead": "6436e207c185eff297fd517c97ab7fe52c272b33"
 }

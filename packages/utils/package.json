@@ -1,6 +1,6 @@
 {
   "name": "@tweakpad/utils",
-  "version": "0.0.2-alpha.3",
+  "version": "0.0.2-alpha.4",
   "description": "TweakPad utils",
   "license": "MIT",
   "main": "dist/bundle.js",
@@ -8,6 +8,9 @@
   "author": {
     "name": "Ivan Juarez",
     "email": "ivan@blindgazer.com"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "type-check": "tsc --noEmit",
@@ -32,5 +35,5 @@
   "resolutions": {
     "terser": "3.14.1"
   },
-  "gitHead": "6a8680481708490cd6c10aeb2681ccf02d054479"
+  "gitHead": "6436e207c185eff297fd517c97ab7fe52c272b33"
 }
