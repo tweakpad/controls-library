@@ -1,6 +1,6 @@
 {
   "name": "@tweakpad/core",
-  "version": "0.0.2-alpha.0",
+  "version": "0.0.2-alpha.1",
   "description": "TweakPad core web components and utils",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -30,7 +30,7 @@
     "@stencil/sass": "^1.1.1"
   },
   "dependencies": {
-    "@tweakpad/utils": "^0.0.2-alpha.0"
+    "@tweakpad/utils": "^0.0.2-alpha.1"
   },
   "license": "MIT"
 }
