@@ -1,6 +1,6 @@
 {
   "name": "@tweakpad/common",
-  "version": "0.0.2-alpha.6",
+  "version": "0.0.2-alpha.7",
   "description": "TweakPad common",
   "license": "MIT",
   "main": "dist/index.js",
