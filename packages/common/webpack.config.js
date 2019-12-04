@@ -1,10 +1,12 @@
 
 module.exports = {
   mode: "development",
-  devtool: "inline-source-map",
+  // devtool: "inline-source-map",
   entry: "./src/index.ts",
   output: {
-    filename: "index.js"
+    filename: "index.js",
+    library: ["Tweakpad", "Common"],
+    libraryTarget: "umd"
   },
   resolve: {
     // Add `.ts` and `.tsx` as a resolvable extension.

@@ -7,13 +7,20 @@
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "noImplicitAny": true,
+    "outDir": "dist/esm",
     "declarationDir": "dist/types",
     "declaration": true,
-    "target": "es2015",
+    "target": "es5",
     "module": "es2015",
-    "strict": true
+    "moduleResolution": "node",
+    "strict": true,
+    "stripInternal": true,
+    "lib": [
+      "dom",
+      "es5",
+      "es6",
+    ],
   },
-
   "include": [
     "src"
   ],

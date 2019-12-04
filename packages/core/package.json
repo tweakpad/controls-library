@@ -23,7 +23,7 @@
   },
   "scripts": {
     "build": "stencil build --docs",
-    "start": "stencil build --dev --watch --serve",
+    "dev": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate"
@@ -33,7 +33,7 @@
     "@stencil/sass": "^1.1.1"
   },
   "dependencies": {
-    "@tweakpad/utils": "^0.0.2-alpha.6"
+    "@tweakpad/common": "^0.0.2-alpha.6"
   },
   "license": "MIT",
   "gitHead": "6436e207c185eff297fd517c97ab7fe52c272b33"

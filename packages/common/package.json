@@ -1,9 +1,10 @@
 {
-  "name": "@tweakpad/utils",
+  "name": "@tweakpad/common",
   "version": "0.0.2-alpha.6",
-  "description": "TweakPad utils",
+  "description": "TweakPad common",
   "license": "MIT",
   "main": "dist/index.js",
+  "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
   "author": {
     "name": "Ivan Juarez",
@@ -14,10 +15,10 @@
   },
   "scripts": {
     "type-check": "tsc --noEmit",
-    "type-check:watch": "npm run type-check -- --watch",
-    "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "webpack --mode=production",
-    "build": "npm run build:types && npm run build:js"
+    "build:umd": "webpack --mode=production",
+    "build:esm": "tsc",
+    "dev": "npm run type-check -- --watch",
+    "build": "npm run build:umd & npm run build:esm"
   },
   "devDependencies": {
     "ts-loader": "^6.2.1",
