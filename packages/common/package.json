@@ -3,9 +3,10 @@
   "version": "0.0.2-alpha.7",
   "description": "TweakPad common",
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "typings": "lib/esm/index.d.ts",
+  "unpkg": "dist/common.bundle.js",
   "author": {
     "name": "Ivan Juarez",
     "email": "ivan@blindgazer.com"
@@ -15,10 +16,11 @@
   },
   "scripts": {
     "type-check": "tsc --noEmit",
-    "build:umd": "webpack --mode=production",
-    "build:esm": "tsc",
-    "dev": "npm run type-check -- --watch",
-    "build": "npm run build:umd & npm run build:esm"
+    "lib:esm": "tsc",
+    "lib:cjs": "tsc -m commonjs --outDir lib/cjs",
+    "dist:bundle": "webpack --mode=production",
+    "dev": "npm run type-check --watch",
+    "build": "npm run dist:bundle & npm run lib:esm & npm run lib:cjs"
   },
   "devDependencies": {
     "ts-loader": "^6.2.1",

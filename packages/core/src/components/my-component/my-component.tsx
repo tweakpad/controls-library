@@ -1,6 +1,6 @@
+import { Sample } from '@tweakpad/common';
 import { Component, Prop, h } from '@stencil/core';
 import { format } from '../../utils/utils';
-
 
 @Component({
   tag: 'my-component',
@@ -28,6 +28,7 @@ export class MyComponent {
   }
 
   render() {
+    console.log(new Sample());
     return <div>Hello, World! I'm {this.getText()}</div>;
   }
 }

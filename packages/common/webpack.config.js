@@ -1,12 +1,18 @@
+const path = require("path");
 
 module.exports = {
   mode: "development",
   // devtool: "inline-source-map",
-  entry: "./src/index.ts",
+  entry: {
+    common: [
+      "./src/index.ts"
+    ],
+  },
   output: {
-    filename: "index.js",
+    filename: "[name].bundle.js",
     library: ["Tweakpad", "Common"],
-    libraryTarget: "umd"
+    libraryTarget: "umd",
+    path: path.resolve(__dirname, './dist'),
   },
   resolve: {
     // Add `.ts` and `.tsx` as a resolvable extension.

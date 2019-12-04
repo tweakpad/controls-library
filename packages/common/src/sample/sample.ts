@@ -2,6 +2,6 @@ export class Sample {
   working: Boolean;
 
   constructor() {
-    this.working = false;
+    this.working = true;
   }
 }

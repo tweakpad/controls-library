@@ -12,7 +12,7 @@
   "scripts": {
     "lerna:bootstrap": "lerna bootstrap",
     "lerna:publish": "lerna publish",
-    "dev": "lerna run start --parallel --scope \"@tweakpad/{core,common}\""
+    "dev": "lerna run dev --parallel --scope \"@tweakpad/{core,common}\""
   },
   "devDependencies": {
     "lerna": "^3.19.0"
