@@ -7,6 +7,7 @@ import {
   type TemplateResult,
 } from 'lit';
 import { TpFormElement } from '../../foundation/form-element.js';
+import { composedContains, composedParent, deepActiveElement } from '../../foundation/focus.js';
 import { ControllableState, orderedValuesEqual } from '../../foundation/controllable-state.js';
 import { TpValueChangeEvent, type TpChangeEventOptions } from '../../foundation/events.js';
 import { Scheduler, CleanupScope } from '../../foundation/services.js';
@@ -917,6 +918,7 @@ export class TpFlow extends TpFormElement<FlowDocument> {
         this.#nodeLayer.rebind(new Set([...previous.nodes, ...value.nodes]));
         this.#edgeLayer.invalidate();
         this.#selectionChanged(value, reason);
+        this.#releaseNodeFocus(value);
         this.#schedule();
       },
     });
@@ -3522,6 +3524,23 @@ export class TpFlow extends TpFormElement<FlowDocument> {
     return text ? `${base}, ${text}` : base;
   }
 
+  /**
+   * A field inside a node keeps the caret only while its node is selected: once the selection
+   * leaves that node, focus moves to the canvas, so the field commits and keys reach the flow.
+   */
+  #releaseNodeFocus(selection: FlowSelection): void {
+    const active = deepActiveElement(this.ownerDocument);
+    if (!active || !composedContains(this, active)) return;
+    for (let node: Node | null = active; node && node !== this; node = composedParent(node)) {
+      if ((node as Element).localName !== 'tp-flow-node') continue;
+      // A focused node host is the node's own keyboard focus, not a field inside it.
+      const id = (node as Element & { nodeId: string }).nodeId;
+      if (node !== active && !selection.nodes.includes(id))
+        this.#canvas?.focus({ preventScroll: true, focusVisible: false });
+      return;
+    }
+  }
+
   #selectionChanged(value: FlowSelection, reason: ChangeReason): void {
     const single = value.nodes.length === 1 && value.edges.length === 0;
     // Keyboard and marquee selections are announced; pointer presses are self-evident.
@@ -5119,10 +5138,13 @@ export class TpFlow extends TpFormElement<FlowDocument> {
     }
     if (node) this.#selectOnPress(node, 'node', event);
     else if (edge) this.#selectOnPress(edge, 'edge', event);
-    else if (pane && !event.shiftKey)
+    else if (pane && !event.shiftKey) {
+      // A field of a node that was never selected (reached with Tab) lets go here too.
+      this.#releaseNodeFocus(EMPTY_SELECTION);
       this.#selectionState.set(EMPTY_SELECTION, 'item-press', event, {
         metadata: { surface: 'pane' },
       });
+    }
   };
 
   #selectOnPress(id: string, kind: 'node' | 'edge', event: PointerEvent): void {

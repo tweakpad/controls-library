@@ -131,6 +131,11 @@ export interface FlowPropertyControlContext {
   /** Connected input port overriding this property, if any. */
   port: FlowResolvedPort | undefined;
   id: string;
+  /**
+   * The control is a node body row: a control with an inline variant renders it and shows the
+   * property's label itself. In the inspector a Field labels the control instead.
+   */
+  inline: boolean;
 }
 export type FlowPropertyControlFactory = (context: FlowPropertyControlContext) => TemplateResult;
 export type FlowPropertyControls = Partial<Record<FlowPropertyControl, FlowPropertyControlFactory>>;

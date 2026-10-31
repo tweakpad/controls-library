@@ -99,6 +99,8 @@ Properties name a `key` of the node data and a `control`: `slider`, `number`, `t
 
 `propertyControls` replaces any of them (and must supply `custom`): a factory `(context) => TemplateResult` receives `{ node, definition, value, disabled, readOnly, propose, commit, port, id }` and renders a control that proposes through `propose(value, reason)` and settles with `commit(reason)`. A node whose type has no definition renders as a card with the shape's default size and no ports.
 
+In a node body, `slider`, `number`, `text`, `select`, `switch` and `checkbox` render their inline variant: the control is the whole row and shows the property's label, and a slider's value can be typed as well as dragged. The inspector shows every control in a labelled Field. A factory's context has `inline` set in a node body, so a replacement control can do the same.
+
 ### Edge kinds
 
 An edge's `kind` is `smoothstep` (the default), `bezier`, `step`, `straight` or `orthogonal`; `rules.defaultEdgeKind` sets it for new connections. `animated` marches a dashed stroke from source to target so the direction reads at a glance, and adds a closed arrow that keeps it readable when reduced motion pauses the dash. `label` renders as a Badge pill on the path.

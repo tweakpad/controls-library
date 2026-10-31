@@ -2,6 +2,7 @@ import { ambientAnimation, motionTransition, presenceMotion } from '../motion.js
 import type { PresentationDictionary, PresentationRule } from '../resolver.js';
 import { focusRing } from './shared/focus.js';
 import { activeRing, thumb } from './shared/handle.js';
+import { inlineControlLabel } from './shared/inline-control.js';
 import { selectionFill, selectionLine } from './shared/selection.js';
 import {
   floatingToolbarAppearance,
@@ -67,9 +68,9 @@ export const flowAppearance: PresentationDictionary = {
       declarations: {
         '--_tp-flow-space': 'var(--tp-space-3)',
         '--_tp-flow-node-width': 'calc(var(--tp-spacing) * 60)',
-        '--_tp-flow-port-size': 'var(--tp-space-2-5)',
+        '--_tp-flow-port-size': 'var(--tp-space-4)',
         '--_tp-flow-handle': 'var(--tp-space-3)',
-        '--_tp-flow-edge-width': '1.5px',
+        '--_tp-flow-edge-width': 'calc(var(--tp-border-width-strong) * 1.5)',
         '--_tp-flow-marker': 'var(--tp-space-3)',
         '--_tp-flow-grid': '16px',
         '--_tp-flow-dash': '6 4',
@@ -91,9 +92,9 @@ export const flowAppearance: PresentationDictionary = {
       declarations: {
         '--_tp-flow-space': 'var(--tp-space-2)',
         '--_tp-flow-node-width': 'calc(var(--tp-spacing) * 52)',
-        '--_tp-flow-port-size': 'var(--tp-space-2)',
+        '--_tp-flow-port-size': 'var(--tp-space-3)',
         '--_tp-flow-handle': 'var(--tp-space-2-5)',
-        '--_tp-flow-edge-width': '1px',
+        '--_tp-flow-edge-width': 'var(--tp-border-width-strong)',
         '--_tp-flow-marker': 'var(--tp-space-2-5)',
         '--_tp-flow-minimap': 'calc(var(--tp-spacing) * 40)',
         '--_tp-flow-inspector': 'calc(var(--tp-spacing) * 72)',
@@ -107,9 +108,9 @@ export const flowAppearance: PresentationDictionary = {
       declarations: {
         '--_tp-flow-space': 'var(--tp-space-4)',
         '--_tp-flow-node-width': 'calc(var(--tp-spacing) * 68)',
-        '--_tp-flow-port-size': 'var(--tp-space-3)',
+        '--_tp-flow-port-size': 'var(--tp-space-5)',
         '--_tp-flow-handle': 'var(--tp-space-4)',
-        '--_tp-flow-edge-width': '2px',
+        '--_tp-flow-edge-width': 'calc(var(--tp-border-width-strong) * 2)',
         '--_tp-flow-marker': 'var(--tp-space-4)',
         '--_tp-flow-minimap': 'calc(var(--tp-spacing) * 60)',
         '--_tp-flow-inspector': 'calc(var(--tp-spacing) * 96)',
@@ -279,7 +280,11 @@ export const flowAppearance: PresentationDictionary = {
     { selector: '&[data-severity="error"]', declarations: { color: 'var(--tp-destructive)' } },
   ],
   'flow-node-row': [{ declarations: { 'font-size': 'var(--tp-text-xs)' } }],
-  'flow-node-row-label': [{ declarations: { color: 'var(--tp-muted-foreground)' } }],
+  // Port and property labels take the inline fields' label role wherever the row places them
+  // (title or trailing slot), muted beside the fields.
+  'flow-node-row-label': [
+    { declarations: { ...inlineControlLabel, color: 'var(--tp-muted-foreground)' } },
+  ],
   'flow-node-row-control': [],
   'flow-node-footer': [
     { declarations: { 'font-size': 'var(--tp-text-xs)', color: 'var(--tp-muted-foreground)' } },

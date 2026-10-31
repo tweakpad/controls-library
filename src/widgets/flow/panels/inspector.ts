@@ -609,6 +609,7 @@ export class TpFlowInspector extends TpElement {
       commit: () => this.#settle(definition.key, new Event('commit')),
       port: undefined,
       id: `${this.#id}-${definition.key}`,
+      inline: false,
     };
   }
 

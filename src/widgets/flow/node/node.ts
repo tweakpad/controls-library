@@ -637,6 +637,7 @@ export class TpFlowNode extends TpElement {
       commit: (reason) => this.#commit(key, this.node?.data[key], reason, new Event('change')),
       port: connected ? port : undefined,
       id: `${this.nodeId}-${key}`,
+      inline: true,
     };
     return factory(context);
   };

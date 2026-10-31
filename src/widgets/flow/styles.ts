@@ -505,6 +505,12 @@ export const flowNodeStyles = css`
     background-color: var(--_tp-flow-node-header-fill, transparent);
   }
 
+  /* A row that holds only a port and its label is compact, so stacked ports sit close together.
+     The list item's box is a subgrid that ignores a minimum size, so its padding sets the height. */
+  .port-row::part(list-item) {
+    padding-block: var(--tp-space-0-5);
+  }
+
   .row-port {
     position: relative;
   }
@@ -546,6 +552,16 @@ export const flowNodeStyles = css`
   }
 
   .row-control > * {
+    inline-size: 100%;
+  }
+
+  /* A node body row of an inline control: the control spans the body. */
+  .field {
+    display: block;
+    min-inline-size: 0;
+  }
+
+  .field > * {
     inline-size: 100%;
   }
 

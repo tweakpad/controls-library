@@ -14,6 +14,7 @@ import type {
 import type { FlowNodeRunState } from '../../../foundation/flow/run/types.js';
 import type { FlowLod, FlowStrings } from '../types.js';
 import { fillTemplate } from '../../../foundation/template.js';
+import { INLINE_PROPERTY_CONTROLS } from './property-controls.js';
 
 export interface ShapeContext {
   node: FlowNode;
@@ -225,6 +226,20 @@ function propertyRows(context: ShapeContext, options: { ports?: boolean } = {}):
   for (const port of context.ports) if (port.control) portByControl.set(port.control, port);
   for (const property of context.properties) {
     const port = options.ports ? portByControl.get(property.key) : undefined;
+    // An inline control is the row: it shows the property's label and its value itself.
+    if (INLINE_PROPERTY_CONTROLS.has(property.control)) {
+      rows.push(
+        html`<div
+          class="row field"
+          part="flow-node-row"
+          data-port-id=${port?.id ?? nothing}
+          data-port-direction=${port?.direction ?? nothing}
+        >
+          ${context.control(property.key)}
+        </div>`,
+      );
+      continue;
+    }
     rows.push(
       html`<tp-list-item
         class="row"

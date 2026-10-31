@@ -1,16 +1,29 @@
 import { html, nothing, type TemplateResult } from 'lit';
 import { TpTextControl } from '../../../components/field/text-control.js';
+import type { FlowPropertyControl } from '../../../foundation/flow/types.js';
 import type { FlowPropertyControlContext, FlowPropertyControls } from '../types.js';
 
 /**
  * Default property control factories (Widgets 6.3 Properties: each property definition names
  * the library control that edits it). Every factory marks its control with
  * `data-flow-property` so the node host re-proposes the control's lane events as node data
- * changes; `number` marks a NumberField root that the host binds after render.
+ * changes; `number` marks a NumberField root that the host binds after render. In a node body
+ * (`inline`), the controls listed in `INLINE_PROPERTY_CONTROLS` render their inline variant,
+ * which is the whole row and shows the property's label.
  */
 
 /** The text a text control shows for a property value. */
 const propertyText = (value: unknown): string => (value == null ? '' : String(value));
+
+/** Control kinds whose default control has an inline variant: in a node body it is the row. */
+export const INLINE_PROPERTY_CONTROLS: ReadonlySet<FlowPropertyControl> = new Set([
+  'text',
+  'number',
+  'slider',
+  'select',
+  'switch',
+  'checkbox',
+]);
 
 function optionItems(context: FlowPropertyControlContext) {
   return (context.definition.options ?? []).map((option) => ({
@@ -25,7 +38,9 @@ export const defaultPropertyControls: FlowPropertyControls = {
       class="control"
       data-flow-property=${context.definition.key}
       id=${context.id}
-      size="sm"
+      size=${context.inline ? nothing : 'sm'}
+      variant=${context.inline ? 'inline' : nothing}
+      label=${context.inline ? context.definition.label : nothing}
       ?mono=${context.definition.mono === true}
       .value=${propertyText(context.value)}
       placeholder=${context.definition.placeholder ?? ''}
@@ -47,27 +62,46 @@ export const defaultPropertyControls: FlowPropertyControls = {
       rows="2"
     ></tp-text-area>`,
   number: (context) =>
-    html`<tp-input-group
-      class="control number"
-      data-number-field=${context.definition.key}
-      data-flow-property=${context.definition.key}
-      size="sm"
-      ><tp-input
-        id=${context.id}
-        type="text"
-        inputmode="decimal"
-        ?mono=${context.definition.mono !== false}
-        ?disabled=${context.disabled}
-        ?readonly=${context.readOnly}
-        aria-label=${context.definition.label}
-      ></tp-input
-    ></tp-input-group>`,
+    context.inline
+      ? html`<span
+          class="control number"
+          data-number-field=${context.definition.key}
+          data-flow-property=${context.definition.key}
+          ><tp-input
+            id=${context.id}
+            variant="inline"
+            label=${context.definition.label}
+            type="text"
+            inputmode="decimal"
+            ?mono=${context.definition.mono !== false}
+            ?disabled=${context.disabled}
+            ?readonly=${context.readOnly}
+          ></tp-input
+        ></span>`
+      : html`<tp-input-group
+          class="control number"
+          data-number-field=${context.definition.key}
+          data-flow-property=${context.definition.key}
+          size="sm"
+          ><tp-input
+            id=${context.id}
+            type="text"
+            inputmode="decimal"
+            ?mono=${context.definition.mono !== false}
+            ?disabled=${context.disabled}
+            ?readonly=${context.readOnly}
+            aria-label=${context.definition.label}
+          ></tp-input
+        ></tp-input-group>`,
   slider: (context) =>
     html`<tp-slider
       class="control slider"
       data-flow-property=${context.definition.key}
       id=${context.id}
-      size="sm"
+      size=${context.inline ? nothing : 'sm'}
+      variant=${context.inline ? 'inline' : nothing}
+      label=${context.inline ? context.definition.label : nothing}
+      ?editable-value=${context.inline}
       .value=${typeof context.value === 'number' ? context.value : (context.definition.min ?? 0)}
       .minimum=${context.definition.min ?? 0}
       .maximum=${context.definition.max ?? 100}
@@ -81,7 +115,8 @@ export const defaultPropertyControls: FlowPropertyControls = {
       class="control"
       data-flow-property=${context.definition.key}
       id=${context.id}
-      size="sm"
+      size=${context.inline ? nothing : 'sm'}
+      variant=${context.inline ? 'inline' : nothing}
       .items=${optionItems(context)}
       .value=${context.value == null ? '' : String(context.value)}
       placeholder=${context.definition.placeholder ?? ''}
@@ -94,22 +129,26 @@ export const defaultPropertyControls: FlowPropertyControls = {
       class="control"
       data-flow-property=${context.definition.key}
       id=${context.id}
-      size="sm"
+      size=${context.inline ? nothing : 'sm'}
+      variant=${context.inline ? 'inline' : nothing}
       .checked=${Boolean(context.value)}
       ?disabled=${context.disabled}
       ?readonly=${context.readOnly}
-      aria-label=${context.definition.label}
-    ></tp-switch>`,
+      aria-label=${context.inline ? nothing : context.definition.label}
+      >${context.inline ? context.definition.label : nothing}</tp-switch
+    >`,
   checkbox: (context) =>
     html`<tp-checkbox
       class="control"
       data-flow-property=${context.definition.key}
       id=${context.id}
+      variant=${context.inline ? 'inline' : nothing}
       .checked=${Boolean(context.value)}
       ?disabled=${context.disabled}
       ?readonly=${context.readOnly}
-      aria-label=${context.definition.label}
-    ></tp-checkbox>`,
+      aria-label=${context.inline ? nothing : context.definition.label}
+      >${context.inline ? context.definition.label : nothing}</tp-checkbox
+    >`,
   color: (context) =>
     html`<tp-color-picker
       class="control"
