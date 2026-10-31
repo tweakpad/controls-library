@@ -26,7 +26,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ['src/**/*.ts', '.storybook/**/*.ts', '*.config.ts'],
+    files: ['src/**/*.ts', 'tests/unit/**/*.ts', '.storybook/**/*.ts', '*.config.ts'],
     plugins: { lit, ...litA11y.configs.recommended.plugins },
     languageOptions: {
       globals: { ...globals.browser, ...globals.node },

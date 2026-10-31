@@ -2,8 +2,8 @@
 
 Round-trip corpus of `tp-text-editor`'s portable formats. The record lives in
 `plans/widgets/text-editor/implementation-checklist.md` (C-103, V-111, V-113 to V-127, V-544).
-The unit tests in `src/foundation/text-editor/content.test.ts` read every file here, through the
-loader of `src/foundation/text-editor/content/corpus.test.ts` and the custom node definitions of
+The unit tests in `tests/unit/foundation/text-editor/content.test.ts` read every file here, through the
+loader of `tests/unit/foundation/text-editor/content/corpus.test.ts` and the custom node definitions of
 `nodes.ts` (a callout, an embed and a mention), which the browser fixtures import too; the parity
 page `../engines.html` loads the canonical documents into both engines.
 
@@ -45,7 +45,7 @@ writing it again gives it back unchanged (`corpus.test.ts`, "canonical parity do
 
 - Content is original sample content.
 - The tests read HTML in Node through a structural tree builder
-  (`src/foundation/text-editor/content/html-source.test.ts`), which is no HTML tree builder: an
+  (`tests/unit/foundation/text-editor/content/html-source.test.ts`), which is no HTML tree builder: an
   input closes every non-void element and nests elements only where a browser's parser keeps
   them, for example no block inside `p`. The real `DOMParser` path runs in the browser.
 - Blocks without a valid identifier receive `te00000001`, `te00000002`, … in document order, so

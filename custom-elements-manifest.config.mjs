@@ -28,7 +28,7 @@ function scanEventSources(...directories) {
     for (const entry of readdirSync(folder, { withFileTypes: true })) {
       const path = join(folder, entry.name);
       if (entry.isDirectory()) walk(path);
-      else if (entry.name.endsWith('.ts') && !entry.name.endsWith('.test.ts'))
+      else if (entry.name.endsWith('.ts'))
         sources.push(readFileSync(path, 'utf8'));
     }
   };
@@ -666,7 +666,6 @@ export default {
     'src/foundation/element.ts',
     'src/foundation/form-element.ts',
   ],
-  exclude: ['src/**/*.test.ts'],
   outdir: 'dist',
   litelement: true,
   plugins: [

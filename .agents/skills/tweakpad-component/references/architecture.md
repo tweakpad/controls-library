@@ -18,8 +18,8 @@ using them. This document does not duplicate normative component contracts.
 | Presentation reference | `../specification/external/` (component registry checkout)                                        | Components, compositions and presentation across applicable registry bases.                                                                                                                                                                                                                                                                                                                                                                                                |
 | Widget reference       | `../specification/external/` and `../specification/research/` (widget library checkout and notes) | Widget parity evidence: the color input binding view (color picker), the 2D point input binding (2D picker) and the number graph monitor view (graph).                                                                                                                                                                                                                                                                                                                     |
 | Public inventory       | `src/catalog.ts`, `src/components/index.ts`, `src/index.ts`, `src/register.ts`, `package.json`    | Catalog identities, class exports, registration and package entrypoints; each component module declares its own `HTMLElementTagNameMap` entry.                                                                                                                                                                                                                                                                                                                             |
-| Widget inventory       | `src/widgets/catalog.ts`, `src/widgets/index.ts`, `src/register/widgets.ts`                       | The widgets section: catalog, class exports and registration for `@tweakpad/ui/widgets` and `@tweakpad/ui/register/widgets`; never reached from `src/index.ts` or `src/register.ts` (`src/widgets/catalog.test.ts`).                                                                                                                                                                                                                                                       |
-| Framework bindings     | `scripts/bindings/`, `src/react/`, `src/vue/`, `src/preact/`, `src/solid/`, `src/svelte/`, `plans/frameworks/ledger.md` | Generated from the manifest, never edited by hand: React and Vue components per registered element, tag types for React, Preact, Solid, Svelte and Vue. `src/bindings.test.ts` fails on drift and untyped events; `tests/frameworks/` holds the type tests, `tests/fixtures/frameworks/` the browser scenarios, and the ledger the per-entry verification. |
+| Widget inventory       | `src/widgets/catalog.ts`, `src/widgets/index.ts`, `src/register/widgets.ts`                       | The widgets section: catalog, class exports and registration for `@tweakpad/ui/widgets` and `@tweakpad/ui/register/widgets`; never reached from `src/index.ts` or `src/register.ts` (`tests/unit/widgets/catalog.test.ts`).                                                                                                                                                                                                                                                       |
+| Framework bindings     | `scripts/bindings/`, `src/react/`, `src/vue/`, `src/preact/`, `src/solid/`, `src/svelte/`, `plans/frameworks/ledger.md` | Generated from the manifest, never edited by hand: React and Vue components per registered element, tag types for React, Preact, Solid, Svelte and Vue. `tests/unit/bindings.test.ts` fails on drift and untyped events; `tests/frameworks/` holds the type tests, `tests/fixtures/frameworks/` the browser scenarios, and the ledger the per-entry verification. |
 | Shared behavior        | `src/foundation/`, `src/components/shared/`                                                       | Existing abstractions and consumers, including limitations that require shared repair.                                                                                                                                                                                                                                                                                                                                                                                     |
 | Shared presentation    | `src/presentation/`, `src/styles.css`, `docs/styling.md`, `docs/motion.md`                        | Definition/part registration, resolution, tokens, recipes, structure, composition, public overrides and motion boundaries.                                                                                                                                                                                                                                                                                                                                                 |
 | Docs and fixtures      | `docs/components/`, `docs/motion/<group>/`, `docs/widgets/`, `src/docs/`, `scripts/docs/`, `src/stories/`, `.storybook/`, `tests/fixtures/components/`   | One documentation page per component (`docs/components/<slug>.mdx`), read by both renderings; the docs tooling (page reader, manifest API rows, Related, preview runtime, Vite plugin) and the index build; story files with `libraryDocs()`; browser fixtures with per-folder README steps. Components not yet migrated keep `docs/<name>.md` and `src/stories/<name>.examples.ts` (with `*-example.js` sources) until their page is written. Widgets use `src/stories/widgets/`, `docs/widgets/` and `tests/fixtures/widgets/`. |
@@ -227,13 +227,13 @@ Fade a state fill through the shared fill layer instead:
   `::after`. A composition that unpaints a reused Button from outside must also
   remove its layer (`::part(button)::before { content: none }`).
 
-`src/presentation/fill-layer.test.ts` fails on any background transition in
+`tests/unit/presentation/fill-layer.test.ts` fails on any background transition in
 component or presentation source.
 
 ### Tree-shakeable ownership
 
 Using one component must bundle only that component, the components it renders and
-the shared code they reach. `src/presentation/families.test.ts` enforces these rules:
+the shared code they reach. `tests/unit/presentation/families.test.ts` enforces these rules:
 
 - **Presentation family.** Each component owns `src/presentation/families/<name>.ts`.
   It holds `definePresentation({ definition, bindings, structure, sources })`. The element
@@ -249,7 +249,7 @@ the shared code they reach. `src/presentation/families.test.ts` enforces these r
   counterparts `presentation/widgets.ts`, `families/widgets.ts`). They exist only for
   tooling and full-library themes. Widget families are listed in `families/widgets.ts`,
   never in `families/index.ts`, so `@tweakpad/ui` and `/register` never reach a widget
-  (`src/widgets/catalog.test.ts`).
+  (`tests/unit/widgets/catalog.test.ts`).
 - **Rendered elements.** Every library element a class renders, through a `<tp-*>`
   template, `renderPart({ tag })` or `createElement`, is listed in
   `static get elementDependencies()`. `defineElement` defines them recursively.
@@ -326,8 +326,8 @@ checks. This location does not authorize adding a second browser driver.
 
 Every component story file is authored in `src/stories/<name>.stories.ts`;
 `.storybook/preview.ts` supplies the `autodocs` tag and padded layout once, so a
-story file declares only what differs. `src/stories/stories.test.ts` and
-`src/docs/docs.test.ts` verify one Default story per catalog entry, the pairing of each page
+story file declares only what differs. `tests/unit/stories/stories.test.ts` and
+`tests/unit/docs/docs.test.ts` verify one Default story per catalog entry, the pairing of each page
 with its story, and the page skeleton; a component not yet migrated keeps its reference
 markdown and `*.examples.ts` until its page is written. Update the affected expectations to
 verify API/documentation behavior rather than preserving an unwanted gallery to satisfy a

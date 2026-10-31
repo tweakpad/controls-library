@@ -309,7 +309,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   let ok = problems.length === 0;
   if (!args.includes('--no-tests')) {
     ok =
-      run('npx', ['vitest', 'run', 'src/docs/docs.test.ts', 'src/stories/stories.test.ts']) && ok;
+      run('npx', ['vitest', 'run', 'tests/unit/docs/docs.test.ts', 'tests/unit/stories/stories.test.ts']) && ok;
     if (
       existsSync(join(root, 'dist/docs/index.js')) &&
       existsSync(join(root, 'dist/custom-elements.json'))

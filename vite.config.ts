@@ -5,7 +5,7 @@ import { defineConfig } from 'vite';
 const iconDirectory = resolve(import.meta.dirname, 'src/icons');
 const iconEntries = Object.fromEntries(
   readdirSync(iconDirectory)
-    .filter((file) => file.endsWith('.ts') && file !== 'types.ts' && !file.endsWith('.test.ts'))
+    .filter((file) => file.endsWith('.ts') && file !== 'types.ts')
     .map((file) => [`icons/${file.slice(0, -3)}`, resolve(iconDirectory, file)]),
 );
 

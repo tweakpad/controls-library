@@ -1,0 +1,436 @@
+import { describe, expect, it, vi } from 'vitest';
+import { PresentationController } from '../../../src/presentation/controller.js';
+import {
+  ContentSecurityService,
+  contentSecurityPolicy,
+} from '../../../src/foundation/content-security.js';
+import { GeneratedStyleResource } from '../../../src/foundation/generated-style.js';
+import { setLogicalPortalOwner } from '../../../src/foundation/portal-ownership.js';
+import { badgePresentation } from '../../../src/presentation/families/badge.js';
+
+type Host = ConstructorParameters<typeof PresentationController>[0];
+type TestStyle = {
+  textContent: string;
+  nodeType: number;
+  parentNode: { removeChild: (node: TestStyle) => void } | null;
+  nextSibling?: TestStyle | null;
+  setAttribute: ReturnType<typeof vi.fn>;
+  remove: () => void;
+};
+function node(nodeType: number): TestStyle {
+  return {
+    nodeType,
+    textContent: '',
+    parentNode: null,
+    setAttribute: vi.fn(),
+    remove() {
+      this.parentNode?.removeChild(this);
+    },
+  };
+}
+
+function environment(realm: string, constructed = true) {
+  class Sheet {
+    readonly realm = realm;
+    css = '';
+    replaceSync(css: string) {
+      this.css = css;
+    }
+  }
+  const document = {
+    nodeType: 9,
+    defaultView: {
+      CSSStyleSheet: constructed ? Sheet : undefined,
+      litNonce: constructed ? undefined : `${realm}-nonce`,
+    },
+    createComment: vi.fn(() => node(8)),
+    createElement: vi.fn(() => node(1)),
+  };
+  return { document, Sheet };
+}
+
+function fixture(scope: ReturnType<typeof environment>, constructed = true) {
+  const children: TestStyle[] = [];
+  let sheets: Array<{ realm: string; css?: string }> = [];
+  const root = {
+    nodeType: 11,
+    host: {},
+    ownerDocument: scope.document,
+    get firstChild() {
+      return children[0] ?? null;
+    },
+    append(style: TestStyle) {
+      children.push(style);
+      style.parentNode = this;
+    },
+    insertBefore(style: TestStyle, reference: TestStyle | null) {
+      const index = reference ? children.indexOf(reference) : children.length;
+      children.splice(index, 0, style);
+      style.parentNode = this;
+    },
+    removeChild(style: TestStyle) {
+      children.splice(children.indexOf(style), 1);
+      style.parentNode = null;
+    },
+  };
+  if (constructed)
+    Object.defineProperty(root, 'adoptedStyleSheets', {
+      get: () => sheets,
+      set: (value: typeof sheets) => {
+        const realm = new root.ownerDocument.defaultView.CSSStyleSheet!().realm;
+        if (value.some((sheet) => sheet.realm !== realm)) throw new Error('foreign sheet');
+        sheets = value;
+      },
+    });
+  const host = {
+    ownerDocument: scope.document,
+    parentNode: scope.document,
+    constructor: {
+      elementStyles: [{ cssText: ':host { display: inline-flex; }' }],
+      shadowRootOptions: { mode: 'open' },
+    },
+    shadowRoot: null as typeof root | null,
+    renderRoot: root,
+    renderOptions: {} as Host['renderOptions'],
+    attachShadow: vi.fn(() => {
+      host.shadowRoot = root;
+      return root;
+    }),
+    addController: vi.fn(),
+    requestUpdate: vi.fn(),
+  };
+  const controller = new PresentationController(host as unknown as Host);
+  return { host, root, children, controller, sheets: () => sheets };
+}
+
+describe('document-local structural style owner', () => {
+  it('creates first-connected structural sheets in the target document', () => {
+    const foreign = environment('foreign');
+    const state = fixture(foreign);
+    expect(state.controller.createRenderRoot()).toBe(state.root);
+    expect(state.sheets()).toHaveLength(1);
+    expect(state.sheets()[0]).toMatchObject({
+      realm: 'foreign',
+      css: ':host { display: inline-flex; }',
+    });
+    expect(state.host.attachShadow).toHaveBeenCalledWith({ mode: 'open' });
+    expect(state.host.renderOptions.renderBefore).toBe(state.children[0]);
+    expect(state.children[0]?.nodeType).toBe(8);
+  });
+
+  it('preserves structural sheet identity on ordinary reconnect', () => {
+    const state = fixture(environment('same'));
+    state.controller.createRenderRoot();
+    state.controller.hostConnected();
+    const original = state.sheets()[0];
+    state.controller.hostDisconnected();
+    state.controller.hostConnected();
+    expect(state.sheets()).toEqual([original]);
+    expect(state.host.requestUpdate).not.toHaveBeenCalled();
+  });
+
+  it('restores owned sheets after adoption and preserves destination consumer sheets', () => {
+    const state = fixture(environment('source'));
+    state.controller.createRenderRoot();
+    state.controller.hostConnected();
+    const previous = state.sheets()[0];
+    state.controller.hostDisconnected();
+    const foreign = environment('target');
+    state.host.ownerDocument = foreign.document;
+    state.host.parentNode = foreign.document;
+    state.root.ownerDocument = foreign.document;
+    const consumer = new foreign.Sheet();
+    (state.root as unknown as ShadowRoot).adoptedStyleSheets = [
+      consumer as unknown as CSSStyleSheet,
+    ];
+    state.controller.hostConnected();
+    expect(state.sheets()).toHaveLength(2);
+    expect(state.sheets()[0]).toBe(consumer);
+    expect(state.sheets()[1]).toMatchObject({
+      realm: 'target',
+      css: ':host { display: inline-flex; }',
+    });
+    expect(state.sheets()).not.toContain(previous);
+    expect(state.host.requestUpdate).toHaveBeenCalledOnce();
+  });
+
+  it('preserves the render boundary and reapplies target nonce across adoption', () => {
+    const state = fixture(environment('source', false), false);
+    state.controller.createRenderRoot();
+    state.controller.hostConnected();
+    const boundary = state.children[0]!;
+    const style = state.children[1]!;
+    expect(state.host.renderOptions.renderBefore).toBe(boundary);
+    expect(style.setAttribute).toHaveBeenCalledWith('nonce', 'source-nonce');
+    state.controller.hostDisconnected();
+    const foreign = environment('target', false);
+    state.host.ownerDocument = foreign.document;
+    state.host.parentNode = foreign.document;
+    state.root.ownerDocument = foreign.document;
+    state.controller.hostConnected();
+    expect(state.children).toHaveLength(2);
+    expect(state.host.renderOptions.renderBefore).toBe(boundary);
+    expect(state.children[1]!.setAttribute).toHaveBeenCalledWith('nonce', 'target-nonce');
+    expect(style.parentNode).toBeNull();
+  });
+});
+
+describe('shared generated resource policy', () => {
+  it('uses nonce-bearing nodes, suppresses only owned resources, and preserves the Lit boundary', () => {
+    const state = fixture(environment('same'));
+    state.controller.createRenderRoot();
+    state.controller.hostConnected();
+    const root = state.root as unknown as ShadowRoot;
+    const consumer = new state.host.ownerDocument.defaultView.CSSStyleSheet!();
+    root.adoptedStyleSheets = [...root.adoptedStyleSheets, consumer as unknown as CSSStyleSheet];
+    const boundary = state.host.renderOptions.renderBefore;
+    const policy = new ContentSecurityService(state.host.ownerDocument as unknown as Document, {
+      nonce: 'first',
+    });
+    expect(state.sheets()).toEqual([consumer]);
+    expect(state.children[1]!.setAttribute).toHaveBeenCalledWith('nonce', 'first');
+    policy.update({ nonce: 'second' });
+    expect(state.children).toHaveLength(2);
+    expect(state.children[1]!.setAttribute).toHaveBeenCalledWith('nonce', 'second');
+    policy.update({ disableStyleElements: true });
+    expect(state.children).toEqual([boundary]);
+    expect(state.sheets()).toEqual([consumer]);
+    expect(state.host.renderOptions.renderBefore).toBe(boundary);
+    policy.dispose();
+    expect(state.sheets()).toHaveLength(2);
+    expect(state.sheets()[0]).toBe(consumer);
+    state.controller.hostDisconnected();
+  });
+
+  it('uses nearest policy through logical portals and restores an outer provider on dispose', () => {
+    const state = fixture(environment('same'));
+    const owner = state.host as unknown as HTMLElement;
+    const outer = new ContentSecurityService(state.host.ownerDocument as unknown as Document, {
+      nonce: 'outer',
+    });
+    const scoped = new ContentSecurityService(owner, { disableStyleElements: true });
+    const portal = {
+      ownerDocument: state.host.ownerDocument,
+      parentNode: state.host.ownerDocument,
+    } as unknown as HTMLElement;
+    setLogicalPortalOwner(portal, owner);
+    expect(contentSecurityPolicy(portal)).toEqual({ disableStyleElements: true });
+    const inner = new ContentSecurityService(portal);
+    expect(contentSecurityPolicy(portal)).toEqual({});
+    inner.dispose();
+    scoped.dispose();
+    expect(contentSecurityPolicy(portal)).toEqual({ nonce: 'outer' });
+    outer.dispose();
+    setLogicalPortalOwner(portal, null);
+  });
+
+  it('stops policy subscriptions on disconnect/dispose and resynchronizes reconnect', () => {
+    const state = fixture(environment('same'));
+    const policy = new ContentSecurityService(state.host.ownerDocument as unknown as Document);
+    const resource = new GeneratedStyleResource(
+      state.host as unknown as HTMLElement,
+      state.root as unknown as ShadowRoot,
+    );
+    resource.setText(':host{display:block}');
+    const original = state.sheets()[0];
+    resource.disconnect();
+    policy.update({ disableStyleElements: true });
+    expect(state.sheets()).toEqual([original]);
+    resource.connect();
+    expect(state.sheets()).toEqual([]);
+    resource.dispose();
+    policy.update({ nonce: 'ignored' });
+    expect(state.children).toEqual([]);
+    expect(state.sheets()).toEqual([]);
+    policy.dispose();
+  });
+
+  it('an update after the removal subscribes its recipe resource to no policy until the host reconnects', () => {
+    const state = fixture(environment('same'));
+    const host = state.host as typeof state.host & Record<string, unknown>;
+    // A Badge whose first update runs after its removal (a child rendered by a removed owner).
+    (host.constructor as Record<string, unknown>)['presentation'] = badgePresentation;
+    Object.assign(host, {
+      localName: 'tp-badge',
+      isConnected: false,
+      partPresentation: {},
+      part: { add: vi.fn(), remove: vi.fn(), contains: () => false },
+      matches: () => false,
+      getAttribute: () => null,
+      setAttribute: vi.fn(),
+      removeAttribute: vi.fn(),
+      dispatchEvent: vi.fn(),
+    });
+    (state.root as unknown as { querySelectorAll: () => never[] }).querySelectorAll = () => [];
+    const policy = new ContentSecurityService(state.host.ownerDocument as unknown as Document);
+    state.controller.hostUpdated();
+    const written = state.sheets().length;
+    expect(written).toBeGreaterThan(0);
+    // Not subscribed: a policy change does not reach the removed element's resource.
+    policy.update({ disableStyleElements: true });
+    expect(state.sheets()).toHaveLength(written);
+    policy.update({ disableStyleElements: false });
+    // The reconnection subscribes it again, so the policy reaches it.
+    host['isConnected'] = true;
+    state.controller.hostConnected();
+    policy.update({ disableStyleElements: true });
+    expect(state.sheets()).toHaveLength(0);
+    policy.dispose();
+  });
+});
+
+/** A rendered part double: token lists and inline style, with every write logged. */
+function partElement(root: unknown, part: string) {
+  const writes: string[] = [];
+  const tokens = (name: string, initial: string[] = []) => {
+    const set = new Set(initial);
+    return {
+      contains: (token: string) => set.has(token),
+      add: (token: string) => {
+        writes.push(`${name}+${token}`);
+        set.add(token);
+      },
+      remove: (token: string) => {
+        writes.push(`${name}-${token}`);
+        set.delete(token);
+      },
+      get length() {
+        return set.size;
+      },
+    };
+  };
+  const style = new Map<string, string>();
+  const attributes = new Map<string, string>();
+  return {
+    writes,
+    part: tokens('part', [part]),
+    classList: tokens('class'),
+    style: {
+      getPropertyValue: (name: string) => style.get(name) ?? '',
+      setProperty: (name: string, value: string) => {
+        writes.push(`style ${name}`);
+        style.set(name, value);
+      },
+      removeProperty: (name: string) => {
+        writes.push(`style -${name}`);
+        style.delete(name);
+      },
+    },
+    getAttribute: (name: string) => attributes.get(name) ?? null,
+    setAttribute: (name: string, value: string) => attributes.set(name, value),
+    removeAttribute: (name: string) => attributes.delete(name),
+    getRootNode: () => root,
+  };
+}
+
+/** A connected Badge host whose style writes are counted. */
+function badgeHost(family = badgePresentation) {
+  const state = fixture(environment('updates'));
+  const host = state.host as typeof state.host & Record<string, unknown>;
+  (host.constructor as Record<string, unknown>)['presentation'] = family;
+  const element = partElement(state.root, 'badge');
+  let open = false;
+  Object.assign(host, {
+    localName: 'tp-badge',
+    isConnected: true,
+    variant: 'default',
+    partPresentation: {},
+    part: { add: vi.fn(), remove: vi.fn(), contains: () => true },
+    matches: (condition: string) => condition === '[data-open]' && open,
+    getAttribute: () => null,
+    setAttribute: vi.fn(),
+    removeAttribute: vi.fn(),
+    dispatchEvent: vi.fn(),
+  });
+  (
+    state.root as unknown as { querySelectorAll: (selector: string) => unknown[] }
+  ).querySelectorAll = (selector) =>
+    selector === '.badge' || selector === '[part~="badge"]' ? [element] : [];
+  state.controller.createRenderRoot();
+  const writes = vi.spyOn(GeneratedStyleResource.prototype, 'setText');
+  return {
+    ...state,
+    host,
+    element,
+    writes,
+    setOpen: (value: boolean) => {
+      open = value;
+    },
+  };
+}
+
+describe('style pass of an update', () => {
+  it('skips the style pass when no presentation input changed', () => {
+    const state = badgeHost();
+    state.controller.hostUpdated();
+    expect(state.writes).toHaveBeenCalled();
+    state.writes.mockClear();
+    state.controller.hostUpdated();
+    expect(state.writes).not.toHaveBeenCalled();
+    state.writes.mockRestore();
+  });
+
+  it('runs it again for an axis change, read from the host or from its owner', () => {
+    const state = badgeHost();
+    state.controller.hostUpdated();
+    state.writes.mockClear();
+    state.host['variant'] = 'outline';
+    state.controller.hostUpdated();
+    expect(state.writes).toHaveBeenCalled();
+    // An axis a constituent reads from its owner through a getter, not a reactive property.
+    const owner = { variant: 'outline' };
+    state.host['presentationOwner'] = owner;
+    state.controller.hostUpdated();
+    state.writes.mockClear();
+    owner.variant = 'ghost';
+    state.controller.hostUpdated();
+    expect(state.writes).toHaveBeenCalled();
+    state.writes.mockRestore();
+  });
+
+  it('runs it again when an owner condition of a registered part flips', async () => {
+    const family = {
+      ...badgePresentation,
+      structure: {
+        badge: [{ selector: ':host([data-open]) &', declarations: { outline: '1px solid' } }],
+      },
+    };
+    const state = badgeHost(family);
+    const member = partElement(state.root, 'badge');
+    state.controller.registerPart('badge', member as unknown as HTMLElement);
+    await Promise.resolve();
+    state.controller.hostUpdated();
+    state.writes.mockClear();
+    state.controller.hostUpdated();
+    expect(state.writes).not.toHaveBeenCalled();
+    state.setOpen(true);
+    state.controller.hostUpdated();
+    expect(state.writes.mock.calls.some(([css]) => css.includes('outline:1px solid'))).toBe(true);
+    state.writes.mockRestore();
+  });
+
+  it('always runs it for an explicit refresh', () => {
+    const state = badgeHost();
+    state.controller.hostUpdated();
+    state.writes.mockClear();
+    state.controller.refresh();
+    expect(state.writes).toHaveBeenCalled();
+    state.writes.mockRestore();
+  });
+
+  it('keeps hooks in place without rewriting them, and removes them when dropped', () => {
+    const state = badgeHost();
+    state.host['partPresentation'] = {
+      badge: { classHook: 'accent', styleHook: { 'outline-offset': '3px' } },
+    };
+    state.controller.hostUpdated();
+    expect(state.element.writes).toEqual(['class+accent', 'style outline-offset']);
+    state.element.writes.length = 0;
+    state.controller.hostUpdated();
+    expect(state.element.writes).toEqual([]);
+    state.host['partPresentation'] = {};
+    state.controller.hostUpdated();
+    expect(state.element.writes).toEqual(['class-accent', 'style -outline-offset']);
+    state.writes.mockRestore();
+  });
+});
