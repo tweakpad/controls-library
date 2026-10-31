@@ -1,5 +1,13 @@
 # @tweakpad/ui
 
+## 0.2.1
+
+### Patch Changes
+
+- Flow node bodies show their `text`, `number`, `slider`, `select`, `switch` and `checkbox` properties as inline fields: the control is the whole row and shows the property's label, and a slider's value can be typed. Color, easing, text area and custom controls keep their label and control row, and the inspector keeps a labelled Field for every control. A property control factory receives `inline`, true in a node body, so a replacement control can render the same way. A field inside a node lets go of focus once its node leaves the selection or the canvas is pressed, so what was typed is saved and keys reach the flow again. Ports are larger and edges twice as wide at every size, both derived from the design tokens; rows that hold only a port are compact, and port labels use the inline field label style wherever they sit.
+- Inline controls do less work when their value changes. A `.value` update on a Slider, Input, Select, Checkbox, Switch or Color input no longer refreshes its presentation or rewrites attributes that keep their value, which makes dense panels of inline controls cheaper to update.
+- An inline Slider (`variant="inline"`) with `editable-value` lets its value be typed as well as dragged. A click on the value, or Enter or F2 on the focused slider, turns the value into a number field with its text selected; the value shows the text cursor on hover. Enter or leaving the field sets the typed value, kept within the range and on the step, as one value change and one commit with the reason `input`; Escape puts the value back. A press on the value no longer moves it, while the rest of the row still does, and a range keeps its plain value. The field exists only while the value is edited. Slider now renders Input, so it defines it too.
+
 ## 0.2.0
 
 ### Minor Changes
