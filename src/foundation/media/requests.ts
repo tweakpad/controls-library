@@ -1,5 +1,6 @@
 import type { Diagnostic } from '../services.js';
 import type { ChangeReason } from '../types.js';
+import { finite } from '../values.js';
 import type { ActivityOwner } from './activity.js';
 import { captionsAvailability, type MediaAvailability } from './availability.js';
 import { captionTracks, findLocaleTrack } from './captions.js';
@@ -186,10 +187,6 @@ const notSupported = (action: string, why: string) =>
   new DOMException(`The ${action} request is not available: ${why}.`, 'NotSupportedError');
 const invalidValue = (action: string) =>
   new TypeError(`The ${action} request needs a finite numeric value.`);
-
-function finite(value: unknown): value is number {
-  return typeof value === 'number' && Number.isFinite(value);
-}
 
 /** Resolves `true` when `type` fires on `target`, `false` when `signal` aborts first. */
 function once(target: EventTarget, type: string, signal: AbortSignal): Promise<boolean> {

@@ -10,6 +10,7 @@
  * names the module, and an engine version the adapter was not verified with gives one
  * `text-editor-engine-version` diagnostic.
  */
+import { isObjectLike } from '../../../values.js';
 
 // Commands, tags and states
 
@@ -756,7 +757,7 @@ const nodeClass = (
     const klass = module[member] as { readonly prototype?: unknown } | undefined;
     const Base = lexical[base];
     return (
-      isObject(klass?.prototype) &&
+      isObjectLike(klass?.prototype) &&
       typeof Base === 'function' &&
       klass.prototype instanceof (Base as abstract new () => unknown)
     );
@@ -845,9 +846,6 @@ export const LEXICAL_MODULE_PATHS: { readonly [K in keyof TextEditorLexicalModul
 
 const OPTIONAL_MODULES: ReadonlySet<string> = new Set(['table']);
 
-const isObject = (value: unknown): value is Readonly<Record<string, unknown>> =>
-  (typeof value === 'object' || typeof value === 'function') && value !== null;
-
 const moduleName = (key: keyof TextEditorLexicalModules): string =>
   `"${key}" (${LEXICAL_MODULE_PATHS[key]})`;
 
@@ -858,15 +856,15 @@ const moduleName = (key: keyof TextEditorLexicalModules): string =>
  * agrees with it; the optional `table` is checked only when given.
  */
 export function probeLexicalModules(modules: unknown): asserts modules is TextEditorLexicalModules {
-  if (!isObject(modules)) throw new Error('The Lexical engine received no modules object.');
+  if (!isObjectLike(modules)) throw new Error('The Lexical engine received no modules object.');
   for (const key of Object.keys(REQUIRED_MEMBERS) as (keyof TextEditorLexicalModules)[]) {
     const module = modules[key];
     if (module === undefined && OPTIONAL_MODULES.has(key)) continue;
-    if (!isObject(module))
+    if (!isObjectLike(module))
       throw new Error(`The Lexical module ${moduleName(key)} is missing from the engine modules.`);
     for (const [member, kind] of REQUIRED_MEMBERS[key]) {
       const value = module[member];
-      const ok = kind === 'object' ? isObject(value) : typeof value === kind;
+      const ok = kind === 'object' ? isObjectLike(value) : typeof value === kind;
       if (!ok)
         throw new Error(
           `The Lexical module ${moduleName(key)} is incompatible: it lacks "${member}".`,
@@ -874,7 +872,7 @@ export function probeLexicalModules(modules: unknown): asserts modules is TextEd
     }
   }
   const lexical = modules['lexical'] as ModuleRecord;
-  const checks = COPY_CHECKS.filter(({ key }) => isObject(modules[key]));
+  const checks = COPY_CHECKS.filter(({ key }) => isObjectLike(modules[key]));
   const failed = checks.filter(({ key, agrees }) => {
     try {
       return !agrees(modules[key] as ModuleRecord, lexical);

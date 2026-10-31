@@ -29,7 +29,7 @@ import { sameTextPoint } from '../shared/selection-state.js';
 import { deleteRange, insertionMarks, replaceRange } from '../shared/text-edits.js';
 import { $commitDocument, editContext } from './blocks.js';
 import { $portableDocument } from './document.js';
-import { $rangeExists, $selectRange } from './marks.js';
+import { $range, $rangeExists, $selectRange } from './marks.js';
 import type { LexicalRangeSelectionLike } from './modules.js';
 import { $textblockAt, $textPointOf } from './points.js';
 import { $clearWholeDocument, $holdsWholeDocument } from './guards.js';
@@ -40,11 +40,6 @@ import { $applySelection, $selectionExists } from './selection.js';
 import { $prepareCellRangeInsert } from './tables.js';
 
 type Prepared = (() => boolean) | null;
-
-function $range(rt: LexicalRuntime): LexicalRangeSelectionLike | null {
-  const selection = rt.lexical.$getSelection();
-  return rt.lexical.$isRangeSelection(selection) ? selection : null;
-}
 
 // Text across blocks (`uwg-te-req-engine-12`)
 

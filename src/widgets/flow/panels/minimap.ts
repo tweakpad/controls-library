@@ -2,6 +2,7 @@ import { css, html, type PropertyValues } from 'lit';
 import { TpElement } from '../../../foundation/element.js';
 import { CanvasSurface } from '../../../foundation/canvas-surface.js';
 import { Scheduler } from '../../../foundation/services.js';
+import { rectCenter } from '../../../foundation/flow/geometry.js';
 import type { FlowPoint, FlowRect } from '../../../foundation/flow/types.js';
 import { PointerDrag, type PointerDragPoint } from '../../../foundation/pointer-drag.js';
 import { TpButton } from '../../../components/button/button.js';
@@ -495,10 +496,6 @@ function emptyColors(): Colors {
     viewport: 'currentColor',
     tones: new Map(),
   };
-}
-
-function rectCenter(rect: FlowRect): FlowPoint {
-  return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 };
 }
 
 function unionRect(a: FlowRect, b: FlowRect): FlowRect {

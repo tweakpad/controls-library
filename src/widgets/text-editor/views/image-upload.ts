@@ -27,15 +27,15 @@ import type {
   TextEditorRequestOutcome,
   TextEditorRequestProposal,
 } from '../../../foundation/text-editor/controller.js';
-import type {
-  TextEditorBlockTree,
-  TextEditorSelection,
-  TextEditorSelectionInput,
+import {
+  selectionInput,
+  type TextEditorBlockTree,
+  type TextEditorSelection,
+  type TextEditorSelectionInput,
 } from '../../../foundation/text-editor/model.js';
 import type { TextEditorStrings } from '../../../foundation/text-editor/strings.js';
 import type { TextEditorRequestSurface } from '../../../foundation/text-editor/tools.js';
 import type { ChangeReason } from '../../../foundation/types.js';
-import { selectionInput } from '../focus.js';
 import type { OverlayInstance } from '../geometry.js';
 import type { TextEditorImageUpload } from '../types.js';
 

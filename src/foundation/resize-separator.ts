@@ -1,4 +1,5 @@
 import { arrowKeys } from './collection.js';
+import { clamp } from './converters.js';
 import { leaseDragCursor } from './drag-cursor.js';
 import { GeneratedStyleResource } from './generated-style.js';
 
@@ -127,9 +128,6 @@ interface DragSession {
   cursor: (() => void) | null;
   delta: number;
 }
-
-const clamp = (value: number, min: number, max: number): number =>
-  Math.min(Math.max(value, min), Math.max(min, max));
 
 /** The default enlarged pointer targets of a separator, in CSS pixels. */
 export const RESIZE_SEPARATOR_TARGET = Object.freeze({ fine: 10, coarse: 20 });

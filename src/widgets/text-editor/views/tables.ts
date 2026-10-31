@@ -28,6 +28,7 @@ import type {
   TextEditorToolTarget,
 } from '../../../foundation/text-editor/tools.js';
 import type { ChangeReason } from '../../../foundation/types.js';
+import { ignore } from '../../../foundation/values.js';
 import type { TextEditorContextualSurface } from '../focus.js';
 import type { OverlayGeometry } from '../geometry.js';
 import { resolveMenuGroups, type TextEditorToolbarGroup } from '../tools/resolve.js';
@@ -92,8 +93,6 @@ export interface TextEditorTablesHost {
   /** A change of the size picker's open lane (`uwg-te-tab-reasons` r12, r13). */
   pickerLane?(open: boolean, reason: ChangeReason): void;
 }
-
-const ignore = (): void => undefined;
 
 /** The table controls of one widget. */
 export class TextEditorTables {

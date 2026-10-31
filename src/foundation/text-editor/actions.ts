@@ -9,6 +9,7 @@
  * answers `false`.
  */
 import { domError } from '../dom-error.js';
+import { isRecord, positive } from '../values.js';
 import type { TextEditorCapability } from './capabilities.js';
 import type { TextEditorPortableFragment } from './content/portable.js';
 import type { TextEditorFormat, TextEditorHistoryMode } from './engine.js';
@@ -542,8 +543,6 @@ export function combinesHistory(actions: readonly TextEditorAction[]): boolean {
 
 type Payload = Readonly<Record<string, unknown>>;
 
-const isRecord = (value: unknown): value is Payload =>
-  typeof value === 'object' && value !== null && !Array.isArray(value);
 const isString = (value: unknown): value is string => typeof value === 'string';
 /** A non-empty string, such as an identifier. */
 const isFilled = (value: unknown): value is string => typeof value === 'string' && value !== '';
@@ -552,8 +551,6 @@ const isInteger = (value: unknown): value is number =>
   typeof value === 'number' && Number.isSafeInteger(value);
 const isIndex = (value: unknown): value is number => isInteger(value) && value >= 0;
 const isCount = (value: unknown): value is number => isInteger(value) && value >= 1;
-const isPositive = (value: unknown): value is number =>
-  typeof value === 'number' && Number.isFinite(value) && value > 0;
 const optional = (value: unknown, check: (value: unknown) => boolean): boolean =>
   value === undefined || check(value);
 const orNull =
@@ -692,7 +689,7 @@ function fitsKind(kind: string, attrs: unknown): boolean {
       return (
         isString(values.src) &&
         optional(values.alt, isString) &&
-        optional(values.width, orNull(isPositive))
+        optional(values.width, orNull(positive))
       );
     case 'table':
       return (
@@ -780,9 +777,7 @@ const PAYLOAD_CHECKS: { readonly [T in TextEditorActionType]: (action: Payload) 
   'table.column-widths': (action) =>
     tableIs(action) &&
     (action.widths === null ||
-      (Array.isArray(action.widths) &&
-        action.widths.length > 0 &&
-        action.widths.every(isPositive))),
+      (Array.isArray(action.widths) && action.widths.length > 0 && action.widths.every(positive))),
   'table.clear-cells': (action) => tableIs(action) && isCellRange(action.range),
 };
 

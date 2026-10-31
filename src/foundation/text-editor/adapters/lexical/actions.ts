@@ -21,7 +21,7 @@ import type {
   TextEditorFormat,
   TextEditorSetContentOptions,
 } from '../../engine.js';
-import type { TextEditorSelectionInput } from '../../model.js';
+import { selectionInput, type TextEditorSelectionInput } from '../../model.js';
 import {
   actionCan,
   actionChange,
@@ -39,7 +39,6 @@ import {
   $prepareOutdent,
   $prepareSetAttrs,
   $prepareSetType,
-  selectionInput,
 } from './blocks.js';
 import { $documentChangedByUpdate, $portableDocument } from './document.js';
 import {

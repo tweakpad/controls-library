@@ -1,12 +1,10 @@
+import { clamp } from '../../../foundation/converters.js';
 import type { Hsv } from '../color/harmony.js';
 
 export interface Point {
   readonly x: number;
   readonly y: number;
 }
-
-const clamp = (value: number, min: number, max: number): number =>
-  Math.min(max, Math.max(min, value));
 
 /** Saturation/brightness from a point in an area box; the x axis mirrors in RTL. */
 export function areaToSv(

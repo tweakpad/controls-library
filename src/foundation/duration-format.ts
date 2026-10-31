@@ -6,6 +6,7 @@
  */
 import { durationFormatter, type DurationRecord, type DurationStyle } from './date-locale.js';
 import { numberFormatter, type LocaleInput } from './intl.js';
+import { finite } from './values.js';
 
 /** `digital` renders clock text such as `1:05:30`; the unit styles render spoken phrases. */
 export type DurationTextStyle = 'digital' | DurationStyle;
@@ -28,10 +29,6 @@ export interface DurationTextParts {
   sign: '' | '-';
   /** The absolute duration text. */
   text: string;
-}
-
-function finite(value: unknown): value is number {
-  return typeof value === 'number' && Number.isFinite(value);
 }
 
 function clock(seconds: number): { hours: number; minutes: number; seconds: number } {

@@ -19,15 +19,10 @@ import { $commitDocument, editContext } from './blocks.js';
 import { $portableDocument } from './document.js';
 import { $ownStep } from './history.js';
 import { $blockId, $nearestHolder } from './ids.js';
+import { $range } from './marks.js';
 import type { LexicalRangeSelectionLike } from './modules.js';
 import { $textblockAt, $textblockLength, $textPointOf } from './points.js';
 import type { LexicalRuntime } from './runtime.js';
-
-/** The range selection being read, or `null`. */
-function $range(rt: LexicalRuntime): LexicalRangeSelectionLike | null {
-  const selection = rt.lexical.$getSelection();
-  return rt.lexical.$isRangeSelection(selection) ? selection : null;
-}
 
 /** Whether either end of the selection lies in a table cell, where the widget owns Tab. */
 function $inCell(rt: LexicalRuntime, selection: LexicalRangeSelectionLike): boolean {

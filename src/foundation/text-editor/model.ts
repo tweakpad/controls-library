@@ -150,6 +150,20 @@ export type TextEditorSelectionInput =
   | TextEditorBlockSelection
   | TextEditorCellSelection;
 
+/** The selection input that sets a reported selection again, or null for no selection. */
+export function selectionInput(selection: TextEditorSelection): TextEditorSelectionInput | null {
+  switch (selection.kind) {
+    case 'text':
+      return { kind: 'text', anchor: selection.anchor, head: selection.head };
+    case 'blocks':
+      return { kind: 'blocks', ids: selection.ids };
+    case 'cells':
+      return { kind: 'cells', table: selection.table, range: selection.range };
+    default:
+      return null;
+  }
+}
+
 // Block tree (uwg-te-tab-engine r7)
 
 /**

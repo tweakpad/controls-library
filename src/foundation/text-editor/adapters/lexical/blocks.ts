@@ -21,7 +21,7 @@ import type {
   TextEditorBlocksMoveAction,
 } from '../../actions.js';
 import type { TextEditorPortableDocument } from '../../content/portable.js';
-import type { TextEditorSelection, TextEditorSelectionInput } from '../../model.js';
+import { selectionInput, type TextEditorSelectionInput } from '../../model.js';
 import {
   indentItems,
   outdentItems,
@@ -63,20 +63,6 @@ export const editContext = (rt: LexicalRuntime): TextEditorFragmentContext => ({
   createId: rt.createId,
   capabilities: rt.glue.capabilities,
 });
-
-/** A selection the model reports, as the input that sets it again. */
-export function selectionInput(selection: TextEditorSelection): TextEditorSelectionInput | null {
-  switch (selection.kind) {
-    case 'text':
-      return { kind: 'text', anchor: selection.anchor, head: selection.head };
-    case 'blocks':
-      return { kind: 'blocks', ids: selection.ids };
-    case 'cells':
-      return { kind: 'cells', table: selection.table, range: selection.range };
-    default:
-      return null;
-  }
-}
 
 /** A caret at the start of the first textblock, or no selection without one. */
 function $fallbackSelection(rt: LexicalRuntime, document: TextEditorPortableDocument): void {

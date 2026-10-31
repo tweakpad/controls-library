@@ -26,10 +26,10 @@ import {
   type TextEditorBlockRule,
   type TextEditorInlineRuleMatch,
 } from '../../input-rules.js';
-import type { TextEditorTextPoint } from '../../model.js';
+import { selectionInput, type TextEditorTextPoint } from '../../model.js';
 import { applyBlockRule } from '../shared/block-edits.js';
 import { caretTextBefore } from '../shared/state.js';
-import { $commitDocument, editContext, selectionInput } from './blocks.js';
+import { $commitDocument, editContext } from './blocks.js';
 import { $portableDocument } from './document.js';
 import { LEXICAL_FORMAT } from './mapping.js';
 import { $nodeColors, writeCaretColors } from './caret.js';

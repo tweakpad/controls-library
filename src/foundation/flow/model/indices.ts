@@ -1,3 +1,4 @@
+import { sizesEqual } from '../support.js';
 import type {
   FlowChange,
   FlowDocument,
@@ -198,12 +199,6 @@ export interface FlowRuntime {
 
 export function createRuntime(): FlowRuntime {
   return { measured: new Map(), ports: new Map(), version: 0 };
-}
-
-function sizesEqual(a: FlowSize | undefined, b: FlowSize | undefined): boolean {
-  if (a === b) return true;
-  if (!a || !b) return false;
-  return a.width === b.width && a.height === b.height;
 }
 
 function portsEqual(

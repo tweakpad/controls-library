@@ -22,6 +22,7 @@
  * exists.
  */
 import { domError } from '../../../dom-error.js';
+import { isObjectLike } from '../../../values.js';
 import { assertTextEditorFormat, type TextEditorAction } from '../../actions.js';
 import { engineCapabilities, type TextEditorCapability } from '../../capabilities.js';
 import { ENGINE_CHANGES, engineChange } from '../../cause.js';
@@ -141,16 +142,13 @@ export type TextEditorTiptapNodeOverride = TiptapExtensionLike;
  */
 export type TextEditorTiptapOptions = TextEditorAdapterOptions<TextEditorTiptapNodeOverride>;
 
-const isObject = (value: unknown): value is Readonly<Record<string, unknown>> =>
-  (typeof value === 'object' || typeof value === 'function') && value !== null;
-
 /**
  * The capabilities of a modules object (`engineCapabilities`): tables with both table modules, and
  * moving rows and columns when the table helpers can.
  */
 function tiptapCapabilities(modules: unknown): ReadonlySet<TextEditorCapability> {
   const tables =
-    isObject(modules) && isObject(modules.table) && isObject(modules.tables)
+    isObjectLike(modules) && isObjectLike(modules.table) && isObjectLike(modules.tables)
       ? modules.tables
       : null;
   return engineCapabilities({

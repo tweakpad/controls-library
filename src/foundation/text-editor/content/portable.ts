@@ -20,6 +20,7 @@
  * model helpers that every format shares (the text of a block, the table grid, the blocks the
  * formats write and the nesting of marks).
  */
+import { isRecord, positive } from '../../values.js';
 import { isTextEditorAttributeValue, storedAlign } from '../actions.js';
 import type { TextEditorCapability } from '../capabilities.js';
 import type { TextEditorDiagnostic } from '../engine.js';
@@ -327,9 +328,6 @@ export interface TextEditorPortableDraft {
 
 type Rec = Readonly<Record<string, unknown>>;
 
-const isRecord = (value: unknown): value is Rec =>
-  typeof value === 'object' && value !== null && !Array.isArray(value);
-
 const list = (value: unknown): readonly unknown[] => (Array.isArray(value) ? value : []);
 
 const LIST_KINDS: ReadonlySet<string> = new Set<TextEditorListKind>([
@@ -507,7 +505,7 @@ export function customNodeAttributes(
 }
 
 /** The attribute values of a node without a definition: the valid ones, as they are. */
-function plainAttributes(attrs: unknown): TextEditorAttributes {
+export function plainAttributes(attrs: unknown): TextEditorAttributes {
   const values: Record<string, TextEditorAttributeValue> = {};
   if (isRecord(attrs))
     for (const [name, value] of Object.entries(attrs))
@@ -1266,9 +1264,6 @@ const listStart = (value: unknown): number | undefined =>
   typeof value === 'number' && Number.isInteger(value) && value >= 0 && value !== 1
     ? value
     : undefined;
-
-const positive = (value: unknown): value is number =>
-  typeof value === 'number' && Number.isFinite(value) && value > 0;
 
 const LANGUAGE = /^\S+$/u;
 

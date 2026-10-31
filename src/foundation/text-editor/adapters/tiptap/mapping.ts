@@ -9,6 +9,7 @@
  * leave the adapter.
  */
 import { domError } from '../../../dom-error.js';
+import { isRecord } from '../../../values.js';
 import { storedAlign, TOGGLE_MARKS } from '../../actions.js';
 import {
   canonicalize,
@@ -34,7 +35,7 @@ import type {
   TextEditorToggleMark,
 } from '../../model.js';
 import type { TextEditorNodeDefinition } from '../../nodes.js';
-import { isTextEditorColor, type TextEditorColor } from '../../palette.js';
+import { isTextEditorColor } from '../../palette.js';
 import type { TextEditorInlineAt } from '../shared/selection-state.js';
 import type { TextEditorInlineUnit } from '../shared/state.js';
 import { positionalHeader } from '../shared/tables.js';
@@ -58,9 +59,6 @@ export interface TiptapJson {
 }
 
 type Rec = Readonly<Record<string, unknown>>;
-
-const isRecord = (value: unknown): value is Rec =>
-  typeof value === 'object' && value !== null && !Array.isArray(value);
 
 const malformed = (problem: string): Error =>
   domError('DataError', `The native JSON is not a Tiptap document: ${problem}.`);
@@ -800,10 +798,6 @@ export function holderAtPos(doc: TiptapNodeLike, pos: number): TiptapHolder | nu
   }
   return found;
 }
-
-/** The palette name of a native color attribute, or `null`. */
-export const colorOf = (value: unknown): TextEditorColor | null =>
-  isTextEditorColor(value) ? value : null;
 
 const KIND_OF_TYPE: Readonly<Record<string, string>> = {
   [NATIVE.paragraph]: 'paragraph',

@@ -23,6 +23,7 @@ import {
   SpringFollower2D,
   type SpringParameters,
 } from '../../foundation/spring-follower.js';
+import { roundTo } from '../../foundation/values.js';
 import { cursorPresentation } from '../../presentation/families/cursor.js';
 import { slotOccupied } from '../shared/slots.js';
 import {
@@ -73,8 +74,6 @@ const LEASE_CSS = [
   // The hidden cursor inherits from the scope element, so a native zone restores it explicitly.
   `[${NATIVE_HIDE_ATTRIBUTE}] tp-cursor-zone[native]{--tp-cursor-hidden:0;cursor:auto!important}`,
 ].join('\n');
-
-const round = (value: number): number => Math.round(value * 100) / 100;
 
 interface Stuck {
   readonly zone: TpCursorZone;
@@ -542,10 +541,10 @@ export class TpCursor extends TpElement implements CursorParticipant {
     const { x, y, vx, vy } = this.#follower;
     if (surface) {
       const scale = this.ownerDocument.defaultView?.visualViewport?.scale ?? 1;
-      surface.style.transform = `translate3d(${round(x)}px, ${round(y)}px, 0) translate(-50%, -50%) scale(${1 / scale})`;
+      surface.style.transform = `translate3d(${roundTo(x, 2)}px, ${roundTo(y, 2)}px, 0) translate(-50%, -50%) scale(${1 / scale})`;
     }
-    this.style.setProperty('--tp-cursor-x', `${round(x)}px`);
-    this.style.setProperty('--tp-cursor-y', `${round(y)}px`);
+    this.style.setProperty('--tp-cursor-x', `${roundTo(x, 2)}px`);
+    this.style.setProperty('--tp-cursor-y', `${roundTo(y, 2)}px`);
     this.style.setProperty('--tp-cursor-velocity-x', `${this.#reduced ? 0 : Math.round(vx)}`);
     this.style.setProperty('--tp-cursor-velocity-y', `${this.#reduced ? 0 : Math.round(vy)}`);
   }
@@ -675,8 +674,8 @@ export class TpCursor extends TpElement implements CursorParticipant {
     const bounds = stuck?.mode === 'bounds';
     this.toggleAttribute('data-stuck', bounds);
     if (bounds && stuck) {
-      this.style.setProperty('--tp-cursor-stuck-width', `${round(stuck.bounds.width)}px`);
-      this.style.setProperty('--tp-cursor-stuck-height', `${round(stuck.bounds.height)}px`);
+      this.style.setProperty('--tp-cursor-stuck-width', `${roundTo(stuck.bounds.width, 2)}px`);
+      this.style.setProperty('--tp-cursor-stuck-height', `${roundTo(stuck.bounds.height, 2)}px`);
     } else {
       this.style.removeProperty('--tp-cursor-stuck-width');
       this.style.removeProperty('--tp-cursor-stuck-height');

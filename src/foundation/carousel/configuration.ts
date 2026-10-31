@@ -13,6 +13,7 @@ import type {
   CarouselMessages,
   CarouselLoopOptions,
 } from './types.js';
+import { finite, positive } from '../values.js';
 
 type Defaults<T, K extends keyof T = never> = Required<Omit<T, K>> & Pick<T, K>;
 export interface CarouselConfiguration extends CarouselRootOptions {
@@ -164,10 +165,7 @@ const object = (value: unknown): value is Record<string, unknown> =>
   Object.prototype.toString.call(value) === '[object Object]';
 const own = (value: object, key: string): unknown =>
   Object.hasOwn(value, key) ? (value as Record<string, unknown>)[key] : undefined;
-const finite = (value: unknown): value is number =>
-  typeof value === 'number' && Number.isFinite(value);
 const nonnegative = (value: unknown) => finite(value) && value >= 0;
-const positive = (value: unknown) => finite(value) && value > 0;
 const integer = (value: unknown) => nonnegative(value) && Number.isInteger(value);
 const target = (value: unknown) =>
   value === null ||

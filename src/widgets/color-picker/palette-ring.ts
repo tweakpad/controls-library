@@ -5,6 +5,8 @@
  * span of a calculated variant. Coordinates are percentages of the ring box, so the clip
  * polygons and mark positions scale with it.
  */
+import { roundTo } from '../../foundation/values.js';
+
 export interface RingLayout {
   /** Inner radius of every segment, as a fraction of the box side. */
   readonly inner: number;
@@ -37,12 +39,13 @@ export const PALETTE_RING: RingLayout = {
 /** Fraction of the ring box the disc occupies (its inset on each side is half the rest). */
 export const PALETTE_DISC = 0.72;
 
-const round = (value: number): number => Math.round(value * 100) / 100;
-
 /** A point on a circle of radius `r` (box fraction) at `degrees` clockwise from the top. */
 function point(degrees: number, r: number): readonly [number, number] {
   const radians = (degrees * Math.PI) / 180;
-  return [round(50 + 100 * r * Math.sin(radians)), round(50 - 100 * r * Math.cos(radians))];
+  return [
+    roundTo(50 + 100 * r * Math.sin(radians), 2),
+    roundTo(50 - 100 * r * Math.cos(radians), 2),
+  ];
 }
 
 /**
@@ -80,6 +83,6 @@ export function ringSegments(
       points.push(`${x}% ${y}%`);
     }
     const [markX, markY] = point((a0 + a1) / 2, (layout.inner + layout.outer) / 2);
-    return { polygon: points.join(', '), span: round(span), markX, markY };
+    return { polygon: points.join(', '), span: roundTo(span, 2), markX, markY };
   });
 }

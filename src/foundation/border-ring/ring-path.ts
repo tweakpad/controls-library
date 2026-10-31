@@ -1,3 +1,5 @@
+import { roundTo } from '../values.js';
+
 /** One corner's horizontal and vertical radius, in pixels. */
 export interface CornerRadius {
   readonly x: number;
@@ -51,8 +53,6 @@ function quarterArc(radius: CornerRadius): number {
   return (Math.PI * (x + y) * (1 + (3 * h) / (10 + Math.sqrt(4 - 3 * h)))) / 4;
 }
 
-const round = (value: number) => Math.round(value * 1000) / 1000;
-
 /**
  * The centerline of a border `inset` pixels inside `box` (half the stroke width, so the stroke
  * covers the border exactly): a closed path through the fitted corner radii, each reduced by the
@@ -70,17 +70,17 @@ export function ringPath(box: RingBox, inset: number): RingPath {
   })) as [CornerRadius, CornerRadius, CornerRadius, CornerRadius];
   const arc = (radius: CornerRadius, x: number, y: number) =>
     radius.x > 0 && radius.y > 0
-      ? `A${round(radius.x)} ${round(radius.y)} 0 0 1 ${round(x)} ${round(y)}`
-      : `L${round(x)} ${round(y)}`;
+      ? `A${roundTo(radius.x, 3)} ${roundTo(radius.y, 3)} 0 0 1 ${roundTo(x, 3)} ${roundTo(y, 3)}`
+      : `L${roundTo(x, 3)} ${roundTo(y, 3)}`;
   const d = [
-    `M${round(x0 + tl.x)} ${round(y0)}`,
-    `H${round(x1 - tr.x)}`,
+    `M${roundTo(x0 + tl.x, 3)} ${roundTo(y0, 3)}`,
+    `H${roundTo(x1 - tr.x, 3)}`,
     arc(tr, x1, y0 + tr.y),
-    `V${round(y1 - br.y)}`,
+    `V${roundTo(y1 - br.y, 3)}`,
     arc(br, x1 - br.x, y1),
-    `H${round(x0 + bl.x)}`,
+    `H${roundTo(x0 + bl.x, 3)}`,
     arc(bl, x0, y1 - bl.y),
-    `V${round(y0 + tl.y)}`,
+    `V${roundTo(y0 + tl.y, 3)}`,
     arc(tl, x0 + tl.x, y0),
     'Z',
   ].join('');

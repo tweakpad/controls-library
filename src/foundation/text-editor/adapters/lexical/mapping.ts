@@ -12,9 +12,11 @@
  * plain JSON, and foreign or malformed JSON (Tiptap's `{ type: 'doc' }`) is a DataError.
  */
 import { domError } from '../../../dom-error.js';
-import { isTextEditorAttributeValue, storedAlign, TOGGLE_MARKS } from '../../actions.js';
+import { isRecord } from '../../../values.js';
+import { storedAlign, TOGGLE_MARKS } from '../../actions.js';
 import {
   isListItem,
+  plainAttributes,
   tableGrid,
   type TextEditorPortableBlock,
   type TextEditorPortableCellParagraph,
@@ -27,7 +29,7 @@ import {
   type TextEditorPortableMarks,
   type TextEditorPortableTable,
 } from '../../content/portable.js';
-import type { TextEditorAlign, TextEditorAttributes, TextEditorHeadingLevel } from '../../model.js';
+import type { TextEditorAlign, TextEditorHeadingLevel } from '../../model.js';
 import type { TextEditorNodeDefinition } from '../../nodes.js';
 import { isTextEditorColor, type TextEditorColor } from '../../palette.js';
 import { LEXICAL_STATE_KEYS } from './states.js';
@@ -76,9 +78,6 @@ export interface LexicalJsonState {
 }
 
 type Rec = Readonly<Record<string, unknown>>;
-
-const isRecord = (value: unknown): value is Rec =>
-  typeof value === 'object' && value !== null && !Array.isArray(value);
 
 const malformed = (what: string): Error =>
   domError('DataError', `The native JSON is no Lexical editor state: ${what}.`);
@@ -171,14 +170,6 @@ function marksOf(node: Rec, link: string | null): TextEditorPortableMarks | unde
     link,
   );
   return Object.keys(marks).length > 0 ? marks : undefined;
-}
-
-function plainAttributes(value: unknown): TextEditorAttributes {
-  const attrs: Record<string, TextEditorAttributes[string]> = {};
-  if (isRecord(value))
-    for (const [name, attr] of Object.entries(value))
-      if (isTextEditorAttributeValue(attr)) attrs[name] = attr;
-  return attrs;
 }
 
 /** Inline content: text runs with their marks, hard breaks and custom inline nodes. */

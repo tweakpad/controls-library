@@ -13,6 +13,7 @@
 import type { IconDefinition } from '../../icons/types.js';
 import type { PlatformKeyPattern } from '../key-bindings.js';
 import { allowedUrl } from '../markdown/url.js';
+import { isRecord } from '../values.js';
 import {
   isMutatingAction,
   type TextEditorAction,
@@ -572,9 +573,6 @@ export function toolChannels(tool: TextEditorTool): readonly TextEditorColorChan
 }
 
 // Values (uwg-te-req-tools-4)
-
-const isRecord = (value: unknown): value is Readonly<Record<string, unknown>> =>
-  typeof value === 'object' && value !== null && !Array.isArray(value);
 
 /**
  * Checks the value of an activation against the domain of the tool's kind: a RangeError for rows

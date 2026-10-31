@@ -2,6 +2,7 @@ import { DEFAULT_EDGE_KIND, edgeKindOptions, type FlowRouterOptions } from '../d
 import { orthogonalPath, smoothStepPath, type FlowEdgePath } from '../edges/paths.js';
 import { expandRect, hashNumber, hashString, roundCoord } from '../geometry.js';
 import { SpatialIndex } from '../spatial-index.js';
+import { defaultNow } from '../support.js';
 import type { FlowEdge, FlowEdgeKind, FlowPoint, FlowRect } from '../types.js';
 import { NUDGE_ROUNDS, nudgeAxis, nudgeItems, renderNudged, type NudgeItem } from './nudging.js';
 import { ObstacleIndex } from './obstacles.js';
@@ -59,9 +60,6 @@ export function routeGeometryHash(request: Omit<FlowRouteRequest, 'context' | 'e
   }
   return hash >>> 0;
 }
-
-const defaultNow = (): number =>
-  typeof performance !== 'undefined' ? performance.now() : Date.now();
 
 export function createRoutingPlanner(
   source: FlowRoutingSource,

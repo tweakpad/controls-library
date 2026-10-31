@@ -1,4 +1,5 @@
 import { unionRects } from '../geometry.js';
+import { defaultNow } from '../support.js';
 import type {
   FlowChange,
   FlowLayoutDirection,
@@ -31,9 +32,6 @@ import {
 } from './types.js';
 
 const THRESHOLD = 0.5;
-
-const defaultNow = (): number =>
-  typeof performance !== 'undefined' ? performance.now() : Date.now();
 
 /**
  * Layered (Sugiyama) layout engine (Widgets §6.3 Layout): groups bottom-up, pinned nodes kept

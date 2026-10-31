@@ -30,14 +30,16 @@ import type {
   TextEditorRequestProposal,
 } from '../../foundation/text-editor/controller.js';
 import type { TextEditorLayout } from '../../foundation/text-editor/layout.js';
-import type {
-  TextEditorSelection,
-  TextEditorSelectionInput,
-  TextEditorTextPoint,
+import {
+  selectionInput,
+  type TextEditorSelection,
+  type TextEditorSelectionInput,
+  type TextEditorTextPoint,
 } from '../../foundation/text-editor/model.js';
 import type { TextEditorNodeDefinition } from '../../foundation/text-editor/nodes.js';
 import type { TextEditorToolRegistry } from '../../foundation/text-editor/tools.js';
-import { activationMovesFocus, selectionInput } from './focus.js';
+import { ignore } from '../../foundation/values.js';
+import { activationMovesFocus } from './focus.js';
 
 /** Where a key, paste or drag event happens: the editing root, the fixed toolbar, a popup of the widget, or elsewhere. */
 export type TextEditorKeyZone = 'editing' | 'toolbar' | 'popup' | 'other';
@@ -95,8 +97,6 @@ const REPEATING_TOOLS: ReadonlySet<string> = new Set(['undo', 'redo']);
 
 /** The editing-host profile of `uwg-te-kb-req-host`. */
 const HOST_GUARDS: KeyBindingGuards = { editable: 'none', activation: false, composites: false };
-
-const ignore = (): void => undefined;
 
 /** What the router needs from the element, which implements it. */
 export interface TextEditorRouterHost {

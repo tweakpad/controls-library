@@ -41,6 +41,7 @@ import { navigationIcons } from '../../../icons/navigation.js';
 import { plusIcon } from '../../../icons/plus.js';
 import { resizeSeparatorTargetCss } from '../../../foundation/resize-separator.js';
 import { cellRangeRect } from '../../../foundation/text-editor/table-range.js';
+import { ignore } from '../../../foundation/values.js';
 import type {
   OverlayBox,
   OverlayGeometry,
@@ -527,8 +528,6 @@ const ADD_COLUMN = quickAdd({
   top: '0',
   translate: `-50% calc(var(${QUICK_ADD_LENGTH}, 0px) / 2 - 50%)`,
 });
-
-const ignore = (): void => undefined;
 
 /** The table chrome layer and its interactions. */
 export class TextEditorTableChrome implements OverlayLayer<TableChromePlacement | null> {

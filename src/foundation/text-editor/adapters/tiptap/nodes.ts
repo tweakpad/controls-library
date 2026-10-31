@@ -20,6 +20,7 @@ import {
   isSupportedNode,
   type TextEditorNodeDefinition,
 } from '../../nodes.js';
+import { writeDataAttributes } from '../shared/node-attributes.js';
 import type { TextEditorTiptapModules, TiptapExtensionLike, TiptapNodeLike } from './modules.js';
 import {
   hiddenAttribute,
@@ -65,14 +66,6 @@ function inlineNodeText(
 /** The class of a custom node's element, with a block's presentation role. */
 const nodeClass = (definition: TextEditorNodeDefinition): string => customNodeClassName(definition);
 
-/** Sets an element's `data-` attributes to the given ones, removing those it no longer has. */
-function writeDataAttributes(element: HTMLElement, attributes: Readonly<Record<string, string>>) {
-  for (const name of element.getAttributeNames())
-    if (name.startsWith('data-') && !Object.hasOwn(attributes, name)) element.removeAttribute(name);
-  for (const [name, value] of Object.entries(attributes))
-    if (element.getAttribute(name) !== value) element.setAttribute(name, value);
-}
-
 const sameAttrs = (a: TiptapNodeLike, b: TiptapNodeLike): boolean =>
   JSON.stringify(a.attrs) === JSON.stringify(b.attrs);
 
@@ -100,7 +93,10 @@ export function customNodeView(definition: TextEditorNodeDefinition) {
       }
     };
     const render = (node: TiptapNodeLike) => {
-      writeDataAttributes(host, dataAttributes(definition.name, node.attrs, block));
+      writeDataAttributes(
+        host,
+        customNodeAttributes(definition.name, definitionValues(node.attrs), block),
+      );
       release();
       host.replaceChildren();
       try {

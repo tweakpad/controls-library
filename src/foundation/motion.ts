@@ -1,6 +1,7 @@
 import { reportDiagnostic } from './services.js';
 import { composedParent } from './focus.js';
 import { splitCssList } from './css-list.js';
+import { errorMessage } from './dom-error.js';
 
 export type MotionKind = 'presence' | 'state' | 'ambient';
 
@@ -423,10 +424,6 @@ function isPlayback(value: unknown): value is MotionPlayback {
     'cancel' in value &&
     typeof (value as MotionPlayback).cancel === 'function'
   );
-}
-
-function errorMessage(error: unknown): string {
-  return error instanceof Error ? error.message : String(error);
 }
 
 function setDriven(target: HTMLElement, role: string, driven: boolean): void {

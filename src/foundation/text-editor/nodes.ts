@@ -10,6 +10,7 @@
 import type { IconDefinition } from '../../icons/types.js';
 import { VOID_ELEMENTS } from '../markdown/html.js';
 import type { MarkdownBlock, MarkdownInline } from '../markdown/types.js';
+import { isRecord } from '../values.js';
 import { BUILTIN_TOOL_FEATURES } from './builtin-tools/ids.js';
 import { isContainedCss } from './content/node-css.js';
 import type { TextEditorAttributeValue } from './model.js';
@@ -352,11 +353,6 @@ const BLOCK_ELEMENTS: ReadonlySet<string> = new Set([
   'section',
 ]);
 
-type Members = Readonly<Record<string, unknown>>;
-
-const isMembers = (value: unknown): value is Members =>
-  typeof value === 'object' && value !== null && !Array.isArray(value);
-
 function describe(value: unknown): string {
   return typeof value === 'string' ? `"${value}"` : String(value);
 }
@@ -393,7 +389,7 @@ function checkElement(name: string, element: unknown, role: 'textblock' | 'atom'
 
 function checkSpec(name: string, attribute: string, spec: unknown): TextEditorAttributeSpec {
   const subject = `The attribute "${attribute}" of the node "${name}"`;
-  if (!isMembers(spec)) throw new TypeError(`${subject} needs a spec.`);
+  if (!isRecord(spec)) throw new TypeError(`${subject} needs a spec.`);
   const fallback = spec.default;
   switch (spec.type) {
     case 'string':
@@ -431,7 +427,7 @@ function checkSpec(name: string, attribute: string, spec: unknown): TextEditorAt
 
 function checkAttributes(name: string, attrs: unknown, block: boolean): TextEditorAttributeSpecs {
   if (attrs === undefined) return Object.freeze({});
-  if (!isMembers(attrs))
+  if (!isRecord(attrs))
     throw new TypeError(`The attributes of the node "${name}" must be an object.`);
   const specs: Record<string, TextEditorAttributeSpec> = {};
   for (const [attribute, spec] of Object.entries(attrs)) {
@@ -477,10 +473,10 @@ function checkCss(name: string, value: unknown): string | undefined {
 }
 
 const isIcon = (value: unknown): value is IconDefinition =>
-  isMembers(value) && typeof value.viewBox === 'string' && Array.isArray(value.paths);
+  isRecord(value) && typeof value.viewBox === 'string' && Array.isArray(value.paths);
 
 function checkTool(name: string, tool: unknown): TextEditorNodeTool {
-  if (!isMembers(tool)) throw new TypeError(`The tool of the node "${name}" must be an object.`);
+  if (!isRecord(tool)) throw new TypeError(`The tool of the node "${name}" must be an object.`);
   const { label, description, icon, keywords } = tool;
   if (typeof label !== 'string' || label.trim() === '')
     throw new TypeError(`The tool of the node "${name}" needs a label.`);
@@ -504,7 +500,7 @@ function checkTool(name: string, tool: unknown): TextEditorNodeTool {
 
 function checkBlockMarkdown(name: string, markdown: unknown): TextEditorBlockMarkdown | undefined {
   if (markdown === undefined) return undefined;
-  if (!isMembers(markdown))
+  if (!isRecord(markdown))
     throw new TypeError(`The Markdown of the node "${name}" must be an object.`);
   const serialize = requiredFunction(
     name,
@@ -524,7 +520,7 @@ function checkInlineMarkdown(
   markdown: unknown,
 ): TextEditorInlineMarkdown | undefined {
   if (markdown === undefined) return undefined;
-  if (!isMembers(markdown))
+  if (!isRecord(markdown))
     throw new TypeError(`The Markdown of the node "${name}" must be an object.`);
   const serialize = requiredFunction(
     name,
@@ -536,7 +532,7 @@ function checkInlineMarkdown(
 
 function checkSuggestion(name: string, suggest: unknown): TextEditorSuggestion | undefined {
   if (suggest === undefined) return undefined;
-  if (!isMembers(suggest))
+  if (!isRecord(suggest))
     throw new TypeError(`The suggestion of the node "${name}" must be an object.`);
   const { trigger } = suggest;
   if (typeof trigger !== 'string' || [...trigger].length !== 1 || /\s/u.test(trigger))
@@ -567,7 +563,7 @@ function checkSuggestion(name: string, suggest: unknown): TextEditorSuggestion |
 export function defineTextEditorBlock<const S extends TextEditorAttributeSpecs>(
   init: TextEditorBlockInit<S>,
 ): TextEditorBlockDefinition<S> {
-  if (!isMembers(init)) throw new TypeError('A text editor block definition must be an object.');
+  if (!isRecord(init)) throw new TypeError('A text editor block definition must be an object.');
   const name = checkName(init.name);
   const { content } = init;
   if (content !== 'inline' && content !== 'none')
@@ -614,7 +610,7 @@ export function defineTextEditorBlock<const S extends TextEditorAttributeSpecs>(
 export function defineTextEditorInline<const S extends TextEditorAttributeSpecs, I = unknown>(
   init: TextEditorInlineInit<S, I>,
 ): TextEditorInlineDefinition<S, I> {
-  if (!isMembers(init))
+  if (!isRecord(init))
     throw new TypeError('A text editor inline node definition must be an object.');
   const name = checkName(init.name);
   const element = checkElement(name, init.element, 'inline');

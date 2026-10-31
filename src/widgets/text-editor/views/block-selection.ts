@@ -18,6 +18,7 @@ import type {
   TextEditorSelectionInput,
 } from '../../../foundation/text-editor/model.js';
 import type { TextEditorStrings } from '../../../foundation/text-editor/strings.js';
+import { ignore } from '../../../foundation/values.js';
 import { blocksDeletedText, blocksSelectedText } from '../announcer.js';
 import { escapeStep } from '../focus.js';
 import {
@@ -347,8 +348,6 @@ export interface TextEditorBlockSelectionHost {
   /** Re-runs the overlay pass. */
   invalidate(): void;
 }
-
-const ignore = (): void => undefined;
 
 /**
  * Block mode: follows the adapter-held block selection, handles its keys and Shift clicks, takes

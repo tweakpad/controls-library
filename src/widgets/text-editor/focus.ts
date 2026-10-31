@@ -9,10 +9,7 @@ import type {
   TextEditorEngineInstance,
   TextEditorFocusPosition,
 } from '../../foundation/text-editor/engine.js';
-import type {
-  TextEditorSelection,
-  TextEditorSelectionInput,
-} from '../../foundation/text-editor/model.js';
+import { selectionInput, type TextEditorSelection } from '../../foundation/text-editor/model.js';
 import type { ChangeReason } from '../../foundation/types.js';
 import type { TextEditorKeyZone } from './router.js';
 
@@ -72,20 +69,6 @@ export function activationMovesFocus(activation: TextEditorActivation): boolean 
   if (activation.reason === 'item-press') return true;
   if (activation.reason === 'hotkey') return activation.zone === 'editing';
   return false;
-}
-
-/** The selection input that sets a reported selection again, or null for no selection. */
-export function selectionInput(selection: TextEditorSelection): TextEditorSelectionInput | null {
-  switch (selection.kind) {
-    case 'text':
-      return { kind: 'text', anchor: selection.anchor, head: selection.head };
-    case 'blocks':
-      return { kind: 'blocks', ids: selection.ids };
-    case 'cells':
-      return { kind: 'cells', table: selection.table, range: selection.range };
-    default:
-      return null;
-  }
 }
 
 // Alt+F10 contextual controls (uwg-te-tab-keymap-host-r2, uwg-te-req-tables-7) ---------------

@@ -11,7 +11,7 @@
  * container, frames, styles and events: this class dispatches no event, writes no DOM and reads
  * no window or document of its own.
  */
-import { domError } from '../dom-error.js';
+import { domError, errorMessage } from '../dom-error.js';
 import { EngineMountSession } from '../engine-session.js';
 import type { FrameSource } from '../frame-loop.js';
 import { frozenCopy } from '../freeze.js';
@@ -243,9 +243,6 @@ const isActionList = (
 /** The `content.set` of a list that holds it alone, or `null`. */
 const soleContentSet = (actions: readonly TextEditorAction[]): TextEditorContentSetAction | null =>
   actions.length === 1 && actions[0]!.type === 'content.set' ? actions[0]! : null;
-
-const errorMessage = (error: unknown): string =>
-  error instanceof Error ? error.message : String(error);
 
 /**
  * The blocks of an instance that can hold a text point, textblocks and tables, in document order;

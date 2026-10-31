@@ -1,5 +1,6 @@
 import { shallowEqual } from '../../store.js';
 import { clampPointToExtent } from '../geometry.js';
+import { sizesEqual } from '../support.js';
 import type {
   FlowChange,
   FlowDocument,
@@ -25,12 +26,6 @@ export type FlowDocumentChange = Exclude<FlowChange, { type: 'node-measure' }>;
 
 function pointsEqual(a: FlowPoint, b: FlowPoint): boolean {
   return a.x === b.x && a.y === b.y;
-}
-
-function sizesEqual(a: FlowSize | undefined, b: FlowSize | undefined): boolean {
-  if (a === b) return true;
-  if (!a || !b) return false;
-  return a.width === b.width && a.height === b.height;
 }
 
 function waypointsEqual(

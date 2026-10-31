@@ -210,6 +210,7 @@
     "format:check": "prettier --check \"src/**/*.{ts,css}\" \"tests/unit/**/*.ts\" \".storybook/**/*.{ts,css,mdx}\" \"scripts/**/*.mjs\" \"*.{js,ts,json,css,html,md}\"",
     "lint": "npm run format:check && npm run lint:ts && npm run lint:css",
     "check": "npm run lint && npm run typecheck && npm test",
+    "deps:check": "depcruise src tests/unit --config .dependency-cruiser.mjs",
     "verify": "npm run check && npm run test:package && node scripts/size-report.mjs",
     "prepare": "node scripts/hooks/install.mjs",
     "lint:ts": "eslint .",
@@ -255,6 +256,7 @@
     "@types/node": "^22.20.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "dependency-cruiser": "^17.4.3",
     "eslint": "^10.10.0",
     "eslint-plugin-lit": "^2.3.1",
     "eslint-plugin-lit-a11y": "^5.1.1",
@@ -262,6 +264,7 @@
     "lexical": "0.52.0",
     "lit": "^3.3.3",
     "maplibre-gl": "^6.13.0",
+    "orderedmap": "2.1.1",
     "postcss-lit": "^1.4.1",
     "preact": "^11.1.0",
     "prettier": "^3.9.6",
@@ -281,7 +284,8 @@
     "vite": "^8.3.0",
     "vitest": "^4.1.11",
     "vue": "^3.5.44",
-    "vue-tsc": "^3.3.14"
+    "vue-tsc": "^3.3.14",
+    "w3c-keyname": "2.2.8"
   },
   "customElements": "dist/custom-elements.json",
   "peerDependencies": {

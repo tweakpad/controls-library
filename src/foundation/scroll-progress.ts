@@ -4,6 +4,7 @@
  * container. Parallax and scroll-linked reveals both read it, so a page measures once per frame
  * however many images and texts follow the scroll.
  */
+import { clamp01 } from './converters.js';
 import {
   observeIntersection,
   observeResize,
@@ -23,8 +24,6 @@ export type ScrollAxis = 'block' | 'inline';
  */
 export type ScrollRange = 'cover' | 'contain' | 'entry' | 'exit';
 
-const clamp = (value: number) => Math.min(1, Math.max(0, value));
-
 /**
  * Progress 0 through 1 of a box at `start` of `size` through the visible extent from
  * `visibleStart` to `visibleEnd`, over `range`.
@@ -41,16 +40,16 @@ export function rangeProgress(
   const shorter = Math.min(size, visible);
   if (range === 'cover') {
     const distance = visible + size;
-    return distance > 0 ? clamp((visibleEnd - start) / distance) : 0;
+    return distance > 0 ? clamp01((visibleEnd - start) / distance) : 0;
   }
-  if (range === 'entry') return shorter > 0 ? clamp((visibleEnd - start) / shorter) : 0;
-  if (range === 'exit') return shorter > 0 ? clamp((visibleStart + shorter - end) / shorter) : 0;
+  if (range === 'entry') return shorter > 0 ? clamp01((visibleEnd - start) / shorter) : 0;
+  if (range === 'exit') return shorter > 0 ? clamp01((visibleStart + shorter - end) / shorter) : 0;
   // contain
   if (size <= visible) {
     const distance = visible - size;
-    return distance > 0 ? clamp((visibleEnd - end) / distance) : start <= visibleStart ? 1 : 0;
+    return distance > 0 ? clamp01((visibleEnd - end) / distance) : start <= visibleStart ? 1 : 0;
   }
-  return clamp((visibleStart - start) / (size - visible));
+  return clamp01((visibleStart - start) / (size - visible));
 }
 
 /** A point of a named range: `fraction` 0 is its start, 1 its end (`entry 20%` is 0.2). */
@@ -136,7 +135,7 @@ export function spanProgress(
   const from = pointPosition(span.start, size, visibleStart, visibleEnd);
   const to = pointPosition(span.end, size, visibleStart, visibleEnd);
   if (from === to) return start <= from ? 1 : 0;
-  return clamp((from - start) / (from - to));
+  return clamp01((from - start) / (from - to));
 }
 
 /** Inline when `container` overflows only horizontally (a sideways strip), otherwise block. */

@@ -18,12 +18,13 @@ import type {
   TextEditorMarkColorAction,
   TextEditorMarkToggleAction,
 } from '../../actions.js';
-import type {
-  TextEditorCellRange,
-  TextEditorLinkState,
-  TextEditorSelectionInput,
-  TextEditorTextRange,
-  TextEditorToggleMark,
+import {
+  selectionInput,
+  type TextEditorCellRange,
+  type TextEditorLinkState,
+  type TextEditorSelectionInput,
+  type TextEditorTextRange,
+  type TextEditorToggleMark,
 } from '../../model.js';
 import type { TextEditorColor } from '../../palette.js';
 import {
@@ -54,7 +55,6 @@ import type {
   LexicalTextLike,
 } from './modules.js';
 import { $pointOfText, $tablePlacement, $textblockAt, $textblockOf } from './points.js';
-import { selectionInput } from './blocks.js';
 import { $applySelection, $readSelection, $selectText } from './selection.js';
 import type { LexicalRuntime } from './runtime.js';
 
@@ -132,7 +132,7 @@ function $extractText(rt: LexicalRuntime, selection: LexicalRangeSelectionLike):
 }
 
 /** The range selection the mark actions act on, or `null`. */
-function $range(rt: LexicalRuntime): LexicalRangeSelectionLike | null {
+export function $range(rt: LexicalRuntime): LexicalRangeSelectionLike | null {
   const selection = rt.lexical.$getSelection();
   return rt.lexical.$isRangeSelection(selection) ? selection : null;
 }

@@ -13,6 +13,7 @@ import { customNodeAttributes, definitionAttributes } from '../../content/portab
 import type { TextEditorAttributes } from '../../model.js';
 import { customNodeClassName, type TextEditorNodeDefinition } from '../../nodes.js';
 import { setBlockType } from '../shared/block-edits.js';
+import { writeDataAttributes } from '../shared/node-attributes.js';
 import { $commitDocument, editContext } from './blocks.js';
 import { $portableDocument } from './document.js';
 import { $ownStep } from './history.js';
@@ -71,18 +72,6 @@ const sameAttributes = (a: TextEditorAttributes, b: TextEditorAttributes): boole
   const keys = Object.keys(a);
   return keys.length === Object.keys(b).length && keys.every((key) => Object.is(a[key], b[key]));
 };
-
-/** Sets the attributes of an element to the given list, removing the `data-` ones it lacks. */
-function writeDataAttributes(
-  element: HTMLElement,
-  attributes: readonly (readonly [string, string])[],
-): void {
-  const wanted = new Map(attributes);
-  for (const name of element.getAttributeNames())
-    if (name.startsWith('data-') && !wanted.has(name)) element.removeAttribute(name);
-  for (const [name, value] of wanted)
-    if (element.getAttribute(name) !== value) element.setAttribute(name, value);
-}
 
 /** The cleanups that the views of custom atoms returned, by host element. */
 const viewCleanups = new WeakMap<HTMLElement, () => void>();

@@ -32,6 +32,7 @@ import type {
   TextEditorToolTarget,
 } from '../../../foundation/text-editor/tools.js';
 import type { KeyShortcut } from '../../../foundation/key-bindings.js';
+import { ignore } from '../../../foundation/values.js';
 import {
   blocksDeletedText,
   blocksDuplicatedText,
@@ -254,8 +255,6 @@ export interface TextEditorBlocksHost {
   transientOpened?(owner: object, close: () => void): void;
   transientClosed?(owner: object): void;
 }
-
-const ignore = (): void => undefined;
 
 /** The block controls of one widget. */
 export class TextEditorBlocks {

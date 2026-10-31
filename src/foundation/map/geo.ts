@@ -6,6 +6,7 @@
  * use another scale convert at their boundary. Bounds are `south`, `west`, `north`, `east`; a west
  * edge greater than the east edge crosses the antimeridian.
  */
+import { finite } from '../values.js';
 
 export interface MapPosition {
   readonly latitude: number;
@@ -54,9 +55,6 @@ export type MapPadding =
 
 export const MERCATOR_MAX_LATITUDE = 85.051129;
 export const TILE_SIZE = 256;
-
-const finite = (value: unknown): value is number =>
-  typeof value === 'number' && Number.isFinite(value);
 
 export function clampLatitude(latitude: number): number {
   return Math.max(-MERCATOR_MAX_LATITUDE, Math.min(MERCATOR_MAX_LATITUDE, latitude));

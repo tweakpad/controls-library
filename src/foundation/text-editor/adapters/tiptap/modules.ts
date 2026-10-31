@@ -8,6 +8,7 @@
  * when the factory runs: a missing or incompatible module, or modules from two copies of the
  * engine, reject the mount with an error that names the module.
  */
+import { isObjectLike } from '../../../values.js';
 
 // Document model
 
@@ -534,9 +535,6 @@ export const TIPTAP_MODULE_PACKAGES = Object.freeze({
 
 type ModuleName = keyof typeof TIPTAP_MODULE_PACKAGES;
 
-const isObject = (value: unknown): value is Readonly<Record<string, unknown>> =>
-  (typeof value === 'object' || typeof value === 'function') && value !== null;
-
 const isFunction = (value: unknown): boolean => typeof value === 'function';
 
 /** Whether the modules carry both table modules, which tables need. */
@@ -546,7 +544,7 @@ export function hasTiptapTables(
   readonly table: TiptapTableLike;
   readonly tables: TiptapTablesLike;
 } {
-  return isObject(modules.table) && isObject(modules.tables);
+  return isObjectLike(modules.table) && isObjectLike(modules.tables);
 }
 
 const moduleError = (name: ModuleName, problem: string): Error =>
@@ -584,7 +582,7 @@ const TABLE_MEMBERS: readonly string[] = ['Table', 'TableRow', 'TableCell', 'Tab
 const TABLES_MEMBERS: readonly string[] = ['TableMap', 'CellSelection'];
 
 function missingMember(module: unknown, members: readonly string[]): string | null {
-  if (!isObject(module)) return '';
+  if (!isObjectLike(module)) return '';
   for (const member of members) if (module[member] === undefined) return member;
   return null;
 }
@@ -614,15 +612,15 @@ function copyProblem(modules: Readonly<Record<string, unknown>>): Error | null {
   const state = modules.state as Readonly<Record<string, unknown>>;
   const history = modules.history as Readonly<Record<string, unknown>>;
   const nodeSelection = state.NodeSelection as { readonly prototype?: unknown } | undefined;
-  const withTables = isObject(modules.table) && isObject(modules.tables);
+  const withTables = isObjectLike(modules.table) && isObjectLike(modules.tables);
   /** Whether each named member of a module is a node of `core`. */
   const coreNodes = (module: unknown, members: readonly string[]) => () =>
-    isObject(module) && members.every((member) => isInstance(module[member], core.Node));
+    isObjectLike(module) && members.every((member) => isInstance(module[member], core.Node));
   const ofState: [ModuleName, () => boolean][] = [
     [
       'core',
       () =>
-        isObject(nodeSelection?.prototype) &&
+        isObjectLike(nodeSelection?.prototype) &&
         (core.isNodeSelection as (value: unknown) => boolean)(
           Object.create(nodeSelection.prototype as object),
         ) === true,
@@ -633,7 +631,8 @@ function copyProblem(modules: Readonly<Record<string, unknown>>): Error | null {
     [
       'starterKit',
       () =>
-        isObject(modules.starterKit) && isInstance(modules.starterKit.StarterKit, core.Extension),
+        isObjectLike(modules.starterKit) &&
+        isInstance(modules.starterKit.StarterKit, core.Extension),
     ],
     ['list', coreNodes(modules.list, REQUIRED_MEMBERS.list)],
   ];
@@ -670,22 +669,22 @@ function copyProblem(modules: Readonly<Record<string, unknown>>): Error | null {
  * with tables, a `table` with its `TableView`; and every module of one copy of the engine.
  */
 export function probeTiptapModules(modules: unknown): Error | null {
-  if (!isObject(modules)) return moduleError('core', 'is missing');
+  if (!isObjectLike(modules)) return moduleError('core', 'is missing');
   for (const name of Object.keys(REQUIRED_MEMBERS) as (keyof typeof REQUIRED_MEMBERS)[]) {
     const module = modules[name];
-    if (!isObject(module)) return moduleError(name, 'is missing');
+    if (!isObjectLike(module)) return moduleError(name, 'is missing');
     const missing = missingMember(module, REQUIRED_MEMBERS[name]);
     if (missing) return moduleError(name, `has no "${missing}"`);
   }
   const core = modules.core as Readonly<Record<string, unknown>>;
   const editor = core.Editor as { readonly prototype?: unknown } | undefined;
-  if (!isFunction(editor) || !isObject(editor?.prototype) || !('mount' in editor.prototype))
+  if (!isFunction(editor) || !isObjectLike(editor?.prototype) || !('mount' in editor.prototype))
     return moduleError('core', 'is not a supported version: its editor cannot mount on an element');
   const history = modules.history as Readonly<Record<string, unknown>>;
   if (!isFunction(history.closeHistory))
     return moduleError('history', 'is not a supported version: it has no closeHistory');
   const { table, tables } = modules;
-  if (isObject(table) && isObject(tables)) {
+  if (isObjectLike(table) && isObjectLike(tables)) {
     const tableMissing = missingMember(table, TABLE_MEMBERS);
     if (tableMissing) return moduleError('table', `has no "${tableMissing}"`);
     if (!isFunction(table.TableView))
