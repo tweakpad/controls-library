@@ -10,6 +10,7 @@ import {
   inlineControlSurface,
   inlineControlValue,
 } from './shared/inline-control.js';
+import { joinedEditor, joinedEditorSelector } from './shared/text-control.js';
 
 // Slider paint; geometry belongs to the family.
 
@@ -152,7 +153,11 @@ export const sliderAppearance: PresentationDictionary = {
   ]),
   'slider-track-variant-inline': horizontal([
     { declarations: { ...inlineControlSurface, height: '100%', width: '100%', overflow: 'clip' } },
-    ...inlineControlRings('[part~="slider"]'),
+    // The row rings while its Thumb has visible focus or its value is being typed.
+    ...inlineControlRings(
+      '[part~="slider"]',
+      ':is([data-focus-visible], :has([data-value-editor]:focus-within))',
+    ),
   ]),
   'slider-range-variant-inline': horizontal([
     { declarations: { 'border-radius': '0', background: inlineControlFill } },
@@ -194,6 +199,23 @@ export const sliderAppearance: PresentationDictionary = {
       declarations: { color: 'var(--tp-foreground)' },
     },
   ]),
+  // The typed value: the Input's editor joined to the bar, reading as the value it replaces.
+  'slider-value-editor': [
+    {
+      selector: joinedEditorSelector,
+      declarations: {
+        ...joinedEditor,
+        ...inlineControlValue,
+        color: 'var(--tp-foreground)',
+        'field-sizing': 'content',
+        'min-inline-size': '3ch',
+        'min-height': '0',
+        height: 'auto',
+        padding: '0',
+        'text-align': 'end',
+      },
+    },
+  ],
   // Ticks: hairlines across the track; the center tick is longer and stronger.
   'slider-tick': [
     {

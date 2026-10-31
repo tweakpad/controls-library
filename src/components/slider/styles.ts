@@ -138,6 +138,21 @@ export const sliderStyles = css`
     margin-inline-start: auto;
   }
 
+  /* An editable value takes its own presses: a click types it; the rest of the bar still sets it. */
+  :host([variant='inline']:not([orientation='vertical'])) [part~='slider-output'][data-editable] {
+    pointer-events: auto;
+    cursor: text;
+  }
+
+  .value-editor {
+    display: flex;
+  }
+
+  .value-editor tp-input {
+    inline-size: auto;
+    min-inline-size: 0;
+  }
+
   :host([variant='inline']:not([orientation='vertical'])) .track {
     align-self: stretch;
   }

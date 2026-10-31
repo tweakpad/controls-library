@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-10-31T21:41:31.168Z",
+  "generatedAt": "2026-10-31T22:20:42.787Z",
   "version": "0.2.0",
   "method": "Each row imports and registers one component or widget from its public package entry. Rolldown tree-shakes and minifies an independent production JavaScript bundle, then measures its output before and after gzip. Required dependencies and embedded styles are included; Lit, optional engines, source maps and the separate global stylesheet are excluded. Each row's React and Vue sizes import its binding from @tweakpad/ui/react and @tweakpad/ui/vue the same way (the framework excluded); each adapter is measured alone. Sizes use kB of 1000 bytes.",
   "lit": { "bytes": 15977, "gzip": 6060 },
   "reactAdapter": { "bytes": 1100, "gzip": 603 },
   "vueAdapter": { "bytes": 1440, "gzip": 779 },
-  "full": { "bytes": 1988566, "gzip": 560278 },
-  "fullWidgets": { "bytes": 1575741, "gzip": 453752 },
+  "full": { "bytes": 2008674, "gzip": 566584 },
+  "fullWidgets": { "bytes": 1578929, "gzip": 454782 },
   "components": [
     {
       "name": "Flow",
       "tagName": "tp-flow",
       "section": "widgets",
-      "react": { "bytes": 1273925, "gzip": 358008 },
-      "vue": { "bytes": 1273731, "gzip": 358052 },
-      "bytes": 1272540,
-      "gzip": 357250,
+      "react": { "bytes": 1277108, "gzip": 359072 },
+      "vue": { "bytes": 1276914, "gzip": 359118 },
+      "bytes": 1275726,
+      "gzip": 358262,
       "modules": 439,
       "includes": [
         "tp-accordion",
@@ -88,7 +88,7 @@
       "tagName": "tp-text-editor",
       "section": "widgets",
       "bytes": 1022275,
-      "gzip": 301149,
+      "gzip": 300775,
       "modules": 384,
       "includes": [
         "tp-aspect-ratio",
@@ -126,10 +126,10 @@
       "name": "Color picker",
       "tagName": "tp-color-picker",
       "section": "widgets",
-      "react": { "bytes": 546376, "gzip": 157085 },
-      "vue": { "bytes": 546454, "gzip": 157188 },
-      "bytes": 545185,
-      "gzip": 156323,
+      "react": { "bytes": 549568, "gzip": 158149 },
+      "vue": { "bytes": 549646, "gzip": 158251 },
+      "bytes": 548378,
+      "gzip": 157358,
       "modules": 213,
       "includes": [
         "tp-badge",
@@ -190,10 +190,10 @@
       "name": "Easing editor",
       "tagName": "tp-easing-editor",
       "section": "widgets",
-      "react": { "bytes": 476282, "gzip": 136633 },
-      "vue": { "bytes": 476437, "gzip": 136761 },
-      "bytes": 475170,
-      "gzip": 137089,
+      "react": { "bytes": 479475, "gzip": 137432 },
+      "vue": { "bytes": 479630, "gzip": 137562 },
+      "bytes": 478361,
+      "gzip": 137918,
       "modules": 195,
       "includes": [
         "tp-badge",
@@ -413,6 +413,17 @@
         "tp-navigation-panel-drawer",
         "tp-spinner"
       ]
+    },
+    {
+      "name": "Slider",
+      "tagName": "tp-slider",
+      "section": "components",
+      "react": { "bytes": 170064, "gzip": 49999 },
+      "vue": { "bytes": 170279, "gzip": 50102 },
+      "bytes": 169016,
+      "gzip": 49825,
+      "modules": 77,
+      "includes": ["tp-button", "tp-icon", "tp-input", "tp-slider-thumb", "tp-spinner"]
     },
     {
       "name": "Table of contents",
@@ -653,17 +664,6 @@
       "gzip": 30402,
       "modules": 56,
       "includes": ["tp-button", "tp-icon", "tp-spinner"]
-    },
-    {
-      "name": "Slider",
-      "tagName": "tp-slider",
-      "section": "components",
-      "react": { "bytes": 96693, "gzip": 29229 },
-      "vue": { "bytes": 96904, "gzip": 29383 },
-      "bytes": 95644,
-      "gzip": 28889,
-      "modules": 44,
-      "includes": ["tp-slider-thumb"]
     },
     {
       "name": "Questionnaire",

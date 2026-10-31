@@ -17,6 +17,7 @@ export const Slider = /*#__PURE__*/ createBinding(TpSlider, 'Slider', {
   | 'buffered'
   | 'defaultValue'
   | 'disabled'
+  | 'editableValue'
   | 'formAssociatedValue'
   | 'formOwner'
   | 'format'

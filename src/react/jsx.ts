@@ -4361,6 +4361,7 @@ type Tags = {
     | 'buffered'
     | 'defaultValue'
     | 'disabled'
+    | 'editableValue'
     | 'formAssociatedValue'
     | 'formOwner'
     | 'format'

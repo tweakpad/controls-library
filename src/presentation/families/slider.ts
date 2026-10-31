@@ -53,6 +53,11 @@ const definition: ComponentDefinition = {
       axes: ['orientation', 'variant'],
     },
     {
+      // editableValue: the Input's editor joins the bar in place of the value text.
+      name: 'slider-value-editor',
+      description: 'The editor of the value while it is typed, in place of the formatted value.',
+    },
+    {
       // sec-148-slider mp-slider-media: optional non-semantic buffer ranges.
       name: 'slider-buffer',
       description: 'One buffered range drawn on the track, such as loaded media.',

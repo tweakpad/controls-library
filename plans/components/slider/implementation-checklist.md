@@ -4,6 +4,7 @@
 
 - Component(s) / public identity: Slider (`tp-slider`, `tp-slider-thumb`); Field (`tp-field`) label hand-off.
 - Requested work / claim: add ticks (interval in value units, free or snapping, distinct center, center detent) to every Slider variant, and a new `inline` variant (compact stackable control-height row, label and value inside, fill as background) as a presentation of the existing control.
+- Update 2026-10-31 (tweakpad/ui#27): opt-in editable value on the inline Slider (`editableValue`): a click on the value (text cursor) or Enter/F2 on the Thumb types it; only the value area stops setting the value by press. User: "leave the numeric input alone, do not conflate"; tp-input unchanged. Spec amended at v0.52.2 → content `d16ba52e` (v0.52.3), bump `2c68e6b1` (v0.53.0): `sltk-prop-2`, `sltk-pub-1`, `sltk-detail-1`, `sltk-q3`.
 - Scope source: user request 2026-10-29 ("extend the slider types to include ticks…", "a new variant called inline…", "we concentrate only on slider for now, it needs to be polished and ready to use"); approved plan `~/.claude/plans/we-want-to-extend-glistening-panda.md`.
 - In-scope changes and existing gaps: Slider value lattice, ticks, inline variant, shared inline-control recipe, Field label ownership hook. Inline variants of Input, Select and Switch are later work (user: "all of them will have this inline variant").
 - Repository baseline / unrelated changes: `development` at cac27a0, clean tree.
@@ -35,11 +36,18 @@
 | C-13 | Vertical inline keeps default presentation | variant row | — | styles scoped `:not([orientation=vertical])`, recipe `horizontal()` scope, `#inline` | ### Inline | V-08 | passed | I08, screenshot |
 | C-14 | Field label ownership: Field hides its label visually, control shows it, name preserved | `sltk-f2` | — | `TpFormElement.rendersFieldLabel`, Field `data-control-label`, slider label fallback `aria-hidden` | ### Inline | V-09 | passed | I06, I07, a11y tree |
 | C-15 | Shared inline-control paint for later controls | plan | — | `src/presentation/recipes/shared/inline-control.ts` | — | V-05 | passed | used by slider recipe |
+| C-16 | `editableValue` / `editable-value`, default false; applies to the inline variant with one value, not disabled, read-only, indeterminate or misconfigured | `sltk-prop-2`, `sltk-q3` | none (issue #27) | `TpSlider.editableValue`, `#valueEditable`, output `data-editable` | ### Editable value | V-13, V-14 | passed | E01, E02 |
+| C-17 | Only the value area stops press-to-set: the output takes its own presses with the text cursor; the rest of the bar keeps press and drag | `sltk-q3` (amends C-11 when on) | existing track press | `styles.ts` output `[data-editable]` pointer-events/cursor; `#ownsControlPath` excludes it | ### Editable value | V-14 | passed | E03, E04, computed cursor `text` |
+| C-18 | Start editing on a primary click on the value, Enter or F2 on the Thumb; the number field replaces the value text with its text selected | `sltk-q3` | base-ui NumberField (composed via local owner) | `#startValueEdit`, `#bindValueEdit` composing `tp-input` + `NumberFieldController` only while editing | ### Editable value | V-15, V-16 | passed | E05, E11, real click and F2 |
+| C-19 | Enter or leaving the field commits the parsed value, constrained like a Thumb value, as one change and one commit with reason `input`; Escape restores without events; Enter and Escape return focus to the Thumb | `sltk-q3` | NumberField blur commit | NumberField commit → `#move(…, 'input', …, true)`; cancel flag; focus to Thumb | ### Editable value | V-15, V-16 | passed | E06–E10, real typing |
+| C-20 | The inner field's value, field, input and change events never leave the Slider | `sltk-q3` (one change, one commit) | — | stopped at `[data-value-editor]` | — | V-15 | passed | E06 exact event list |
+| C-21 | `slider-value-editor` part: the Input's editor joined to the bar (joined-editor recipe) and the row ring while typing | `sltk-pub-1`, `sltk-detail-1` | Input group joined control | `registerPart('slider-value-editor', editor)`; recipe `joinedEditor` + `inlineControlValue`; ring `:has([data-value-editor]:focus-within)` | API Reference (part) | V-17 | passed | screenshots dark/light |
 
 | Issue | Concrete missing/conflicting contract | Affected dependencies | Proposed resolution | Authority / resolution evidence | Status |
 | ----- | ------------------------------------- | --------------------- | ------------------- | ------------------------------- | ------ |
 | S-1 | No ticks, snap-to-ticks or center contract | Slider | Add props, part, requirements | Spec v0.46.1/v0.47.0 | passed |
 | S-2 | No inline variant or Field label ownership | Slider, Field | Add variant text, `sltk-q2`, `sltk-f2` | Spec v0.46.1; geometry corrected v0.47.1 | passed |
+| S-3 | No editable value contract | Slider | Add prop, part and requirement | Spec v0.52.3 content, v0.53.0 bump (`sltk-prop-2`, `sltk-pub-1`, `sltk-detail-1`, `sltk-q3`) | passed |
 
 ## Architecture and reuse
 
@@ -55,6 +63,8 @@
 | Tick geometry | videojs `SliderSegmentsCore` | `normalizeSliderSegments` + `thumbPosition` | new `sliderTicks`; position shared with Thumbs through `#axisPosition` | V-01 |
 | Inline row paint | base-ui inset experiment | `fieldBoundary`, `fieldFocus`, `fieldInvalid` (`shared/text-control.ts`) | reused via `shared/inline-control.ts` | slider; future Input/Select/Switch inline |
 | Field label | Field.Label | `tp-field` `#associate`, `setFieldAssociation` | repaired: `rendersFieldLabel` hook, visually hidden label | V-09 |
+| Typed value | NumberField (Root, Input) | `NumberFieldController` + `tp-input` (as color picker, easing editor, flow) | reused unchanged; Slider mounts them only while editing and publishes the result through its own Thumb move | V-15, V-18 |
+| Joined editor paint | Input group control | `joinedEditor`, `joinedEditorSelector` (`shared/text-control.ts`) | reused for `slider-value-editor` | V-17 |
 
 ### Presentation source map
 
@@ -71,6 +81,8 @@
 | ------------------ | ----------- | ------------------------------- | ----------------------------------- | --------------------------------------------- |
 | fixture `#stack` | filter rows | `tp-slider` inline | V-05 | stack is native grid layout |
 | docs Inline in a field | label, description | `tp-field` | V-09 | none |
+| Slider value editor (internal) | number field | `tp-input` + `NumberFieldController` | V-15, V-18 | none; `tp-input` unchanged |
+| fixture/docs Editable value | rows | `tp-slider` inline `editable-value` | V-13 | none |
 
 ## Verification scenarios
 
@@ -88,6 +100,13 @@
 | V-10 | C-01, C-05, C-08; regression | existing slider fixture, media player, color picker, easing editor | unchanged | all slider asserts pass (C07 fixture repaired: drag moves carry `buttons`) | DevTools fixtures | passed | Recorded in the Actual result and evidence columns; fixture `ticks-inline.html` reruns it. |
 | V-11 | C-03, C-12, C-14; accessibility automation | axe on ticks-inline fixture, dark and light | no violations | none | injected axe-core | passed | Recorded in the Actual result and evidence columns; fixture `ticks-inline.html` reruns it. |
 | V-12 | C-08, C-12, C-15; update cost regression | `inline-update-cost` fixture: 40 inline sliders in one shadow root, controlled value, hook on instance 0; 20 value changes and 30 updates per frame; dist from 3eeb6b4 vs this tree | no presentation refresh and no attribute rewritten to its own value per value change; hook kept; forced refresh changes nothing | 66.2 → 15 mutation records per change (51 → 0 no-op), refresh 2 → 0, querySelectorAll 12.1 → 2.1; 173 → 127 µs per update, frame 9.9 → 7.8 ms; safety 0 differences; slider fixture 119/119, ticks-inline 14/14 | DevTools MCP, `tests/fixtures/components/inline-update-cost/` (`counters`, `startTiming`, `safety`), baseline `tmp/inline-update-cost/baseline.json` | passed | Shared fix for tweakpad/ui#26 (bindPart, PresentationController, markers, Field association). The remaining cost is the Slider's own `#refreshThumbs` scans. |
+| V-13 | C-16; behavior | `#opacity`, `#width` vs `#editable-range`, `#editable-disabled`, `#editable-default` | only the editable inline single-value rows mark their value | as expected | `assertEditable` E01, E02 | passed | fixture `ticks-inline.html` reruns it |
+| V-14 | C-17; pointer (dispatched at hit-tested element) | press on the value; press at 50% | value unchanged, no editor; 0.5 | 0.35 kept; 0.5 | E03, E04 | passed | dispatched events |
+| V-15 | C-18–C-20; behavior | open by click, type, Enter / Escape / blur, clamp 5 → 1, 251.74 → 251.7, F2 | one change + one commit (`input`), Thumb focus, no leak | as expected; events `tp-value-change input 0.57`, `tp-value-commit input 0.57`, `tp-field-value input 0.57` | E05–E11 (11/11) | passed | fixture reruns it |
+| V-16 | C-18, C-19; real keyboard + pointer | DevTools click on the value, `type_text 251.74`, Enter; F2, `10`, Escape; ArrowRight | 251.7 committed, focus on Thumb; Escape keeps 251.7; ArrowRight → 251.8 | as expected | DevTools `click`, `type_text`, `press_key` | passed | real input |
+| V-17 | C-21; visual | editing in dark and light | field in place of the value, text selected, row ringed, fill kept | as expected | `tmp/component-verification/slider/2026-10-31-editable/` editing-dark, typing-dark, editing-light | passed | local screenshots |
+| V-18 | C-18; accessibility | a11y tree while editing; axe on the section and document | spinbutton "Brush opacity" (Number field, 0–1) beside the slider | as expected; document axe clean; section-scoped axe flags only the disabled row's label contrast (inactive control, existing disabled paint) | DevTools snapshot, injected axe-core | passed | no screen-reader run |
+| V-19 | C-16–C-21; regression | slider fixture (14 helpers), ticks-inline (ticks, inline), React and Vue lane `tp-slider` + smoke 201 | unchanged | 119/119; 6/6, 8/8; lane passed, 0 failures | DevTools fixtures | passed | `npm test`, typecheck, lint green |
 
 ## Early integration checkpoint
 
@@ -109,13 +128,14 @@
 | 5. Accessibility                      | passed | V-09 tree, V-03 keyboard, V-11 axe. |
 | 6. Visual and interaction inspection  | passed | V-05, V-08. |
 | 7. Documentation and demo reuse       | passed | slider.mdx Inline and Ticks sections; check-docs passes; story args. |
-| 8. Regression and reconciliation      | passed | `npm test`, `npm run build`, consumer fixtures. |
+| 8. Regression and reconciliation      | passed | `npm test`, `npm run build`, consumer fixtures; editable value (2026-10-31): V-13…V-19, bindings regenerated, ledger row updated. |
 
 ## Documentation synchronization
 
 - [x] `docs/components/slider.mdx` follows the tweakpad-docs skill; `check-docs.mjs components/slider` passes.
 - [x] JSDoc covers `ticks`, `snapToTicks`, `variant`; `slider-tick` has a part description.
-- [x] `elementDependencies` unchanged (no new rendered elements).
+- [x] `elementDependencies` gains `TpInput` (rendered while the value is edited); the Slider bundle grows by the Input (28.9 → 49.8 kB gzip, size report 2026-10-31).
+- [x] slider.mdx `### Editable value`; `editableValue` JSDoc; `slider-value-editor` part description.
 - [x] Verification fixtures are separate from the page.
 - [x] Previews reuse library components (`tp-field`).
 - [x] Preview code works outside Storybook.

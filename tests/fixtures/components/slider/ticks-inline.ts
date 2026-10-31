@@ -202,5 +202,173 @@ async function assertInline() {
   return { checks: records.length, records: [...records] };
 }
 
-Object.assign(window, { sliderTicksInlineAPI: { assertTicks, assertInline, settle, press } });
+/** Editable value (`editableValue`): hit target, editing, commit, cancel and event containment. */
+async function assertEditable() {
+  records.length = 0;
+  const opacity = $<TpSlider>('#opacity');
+  const width = $<TpSlider>('#width');
+  const others = ['#editable-range', '#editable-disabled', '#editable-default'].map((id) =>
+    $<TpSlider>(id),
+  );
+  for (const slider of [opacity, width, ...others]) await settle(slider);
+  const output = (slider: TpSlider) =>
+    slider.shadowRoot!.querySelector<HTMLElement>('[part~="slider-output"]');
+  const editorOf = (slider: TpSlider) =>
+    slider.shadowRoot!.querySelector<HTMLElement & { inputElement?: HTMLInputElement | null }>(
+      '[data-value-editor] tp-input',
+    )?.inputElement ?? null;
+  const thumbInput = (slider: TpSlider) =>
+    slider
+      .shadowRoot!.querySelector<TpSliderThumb>('tp-slider-thumb')!
+      .shadowRoot!.querySelector('input')!;
+  const deepActive = () => {
+    let active: Element | null = document.activeElement;
+    while (active?.shadowRoot?.activeElement) active = active.shadowRoot.activeElement;
+    return active;
+  };
+  const open = async (slider: TpSlider) => {
+    output(slider)!.dispatchEvent(
+      new MouseEvent('click', { bubbles: true, composed: true, button: 0 }),
+    );
+    for (let i = 0; i < 5 && !editorOf(slider); i++) await settle(slider);
+    await settle(slider);
+    return editorOf(slider);
+  };
+  const type = (editor: HTMLInputElement, text: string) => {
+    editor.value = text;
+    editor.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
+  };
+  const key = (target: Element, name: string) =>
+    target.dispatchEvent(
+      new KeyboardEvent('keydown', { key: name, bubbles: true, composed: true, cancelable: true }),
+    );
+  const events: string[] = [];
+  const log = (event: Event) => {
+    const detail = (event as CustomEvent<{ value?: unknown; reason?: string }>).detail;
+    events.push(`${event.type} ${detail?.reason ?? ''} ${JSON.stringify(detail?.value)}`);
+  };
+  for (const name of ['tp-value-change', 'tp-value-commit', 'tp-field-value'])
+    opacity.addEventListener(name, log);
+
+  const style = getComputedStyle(output(opacity)!);
+  check(
+    'E01 an editable inline value takes its own presses with the text cursor',
+    output(opacity)!.hasAttribute('data-editable') &&
+      style.cursor === 'text' &&
+      style.pointerEvents === 'auto',
+    { cursor: style.cursor, pointerEvents: style.pointerEvents },
+  );
+  check(
+    'E02 a range, a disabled and a default-variant slider keep a plain value',
+    others.every(
+      (slider) =>
+        !output(slider)?.hasAttribute('data-editable') &&
+        (!output(slider) || getComputedStyle(output(slider)!).cursor !== 'text'),
+    ),
+    others.map((slider) => [slider.id, output(slider)?.hasAttribute('data-editable') ?? null]),
+  );
+  const box = output(opacity)!.getBoundingClientRect();
+  const pressedValue = await press(opacity, box.left + box.width / 2, box.top + box.height / 2);
+  check(
+    'E03 a press on the value neither moves it nor edits it',
+    pressedValue === 0.35 && !editorOf(opacity) && events.length === 0,
+    { pressedValue, events: [...events] },
+  );
+  const rect = controlRect(opacity);
+  const moved = await press(opacity, rect.left + rect.width * 0.5, rect.top + rect.height / 2);
+  check('E04 a press elsewhere on the bar still sets the value', moved === 0.5, { moved });
+  opacity.setValue(0.35);
+  await settle(opacity);
+  events.length = 0;
+
+  let editor = await open(opacity);
+  check(
+    'E05 a click on the value opens a number field with the value selected',
+    !!editor &&
+      deepActive() === editor &&
+      editor.value === '0.35' &&
+      editor.selectionStart === 0 &&
+      editor.selectionEnd === editor.value.length,
+    {
+      value: editor?.value,
+      focused: deepActive() === editor,
+      selection: [editor?.selectionStart, editor?.selectionEnd],
+    },
+  );
+  type(editor!, '0.567');
+  key(editor!, 'Enter');
+  await settle(opacity);
+  check(
+    'E06 Enter commits the typed value on the step lattice as one change and one commit',
+    opacity.value === 0.57 &&
+      !editorOf(opacity) &&
+      deepActive() === thumbInput(opacity) &&
+      events.filter((event) => event.startsWith('tp-value-change')).length === 1 &&
+      events.filter((event) => event.startsWith('tp-value-commit')).length === 1 &&
+      events.includes('tp-value-change input 0.57') &&
+      events.includes('tp-value-commit input 0.57'),
+    { value: opacity.value, events: [...events], focus: deepActive()?.localName },
+  );
+  events.length = 0;
+  editor = await open(opacity);
+  type(editor!, '0.9');
+  key(editor!, 'Escape');
+  await settle(opacity);
+  check(
+    'E07 Escape restores the value without events and returns focus to the Thumb',
+    opacity.value === 0.57 &&
+      !editorOf(opacity) &&
+      events.length === 0 &&
+      deepActive() === thumbInput(opacity),
+    { value: opacity.value, events: [...events] },
+  );
+  editor = await open(opacity);
+  type(editor!, '0.25');
+  editor!.blur();
+  await settle(opacity);
+  check(
+    'E08 leaving the field commits it and leaves focus where it went',
+    opacity.value === 0.25 &&
+      !editorOf(opacity) &&
+      deepActive() !== thumbInput(opacity) &&
+      events.includes('tp-value-commit input 0.25'),
+    { value: opacity.value, events: [...events] },
+  );
+  editor = await open(opacity);
+  type(editor!, '5');
+  key(editor!, 'Enter');
+  await settle(opacity);
+  check('E09 a typed value beyond the range is clamped to it', opacity.value === 1, {
+    value: opacity.value,
+  });
+  editor = await open(width);
+  type(editor!, '251.74');
+  key(editor!, 'Enter');
+  await settle(width);
+  check('E10 the field keeps the precision of the step', width.value === 251.7, {
+    value: width.value,
+  });
+  thumbInput(width).focus();
+  key(thumbInput(width), 'F2');
+  for (let i = 0; i < 5 && !editorOf(width); i++) await settle(width);
+  await settle(width);
+  editor = editorOf(width);
+  check(
+    'E11 F2 on the Thumb opens the field',
+    !!editor && deepActive() === editor && editor.value === '251.7',
+    { value: editor?.value, focused: deepActive() === editor },
+  );
+  key(editor!, 'Escape');
+  await settle(width);
+  for (const name of ['tp-value-change', 'tp-value-commit', 'tp-field-value'])
+    opacity.removeEventListener(name, log);
+  opacity.setValue(0.35);
+  width.setValue(120);
+  await settle(opacity);
+  return { checks: records.length, records: [...records] };
+}
+
+Object.assign(window, {
+  sliderTicksInlineAPI: { assertTicks, assertInline, assertEditable, settle, press },
+});
 document.documentElement.dataset.fixtureReady = 'true';

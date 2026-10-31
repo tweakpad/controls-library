@@ -60,6 +60,53 @@
           ></tp-slider>
         </div>
       </section>
+      <section aria-labelledby="editable-title">
+        <h2 id="editable-title">Editable values</h2>
+        <div class="stack">
+          <tp-slider
+            id="opacity"
+            variant="inline"
+            label="Brush opacity"
+            default-value="0.35"
+            max="1"
+            step="0.01"
+            editable-value
+          ></tp-slider>
+          <tp-slider
+            id="width"
+            variant="inline"
+            label="Canvas width"
+            default-value="120"
+            max="400"
+            step="0.1"
+            editable-value
+          ></tp-slider>
+          <tp-slider
+            id="editable-range"
+            variant="inline"
+            label="Visible layers"
+            default-value="2 6"
+            max="10"
+            editable-value
+          ></tp-slider>
+          <tp-slider
+            id="editable-disabled"
+            variant="inline"
+            label="Locked margin"
+            default-value="4"
+            max="10"
+            disabled
+            editable-value
+          ></tp-slider>
+          <tp-slider
+            id="editable-default"
+            label="Stroke width"
+            default-value="3"
+            max="10"
+            editable-value
+          ></tp-slider>
+        </div>
+      </section>
       <tp-slider
         id="ticks"
         label="Balance"

@@ -14,6 +14,7 @@ export type SliderProps = ElementProps<
   | 'buffered'
   | 'defaultValue'
   | 'disabled'
+  | 'editableValue'
   | 'formAssociatedValue'
   | 'formOwner'
   | 'format'
