@@ -181,7 +181,9 @@ const preview = definePreview({
       // Every Docs page takes the Theme toolbar's scheme (System by default), Storybook's blocks
       // and the library previews alike.
       container: ThemedDocsContainer,
-      source: { format: false },
+      // Code samples are dark in both schemes, as every preview's source is: Storybook draws a
+      // Canvas source dark whatever the theme, so `<Code>` blocks match it.
+      source: { format: false, dark: true },
       // Every story on a docs page keeps the canvas toolbar (reload, zoom, open isolated). The
       // Canvas block reads this parameter as a boolean; its declared type mirrors `withSource`.
       canvas: { withToolbar: true as unknown as 'open' },

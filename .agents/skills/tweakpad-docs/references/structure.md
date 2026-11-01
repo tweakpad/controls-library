@@ -64,7 +64,7 @@ preview, such as install commands or engine setup.
 | Header        | `Title`, `Description`, tag chip                                           | `h1`, description, tag chip                                       | frontmatter                                 |
 | Main use case | `Primary` (Default story, source = hero code) + `Controls`                 | `Preview.astro` of the hero                                       | hero `<Preview>` + story args               |
 | Usage         | the page through `LibraryDoc`: `Canvas` per preview, `Source` per `<Code>` | the page through `<Content components={{ Preview, Code, Keys }}>` | the page                                    |
-| API Reference | `.tp-docs-api` tables                                                      | `tp-table`s                                                       | `elementApi` (manifest, JSDoc)              |
+| API Reference | Storybook args tables                                                      | `tp-table`s                                                       | `elementApi` (manifest, JSDoc)              |
 | Related       | never                                                                      | component/widget cards, then pattern cards                        | `docs.json` `related`, pattern `components` |
 
 The Default story's default args render the hero's markup, and `libraryDocs()` sets the hero code

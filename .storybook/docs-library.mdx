@@ -8,6 +8,7 @@ import {
   useOf,
 } from '@storybook/addon-docs/blocks';
 import { MDXProvider } from '@storybook/addon-docs/mdx-react-shim';
+import { DocsTable } from './docs-table.js';
 import { manifest } from './manifest.js';
 import { elementApi } from '../src/docs/api.js';
 import { mountPreview, previewSource } from '../src/docs/preview-runtime.js';
@@ -158,7 +159,7 @@ export function LibraryDoc() {
   const doc = useLibraryDoc();
   if (!doc) return null;
   const { page, Content } = doc;
-  const components = { Preview, Code, Keys };
+  const components = { Preview, Code, Keys, table: DocsTable };
   // MDX resolves member-expression elements through its provider, so the context provider is
   // created directly.
   return React.createElement(

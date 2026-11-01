@@ -26,6 +26,31 @@ const config: StorybookConfig = {
     name: '@storybook/web-components-vite',
     options: {},
   },
+  // Before any script loads, the preview takes the Theme toolbar's scheme (the `theme` global in
+  // its URL, else the device), so the page and Storybook's loading screens, which are white by
+  // default, do not flash light in the dark scheme. The colors are Storybook's dark docs theme
+  // (content and app backgrounds, border), which the docs page renders a moment later.
+  previewHead: (head) => `${head}
+    <script>
+      (() => {
+        const theme = /(?:^|;)theme:(\\w+)/.exec(new URLSearchParams(location.search).get('globals') ?? '')?.[1];
+        const dark = theme === 'dark' || (theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+        document.documentElement.dataset.sbScheme = dark ? 'dark' : 'light';
+      })();
+    </script>
+    <style>
+      html[data-sb-scheme='dark'] :is(.sb-preparing-docs, .sb-preparing-story) {
+        background-color: #222325;
+      }
+      html[data-sb-scheme='dark'] .sb-previewBlock {
+        background: #1b1c1d;
+        border-color: rgb(255 255 255 / 10%);
+      }
+      html[data-sb-scheme='dark'] :is(.sb-previewBlock_icon, .sb-argstableBlock-body td span) {
+        background: rgb(255 255 255 / 10%);
+      }
+    </style>`,
   // Storybook keeps only `build.target` from the project config. The static build needs the
   // package's CSS target too, or light-dark() is lowered and scoped color schemes stop working.
   // The documentation pages' example code keeps its indentation through MDX when the literal

@@ -69,7 +69,9 @@ rows from `elementApi` and `docs.json`. Never one HTML template, component or st
   - `Primary`: the Default story with its `Controls`. Its source is the hero code, and its
     default args render the hero markup.
   - `Canvas` for every other preview, and the `Source` block for `<Code>`.
-  - Storybook-styled API tables (`.tp-docs-api`).
+  - Storybook's args table for the API tables, and the same design for Markdown tables
+    (`DocsTable`, `.storybook/docs-table.ts`); code samples, `<Code>` included, are dark like every
+    Canvas source.
   - **No library elements** (`tp-table`, `tp-code-block`, …) in the docs chrome. Library elements
     appear only inside previews, and in the Kbd elements inside the Keyboard `<Keys>` cells.
 - **The website** renders with library components for every part:
