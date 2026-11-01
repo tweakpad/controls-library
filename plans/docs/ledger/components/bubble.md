@@ -19,3 +19,4 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+| preview | Rich content | user request: the link takes the bubble's text color, legible on a filled bubble |
