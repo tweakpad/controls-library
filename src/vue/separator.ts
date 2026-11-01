@@ -9,6 +9,7 @@ export const Separator = /*#__PURE__*/ createBinding(TpSeparator, 'Separator', {
 }) as ElementBinding<
   TpSeparator,
   | 'decorative'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

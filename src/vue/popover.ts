@@ -33,6 +33,7 @@ export const Popover = /*#__PURE__*/ createBinding(TpPopover, 'Popover', {
   | 'defaultOpen'
   | 'defaultTriggerIdentifier'
   | 'delay'
+  | 'density'
   | 'disableAnchorTracking'
   | 'disableHoverablePopup'
   | 'disabled'

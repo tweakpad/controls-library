@@ -12,6 +12,7 @@ export const ResizableHandle = /*#__PURE__*/ createBinding(TpResizableHandle, 'R
 }) as ElementBinding<
   TpResizableHandle,
   | 'boundary'
+  | 'density'
   | 'disableDoubleClickReset'
   | 'disabled'
   | 'invalid'
@@ -40,6 +41,7 @@ export const ResizablePanel = /*#__PURE__*/ createBinding(TpResizablePanel, 'Res
   | 'collapsedSize'
   | 'collapsible'
   | 'defaultSize'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'maxSize'
@@ -75,6 +77,7 @@ export const ResizablePanelGroup = /*#__PURE__*/ createBinding(
   TpResizablePanelGroup,
   | 'defaultLayout'
   | 'defaultSizes'
+  | 'density'
   | 'disableCursor'
   | 'disableDoubleClickReset'
   | 'disabled'

@@ -12,6 +12,7 @@ export const Image = /*#__PURE__*/ createBinding(TpImage, 'Image', {
   TpImage,
   | 'alt'
   | 'crossOrigin'
+  | 'density'
   | 'disabled'
   | 'fetchPriority'
   | 'fit'
@@ -52,6 +53,7 @@ export const ImageGroup = /*#__PURE__*/ createBinding(TpImageGroup, 'ImageGroup'
   lanes: {},
 }) as ElementBinding<
   TpImageGroup,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

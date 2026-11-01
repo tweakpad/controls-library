@@ -10,6 +10,7 @@ export type InputGroupProps = ElementProps<
   | 'actionSize'
   | 'actionVariant'
   | 'addonPosition'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

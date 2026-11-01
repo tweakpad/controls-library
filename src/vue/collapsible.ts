@@ -13,6 +13,7 @@ export const Collapsible = /*#__PURE__*/ createBinding(TpCollapsible, 'Collapsib
   TpCollapsible,
   | 'contentAlignment'
   | 'defaultOpen'
+  | 'density'
   | 'disabled'
   | 'headingLevel'
   | 'hiddenUntilFound'

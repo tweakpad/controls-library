@@ -30,6 +30,7 @@ export type PreviewCardProps = ElementProps<
   | 'defaultOpen'
   | 'defaultTriggerIdentifier'
   | 'delay'
+  | 'density'
   | 'disableAnchorTracking'
   | 'disableHoverablePopup'
   | 'disabled'

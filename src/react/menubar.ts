@@ -10,6 +10,7 @@ import type * as foundationSurfaceState from '../foundation/surface-state.js';
 export type MenubarProps = ElementProps<
   TpMenubar,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'loopFocus'

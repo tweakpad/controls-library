@@ -8,6 +8,7 @@ export const MoTextStroke = /*#__PURE__*/ createBinding(TpMoTextStroke, 'MoTextS
   lanes: {},
 }) as ElementBinding<
   TpMoTextStroke,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

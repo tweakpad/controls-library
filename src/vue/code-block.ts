@@ -17,6 +17,7 @@ export const CodeBlock = /*#__PURE__*/ createBinding(TpCodeBlock, 'CodeBlock', {
   | 'collapsible'
   | 'copyable'
   | 'defaultExpanded'
+  | 'density'
   | 'disabled'
   | 'expanded'
   | 'highlightLines'

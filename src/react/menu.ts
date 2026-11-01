@@ -37,6 +37,7 @@ export type MenuProps = ElementProps<
   | 'defaultOpen'
   | 'defaultTriggerIdentifier'
   | 'delay'
+  | 'density'
   | 'disableAnchorTracking'
   | 'disableHoverablePopup'
   | 'disabled'
@@ -112,6 +113,7 @@ export type MenuCheckboxItemProps = ElementProps<
   | 'checked'
   | 'closeOnClick'
   | 'defaultChecked'
+  | 'density'
   | 'disabled'
   | 'inset'
   | 'invalid'
@@ -145,6 +147,7 @@ export const MenuCheckboxItem = /*#__PURE__*/ createBinding<MenuCheckboxItemProp
 export type MenuItemProps = ElementProps<
   TpMenuItem,
   | 'closeOnClick'
+  | 'density'
   | 'disabled'
   | 'inset'
   | 'invalid'
@@ -175,6 +178,7 @@ export const MenuItem = /*#__PURE__*/ createBinding<MenuItemProps>(
 export type MenuRadioGroupProps = ElementProps<
   TpMenuRadioGroup,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -203,6 +207,7 @@ export const MenuRadioGroup = /*#__PURE__*/ createBinding<MenuRadioGroupProps>(
 export type MenuRadioItemProps = ElementProps<
   TpMenuRadioItem,
   | 'closeOnClick'
+  | 'density'
   | 'disabled'
   | 'inset'
   | 'invalid'

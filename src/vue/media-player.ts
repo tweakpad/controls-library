@@ -56,6 +56,7 @@ export const MediaAudioLayout = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMediaAudioLayout,
+  | 'density'
   | 'disabled'
   | 'hide'
   | 'invalid'
@@ -85,6 +86,7 @@ export const MediaAudioTrackRadioGroup = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpMediaAudioTrackRadioGroup,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -117,6 +119,7 @@ export const MediaBufferingIndicator = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpMediaBufferingIndicator,
   | 'delay'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -141,6 +144,7 @@ export const MediaCaptionsButton = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMediaCaptionsButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -171,6 +175,7 @@ export const MediaCaptionsRadioGroup = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpMediaCaptionsRadioGroup,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -202,6 +207,7 @@ export const MediaChapterTitle = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMediaChapterTitle,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -222,6 +228,7 @@ export const MediaContainer = /*#__PURE__*/ createBinding(TpMediaContainer, 'Med
   lanes: {},
 }) as ElementBinding<
   TpMediaContainer,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -242,6 +249,7 @@ export const MediaControls = /*#__PURE__*/ createBinding(TpMediaControls, 'Media
   lanes: {},
 }) as ElementBinding<
   TpMediaControls,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -267,6 +275,7 @@ export const MediaControlsGroup = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMediaControlsGroup,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -292,6 +301,7 @@ export const MediaErrorDialog = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMediaErrorDialog,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -317,6 +327,7 @@ export const MediaFullscreenButton = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMediaFullscreenButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -341,6 +352,7 @@ export const MediaGesture = /*#__PURE__*/ createBinding(TpMediaGesture, 'MediaGe
 }) as ElementBinding<
   TpMediaGesture,
   | 'action'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -366,6 +378,7 @@ export const MediaHotkey = /*#__PURE__*/ createBinding(TpMediaHotkey, 'MediaHotk
 }) as ElementBinding<
   TpMediaHotkey,
   | 'action'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'keys'
@@ -388,6 +401,7 @@ export const MediaLiveButton = /*#__PURE__*/ createBinding(TpMediaLiveButton, 'M
   lanes: {},
 }) as ElementBinding<
   TpMediaLiveButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -411,6 +425,7 @@ export const MediaMuteButton = /*#__PURE__*/ createBinding(TpMediaMuteButton, 'M
   lanes: {},
 }) as ElementBinding<
   TpMediaMuteButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -434,6 +449,7 @@ export const MediaPipButton = /*#__PURE__*/ createBinding(TpMediaPipButton, 'Med
   lanes: {},
 }) as ElementBinding<
   TpMediaPipButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -457,6 +473,7 @@ export const MediaPlayButton = /*#__PURE__*/ createBinding(TpMediaPlayButton, 'M
   lanes: {},
 }) as ElementBinding<
   TpMediaPlayButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -484,6 +501,7 @@ export const MediaPlaybackRateButton = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMediaPlaybackRateButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -514,6 +532,7 @@ export const MediaPlaybackRateRadioGroup = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpMediaPlaybackRateRadioGroup,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -543,6 +562,7 @@ export const MediaPlayer = /*#__PURE__*/ createBinding(TpMediaPlayer, 'MediaPlay
   TpMediaPlayer,
   | 'announcements'
   | 'contentTitle'
+  | 'density'
   | 'disabled'
   | 'gestures'
   | 'hideOverControls'
@@ -582,6 +602,7 @@ export const MediaPoster = /*#__PURE__*/ createBinding(TpMediaPoster, 'MediaPost
   lanes: {},
 }) as ElementBinding<
   TpMediaPoster,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -610,6 +631,7 @@ export const MediaQualityRadioGroup = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpMediaQualityRadioGroup,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -641,6 +663,7 @@ export const MediaRemotePlaybackButton = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMediaRemotePlaybackButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -664,6 +687,7 @@ export const MediaSeekButton = /*#__PURE__*/ createBinding(TpMediaSeekButton, 'M
   lanes: {},
 }) as ElementBinding<
   TpMediaSeekButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -695,6 +719,7 @@ export const MediaSeekIndicator = /*#__PURE__*/ createBinding(
   TpMediaSeekIndicator,
   | 'actions'
   | 'closeDelay'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -720,6 +745,7 @@ export const MediaSettingsMenu = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpMediaSettingsMenu,
   | 'align'
+  | 'density'
   | 'disabled'
   | 'groups'
   | 'invalid'
@@ -748,6 +774,7 @@ export const MediaStatusIndicator = /*#__PURE__*/ createBinding(
   TpMediaStatusIndicator,
   | 'actions'
   | 'closeDelay'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -769,6 +796,7 @@ export const MediaThumbnail = /*#__PURE__*/ createBinding(TpMediaThumbnail, 'Med
 }) as ElementBinding<
   TpMediaThumbnail,
   | 'crossOrigin'
+  | 'density'
   | 'disabled'
   | 'fetchPriority'
   | 'invalid'
@@ -792,6 +820,7 @@ export const MediaTime = /*#__PURE__*/ createBinding(TpMediaTime, 'MediaTime', {
   lanes: {},
 }) as ElementBinding<
   TpMediaTime,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -817,6 +846,7 @@ export const MediaTimeSlider = /*#__PURE__*/ createBinding(TpMediaTimeSlider, 'M
 }) as ElementBinding<
   TpMediaTimeSlider,
   | 'changeThrottle'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'largeStep'
@@ -849,6 +879,7 @@ export const MediaTimeSliderPreview = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMediaTimeSliderPreview,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -871,6 +902,7 @@ export const MediaTitle = /*#__PURE__*/ createBinding(TpMediaTitle, 'MediaTitle'
   lanes: {},
 }) as ElementBinding<
   TpMediaTitle,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -895,6 +927,7 @@ export const MediaVideoLayout = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMediaVideoLayout,
+  | 'density'
   | 'disabled'
   | 'hide'
   | 'invalid'
@@ -923,6 +956,7 @@ export const MediaVolumeIndicator = /*#__PURE__*/ createBinding(
   TpMediaVolumeIndicator,
   | 'actions'
   | 'closeDelay'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -948,6 +982,7 @@ export const MediaVolumePopover = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpMediaVolumePopover,
   | 'closeDelay'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -974,6 +1009,7 @@ export const MediaVolumeSlider = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMediaVolumeSlider,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'largeStep'

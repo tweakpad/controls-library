@@ -10,6 +10,7 @@ export type MoBorderSegmentProps = ElementProps<
   TpMoBorderSegment,
   | 'alternate'
   | 'delay'
+  | 'density'
   | 'disabled'
   | 'draw'
   | 'duration'
@@ -40,6 +41,7 @@ export const MoBorderSegment = /*#__PURE__*/ createBinding<MoBorderSegmentProps>
 /** Props of {@link MoSegmentBorder}, the React binding of `<tp-mo-segment-border>`. */
 export type MoSegmentBorderProps = ElementProps<
   TpMoSegmentBorder,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

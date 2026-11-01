@@ -17,6 +17,7 @@ export const AlertDialog = /*#__PURE__*/ createBinding(TpAlertDialog, 'AlertDial
   | 'container'
   | 'defaultOpen'
   | 'defaultTriggerIdentifier'
+  | 'density'
   | 'description'
   | 'disabled'
   | 'finalFocus'

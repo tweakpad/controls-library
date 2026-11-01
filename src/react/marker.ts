@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Marker}, the React binding of `<tp-marker>`. */
 export type MarkerProps = ElementProps<
   TpMarker,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'

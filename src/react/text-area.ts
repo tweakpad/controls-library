@@ -11,6 +11,7 @@ export type TextAreaProps = ElementProps<
   TpTextArea,
   | 'autocomplete'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'hostProperties'

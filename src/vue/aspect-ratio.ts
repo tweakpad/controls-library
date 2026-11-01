@@ -8,6 +8,7 @@ export const AspectRatio = /*#__PURE__*/ createBinding(TpAspectRatio, 'AspectRat
   lanes: {},
 }) as ElementBinding<
   TpAspectRatio,
+  | 'density'
   | 'disabled'
   | 'fit'
   | 'invalid'

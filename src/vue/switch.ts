@@ -15,6 +15,7 @@ export const Switch = /*#__PURE__*/ createBinding(TpSwitch, 'Switch', {
   | 'checkboxGroup'
   | 'checked'
   | 'defaultChecked'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'identifier'

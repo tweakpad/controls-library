@@ -40,6 +40,7 @@ export const Menu = /*#__PURE__*/ createBinding(TpMenu, 'Menu', {
   | 'defaultOpen'
   | 'defaultTriggerIdentifier'
   | 'delay'
+  | 'density'
   | 'disableAnchorTracking'
   | 'disableHoverablePopup'
   | 'disabled'
@@ -112,6 +113,7 @@ export const MenuCheckboxItem = /*#__PURE__*/ createBinding(
   | 'checked'
   | 'closeOnClick'
   | 'defaultChecked'
+  | 'density'
   | 'disabled'
   | 'inset'
   | 'invalid'
@@ -143,6 +145,7 @@ export const MenuItem = /*#__PURE__*/ createBinding(TpMenuItem, 'MenuItem', {
 }) as ElementBinding<
   TpMenuItem,
   | 'closeOnClick'
+  | 'density'
   | 'disabled'
   | 'inset'
   | 'invalid'
@@ -170,6 +173,7 @@ export const MenuRadioGroup = /*#__PURE__*/ createBinding(TpMenuRadioGroup, 'Men
 }) as ElementBinding<
   TpMenuRadioGroup,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -196,6 +200,7 @@ export const MenuRadioItem = /*#__PURE__*/ createBinding(TpMenuRadioItem, 'MenuR
 }) as ElementBinding<
   TpMenuRadioItem,
   | 'closeOnClick'
+  | 'density'
   | 'disabled'
   | 'inset'
   | 'invalid'

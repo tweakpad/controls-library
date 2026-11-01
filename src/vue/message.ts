@@ -11,6 +11,7 @@ export const Message = /*#__PURE__*/ createBinding(TpMessage, 'Message', {
   TpMessage,
   | 'align'
   | 'author'
+  | 'density'
   | 'disabled'
   | 'failed'
   | 'invalid'
@@ -32,6 +33,7 @@ export const MessageGroup = /*#__PURE__*/ createBinding(TpMessageGroup, 'Message
   lanes: {},
 }) as ElementBinding<
   TpMessageGroup,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

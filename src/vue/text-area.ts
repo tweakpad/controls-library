@@ -14,6 +14,7 @@ export const TextArea = /*#__PURE__*/ createBinding(TpTextArea, 'TextArea', {
   TpTextArea,
   | 'autocomplete'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'hostProperties'

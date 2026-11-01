@@ -12,6 +12,7 @@ export const Avatar = /*#__PURE__*/ createBinding(TpAvatar, 'Avatar', {
   TpAvatar,
   | 'alt'
   | 'crossOrigin'
+  | 'density'
   | 'disabled'
   | 'fallback'
   | 'fallbackDelay'
@@ -41,6 +42,7 @@ export const AvatarGroup = /*#__PURE__*/ createBinding(TpAvatarGroup, 'AvatarGro
   lanes: {},
 }) as ElementBinding<
   TpAvatarGroup,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

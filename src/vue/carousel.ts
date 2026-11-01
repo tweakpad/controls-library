@@ -12,6 +12,7 @@ export const Carousel = /*#__PURE__*/ createBinding(TpCarousel, 'Carousel', {
   TpCarousel,
   | 'autoplay'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'effect'
   | 'getItemId'

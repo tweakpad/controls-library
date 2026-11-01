@@ -18,6 +18,7 @@ export const Calendar = /*#__PURE__*/ createBinding(TpCalendar, 'Calendar', {
   | 'dayModifiers'
   | 'defaultDisplayedMonth'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'disabledDates'
   | 'disabledNavigation'

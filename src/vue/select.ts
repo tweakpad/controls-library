@@ -52,6 +52,7 @@ export const Select = /*#__PURE__*/ createBinding(TpSelect, 'Select', {
   | 'defaultInputValue'
   | 'defaultOpen'
   | 'defaultValue'
+  | 'density'
   | 'disableAnchorTracking'
   | 'disabled'
   | 'filter'
@@ -151,6 +152,7 @@ export const SelectChipRemove = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpSelectChipRemove,
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -188,6 +190,7 @@ export const SelectClear = /*#__PURE__*/ createBinding(TpSelectClear, 'SelectCle
 }) as ElementBinding<
   TpSelectClear,
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -225,6 +228,7 @@ export const SelectOption = /*#__PURE__*/ createBinding(TpSelectOption, 'SelectO
   lanes: {},
 }) as ElementBinding<
   TpSelectOption,
+  | 'density'
   | 'disabled'
   | 'index'
   | 'indicatorContract'
@@ -254,6 +258,7 @@ export const SelectTrigger = /*#__PURE__*/ createBinding(TpSelectTrigger, 'Selec
 }) as ElementBinding<
   TpSelectTrigger,
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'

@@ -10,6 +10,7 @@ export const Time = /*#__PURE__*/ createBinding(TpTime, 'Time', {
 }) as ElementBinding<
   TpTime,
   | 'datetime'
+  | 'density'
   | 'disabled'
   | 'format'
   | 'formatter'

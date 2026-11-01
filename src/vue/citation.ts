@@ -9,6 +9,7 @@ export const Citation = /*#__PURE__*/ createBinding(TpCitation, 'Citation', {
   lanes: {},
 }) as ElementBinding<
   TpCitation,
+  | 'density'
   | 'description'
   | 'disabled'
   | 'href'
@@ -38,6 +39,7 @@ export const CitationList = /*#__PURE__*/ createBinding(TpCitationList, 'Citatio
   lanes: {},
 }) as ElementBinding<
   TpCitationList,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'

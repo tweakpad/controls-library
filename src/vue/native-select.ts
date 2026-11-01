@@ -13,6 +13,7 @@ export const NativeSelect = /*#__PURE__*/ createBinding(TpNativeSelect, 'NativeS
 }) as ElementBinding<
   TpNativeSelect,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'hostProperties'

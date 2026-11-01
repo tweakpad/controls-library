@@ -9,6 +9,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type OverflowListProps = ElementProps<
   TpOverflowList,
   | 'collapseFrom'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'limit'

@@ -33,6 +33,7 @@ export type NavigationMenuProps = ElementProps<
   | 'defaultTriggerIdentifier'
   | 'defaultValue'
   | 'delay'
+  | 'density'
   | 'disableAnchorTracking'
   | 'disableHoverablePopup'
   | 'disabled'
@@ -95,6 +96,7 @@ export const NavigationMenu = /*#__PURE__*/ createBinding<NavigationMenuProps>(
 /** Props of {@link NavigationMenuItem}, the React binding of `<tp-navigation-menu-item>`. */
 export type NavigationMenuItemProps = ElementProps<
   TpNavigationMenuItem,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'keepMounted'

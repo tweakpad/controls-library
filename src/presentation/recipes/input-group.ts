@@ -71,8 +71,9 @@ export const inputGroupAppearance: PresentationDictionary = {
   ],
   'input-group-control': [
     {
+      // A joined single-line editor fills the boundary inside its borders; a Text area grows.
       selector: '&:is(input)',
-      declarations: { 'min-height': joinedEditorMinHeight },
+      declarations: { 'min-height': joinedEditorMinHeight, 'block-size': joinedEditorMinHeight },
     },
     { selector: joinedEditorSelector, declarations: joinedEditor },
   ],

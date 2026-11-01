@@ -17,6 +17,7 @@ export type FileUploadProps = ElementProps<
   | 'capture'
   | 'clearable'
   | 'defaultValue'
+  | 'density'
   | 'directory'
   | 'disabled'
   | 'fileValidator'

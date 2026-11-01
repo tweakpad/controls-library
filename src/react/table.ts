@@ -16,6 +16,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Table}, the React binding of `<tp-table>`. */
 export type TableProps = ElementProps<
   TpTable,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -47,6 +48,7 @@ export const Table = /*#__PURE__*/ createBinding<TableProps>(
 export type TableBodyProps = ElementProps<
   TpTableBody,
   | 'colSpan'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -74,6 +76,7 @@ export const TableBody = /*#__PURE__*/ createBinding<TableBodyProps>(
 export type TableCaptionProps = ElementProps<
   TpTableCaption,
   | 'colSpan'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -101,6 +104,7 @@ export const TableCaption = /*#__PURE__*/ createBinding<TableCaptionProps>(
 export type TableCellProps = ElementProps<
   TpTableCell,
   | 'colSpan'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -128,6 +132,7 @@ export const TableCell = /*#__PURE__*/ createBinding<TableCellProps>(
 export type TableFooterProps = ElementProps<
   TpTableFooter,
   | 'colSpan'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -155,6 +160,7 @@ export const TableFooter = /*#__PURE__*/ createBinding<TableFooterProps>(
 export type TableHeadProps = ElementProps<
   TpTableHead,
   | 'colSpan'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -182,6 +188,7 @@ export const TableHead = /*#__PURE__*/ createBinding<TableHeadProps>(
 export type TableHeaderProps = ElementProps<
   TpTableHeader,
   | 'colSpan'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -209,6 +216,7 @@ export const TableHeader = /*#__PURE__*/ createBinding<TableHeaderProps>(
 export type TableRowProps = ElementProps<
   TpTableRow,
   | 'colSpan'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

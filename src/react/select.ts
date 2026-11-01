@@ -43,6 +43,7 @@ export type SelectProps = ElementProps<
   | 'defaultInputValue'
   | 'defaultOpen'
   | 'defaultValue'
+  | 'density'
   | 'disableAnchorTracking'
   | 'disabled'
   | 'filter'
@@ -155,6 +156,7 @@ export const Select = /*#__PURE__*/ createBinding<SelectProps>(
 export type SelectChipRemoveProps = ElementProps<
   TpSelectChipRemove,
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -197,6 +199,7 @@ export const SelectChipRemove = /*#__PURE__*/ createBinding<SelectChipRemoveProp
 export type SelectClearProps = ElementProps<
   TpSelectClear,
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -238,6 +241,7 @@ export const SelectClear = /*#__PURE__*/ createBinding<SelectClearProps>(
 /** Props of {@link SelectOption}, the React binding of `<tp-select-option>`. */
 export type SelectOptionProps = ElementProps<
   TpSelectOption,
+  | 'density'
   | 'disabled'
   | 'index'
   | 'indicatorContract'
@@ -272,6 +276,7 @@ export const SelectOption = /*#__PURE__*/ createBinding<SelectOptionProps>(
 export type SelectTriggerProps = ElementProps<
   TpSelectTrigger,
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'

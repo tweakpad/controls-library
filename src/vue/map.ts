@@ -23,6 +23,7 @@ export const Map = /*#__PURE__*/ createBinding(TpMap, 'Map', {
   | 'defaultCenter'
   | 'defaultSelectedPin'
   | 'defaultZoom'
+  | 'density'
   | 'disabled'
   | 'engine'
   | 'fitPadding'
@@ -63,6 +64,7 @@ export const MapControl = /*#__PURE__*/ createBinding(TpMapControl, 'MapControl'
 }) as ElementBinding<
   TpMapControl,
   | 'action'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -109,6 +111,7 @@ export const MapOverlay = /*#__PURE__*/ createBinding(TpMapOverlay, 'MapOverlay'
   | 'defaultOpen'
   | 'defaultTriggerIdentifier'
   | 'delay'
+  | 'density'
   | 'disableAnchorTracking'
   | 'disableHoverablePopup'
   | 'disabled'
@@ -162,6 +165,7 @@ export const MapPin = /*#__PURE__*/ createBinding(TpMapPin, 'MapPin', {
 }) as ElementBinding<
   TpMapPin,
   | 'anchor'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'

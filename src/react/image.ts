@@ -11,6 +11,7 @@ export type ImageProps = ElementProps<
   TpImage,
   | 'alt'
   | 'crossOrigin'
+  | 'density'
   | 'disabled'
   | 'fetchPriority'
   | 'fit'
@@ -61,6 +62,7 @@ export const Image = /*#__PURE__*/ createBinding<ImageProps>(
 /** Props of {@link ImageGroup}, the React binding of `<tp-image-group>`. */
 export type ImageGroupProps = ElementProps<
   TpImageGroup,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

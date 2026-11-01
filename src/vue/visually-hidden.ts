@@ -8,6 +8,7 @@ export const VisuallyHidden = /*#__PURE__*/ createBinding(TpVisuallyHidden, 'Vis
   lanes: {},
 }) as ElementBinding<
   TpVisuallyHidden,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

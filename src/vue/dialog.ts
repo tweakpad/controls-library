@@ -17,6 +17,7 @@ export const Dialog = /*#__PURE__*/ createBinding(TpDialog, 'Dialog', {
   | 'container'
   | 'defaultOpen'
   | 'defaultTriggerIdentifier'
+  | 'density'
   | 'description'
   | 'disabled'
   | 'finalFocus'

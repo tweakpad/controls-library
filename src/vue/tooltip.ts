@@ -33,6 +33,7 @@ export const Tooltip = /*#__PURE__*/ createBinding(TpTooltip, 'Tooltip', {
   | 'defaultOpen'
   | 'defaultTriggerIdentifier'
   | 'delay'
+  | 'density'
   | 'describes'
   | 'disableAnchorTracking'
   | 'disableHoverablePopup'

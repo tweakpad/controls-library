@@ -74,11 +74,17 @@ export const colorInputAppearance: PresentationDictionary = {
   'color-input-row-size-sm': [rule({ 'min-block-size': 'var(--tp-control-height-sm)' })],
   'color-input-label-variant-inline': [rule(inlineControlLabel)],
   'color-input-swatch-variant-inline': [
-    rule({
-      'block-size': joinedEditorMinHeight,
-      'inline-size': joinedEditorMinHeight,
-      'border-radius': 'var(--tp-radius-lg)',
-    }),
+    // Inside the row's borders, over the size step's control extent.
+    rule(
+      {
+        'block-size': joinedEditorMinHeight,
+        'inline-size': joinedEditorMinHeight,
+        'min-block-size': joinedEditorMinHeight,
+        'min-inline-size': joinedEditorMinHeight,
+        'border-radius': 'var(--tp-radius-lg)',
+      },
+      '&[part]',
+    ),
     rule(insetFocusRing, `&:has(> ${control}:focus-visible)`),
   ],
   // The value reads like the other inline values: muted at rest, the foreground while in use.
@@ -88,6 +94,7 @@ export const colorInputAppearance: PresentationDictionary = {
     rule(
       {
         'min-height': joinedEditorMinHeight,
+        'block-size': joinedEditorMinHeight,
         'text-align': 'end',
         'padding-inline': '0',
         color: inlineControlValue.color!,

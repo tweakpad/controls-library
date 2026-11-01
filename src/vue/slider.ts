@@ -16,6 +16,7 @@ export const Slider = /*#__PURE__*/ createBinding(TpSlider, 'Slider', {
   TpSlider,
   | 'buffered'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'editableValue'
   | 'formAssociatedValue'
@@ -76,6 +77,7 @@ export const SliderThumb = /*#__PURE__*/ createBinding(TpSliderThumb, 'SliderThu
   lanes: {},
 }) as ElementBinding<
   TpSliderThumb,
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'getAccessibleLabel'

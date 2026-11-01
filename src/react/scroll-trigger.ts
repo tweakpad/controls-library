@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link ScrollTrigger}, the React binding of `<tp-scroll-trigger>`. */
 export type ScrollTriggerProps = ElementProps<
   TpScrollTrigger,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

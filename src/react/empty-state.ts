@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link EmptyState}, the React binding of `<tp-empty-state>`. */
 export type EmptyStateProps = ElementProps<
   TpEmptyState,
+  | 'density'
   | 'description'
   | 'disabled'
   | 'invalid'

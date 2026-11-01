@@ -21,6 +21,7 @@ export type DragDropListProps<T = DragDropListDefaults[0]> = ElementProps<
   | 'collisionDetector'
   | 'collisionPriority'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'dropAnimation'
   | 'feedback'

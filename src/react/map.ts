@@ -21,6 +21,7 @@ export type MapProps = ElementProps<
   | 'defaultCenter'
   | 'defaultSelectedPin'
   | 'defaultZoom'
+  | 'density'
   | 'disabled'
   | 'engine'
   | 'fitPadding'
@@ -75,6 +76,7 @@ export const Map = /*#__PURE__*/ createBinding<MapProps>(
 export type MapControlProps = ElementProps<
   TpMapControl,
   | 'action'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -124,6 +126,7 @@ export type MapOverlayProps = ElementProps<
   | 'defaultOpen'
   | 'defaultTriggerIdentifier'
   | 'delay'
+  | 'density'
   | 'disableAnchorTracking'
   | 'disableHoverablePopup'
   | 'disabled'
@@ -184,6 +187,7 @@ export const MapOverlay = /*#__PURE__*/ createBinding<MapOverlayProps>(
 export type MapPinProps = ElementProps<
   TpMapPin,
   | 'anchor'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'

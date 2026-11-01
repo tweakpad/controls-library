@@ -62,11 +62,13 @@ export abstract class TpTextControl extends TpFormElement {
         min-inline-size: 0;
       }
 
-      /* The light-DOM editor receives the base shadow rules it no longer inherits. */
+      /* The light-DOM editor receives the base shadow rules it no longer inherits, top-aligned so
+         the host's line box adds no descender space below a short editor. */
       ::slotted([data-tp-editor]) {
         box-sizing: inherit;
         inline-size: 100%;
         min-inline-size: 0;
+        vertical-align: top;
       }
 
       ::slotted([data-tp-editor]:focus-visible) {

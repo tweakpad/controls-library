@@ -13,6 +13,7 @@ export type SliderProps = ElementProps<
   TpSlider,
   | 'buffered'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'editableValue'
   | 'formAssociatedValue'
@@ -82,6 +83,7 @@ export const Slider = /*#__PURE__*/ createBinding<SliderProps>(
 /** Props of {@link SliderThumb}, the React binding of `<tp-slider-thumb>`. */
 export type SliderThumbProps = ElementProps<
   TpSliderThumb,
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'getAccessibleLabel'

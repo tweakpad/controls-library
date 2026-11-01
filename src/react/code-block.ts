@@ -15,6 +15,7 @@ export type CodeBlockProps = ElementProps<
   | 'collapsible'
   | 'copyable'
   | 'defaultExpanded'
+  | 'density'
   | 'disabled'
   | 'expanded'
   | 'highlightLines'

@@ -46,10 +46,12 @@ export const selectStyles = css`
     inline-size: 100%;
   }
 
+  /* Top-aligned, so the host's line box adds no descender space below a short trigger. */
   .select-root {
     display: inline-flex;
     min-inline-size: 0;
     inline-size: 100%;
+    vertical-align: top;
   }
 
   .select-trigger {

@@ -13,6 +13,7 @@ export const ThemeSwitcher = /*#__PURE__*/ createBinding(TpThemeSwitcher, 'Theme
 }) as ElementBinding<
   TpThemeSwitcher,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'

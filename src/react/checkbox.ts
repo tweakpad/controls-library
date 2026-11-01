@@ -12,6 +12,7 @@ export type CheckboxProps = ElementProps<
   | 'checkboxGroup'
   | 'checked'
   | 'defaultChecked'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'identifier'

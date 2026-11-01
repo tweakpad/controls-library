@@ -9,6 +9,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type TimelineProps = ElementProps<
   TpTimeline,
   | 'align'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -35,6 +36,7 @@ export const Timeline = /*#__PURE__*/ createBinding<TimelineProps>(
 export type TimelineItemProps = ElementProps<
   TpTimelineItem,
   | 'align'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

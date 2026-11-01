@@ -19,6 +19,7 @@ export type ColorPickerProps = ElementProps<
   | 'defaultOpen'
   | 'defaultValue'
   | 'defaultView'
+  | 'density'
   | 'disabled'
   | 'eyedropper'
   | 'fields'

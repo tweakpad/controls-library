@@ -2,6 +2,7 @@ import { LitElement, css, unsafeCSS } from 'lit';
 import type { CSSResultGroup, PropertyDeclarations, PropertyValues } from 'lit';
 import type { Direction, Orientation } from './types.js';
 import { cancelMotions, type MotionPolicy } from './motion.js';
+import { densityDerivedDeclarations, type Density } from './density.js';
 import { dispatchTpEvent } from './events.js';
 import type { Diagnostic, DiagnosticSeverity } from './services.js';
 import { visuallyHiddenRule } from './visually-hidden.js';
@@ -24,6 +25,7 @@ export class TpElement extends LitElement {
     required: { type: Boolean, reflect: true },
     orientation: { type: String, reflect: true },
     motionPolicy: { type: String, attribute: 'motion-policy', reflect: true },
+    density: { type: String, reflect: true },
     partPresentation: { attribute: false },
     partContracts: { attribute: false },
   };
@@ -45,6 +47,21 @@ export class TpElement extends LitElement {
     :host([motion-policy='normal']) {
       --tp-motion-scale: 1;
       --tp-motion-play-state: running;
+    }
+
+    /* A density region on a library element, as the default stylesheet's document rules state it,
+       so it also applies where that stylesheet does not reach (inside another shadow root). */
+    :host([density='default']) {
+      --tp-spacing: var(--_tp-spacing-default);
+    }
+
+    :host([density='compact']) {
+      --tp-spacing: var(--tp-spacing-compact);
+    }
+
+    :host([density='default']),
+    :host([density='compact']) {
+      ${unsafeCSS(densityDerivedDeclarations())}
     }
 
     :host([hidden]) {
@@ -97,6 +114,12 @@ export class TpElement extends LitElement {
   required = false;
   orientation: Orientation = 'horizontal';
   motionPolicy: MotionPolicy = 'inherit';
+  /**
+   * The density of this element and everything inside it: `compact` tightens spacing, control
+   * heights and icon sizes; `default` restores the theme's own inside a compact region. Unset, the
+   * element follows the enclosing region.
+   */
+  density: Density | undefined;
   partPresentation: PartPresentation = {};
   partContracts: Record<string, ComponentPartContract> = {};
   renderPart(name: string, state: PartState, options: PartRenderOptions = {}): unknown {

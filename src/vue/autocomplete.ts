@@ -46,6 +46,7 @@ export const Autocomplete = /*#__PURE__*/ createBinding(TpAutocomplete, 'Autocom
   | 'defaultInputValue'
   | 'defaultOpen'
   | 'defaultValue'
+  | 'density'
   | 'disableAnchorTracking'
   | 'disabled'
   | 'filter'

@@ -9,6 +9,7 @@ import type * as foundationValidation from '../foundation/validation.js';
 /** Props of {@link Field}, the React binding of `<tp-field>`. */
 export type FieldProps = ElementProps<
   TpField,
+  | 'density'
   | 'description'
   | 'dirty'
   | 'disabled'

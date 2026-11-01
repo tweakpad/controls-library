@@ -10,6 +10,7 @@ export type ToggleProps = ElementProps<
   TpToggle,
   | 'ariaLabel'
   | 'defaultPressed'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'inputElementReference'

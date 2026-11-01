@@ -10,6 +10,7 @@ export type MessageProps = ElementProps<
   TpMessage,
   | 'align'
   | 'author'
+  | 'density'
   | 'disabled'
   | 'failed'
   | 'invalid'
@@ -36,6 +37,7 @@ export const Message = /*#__PURE__*/ createBinding<MessageProps>(
 /** Props of {@link MessageGroup}, the React binding of `<tp-message-group>`. */
 export type MessageGroupProps = ElementProps<
   TpMessageGroup,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

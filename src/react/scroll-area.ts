@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type ScrollAreaProps = ElementProps<
   TpScrollArea,
   | 'axis'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'keepMounted'

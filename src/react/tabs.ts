@@ -12,6 +12,7 @@ export type TabsProps = ElementProps<
   | 'activation'
   | 'activationDirection'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'

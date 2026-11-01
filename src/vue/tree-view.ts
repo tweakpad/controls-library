@@ -11,6 +11,7 @@ export const TreeItem = /*#__PURE__*/ createBinding(TpTreeItem, 'TreeItem', {
   lanes: {},
 }) as ElementBinding<
   TpTreeItem,
+  | 'density'
   | 'disabled'
   | 'hasChildren'
   | 'invalid'
@@ -41,6 +42,7 @@ export const TreeView = /*#__PURE__*/ createBinding(TpTreeView, 'TreeView', {
   | 'defaultExpanded'
   | 'defaultItems'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'expanded'
   | 'expansionTrigger'

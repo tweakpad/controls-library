@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Density regions verification</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: var(--tp-space-6);
+        background: var(--tp-background);
+        color: var(--tp-foreground);
+        font-family: var(--tp-font-sans);
+      }
+
+      main {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+        align-items: start;
+        gap: var(--tp-space-6);
+      }
+
+      .region {
+        display: grid;
+        gap: var(--tp-space-3);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Density regions verification</h1>
+    <main>
+      <tp-card id="default-card">
+        <h2 slot="header">Default region</h2>
+        <div class="region" id="default-region">
+          <tp-button id="default-button">Save draft</tp-button>
+          <tp-input id="default-input" label="Project name" placeholder="Harbor survey"></tp-input>
+          <tp-select id="default-select" label="Season" placeholder="Pick a season"></tp-select>
+          <tp-slider
+            id="default-slider"
+            variant="inline"
+            label="Exposure"
+            default-value="40"
+          ></tp-slider>
+          <tp-switch id="default-switch">Auto save</tp-switch>
+        </div>
+      </tp-card>
+      <section id="compact-region" density="compact" aria-labelledby="compact-title">
+        <h2 id="compact-title">Compact region</h2>
+        <div class="region">
+          <tp-button id="compact-button">Save draft</tp-button>
+          <tp-input id="compact-input" label="Project name" placeholder="Harbor survey"></tp-input>
+          <tp-select id="compact-select" label="Season" placeholder="Pick a season"></tp-select>
+          <tp-select id="compact-portaled" label="Tide" placeholder="Pick a tide"></tp-select>
+          <tp-slider
+            id="compact-slider"
+            variant="inline"
+            label="Exposure"
+            default-value="40"
+          ></tp-slider>
+          <tp-switch id="compact-switch">Auto save</tp-switch>
+          <div id="island" density="default" class="region">
+            <tp-button id="island-button">Default inside compact</tp-button>
+          </div>
+        </div>
+      </section>
+      <div id="shadow-host"></div>
+      <div class="region" id="live-region">
+        <tp-button id="live-button">Live switch</tp-button>
+        <tp-select id="live-select" label="Wind" placeholder="Pick a wind"></tp-select>
+      </div>
+    </main>
+    <script type="module" src="./fixture.ts"></script>
+  </body>
+</html>

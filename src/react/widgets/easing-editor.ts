@@ -15,6 +15,7 @@ export type EasingEditorProps = ElementProps<
   | 'defaultDuration'
   | 'defaultPresetsOpen'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'duration'
   | 'durationMax'

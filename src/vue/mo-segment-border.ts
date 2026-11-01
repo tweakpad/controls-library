@@ -11,6 +11,7 @@ export const MoBorderSegment = /*#__PURE__*/ createBinding(TpMoBorderSegment, 'M
   TpMoBorderSegment,
   | 'alternate'
   | 'delay'
+  | 'density'
   | 'disabled'
   | 'draw'
   | 'duration'
@@ -36,6 +37,7 @@ export const MoSegmentBorder = /*#__PURE__*/ createBinding(TpMoSegmentBorder, 'M
   lanes: {},
 }) as ElementBinding<
   TpMoSegmentBorder,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

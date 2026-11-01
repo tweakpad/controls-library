@@ -8,6 +8,7 @@ import type * as foundationValidation from '../foundation/validation.js';
 /** Props of {@link Form}, the React binding of `<tp-form>`. */
 export type FormProps = ElementProps<
   TpForm,
+  | 'density'
   | 'disabled'
   | 'errors'
   | 'invalid'

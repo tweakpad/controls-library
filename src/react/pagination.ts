@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Pagination}, the React binding of `<tp-pagination>`. */
 export type PaginationProps = ElementProps<
   TpPagination,
+  | 'density'
   | 'disabled'
   | 'hrefForPage'
   | 'invalid'

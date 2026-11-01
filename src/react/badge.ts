@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Badge}, the React binding of `<tp-badge>`. */
 export type BadgeProps = ElementProps<
   TpBadge,
+  | 'density'
   | 'disabled'
   | 'interactive'
   | 'invalid'

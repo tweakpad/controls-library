@@ -10,6 +10,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type ThemeSwitcherProps = ElementProps<
   TpThemeSwitcher,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'

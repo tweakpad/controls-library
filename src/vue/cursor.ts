@@ -12,6 +12,7 @@ export const Cursor = /*#__PURE__*/ createBinding(TpCursor, 'Cursor', {
 }) as ElementBinding<
   TpCursor,
   | 'damping'
+  | 'density'
   | 'disabled'
   | 'hideNative'
   | 'invalid'
@@ -41,6 +42,7 @@ export const CursorZone = /*#__PURE__*/ createBinding(TpCursorZone, 'CursorZone'
 }) as ElementBinding<
   TpCursorZone,
   | 'damping'
+  | 'density'
   | 'disabled'
   | 'for'
   | 'invalid'

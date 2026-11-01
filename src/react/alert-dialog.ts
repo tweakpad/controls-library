@@ -14,6 +14,7 @@ export type AlertDialogProps = ElementProps<
   | 'container'
   | 'defaultOpen'
   | 'defaultTriggerIdentifier'
+  | 'density'
   | 'description'
   | 'disabled'
   | 'finalFocus'

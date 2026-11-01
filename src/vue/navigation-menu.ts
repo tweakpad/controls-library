@@ -36,6 +36,7 @@ export const NavigationMenu = /*#__PURE__*/ createBinding(TpNavigationMenu, 'Nav
   | 'defaultTriggerIdentifier'
   | 'defaultValue'
   | 'delay'
+  | 'density'
   | 'disableAnchorTracking'
   | 'disableHoverablePopup'
   | 'disabled'
@@ -94,6 +95,7 @@ export const NavigationMenuItem = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationMenuItem,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'keepMounted'

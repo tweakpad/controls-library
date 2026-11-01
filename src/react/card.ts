@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type CardProps = ElementProps<
   TpCard,
   | 'borders'
+  | 'density'
   | 'disabled'
   | 'elevated'
   | 'invalid'

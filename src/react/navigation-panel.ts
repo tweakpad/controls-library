@@ -41,6 +41,7 @@ export type NavigationPanelProps = ElementProps<
   | 'compactOpen'
   | 'compactWidth'
   | 'defaultExpanded'
+  | 'density'
   | 'disabled'
   | 'expanded'
   | 'invalid'
@@ -85,6 +86,7 @@ export type NavigationPanelActionProps = ElementProps<
   TpNavigationPanelAction,
   | 'active'
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -124,6 +126,7 @@ export const NavigationPanelAction = /*#__PURE__*/ createBinding<NavigationPanel
 /** Props of {@link NavigationPanelBadge}, the React binding of `<tp-navigation-panel-badge>`. */
 export type NavigationPanelBadgeProps = ElementProps<
   TpNavigationPanelBadge,
+  | 'density'
   | 'disabled'
   | 'interactive'
   | 'invalid'
@@ -149,6 +152,7 @@ export const NavigationPanelBadge = /*#__PURE__*/ createBinding<NavigationPanelB
 /** Props of {@link NavigationPanelContent}, the React binding of `<tp-navigation-panel-content>`. */
 export type NavigationPanelContentProps = ElementProps<
   TpNavigationPanelContent,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -181,6 +185,7 @@ export type NavigationPanelDrawerProps = ElementProps<
   | 'defaultOpen'
   | 'defaultSnapPoint'
   | 'defaultTriggerIdentifier'
+  | 'density'
   | 'description'
   | 'disabled'
   | 'dismissible'
@@ -239,6 +244,7 @@ export const NavigationPanelDrawer = /*#__PURE__*/ createBinding<NavigationPanel
 /** Props of {@link NavigationPanelFooter}, the React binding of `<tp-navigation-panel-footer>`. */
 export type NavigationPanelFooterProps = ElementProps<
   TpNavigationPanelFooter,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -262,6 +268,7 @@ export const NavigationPanelFooter = /*#__PURE__*/ createBinding<NavigationPanel
 /** Props of {@link NavigationPanelGroup}, the React binding of `<tp-navigation-panel-group>`. */
 export type NavigationPanelGroupProps = ElementProps<
   TpNavigationPanelGroup,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -287,6 +294,7 @@ export type NavigationPanelGroupActionProps = ElementProps<
   TpNavigationPanelGroupAction,
   | 'active'
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -327,6 +335,7 @@ export const NavigationPanelGroupAction =
 /** Props of {@link NavigationPanelGroupContent}, the React binding of `<tp-navigation-panel-group-content>`. */
 export type NavigationPanelGroupContentProps = ElementProps<
   TpNavigationPanelGroupContent,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -351,6 +360,7 @@ export const NavigationPanelGroupContent =
 /** Props of {@link NavigationPanelGroupLabel}, the React binding of `<tp-navigation-panel-group-label>`. */
 export type NavigationPanelGroupLabelProps = ElementProps<
   TpNavigationPanelGroupLabel,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -375,6 +385,7 @@ export const NavigationPanelGroupLabel =
 /** Props of {@link NavigationPanelHeader}, the React binding of `<tp-navigation-panel-header>`. */
 export type NavigationPanelHeaderProps = ElementProps<
   TpNavigationPanelHeader,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -400,6 +411,7 @@ export type NavigationPanelInputProps = ElementProps<
   TpNavigationPanelInput,
   | 'autocomplete'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'hostProperties'
@@ -455,6 +467,7 @@ export const NavigationPanelInput = /*#__PURE__*/ createBinding<NavigationPanelI
 /** Props of {@link NavigationPanelInset}, the React binding of `<tp-navigation-panel-inset>`. */
 export type NavigationPanelInsetProps = ElementProps<
   TpNavigationPanelInset,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -478,6 +491,7 @@ export const NavigationPanelInset = /*#__PURE__*/ createBinding<NavigationPanelI
 /** Props of {@link NavigationPanelItem}, the React binding of `<tp-navigation-panel-item>`. */
 export type NavigationPanelItemProps = ElementProps<
   TpNavigationPanelItem,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -503,6 +517,7 @@ export type NavigationPanelLinkProps = ElementProps<
   TpNavigationPanelLink,
   | 'active'
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -542,6 +557,7 @@ export const NavigationPanelLink = /*#__PURE__*/ createBinding<NavigationPanelLi
 /** Props of {@link NavigationPanelLoadingPlaceholder}, the React binding of `<tp-navigation-panel-loading-placeholder>`. */
 export type NavigationPanelLoadingPlaceholderProps = ElementProps<
   TpNavigationPanelLoadingPlaceholder,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -567,6 +583,7 @@ export const NavigationPanelLoadingPlaceholder =
 /** Props of {@link NavigationPanelMenu}, the React binding of `<tp-navigation-panel-menu>`. */
 export type NavigationPanelMenuProps = ElementProps<
   TpNavigationPanelMenu,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -592,6 +609,7 @@ export type NavigationPanelResizeRailProps = ElementProps<
   TpNavigationPanelResizeRail,
   | 'active'
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -633,6 +651,7 @@ export const NavigationPanelResizeRail =
 export type NavigationPanelSeparatorProps = ElementProps<
   TpNavigationPanelSeparator,
   | 'decorative'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -656,6 +675,7 @@ export const NavigationPanelSeparator = /*#__PURE__*/ createBinding<NavigationPa
 /** Props of {@link NavigationPanelSubitem}, the React binding of `<tp-navigation-panel-subitem>`. */
 export type NavigationPanelSubitemProps = ElementProps<
   TpNavigationPanelSubitem,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -681,6 +701,7 @@ export type NavigationPanelSublinkProps = ElementProps<
   TpNavigationPanelSublink,
   | 'active'
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -720,6 +741,7 @@ export const NavigationPanelSublink = /*#__PURE__*/ createBinding<NavigationPane
 /** Props of {@link NavigationPanelSubmenu}, the React binding of `<tp-navigation-panel-submenu>`. */
 export type NavigationPanelSubmenuProps = ElementProps<
   TpNavigationPanelSubmenu,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -745,6 +767,7 @@ export type NavigationPanelTriggerProps = ElementProps<
   TpNavigationPanelTrigger,
   | 'active'
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'

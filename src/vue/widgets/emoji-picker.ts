@@ -21,6 +21,7 @@ export const EmojiPicker = /*#__PURE__*/ createBinding(TpEmojiPicker, 'EmojiPick
   | 'defaultQuery'
   | 'defaultSkinTone'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'emojiVersion'
   | 'formOwner'

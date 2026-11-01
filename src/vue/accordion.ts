@@ -15,6 +15,7 @@ export const Accordion = /*#__PURE__*/ createBinding(TpAccordion, 'Accordion', {
   | 'collapsible'
   | 'contentAlignment'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'hiddenUntilFound'
   | 'invalid'
@@ -46,6 +47,7 @@ export const AccordionItem = /*#__PURE__*/ createBinding(TpAccordionItem, 'Accor
 }) as ElementBinding<
   TpAccordionItem,
   | 'contentAlignment'
+  | 'density'
   | 'disabled'
   | 'headingLevel'
   | 'indicatorPosition'

@@ -8,10 +8,11 @@ Import `@tweakpad/ui/styles.css` once to install the default token set. Componen
   --tp-primary-foreground: white;
   --tp-ring: oklch(67% 0.18 275deg);
   --tp-radius: 0.75rem;
-  --tp-spacing: 0.275rem;
   --tp-font-sans: 'Example Sans', sans-serif;
 }
 ```
+
+Spacing is the exception: the `space-*` roles, control heights and icon sizes derive from the spacing seed, so a region changes its spacing through [Density](#density), not by setting `--tp-spacing` on the subtree.
 
 ## Token families
 
@@ -19,7 +20,7 @@ Import `@tweakpad/ui/styles.css` once to install the default token set. Componen
 - Unpaired colors: `border`, `input`, `ring`, and `chart-1` through `chart-5`.
 - Syntax colors: one role per scope of highlighted code: `syntax-comment`, `syntax-keyword`, `syntax-string`, `syntax-number`, `syntax-function`, `syntax-type`, `syntax-constant`, `syntax-variable`, `syntax-property`, `syntax-tag`, `syntax-attribute`, `syntax-operator`, `syntax-inserted` and `syntax-deleted`. See [Code block](components/code-block.mdx#theming).
 - Content colors: `content-<hue>` and `content-<hue>-foreground` for the hues `gray`, `brown`, `orange`, `yellow`, `green`, `blue`, `purple`, `pink` and `red`. See [Content colors](#content-colors).
-- Spacing: `spacing` plus the derived `space-*` scale: `space-0`, `space-0-5`, `space-1`, `space-1-5`, `space-2`, `space-2-5`, `space-3`, `space-4`, `space-5`, `space-6`, `space-8`, `space-10`, `space-12` and `space-16`. Each equals `spacing` times its suffix; a trailing `-5` is the half step.
+- Spacing: `spacing` and `spacing-compact`, the seed of each [density](#density) mode, plus the derived `space-*` scale: `space-0`, `space-0-5`, `space-1`, `space-1-5`, `space-2`, `space-2-5`, `space-3`, `space-4`, `space-5`, `space-6`, `space-8`, `space-10`, `space-12` and `space-16`. Each equals `spacing` times its suffix; a trailing `-5` is the half step.
 - Typography: `font-*`, `text-*`, `leading-*`, and `tracking-*`.
 - Extents: `control-height-xs|sm|md|lg`, `icon-size-xs|sm|md|lg`, and `target-size-min`.
 - Lines and shape: `border-width`, `border-width-strong`, `border-style`, `ring-width`, `ring-offset`, and `radius-*`.
@@ -171,13 +172,50 @@ input.partContracts = {
 
 Put `bind` on the delegate's compatible semantic host to retain handlers, state, accessibility and reference cleanup. Host properties use attribute names, `.property` for explicit property bindings and `@event` for handlers. Consumer handlers run first. Calling `event.preventComponentHandling()` suppresses the component action through a separate channel from native `preventDefault()`; controls retain required native-state reconciliation. Rendering customization does not transfer value or validation ownership. Consult each component's documentation for its supported hosts, parts and constituent scope.
 
+## Density
+
+The token set has two density modes. `default` uses the theme's spacing seed; `compact` uses a smaller seed (0.1875rem against the default 0.25rem), so padding, gaps, control heights and icon sizes all tighten together while type sizes stay the same. Set `density="compact"` on any element to make it and everything inside it compact, and `density="default"` to return part of a compact region to the default density. Regions nest in any order, so one document can mix both:
+
+```html
+<main>
+  <tp-card>…</tp-card>
+  <aside density="compact">
+    <tp-input variant="inline" label="Radius"></tp-input>
+    <tp-slider variant="inline" label="Opacity" editable-value></tp-slider>
+    <section density="default">
+      <tp-button>Apply</tp-button>
+    </section>
+  </aside>
+</main>
+```
+
+| Role                       | default        | compact           |
+| -------------------------- | -------------- | ----------------- |
+| `spacing`                  | 0.25rem (4px)  | 0.1875rem (3px)   |
+| `space-2`                  | 8px            | 6px               |
+| `control-height-xs` … `lg` | 24, 28, 32, 36 | 18, 21, 24, 27px  |
+| `icon-size-xs` … `lg`      | 12, 14, 16, 20 | 9, 10.5, 12, 15px |
+
+Library elements also take `density` as an attribute or a property (`element.density = 'compact'`, or `density` in the framework bindings), which works inside other shadow roots where the default stylesheet's document rules do not reach. Popups opened from a region, such as a Select list or a Menu, keep the region's density, also when they are portaled to the document body, and changing `density` on a region updates surfaces that are already open.
+
+Density and a component's `size` combine: `size` picks a step of the control scale, and density sets how large that scale is. A compact region of `size="sm"` controls is smaller still.
+
+A theme sets the seed of each mode on `:root`: `--tp-spacing` for the default mode and `--tp-spacing-compact` for the compact mode. Every derived role follows in each region, so a theme never restates the `space-*`, control or icon roles:
+
+```css
+:root {
+  --tp-spacing: 0.275rem;
+  --tp-spacing-compact: 0.2rem;
+}
+```
+
 ## Default spacing
 
-Change `--tp-spacing` in the theme to scale library padding, gaps, control/icon extents and default anchored-surface geometry. Popup menus, navigation menus and selection lists use a one-unit outer inset; Popover uses `space-2-5`. Anchored surfaces use a three-unit default trigger separation and collision inset; explicit numeric positioning overrides remain available for deliberate geometry. Popover content uses real flex gaps, including the close action. Switch derives track and thumb extents from one size-dependent spacing value.
+Change `--tp-spacing` in the theme to scale library padding, gaps, control/icon extents and default anchored-surface geometry; [Density](#density) changes it for a region. Popup menus, navigation menus and selection lists use a one-unit outer inset; Popover uses `space-2-5`. Anchored surfaces use a three-unit default trigger separation and collision inset; explicit numeric positioning overrides remain available for deliberate geometry. Popover content uses real flex gaps, including the close action. Switch derives track and thumb extents from one size-dependent spacing value.
 
 Menu, select and combobox items use `space-1` by `space-1-5` insets and are at least `control-height-sm` tall, so they scale with `--tp-spacing`. Rows and triggers packed against their neighbours (navigation panel rows and group labels, navigation menu triggers and links) show their compact control extent on fine pointers. They cannot expand their pointer target without overlapping a neighbour, so on coarse pointers the default theme raises them to `--tp-target-size-min`.
 
-Typography, line widths, shape seeds, responsive query thresholds and minimum accessible targets retain their independent roles. Screen-reader-only clipping dimensions and runtime-measured pixel coordinates are geometry, not visible spacing. Scoped complete themes should provide their derived `space-*` roles consistently with their spacing seed.
+Typography, line widths, shape seeds, responsive query thresholds and minimum accessible targets retain their independent roles. Screen-reader-only clipping dimensions and runtime-measured pixel coordinates are geometry, not visible spacing.
 
 ## Shared surface corners
 

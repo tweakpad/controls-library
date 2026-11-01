@@ -15,6 +15,7 @@ export type CalendarProps = ElementProps<
   | 'dayModifiers'
   | 'defaultDisplayedMonth'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'disabledDates'
   | 'disabledNavigation'

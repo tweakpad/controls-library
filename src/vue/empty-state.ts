@@ -8,6 +8,7 @@ export const EmptyState = /*#__PURE__*/ createBinding(TpEmptyState, 'EmptyState'
   lanes: {},
 }) as ElementBinding<
   TpEmptyState,
+  | 'density'
   | 'description'
   | 'disabled'
   | 'invalid'

@@ -30,6 +30,7 @@ export type TooltipProps = ElementProps<
   | 'defaultOpen'
   | 'defaultTriggerIdentifier'
   | 'delay'
+  | 'density'
   | 'describes'
   | 'disableAnchorTracking'
   | 'disableHoverablePopup'

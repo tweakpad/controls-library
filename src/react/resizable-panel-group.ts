@@ -11,6 +11,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type ResizableHandleProps = ElementProps<
   TpResizableHandle,
   | 'boundary'
+  | 'density'
   | 'disableDoubleClickReset'
   | 'disabled'
   | 'invalid'
@@ -43,6 +44,7 @@ export type ResizablePanelProps = ElementProps<
   | 'collapsedSize'
   | 'collapsible'
   | 'defaultSize'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'maxSize'
@@ -82,6 +84,7 @@ export type ResizablePanelGroupProps = ElementProps<
   TpResizablePanelGroup,
   | 'defaultLayout'
   | 'defaultSizes'
+  | 'density'
   | 'disableCursor'
   | 'disableDoubleClickReset'
   | 'disabled'

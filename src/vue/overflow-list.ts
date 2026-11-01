@@ -10,6 +10,7 @@ export const OverflowList = /*#__PURE__*/ createBinding(TpOverflowList, 'Overflo
 }) as ElementBinding<
   TpOverflowList,
   | 'collapseFrom'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'limit'

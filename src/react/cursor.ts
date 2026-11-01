@@ -11,6 +11,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type CursorProps = ElementProps<
   TpCursor,
   | 'damping'
+  | 'density'
   | 'disabled'
   | 'hideNative'
   | 'invalid'
@@ -50,6 +51,7 @@ export const Cursor = /*#__PURE__*/ createBinding<CursorProps>(
 export type CursorZoneProps = ElementProps<
   TpCursorZone,
   | 'damping'
+  | 'density'
   | 'disabled'
   | 'for'
   | 'invalid'

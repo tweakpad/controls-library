@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type SkeletonProps = ElementProps<
   TpSkeleton,
   | 'animated'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'

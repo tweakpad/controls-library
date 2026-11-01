@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link FieldGroup}, the React binding of `<tp-field-group>`. */
 export type FieldGroupProps = ElementProps<
   TpFieldGroup,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'joined'

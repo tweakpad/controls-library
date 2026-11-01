@@ -21,6 +21,7 @@ export const OneTimeCodeField = /*#__PURE__*/ createBinding(
   | 'autocomplete'
   | 'characterPredicate'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'groupLengths'

@@ -8,6 +8,7 @@ export const FieldGroup = /*#__PURE__*/ createBinding(TpFieldGroup, 'FieldGroup'
   lanes: {},
 }) as ElementBinding<
   TpFieldGroup,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'joined'

@@ -254,6 +254,7 @@ type Tags = {
     | 'collapsible'
     | 'contentAlignment'
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'hiddenUntilFound'
     | 'invalid'
@@ -277,6 +278,7 @@ type Tags = {
   'tp-accordion-item': Tag<
     TpAccordionItem,
     | 'contentAlignment'
+    | 'density'
     | 'disabled'
     | 'headingLevel'
     | 'indicatorPosition'
@@ -293,6 +295,7 @@ type Tags = {
   'tp-alert': Tag<
     TpAlert,
     | 'announcement'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -313,6 +316,7 @@ type Tags = {
     | 'container'
     | 'defaultOpen'
     | 'defaultTriggerIdentifier'
+    | 'density'
     | 'description'
     | 'disabled'
     | 'finalFocus'
@@ -344,6 +348,7 @@ type Tags = {
   >;
   'tp-aspect-ratio': Tag<
     TpAspectRatio,
+    | 'density'
     | 'disabled'
     | 'fit'
     | 'invalid'
@@ -358,6 +363,7 @@ type Tags = {
   >;
   'tp-attachment': Tag<
     TpAttachment,
+    | 'density'
     | 'description'
     | 'disabled'
     | 'errorMessage'
@@ -384,6 +390,7 @@ type Tags = {
   >;
   'tp-attachment-group': Tag<
     TpAttachmentGroup,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -422,6 +429,7 @@ type Tags = {
     | 'defaultInputValue'
     | 'defaultOpen'
     | 'defaultValue'
+    | 'density'
     | 'disableAnchorTracking'
     | 'disabled'
     | 'filter'
@@ -507,6 +515,7 @@ type Tags = {
     TpAvatar,
     | 'alt'
     | 'crossOrigin'
+    | 'density'
     | 'disabled'
     | 'fallback'
     | 'fallbackDelay'
@@ -531,6 +540,7 @@ type Tags = {
   >;
   'tp-avatar-group': Tag<
     TpAvatarGroup,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -545,6 +555,7 @@ type Tags = {
   >;
   'tp-badge': Tag<
     TpBadge,
+    | 'density'
     | 'disabled'
     | 'interactive'
     | 'invalid'
@@ -559,6 +570,7 @@ type Tags = {
   >;
   'tp-breadcrumb': Tag<
     TpBreadcrumb,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -574,6 +586,7 @@ type Tags = {
   'tp-bubble': Tag<
     TpBubble,
     | 'align'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -590,6 +603,7 @@ type Tags = {
   >;
   'tp-bubble-group': Tag<
     TpBubbleGroup,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -603,6 +617,7 @@ type Tags = {
   'tp-button': Tag<
     TpButton,
     | 'ariaLabel'
+    | 'density'
     | 'disabled'
     | 'download'
     | 'focusableWhenDisabled'
@@ -629,6 +644,7 @@ type Tags = {
   >;
   'tp-button-group': Tag<
     TpButtonGroup,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'joined'
@@ -643,6 +659,7 @@ type Tags = {
   >;
   'tp-button-group-text': Tag<
     TpButtonGroupText,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -661,6 +678,7 @@ type Tags = {
     | 'dayModifiers'
     | 'defaultDisplayedMonth'
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'disabledDates'
     | 'disabledNavigation'
@@ -713,6 +731,7 @@ type Tags = {
   'tp-card': Tag<
     TpCard,
     | 'borders'
+    | 'density'
     | 'disabled'
     | 'elevated'
     | 'invalid'
@@ -730,6 +749,7 @@ type Tags = {
     TpCarousel<unknown>,
     | 'autoplay'
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'effect'
     | 'getItemId'
@@ -761,6 +781,7 @@ type Tags = {
     | 'checkboxGroup'
     | 'checked'
     | 'defaultChecked'
+    | 'density'
     | 'disabled'
     | 'formOwner'
     | 'identifier'
@@ -792,6 +813,7 @@ type Tags = {
   >;
   'tp-citation': Tag<
     TpCitation,
+    | 'density'
     | 'description'
     | 'disabled'
     | 'href'
@@ -815,6 +837,7 @@ type Tags = {
   >;
   'tp-citation-list': Tag<
     TpCitationList,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -836,6 +859,7 @@ type Tags = {
     | 'collapsible'
     | 'copyable'
     | 'defaultExpanded'
+    | 'density'
     | 'disabled'
     | 'expanded'
     | 'highlightLines'
@@ -863,6 +887,7 @@ type Tags = {
     TpCollapsible,
     | 'contentAlignment'
     | 'defaultOpen'
+    | 'density'
     | 'disabled'
     | 'headingLevel'
     | 'hiddenUntilFound'
@@ -886,6 +911,7 @@ type Tags = {
     TpColorInput,
     | 'alpha'
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'formOwner'
     | 'format'
@@ -945,6 +971,7 @@ type Tags = {
     | 'defaultInputValue'
     | 'defaultOpen'
     | 'defaultValue'
+    | 'density'
     | 'disableAnchorTracking'
     | 'disabled'
     | 'filter'
@@ -1037,6 +1064,7 @@ type Tags = {
     | 'defaultQuery'
     | 'defaultTriggerIdentifier'
     | 'defaultValue'
+    | 'density'
     | 'description'
     | 'disabled'
     | 'filter'
@@ -1081,6 +1109,7 @@ type Tags = {
     TpCopyButton,
     | 'copiedLabel'
     | 'data'
+    | 'density'
     | 'disabled'
     | 'duration'
     | 'failedLabel'
@@ -1106,6 +1135,7 @@ type Tags = {
   'tp-cursor': Tag<
     TpCursor,
     | 'damping'
+    | 'density'
     | 'disabled'
     | 'hideNative'
     | 'invalid'
@@ -1131,6 +1161,7 @@ type Tags = {
   'tp-cursor-zone': Tag<
     TpCursorZone,
     | 'damping'
+    | 'density'
     | 'disabled'
     | 'for'
     | 'invalid'
@@ -1150,6 +1181,7 @@ type Tags = {
   'tp-data-visualization': Tag<
     TpDataVisualization,
     | 'data'
+    | 'density'
     | 'description'
     | 'disabled'
     | 'interaction'
@@ -1174,6 +1206,7 @@ type Tags = {
     TpDescriptionList,
     | 'align'
     | 'defaultOpen'
+    | 'density'
     | 'disabled'
     | 'hiddenUntilFound'
     | 'invalid'
@@ -1195,6 +1228,7 @@ type Tags = {
   >;
   'tp-description-list-item': Tag<
     TpDescriptionListItem,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -1215,6 +1249,7 @@ type Tags = {
     | 'container'
     | 'defaultOpen'
     | 'defaultTriggerIdentifier'
+    | 'density'
     | 'description'
     | 'disabled'
     | 'finalFocus'
@@ -1255,6 +1290,7 @@ type Tags = {
     | 'collisionDetector'
     | 'collisionPriority'
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'dropAnimation'
     | 'feedback'
@@ -1308,6 +1344,7 @@ type Tags = {
     | 'defaultOpen'
     | 'defaultSnapPoint'
     | 'defaultTriggerIdentifier'
+    | 'density'
     | 'description'
     | 'disabled'
     | 'dismissible'
@@ -1352,6 +1389,7 @@ type Tags = {
   'tp-drawer-provider': Tag<TpDrawerProvider, never, Record<never, never>>;
   'tp-drawer-swipe-area': Tag<
     TpDrawerSwipeArea,
+    | 'density'
     | 'disabled'
     | 'for'
     | 'invalid'
@@ -1372,6 +1410,7 @@ type Tags = {
   >;
   'tp-empty-state': Tag<
     TpEmptyState,
+    | 'density'
     | 'description'
     | 'disabled'
     | 'invalid'
@@ -1387,6 +1426,7 @@ type Tags = {
   >;
   'tp-field': Tag<
     TpField,
+    | 'density'
     | 'description'
     | 'dirty'
     | 'disabled'
@@ -1423,6 +1463,7 @@ type Tags = {
   >;
   'tp-field-group': Tag<
     TpFieldGroup,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'joined'
@@ -1444,6 +1485,7 @@ type Tags = {
     | 'capture'
     | 'clearable'
     | 'defaultValue'
+    | 'density'
     | 'directory'
     | 'disabled'
     | 'fileValidator'
@@ -1514,6 +1556,7 @@ type Tags = {
   >;
   'tp-form': Tag<
     TpForm,
+    | 'density'
     | 'disabled'
     | 'errors'
     | 'invalid'
@@ -1558,6 +1601,7 @@ type Tags = {
     TpImage,
     | 'alt'
     | 'crossOrigin'
+    | 'density'
     | 'disabled'
     | 'fetchPriority'
     | 'fit'
@@ -1594,6 +1638,7 @@ type Tags = {
   >;
   'tp-image-group': Tag<
     TpImageGroup,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -1623,6 +1668,7 @@ type Tags = {
     TpInput,
     | 'autocomplete'
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'formOwner'
     | 'hostProperties'
@@ -1667,6 +1713,7 @@ type Tags = {
     | 'actionSize'
     | 'actionVariant'
     | 'addonPosition'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -1679,6 +1726,7 @@ type Tags = {
   >;
   'tp-kbd': Tag<
     TpKbd,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'keyLabels'
@@ -1695,6 +1743,7 @@ type Tags = {
   >;
   'tp-kbd-group': Tag<
     TpKbdGroup,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'keyLabels'
@@ -1711,6 +1760,7 @@ type Tags = {
   >;
   'tp-label': Tag<
     TpLabel,
+    | 'density'
     | 'disabled'
     | 'for'
     | 'invalid'
@@ -1726,6 +1776,7 @@ type Tags = {
   'tp-list': Tag<
     TpList,
     | 'ariaLabel'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -1738,6 +1789,7 @@ type Tags = {
   >;
   'tp-list-item': Tag<
     TpListItem,
+    | 'density'
     | 'description'
     | 'disabled'
     | 'invalid'
@@ -1756,6 +1808,7 @@ type Tags = {
   >;
   'tp-list-separator': Tag<
     TpListSeparator,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -1776,6 +1829,7 @@ type Tags = {
     | 'defaultCenter'
     | 'defaultSelectedPin'
     | 'defaultZoom'
+    | 'density'
     | 'disabled'
     | 'engine'
     | 'fitPadding'
@@ -1810,6 +1864,7 @@ type Tags = {
   'tp-map-control': Tag<
     TpMapControl,
     | 'action'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -1848,6 +1903,7 @@ type Tags = {
     | 'defaultOpen'
     | 'defaultTriggerIdentifier'
     | 'delay'
+    | 'density'
     | 'disableAnchorTracking'
     | 'disableHoverablePopup'
     | 'disabled'
@@ -1893,6 +1949,7 @@ type Tags = {
   'tp-map-pin': Tag<
     TpMapPin,
     | 'anchor'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -1910,6 +1967,7 @@ type Tags = {
   >;
   'tp-markdown': Tag<
     TpMarkdown,
+    | 'density'
     | 'disabled'
     | 'elements'
     | 'headingOffset'
@@ -1936,6 +1994,7 @@ type Tags = {
   >;
   'tp-marker': Tag<
     TpMarker,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -1952,6 +2011,7 @@ type Tags = {
   >;
   'tp-media-audio-layout': Tag<
     TpMediaAudioLayout,
+    | 'density'
     | 'disabled'
     | 'hide'
     | 'invalid'
@@ -1969,6 +2029,7 @@ type Tags = {
   'tp-media-audio-track-radio-group': Tag<
     TpMediaAudioTrackRadioGroup,
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -1990,6 +2051,7 @@ type Tags = {
   'tp-media-buffering-indicator': Tag<
     TpMediaBufferingIndicator,
     | 'delay'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -2004,6 +2066,7 @@ type Tags = {
   >;
   'tp-media-captions-button': Tag<
     TpMediaCaptionsButton,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2022,6 +2085,7 @@ type Tags = {
   'tp-media-captions-radio-group': Tag<
     TpMediaCaptionsRadioGroup,
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2042,6 +2106,7 @@ type Tags = {
   >;
   'tp-media-chapter-title': Tag<
     TpMediaChapterTitle,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -2056,6 +2121,7 @@ type Tags = {
   >;
   'tp-media-container': Tag<
     TpMediaContainer,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -2070,6 +2136,7 @@ type Tags = {
   >;
   'tp-media-controls': Tag<
     TpMediaControls,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -2085,6 +2152,7 @@ type Tags = {
   >;
   'tp-media-controls-group': Tag<
     TpMediaControlsGroup,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2100,6 +2168,7 @@ type Tags = {
   >;
   'tp-media-error-dialog': Tag<
     TpMediaErrorDialog,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -2115,6 +2184,7 @@ type Tags = {
   >;
   'tp-media-fullscreen-button': Tag<
     TpMediaFullscreenButton,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2133,6 +2203,7 @@ type Tags = {
   'tp-media-gesture': Tag<
     TpMediaGesture,
     | 'action'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -2152,6 +2223,7 @@ type Tags = {
   'tp-media-hotkey': Tag<
     TpMediaHotkey,
     | 'action'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'keys'
@@ -2168,6 +2240,7 @@ type Tags = {
   >;
   'tp-media-live-button': Tag<
     TpMediaLiveButton,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2185,6 +2258,7 @@ type Tags = {
   >;
   'tp-media-mute-button': Tag<
     TpMediaMuteButton,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2202,6 +2276,7 @@ type Tags = {
   >;
   'tp-media-pip-button': Tag<
     TpMediaPipButton,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2219,6 +2294,7 @@ type Tags = {
   >;
   'tp-media-play-button': Tag<
     TpMediaPlayButton,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2236,6 +2312,7 @@ type Tags = {
   >;
   'tp-media-playback-rate-button': Tag<
     TpMediaPlaybackRateButton,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2254,6 +2331,7 @@ type Tags = {
   'tp-media-playback-rate-radio-group': Tag<
     TpMediaPlaybackRateRadioGroup,
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2276,6 +2354,7 @@ type Tags = {
     TpMediaPlayer,
     | 'announcements'
     | 'contentTitle'
+    | 'density'
     | 'disabled'
     | 'gestures'
     | 'hideOverControls'
@@ -2311,6 +2390,7 @@ type Tags = {
   >;
   'tp-media-poster': Tag<
     TpMediaPoster,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -2327,6 +2407,7 @@ type Tags = {
   'tp-media-quality-radio-group': Tag<
     TpMediaQualityRadioGroup,
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2347,6 +2428,7 @@ type Tags = {
   >;
   'tp-media-remote-playback-button': Tag<
     TpMediaRemotePlaybackButton,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2364,6 +2446,7 @@ type Tags = {
   >;
   'tp-media-seek-button': Tag<
     TpMediaSeekButton,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2385,6 +2468,7 @@ type Tags = {
     TpMediaSeekIndicator,
     | 'actions'
     | 'closeDelay'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -2400,6 +2484,7 @@ type Tags = {
   'tp-media-settings-menu': Tag<
     TpMediaSettingsMenu,
     | 'align'
+    | 'density'
     | 'disabled'
     | 'groups'
     | 'invalid'
@@ -2418,6 +2503,7 @@ type Tags = {
     TpMediaStatusIndicator,
     | 'actions'
     | 'closeDelay'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -2433,6 +2519,7 @@ type Tags = {
   'tp-media-thumbnail': Tag<
     TpMediaThumbnail,
     | 'crossOrigin'
+    | 'density'
     | 'disabled'
     | 'fetchPriority'
     | 'invalid'
@@ -2450,6 +2537,7 @@ type Tags = {
   >;
   'tp-media-time': Tag<
     TpMediaTime,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -2469,6 +2557,7 @@ type Tags = {
   'tp-media-time-slider': Tag<
     TpMediaTimeSlider,
     | 'changeThrottle'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'largeStep'
@@ -2493,6 +2582,7 @@ type Tags = {
   >;
   'tp-media-time-slider-preview': Tag<
     TpMediaTimeSliderPreview,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -2511,6 +2601,7 @@ type Tags = {
   >;
   'tp-media-title': Tag<
     TpMediaTitle,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -2525,6 +2616,7 @@ type Tags = {
   >;
   'tp-media-video-layout': Tag<
     TpMediaVideoLayout,
+    | 'density'
     | 'disabled'
     | 'hide'
     | 'invalid'
@@ -2543,6 +2635,7 @@ type Tags = {
     TpMediaVolumeIndicator,
     | 'actions'
     | 'closeDelay'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -2558,6 +2651,7 @@ type Tags = {
   'tp-media-volume-popover': Tag<
     TpMediaVolumePopover,
     | 'closeDelay'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -2574,6 +2668,7 @@ type Tags = {
   >;
   'tp-media-volume-slider': Tag<
     TpMediaVolumeSlider,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'largeStep'
@@ -2618,6 +2713,7 @@ type Tags = {
     | 'defaultOpen'
     | 'defaultTriggerIdentifier'
     | 'delay'
+    | 'density'
     | 'disableAnchorTracking'
     | 'disableHoverablePopup'
     | 'disabled'
@@ -2676,6 +2772,7 @@ type Tags = {
     | 'checked'
     | 'closeOnClick'
     | 'defaultChecked'
+    | 'density'
     | 'disabled'
     | 'inset'
     | 'invalid'
@@ -2698,6 +2795,7 @@ type Tags = {
   'tp-menu-item': Tag<
     TpMenuItem,
     | 'closeOnClick'
+    | 'density'
     | 'disabled'
     | 'inset'
     | 'invalid'
@@ -2716,6 +2814,7 @@ type Tags = {
   'tp-menu-radio-group': Tag<
     TpMenuRadioGroup,
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2734,6 +2833,7 @@ type Tags = {
   'tp-menu-radio-item': Tag<
     TpMenuRadioItem,
     | 'closeOnClick'
+    | 'density'
     | 'disabled'
     | 'inset'
     | 'invalid'
@@ -2753,6 +2853,7 @@ type Tags = {
   'tp-menubar': Tag<
     TpMenubar,
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'loopFocus'
@@ -2774,6 +2875,7 @@ type Tags = {
     TpMessage,
     | 'align'
     | 'author'
+    | 'density'
     | 'disabled'
     | 'failed'
     | 'invalid'
@@ -2789,6 +2891,7 @@ type Tags = {
   >;
   'tp-message-group': Tag<
     TpMessageGroup,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -2802,6 +2905,7 @@ type Tags = {
   'tp-message-scroller': Tag<
     TpMessageScroller,
     | 'defaultPinned'
+    | 'density'
     | 'disabled'
     | 'follow'
     | 'initialPosition'
@@ -2828,6 +2932,7 @@ type Tags = {
   >;
   'tp-message-scroller-content': Tag<
     TpMessageScrollerContent,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2841,6 +2946,7 @@ type Tags = {
   >;
   'tp-message-scroller-item': Tag<
     TpMessageScrollerItem,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messageId'
@@ -2857,6 +2963,7 @@ type Tags = {
     TpMessageScrollerReturnControl,
     | 'ariaLabel'
     | 'behavior'
+    | 'density'
     | 'disabled'
     | 'download'
     | 'focusableWhenDisabled'
@@ -2884,6 +2991,7 @@ type Tags = {
   >;
   'tp-message-scroller-viewport': Tag<
     TpMessageScrollerViewport,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -2898,6 +3006,7 @@ type Tags = {
   >;
   'tp-mo-glow-border': Tag<
     TpMoGlowBorder,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'lightSpacing'
@@ -2920,6 +3029,7 @@ type Tags = {
     TpMoBorderSegment,
     | 'alternate'
     | 'delay'
+    | 'density'
     | 'disabled'
     | 'draw'
     | 'duration'
@@ -2939,6 +3049,7 @@ type Tags = {
   >;
   'tp-mo-segment-border': Tag<
     TpMoSegmentBorder,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -2952,6 +3063,7 @@ type Tags = {
   >;
   'tp-mo-text-mirror': Tag<
     TpMoTextMirror,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -2978,6 +3090,7 @@ type Tags = {
   >;
   'tp-mo-text-split': Tag<
     TpMoTextSplit,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'mask'
@@ -3007,6 +3120,7 @@ type Tags = {
   >;
   'tp-mo-text-stroke': Tag<
     TpMoTextStroke,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -3035,6 +3149,7 @@ type Tags = {
   'tp-native-select': Tag<
     TpNativeSelect,
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'formOwner'
     | 'hostProperties'
@@ -3088,6 +3203,7 @@ type Tags = {
     | 'defaultTriggerIdentifier'
     | 'defaultValue'
     | 'delay'
+    | 'density'
     | 'disableAnchorTracking'
     | 'disableHoverablePopup'
     | 'disabled'
@@ -3133,6 +3249,7 @@ type Tags = {
   >;
   'tp-navigation-menu-item': Tag<
     TpNavigationMenuItem,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'keepMounted'
@@ -3154,6 +3271,7 @@ type Tags = {
     | 'compactOpen'
     | 'compactWidth'
     | 'defaultExpanded'
+    | 'density'
     | 'disabled'
     | 'expanded'
     | 'invalid'
@@ -3183,6 +3301,7 @@ type Tags = {
     TpNavigationPanelAction,
     | 'active'
     | 'ariaLabel'
+    | 'density'
     | 'disabled'
     | 'download'
     | 'focusableWhenDisabled'
@@ -3211,6 +3330,7 @@ type Tags = {
   >;
   'tp-navigation-panel-badge': Tag<
     TpNavigationPanelBadge,
+    | 'density'
     | 'disabled'
     | 'interactive'
     | 'invalid'
@@ -3225,6 +3345,7 @@ type Tags = {
   >;
   'tp-navigation-panel-content': Tag<
     TpNavigationPanelContent,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -3246,6 +3367,7 @@ type Tags = {
     | 'defaultOpen'
     | 'defaultSnapPoint'
     | 'defaultTriggerIdentifier'
+    | 'density'
     | 'description'
     | 'disabled'
     | 'dismissible'
@@ -3287,6 +3409,7 @@ type Tags = {
   >;
   'tp-navigation-panel-footer': Tag<
     TpNavigationPanelFooter,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -3299,6 +3422,7 @@ type Tags = {
   >;
   'tp-navigation-panel-group': Tag<
     TpNavigationPanelGroup,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -3313,6 +3437,7 @@ type Tags = {
     TpNavigationPanelGroupAction,
     | 'active'
     | 'ariaLabel'
+    | 'density'
     | 'disabled'
     | 'download'
     | 'focusableWhenDisabled'
@@ -3341,6 +3466,7 @@ type Tags = {
   >;
   'tp-navigation-panel-group-content': Tag<
     TpNavigationPanelGroupContent,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -3353,6 +3479,7 @@ type Tags = {
   >;
   'tp-navigation-panel-group-label': Tag<
     TpNavigationPanelGroupLabel,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -3365,6 +3492,7 @@ type Tags = {
   >;
   'tp-navigation-panel-header': Tag<
     TpNavigationPanelHeader,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -3379,6 +3507,7 @@ type Tags = {
     TpNavigationPanelInput,
     | 'autocomplete'
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'formOwner'
     | 'hostProperties'
@@ -3420,6 +3549,7 @@ type Tags = {
   >;
   'tp-navigation-panel-inset': Tag<
     TpNavigationPanelInset,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -3432,6 +3562,7 @@ type Tags = {
   >;
   'tp-navigation-panel-item': Tag<
     TpNavigationPanelItem,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -3446,6 +3577,7 @@ type Tags = {
     TpNavigationPanelLink,
     | 'active'
     | 'ariaLabel'
+    | 'density'
     | 'disabled'
     | 'download'
     | 'focusableWhenDisabled'
@@ -3474,6 +3606,7 @@ type Tags = {
   >;
   'tp-navigation-panel-loading-placeholder': Tag<
     TpNavigationPanelLoadingPlaceholder,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -3487,6 +3620,7 @@ type Tags = {
   >;
   'tp-navigation-panel-menu': Tag<
     TpNavigationPanelMenu,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -3501,6 +3635,7 @@ type Tags = {
     TpNavigationPanelResizeRail,
     | 'active'
     | 'ariaLabel'
+    | 'density'
     | 'disabled'
     | 'download'
     | 'focusableWhenDisabled'
@@ -3530,6 +3665,7 @@ type Tags = {
   'tp-navigation-panel-separator': Tag<
     TpNavigationPanelSeparator,
     | 'decorative'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -3542,6 +3678,7 @@ type Tags = {
   >;
   'tp-navigation-panel-subitem': Tag<
     TpNavigationPanelSubitem,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -3556,6 +3693,7 @@ type Tags = {
     TpNavigationPanelSublink,
     | 'active'
     | 'ariaLabel'
+    | 'density'
     | 'disabled'
     | 'download'
     | 'focusableWhenDisabled'
@@ -3584,6 +3722,7 @@ type Tags = {
   >;
   'tp-navigation-panel-submenu': Tag<
     TpNavigationPanelSubmenu,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -3598,6 +3737,7 @@ type Tags = {
     TpNavigationPanelTrigger,
     | 'active'
     | 'ariaLabel'
+    | 'density'
     | 'disabled'
     | 'download'
     | 'focusableWhenDisabled'
@@ -3630,6 +3770,7 @@ type Tags = {
     | 'autocomplete'
     | 'characterPredicate'
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'formOwner'
     | 'groupLengths'
@@ -3666,6 +3807,7 @@ type Tags = {
   'tp-overflow-list': Tag<
     TpOverflowList,
     | 'collapseFrom'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'limit'
@@ -3684,6 +3826,7 @@ type Tags = {
   >;
   'tp-pagination': Tag<
     TpPagination,
+    | 'density'
     | 'disabled'
     | 'hrefForPage'
     | 'invalid'
@@ -3733,6 +3876,7 @@ type Tags = {
     | 'defaultOpen'
     | 'defaultTriggerIdentifier'
     | 'delay'
+    | 'density'
     | 'disableAnchorTracking'
     | 'disableHoverablePopup'
     | 'disabled'
@@ -3799,6 +3943,7 @@ type Tags = {
     | 'defaultOpen'
     | 'defaultTriggerIdentifier'
     | 'delay'
+    | 'density'
     | 'disableAnchorTracking'
     | 'disableHoverablePopup'
     | 'disabled'
@@ -3842,6 +3987,7 @@ type Tags = {
   >;
   'tp-progress': Tag<
     TpProgress,
+    | 'density'
     | 'disabled'
     | 'format'
     | 'getAccessibleValueText'
@@ -3865,6 +4011,7 @@ type Tags = {
   'tp-qr-code': Tag<
     TpQrCode,
     | 'copyable'
+    | 'density'
     | 'disabled'
     | 'downloadable'
     | 'errorCorrection'
@@ -3897,6 +4044,7 @@ type Tags = {
     | 'choiceMode'
     | 'defaultItem'
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'flow'
     | 'invalid'
@@ -3924,6 +4072,7 @@ type Tags = {
   'tp-radio-group': Tag<
     TpRadioGroup,
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'formOwner'
     | 'inputElementReference'
@@ -3950,6 +4099,7 @@ type Tags = {
   >;
   'tp-radio-group-item': Tag<
     TpRadioGroupItem,
+    | 'density'
     | 'disabled'
     | 'formOwner'
     | 'inputElementReference'
@@ -3970,6 +4120,7 @@ type Tags = {
   'tp-resizable-handle': Tag<
     TpResizableHandle,
     | 'boundary'
+    | 'density'
     | 'disableDoubleClickReset'
     | 'disabled'
     | 'invalid'
@@ -3993,6 +4144,7 @@ type Tags = {
     | 'collapsedSize'
     | 'collapsible'
     | 'defaultSize'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'maxSize'
@@ -4018,6 +4170,7 @@ type Tags = {
     TpResizablePanelGroup,
     | 'defaultLayout'
     | 'defaultSizes'
+    | 'density'
     | 'disableCursor'
     | 'disableDoubleClickReset'
     | 'disabled'
@@ -4051,6 +4204,7 @@ type Tags = {
   'tp-scroll-area': Tag<
     TpScrollArea,
     | 'axis'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'keepMounted'
@@ -4069,6 +4223,7 @@ type Tags = {
   >;
   'tp-scroll-trigger': Tag<
     TpScrollTrigger,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -4128,6 +4283,7 @@ type Tags = {
     | 'defaultInputValue'
     | 'defaultOpen'
     | 'defaultValue'
+    | 'density'
     | 'disableAnchorTracking'
     | 'disabled'
     | 'filter'
@@ -4212,6 +4368,7 @@ type Tags = {
   'tp-select-chip-remove': Tag<
     TpSelectChipRemove,
     | 'ariaLabel'
+    | 'density'
     | 'disabled'
     | 'download'
     | 'focusableWhenDisabled'
@@ -4243,6 +4400,7 @@ type Tags = {
   'tp-select-clear': Tag<
     TpSelectClear,
     | 'ariaLabel'
+    | 'density'
     | 'disabled'
     | 'download'
     | 'focusableWhenDisabled'
@@ -4273,6 +4431,7 @@ type Tags = {
   >;
   'tp-select-option': Tag<
     TpSelectOption,
+    | 'density'
     | 'disabled'
     | 'index'
     | 'indicatorContract'
@@ -4297,6 +4456,7 @@ type Tags = {
   'tp-select-trigger': Tag<
     TpSelectTrigger,
     | 'ariaLabel'
+    | 'density'
     | 'disabled'
     | 'download'
     | 'focusableWhenDisabled'
@@ -4328,6 +4488,7 @@ type Tags = {
   'tp-separator': Tag<
     TpSeparator,
     | 'decorative'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -4341,6 +4502,7 @@ type Tags = {
   'tp-skeleton': Tag<
     TpSkeleton,
     | 'animated'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -4357,6 +4519,7 @@ type Tags = {
     TpSlider,
     | 'buffered'
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'editableValue'
     | 'formAssociatedValue'
@@ -4409,6 +4572,7 @@ type Tags = {
   >;
   'tp-slider-thumb': Tag<
     TpSliderThumb,
+    | 'density'
     | 'disabled'
     | 'formOwner'
     | 'getAccessibleLabel'
@@ -4431,6 +4595,7 @@ type Tags = {
   >;
   'tp-spinner': Tag<
     TpSpinner,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -4445,6 +4610,7 @@ type Tags = {
   >;
   'tp-status-dot': Tag<
     TpStatusDot,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -4465,6 +4631,7 @@ type Tags = {
     | 'checkboxGroup'
     | 'checked'
     | 'defaultChecked'
+    | 'density'
     | 'disabled'
     | 'formOwner'
     | 'identifier'
@@ -4497,6 +4664,7 @@ type Tags = {
   >;
   'tp-table': Tag<
     TpTable,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -4517,6 +4685,7 @@ type Tags = {
   'tp-table-body': Tag<
     TpTableBody,
     | 'colSpan'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -4533,6 +4702,7 @@ type Tags = {
   'tp-table-caption': Tag<
     TpTableCaption,
     | 'colSpan'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -4549,6 +4719,7 @@ type Tags = {
   'tp-table-cell': Tag<
     TpTableCell,
     | 'colSpan'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -4565,6 +4736,7 @@ type Tags = {
   'tp-table-footer': Tag<
     TpTableFooter,
     | 'colSpan'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -4581,6 +4753,7 @@ type Tags = {
   'tp-table-head': Tag<
     TpTableHead,
     | 'colSpan'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -4597,6 +4770,7 @@ type Tags = {
   'tp-table-header': Tag<
     TpTableHeader,
     | 'colSpan'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -4613,6 +4787,7 @@ type Tags = {
   'tp-table-row': Tag<
     TpTableRow,
     | 'colSpan'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -4631,6 +4806,7 @@ type Tags = {
     | 'activationOffset'
     | 'closeDelay'
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -4660,6 +4836,7 @@ type Tags = {
     TpTableOfContentsItem,
     | 'active'
     | 'current'
+    | 'density'
     | 'depth'
     | 'disabled'
     | 'href'
@@ -4682,6 +4859,7 @@ type Tags = {
     | 'activation'
     | 'activationDirection'
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -4704,6 +4882,7 @@ type Tags = {
     TpTextArea,
     | 'autocomplete'
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'formOwner'
     | 'hostProperties'
@@ -4742,6 +4921,7 @@ type Tags = {
     TpTextTransform,
     | 'currency'
     | 'decimals'
+    | 'density'
     | 'disabled'
     | 'format'
     | 'formatter'
@@ -4765,6 +4945,7 @@ type Tags = {
   'tp-theme-switcher': Tag<
     TpThemeSwitcher,
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'label'
@@ -4787,6 +4968,7 @@ type Tags = {
   'tp-time': Tag<
     TpTime,
     | 'datetime'
+    | 'density'
     | 'disabled'
     | 'format'
     | 'formatter'
@@ -4825,6 +5007,7 @@ type Tags = {
   'tp-timeline': Tag<
     TpTimeline,
     | 'align'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'messages'
@@ -4840,6 +5023,7 @@ type Tags = {
   'tp-timeline-item': Tag<
     TpTimelineItem,
     | 'align'
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'
@@ -4855,6 +5039,7 @@ type Tags = {
   'tp-toast': Tag<
     TpToast,
     | 'container'
+    | 'density'
     | 'disabled'
     | 'dismissible'
     | 'duration'
@@ -4887,6 +5072,7 @@ type Tags = {
     TpToggle,
     | 'ariaLabel'
     | 'defaultPressed'
+    | 'density'
     | 'disabled'
     | 'formOwner'
     | 'inputElementReference'
@@ -4912,6 +5098,7 @@ type Tags = {
   'tp-toggle-group': Tag<
     TpToggleGroup,
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'formOwner'
     | 'inputElementReference'
@@ -4960,6 +5147,7 @@ type Tags = {
     | 'defaultOpen'
     | 'defaultTriggerIdentifier'
     | 'delay'
+    | 'density'
     | 'describes'
     | 'disableAnchorTracking'
     | 'disableHoverablePopup'
@@ -5004,6 +5192,7 @@ type Tags = {
   >;
   'tp-tree-item': Tag<
     TpTreeItem,
+    | 'density'
     | 'disabled'
     | 'hasChildren'
     | 'invalid'
@@ -5026,6 +5215,7 @@ type Tags = {
     | 'defaultExpanded'
     | 'defaultItems'
     | 'defaultValue'
+    | 'density'
     | 'disabled'
     | 'expanded'
     | 'expansionTrigger'
@@ -5074,6 +5264,7 @@ type Tags = {
   >;
   'tp-visually-hidden': Tag<
     TpVisuallyHidden,
+    | 'density'
     | 'disabled'
     | 'invalid'
     | 'motionPolicy'

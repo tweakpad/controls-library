@@ -11,6 +11,7 @@ export const CopyButton = /*#__PURE__*/ createBinding(TpCopyButton, 'CopyButton'
   TpCopyButton,
   | 'copiedLabel'
   | 'data'
+  | 'density'
   | 'disabled'
   | 'duration'
   | 'failedLabel'

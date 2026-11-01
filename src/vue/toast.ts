@@ -10,6 +10,7 @@ export const Toast = /*#__PURE__*/ createBinding(TpToast, 'Toast', {
 }) as ElementBinding<
   TpToast,
   | 'container'
+  | 'density'
   | 'disabled'
   | 'dismissible'
   | 'duration'

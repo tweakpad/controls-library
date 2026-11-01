@@ -22,6 +22,7 @@ export const ColorPicker = /*#__PURE__*/ createBinding(TpColorPicker, 'ColorPick
   | 'defaultOpen'
   | 'defaultValue'
   | 'defaultView'
+  | 'density'
   | 'disabled'
   | 'eyedropper'
   | 'fields'

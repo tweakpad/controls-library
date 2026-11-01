@@ -51,6 +51,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link MediaAudioLayout}, the React binding of `<tp-media-audio-layout>`. */
 export type MediaAudioLayoutProps = ElementProps<
   TpMediaAudioLayout,
+  | 'density'
   | 'disabled'
   | 'hide'
   | 'invalid'
@@ -79,6 +80,7 @@ export const MediaAudioLayout = /*#__PURE__*/ createBinding<MediaAudioLayoutProp
 export type MediaAudioTrackRadioGroupProps = ElementProps<
   TpMediaAudioTrackRadioGroup,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -111,6 +113,7 @@ export const MediaAudioTrackRadioGroup =
 export type MediaBufferingIndicatorProps = ElementProps<
   TpMediaBufferingIndicator,
   | 'delay'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -136,6 +139,7 @@ export const MediaBufferingIndicator = /*#__PURE__*/ createBinding<MediaBufferin
 /** Props of {@link MediaCaptionsButton}, the React binding of `<tp-media-captions-button>`. */
 export type MediaCaptionsButtonProps = ElementProps<
   TpMediaCaptionsButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -165,6 +169,7 @@ export const MediaCaptionsButton = /*#__PURE__*/ createBinding<MediaCaptionsButt
 export type MediaCaptionsRadioGroupProps = ElementProps<
   TpMediaCaptionsRadioGroup,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -195,6 +200,7 @@ export const MediaCaptionsRadioGroup = /*#__PURE__*/ createBinding<MediaCaptions
 /** Props of {@link MediaChapterTitle}, the React binding of `<tp-media-chapter-title>`. */
 export type MediaChapterTitleProps = ElementProps<
   TpMediaChapterTitle,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -220,6 +226,7 @@ export const MediaChapterTitle = /*#__PURE__*/ createBinding<MediaChapterTitlePr
 /** Props of {@link MediaContainer}, the React binding of `<tp-media-container>`. */
 export type MediaContainerProps = ElementProps<
   TpMediaContainer,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -245,6 +252,7 @@ export const MediaContainer = /*#__PURE__*/ createBinding<MediaContainerProps>(
 /** Props of {@link MediaControls}, the React binding of `<tp-media-controls>`. */
 export type MediaControlsProps = ElementProps<
   TpMediaControls,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -271,6 +279,7 @@ export const MediaControls = /*#__PURE__*/ createBinding<MediaControlsProps>(
 /** Props of {@link MediaControlsGroup}, the React binding of `<tp-media-controls-group>`. */
 export type MediaControlsGroupProps = ElementProps<
   TpMediaControlsGroup,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -297,6 +306,7 @@ export const MediaControlsGroup = /*#__PURE__*/ createBinding<MediaControlsGroup
 /** Props of {@link MediaErrorDialog}, the React binding of `<tp-media-error-dialog>`. */
 export type MediaErrorDialogProps = ElementProps<
   TpMediaErrorDialog,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -323,6 +333,7 @@ export const MediaErrorDialog = /*#__PURE__*/ createBinding<MediaErrorDialogProp
 /** Props of {@link MediaFullscreenButton}, the React binding of `<tp-media-fullscreen-button>`. */
 export type MediaFullscreenButtonProps = ElementProps<
   TpMediaFullscreenButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -352,6 +363,7 @@ export const MediaFullscreenButton = /*#__PURE__*/ createBinding<MediaFullscreen
 export type MediaGestureProps = ElementProps<
   TpMediaGesture,
   | 'action'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -382,6 +394,7 @@ export const MediaGesture = /*#__PURE__*/ createBinding<MediaGestureProps>(
 export type MediaHotkeyProps = ElementProps<
   TpMediaHotkey,
   | 'action'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'keys'
@@ -409,6 +422,7 @@ export const MediaHotkey = /*#__PURE__*/ createBinding<MediaHotkeyProps>(
 /** Props of {@link MediaLiveButton}, the React binding of `<tp-media-live-button>`. */
 export type MediaLiveButtonProps = ElementProps<
   TpMediaLiveButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -437,6 +451,7 @@ export const MediaLiveButton = /*#__PURE__*/ createBinding<MediaLiveButtonProps>
 /** Props of {@link MediaMuteButton}, the React binding of `<tp-media-mute-button>`. */
 export type MediaMuteButtonProps = ElementProps<
   TpMediaMuteButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -465,6 +480,7 @@ export const MediaMuteButton = /*#__PURE__*/ createBinding<MediaMuteButtonProps>
 /** Props of {@link MediaPipButton}, the React binding of `<tp-media-pip-button>`. */
 export type MediaPipButtonProps = ElementProps<
   TpMediaPipButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -493,6 +509,7 @@ export const MediaPipButton = /*#__PURE__*/ createBinding<MediaPipButtonProps>(
 /** Props of {@link MediaPlayButton}, the React binding of `<tp-media-play-button>`. */
 export type MediaPlayButtonProps = ElementProps<
   TpMediaPlayButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -521,6 +538,7 @@ export const MediaPlayButton = /*#__PURE__*/ createBinding<MediaPlayButtonProps>
 /** Props of {@link MediaPlaybackRateButton}, the React binding of `<tp-media-playback-rate-button>`. */
 export type MediaPlaybackRateButtonProps = ElementProps<
   TpMediaPlaybackRateButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -550,6 +568,7 @@ export const MediaPlaybackRateButton = /*#__PURE__*/ createBinding<MediaPlayback
 export type MediaPlaybackRateRadioGroupProps = ElementProps<
   TpMediaPlaybackRateRadioGroup,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -583,6 +602,7 @@ export type MediaPlayerProps = ElementProps<
   TpMediaPlayer,
   | 'announcements'
   | 'contentTitle'
+  | 'density'
   | 'disabled'
   | 'gestures'
   | 'hideOverControls'
@@ -636,6 +656,7 @@ export const MediaPlayer = /*#__PURE__*/ createBinding<MediaPlayerProps>(
 /** Props of {@link MediaPoster}, the React binding of `<tp-media-poster>`. */
 export type MediaPosterProps = ElementProps<
   TpMediaPoster,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -663,6 +684,7 @@ export const MediaPoster = /*#__PURE__*/ createBinding<MediaPosterProps>(
 export type MediaQualityRadioGroupProps = ElementProps<
   TpMediaQualityRadioGroup,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -693,6 +715,7 @@ export const MediaQualityRadioGroup = /*#__PURE__*/ createBinding<MediaQualityRa
 /** Props of {@link MediaRemotePlaybackButton}, the React binding of `<tp-media-remote-playback-button>`. */
 export type MediaRemotePlaybackButtonProps = ElementProps<
   TpMediaRemotePlaybackButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -722,6 +745,7 @@ export const MediaRemotePlaybackButton =
 /** Props of {@link MediaSeekButton}, the React binding of `<tp-media-seek-button>`. */
 export type MediaSeekButtonProps = ElementProps<
   TpMediaSeekButton,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -754,6 +778,7 @@ export type MediaSeekIndicatorProps = ElementProps<
   TpMediaSeekIndicator,
   | 'actions'
   | 'closeDelay'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -780,6 +805,7 @@ export const MediaSeekIndicator = /*#__PURE__*/ createBinding<MediaSeekIndicator
 export type MediaSettingsMenuProps = ElementProps<
   TpMediaSettingsMenu,
   | 'align'
+  | 'density'
   | 'disabled'
   | 'groups'
   | 'invalid'
@@ -809,6 +835,7 @@ export type MediaStatusIndicatorProps = ElementProps<
   TpMediaStatusIndicator,
   | 'actions'
   | 'closeDelay'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -835,6 +862,7 @@ export const MediaStatusIndicator = /*#__PURE__*/ createBinding<MediaStatusIndic
 export type MediaThumbnailProps = ElementProps<
   TpMediaThumbnail,
   | 'crossOrigin'
+  | 'density'
   | 'disabled'
   | 'fetchPriority'
   | 'invalid'
@@ -863,6 +891,7 @@ export const MediaThumbnail = /*#__PURE__*/ createBinding<MediaThumbnailProps>(
 /** Props of {@link MediaTime}, the React binding of `<tp-media-time>`. */
 export type MediaTimeProps = ElementProps<
   TpMediaTime,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -893,6 +922,7 @@ export const MediaTime = /*#__PURE__*/ createBinding<MediaTimeProps>(
 export type MediaTimeSliderProps = ElementProps<
   TpMediaTimeSlider,
   | 'changeThrottle'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'largeStep'
@@ -931,6 +961,7 @@ export const MediaTimeSlider = /*#__PURE__*/ createBinding<MediaTimeSliderProps>
 /** Props of {@link MediaTimeSliderPreview}, the React binding of `<tp-media-time-slider-preview>`. */
 export type MediaTimeSliderPreviewProps = ElementProps<
   TpMediaTimeSliderPreview,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -958,6 +989,7 @@ export const MediaTimeSliderPreview = /*#__PURE__*/ createBinding<MediaTimeSlide
 /** Props of {@link MediaTitle}, the React binding of `<tp-media-title>`. */
 export type MediaTitleProps = ElementProps<
   TpMediaTitle,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -983,6 +1015,7 @@ export const MediaTitle = /*#__PURE__*/ createBinding<MediaTitleProps>(
 /** Props of {@link MediaVideoLayout}, the React binding of `<tp-media-video-layout>`. */
 export type MediaVideoLayoutProps = ElementProps<
   TpMediaVideoLayout,
+  | 'density'
   | 'disabled'
   | 'hide'
   | 'invalid'
@@ -1012,6 +1045,7 @@ export type MediaVolumeIndicatorProps = ElementProps<
   TpMediaVolumeIndicator,
   | 'actions'
   | 'closeDelay'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -1038,6 +1072,7 @@ export const MediaVolumeIndicator = /*#__PURE__*/ createBinding<MediaVolumeIndic
 export type MediaVolumePopoverProps = ElementProps<
   TpMediaVolumePopover,
   | 'closeDelay'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messages'
@@ -1065,6 +1100,7 @@ export const MediaVolumePopover = /*#__PURE__*/ createBinding<MediaVolumePopover
 /** Props of {@link MediaVolumeSlider}, the React binding of `<tp-media-volume-slider>`. */
 export type MediaVolumeSliderProps = ElementProps<
   TpMediaVolumeSlider,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'largeStep'

@@ -37,6 +37,7 @@ export const Flow = /*#__PURE__*/ createBinding(TpFlow, 'Flow', {
   | 'defaultTool'
   | 'defaultValue'
   | 'defaultViewport'
+  | 'density'
   | 'detailZoom'
   | 'disabled'
   | 'edgeTemplates'

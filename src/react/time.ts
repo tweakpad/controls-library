@@ -9,6 +9,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type TimeProps = ElementProps<
   TpTime,
   | 'datetime'
+  | 'density'
   | 'disabled'
   | 'format'
   | 'formatter'

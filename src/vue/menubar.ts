@@ -13,6 +13,7 @@ export const Menubar = /*#__PURE__*/ createBinding(TpMenubar, 'Menubar', {
 }) as ElementBinding<
   TpMenubar,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'loopFocus'

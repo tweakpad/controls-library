@@ -10,6 +10,7 @@ export type CollapsibleProps = ElementProps<
   TpCollapsible,
   | 'contentAlignment'
   | 'defaultOpen'
+  | 'density'
   | 'disabled'
   | 'headingLevel'
   | 'hiddenUntilFound'

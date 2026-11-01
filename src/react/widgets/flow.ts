@@ -34,6 +34,7 @@ export type FlowProps = ElementProps<
   | 'defaultTool'
   | 'defaultValue'
   | 'defaultViewport'
+  | 'density'
   | 'detailZoom'
   | 'disabled'
   | 'edgeTemplates'

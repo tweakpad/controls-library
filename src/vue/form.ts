@@ -10,6 +10,7 @@ export const Form = /*#__PURE__*/ createBinding(TpForm, 'Form', {
   lanes: {},
 }) as ElementBinding<
   TpForm,
+  | 'density'
   | 'disabled'
   | 'errors'
   | 'invalid'

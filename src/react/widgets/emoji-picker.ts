@@ -18,6 +18,7 @@ export type EmojiPickerProps = ElementProps<
   | 'defaultQuery'
   | 'defaultSkinTone'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'emojiVersion'
   | 'formOwner'

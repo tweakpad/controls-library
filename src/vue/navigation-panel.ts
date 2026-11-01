@@ -43,6 +43,7 @@ export const NavigationPanel = /*#__PURE__*/ createBinding(TpNavigationPanel, 'N
   | 'compactOpen'
   | 'compactWidth'
   | 'defaultExpanded'
+  | 'density'
   | 'disabled'
   | 'expanded'
   | 'invalid'
@@ -83,6 +84,7 @@ export const NavigationPanelAction = /*#__PURE__*/ createBinding(
   TpNavigationPanelAction,
   | 'active'
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -121,6 +123,7 @@ export const NavigationPanelBadge = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelBadge,
+  | 'density'
   | 'disabled'
   | 'interactive'
   | 'invalid'
@@ -145,6 +148,7 @@ export const NavigationPanelContent = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelContent,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -178,6 +182,7 @@ export const NavigationPanelDrawer = /*#__PURE__*/ createBinding(
   | 'defaultOpen'
   | 'defaultSnapPoint'
   | 'defaultTriggerIdentifier'
+  | 'density'
   | 'description'
   | 'disabled'
   | 'dismissible'
@@ -232,6 +237,7 @@ export const NavigationPanelFooter = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelFooter,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -254,6 +260,7 @@ export const NavigationPanelGroup = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelGroup,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -278,6 +285,7 @@ export const NavigationPanelGroupAction = /*#__PURE__*/ createBinding(
   TpNavigationPanelGroupAction,
   | 'active'
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -316,6 +324,7 @@ export const NavigationPanelGroupContent = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelGroupContent,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -338,6 +347,7 @@ export const NavigationPanelGroupLabel = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelGroupLabel,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -360,6 +370,7 @@ export const NavigationPanelHeader = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelHeader,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -386,6 +397,7 @@ export const NavigationPanelInput = /*#__PURE__*/ createBinding(
   TpNavigationPanelInput,
   | 'autocomplete'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'hostProperties'
@@ -438,6 +450,7 @@ export const NavigationPanelInset = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelInset,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -460,6 +473,7 @@ export const NavigationPanelItem = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelItem,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -484,6 +498,7 @@ export const NavigationPanelLink = /*#__PURE__*/ createBinding(
   TpNavigationPanelLink,
   | 'active'
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -522,6 +537,7 @@ export const NavigationPanelLoadingPlaceholder = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelLoadingPlaceholder,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -545,6 +561,7 @@ export const NavigationPanelMenu = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelMenu,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -569,6 +586,7 @@ export const NavigationPanelResizeRail = /*#__PURE__*/ createBinding(
   TpNavigationPanelResizeRail,
   | 'active'
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -608,6 +626,7 @@ export const NavigationPanelSeparator = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpNavigationPanelSeparator,
   | 'decorative'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -630,6 +649,7 @@ export const NavigationPanelSubitem = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelSubitem,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -654,6 +674,7 @@ export const NavigationPanelSublink = /*#__PURE__*/ createBinding(
   TpNavigationPanelSublink,
   | 'active'
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -692,6 +713,7 @@ export const NavigationPanelSubmenu = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelSubmenu,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -716,6 +738,7 @@ export const NavigationPanelTrigger = /*#__PURE__*/ createBinding(
   TpNavigationPanelTrigger,
   | 'active'
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'

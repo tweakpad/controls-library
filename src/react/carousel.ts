@@ -13,6 +13,7 @@ export type CarouselProps<T = CarouselDefaults[0]> = ElementProps<
   TpCarousel<T>,
   | 'autoplay'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'effect'
   | 'getItemId'

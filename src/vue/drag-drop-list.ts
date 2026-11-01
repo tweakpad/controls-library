@@ -23,6 +23,7 @@ export const DragDropList = /*#__PURE__*/ createBinding(TpDragDropList, 'DragDro
   | 'collisionDetector'
   | 'collisionPriority'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'dropAnimation'
   | 'feedback'

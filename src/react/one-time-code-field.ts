@@ -14,6 +14,7 @@ export type OneTimeCodeFieldProps = ElementProps<
   | 'autocomplete'
   | 'characterPredicate'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'groupLengths'

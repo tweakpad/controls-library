@@ -9,6 +9,7 @@ export const ScrollArea = /*#__PURE__*/ createBinding(TpScrollArea, 'ScrollArea'
 }) as ElementBinding<
   TpScrollArea,
   | 'axis'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'keepMounted'

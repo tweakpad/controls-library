@@ -9,6 +9,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type ToggleGroupProps = ElementProps<
   TpToggleGroup,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'inputElementReference'

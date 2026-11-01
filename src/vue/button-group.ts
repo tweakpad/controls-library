@@ -9,6 +9,7 @@ export const ButtonGroup = /*#__PURE__*/ createBinding(TpButtonGroup, 'ButtonGro
   lanes: {},
 }) as ElementBinding<
   TpButtonGroup,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'joined'
@@ -29,6 +30,7 @@ export const ButtonGroupText = /*#__PURE__*/ createBinding(TpButtonGroupText, 'B
   lanes: {},
 }) as ElementBinding<
   TpButtonGroupText,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

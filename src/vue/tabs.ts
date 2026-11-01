@@ -15,6 +15,7 @@ export const Tabs = /*#__PURE__*/ createBinding(TpTabs, 'Tabs', {
   | 'activation'
   | 'activationDirection'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'

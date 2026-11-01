@@ -14,6 +14,7 @@ export type DialogProps = ElementProps<
   | 'container'
   | 'defaultOpen'
   | 'defaultTriggerIdentifier'
+  | 'density'
   | 'description'
   | 'disabled'
   | 'finalFocus'

@@ -11,6 +11,7 @@ export const QrCode = /*#__PURE__*/ createBinding(TpQrCode, 'QrCode', {
 }) as ElementBinding<
   TpQrCode,
   | 'copyable'
+  | 'density'
   | 'disabled'
   | 'downloadable'
   | 'errorCorrection'

@@ -15,6 +15,7 @@ export const Checkbox = /*#__PURE__*/ createBinding(TpCheckbox, 'Checkbox', {
   | 'checkboxGroup'
   | 'checked'
   | 'defaultChecked'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'identifier'

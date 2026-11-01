@@ -8,6 +8,7 @@ export const MoTextMirror = /*#__PURE__*/ createBinding(TpMoTextMirror, 'MoTextM
   lanes: {},
 }) as ElementBinding<
   TpMoTextMirror,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

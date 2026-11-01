@@ -25,6 +25,7 @@ export type DrawerProps = ElementProps<
   | 'defaultOpen'
   | 'defaultSnapPoint'
   | 'defaultTriggerIdentifier'
+  | 'density'
   | 'description'
   | 'disabled'
   | 'dismissible'
@@ -117,6 +118,7 @@ export const DrawerProvider = /*#__PURE__*/ createBinding<DrawerProviderProps>(
 /** Props of {@link DrawerSwipeArea}, the React binding of `<tp-drawer-swipe-area>`. */
 export type DrawerSwipeAreaProps = ElementProps<
   TpDrawerSwipeArea,
+  | 'density'
   | 'disabled'
   | 'for'
   | 'invalid'

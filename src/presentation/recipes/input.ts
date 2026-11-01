@@ -15,7 +15,12 @@ import {
 } from './shared/text-control.js';
 
 export const inputAppearance: PresentationDictionary = {
-  input: inputRules,
+  // A single-line editor takes its block extent from the control height, as every single-line
+  // control does, so it keeps the height of the Buttons and Selects beside it in every density.
+  input: [
+    ...inputRules,
+    { declarations: { 'block-size': 'var(--tp-control-height-md)', 'padding-block': '0' } },
+  ],
   // Inline variant: the row is the shared inline control row and owns the boundary, rings and
   // fill; the native editor joins it as in an Input group, with its value at the row's end.
   'input-row-variant-inline': [
@@ -32,7 +37,7 @@ export const inputAppearance: PresentationDictionary = {
   'input-label-variant-inline': [{ declarations: inlineControlLabel }],
   // The value reads like the other inline values: muted at rest, the foreground while in use.
   'input-variant-inline': [
-    { declarations: { 'min-height': joinedEditorMinHeight } },
+    { declarations: { 'min-height': joinedEditorMinHeight, 'block-size': joinedEditorMinHeight } },
     { selector: joinedEditorSelector, declarations: joinedEditor },
     {
       declarations: {

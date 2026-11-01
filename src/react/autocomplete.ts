@@ -37,6 +37,7 @@ export type AutocompleteProps = ElementProps<
   | 'defaultInputValue'
   | 'defaultOpen'
   | 'defaultValue'
+  | 'density'
   | 'disableAnchorTracking'
   | 'disabled'
   | 'filter'

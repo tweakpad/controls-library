@@ -10,6 +10,7 @@ export const TextTransform = /*#__PURE__*/ createBinding(TpTextTransform, 'TextT
   TpTextTransform,
   | 'currency'
   | 'decimals'
+  | 'density'
   | 'disabled'
   | 'format'
   | 'formatter'

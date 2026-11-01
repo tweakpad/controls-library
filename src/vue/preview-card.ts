@@ -33,6 +33,7 @@ export const PreviewCard = /*#__PURE__*/ createBinding(TpPreviewCard, 'PreviewCa
   | 'defaultOpen'
   | 'defaultTriggerIdentifier'
   | 'delay'
+  | 'density'
   | 'disableAnchorTracking'
   | 'disableHoverablePopup'
   | 'disabled'

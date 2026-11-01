@@ -8,6 +8,7 @@ export const MoGlowBorder = /*#__PURE__*/ createBinding(TpMoGlowBorder, 'MoGlowB
   lanes: {},
 }) as ElementBinding<
   TpMoGlowBorder,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'lightSpacing'

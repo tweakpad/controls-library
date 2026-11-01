@@ -15,6 +15,7 @@ export const TableOfContents = /*#__PURE__*/ createBinding(TpTableOfContents, 'T
   | 'activationOffset'
   | 'closeDelay'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -55,6 +56,7 @@ export const TableOfContentsItem = /*#__PURE__*/ createBinding(
   TpTableOfContentsItem,
   | 'active'
   | 'current'
+  | 'density'
   | 'depth'
   | 'disabled'
   | 'href'

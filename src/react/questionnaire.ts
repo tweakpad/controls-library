@@ -14,6 +14,7 @@ export type QuestionnaireProps = ElementProps<
   | 'choiceMode'
   | 'defaultItem'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'flow'
   | 'invalid'

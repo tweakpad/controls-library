@@ -10,6 +10,7 @@ export type AvatarProps = ElementProps<
   TpAvatar,
   | 'alt'
   | 'crossOrigin'
+  | 'density'
   | 'disabled'
   | 'fallback'
   | 'fallbackDelay'
@@ -44,6 +45,7 @@ export const Avatar = /*#__PURE__*/ createBinding<AvatarProps>(
 /** Props of {@link AvatarGroup}, the React binding of `<tp-avatar-group>`. */
 export type AvatarGroupProps = ElementProps<
   TpAvatarGroup,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

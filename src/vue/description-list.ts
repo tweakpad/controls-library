@@ -14,6 +14,7 @@ export const DescriptionList = /*#__PURE__*/ createBinding(TpDescriptionList, 'D
   TpDescriptionList,
   | 'align'
   | 'defaultOpen'
+  | 'density'
   | 'disabled'
   | 'hiddenUntilFound'
   | 'invalid'
@@ -46,6 +47,7 @@ export const DescriptionListItem = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpDescriptionListItem,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'

@@ -28,6 +28,7 @@ export const Drawer = /*#__PURE__*/ createBinding(TpDrawer, 'Drawer', {
   | 'defaultOpen'
   | 'defaultSnapPoint'
   | 'defaultTriggerIdentifier'
+  | 'density'
   | 'description'
   | 'disabled'
   | 'dismissible'
@@ -97,6 +98,7 @@ export const DrawerSwipeArea = /*#__PURE__*/ createBinding(TpDrawerSwipeArea, 'D
   lanes: {},
 }) as ElementBinding<
   TpDrawerSwipeArea,
+  | 'density'
   | 'disabled'
   | 'for'
   | 'invalid'

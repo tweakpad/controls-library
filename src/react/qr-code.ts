@@ -10,6 +10,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type QrCodeProps = ElementProps<
   TpQrCode,
   | 'copyable'
+  | 'density'
   | 'disabled'
   | 'downloadable'
   | 'errorCorrection'

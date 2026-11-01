@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Citation}, the React binding of `<tp-citation>`. */
 export type CitationProps = ElementProps<
   TpCitation,
+  | 'density'
   | 'description'
   | 'disabled'
   | 'href'
@@ -42,6 +43,7 @@ export const Citation = /*#__PURE__*/ createBinding<CitationProps>(
 /** Props of {@link CitationList}, the React binding of `<tp-citation-list>`. */
 export type CitationListProps = ElementProps<
   TpCitationList,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'

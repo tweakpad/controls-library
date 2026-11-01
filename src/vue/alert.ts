@@ -9,6 +9,7 @@ export const Alert = /*#__PURE__*/ createBinding(TpAlert, 'Alert', {
 }) as ElementBinding<
   TpAlert,
   | 'announcement'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

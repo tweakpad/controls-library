@@ -12,6 +12,7 @@ import type * as widgetsTextEditorTypes from '../../widgets/text-editor/types.js
 export type TextEditorProps = ElementProps<
   TpTextEditor,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'engine'
   | 'features'

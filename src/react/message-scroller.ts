@@ -15,6 +15,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type MessageScrollerProps = ElementProps<
   TpMessageScroller,
   | 'defaultPinned'
+  | 'density'
   | 'disabled'
   | 'follow'
   | 'initialPosition'
@@ -50,6 +51,7 @@ export const MessageScroller = /*#__PURE__*/ createBinding<MessageScrollerProps>
 /** Props of {@link MessageScrollerContent}, the React binding of `<tp-message-scroller-content>`. */
 export type MessageScrollerContentProps = ElementProps<
   TpMessageScrollerContent,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -74,6 +76,7 @@ export const MessageScrollerContent = /*#__PURE__*/ createBinding<MessageScrolle
 /** Props of {@link MessageScrollerItem}, the React binding of `<tp-message-scroller-item>`. */
 export type MessageScrollerItemProps = ElementProps<
   TpMessageScrollerItem,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'messageId'
@@ -101,6 +104,7 @@ export type MessageScrollerReturnControlProps = ElementProps<
   TpMessageScrollerReturnControl,
   | 'ariaLabel'
   | 'behavior'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'
@@ -140,6 +144,7 @@ export const MessageScrollerReturnControl =
 /** Props of {@link MessageScrollerViewport}, the React binding of `<tp-message-scroller-viewport>`. */
 export type MessageScrollerViewportProps = ElementProps<
   TpMessageScrollerViewport,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'

@@ -9,6 +9,7 @@ export type TextTransformProps = ElementProps<
   TpTextTransform,
   | 'currency'
   | 'decimals'
+  | 'density'
   | 'disabled'
   | 'format'
   | 'formatter'

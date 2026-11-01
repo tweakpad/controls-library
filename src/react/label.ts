@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Label}, the React binding of `<tp-label>`. */
 export type LabelProps = ElementProps<
   TpLabel,
+  | 'density'
   | 'disabled'
   | 'for'
   | 'invalid'

@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Spinner}, the React binding of `<tp-spinner>`. */
 export type SpinnerProps = ElementProps<
   TpSpinner,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'

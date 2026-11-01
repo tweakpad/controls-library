@@ -10,6 +10,7 @@ import type * as foundationTypes from '../foundation/types.js';
 export type NativeSelectProps = ElementProps<
   TpNativeSelect,
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'hostProperties'

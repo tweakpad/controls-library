@@ -76,22 +76,14 @@
   --tp-content-red: light-dark(#fee7e4, #4f1f1d);
   --tp-content-red-foreground: light-dark(#a12628, #ffb0a9);
 
-  /* One spacing seed and its closed derived scale. */
+  /* One spacing seed and its closed derived scale. The seed has a value per density mode: `spacing`
+     for the default mode and `spacing-compact` for the compact mode; a `density` region selects
+     one (see the density rules below), and a default region inside a compact one restores the
+     root's seed. */
   --tp-spacing: 0.25rem;
+  --tp-spacing-compact: 0.1875rem;
+  --_tp-spacing-default: var(--tp-spacing);
   --tp-space-0: 0;
-  --tp-space-0-5: calc(var(--tp-spacing) * 0.5);
-  --tp-space-1: calc(var(--tp-spacing) * 1);
-  --tp-space-1-5: calc(var(--tp-spacing) * 1.5);
-  --tp-space-2: calc(var(--tp-spacing) * 2);
-  --tp-space-2-5: calc(var(--tp-spacing) * 2.5);
-  --tp-space-3: calc(var(--tp-spacing) * 3);
-  --tp-space-4: calc(var(--tp-spacing) * 4);
-  --tp-space-5: calc(var(--tp-spacing) * 5);
-  --tp-space-6: calc(var(--tp-spacing) * 6);
-  --tp-space-8: calc(var(--tp-spacing) * 8);
-  --tp-space-10: calc(var(--tp-spacing) * 10);
-  --tp-space-12: calc(var(--tp-spacing) * 12);
-  --tp-space-16: calc(var(--tp-spacing) * 16);
 
   /* Typography. */
   --tp-font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
@@ -118,14 +110,6 @@
   --tp-tracking-wide: 0.025em;
 
   /* Shared control and icon extents. */
-  --tp-control-height-xs: calc(var(--tp-spacing) * 6);
-  --tp-control-height-sm: calc(var(--tp-spacing) * 7);
-  --tp-control-height-md: calc(var(--tp-spacing) * 8);
-  --tp-control-height-lg: calc(var(--tp-spacing) * 9);
-  --tp-icon-size-xs: calc(var(--tp-spacing) * 3);
-  --tp-icon-size-sm: calc(var(--tp-spacing) * 3.5);
-  --tp-icon-size-md: calc(var(--tp-spacing) * 4);
-  --tp-icon-size-lg: calc(var(--tp-spacing) * 5);
   --tp-target-size-min: 2.75rem;
 
   /* Lines, shape, elevation, and state opacity. */
@@ -133,7 +117,6 @@
   --tp-border-width-strong: 2px;
   --tp-border-style: solid;
   --tp-ring-width: 2px;
-  --tp-ring-offset: calc(var(--tp-spacing) / 2);
   --tp-radius: 0.625rem;
 
   /* Radii derive from radius alone (CL §5.3): sm 0.6, md 0.8, xl 1.4, 2xl 1.8, 3xl 2.2, 4xl 2.6. */
@@ -146,9 +129,6 @@
   --tp-radius-4xl: calc(var(--tp-radius) * 2.6);
   --tp-radius-full: 9999px;
   --tp-shadow-none: none;
-  --tp-shadow-sm: 0 calc(var(--tp-spacing) / 4) var(--tp-space-1) rgb(0 0 0 / 16%);
-  --tp-shadow-md: 0 var(--tp-space-1) var(--tp-space-5) rgb(0 0 0 / 18%);
-  --tp-shadow-lg: 0 var(--tp-space-3) var(--tp-space-12) rgb(0 0 0 / 20%);
   --tp-opacity-disabled: 0.55;
   --tp-opacity-backdrop: 0.48;
 
@@ -170,6 +150,47 @@
   font-weight: var(--tp-font-normal);
   line-height: var(--tp-leading-normal);
   letter-spacing: var(--tp-tracking-normal);
+}
+
+/* Density modes: a `density` region takes the seed of its mode, and every role derived from the
+   seed re-resolves for the region and its descendants, so compact and default regions nest in one
+   document. Library elements carry the same rules on their host (`DENSITY_DERIVED_ROLES`). */
+[density='default'] {
+  --tp-spacing: var(--_tp-spacing-default);
+}
+
+[density='compact'] {
+  --tp-spacing: var(--tp-spacing-compact);
+}
+
+:root,
+[density='default'],
+[density='compact'] {
+  --tp-space-0-5: calc(var(--tp-spacing) * 0.5);
+  --tp-space-1: calc(var(--tp-spacing) * 1);
+  --tp-space-1-5: calc(var(--tp-spacing) * 1.5);
+  --tp-space-2: calc(var(--tp-spacing) * 2);
+  --tp-space-2-5: calc(var(--tp-spacing) * 2.5);
+  --tp-space-3: calc(var(--tp-spacing) * 3);
+  --tp-space-4: calc(var(--tp-spacing) * 4);
+  --tp-space-5: calc(var(--tp-spacing) * 5);
+  --tp-space-6: calc(var(--tp-spacing) * 6);
+  --tp-space-8: calc(var(--tp-spacing) * 8);
+  --tp-space-10: calc(var(--tp-spacing) * 10);
+  --tp-space-12: calc(var(--tp-spacing) * 12);
+  --tp-space-16: calc(var(--tp-spacing) * 16);
+  --tp-control-height-xs: calc(var(--tp-spacing) * 6);
+  --tp-control-height-sm: calc(var(--tp-spacing) * 7);
+  --tp-control-height-md: calc(var(--tp-spacing) * 8);
+  --tp-control-height-lg: calc(var(--tp-spacing) * 9);
+  --tp-icon-size-xs: calc(var(--tp-spacing) * 3);
+  --tp-icon-size-sm: calc(var(--tp-spacing) * 3.5);
+  --tp-icon-size-md: calc(var(--tp-spacing) * 4);
+  --tp-icon-size-lg: calc(var(--tp-spacing) * 5);
+  --tp-ring-offset: calc(var(--tp-spacing) / 2);
+  --tp-shadow-sm: 0 calc(var(--tp-spacing) / 4) var(--tp-space-1) rgb(0 0 0 / 16%);
+  --tp-shadow-md: 0 var(--tp-space-1) var(--tp-space-5) rgb(0 0 0 / 18%);
+  --tp-shadow-lg: 0 var(--tp-space-3) var(--tp-space-12) rgb(0 0 0 / 20%);
 }
 
 /* Code and machine output read in the mono role; zero specificity, so pages and components restyle freely. */

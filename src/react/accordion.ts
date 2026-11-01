@@ -12,6 +12,7 @@ export type AccordionProps = ElementProps<
   | 'collapsible'
   | 'contentAlignment'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'hiddenUntilFound'
   | 'invalid'
@@ -50,6 +51,7 @@ export const Accordion = /*#__PURE__*/ createBinding<AccordionProps>(
 export type AccordionItemProps = ElementProps<
   TpAccordionItem,
   | 'contentAlignment'
+  | 'density'
   | 'disabled'
   | 'headingLevel'
   | 'indicatorPosition'

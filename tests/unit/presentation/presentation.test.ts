@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import { DENSITY_DERIVED_ROLES } from '../../../src/foundation/density.js';
 import { TEXT_EDITOR_COLORS } from '../../../src/foundation/text-editor/palette.js';
 import {
   assertCompatibleTokenModes,
@@ -156,8 +157,28 @@ describe('foundational styling tokens', () => {
       );
     });
 
+    it('re-derives every seed role in a density region, as library hosts do', () => {
+      const rule =
+        /^:root,\s*\[density='default'\],\s*\[density='compact'\] \{([\s\S]*?)^\}/mu.exec(
+          styles,
+        )?.[1];
+      const declared = [...(rule ?? '').matchAll(/(--tp-[\w-]+)\s*:\s*([^;]+);/gu)].map(
+        ([, name, value]) => [name, value!.trim()],
+      );
+      expect(declared).toEqual(DENSITY_DERIVED_ROLES.map(([name, value]) => [name, value]));
+      expect(styles).toMatch(
+        /\[density='compact'\] \{\s*--tp-spacing: var\(--tp-spacing-compact\);/u,
+      );
+      expect(styles).toMatch(
+        /\[density='default'\] \{\s*--tp-spacing: var\(--_tp-spacing-default\);/u,
+      );
+    });
+
     it('ships a complete default token set with compatible light and dark modes (ccx-defined)', () => {
-      const root = /^:root \{([\s\S]*?)^\}/mu.exec(styles)?.[1] ?? '';
+      // The default set is every rule that targets :root, the density-aware derived roles included.
+      const root = [...styles.matchAll(/^:root(?:,[^{]*)? \{([\s\S]*?)^\}/gmu)]
+        .map((match) => match[1])
+        .join('\n');
       const light: Record<string, string> = {};
       const dark: Record<string, string> = {};
       for (const [, role, value] of root

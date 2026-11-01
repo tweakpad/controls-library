@@ -10,6 +10,7 @@ export type CopyButtonProps = ElementProps<
   TpCopyButton,
   | 'copiedLabel'
   | 'data'
+  | 'density'
   | 'disabled'
   | 'duration'
   | 'failedLabel'

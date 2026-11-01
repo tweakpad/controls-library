@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link MoTextStroke}, the React binding of `<tp-mo-text-stroke>`. */
 export type MoTextStrokeProps = ElementProps<
   TpMoTextStroke,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

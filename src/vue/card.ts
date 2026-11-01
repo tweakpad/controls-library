@@ -9,6 +9,7 @@ export const Card = /*#__PURE__*/ createBinding(TpCard, 'Card', {
 }) as ElementBinding<
   TpCard,
   | 'borders'
+  | 'density'
   | 'disabled'
   | 'elevated'
   | 'invalid'

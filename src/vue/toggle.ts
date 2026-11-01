@@ -13,6 +13,7 @@ export const Toggle = /*#__PURE__*/ createBinding(TpToggle, 'Toggle', {
   TpToggle,
   | 'ariaLabel'
   | 'defaultPressed'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'inputElementReference'

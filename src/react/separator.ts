@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type SeparatorProps = ElementProps<
   TpSeparator,
   | 'decorative'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

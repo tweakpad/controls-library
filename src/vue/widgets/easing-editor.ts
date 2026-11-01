@@ -18,6 +18,7 @@ export const EasingEditor = /*#__PURE__*/ createBinding(TpEasingEditor, 'EasingE
   | 'defaultDuration'
   | 'defaultPresetsOpen'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'duration'
   | 'durationMax'

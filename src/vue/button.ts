@@ -9,6 +9,7 @@ export const Button = /*#__PURE__*/ createBinding(TpButton, 'Button', {
 }) as ElementBinding<
   TpButton,
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'

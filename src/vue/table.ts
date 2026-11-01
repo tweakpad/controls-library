@@ -17,6 +17,7 @@ export const Table = /*#__PURE__*/ createBinding(TpTable, 'Table', {
   lanes: {},
 }) as ElementBinding<
   TpTable,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -43,6 +44,7 @@ export const TableBody = /*#__PURE__*/ createBinding(TpTableBody, 'TableBody', {
 }) as ElementBinding<
   TpTableBody,
   | 'colSpan'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -65,6 +67,7 @@ export const TableCaption = /*#__PURE__*/ createBinding(TpTableCaption, 'TableCa
 }) as ElementBinding<
   TpTableCaption,
   | 'colSpan'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -87,6 +90,7 @@ export const TableCell = /*#__PURE__*/ createBinding(TpTableCell, 'TableCell', {
 }) as ElementBinding<
   TpTableCell,
   | 'colSpan'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -109,6 +113,7 @@ export const TableFooter = /*#__PURE__*/ createBinding(TpTableFooter, 'TableFoot
 }) as ElementBinding<
   TpTableFooter,
   | 'colSpan'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -131,6 +136,7 @@ export const TableHead = /*#__PURE__*/ createBinding(TpTableHead, 'TableHead', {
 }) as ElementBinding<
   TpTableHead,
   | 'colSpan'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -153,6 +159,7 @@ export const TableHeader = /*#__PURE__*/ createBinding(TpTableHeader, 'TableHead
 }) as ElementBinding<
   TpTableHeader,
   | 'colSpan'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'
@@ -175,6 +182,7 @@ export const TableRow = /*#__PURE__*/ createBinding(TpTableRow, 'TableRow', {
 }) as ElementBinding<
   TpTableRow,
   | 'colSpan'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'motionPolicy'

@@ -83,6 +83,11 @@ export class TpInput extends TpTextControl {
         cursor: default;
       }
 
+      /* A flex box, so the Button sets the step's height instead of the line box's strut. */
+      .step {
+        display: inline-flex;
+      }
+
       /* The arrows point away from the value in either writing direction. */
       :host(:dir(rtl)) .step {
         scale: -1 1;

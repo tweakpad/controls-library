@@ -12,6 +12,7 @@ export type TableOfContentsProps = ElementProps<
   | 'activationOffset'
   | 'closeDelay'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'
@@ -51,6 +52,7 @@ export type TableOfContentsItemProps = ElementProps<
   TpTableOfContentsItem,
   | 'active'
   | 'current'
+  | 'density'
   | 'depth'
   | 'disabled'
   | 'href'

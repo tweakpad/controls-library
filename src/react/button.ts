@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type ButtonProps = ElementProps<
   TpButton,
   | 'ariaLabel'
+  | 'density'
   | 'disabled'
   | 'download'
   | 'focusableWhenDisabled'

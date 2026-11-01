@@ -11,6 +11,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link TreeItem}, the React binding of `<tp-tree-item>`. */
 export type TreeItemProps = ElementProps<
   TpTreeItem,
+  | 'density'
   | 'disabled'
   | 'hasChildren'
   | 'invalid'
@@ -46,6 +47,7 @@ export type TreeViewProps<T = TreeViewDefaults[0]> = ElementProps<
   | 'defaultExpanded'
   | 'defaultItems'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'expanded'
   | 'expansionTrigger'

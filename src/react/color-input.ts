@@ -11,6 +11,7 @@ export type ColorInputProps = ElementProps<
   TpColorInput,
   | 'alpha'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'format'

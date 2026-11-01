@@ -11,6 +11,7 @@ export type DescriptionListProps = ElementProps<
   TpDescriptionList,
   | 'align'
   | 'defaultOpen'
+  | 'density'
   | 'disabled'
   | 'hiddenUntilFound'
   | 'invalid'
@@ -46,6 +47,7 @@ export const DescriptionList = /*#__PURE__*/ createBinding<DescriptionListProps>
 /** Props of {@link DescriptionListItem}, the React binding of `<tp-description-list-item>`. */
 export type DescriptionListItemProps = ElementProps<
   TpDescriptionListItem,
+  | 'density'
   | 'disabled'
   | 'invalid'
   | 'label'

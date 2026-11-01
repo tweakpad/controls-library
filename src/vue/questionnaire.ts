@@ -17,6 +17,7 @@ export const Questionnaire = /*#__PURE__*/ createBinding(TpQuestionnaire, 'Quest
   | 'choiceMode'
   | 'defaultItem'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'flow'
   | 'invalid'

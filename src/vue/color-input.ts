@@ -14,6 +14,7 @@ export const ColorInput = /*#__PURE__*/ createBinding(TpColorInput, 'ColorInput'
   TpColorInput,
   | 'alpha'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'format'

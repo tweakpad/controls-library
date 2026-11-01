@@ -11,6 +11,7 @@ export type InputProps = ElementProps<
   TpInput,
   | 'autocomplete'
   | 'defaultValue'
+  | 'density'
   | 'disabled'
   | 'formOwner'
   | 'hostProperties'

@@ -6,7 +6,7 @@
 &[data-invalid]:focus-within{outline:var(--tp-ring-width) var(--tp-border-style) var(--tp-destructive)}
 &[data-disabled]{background:color-mix(in oklab, var(--tp-input) 50%, transparent)}
 /* input-group-control */
-&:is(input){min-height:calc(var(--tp-control-height-md) - var(--tp-border-width) * 2)}
+&:is(input){min-height:calc(var(--tp-control-height-md) - var(--tp-border-width) * 2);block-size:calc(var(--tp-control-height-md) - var(--tp-border-width) * 2)}
 &[data-tp-presentation-part], &[data-tp-presentation-part]:is(:focus-visible, :disabled, [aria-invalid="true"]){border:0;border-radius:0;outline:0;box-shadow:none;background:transparent;font-size:var(--tp-text-sm);line-height:var(--tp-leading-normal)}
 &{border:0;border-radius:0;outline:0;min-inline-size:0;flex:1;font:inherit;color:inherit;background:transparent}
 /* input-group-addon */
