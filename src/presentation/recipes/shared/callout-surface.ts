@@ -1,6 +1,6 @@
 import type { MarkdownAlertKind } from '../../../foundation/markdown/types.js';
 import type { PresentationDeclarations } from '../../resolver.js';
-import { surfaceEdge } from './edges.js';
+import { statusEdge, surfaceEdge } from './edges.js';
 
 /** The callout surface (`uwg-te-tab-vocabulary-r17`): the Alert surface with its icon column gap. */
 export const calloutSurface: PresentationDeclarations = {
@@ -45,4 +45,27 @@ export function calloutTint(severity: CalloutTint): PresentationDeclarations {
     'border-color': `var(--tp-${role}-border)`,
     color: `var(--tp-${role}-subtle-foreground)`,
   };
+}
+
+/**
+ * The roles a severity retints for a callout's content (its actions, badges and fields), as CSS
+ * declarations for the callout's host: text in the severity's text tone, field and outline edges
+ * in its edge color, outline fills a light tint and their hover a deeper one, secondary fills a
+ * stronger tint. Controls inside then follow the surface, as a status variant does, in either
+ * appearance.
+ */
+export function calloutRegion(severity: CalloutTint): string {
+  const role = roleOf(severity);
+  const tint = (amount: number) =>
+    `color-mix(in oklab, var(--tp-${role}) ${amount}%, var(--tp-${role}-subtle))`;
+  return Object.entries({
+    '--tp-foreground': `var(--tp-${role}-subtle-foreground)`,
+    '--tp-secondary': tint(20),
+    '--tp-secondary-foreground': `var(--tp-${role}-subtle-foreground)`,
+    '--tp-input': statusEdge(role).color,
+    '--tp-control': tint(8),
+    '--tp-control-strong': tint(16),
+  })
+    .map(([name, value]) => `${name}: ${value};`)
+    .join('\n');
 }

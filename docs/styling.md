@@ -216,7 +216,7 @@ A theme sets the seeds of each mode on `:root`: `--tp-spacing` and `--tp-type-sc
 
 ## Status colors
 
-Status variants, such as a `destructive` Button or a `success` Badge, paint the role's tinted fill, its text tone and its edge: `--tp-destructive-subtle`, `--tp-destructive-subtle-foreground` and `--tp-destructive-border`. The `default` and `secondary` variants keep their solid fill and foreground. An Alert paints its severity the same way: the tinted fill, the edge, and the text tone for its title, description and icon; `informational` uses the primary role. Error messages and destructive menu commands use the destructive text tone, so they stay readable on any surface.
+Status variants, such as a `destructive` Button or a `success` Badge, paint the role's tinted fill, its text tone and its edge: `--tp-destructive-subtle`, `--tp-destructive-subtle-foreground` and `--tp-destructive-border`. The `default` and `secondary` variants keep their solid fill and foreground. An Alert paints its severity the same way: the tinted fill, the edge, and the text tone for its title, description and icon; `informational` uses the primary role. Controls inside an Alert, such as its action Buttons or a Badge in its title, follow the severity too: their text, edges and fills take its tones. Error messages and destructive menu commands use the destructive text tone, so they stay readable on any surface.
 
 ## Lines and edges
 

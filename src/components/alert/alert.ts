@@ -1,7 +1,8 @@
-import { css, html, nothing } from 'lit';
+import { css, html, nothing, unsafeCSS } from 'lit';
 import type { PropertyValues } from 'lit';
 import { TpElement } from '../../foundation/element.js';
 import { alertPresentation } from '../../presentation/families/alert.js';
+import { calloutRegion, calloutTints } from '../../presentation/recipes/shared/callout-surface.js';
 
 export type AlertSeverity = 'informational' | 'success' | 'warning' | 'danger';
 export type AlertAnnouncement = 'off' | 'polite' | 'assertive';
@@ -27,6 +28,12 @@ export class TpAlert extends TpElement {
   };
   static override styles = [
     TpElement.styles,
+    // A severity retints the roles its content inherits, so its actions follow the surface.
+    unsafeCSS(
+      calloutTints
+        .map((severity) => `:host([severity='${severity}']) { ${calloutRegion(severity)} }`)
+        .join('\n'),
+    ),
     css`
       :host {
         display: block;
