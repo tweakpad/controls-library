@@ -29,7 +29,8 @@ const config: StorybookConfig = {
   // Before any script loads, the preview takes the Theme toolbar's scheme (the `theme` global in
   // its URL, else the device), so the page and Storybook's loading screens, which are white by
   // default, do not flash light in the dark scheme. The colors are Storybook's dark docs theme
-  // (content and app backgrounds, border), which the docs page renders a moment later.
+  // (content and app backgrounds, border), which the docs page renders a moment later; every
+  // light color of the loading skeleton (preview block, controls table, spinner) is restated.
   previewHead: (head) => `${head}
     <script>
       (() => {
@@ -43,11 +44,25 @@ const config: StorybookConfig = {
       html[data-sb-scheme='dark'] :is(.sb-preparing-docs, .sb-preparing-story) {
         background-color: #222325;
       }
-      html[data-sb-scheme='dark'] .sb-previewBlock {
+      html[data-sb-scheme='dark'] .sb-loader {
+        border-color: rgb(255 255 255 / 15%);
+        border-top-color: rgb(255 255 255 / 50%);
+      }
+      html[data-sb-scheme='dark'] :is(.sb-previewBlock, .sb-argstableBlock-body td) {
         background: #1b1c1d;
         border-color: rgb(255 255 255 / 10%);
       }
-      html[data-sb-scheme='dark'] :is(.sb-previewBlock_icon, .sb-argstableBlock-body td span) {
+      html[data-sb-scheme='dark'] .sb-previewBlock_header {
+        box-shadow: rgb(255 255 255 / 10%) 0 -1px 0 0 inset;
+      }
+      html[data-sb-scheme='dark'] .sb-argstableBlock-body {
+        box-shadow: rgb(255 255 255 / 10%) 0 0 0 1px;
+      }
+      html[data-sb-scheme='dark'] .sb-argstableBlock-body tr:not(:first-child) {
+        border-top-color: rgb(255 255 255 / 10%);
+      }
+      html[data-sb-scheme='dark']
+        :is(.sb-previewBlock_icon, .sb-argstableBlock span, .sb-argstableBlock-body button) {
         background: rgb(255 255 255 / 10%);
       }
     </style>`,

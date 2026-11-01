@@ -8,6 +8,8 @@ const settle = async (...elements) => {
   }
 };
 const menu = (id) => document.querySelector(`#${id}`);
+// A portaled menu's items live in its portal, not under the host.
+const items = (root) => root.portalElement ?? root;
 const fail = (name, result) => {
   const failed = Object.entries(result).filter(([, value]) => value !== true);
   if (failed.length)
@@ -25,14 +27,20 @@ const activeValue = () => {
     null
   );
 };
+// A closed menu has no active trigger; its slotted trigger is the one focus returns to.
+const triggerFocused = (root) => {
+  const trigger = root.triggerElement ?? root.querySelector(':scope > [slot="trigger"]');
+  const active = document.activeElement;
+  return (
+    active === trigger || trigger?.contains(active) || trigger?.shadowRoot?.activeElement != null
+  );
+};
 /** Open state, highlighted items and the focused value, for tool-driven steps. */
 export const state = (id = 'actions') => ({
   open: menu(id).open,
   active: activeValue(),
-  triggerFocused:
-    document.activeElement === menu(id).triggerElement ||
-    menu(id).triggerElement?.shadowRoot?.activeElement != null,
-  highlighted: [...menu(id).querySelectorAll('[data-highlighted]')].map((element) =>
+  triggerFocused: triggerFocused(menu(id)),
+  highlighted: [...items(menu(id)).querySelectorAll('[data-highlighted]')].map((element) =>
     element.getAttribute('value'),
   ),
 });
@@ -44,7 +52,7 @@ export async function commands() {
   const closedDefault = !root.open && !(root.popupElement && !root.popupElement.hidden);
   root.setOpen(true);
   await settle(root);
-  const check = root.querySelector('[value="check"]');
+  const check = items(root).querySelector('[value="check"]');
   const checked = () => check.checked === true || check.getAttribute('aria-checked') === 'true';
   check.click();
   await settle(root);
@@ -55,7 +63,7 @@ export async function commands() {
   await settle(root);
   const cancellation = checked() && root.open;
   root.removeEventListener('tp-action', cancel);
-  root.querySelector('[value="go"]').click();
+  items(root).querySelector('[value="go"]').click();
   await settle(root);
   const commandClose = !root.open;
   return fail('commands', { closedDefault, checkboxPolicy, cancellation, commandClose });
@@ -84,7 +92,7 @@ export async function openParent() {
   const parent = menu('parent');
   parent.setOpen(true);
   await settle(parent);
-  parent.querySelector('[value="first"]').focus();
+  items(parent).querySelector('[value="first"]').focus();
   return { open: parent.open, active: activeValue() };
 }
 /** Parent/child open state and the focused value after ArrowRight, ArrowLeft or Escape. */
