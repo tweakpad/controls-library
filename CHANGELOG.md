@@ -1,5 +1,18 @@
 # @tweakpad/ui
 
+## 0.2.2
+
+### Patch Changes
+
+- Scoped `density` and `appearance` modes, reworked color roles and one owner for every line.
+
+  - `density="compact"` on any element (or the `density` property of any library element) tightens spacing, control heights, icon sizes and type for that region; regions nest, popups follow them, and themes set `--tp-spacing-compact` and `--tp-type-scale-compact`.
+  - `appearance="flat"` removes the edges of components and panels and separates them by fill; regions nest with `appearance="default"`. Storybook has Density and Appearance toolbars.
+  - Status variants (destructive, success, warning) of Badge, Button, Bubble and Copy button, and Alert severities, paint a tinted fill, an edge and a text tone from new `<role>-subtle`, `<role>-subtle-foreground` and `<role>-border` roles. Solid destructive fills take white text.
+  - New line and fill roles: `edge`, `hairline`, `control`, `control-strong`, `control-border`, `choice`, `choice-foreground`, `joined-edge-width`. Joined groups own their seams, so solid members show a cut between them.
+  - Swatches draw an edge from their own color that stays visible on any color.
+  - Fixes: searchable Select shows its selected label, Menu destructive items are red, invalid fields use one red, One-time code and Questionnaire layouts in compact and flat.
+
 ## 0.2.1
 
 ### Patch Changes
