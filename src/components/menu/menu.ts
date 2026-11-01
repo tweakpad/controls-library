@@ -29,6 +29,7 @@ import type {
   AnchorGeometry,
   Alignment,
   CollisionPolicy,
+  GeometryOffset,
   PositioningStrategy,
 } from '../../foundation/positioning.js';
 import type { ChangeReason } from '../../foundation/types.js';
@@ -148,6 +149,18 @@ export class TpMenu extends TpHoverSurface implements MenuItemOwner {
   override align: Alignment = 'center';
   override positionMethod: PositioningStrategy = 'absolute';
   override collisionAvoidance: CollisionPolicy = { side: 'flip', align: 'flip' };
+  // A submenu continues its parent: it meets the parent's content edge and its first item is
+  // level with the trigger row, whatever the surface padding.
+  protected override get defaultSideOffset(): GeometryOffset {
+    return this.parentMenu ? 0 : super.defaultSideOffset;
+  }
+  protected override get defaultAlignOffset(): GeometryOffset {
+    if (!this.parentMenu) return super.defaultAlignOffset;
+    return () => {
+      const popup = this.popupElement;
+      return popup ? -parseFloat(getComputedStyle(popup).paddingBlockStart) || 0 : 0;
+    };
+  }
   #bar: MenuBarOwner | null = null;
   #lastReason: ChangeReason | undefined;
   #indicators = new Map<HTMLElement, TpIcon>();

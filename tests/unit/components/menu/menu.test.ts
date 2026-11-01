@@ -67,3 +67,24 @@ describe('Menu Tab out of a menubar', () => {
     expect(menu.focusOutsidePasses(outside)).toBe(false);
   });
 });
+
+describe('Submenu placement defaults', () => {
+  it('a submenu meets its parent and levels its first item, unless offsets are set', async () => {
+    const { TpMenu } = await import('../../../../src/components/menu/menu.js');
+    if (!customElements.get('tp-menu-offset-unit'))
+      customElements.define('tp-menu-offset-unit', class extends TpMenu {});
+    const create = () =>
+      new (customElements.get('tp-menu-offset-unit')!)() as InstanceType<typeof TpMenu>;
+    const root = create();
+    expect(root.alignOffset).toBe(0);
+    const submenu = create();
+    Object.defineProperty(submenu, 'parentMenu', { get: () => root });
+    expect(submenu.sideOffset).toBe(0);
+    // Measured from the open surface's padding at placement.
+    expect(typeof submenu.alignOffset).toBe('function');
+    submenu.sideOffset = 8;
+    submenu.alignOffset = 2;
+    expect(submenu.sideOffset).toBe(8);
+    expect(submenu.alignOffset).toBe(2);
+  });
+});

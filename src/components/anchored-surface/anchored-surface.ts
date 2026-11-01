@@ -127,7 +127,7 @@ export abstract class TpAnchoredSurface extends TpElement {
     align: { type: String, reflect: true },
     offset: { type: Number, noAccessor: true },
     sideOffset: { type: Number, attribute: 'side-offset', noAccessor: true },
-    alignOffset: { type: Number, attribute: 'align-offset' },
+    alignOffset: { type: Number, attribute: 'align-offset', noAccessor: true },
     collisionPadding: { attribute: false, noAccessor: true },
     collisionBoundary: { attribute: false },
     collisionAvoidance: { attribute: false },
@@ -280,14 +280,30 @@ export abstract class TpAnchoredSurface extends TpElement {
   align: Alignment = 'start';
   #sideOffset: GeometryOffset | undefined;
   get sideOffset(): GeometryOffset {
-    return this.#sideOffset ?? themeSpacing(this, 3);
+    return this.#sideOffset ?? this.defaultSideOffset;
   }
   set sideOffset(value: GeometryOffset | undefined) {
     const previous = this.#sideOffset;
     this.#sideOffset = value ?? undefined;
     this.requestUpdate('sideOffset', previous);
   }
-  alignOffset: GeometryOffset = 0;
+  #alignOffset: GeometryOffset | undefined;
+  get alignOffset(): GeometryOffset {
+    return this.#alignOffset ?? this.defaultAlignOffset;
+  }
+  set alignOffset(value: GeometryOffset | undefined) {
+    const previous = this.#alignOffset;
+    this.#alignOffset = value ?? undefined;
+    this.requestUpdate('alignOffset', previous);
+  }
+  /** The side offset while none is set: the theme's `space-3`. */
+  protected get defaultSideOffset(): GeometryOffset {
+    return themeSpacing(this, 3);
+  }
+  /** The align offset while none is set. */
+  protected get defaultAlignOffset(): GeometryOffset {
+    return 0;
+  }
   #collisionPadding:
     number | Partial<Record<'top' | 'right' | 'bottom' | 'left', number>> | undefined;
   get collisionPadding(): number | Partial<Record<'top' | 'right' | 'bottom' | 'left', number>> {

@@ -17,3 +17,4 @@
 | Kind | A text | Reason |
 | --- | --- | --- |
 | preview | View options | `aria-label` on `tp-menu-radio-group` named a generic host; `label` names the group (same text) |
+| prose | Nest a `tp-menu` with its own trigger… | submenus gained their own default placement (issue #31); one sentence appended |
