@@ -12,6 +12,7 @@ export const NativeSelect = /*#__PURE__*/ createBinding(TpNativeSelect, 'NativeS
   model: 'value',
 }) as ElementBinding<
   TpNativeSelect,
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'

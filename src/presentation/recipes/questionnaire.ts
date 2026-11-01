@@ -44,8 +44,14 @@ export const questionnaireAppearance: PresentationDictionary = {
         border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-input)',
         'border-radius': 'var(--tp-radius-lg)',
         'font-size': 'var(--tp-text-sm)',
-        background: 'light-dark(transparent,color-mix(in oklab,var(--tp-input) 20%,transparent))',
+        background: 'var(--tp-control)',
       },
+    },
+    // An unchosen mark sits on the choice's control fill, so it takes the page color: a hole cut
+    // through the fill, which stays visible when the appearance draws no edges.
+    {
+      selector: '&:not([data-checked], [data-indeterminate]) > .box',
+      declarations: { background: 'var(--tp-background)' },
     },
     fillColor('color-mix(in oklab,var(--tp-muted) 50%,transparent)'),
     // A checked choice keeps its own fill; hover does not cover it.
@@ -79,7 +85,12 @@ export const questionnaireAppearance: PresentationDictionary = {
     .filter((rule) => !rule.selector?.includes('file-selector'))
     .map((rule) => ({ ...rule, selector: (rule.selector ?? '&').replaceAll('&', '& > input') })),
   'questionnaire-error': [
-    { declarations: { color: 'var(--tp-destructive)', 'font-size': 'var(--tp-text-sm)' } },
+    {
+      declarations: {
+        color: 'var(--tp-destructive-subtle-foreground)',
+        'font-size': 'var(--tp-text-sm)',
+      },
+    },
   ],
   'questionnaire-actions': [{ declarations: { gap: 'var(--tp-space-2)' } }],
 };

@@ -11,6 +11,7 @@ export const ResizableHandle = /*#__PURE__*/ createBinding(TpResizableHandle, 'R
   lanes: {},
 }) as ElementBinding<
   TpResizableHandle,
+  | 'appearance'
   | 'boundary'
   | 'density'
   | 'disableDoubleClickReset'
@@ -38,6 +39,7 @@ export const ResizablePanel = /*#__PURE__*/ createBinding(TpResizablePanel, 'Res
   lanes: {},
 }) as ElementBinding<
   TpResizablePanel,
+  | 'appearance'
   | 'collapsedSize'
   | 'collapsible'
   | 'defaultSize'
@@ -75,6 +77,7 @@ export const ResizablePanelGroup = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpResizablePanelGroup,
+  | 'appearance'
   | 'defaultLayout'
   | 'defaultSizes'
   | 'density'

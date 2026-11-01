@@ -81,7 +81,7 @@ export const flowAppearance: PresentationDictionary = {
         background: 'var(--tp-background)',
         color: 'var(--tp-foreground)',
         'font-size': 'var(--tp-text-sm)',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
         'border-radius': 'var(--tp-radius-lg)',
       },
     },
@@ -276,8 +276,14 @@ export const flowAppearance: PresentationDictionary = {
   'flow-node-body': [],
   // The problem indicator's icon takes the problem's tone.
   'flow-node-problem': [
-    { selector: '&[data-severity="warning"]', declarations: { color: 'var(--tp-warning)' } },
-    { selector: '&[data-severity="error"]', declarations: { color: 'var(--tp-destructive)' } },
+    {
+      selector: '&[data-severity="warning"]',
+      declarations: { color: 'var(--tp-warning-subtle-foreground)' },
+    },
+    {
+      selector: '&[data-severity="error"]',
+      declarations: { color: 'var(--tp-destructive-subtle-foreground)' },
+    },
   ],
   'flow-node-row': [{ declarations: { 'font-size': 'var(--tp-text-xs)' } }],
   // Port and property labels take the inline fields' label role wherever the row places them

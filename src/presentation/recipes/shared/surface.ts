@@ -6,7 +6,7 @@ import { rule } from './variant.js';
 export const surfaceAppearance: readonly PresentationRule[] = [
   rule({
     padding: 'var(--tp-space-3)',
-    border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+    border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
     'border-radius': 'var(--tp-radius-lg)',
     color: 'var(--tp-popover-foreground)',
     background: 'var(--tp-popover)',

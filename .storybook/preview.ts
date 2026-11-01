@@ -5,7 +5,7 @@ import { html } from 'lit';
 import { ref } from 'lit/directives/ref.js';
 import DocumentationPage from './docs-page.mdx';
 import { ThemedDocsContainer } from './docs-container.mdx';
-import { applyDensity, applyTheme, themePreference } from './docs-theme.js';
+import { applyAppearance, applyDensity, applyTheme, themePreference } from './docs-theme.js';
 import { manifest } from './manifest.js';
 import { elementApi } from '../src/docs/api.js';
 import {
@@ -16,7 +16,6 @@ import {
 import type { LibraryDoc } from '../src/stories/library-docs.js';
 import '../src/styles.css';
 import './docs.css';
-import './density-compact.css';
 import '../src/register.js';
 import '../src/register/widgets.js';
 
@@ -90,8 +89,20 @@ const preview = definePreview({
         dynamicTitle: true,
       },
     },
+    appearance: {
+      description: 'Appearance of every library element: bordered (Default) or borderless (Flat)',
+      toolbar: {
+        title: 'Appearance',
+        icon: 'contrast',
+        items: [
+          { value: 'default', title: 'Default' },
+          { value: 'flat', title: 'Flat' },
+        ],
+        dynamicTitle: true,
+      },
+    },
     density: {
-      description: 'Token density preset (prototype)',
+      description: 'Density of every library element: Default or Compact',
       toolbar: {
         title: 'Density',
         icon: 'component',
@@ -103,7 +114,7 @@ const preview = definePreview({
       },
     },
   },
-  initialGlobals: { theme: 'system', density: 'default' },
+  initialGlobals: { theme: 'system', density: 'default', appearance: 'default' },
   // The manifest lists every member of the element, base plumbing included. Controls keep the
   // element's own public attributes and properties (the rows of its API reference) plus whatever
   // the story declares itself; events, slots and parts are the Docs page's API section.
@@ -126,11 +137,6 @@ const preview = definePreview({
     },
   ],
   decorators: [
-    (story, context) => {
-      applyDensity(context.globals);
-      applyTheme(themePreference(context.globals));
-      return story();
-    },
     // A documented element's Default story is the page's main use case: until its Controls change,
     // it renders the page's hero, whose code is the story's source. Changed Controls render the
     // story itself, in the hero's frame, alignment and root width, so a Control never moves or
@@ -151,6 +157,15 @@ const preview = definePreview({
           mountedHeroes.set(host, mountPreview(host as HTMLElement, hero));
         })}
       ></div>`;
+    },
+    // The toolbar globals apply to the preview document. Last in the list, this decorator is the
+    // outermost, so it runs for every story, including a Default story that renders its hero
+    // without calling the stories inside it.
+    (story, context) => {
+      applyDensity(context.globals);
+      applyAppearance(context.globals);
+      applyTheme(themePreference(context.globals));
+      return story();
     },
   ],
   parameters: {

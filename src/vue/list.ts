@@ -10,6 +10,7 @@ export const List = /*#__PURE__*/ createBinding(TpList, 'List', {
   lanes: {},
 }) as ElementBinding<
   TpList,
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -30,6 +31,7 @@ export const ListItem = /*#__PURE__*/ createBinding(TpListItem, 'ListItem', {
   lanes: {},
 }) as ElementBinding<
   TpListItem,
+  | 'appearance'
   | 'density'
   | 'description'
   | 'disabled'
@@ -55,6 +57,7 @@ export const ListSeparator = /*#__PURE__*/ createBinding(TpListSeparator, 'ListS
   lanes: {},
 }) as ElementBinding<
   TpListSeparator,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

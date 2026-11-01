@@ -10,6 +10,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type TableOfContentsProps = ElementProps<
   TpTableOfContents,
   | 'activationOffset'
+  | 'appearance'
   | 'closeDelay'
   | 'defaultValue'
   | 'density'
@@ -51,6 +52,7 @@ export const TableOfContents = /*#__PURE__*/ createBinding<TableOfContentsProps>
 export type TableOfContentsItemProps = ElementProps<
   TpTableOfContentsItem,
   | 'active'
+  | 'appearance'
   | 'current'
   | 'density'
   | 'depth'

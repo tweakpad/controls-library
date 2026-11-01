@@ -21,7 +21,7 @@ export function edgeSurfaceAppearance(
       return {
         selector,
         declarations: {
-          [`border-${border}`]: 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+          [`border-${border}`]: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
           ...Object.fromEntries(
             corners.map((corner) => [`border-${corner}-radius`, 'var(--tp-radius-lg)']),
           ),

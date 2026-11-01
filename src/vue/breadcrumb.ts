@@ -8,6 +8,7 @@ export const Breadcrumb = /*#__PURE__*/ createBinding(TpBreadcrumb, 'Breadcrumb'
   lanes: {},
 }) as ElementBinding<
   TpBreadcrumb,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

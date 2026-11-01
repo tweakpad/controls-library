@@ -17,6 +17,7 @@ export type MenuProps = ElementProps<
   | 'align'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'
@@ -110,6 +111,7 @@ export const Menu = /*#__PURE__*/ createBinding<MenuProps>(
 /** Props of {@link MenuCheckboxItem}, the React binding of `<tp-menu-checkbox-item>`. */
 export type MenuCheckboxItemProps = ElementProps<
   TpMenuCheckboxItem,
+  | 'appearance'
   | 'checked'
   | 'closeOnClick'
   | 'defaultChecked'
@@ -146,6 +148,7 @@ export const MenuCheckboxItem = /*#__PURE__*/ createBinding<MenuCheckboxItemProp
 /** Props of {@link MenuItem}, the React binding of `<tp-menu-item>`. */
 export type MenuItemProps = ElementProps<
   TpMenuItem,
+  | 'appearance'
   | 'closeOnClick'
   | 'density'
   | 'disabled'
@@ -177,6 +180,7 @@ export const MenuItem = /*#__PURE__*/ createBinding<MenuItemProps>(
 /** Props of {@link MenuRadioGroup}, the React binding of `<tp-menu-radio-group>`. */
 export type MenuRadioGroupProps = ElementProps<
   TpMenuRadioGroup,
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'
@@ -206,6 +210,7 @@ export const MenuRadioGroup = /*#__PURE__*/ createBinding<MenuRadioGroupProps>(
 /** Props of {@link MenuRadioItem}, the React binding of `<tp-menu-radio-item>`. */
 export type MenuRadioItemProps = ElementProps<
   TpMenuRadioItem,
+  | 'appearance'
   | 'closeOnClick'
   | 'density'
   | 'disabled'

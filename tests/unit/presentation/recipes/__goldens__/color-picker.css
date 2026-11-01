@@ -107,7 +107,7 @@
 /* color-picker-channel-size-default */
 /* color-picker-channel-size-lg */
 /* color-picker-preview */
-&{inline-size:var(--tp-control-height-md);block-size:var(--tp-control-height-md);border-radius:var(--tp-radius-md);border:var(--tp-border-width) var(--tp-border-style) color-mix(in oklab, var(--tp-foreground) 10%, transparent);background-color:var(--tp-background);background-image:var(--_tp-color-picker-paint, none), linear-gradient(45deg, var(--tp-muted) 25%, transparent 25% 75%, var(--tp-muted) 75%), linear-gradient(45deg, var(--tp-muted) 25%, transparent 25% 75%, var(--tp-muted) 75%);background-size:auto, var(--_tp-color-picker-checker) var(--_tp-color-picker-checker), var(--_tp-color-picker-checker) var(--_tp-color-picker-checker);background-position:0 0, 0 0, calc(var(--_tp-color-picker-checker) / 2) calc(var(--_tp-color-picker-checker) / 2)}
+&{inline-size:var(--tp-control-height-md);block-size:var(--tp-control-height-md);border-radius:var(--tp-radius-md);border:var(--tp-border-width) var(--tp-border-style) color-mix(in oklab, var(--_tp-swatch-color, var(--tp-foreground)) 60%, contrast-color(var(--_tp-swatch-color, var(--tp-foreground))));background-color:var(--tp-background);background-image:var(--_tp-color-picker-paint, none), linear-gradient(45deg, var(--tp-muted) 25%, transparent 25% 75%, var(--tp-muted) 75%), linear-gradient(45deg, var(--tp-muted) 25%, transparent 25% 75%, var(--tp-muted) 75%);background-size:auto, var(--_tp-color-picker-checker) var(--_tp-color-picker-checker), var(--_tp-color-picker-checker) var(--_tp-color-picker-checker);background-position:0 0, 0 0, calc(var(--_tp-color-picker-checker) / 2) calc(var(--_tp-color-picker-checker) / 2)}
 /* color-picker-preview-size-sm */
 /* color-picker-preview-size-default */
 /* color-picker-preview-size-lg */
@@ -149,7 +149,7 @@
 /* color-picker-swatch-item-shape-round */
 &[part~="toggle"]{border-radius:var(--tp-radius-full)}
 /* color-picker-swatch */
-&{background-color:var(--tp-background);background-image:var(--_tp-color-picker-paint, none), linear-gradient(45deg, var(--tp-muted) 25%, transparent 25% 75%, var(--tp-muted) 75%), linear-gradient(45deg, var(--tp-muted) 25%, transparent 25% 75%, var(--tp-muted) 75%);background-size:auto, var(--_tp-color-picker-checker) var(--_tp-color-picker-checker), var(--_tp-color-picker-checker) var(--_tp-color-picker-checker);background-position:0 0, 0 0, calc(var(--_tp-color-picker-checker) / 2) calc(var(--_tp-color-picker-checker) / 2)}
+&{background-color:var(--tp-background);background-image:var(--_tp-color-picker-paint, none), linear-gradient(45deg, var(--tp-muted) 25%, transparent 25% 75%, var(--tp-muted) 75%), linear-gradient(45deg, var(--tp-muted) 25%, transparent 25% 75%, var(--tp-muted) 75%);background-size:auto, var(--_tp-color-picker-checker) var(--_tp-color-picker-checker), var(--_tp-color-picker-checker) var(--_tp-color-picker-checker);background-position:0 0, 0 0, calc(var(--_tp-color-picker-checker) / 2) calc(var(--_tp-color-picker-checker) / 2);box-shadow:inset 0 0 0 var(--tp-border-width) color-mix(in oklab, var(--_tp-swatch-color, var(--tp-foreground)) 60%, contrast-color(var(--_tp-swatch-color, var(--tp-foreground))))}
 /* color-picker-swatch-size-sm */
 /* color-picker-swatch-size-default */
 /* color-picker-swatch-size-lg */

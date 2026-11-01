@@ -1,6 +1,6 @@
 /* tp-map appearance */
 /* map */
-&{border-radius:var(--tp-radius-lg);border:var(--tp-border-width) var(--tp-border-style) var(--tp-border);background:var(--tp-muted);color:var(--tp-foreground)}
+&{border-radius:var(--tp-radius-lg);border:var(--tp-border-width) var(--tp-border-style) var(--tp-edge);background:var(--tp-muted);color:var(--tp-foreground)}
 /* map-viewport */
 &:focus-visible{outline:var(--tp-ring-width) var(--tp-border-style) var(--tp-ring);outline-offset:calc(var(--tp-ring-width) * -1)}
 /* map-pin */
@@ -17,6 +17,6 @@
 &{background:var(--tp-background);border-radius:var(--tp-radius-md);box-shadow:var(--tp-shadow-md)}
 /* map-status */
 &{color:var(--tp-muted-foreground);font-size:var(--tp-text-sm);background:var(--tp-muted);gap:var(--tp-space-2);padding:var(--tp-space-4)}
-:host([data-status="error"]) &{color:var(--tp-destructive)}
+:host([data-status="error"]) &{color:var(--tp-destructive-subtle-foreground)}
 
 /* tp-map structure */

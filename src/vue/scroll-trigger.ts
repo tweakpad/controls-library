@@ -8,6 +8,7 @@ export const ScrollTrigger = /*#__PURE__*/ createBinding(TpScrollTrigger, 'Scrol
   lanes: {},
 }) as ElementBinding<
   TpScrollTrigger,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

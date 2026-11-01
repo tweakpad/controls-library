@@ -11,6 +11,7 @@ export type TooltipProps = ElementProps<
   | 'align'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'

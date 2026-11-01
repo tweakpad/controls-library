@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link OverflowList}, the React binding of `<tp-overflow-list>`. */
 export type OverflowListProps = ElementProps<
   TpOverflowList,
+  | 'appearance'
   | 'collapseFrom'
   | 'density'
   | 'disabled'

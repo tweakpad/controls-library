@@ -10,6 +10,7 @@ export const Field = /*#__PURE__*/ createBinding(TpField, 'Field', {
   lanes: {},
 }) as ElementBinding<
   TpField,
+  | 'appearance'
   | 'density'
   | 'description'
   | 'dirty'

@@ -254,6 +254,7 @@ type Tag<E extends HTMLElement, F extends keyof E, V> = DefineSetupFnComponent<
 type Tags = {
   'tp-accordion': Tag<
     TpAccordion,
+    | 'appearance'
     | 'collapsible'
     | 'contentAlignment'
     | 'defaultValue'
@@ -280,6 +281,7 @@ type Tags = {
   >;
   'tp-accordion-item': Tag<
     TpAccordionItem,
+    | 'appearance'
     | 'contentAlignment'
     | 'density'
     | 'disabled'
@@ -298,6 +300,7 @@ type Tags = {
   'tp-alert': Tag<
     TpAlert,
     | 'announcement'
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -313,6 +316,7 @@ type Tags = {
   >;
   'tp-alert-dialog': Tag<
     TpAlertDialog,
+    | 'appearance'
     | 'backdrop'
     | 'closeOnEscape'
     | 'closeOnOutsideInteraction'
@@ -351,6 +355,7 @@ type Tags = {
   >;
   'tp-aspect-ratio': Tag<
     TpAspectRatio,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'fit'
@@ -366,6 +371,7 @@ type Tags = {
   >;
   'tp-attachment': Tag<
     TpAttachment,
+    | 'appearance'
     | 'density'
     | 'description'
     | 'disabled'
@@ -393,6 +399,7 @@ type Tags = {
   >;
   'tp-attachment-group': Tag<
     TpAttachmentGroup,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -410,6 +417,7 @@ type Tags = {
     | 'alignItemWithTrigger'
     | 'alignOffset'
     | 'anchor'
+    | 'appearance'
     | 'arrowBorderColor'
     | 'arrowBorderWidth'
     | 'arrowHeight'
@@ -517,6 +525,7 @@ type Tags = {
   'tp-avatar': Tag<
     TpAvatar,
     | 'alt'
+    | 'appearance'
     | 'crossOrigin'
     | 'density'
     | 'disabled'
@@ -543,6 +552,7 @@ type Tags = {
   >;
   'tp-avatar-group': Tag<
     TpAvatarGroup,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -558,6 +568,7 @@ type Tags = {
   >;
   'tp-badge': Tag<
     TpBadge,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'interactive'
@@ -573,6 +584,7 @@ type Tags = {
   >;
   'tp-breadcrumb': Tag<
     TpBreadcrumb,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -589,6 +601,7 @@ type Tags = {
   'tp-bubble': Tag<
     TpBubble,
     | 'align'
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -606,6 +619,7 @@ type Tags = {
   >;
   'tp-bubble-group': Tag<
     TpBubbleGroup,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -619,6 +633,7 @@ type Tags = {
   >;
   'tp-button': Tag<
     TpButton,
+    | 'appearance'
     | 'ariaLabel'
     | 'density'
     | 'disabled'
@@ -647,6 +662,7 @@ type Tags = {
   >;
   'tp-button-group': Tag<
     TpButtonGroup,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -662,6 +678,7 @@ type Tags = {
   >;
   'tp-button-group-text': Tag<
     TpButtonGroupText,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -675,6 +692,7 @@ type Tags = {
   >;
   'tp-calendar': Tag<
     TpCalendar,
+    | 'appearance'
     | 'buttonVariant'
     | 'calendarAdapter'
     | 'captionLayout'
@@ -733,6 +751,7 @@ type Tags = {
   >;
   'tp-card': Tag<
     TpCard,
+    | 'appearance'
     | 'borders'
     | 'density'
     | 'disabled'
@@ -750,6 +769,7 @@ type Tags = {
   >;
   'tp-carousel': Tag<
     TpCarousel<unknown>,
+    | 'appearance'
     | 'autoplay'
     | 'defaultValue'
     | 'density'
@@ -781,6 +801,7 @@ type Tags = {
   >;
   'tp-checkbox': Tag<
     TpCheckbox,
+    | 'appearance'
     | 'checkboxGroup'
     | 'checked'
     | 'defaultChecked'
@@ -816,6 +837,7 @@ type Tags = {
   >;
   'tp-citation': Tag<
     TpCitation,
+    | 'appearance'
     | 'density'
     | 'description'
     | 'disabled'
@@ -840,6 +862,7 @@ type Tags = {
   >;
   'tp-citation-list': Tag<
     TpCitationList,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -857,6 +880,7 @@ type Tags = {
   'tp-code-block': Tag<
     TpCodeBlock,
     | 'addedLines'
+    | 'appearance'
     | 'code'
     | 'collapsedLines'
     | 'collapsible'
@@ -888,6 +912,7 @@ type Tags = {
   >;
   'tp-collapsible': Tag<
     TpCollapsible,
+    | 'appearance'
     | 'contentAlignment'
     | 'defaultOpen'
     | 'density'
@@ -913,6 +938,7 @@ type Tags = {
   'tp-color-input': Tag<
     TpColorInput,
     | 'alpha'
+    | 'appearance'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -952,6 +978,7 @@ type Tags = {
     | 'alignItemWithTrigger'
     | 'alignOffset'
     | 'anchor'
+    | 'appearance'
     | 'arrowBorderColor'
     | 'arrowBorderWidth'
     | 'arrowHeight'
@@ -1059,6 +1086,7 @@ type Tags = {
   >;
   'tp-command-palette': Tag<
     TpCommandPalette,
+    | 'appearance'
     | 'backdrop'
     | 'closeOnEscape'
     | 'closeOnOutsideInteraction'
@@ -1110,6 +1138,7 @@ type Tags = {
   >;
   'tp-copy-button': Tag<
     TpCopyButton,
+    | 'appearance'
     | 'copiedLabel'
     | 'data'
     | 'density'
@@ -1137,6 +1166,7 @@ type Tags = {
   >;
   'tp-cursor': Tag<
     TpCursor,
+    | 'appearance'
     | 'damping'
     | 'density'
     | 'disabled'
@@ -1163,6 +1193,7 @@ type Tags = {
   >;
   'tp-cursor-zone': Tag<
     TpCursorZone,
+    | 'appearance'
     | 'damping'
     | 'density'
     | 'disabled'
@@ -1183,6 +1214,7 @@ type Tags = {
   >;
   'tp-data-visualization': Tag<
     TpDataVisualization,
+    | 'appearance'
     | 'data'
     | 'density'
     | 'description'
@@ -1208,6 +1240,7 @@ type Tags = {
   'tp-description-list': Tag<
     TpDescriptionList,
     | 'align'
+    | 'appearance'
     | 'defaultOpen'
     | 'density'
     | 'disabled'
@@ -1231,6 +1264,7 @@ type Tags = {
   >;
   'tp-description-list-item': Tag<
     TpDescriptionListItem,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -1246,6 +1280,7 @@ type Tags = {
   >;
   'tp-dialog': Tag<
     TpDialog,
+    | 'appearance'
     | 'backdrop'
     | 'closeOnEscape'
     | 'closeOnOutsideInteraction'
@@ -1289,6 +1324,7 @@ type Tags = {
     | 'activation'
     | 'alignment'
     | 'announcements'
+    | 'appearance'
     | 'autoScroll'
     | 'collisionDetector'
     | 'collisionPriority'
@@ -1340,6 +1376,7 @@ type Tags = {
   'tp-drawer': Tag<
     TpDrawer,
     | 'activeSnapPoint'
+    | 'appearance'
     | 'backdrop'
     | 'closeOnEscape'
     | 'closeOnOutsideInteraction'
@@ -1392,6 +1429,7 @@ type Tags = {
   'tp-drawer-provider': Tag<TpDrawerProvider, never, Record<never, never>>;
   'tp-drawer-swipe-area': Tag<
     TpDrawerSwipeArea,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'for'
@@ -1413,6 +1451,7 @@ type Tags = {
   >;
   'tp-empty-state': Tag<
     TpEmptyState,
+    | 'appearance'
     | 'density'
     | 'description'
     | 'disabled'
@@ -1429,6 +1468,7 @@ type Tags = {
   >;
   'tp-field': Tag<
     TpField,
+    | 'appearance'
     | 'density'
     | 'description'
     | 'dirty'
@@ -1466,6 +1506,7 @@ type Tags = {
   >;
   'tp-field-group': Tag<
     TpFieldGroup,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -1484,6 +1525,7 @@ type Tags = {
     | 'accept'
     | 'allowDrop'
     | 'allowDuplicates'
+    | 'appearance'
     | 'autoUpload'
     | 'capture'
     | 'clearable'
@@ -1559,6 +1601,7 @@ type Tags = {
   >;
   'tp-form': Tag<
     TpForm,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'errors'
@@ -1603,6 +1646,7 @@ type Tags = {
   'tp-image': Tag<
     TpImage,
     | 'alt'
+    | 'appearance'
     | 'crossOrigin'
     | 'density'
     | 'disabled'
@@ -1641,6 +1685,7 @@ type Tags = {
   >;
   'tp-image-group': Tag<
     TpImageGroup,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -1669,6 +1714,7 @@ type Tags = {
   >;
   'tp-input': Tag<
     TpInput,
+    | 'appearance'
     | 'autocomplete'
     | 'defaultValue'
     | 'density'
@@ -1716,6 +1762,7 @@ type Tags = {
     | 'actionSize'
     | 'actionVariant'
     | 'addonPosition'
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -1729,6 +1776,7 @@ type Tags = {
   >;
   'tp-kbd': Tag<
     TpKbd,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -1746,6 +1794,7 @@ type Tags = {
   >;
   'tp-kbd-group': Tag<
     TpKbdGroup,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -1763,6 +1812,7 @@ type Tags = {
   >;
   'tp-label': Tag<
     TpLabel,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'for'
@@ -1778,6 +1828,7 @@ type Tags = {
   >;
   'tp-list': Tag<
     TpList,
+    | 'appearance'
     | 'ariaLabel'
     | 'density'
     | 'disabled'
@@ -1792,6 +1843,7 @@ type Tags = {
   >;
   'tp-list-item': Tag<
     TpListItem,
+    | 'appearance'
     | 'density'
     | 'description'
     | 'disabled'
@@ -1811,6 +1863,7 @@ type Tags = {
   >;
   'tp-list-separator': Tag<
     TpListSeparator,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -1824,6 +1877,7 @@ type Tags = {
   >;
   'tp-map': Tag<
     TpMap,
+    | 'appearance'
     | 'controls'
     | 'controlsOrientation'
     | 'controlsPosition'
@@ -1867,6 +1921,7 @@ type Tags = {
   'tp-map-control': Tag<
     TpMapControl,
     | 'action'
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -1887,6 +1942,7 @@ type Tags = {
     | 'align'
     | 'alignOffset'
     | 'anchor'
+    | 'appearance'
     | 'arrowBorderColor'
     | 'arrowBorderWidth'
     | 'arrowHeight'
@@ -1952,6 +2008,7 @@ type Tags = {
   'tp-map-pin': Tag<
     TpMapPin,
     | 'anchor'
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -1970,6 +2027,7 @@ type Tags = {
   >;
   'tp-markdown': Tag<
     TpMarkdown,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'elements'
@@ -1997,6 +2055,7 @@ type Tags = {
   >;
   'tp-marker': Tag<
     TpMarker,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2014,6 +2073,7 @@ type Tags = {
   >;
   'tp-media-audio-layout': Tag<
     TpMediaAudioLayout,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'hide'
@@ -2031,6 +2091,7 @@ type Tags = {
   >;
   'tp-media-audio-track-radio-group': Tag<
     TpMediaAudioTrackRadioGroup,
+    | 'appearance'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -2053,6 +2114,7 @@ type Tags = {
   >;
   'tp-media-buffering-indicator': Tag<
     TpMediaBufferingIndicator,
+    | 'appearance'
     | 'delay'
     | 'density'
     | 'disabled'
@@ -2069,6 +2131,7 @@ type Tags = {
   >;
   'tp-media-captions-button': Tag<
     TpMediaCaptionsButton,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2087,6 +2150,7 @@ type Tags = {
   >;
   'tp-media-captions-radio-group': Tag<
     TpMediaCaptionsRadioGroup,
+    | 'appearance'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -2109,6 +2173,7 @@ type Tags = {
   >;
   'tp-media-chapter-title': Tag<
     TpMediaChapterTitle,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2124,6 +2189,7 @@ type Tags = {
   >;
   'tp-media-container': Tag<
     TpMediaContainer,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2139,6 +2205,7 @@ type Tags = {
   >;
   'tp-media-controls': Tag<
     TpMediaControls,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2155,6 +2222,7 @@ type Tags = {
   >;
   'tp-media-controls-group': Tag<
     TpMediaControlsGroup,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2171,6 +2239,7 @@ type Tags = {
   >;
   'tp-media-error-dialog': Tag<
     TpMediaErrorDialog,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2187,6 +2256,7 @@ type Tags = {
   >;
   'tp-media-fullscreen-button': Tag<
     TpMediaFullscreenButton,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2206,6 +2276,7 @@ type Tags = {
   'tp-media-gesture': Tag<
     TpMediaGesture,
     | 'action'
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2226,6 +2297,7 @@ type Tags = {
   'tp-media-hotkey': Tag<
     TpMediaHotkey,
     | 'action'
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2243,6 +2315,7 @@ type Tags = {
   >;
   'tp-media-live-button': Tag<
     TpMediaLiveButton,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2261,6 +2334,7 @@ type Tags = {
   >;
   'tp-media-mute-button': Tag<
     TpMediaMuteButton,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2279,6 +2353,7 @@ type Tags = {
   >;
   'tp-media-pip-button': Tag<
     TpMediaPipButton,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2297,6 +2372,7 @@ type Tags = {
   >;
   'tp-media-play-button': Tag<
     TpMediaPlayButton,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2315,6 +2391,7 @@ type Tags = {
   >;
   'tp-media-playback-rate-button': Tag<
     TpMediaPlaybackRateButton,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2333,6 +2410,7 @@ type Tags = {
   >;
   'tp-media-playback-rate-radio-group': Tag<
     TpMediaPlaybackRateRadioGroup,
+    | 'appearance'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -2356,6 +2434,7 @@ type Tags = {
   'tp-media-player': Tag<
     TpMediaPlayer,
     | 'announcements'
+    | 'appearance'
     | 'contentTitle'
     | 'density'
     | 'disabled'
@@ -2393,6 +2472,7 @@ type Tags = {
   >;
   'tp-media-poster': Tag<
     TpMediaPoster,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2409,6 +2489,7 @@ type Tags = {
   >;
   'tp-media-quality-radio-group': Tag<
     TpMediaQualityRadioGroup,
+    | 'appearance'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -2431,6 +2512,7 @@ type Tags = {
   >;
   'tp-media-remote-playback-button': Tag<
     TpMediaRemotePlaybackButton,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2449,6 +2531,7 @@ type Tags = {
   >;
   'tp-media-seek-button': Tag<
     TpMediaSeekButton,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2470,6 +2553,7 @@ type Tags = {
   'tp-media-seek-indicator': Tag<
     TpMediaSeekIndicator,
     | 'actions'
+    | 'appearance'
     | 'closeDelay'
     | 'density'
     | 'disabled'
@@ -2487,6 +2571,7 @@ type Tags = {
   'tp-media-settings-menu': Tag<
     TpMediaSettingsMenu,
     | 'align'
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'groups'
@@ -2505,6 +2590,7 @@ type Tags = {
   'tp-media-status-indicator': Tag<
     TpMediaStatusIndicator,
     | 'actions'
+    | 'appearance'
     | 'closeDelay'
     | 'density'
     | 'disabled'
@@ -2521,6 +2607,7 @@ type Tags = {
   >;
   'tp-media-thumbnail': Tag<
     TpMediaThumbnail,
+    | 'appearance'
     | 'crossOrigin'
     | 'density'
     | 'disabled'
@@ -2540,6 +2627,7 @@ type Tags = {
   >;
   'tp-media-time': Tag<
     TpMediaTime,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2559,6 +2647,7 @@ type Tags = {
   >;
   'tp-media-time-slider': Tag<
     TpMediaTimeSlider,
+    | 'appearance'
     | 'changeThrottle'
     | 'density'
     | 'disabled'
@@ -2585,6 +2674,7 @@ type Tags = {
   >;
   'tp-media-time-slider-preview': Tag<
     TpMediaTimeSliderPreview,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2604,6 +2694,7 @@ type Tags = {
   >;
   'tp-media-title': Tag<
     TpMediaTitle,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2619,6 +2710,7 @@ type Tags = {
   >;
   'tp-media-video-layout': Tag<
     TpMediaVideoLayout,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'hide'
@@ -2637,6 +2729,7 @@ type Tags = {
   'tp-media-volume-indicator': Tag<
     TpMediaVolumeIndicator,
     | 'actions'
+    | 'appearance'
     | 'closeDelay'
     | 'density'
     | 'disabled'
@@ -2653,6 +2746,7 @@ type Tags = {
   >;
   'tp-media-volume-popover': Tag<
     TpMediaVolumePopover,
+    | 'appearance'
     | 'closeDelay'
     | 'density'
     | 'disabled'
@@ -2671,6 +2765,7 @@ type Tags = {
   >;
   'tp-media-volume-slider': Tag<
     TpMediaVolumeSlider,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2696,6 +2791,7 @@ type Tags = {
     | 'align'
     | 'alignOffset'
     | 'anchor'
+    | 'appearance'
     | 'arrowBorderColor'
     | 'arrowBorderWidth'
     | 'arrowHeight'
@@ -2772,6 +2868,7 @@ type Tags = {
   >;
   'tp-menu-checkbox-item': Tag<
     TpMenuCheckboxItem,
+    | 'appearance'
     | 'checked'
     | 'closeOnClick'
     | 'defaultChecked'
@@ -2797,6 +2894,7 @@ type Tags = {
   >;
   'tp-menu-item': Tag<
     TpMenuItem,
+    | 'appearance'
     | 'closeOnClick'
     | 'density'
     | 'disabled'
@@ -2816,6 +2914,7 @@ type Tags = {
   >;
   'tp-menu-radio-group': Tag<
     TpMenuRadioGroup,
+    | 'appearance'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -2835,6 +2934,7 @@ type Tags = {
   >;
   'tp-menu-radio-item': Tag<
     TpMenuRadioItem,
+    | 'appearance'
     | 'closeOnClick'
     | 'density'
     | 'disabled'
@@ -2855,6 +2955,7 @@ type Tags = {
   >;
   'tp-menubar': Tag<
     TpMenubar,
+    | 'appearance'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -2877,6 +2978,7 @@ type Tags = {
   'tp-message': Tag<
     TpMessage,
     | 'align'
+    | 'appearance'
     | 'author'
     | 'density'
     | 'disabled'
@@ -2894,6 +2996,7 @@ type Tags = {
   >;
   'tp-message-group': Tag<
     TpMessageGroup,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2907,6 +3010,7 @@ type Tags = {
   >;
   'tp-message-scroller': Tag<
     TpMessageScroller,
+    | 'appearance'
     | 'defaultPinned'
     | 'density'
     | 'disabled'
@@ -2935,6 +3039,7 @@ type Tags = {
   >;
   'tp-message-scroller-content': Tag<
     TpMessageScrollerContent,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2949,6 +3054,7 @@ type Tags = {
   >;
   'tp-message-scroller-item': Tag<
     TpMessageScrollerItem,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -2964,6 +3070,7 @@ type Tags = {
   >;
   'tp-message-scroller-return-control': Tag<
     TpMessageScrollerReturnControl,
+    | 'appearance'
     | 'ariaLabel'
     | 'behavior'
     | 'density'
@@ -2994,6 +3101,7 @@ type Tags = {
   >;
   'tp-message-scroller-viewport': Tag<
     TpMessageScrollerViewport,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3009,6 +3117,7 @@ type Tags = {
   >;
   'tp-mo-glow-border': Tag<
     TpMoGlowBorder,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3031,6 +3140,7 @@ type Tags = {
   'tp-mo-border-segment': Tag<
     TpMoBorderSegment,
     | 'alternate'
+    | 'appearance'
     | 'delay'
     | 'density'
     | 'disabled'
@@ -3052,6 +3162,7 @@ type Tags = {
   >;
   'tp-mo-segment-border': Tag<
     TpMoSegmentBorder,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3066,6 +3177,7 @@ type Tags = {
   >;
   'tp-mo-text-mirror': Tag<
     TpMoTextMirror,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3093,6 +3205,7 @@ type Tags = {
   >;
   'tp-mo-text-split': Tag<
     TpMoTextSplit,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3123,6 +3236,7 @@ type Tags = {
   >;
   'tp-mo-text-stroke': Tag<
     TpMoTextStroke,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3151,6 +3265,7 @@ type Tags = {
   >;
   'tp-native-select': Tag<
     TpNativeSelect,
+    | 'appearance'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -3186,6 +3301,7 @@ type Tags = {
     | 'align'
     | 'alignOffset'
     | 'anchor'
+    | 'appearance'
     | 'arrowBorderColor'
     | 'arrowBorderWidth'
     | 'arrowHeight'
@@ -3252,6 +3368,7 @@ type Tags = {
   >;
   'tp-navigation-menu-item': Tag<
     TpNavigationMenuItem,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3268,6 +3385,7 @@ type Tags = {
   >;
   'tp-navigation-panel': Tag<
     TpNavigationPanel,
+    | 'appearance'
     | 'collapseMode'
     | 'collapsed'
     | 'compact'
@@ -3303,6 +3421,7 @@ type Tags = {
   'tp-navigation-panel-action': Tag<
     TpNavigationPanelAction,
     | 'active'
+    | 'appearance'
     | 'ariaLabel'
     | 'density'
     | 'disabled'
@@ -3333,6 +3452,7 @@ type Tags = {
   >;
   'tp-navigation-panel-badge': Tag<
     TpNavigationPanelBadge,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'interactive'
@@ -3348,6 +3468,7 @@ type Tags = {
   >;
   'tp-navigation-panel-content': Tag<
     TpNavigationPanelContent,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3362,6 +3483,7 @@ type Tags = {
   'tp-navigation-panel-drawer': Tag<
     NavigationPanelDrawer,
     | 'activeSnapPoint'
+    | 'appearance'
     | 'backdrop'
     | 'closeOnEscape'
     | 'closeOnOutsideInteraction'
@@ -3412,6 +3534,7 @@ type Tags = {
   >;
   'tp-navigation-panel-footer': Tag<
     TpNavigationPanelFooter,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3425,6 +3548,7 @@ type Tags = {
   >;
   'tp-navigation-panel-group': Tag<
     TpNavigationPanelGroup,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3439,6 +3563,7 @@ type Tags = {
   'tp-navigation-panel-group-action': Tag<
     TpNavigationPanelGroupAction,
     | 'active'
+    | 'appearance'
     | 'ariaLabel'
     | 'density'
     | 'disabled'
@@ -3469,6 +3594,7 @@ type Tags = {
   >;
   'tp-navigation-panel-group-content': Tag<
     TpNavigationPanelGroupContent,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3482,6 +3608,7 @@ type Tags = {
   >;
   'tp-navigation-panel-group-label': Tag<
     TpNavigationPanelGroupLabel,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3495,6 +3622,7 @@ type Tags = {
   >;
   'tp-navigation-panel-header': Tag<
     TpNavigationPanelHeader,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3508,6 +3636,7 @@ type Tags = {
   >;
   'tp-navigation-panel-input': Tag<
     TpNavigationPanelInput,
+    | 'appearance'
     | 'autocomplete'
     | 'defaultValue'
     | 'density'
@@ -3552,6 +3681,7 @@ type Tags = {
   >;
   'tp-navigation-panel-inset': Tag<
     TpNavigationPanelInset,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3565,6 +3695,7 @@ type Tags = {
   >;
   'tp-navigation-panel-item': Tag<
     TpNavigationPanelItem,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3579,6 +3710,7 @@ type Tags = {
   'tp-navigation-panel-link': Tag<
     TpNavigationPanelLink,
     | 'active'
+    | 'appearance'
     | 'ariaLabel'
     | 'density'
     | 'disabled'
@@ -3609,6 +3741,7 @@ type Tags = {
   >;
   'tp-navigation-panel-loading-placeholder': Tag<
     TpNavigationPanelLoadingPlaceholder,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3623,6 +3756,7 @@ type Tags = {
   >;
   'tp-navigation-panel-menu': Tag<
     TpNavigationPanelMenu,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3637,6 +3771,7 @@ type Tags = {
   'tp-navigation-panel-resize-rail': Tag<
     TpNavigationPanelResizeRail,
     | 'active'
+    | 'appearance'
     | 'ariaLabel'
     | 'density'
     | 'disabled'
@@ -3667,6 +3802,7 @@ type Tags = {
   >;
   'tp-navigation-panel-separator': Tag<
     TpNavigationPanelSeparator,
+    | 'appearance'
     | 'decorative'
     | 'density'
     | 'disabled'
@@ -3681,6 +3817,7 @@ type Tags = {
   >;
   'tp-navigation-panel-subitem': Tag<
     TpNavigationPanelSubitem,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3695,6 +3832,7 @@ type Tags = {
   'tp-navigation-panel-sublink': Tag<
     TpNavigationPanelSublink,
     | 'active'
+    | 'appearance'
     | 'ariaLabel'
     | 'density'
     | 'disabled'
@@ -3725,6 +3863,7 @@ type Tags = {
   >;
   'tp-navigation-panel-submenu': Tag<
     TpNavigationPanelSubmenu,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -3739,6 +3878,7 @@ type Tags = {
   'tp-navigation-panel-trigger': Tag<
     TpNavigationPanelTrigger,
     | 'active'
+    | 'appearance'
     | 'ariaLabel'
     | 'density'
     | 'disabled'
@@ -3769,6 +3909,7 @@ type Tags = {
   >;
   'tp-one-time-code-field': Tag<
     TpOneTimeCodeField,
+    | 'appearance'
     | 'autoSubmit'
     | 'autocomplete'
     | 'characterPredicate'
@@ -3809,6 +3950,7 @@ type Tags = {
   >;
   'tp-overflow-list': Tag<
     TpOverflowList,
+    | 'appearance'
     | 'collapseFrom'
     | 'density'
     | 'disabled'
@@ -3829,6 +3971,7 @@ type Tags = {
   >;
   'tp-pagination': Tag<
     TpPagination,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'hrefForPage'
@@ -3860,6 +4003,7 @@ type Tags = {
     | 'align'
     | 'alignOffset'
     | 'anchor'
+    | 'appearance'
     | 'arrowBorderColor'
     | 'arrowBorderWidth'
     | 'arrowHeight'
@@ -3927,6 +4071,7 @@ type Tags = {
     | 'align'
     | 'alignOffset'
     | 'anchor'
+    | 'appearance'
     | 'arrowBorderColor'
     | 'arrowBorderWidth'
     | 'arrowHeight'
@@ -3990,6 +4135,7 @@ type Tags = {
   >;
   'tp-progress': Tag<
     TpProgress,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'format'
@@ -4013,6 +4159,7 @@ type Tags = {
   >;
   'tp-qr-code': Tag<
     TpQrCode,
+    | 'appearance'
     | 'copyable'
     | 'density'
     | 'disabled'
@@ -4044,6 +4191,7 @@ type Tags = {
   'tp-questionnaire': Tag<
     TpQuestionnaire,
     | 'actions'
+    | 'appearance'
     | 'choiceMode'
     | 'defaultItem'
     | 'defaultValue'
@@ -4074,6 +4222,7 @@ type Tags = {
   >;
   'tp-radio-group': Tag<
     TpRadioGroup,
+    | 'appearance'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -4102,6 +4251,7 @@ type Tags = {
   >;
   'tp-radio-group-item': Tag<
     TpRadioGroupItem,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'formOwner'
@@ -4122,6 +4272,7 @@ type Tags = {
   >;
   'tp-resizable-handle': Tag<
     TpResizableHandle,
+    | 'appearance'
     | 'boundary'
     | 'density'
     | 'disableDoubleClickReset'
@@ -4144,6 +4295,7 @@ type Tags = {
   >;
   'tp-resizable-panel': Tag<
     TpResizablePanel,
+    | 'appearance'
     | 'collapsedSize'
     | 'collapsible'
     | 'defaultSize'
@@ -4171,6 +4323,7 @@ type Tags = {
   >;
   'tp-resizable-panel-group': Tag<
     TpResizablePanelGroup,
+    | 'appearance'
     | 'defaultLayout'
     | 'defaultSizes'
     | 'density'
@@ -4206,6 +4359,7 @@ type Tags = {
   >;
   'tp-scroll-area': Tag<
     TpScrollArea,
+    | 'appearance'
     | 'axis'
     | 'density'
     | 'disabled'
@@ -4226,6 +4380,7 @@ type Tags = {
   >;
   'tp-scroll-trigger': Tag<
     TpScrollTrigger,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -4264,6 +4419,7 @@ type Tags = {
     | 'alignItemWithTrigger'
     | 'alignOffset'
     | 'anchor'
+    | 'appearance'
     | 'arrowBorderColor'
     | 'arrowBorderWidth'
     | 'arrowHeight'
@@ -4370,6 +4526,7 @@ type Tags = {
   >;
   'tp-select-chip-remove': Tag<
     TpSelectChipRemove,
+    | 'appearance'
     | 'ariaLabel'
     | 'density'
     | 'disabled'
@@ -4402,6 +4559,7 @@ type Tags = {
   >;
   'tp-select-clear': Tag<
     TpSelectClear,
+    | 'appearance'
     | 'ariaLabel'
     | 'density'
     | 'disabled'
@@ -4434,6 +4592,7 @@ type Tags = {
   >;
   'tp-select-option': Tag<
     TpSelectOption,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'index'
@@ -4458,6 +4617,7 @@ type Tags = {
   >;
   'tp-select-trigger': Tag<
     TpSelectTrigger,
+    | 'appearance'
     | 'ariaLabel'
     | 'density'
     | 'disabled'
@@ -4490,6 +4650,7 @@ type Tags = {
   >;
   'tp-separator': Tag<
     TpSeparator,
+    | 'appearance'
     | 'decorative'
     | 'density'
     | 'disabled'
@@ -4505,6 +4666,7 @@ type Tags = {
   'tp-skeleton': Tag<
     TpSkeleton,
     | 'animated'
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -4520,6 +4682,7 @@ type Tags = {
   >;
   'tp-slider': Tag<
     TpSlider,
+    | 'appearance'
     | 'buffered'
     | 'defaultValue'
     | 'density'
@@ -4575,6 +4738,7 @@ type Tags = {
   >;
   'tp-slider-thumb': Tag<
     TpSliderThumb,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'formOwner'
@@ -4598,6 +4762,7 @@ type Tags = {
   >;
   'tp-spinner': Tag<
     TpSpinner,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -4613,6 +4778,7 @@ type Tags = {
   >;
   'tp-status-dot': Tag<
     TpStatusDot,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -4631,6 +4797,7 @@ type Tags = {
   >;
   'tp-switch': Tag<
     TpSwitch,
+    | 'appearance'
     | 'checkboxGroup'
     | 'checked'
     | 'defaultChecked'
@@ -4667,6 +4834,7 @@ type Tags = {
   >;
   'tp-table': Tag<
     TpTable,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -4687,6 +4855,7 @@ type Tags = {
   >;
   'tp-table-body': Tag<
     TpTableBody,
+    | 'appearance'
     | 'colSpan'
     | 'density'
     | 'disabled'
@@ -4704,6 +4873,7 @@ type Tags = {
   >;
   'tp-table-caption': Tag<
     TpTableCaption,
+    | 'appearance'
     | 'colSpan'
     | 'density'
     | 'disabled'
@@ -4721,6 +4891,7 @@ type Tags = {
   >;
   'tp-table-cell': Tag<
     TpTableCell,
+    | 'appearance'
     | 'colSpan'
     | 'density'
     | 'disabled'
@@ -4738,6 +4909,7 @@ type Tags = {
   >;
   'tp-table-footer': Tag<
     TpTableFooter,
+    | 'appearance'
     | 'colSpan'
     | 'density'
     | 'disabled'
@@ -4755,6 +4927,7 @@ type Tags = {
   >;
   'tp-table-head': Tag<
     TpTableHead,
+    | 'appearance'
     | 'colSpan'
     | 'density'
     | 'disabled'
@@ -4772,6 +4945,7 @@ type Tags = {
   >;
   'tp-table-header': Tag<
     TpTableHeader,
+    | 'appearance'
     | 'colSpan'
     | 'density'
     | 'disabled'
@@ -4789,6 +4963,7 @@ type Tags = {
   >;
   'tp-table-row': Tag<
     TpTableRow,
+    | 'appearance'
     | 'colSpan'
     | 'density'
     | 'disabled'
@@ -4807,6 +4982,7 @@ type Tags = {
   'tp-table-of-contents': Tag<
     TpTableOfContents,
     | 'activationOffset'
+    | 'appearance'
     | 'closeDelay'
     | 'defaultValue'
     | 'density'
@@ -4838,6 +5014,7 @@ type Tags = {
   'tp-table-of-contents-item': Tag<
     TpTableOfContentsItem,
     | 'active'
+    | 'appearance'
     | 'current'
     | 'density'
     | 'depth'
@@ -4861,6 +5038,7 @@ type Tags = {
     | 'activateOnFocus'
     | 'activation'
     | 'activationDirection'
+    | 'appearance'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -4883,6 +5061,7 @@ type Tags = {
   >;
   'tp-text-area': Tag<
     TpTextArea,
+    | 'appearance'
     | 'autocomplete'
     | 'defaultValue'
     | 'density'
@@ -4922,6 +5101,7 @@ type Tags = {
   >;
   'tp-text-transform': Tag<
     TpTextTransform,
+    | 'appearance'
     | 'currency'
     | 'decimals'
     | 'density'
@@ -4947,6 +5127,7 @@ type Tags = {
   >;
   'tp-theme-switcher': Tag<
     TpThemeSwitcher,
+    | 'appearance'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -4970,6 +5151,7 @@ type Tags = {
   >;
   'tp-time': Tag<
     TpTime,
+    | 'appearance'
     | 'datetime'
     | 'density'
     | 'disabled'
@@ -5010,6 +5192,7 @@ type Tags = {
   'tp-timeline': Tag<
     TpTimeline,
     | 'align'
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -5026,6 +5209,7 @@ type Tags = {
   'tp-timeline-item': Tag<
     TpTimelineItem,
     | 'align'
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'
@@ -5041,6 +5225,7 @@ type Tags = {
   >;
   'tp-toast': Tag<
     TpToast,
+    | 'appearance'
     | 'container'
     | 'density'
     | 'disabled'
@@ -5073,6 +5258,7 @@ type Tags = {
   >;
   'tp-toggle': Tag<
     TpToggle,
+    | 'appearance'
     | 'ariaLabel'
     | 'defaultPressed'
     | 'density'
@@ -5100,6 +5286,7 @@ type Tags = {
   >;
   'tp-toggle-group': Tag<
     TpToggleGroup,
+    | 'appearance'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -5131,6 +5318,7 @@ type Tags = {
     | 'align'
     | 'alignOffset'
     | 'anchor'
+    | 'appearance'
     | 'arrowBorderColor'
     | 'arrowBorderWidth'
     | 'arrowHeight'
@@ -5195,6 +5383,7 @@ type Tags = {
   >;
   'tp-tree-item': Tag<
     TpTreeItem,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'hasChildren'
@@ -5213,6 +5402,7 @@ type Tags = {
   >;
   'tp-tree-view': Tag<
     TpTreeView<unknown>,
+    | 'appearance'
     | 'canDrop'
     | 'checkboxSelection'
     | 'defaultExpanded'
@@ -5267,6 +5457,7 @@ type Tags = {
   >;
   'tp-visually-hidden': Tag<
     TpVisuallyHidden,
+    | 'appearance'
     | 'density'
     | 'disabled'
     | 'invalid'

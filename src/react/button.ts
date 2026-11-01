@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Button}, the React binding of `<tp-button>`. */
 export type ButtonProps = ElementProps<
   TpButton,
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'

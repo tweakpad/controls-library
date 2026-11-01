@@ -14,6 +14,7 @@ export const EasingEditor = /*#__PURE__*/ createBinding(TpEasingEditor, 'EasingE
   TpEasingEditor,
   | 'adapter'
   | 'adapters'
+  | 'appearance'
   | 'defaultAdapter'
   | 'defaultDuration'
   | 'defaultPresetsOpen'

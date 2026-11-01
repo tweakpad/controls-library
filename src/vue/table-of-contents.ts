@@ -13,6 +13,7 @@ export const TableOfContents = /*#__PURE__*/ createBinding(TpTableOfContents, 'T
 }) as ElementBinding<
   TpTableOfContents,
   | 'activationOffset'
+  | 'appearance'
   | 'closeDelay'
   | 'defaultValue'
   | 'density'
@@ -55,6 +56,7 @@ export const TableOfContentsItem = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpTableOfContentsItem,
   | 'active'
+  | 'appearance'
   | 'current'
   | 'density'
   | 'depth'

@@ -12,6 +12,7 @@ export const TextEditor = /*#__PURE__*/ createBinding(TpTextEditor, 'TextEditor'
   lanes: {},
 }) as ElementBinding<
   TpTextEditor,
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'

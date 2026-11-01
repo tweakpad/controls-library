@@ -17,6 +17,7 @@ export type DragDropListProps<T = DragDropListDefaults[0]> = ElementProps<
   | 'activation'
   | 'alignment'
   | 'announcements'
+  | 'appearance'
   | 'autoScroll'
   | 'collisionDetector'
   | 'collisionPriority'

@@ -17,11 +17,11 @@ describe('shared status set', () => {
     ]);
   });
 
-  it("turns the status text destructive while the owner's status is error (`uwg-te-tab-anatomy-status`)", () => {
+  it("turns the status text to the destructive text tone while the owner's status is error (`uwg-te-tab-anatomy-status`)", () => {
     expect(statusAppearance).toHaveLength(2);
     expect(statusAppearance[1]).toEqual({
       selector: ':host([data-status="error"]) &',
-      declarations: { color: 'var(--tp-destructive)' },
+      declarations: { color: 'var(--tp-destructive-subtle-foreground)' },
     });
   });
 

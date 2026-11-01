@@ -10,6 +10,7 @@ export const QrCode = /*#__PURE__*/ createBinding(TpQrCode, 'QrCode', {
   lanes: {},
 }) as ElementBinding<
   TpQrCode,
+  | 'appearance'
   | 'copyable'
   | 'density'
   | 'disabled'

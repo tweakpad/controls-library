@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Time}, the React binding of `<tp-time>`. */
 export type TimeProps = ElementProps<
   TpTime,
+  | 'appearance'
   | 'datetime'
   | 'density'
   | 'disabled'

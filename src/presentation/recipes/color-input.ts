@@ -9,8 +9,7 @@ import {
   inlineControlSurface,
   inlineControlValue,
 } from './shared/inline-control.js';
-import { popupBorder } from './shared/surface.js';
-import { swatchCorner, swatchFill } from './shared/swatch.js';
+import { swatchCorner, swatchEdge, swatchFill } from './shared/swatch.js';
 import {
   disabledBackground,
   joinedEditor,
@@ -52,7 +51,7 @@ export const colorInputAppearance: PresentationDictionary = {
       'inline-size': `calc(100% - ${chipInset})`,
       'block-size': `calc(100% - ${chipInset})`,
       'border-radius': swatchCorner,
-      border: popupBorder,
+      border: swatchEdge,
       'box-sizing': 'border-box',
       '--_tp-color-input-checker': 'var(--tp-space-2)',
       ...swatchFill('var(--_tp-color-input-paint, none)', 'var(--_tp-color-input-checker)'),

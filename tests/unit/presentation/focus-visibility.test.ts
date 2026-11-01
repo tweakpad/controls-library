@@ -26,7 +26,10 @@ import type { PresentationRule } from '../../../src/presentation/resolver.js';
 // controller emits it, so rule order (later equal-specificity rules win) is part of the check.
 
 const ring = 'var(--tp-ring-width) var(--tp-border-style) var(--tp-ring)';
-const invalidRing = 'var(--tp-ring-width) var(--tp-border-style) var(--tp-destructive)';
+// A focused invalid field rings as a focused field does, in the destructive color.
+const invalidRing =
+  'var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-destructive) 50%, transparent)';
+const invalidFocus = `border-color:var(--tp-destructive);outline:${invalidRing};outline-offset:0`;
 const inset = 'outline-offset:calc(-1 * var(--tp-ring-width))';
 
 const css = (family: PresentationFamily, part: string, axes: Record<string, unknown> = {}) => {
@@ -54,7 +57,7 @@ const expectOrder = (text: string, earlier: string, later: string) => {
 };
 
 describe('invalid controls keep a full-strength focus ring', () => {
-  it('rings a focused invalid Input and Text area after the invalid paint', () => {
+  it('rings a focused invalid Input and Text area after the invalid paint, as a focused field in red', () => {
     for (const [family, part] of [
       [inputPresentation, 'input'],
       [textAreaPresentation, 'text-area'],
@@ -63,7 +66,7 @@ describe('invalid controls keep a full-strength focus ring', () => {
       expectOrder(
         text,
         `[part~="${part}"][aria-invalid="true"]{`,
-        `[part~="${part}"][aria-invalid="true"]:focus-visible{outline:${invalidRing}}`,
+        `[part~="${part}"][aria-invalid="true"]:focus-visible{${invalidFocus}}`,
       );
     }
   });
@@ -72,7 +75,7 @@ describe('invalid controls keep a full-strength focus ring', () => {
     expectOrder(
       css(inputGroupPresentation, 'input-group'),
       '[part~="input-group"][data-invalid]{',
-      `[part~="input-group"][data-invalid]:focus-within{outline:${invalidRing}}`,
+      `[part~="input-group"][data-invalid]:focus-within{${invalidFocus}}`,
     );
   });
 
@@ -93,15 +96,15 @@ describe('invalid controls keep a full-strength focus ring', () => {
 
   it('rings a focused invalid Select trigger, File upload and One-time code slot', () => {
     expect(css(selectPresentation, 'select-trigger')).toContain(
-      '[data-invalid]:focus-visible{outline-color:var(--tp-destructive)}',
+      `[data-invalid]:focus-visible{${invalidFocus}}`,
     );
     expect(css(fileUploadPresentation, 'file-upload-dropzone')).toContain(
-      `[part~="file-upload-dropzone"][data-invalid][data-focus-visible]{border-color:var(--tp-destructive);outline:${invalidRing};outline-offset:0}`,
+      `[part~="file-upload-dropzone"][data-invalid][data-focus-visible]{${invalidFocus}}`,
     );
     expectOrder(
       css(oneTimeCodeFieldPresentation, 'one-time-code-field-slot'),
       '[part~="one-time-code-field-slot"][data-invalid]{',
-      `[part~="one-time-code-field-slot"][data-invalid][data-active]{outline:${invalidRing}}`,
+      `[part~="one-time-code-field-slot"][data-invalid][data-active]{${invalidFocus}}`,
     );
   });
 });

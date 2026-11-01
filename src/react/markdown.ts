@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Markdown}, the React binding of `<tp-markdown>`. */
 export type MarkdownProps = ElementProps<
   TpMarkdown,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'elements'

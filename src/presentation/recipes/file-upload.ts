@@ -21,7 +21,8 @@ export const fileUploadAppearance: PresentationDictionary = {
         // Empty state rhythm: header items 2 apart, the content row 4 below (see hint/trigger).
         gap: 'var(--tp-space-2)',
         'border-radius': 'var(--tp-radius-lg)',
-        border: 'var(--tp-border-width) dashed var(--tp-border)',
+        border: 'var(--tp-border-width) dashed var(--tp-input)',
+        background: 'var(--tp-control)',
         color: 'var(--tp-foreground)',
         cursor: 'pointer',
         transition: motionTransition(['border-color', 'outline-color'], 'fast'),
@@ -49,7 +50,7 @@ export const fileUploadAppearance: PresentationDictionary = {
       selector: '&[data-drop-reject]',
       declarations: {
         'border-color': 'var(--tp-destructive)',
-        'background-color': 'color-mix(in oklab, var(--tp-destructive) 5%, transparent)',
+        'background-color': 'var(--tp-destructive-subtle)',
       },
     },
     { selector: '&[data-readonly], &[data-full]', declarations: { cursor: 'default' } },

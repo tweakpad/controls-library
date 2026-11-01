@@ -10,6 +10,7 @@ import type * as foundationTypes from '../foundation/types.js';
 /** Props of {@link RadioGroup}, the React binding of `<tp-radio-group>`. */
 export type RadioGroupProps = ElementProps<
   TpRadioGroup,
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'
@@ -52,6 +53,7 @@ export const RadioGroup = /*#__PURE__*/ createBinding<RadioGroupProps>(
 /** Props of {@link RadioGroupItem}, the React binding of `<tp-radio-group-item>`. */
 export type RadioGroupItemProps = ElementProps<
   TpRadioGroupItem,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'formOwner'

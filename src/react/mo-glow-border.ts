@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link MoGlowBorder}, the React binding of `<tp-mo-glow-border>`. */
 export type MoGlowBorderProps = ElementProps<
   TpMoGlowBorder,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

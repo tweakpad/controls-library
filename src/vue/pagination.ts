@@ -10,6 +10,7 @@ export const Pagination = /*#__PURE__*/ createBinding(TpPagination, 'Pagination'
   lanes: { page: 'onPageChange' },
 }) as ElementBinding<
   TpPagination,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'hrefForPage'

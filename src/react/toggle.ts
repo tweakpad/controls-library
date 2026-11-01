@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Toggle}, the React binding of `<tp-toggle>`. */
 export type ToggleProps = ElementProps<
   TpToggle,
+  | 'appearance'
   | 'ariaLabel'
   | 'defaultPressed'
   | 'density'

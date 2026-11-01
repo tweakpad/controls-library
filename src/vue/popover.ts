@@ -14,6 +14,7 @@ export const Popover = /*#__PURE__*/ createBinding(TpPopover, 'Popover', {
   | 'align'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'

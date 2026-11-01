@@ -9,7 +9,7 @@ export const fieldBoundary = {
   border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-input)',
   'border-radius': 'var(--tp-radius-lg)',
   color: 'var(--tp-foreground)',
-  background: 'light-dark(transparent, color-mix(in oklab, var(--tp-input) 30%, transparent))',
+  background: 'var(--tp-control)',
   font: 'inherit',
   'font-size': 'var(--tp-text-sm)',
   'line-height': 'var(--tp-leading-normal)',
@@ -20,13 +20,11 @@ export const fieldFocus = {
     'var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-ring) 50%, transparent)',
   'outline-offset': '0',
 };
+/** An invalid field at rest: its edge in the destructive color, with no ring of its own. */
 export const fieldInvalid = {
   'border-color': 'var(--tp-destructive)',
-  outline:
-    'var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-destructive) 20%, transparent)',
-  'outline-offset': '0',
 };
-export const disabledBackground = 'color-mix(in oklab, var(--tp-input) 50%, transparent)';
+export const disabledBackground = 'var(--tp-control-strong)';
 
 /**
  * A native editor joined into a surrounding boundary (Input group, inline Input): the boundary

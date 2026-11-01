@@ -11,6 +11,7 @@ export const ToggleGroup = /*#__PURE__*/ createBinding(TpToggleGroup, 'ToggleGro
   model: 'value',
 }) as ElementBinding<
   TpToggleGroup,
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'

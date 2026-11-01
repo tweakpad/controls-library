@@ -11,6 +11,7 @@ type CarouselDefaults = TpCarousel extends TpCarousel<infer T> ? [T] : never;
 /** Props of {@link Carousel}, the React binding of `<tp-carousel>`. */
 export type CarouselProps<T = CarouselDefaults[0]> = ElementProps<
   TpCarousel<T>,
+  | 'appearance'
   | 'autoplay'
   | 'defaultValue'
   | 'density'

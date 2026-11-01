@@ -13,6 +13,7 @@ export const RadioGroup = /*#__PURE__*/ createBinding(TpRadioGroup, 'RadioGroup'
   model: 'value',
 }) as ElementBinding<
   TpRadioGroup,
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'
@@ -48,6 +49,7 @@ export const RadioGroupItem = /*#__PURE__*/ createBinding(TpRadioGroupItem, 'Rad
   lanes: {},
 }) as ElementBinding<
   TpRadioGroupItem,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'formOwner'

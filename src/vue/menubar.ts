@@ -12,6 +12,7 @@ export const Menubar = /*#__PURE__*/ createBinding(TpMenubar, 'Menubar', {
   model: 'value',
 }) as ElementBinding<
   TpMenubar,
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'

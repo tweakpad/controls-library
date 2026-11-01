@@ -1,0 +1,483 @@
+import { html, render } from 'lit';
+import { live } from 'lit/directives/live.js';
+import {
+  authoredTokens,
+  contrastRatio,
+  hex,
+  MINIMUM_CONTRAST,
+  type Rgba,
+} from '../../../../src/docs/token-catalog.js';
+import { catalog } from '../../../../src/catalog.js';
+import { FLAT_ROLES } from '../../../../src/foundation/appearance.js';
+import type { TpValueChangeEvent } from '../../../../src/foundation/events.js';
+import { TOKEN_FAMILIES } from '../../../../src/presentation/tokens.js';
+import { renderComponentExample } from '../../../../src/stories/examples.js';
+import stylesheetSource from '../../../../src/styles.css?raw';
+
+const built = new URLSearchParams(location.search).has('built');
+if (built)
+  document.querySelector<HTMLLinkElement>('link[rel="stylesheet"]')!.href = '/dist/styles.css';
+await import(/* @vite-ignore */ built ? '/dist/register.js' : '/src/register.ts');
+
+type Scheme = 'light' | 'dark';
+type Appearance = 'default' | 'flat';
+type Values = Partial<Record<Scheme, string>>;
+/** Tuned role values, per appearance and per scheme. Unset values keep the library's. */
+type Overrides = Record<Appearance, Record<string, Values>>;
+
+const STATUS = ['primary', 'destructive', 'success', 'warning'] as const;
+/** The roles the tuner edits, grouped as the token set documents them. */
+const GROUPS = [
+  {
+    title: 'Solid fills',
+    note: 'Default and Secondary variants, checked controls, Slider and Progress, Calendar day, highlighted rows (accent).',
+    pairs: ['primary', 'secondary', 'accent', 'destructive', 'success', 'warning'].map((role) => ({
+      fill: role,
+      text: `${role}-foreground`,
+    })),
+  },
+  {
+    title: 'Status tints',
+    note: 'Status variants of Badge, Button, Bubble and Copy button; Alerts (a lighter tint of the fill); error text and destructive menu commands (the text tone).',
+    pairs: STATUS.map((role) => ({
+      fill: `${role}-subtle`,
+      text: `${role}-subtle-foreground`,
+      edge: `${role}-border`,
+    })),
+  },
+  {
+    title: 'Surfaces and lines',
+    note: 'The page, panels, fields and the lines between them. In flat, edge and input are transparent and fields separate by fill.',
+    pairs: [
+      { fill: 'background', text: 'foreground' },
+      { fill: 'card', text: 'card-foreground' },
+      { fill: 'muted', text: 'muted-foreground' },
+      { fill: 'control', text: 'foreground' },
+      { fill: 'control-strong', text: 'foreground' },
+      { fill: 'choice', text: 'choice-foreground' },
+    ],
+    lines: ['border', 'edge', 'input', 'control-border', 'ring'],
+  },
+] as const;
+const STORAGE_KEY = 'tp-color-roles-tuner-v2';
+
+// Every color role the default set derives from another, re-stated on the preview region so a
+// tuned role carries into the roles derived from it there.
+const colorRoles = new Set<string>(TOKEN_FAMILIES.color);
+const derived = [...authoredTokens(stylesheetSource)].filter(
+  ([role, value]) => colorRoles.has(role) && value.includes('var(--tp-'),
+);
+
+const canvas = document.createElement('canvas');
+canvas.width = canvas.height = 1;
+const context = canvas.getContext('2d', { willReadFrequently: true })!;
+function bytes(color: string): Rgba {
+  context.clearRect(0, 0, 1, 1);
+  context.fillStyle = color;
+  context.fillRect(0, 0, 1, 1);
+  const [red, green, blue, alpha] = context.getImageData(0, 0, 1, 1).data;
+  return [red!, green!, blue!, alpha!];
+}
+
+function load(): Overrides {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null') as Overrides | null;
+    if (saved?.default && saved.flat) return saved;
+  } catch {
+    // Unreadable storage starts from the library's values.
+  }
+  return { default: {}, flat: {} };
+}
+let overrides = load();
+let appearance: Appearance = 'default';
+function save() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides));
+  } catch {
+    // The tuning still applies to the page without storage.
+  }
+}
+
+const declaration = (role: string, values: Values) =>
+  `  --tp-${role}: light-dark(${values.light}, ${values.dark});`;
+const block = (selector: string, lines: readonly string[]) =>
+  lines.length ? `${selector} {\n${lines.join('\n')}\n}` : '';
+/** The tuning as CSS, for the preview region (`scope`) or for a page (no scope). */
+function stylesheet(scope?: string): string {
+  const tuned = (mode: Appearance) =>
+    Object.entries(overrides[mode]).map(([role, values]) => declaration(role, values));
+  if (!scope)
+    return [block(':root', tuned('default')), block("[appearance='flat']", tuned('flat'))]
+      .filter(Boolean)
+      .join('\n\n');
+  return [
+    block(scope, [
+      ...derived.map(([role, value]) => `  --tp-${role}: ${value};`),
+      ...tuned('default'),
+    ]),
+    block(`${scope}[appearance='flat']`, [
+      ...FLAT_ROLES.map(([name, value]) => `  ${name}: ${value};`),
+      ...tuned('flat'),
+    ]),
+  ].join('\n\n');
+}
+
+const applied = document.head.appendChild(document.createElement('style'));
+const app = document.getElementById('app')!;
+let surface: HTMLElement | null = null;
+let probe: HTMLElement | null = null;
+
+/** A color as the preview resolves it, in its own scheme or the given one. */
+function resolve(expression: string, scheme?: Scheme): string {
+  if (!probe) return '#000000';
+  probe.style.colorScheme = scheme ?? '';
+  probe.style.color = expression;
+  return hex(bytes(getComputedStyle(probe).color));
+}
+const role = (name: string, scheme?: Scheme) => resolve(`var(--tp-${name})`, scheme);
+/** The scheme the preview resolves to. */
+function surfaceScheme(): Scheme {
+  if (!probe) return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  return resolve('light-dark(#000000, #ffffff)') === '#ffffff' ? 'dark' : 'light';
+}
+
+/** Contrast of a color over a surface, where a translucent surface sits on the page background. */
+function ratio(text: string, fill: string) {
+  const page = bytes(role('background'));
+  const top = bytes(fill);
+  const alpha = top[3] / 255;
+  const surfaceColor: Rgba = [
+    top[0] * alpha + page[0] * (1 - alpha),
+    top[1] * alpha + page[1] * (1 - alpha),
+    top[2] * alpha + page[2] * (1 - alpha),
+    255,
+  ];
+  return contrastRatio(bytes(text), surfaceColor);
+}
+const contrast = (value: number, minimum = MINIMUM_CONTRAST) =>
+  html`<tp-badge variant="outline" title="Contrast against its surface"
+    >${value.toFixed(1)} : 1 ${value >= minimum ? 'pass' : 'low'}</tp-badge
+  >`;
+
+function edit(name: string, scheme: Scheme, value: string) {
+  const values = (overrides[appearance][name] ??= {
+    light: role(name, 'light'),
+    dark: role(name, 'dark'),
+  });
+  values[scheme] = value;
+  save();
+  update();
+}
+
+function update() {
+  applied.textContent = stylesheet('.surface');
+  const scheme = surfaceScheme();
+  const color = (name: string) =>
+    html`<tp-color-input
+      variant="inline"
+      size="sm"
+      alpha
+      label=${name}
+      .value=${live(role(name))}
+      @tp-value-change=${(event: TpValueChangeEvent<string>) =>
+        edit(name, scheme, event.detail.value)}
+    ></tp-color-input>`;
+  render(
+    html`<div class="tuner">
+      <aside class="controls" aria-label="Color roles">
+        <div class="group">
+          <h1>Color roles</h1>
+          <p class="note">
+            Editing the ${appearance} appearance in the ${scheme} theme. Changes are kept in this
+            browser.
+          </p>
+          <tp-field label="Filter components"
+            ><tp-input
+              placeholder="Every component"
+              .value=${live(query)}
+              @tp-value-change=${(event: TpValueChangeEvent<string>) => {
+                query = event.detail.value;
+                update();
+              }}
+            ></tp-input
+          ></tp-field>
+          <div class="actions">
+            <tp-theme-switcher
+              variant="group"
+              storage-key="tp-color-roles-theme"
+              .target=${surface}
+            ></tp-theme-switcher>
+            <tp-toggle-group
+              label="Appearance"
+              variant="outline"
+              .value=${live([appearance])}
+              @tp-value-change=${(event: TpValueChangeEvent<string[]>) => {
+                const next = event.detail.value[0] as Appearance | undefined;
+                if (!next) return;
+                appearance = next;
+                update();
+              }}
+            >
+              <tp-toggle value="default">Default</tp-toggle>
+              <tp-toggle value="flat">Flat</tp-toggle>
+            </tp-toggle-group>
+          </div>
+        </div>
+        ${GROUPS.map(
+          (group) =>
+            html`<div class="group">
+              <h2>${group.title}</h2>
+              <p class="note">${group.note}</p>
+              ${group.pairs.map(
+                (pair) => html`
+                  ${color(pair.fill)}
+                  <div class="pair">
+                    ${color(pair.text)} ${contrast(ratio(role(pair.text), role(pair.fill)))}
+                  </div>
+                  ${'edge' in pair ? color(pair.edge) : ''}
+                `,
+              )}
+              ${
+                'lines' in group
+                  ? html`${group.lines.map((name) => color(name))}
+                      <div class="pair">
+                        <span class="note"
+                          >Checkbox and radio boundary against the card (3 : 1)</span
+                        >
+                        ${contrast(ratio(role('control-border'), role('card')), 3)}
+                      </div>
+                      <div class="pair">
+                        <span class="note"
+                          >Control fill against the page (3 : 1 for a boundary)</span
+                        >
+                        ${contrast(ratio(role('control'), role('background')), 3)}
+                      </div>`
+                  : ''
+              }
+            </div>`,
+        )}
+        <div class="group">
+          <h2>Result</h2>
+          <tp-code-block
+            language="css"
+            label="color-roles.css"
+            .code=${stylesheet() || '/* The library values, unchanged. */'}
+          ></tp-code-block>
+          <div class="actions">
+            <tp-button
+              variant="outline"
+              size="sm"
+              @click=${() => {
+                overrides = { default: {}, flat: {} };
+                try {
+                  localStorage.removeItem(STORAGE_KEY);
+                } catch {
+                  // Nothing stored.
+                }
+                update();
+              }}
+              >Reset to library values</tp-button
+            >
+          </div>
+        </div>
+      </aside>
+      <main class="surface" appearance=${appearance}>
+        <span class="probe" aria-hidden="true"></span>
+        <div class="section-list" ?hidden=${query.trim() !== ''}>${preview}</div>
+        <h2 class="part-heading">Every component</h2>
+        ${components.map(
+          ({ name, example }) =>
+            html`<section ?hidden=${!name.toLowerCase().includes(query.trim().toLowerCase())}>
+              <h2>${name}</h2>
+              <div class="example">${example}</div>
+            </section>`,
+        )}
+      </main>
+    </div>`,
+    app,
+  );
+}
+
+// Every library component, through its own documented example, built once so a re-render keeps
+// each example's state.
+const components = catalog.map(([name, tag]) => ({ name, example: renderComponentExample(tag) }));
+let query = '';
+
+const statusVariants = ['default', 'secondary', 'destructive', 'success', 'warning'];
+const title = (variant: string) => variant[0]!.toUpperCase() + variant.slice(1);
+const preview = html`
+  <section>
+    <h2>Badge</h2>
+    <div class="row">
+      ${[...statusVariants, 'outline', 'ghost', 'link'].map(
+        (variant) => html`<tp-badge variant=${variant}>${title(variant)}</tp-badge>`,
+      )}
+    </div>
+  </section>
+  <section>
+    <h2>Button</h2>
+    <div class="row">
+      ${['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'].map(
+        (variant) => html`<tp-button variant=${variant}>${title(variant)}</tp-button>`,
+      )}
+      <tp-button disabled>Disabled</tp-button>
+    </div>
+    <div class="row">
+      ${['default', 'secondary', 'destructive', 'outline', 'ghost'].map(
+        (variant) =>
+          html`<tp-copy-button
+            variant=${variant}
+            show-label
+            value="TIDE-204"
+            label="Copy ${variant} ID"
+          ></tp-copy-button>`,
+      )}
+    </div>
+    <div class="row">
+      <tp-toggle-group label="Chart range" variant="outline" default-value='["week"]'>
+        <tp-toggle value="day">Day</tp-toggle>
+        <tp-toggle value="week">Week</tp-toggle>
+        <tp-toggle value="month">Month</tp-toggle>
+      </tp-toggle-group>
+      <tp-menu label="Station actions" .portal=${false}>
+        <tp-button slot="trigger" variant="outline">Station actions</tp-button>
+        <tp-menu-item value="calibrate">Calibrate</tp-menu-item>
+        <tp-menu-item value="export">Export readings</tp-menu-item>
+        <tp-menu-item value="retire" variant="destructive">Retire station</tp-menu-item>
+      </tp-menu>
+    </div>
+  </section>
+  <section>
+    <h2>Alert</h2>
+    <div class="stack">
+      <tp-alert title="Survey window opens Monday">Crews can book boats from Friday.</tp-alert>
+      <tp-alert severity="success" title="Readings uploaded">All 14 stations reported.</tp-alert>
+      <tp-alert severity="warning" title="Battery low">Station 7 has two days left.</tp-alert>
+      <tp-alert severity="danger" title="Sensor offline">Station 3 stopped at 04:12.</tp-alert>
+    </div>
+  </section>
+  <section>
+    <h2>Card and fields</h2>
+    <tp-card class="stack">
+      <span slot="header">North buoy</span>
+      <span slot="description">Calibration for the next survey.</span>
+      <tp-field label="Station name"><tp-input default-value="North buoy"></tp-input></tp-field>
+      <tp-field label="Notes"
+        ><tp-text-area placeholder="Anything the crew should know"></tp-text-area
+      ></tp-field>
+      <tp-field label="Region">
+        <tp-native-select default-value="north">
+          <option value="north">North bay</option>
+          <option value="south">South bay</option>
+        </tp-native-select>
+      </tp-field>
+      <tp-field label="Station code" error="Use four letters, such as TIDE.">
+        <tp-input invalid default-value="TD1"></tp-input>
+      </tp-field>
+      <div class="row">
+        <tp-checkbox default-checked>Notify crew</tp-checkbox>
+        <tp-checkbox>Archive readings</tp-checkbox>
+        <tp-switch default-checked>Live readings</tp-switch>
+        <tp-switch>Night mode</tp-switch>
+      </div>
+      <tp-radio-group default-value="hourly" label="Interval">
+        <tp-radio-group-item value="hourly">Hourly</tp-radio-group-item>
+        <tp-radio-group-item value="daily">Daily</tp-radio-group-item>
+      </tp-radio-group>
+      <tp-slider label="Sample depth" default-value="40"></tp-slider>
+      <tp-progress value="56" label="Uploading readings"></tp-progress>
+      <div slot="footer" class="row">
+        <tp-button variant="outline">Cancel</tp-button>
+        <tp-button>Save station</tp-button>
+      </div>
+    </tp-card>
+  </section>
+  <section>
+    <h2>Tabs and table</h2>
+    <tp-tabs default-value="readings" label="Station">
+      <button slot="tab" value="readings">Readings</button>
+      <button slot="tab" value="crew">Crew</button>
+      <section slot="panel" value="readings">
+        <tp-table label="Latest readings">
+          <tp-table-header>
+            <tp-table-row>
+              <tp-table-head>Station</tp-table-head>
+              <tp-table-head>State</tp-table-head>
+              <tp-table-head style="text-align:end">Depth</tp-table-head>
+            </tp-table-row>
+          </tp-table-header>
+          <tp-table-body>
+            <tp-table-row>
+              <tp-table-head scope="row">North buoy</tp-table-head>
+              <tp-table-cell><tp-badge variant="success">Live</tp-badge></tp-table-cell>
+              <tp-table-cell style="text-align:end">12.4 m</tp-table-cell>
+            </tp-table-row>
+            <tp-table-row>
+              <tp-table-head scope="row">Station 7</tp-table-head>
+              <tp-table-cell><tp-badge variant="warning">Limited</tp-badge></tp-table-cell>
+              <tp-table-cell style="text-align:end">8.1 m</tp-table-cell>
+            </tp-table-row>
+            <tp-table-row>
+              <tp-table-head scope="row">Station 3</tp-table-head>
+              <tp-table-cell><tp-badge variant="destructive">Offline</tp-badge></tp-table-cell>
+              <tp-table-cell style="text-align:end">—</tp-table-cell>
+            </tp-table-row>
+          </tp-table-body>
+        </tp-table>
+      </section>
+      <section slot="panel" value="crew">Three crews this week.</section>
+    </tp-tabs>
+  </section>
+  <section>
+    <h2>Bubble and status</h2>
+    <div class="stack">
+      ${['default', 'secondary', 'destructive', 'tinted', 'subdued', 'outline'].map(
+        (variant, index) =>
+          html`<tp-bubble variant=${variant} align=${index % 2 ? 'end' : 'start'}
+            >${title(variant)}: the north buoy reported at 06:40.</tp-bubble
+          >`,
+      )}
+    </div>
+    <div class="row">
+      ${statusVariants.map(
+        (variant) =>
+          html`<tp-status-dot
+            variant=${variant}
+            label=${title(variant)}
+            show-label
+          ></tp-status-dot>`,
+      )}
+    </div>
+    <tp-attachment
+      filename="readings-0412.raw"
+      status="error"
+      error-message="This format isn't supported. Export as CSV and try again."
+      removable
+    ></tp-attachment>
+    <tp-calendar label="Survey day" today="2026-11-02" default-value="2026-11-05"></tp-calendar>
+  </section>
+`;
+
+update();
+surface = app.querySelector<HTMLElement>('.surface');
+probe = app.querySelector<HTMLElement>('.probe');
+update();
+// The theme switcher writes the preview's color scheme; edits follow the scheme it shows.
+new MutationObserver(() => update()).observe(surface!, {
+  attributes: true,
+  attributeFilter: ['data-theme', 'style'],
+});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => update());
+
+Object.assign(window, {
+  colorRolesAPI: {
+    overrides: () => overrides,
+    appearance: () => appearance,
+    scheme: surfaceScheme,
+    role,
+    ratio,
+    css: () => stylesheet(),
+    update,
+  },
+});
+document.documentElement.dataset.fixtureReady = 'true';

@@ -1,14 +1,14 @@
 /* tp-switch appearance */
 /* switch */
 & ~ tp-label:not([hidden]){padding-inline-start:var(--tp-space-2)}
-&{background:light-dark(var(--tp-input), color-mix(in oklab, var(--tp-input) 80%, transparent));border:var(--tp-border-width) var(--tp-border-style) transparent;border-radius:var(--tp-radius-full)}
+&{background:light-dark(var(--tp-border), color-mix(in oklab, var(--tp-border) 80%, transparent));border:var(--tp-border-width) var(--tp-border-style) transparent;border-radius:var(--tp-radius-full)}
 &::before{background-color:var(--tp-primary)}
 &[data-checked]::before{opacity:1}
 &[data-disabled]{cursor:not-allowed}
 &[data-readonly]:not([data-disabled]){cursor:default}
 &[data-focus-visible]:focus-visible{outline:var(--tp-ring-width) var(--tp-border-style) var(--tp-ring);outline-offset:var(--tp-ring-offset);border-color:var(--tp-ring);box-shadow:0 0 0 var(--tp-ring-width) color-mix(in oklab, var(--tp-ring) 50%, transparent)}
-&[data-invalid][data-focus-visible]:focus-visible{outline-color:var(--tp-destructive);border-color:light-dark(var(--tp-destructive), color-mix(in oklab, var(--tp-destructive) 50%, transparent));box-shadow:0 0 0 var(--tp-ring-width) light-dark(color-mix(in oklab, var(--tp-destructive) 20%, transparent), color-mix(in oklab, var(--tp-destructive) 40%, transparent))}
-&[data-invalid]{border-color:light-dark(var(--tp-destructive), color-mix(in oklab, var(--tp-destructive) 50%, transparent));box-shadow:0 0 0 var(--tp-ring-width) light-dark(color-mix(in oklab, var(--tp-destructive) 20%, transparent), color-mix(in oklab, var(--tp-destructive) 40%, transparent))}
+&[data-invalid][data-focus-visible]:focus-visible{outline-color:var(--tp-destructive);border-color:var(--tp-destructive);box-shadow:0 0 0 var(--tp-ring-width) color-mix(in oklab, var(--tp-destructive) 50%, transparent)}
+&[data-invalid]{border-color:var(--tp-destructive)}
 /* switch-size-sm */
 /* switch-size-default */
 /* switch-variant-default */
@@ -25,7 +25,7 @@
 &{box-sizing:border-box;border:var(--tp-border-width) var(--tp-border-style) var(--tp-input);border-radius:var(--tp-radius-lg);background:var(--tp-muted);min-block-size:var(--tp-control-height-md);gap:var(--tp-space-2);padding-inline-start:var(--tp-space-2-5);padding-inline-end:var(--tp-space-3)}
 & > tp-label{font-size:var(--tp-text-sm);font-weight:var(--tp-font-normal);line-height:var(--tp-leading-normal);color:var(--tp-foreground)}
 &:has(> [part~="switch"]:focus-visible){border-color:var(--tp-ring);outline:var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-ring) 50%, transparent);outline-offset:0}
-&[data-invalid]{border-color:var(--tp-destructive);outline:var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-destructive) 20%, transparent);outline-offset:0}
-&[data-invalid]:has(> [part~="switch"]:focus-visible){outline:var(--tp-ring-width) var(--tp-border-style) var(--tp-destructive)}
+&[data-invalid]{border-color:var(--tp-destructive)}
+&[data-invalid]:has(> [part~="switch"]:focus-visible){border-color:var(--tp-destructive);outline:var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-destructive) 50%, transparent);outline-offset:0}
 
 /* tp-switch structure */

@@ -56,7 +56,7 @@ export const navigationPanelAppearance: PresentationDictionary = {
       declarations: {
         'border-radius': 'var(--tp-radius-lg)',
         'box-shadow': 'var(--tp-shadow-sm)',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
       },
     },
   ],

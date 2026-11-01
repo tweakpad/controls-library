@@ -9,6 +9,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type MoBorderSegmentProps = ElementProps<
   TpMoBorderSegment,
   | 'alternate'
+  | 'appearance'
   | 'delay'
   | 'density'
   | 'disabled'
@@ -41,6 +42,7 @@ export const MoBorderSegment = /*#__PURE__*/ createBinding<MoBorderSegmentProps>
 /** Props of {@link MoSegmentBorder}, the React binding of `<tp-mo-segment-border>`. */
 export type MoSegmentBorderProps = ElementProps<
   TpMoSegmentBorder,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

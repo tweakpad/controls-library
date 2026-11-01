@@ -9,6 +9,7 @@ export const Bubble = /*#__PURE__*/ createBinding(TpBubble, 'Bubble', {
 }) as ElementBinding<
   TpBubble,
   | 'align'
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -32,6 +33,7 @@ export const BubbleGroup = /*#__PURE__*/ createBinding(TpBubbleGroup, 'BubbleGro
   lanes: {},
 }) as ElementBinding<
   TpBubbleGroup,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

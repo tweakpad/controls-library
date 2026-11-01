@@ -28,6 +28,7 @@ export const CommandList = /*#__PURE__*/ createBinding(TpCommandList, 'CommandLi
   | 'alignItemWithTrigger'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'
@@ -156,6 +157,7 @@ export const CommandPalette = /*#__PURE__*/ createBinding(TpCommandPalette, 'Com
   model: 'value',
 }) as ElementBinding<
   TpCommandPalette,
+  | 'appearance'
   | 'backdrop'
   | 'closeOnEscape'
   | 'closeOnOutsideInteraction'

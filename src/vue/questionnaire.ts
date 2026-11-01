@@ -14,6 +14,7 @@ export const Questionnaire = /*#__PURE__*/ createBinding(TpQuestionnaire, 'Quest
 }) as ElementBinding<
   TpQuestionnaire,
   | 'actions'
+  | 'appearance'
   | 'choiceMode'
   | 'defaultItem'
   | 'defaultValue'

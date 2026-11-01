@@ -16,13 +16,23 @@ export function themePreference(
 }
 
 /**
- * Applies the Density toolbar's preset to the preview document: `compact` scales the spacing and
- * type seeds (`density-compact.css`), and every derived extent follows.
+ * Applies the Density toolbar to the preview document through the library's `density` attribute:
+ * `compact` selects the compact spacing seed, and every derived extent follows.
  */
 export function applyDensity(globals: Record<string, unknown> | undefined): void {
   const root = document.documentElement;
-  if (globals?.density === 'compact') root.dataset.tpDensity = 'compact';
-  else delete root.dataset.tpDensity;
+  if (globals?.density === 'compact') root.setAttribute('density', 'compact');
+  else root.removeAttribute('density');
+}
+
+/**
+ * Applies the Appearance toolbar to the preview document through the library's `appearance`
+ * attribute: `flat` removes edges and separates components by fill, `default` is the bordered look.
+ */
+export function applyAppearance(globals: Record<string, unknown> | undefined): void {
+  const root = document.documentElement;
+  if (globals?.appearance === 'flat') root.setAttribute('appearance', 'flat');
+  else root.removeAttribute('appearance');
 }
 
 /**

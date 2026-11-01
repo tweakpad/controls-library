@@ -21,15 +21,98 @@
   --tp-muted-foreground: light-dark(#666670, #a1a1aa);
   --tp-accent: light-dark(#ede9fe, #4c1d95);
   --tp-accent-foreground: light-dark(#3b197a, #f5f3ff);
-  --tp-destructive: light-dark(#dc2626, #ef4444);
-  --tp-destructive-foreground: light-dark(#fff, #18181b);
+  --tp-destructive: #dc2626;
+  --tp-destructive-foreground: #fff;
   --tp-success: light-dark(#15803d, #22c55e);
-  --tp-success-foreground: #fff;
+  --tp-success-foreground: light-dark(#fff, #18181b);
   --tp-warning: light-dark(#b45309, #f59e0b);
   --tp-warning-foreground: light-dark(#fff, #18181b);
+
+  /* Lines: `border` draws dividers, `edge` the outer edge of a component or panel, and `input` the
+     edge of a field or an outline control. `control` fills fields and outline controls;
+     `control-strong` is the stronger fill of hovered outline and ghost controls and disabled
+     fields. `control-border` is the boundary of checkboxes and radios, at a non-text contrast
+     against the page. */
   --tp-border: light-dark(#d4d4d8, #3f3f46);
+  --tp-edge: var(--tp-border);
   --tp-input: var(--tp-border);
+  --tp-control: light-dark(transparent, color-mix(in oklab, var(--tp-input) 30%, transparent));
+  --tp-control-strong: color-mix(in oklab, var(--tp-input) 50%, transparent);
+  --tp-control-border: color-mix(in oklab, var(--tp-foreground) 45%, var(--tp-background));
+
+  /* A chosen radio: its fill and its dot. The default appearance rings it in the primary color on
+     the control fill; the flat one fills it with no dot. */
+  --tp-choice: var(--tp-control);
+  --tp-choice-foreground: var(--tp-primary);
   --tp-ring: light-dark(#6d5dfc, #a78bfa);
+
+  /* Status tints, derived from each role: a fill over the background, the role's text tone on that
+     fill and on surfaces (darker in light schemes, lighter in dark ones), and an edge. A theme that
+     sets only a role gets a matching set; it can also set these directly. */
+  --tp-primary-subtle: light-dark(
+    color-mix(in oklab, var(--tp-primary) 12%, var(--tp-background)),
+    color-mix(in oklab, var(--tp-primary) 20%, var(--tp-background))
+  );
+  --tp-primary-subtle-foreground: light-dark(
+    color-mix(in oklab, var(--tp-primary) 85%, var(--tp-foreground)),
+    color-mix(in oklab, var(--tp-primary) 70%, var(--tp-foreground))
+  );
+  --tp-primary-border: light-dark(
+    color-mix(in oklab, var(--tp-primary) 30%, var(--tp-background)),
+    color-mix(in oklab, var(--tp-primary) 40%, var(--tp-background))
+  );
+  --tp-destructive-subtle: light-dark(
+    color-mix(in oklab, var(--tp-destructive) 12%, var(--tp-background)),
+    color-mix(in oklab, var(--tp-destructive) 20%, var(--tp-background))
+  );
+  --tp-destructive-subtle-foreground: light-dark(
+    color-mix(in oklab, var(--tp-destructive) 85%, var(--tp-foreground)),
+    color-mix(in oklab, var(--tp-destructive) 70%, var(--tp-foreground))
+  );
+  --tp-destructive-border: light-dark(
+    color-mix(in oklab, var(--tp-destructive) 30%, var(--tp-background)),
+    color-mix(in oklab, var(--tp-destructive) 40%, var(--tp-background))
+  );
+  --tp-success-subtle: light-dark(
+    color-mix(in oklab, var(--tp-success) 12%, var(--tp-background)),
+    color-mix(in oklab, var(--tp-success) 20%, var(--tp-background))
+  );
+  --tp-success-subtle-foreground: light-dark(
+    color-mix(in oklab, var(--tp-success) 85%, var(--tp-foreground)),
+    color-mix(in oklab, var(--tp-success) 70%, var(--tp-foreground))
+  );
+  --tp-success-border: light-dark(
+    color-mix(in oklab, var(--tp-success) 30%, var(--tp-background)),
+    color-mix(in oklab, var(--tp-success) 40%, var(--tp-background))
+  );
+  --tp-warning-subtle: light-dark(
+    color-mix(in oklab, var(--tp-warning) 12%, var(--tp-background)),
+    color-mix(in oklab, var(--tp-warning) 20%, var(--tp-background))
+  );
+  --tp-warning-subtle-foreground: light-dark(
+    color-mix(in oklab, var(--tp-warning) 85%, var(--tp-foreground)),
+    color-mix(in oklab, var(--tp-warning) 70%, var(--tp-foreground))
+  );
+  --tp-warning-border: light-dark(
+    color-mix(in oklab, var(--tp-warning) 30%, var(--tp-background)),
+    color-mix(in oklab, var(--tp-warning) 40%, var(--tp-background))
+  );
+
+  /* The default values of the roles the flat appearance redefines, which a `default` region inside
+     a flat one restores. */
+  --_tp-edge-default: var(--tp-edge);
+  --_tp-input-default: var(--tp-input);
+  --_tp-card-default: var(--tp-card);
+  --_tp-control-default: var(--tp-control);
+  --_tp-control-strong-default: var(--tp-control-strong);
+  --_tp-control-border-default: var(--tp-control-border);
+  --_tp-choice-default: var(--tp-choice);
+  --_tp-choice-foreground-default: var(--tp-choice-foreground);
+  --_tp-joined-edge-width-default: var(--tp-joined-edge-width);
+  --_tp-primary-border-default: var(--tp-primary-border);
+  --_tp-destructive-border-default: var(--tp-destructive-border);
+  --_tp-success-border-default: var(--tp-success-border);
+  --_tp-warning-border-default: var(--tp-warning-border);
   --tp-chart-1: #6d5dfc;
   --tp-chart-2: #0ea5e9;
   --tp-chart-3: #16a34a;
@@ -112,9 +195,11 @@
   /* Shared control and icon extents. */
   --tp-target-size-min: 2.75rem;
 
-  /* Lines, shape, elevation, and state opacity. */
+  /* Lines, shape, elevation, and state opacity. `joined-edge-width` is the edge between joined
+     slots: a line by default, a cut through the fill when flat. */
   --tp-border-width: 1px;
   --tp-border-width-strong: 2px;
+  --tp-joined-edge-width: var(--tp-border-width);
   --tp-border-style: solid;
   --tp-ring-width: 2px;
   --tp-radius: 0.625rem;
@@ -191,6 +276,42 @@
   --tp-shadow-sm: 0 calc(var(--tp-spacing) / 4) var(--tp-space-1) rgb(0 0 0 / 16%);
   --tp-shadow-md: 0 var(--tp-space-1) var(--tp-space-5) rgb(0 0 0 / 18%);
   --tp-shadow-lg: 0 var(--tp-space-3) var(--tp-space-12) rgb(0 0 0 / 20%);
+}
+
+/* Appearance modes: a `flat` region removes the edges of components and panels and separates them
+   by fill; `default` restores the bordered values, which the root keeps, inside a flat region, so
+   the modes nest in one document. Library elements carry the same rules on their host
+   (`FLAT_ROLES`). */
+[appearance='flat'] {
+  --tp-edge: transparent;
+  --tp-input: transparent;
+  --tp-card: color-mix(in oklab, var(--tp-foreground) 4%, var(--tp-background));
+  --tp-control: color-mix(in oklab, var(--tp-foreground) 10%, var(--tp-card));
+  --tp-control-strong: color-mix(in oklab, var(--tp-foreground) 15%, var(--tp-card));
+  --tp-control-border: transparent;
+  --tp-choice: var(--tp-primary);
+  --tp-choice-foreground: var(--tp-primary);
+  --tp-joined-edge-width: var(--tp-border-width-strong);
+  --tp-primary-border: transparent;
+  --tp-destructive-border: transparent;
+  --tp-success-border: transparent;
+  --tp-warning-border: transparent;
+}
+
+[appearance='default'] {
+  --tp-edge: var(--_tp-edge-default);
+  --tp-input: var(--_tp-input-default);
+  --tp-card: var(--_tp-card-default);
+  --tp-control: var(--_tp-control-default);
+  --tp-control-strong: var(--_tp-control-strong-default);
+  --tp-control-border: var(--_tp-control-border-default);
+  --tp-choice: var(--_tp-choice-default);
+  --tp-choice-foreground: var(--_tp-choice-foreground-default);
+  --tp-joined-edge-width: var(--_tp-joined-edge-width-default);
+  --tp-primary-border: var(--_tp-primary-border-default);
+  --tp-destructive-border: var(--_tp-destructive-border-default);
+  --tp-success-border: var(--_tp-success-border-default);
+  --tp-warning-border: var(--_tp-warning-border-default);
 }
 
 /* Code and machine output read in the mono role; zero specificity, so pages and components restyle freely. */

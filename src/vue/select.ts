@@ -30,6 +30,7 @@ export const Select = /*#__PURE__*/ createBinding(TpSelect, 'Select', {
   | 'alignItemWithTrigger'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'
@@ -151,6 +152,7 @@ export const SelectChipRemove = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpSelectChipRemove,
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -189,6 +191,7 @@ export const SelectClear = /*#__PURE__*/ createBinding(TpSelectClear, 'SelectCle
   lanes: {},
 }) as ElementBinding<
   TpSelectClear,
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -228,6 +231,7 @@ export const SelectOption = /*#__PURE__*/ createBinding(TpSelectOption, 'SelectO
   lanes: {},
 }) as ElementBinding<
   TpSelectOption,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'index'
@@ -257,6 +261,7 @@ export const SelectTrigger = /*#__PURE__*/ createBinding(TpSelectTrigger, 'Selec
   lanes: {},
 }) as ElementBinding<
   TpSelectTrigger,
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'

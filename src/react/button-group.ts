@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link ButtonGroup}, the React binding of `<tp-button-group>`. */
 export type ButtonGroupProps = ElementProps<
   TpButtonGroup,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -34,6 +35,7 @@ export const ButtonGroup = /*#__PURE__*/ createBinding<ButtonGroupProps>(
 /** Props of {@link ButtonGroupText}, the React binding of `<tp-button-group-text>`. */
 export type ButtonGroupTextProps = ElementProps<
   TpButtonGroupText,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

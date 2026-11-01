@@ -149,7 +149,10 @@ export const mediaPlayerAppearance: PresentationDictionary = {
         transition: motionTransition(['color']),
       },
     },
-    { selector: ':host([data-live-edge]) &', declarations: { color: 'var(--tp-destructive)' } },
+    {
+      selector: ':host([data-live-edge]) &',
+      declarations: { color: 'var(--tp-destructive-subtle-foreground)' },
+    },
   ],
   // Time: tabular numerals keep the clock width stable; an unknown time is subdued.
   'media-time': [

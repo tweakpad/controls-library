@@ -5,7 +5,7 @@ import type { PresentationDeclarations } from '../../resolver.js';
 export const calloutSurface: PresentationDeclarations = {
   'column-gap': 'var(--tp-space-2)',
   padding: 'var(--tp-space-2) var(--tp-space-2-5)',
-  border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+  border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
   'border-radius': 'var(--tp-radius-lg)',
   background: 'var(--tp-card)',
   color: 'var(--tp-card-foreground)',
@@ -16,8 +16,13 @@ export const calloutSurface: PresentationDeclarations = {
 /** The severities of a callout surface; `informational` keeps the surface's own text color. */
 export type CalloutSeverity = 'informational' | 'success' | 'warning' | 'danger';
 
-/** The severities that tint the callout surface's text, in this order. */
-export const calloutTints = ['success', 'warning', 'danger'] as const;
+/** The severities that tint the callout surface, in this order. */
+export const calloutTints = ['informational', 'success', 'warning', 'danger'] as const;
+type CalloutTint = (typeof calloutTints)[number];
+
+/** The status role of a tinting severity. */
+const roleOf = (severity: CalloutTint) =>
+  severity === 'danger' ? 'destructive' : severity === 'informational' ? 'primary' : severity;
 
 /** The severity of each alert kind (`> [!NOTE]`), shared by Markdown alerts and callout tones. */
 export const alertKindSeverity: Readonly<Record<MarkdownAlertKind, CalloutSeverity>> = {
@@ -28,9 +33,15 @@ export const alertKindSeverity: Readonly<Record<MarkdownAlertKind, CalloutSeveri
   caution: 'danger',
 };
 
-/** The text color of the callout surface in a tinting severity: its status role over the text. */
-export function calloutTint(severity: (typeof calloutTints)[number]): PresentationDeclarations {
+/**
+ * The callout surface in a severity, painted as a status variant: its role's tinted fill, edge and
+ * text tone, which the title, the description and the mark all take.
+ */
+export function calloutTint(severity: CalloutTint): PresentationDeclarations {
+  const role = roleOf(severity);
   return {
-    color: `color-mix(in oklab, var(--tp-${severity === 'danger' ? 'destructive' : severity}) 85%, var(--tp-card-foreground))`,
+    background: `var(--tp-${role}-subtle)`,
+    'border-color': `var(--tp-${role}-border)`,
+    color: `var(--tp-${role}-subtle-foreground)`,
   };
 }

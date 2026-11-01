@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link AspectRatio}, the React binding of `<tp-aspect-ratio>`. */
 export type AspectRatioProps = ElementProps<
   TpAspectRatio,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'fit'

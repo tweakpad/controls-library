@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Collapsible}, the React binding of `<tp-collapsible>`. */
 export type CollapsibleProps = ElementProps<
   TpCollapsible,
+  | 'appearance'
   | 'contentAlignment'
   | 'defaultOpen'
   | 'density'

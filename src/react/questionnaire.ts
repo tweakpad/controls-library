@@ -11,6 +11,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type QuestionnaireProps = ElementProps<
   TpQuestionnaire,
   | 'actions'
+  | 'appearance'
   | 'choiceMode'
   | 'defaultItem'
   | 'defaultValue'

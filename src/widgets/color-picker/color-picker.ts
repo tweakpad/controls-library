@@ -1721,7 +1721,7 @@ export class TpColorPicker extends TpFormElement<string> {
         class="swatch"
         part="color-picker-swatch"
         slot=${slot ?? nothing}
-        style=${`--_tp-color-picker-paint: ${color ? flatGradient(color) : 'none'}`}
+        style=${color ? `--_tp-color-picker-paint: ${flatGradient(color)}; --_tp-swatch-color: ${displayColor(color, 1)}` : '--_tp-color-picker-paint: none'}
       ></span>`;
     // The Tooltips repeat what the Button's name and the fields already say: visual only.
     return html`<tp-button-group
@@ -2232,6 +2232,7 @@ export class TpColorPicker extends TpFormElement<string> {
               'aria-hidden': 'true',
               style: {
                 '--_tp-color-picker-paint': this.#model ? flatGradient(this.#model) : 'none',
+                ...(this.#model ? { '--_tp-swatch-color': displayColor(this.#model, 1) } : {}),
               },
             },
           },

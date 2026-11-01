@@ -11,6 +11,7 @@ export type TabsProps = ElementProps<
   | 'activateOnFocus'
   | 'activation'
   | 'activationDirection'
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'

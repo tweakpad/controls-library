@@ -13,6 +13,7 @@ export const ColorInput = /*#__PURE__*/ createBinding(TpColorInput, 'ColorInput'
 }) as ElementBinding<
   TpColorInput,
   | 'alpha'
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'

@@ -9,7 +9,7 @@ export const mapAppearance: PresentationDictionary = {
     {
       declarations: {
         'border-radius': 'var(--tp-radius-lg)',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
         background: 'var(--tp-muted)',
         color: 'var(--tp-foreground)',
       },

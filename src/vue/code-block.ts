@@ -12,6 +12,7 @@ export const CodeBlock = /*#__PURE__*/ createBinding(TpCodeBlock, 'CodeBlock', {
 }) as ElementBinding<
   TpCodeBlock,
   | 'addedLines'
+  | 'appearance'
   | 'code'
   | 'collapsedLines'
   | 'collapsible'

@@ -8,6 +8,7 @@ export const Card = /*#__PURE__*/ createBinding(TpCard, 'Card', {
   lanes: {},
 }) as ElementBinding<
   TpCard,
+  | 'appearance'
   | 'borders'
   | 'density'
   | 'disabled'

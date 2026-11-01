@@ -226,7 +226,10 @@ export const easingEditorAppearance: PresentationDictionary = {
         color: 'transparent',
       },
     },
-    { selector: '&[data-invalid] .highlight', declarations: { color: 'var(--tp-destructive)' } },
+    {
+      selector: '&[data-invalid] .highlight',
+      declarations: { color: 'var(--tp-destructive-subtle-foreground)' },
+    },
     { selector: '&[data-disabled] .highlight', declarations: { opacity: '0.5' } },
   ],
   'easing-editor-output-token': [

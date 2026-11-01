@@ -10,17 +10,17 @@
 :where(&)::before{background-color:color-mix(in oklab, var(--tp-secondary) 80%, light-dark(var(--tp-foreground), var(--tp-background)))}
 &:where(:not(:disabled, [aria-disabled="true"]):is(:hover, [data-popup-open]))::before{opacity:1}
 /* button-variant-destructive */
-&{background:var(--tp-destructive);color:var(--tp-destructive-foreground);border-color:var(--tp-destructive)}
-:where(&)::before{background-color:color-mix(in oklab, var(--tp-destructive) 85%, light-dark(var(--tp-foreground), var(--tp-background)))}
+&{background:var(--tp-destructive-subtle);color:var(--tp-destructive-subtle-foreground);border-color:var(--tp-destructive-border)}
+:where(&)::before{background-color:color-mix(in oklab, var(--tp-destructive) 12%, var(--tp-destructive-subtle))}
 &:where(:not(:disabled, [aria-disabled="true"]):is(:hover, [data-popup-open]))::before{opacity:1}
 /* button-variant-outline */
 &{color:var(--tp-foreground);background:var(--tp-background);border-color:var(--tp-border);transition:color calc(var(--tp-duration-fast) * var(--tp-motion-scale) * 1) var(--tp-easing-standard), border-color calc(var(--tp-duration-fast) * var(--tp-motion-scale) * 1) var(--tp-easing-standard)}
-:where(&)::before{background-color:color-mix(in oklab, var(--tp-input) 50%, transparent)}
+:where(&)::before{background-color:var(--tp-control-strong)}
 &:where(:not(:disabled, [aria-disabled="true"]):is(:hover, [data-popup-open]))::before{opacity:1}
-&{background:light-dark(var(--tp-background), color-mix(in oklab, var(--tp-input) 30%, transparent));border-color:light-dark(var(--tp-border), var(--tp-input))}
+&{background:var(--tp-control);border-color:var(--tp-input)}
 /* button-variant-ghost */
 &{color:var(--tp-foreground);background:transparent;border-color:transparent;transition:color calc(var(--tp-duration-fast) * var(--tp-motion-scale) * 1) var(--tp-easing-standard), border-color calc(var(--tp-duration-fast) * var(--tp-motion-scale) * 1) var(--tp-easing-standard)}
-:where(&)::before{background-color:color-mix(in oklab, var(--tp-input) 50%, transparent)}
+:where(&)::before{background-color:var(--tp-control-strong)}
 &:where(:not(:disabled, [aria-disabled="true"]):is(:hover, [data-popup-open]))::before{opacity:1}
 /* button-variant-link */
 &{color:var(--tp-foreground);background:transparent;border-color:transparent}

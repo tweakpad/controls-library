@@ -11,6 +11,7 @@ export const AlertDialog = /*#__PURE__*/ createBinding(TpAlertDialog, 'AlertDial
   model: 'open',
 }) as ElementBinding<
   TpAlertDialog,
+  | 'appearance'
   | 'backdrop'
   | 'closeOnEscape'
   | 'closeOnOutsideInteraction'

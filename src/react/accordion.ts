@@ -9,6 +9,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Accordion}, the React binding of `<tp-accordion>`. */
 export type AccordionProps = ElementProps<
   TpAccordion,
+  | 'appearance'
   | 'collapsible'
   | 'contentAlignment'
   | 'defaultValue'
@@ -50,6 +51,7 @@ export const Accordion = /*#__PURE__*/ createBinding<AccordionProps>(
 /** Props of {@link AccordionItem}, the React binding of `<tp-accordion-item>`. */
 export type AccordionItemProps = ElementProps<
   TpAccordionItem,
+  | 'appearance'
   | 'contentAlignment'
   | 'density'
   | 'disabled'

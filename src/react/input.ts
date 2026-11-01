@@ -9,6 +9,7 @@ import type * as foundationTypes from '../foundation/types.js';
 /** Props of {@link Input}, the React binding of `<tp-input>`. */
 export type InputProps = ElementProps<
   TpInput,
+  | 'appearance'
   | 'autocomplete'
   | 'defaultValue'
   | 'density'

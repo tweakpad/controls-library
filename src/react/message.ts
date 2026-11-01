@@ -9,6 +9,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type MessageProps = ElementProps<
   TpMessage,
   | 'align'
+  | 'appearance'
   | 'author'
   | 'density'
   | 'disabled'
@@ -37,6 +38,7 @@ export const Message = /*#__PURE__*/ createBinding<MessageProps>(
 /** Props of {@link MessageGroup}, the React binding of `<tp-message-group>`. */
 export type MessageGroupProps = ElementProps<
   TpMessageGroup,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

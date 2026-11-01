@@ -11,6 +11,7 @@ export const Cursor = /*#__PURE__*/ createBinding(TpCursor, 'Cursor', {
   lanes: {},
 }) as ElementBinding<
   TpCursor,
+  | 'appearance'
   | 'damping'
   | 'density'
   | 'disabled'
@@ -41,6 +42,7 @@ export const CursorZone = /*#__PURE__*/ createBinding(TpCursorZone, 'CursorZone'
   lanes: {},
 }) as ElementBinding<
   TpCursorZone,
+  | 'appearance'
   | 'damping'
   | 'density'
   | 'disabled'

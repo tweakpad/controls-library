@@ -10,6 +10,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link ResizableHandle}, the React binding of `<tp-resizable-handle>`. */
 export type ResizableHandleProps = ElementProps<
   TpResizableHandle,
+  | 'appearance'
   | 'boundary'
   | 'density'
   | 'disableDoubleClickReset'
@@ -41,6 +42,7 @@ export const ResizableHandle = /*#__PURE__*/ createBinding<ResizableHandleProps>
 /** Props of {@link ResizablePanel}, the React binding of `<tp-resizable-panel>`. */
 export type ResizablePanelProps = ElementProps<
   TpResizablePanel,
+  | 'appearance'
   | 'collapsedSize'
   | 'collapsible'
   | 'defaultSize'
@@ -82,6 +84,7 @@ export const ResizablePanel = /*#__PURE__*/ createBinding<ResizablePanelProps>(
 /** Props of {@link ResizablePanelGroup}, the React binding of `<tp-resizable-panel-group>`. */
 export type ResizablePanelGroupProps = ElementProps<
   TpResizablePanelGroup,
+  | 'appearance'
   | 'defaultLayout'
   | 'defaultSizes'
   | 'density'

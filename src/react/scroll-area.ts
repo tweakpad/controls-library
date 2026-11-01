@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link ScrollArea}, the React binding of `<tp-scroll-area>`. */
 export type ScrollAreaProps = ElementProps<
   TpScrollArea,
+  | 'appearance'
   | 'axis'
   | 'density'
   | 'disabled'

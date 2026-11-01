@@ -13,6 +13,7 @@ import type * as foundationSurfaceState from '../foundation/surface-state.js';
 /** Props of {@link Map}, the React binding of `<tp-map>`. */
 export type MapProps = ElementProps<
   TpMap,
+  | 'appearance'
   | 'controls'
   | 'controlsOrientation'
   | 'controlsPosition'
@@ -76,6 +77,7 @@ export const Map = /*#__PURE__*/ createBinding<MapProps>(
 export type MapControlProps = ElementProps<
   TpMapControl,
   | 'action'
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -107,6 +109,7 @@ export type MapOverlayProps = ElementProps<
   | 'align'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'
@@ -187,6 +190,7 @@ export const MapOverlay = /*#__PURE__*/ createBinding<MapOverlayProps>(
 export type MapPinProps = ElementProps<
   TpMapPin,
   | 'anchor'
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

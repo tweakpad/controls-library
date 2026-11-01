@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type AlertProps = ElementProps<
   TpAlert,
   | 'announcement'
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

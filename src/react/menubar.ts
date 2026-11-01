@@ -9,6 +9,7 @@ import type * as foundationSurfaceState from '../foundation/surface-state.js';
 /** Props of {@link Menubar}, the React binding of `<tp-menubar>`. */
 export type MenubarProps = ElementProps<
   TpMenubar,
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'

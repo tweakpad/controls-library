@@ -9,6 +9,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Calendar}, the React binding of `<tp-calendar>`. */
 export type CalendarProps = ElementProps<
   TpCalendar,
+  | 'appearance'
   | 'buttonVariant'
   | 'calendarAdapter'
   | 'captionLayout'

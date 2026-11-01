@@ -24,6 +24,7 @@ export const Autocomplete = /*#__PURE__*/ createBinding(TpAutocomplete, 'Autocom
   | 'alignItemWithTrigger'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'

@@ -9,6 +9,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type AvatarProps = ElementProps<
   TpAvatar,
   | 'alt'
+  | 'appearance'
   | 'crossOrigin'
   | 'density'
   | 'disabled'
@@ -45,6 +46,7 @@ export const Avatar = /*#__PURE__*/ createBinding<AvatarProps>(
 /** Props of {@link AvatarGroup}, the React binding of `<tp-avatar-group>`. */
 export type AvatarGroupProps = ElementProps<
   TpAvatarGroup,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

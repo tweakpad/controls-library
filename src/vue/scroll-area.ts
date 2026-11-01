@@ -8,6 +8,7 @@ export const ScrollArea = /*#__PURE__*/ createBinding(TpScrollArea, 'ScrollArea'
   lanes: {},
 }) as ElementBinding<
   TpScrollArea,
+  | 'appearance'
   | 'axis'
   | 'density'
   | 'disabled'

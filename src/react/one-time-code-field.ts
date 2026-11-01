@@ -10,6 +10,7 @@ import type * as foundationTypes from '../foundation/types.js';
 /** Props of {@link OneTimeCodeField}, the React binding of `<tp-one-time-code-field>`. */
 export type OneTimeCodeFieldProps = ElementProps<
   TpOneTimeCodeField,
+  | 'appearance'
   | 'autoSubmit'
   | 'autocomplete'
   | 'characterPredicate'

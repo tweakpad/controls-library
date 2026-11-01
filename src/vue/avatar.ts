@@ -11,6 +11,7 @@ export const Avatar = /*#__PURE__*/ createBinding(TpAvatar, 'Avatar', {
 }) as ElementBinding<
   TpAvatar,
   | 'alt'
+  | 'appearance'
   | 'crossOrigin'
   | 'density'
   | 'disabled'
@@ -42,6 +43,7 @@ export const AvatarGroup = /*#__PURE__*/ createBinding(TpAvatarGroup, 'AvatarGro
   lanes: {},
 }) as ElementBinding<
   TpAvatarGroup,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

@@ -12,6 +12,7 @@ import { containNestedEvents } from '../../foundation/nested-events.js';
 import { defaultTrue } from '../../foundation/converters.js';
 import { parseColor } from '../../foundation/color/parse.js';
 import {
+  displayColor,
   flatGradient,
   normalizeColorText,
   serializeColor,
@@ -545,7 +546,11 @@ export class TpColorInput extends TpFormElement<string> {
         ...markers,
         class: 'chip',
         'aria-hidden': 'true',
-        style: { '--_tp-color-input-paint': parsed ? flatGradient(parsed) : 'none' },
+        style: {
+          '--_tp-color-input-paint': parsed ? flatGradient(parsed) : 'none',
+          // The opaque color, from which the chip draws its edge.
+          ...(parsed ? { '--_tp-swatch-color': displayColor(parsed, 1) } : {}),
+        },
       },
     });
     return this.renderPart('color-input-swatch', state, {

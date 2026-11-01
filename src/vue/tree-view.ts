@@ -11,6 +11,7 @@ export const TreeItem = /*#__PURE__*/ createBinding(TpTreeItem, 'TreeItem', {
   lanes: {},
 }) as ElementBinding<
   TpTreeItem,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'hasChildren'
@@ -37,6 +38,7 @@ export const TreeView = /*#__PURE__*/ createBinding(TpTreeView, 'TreeView', {
   lanes: {},
 }) as ElementBinding<
   TpTreeView,
+  | 'appearance'
   | 'canDrop'
   | 'checkboxSelection'
   | 'defaultExpanded'

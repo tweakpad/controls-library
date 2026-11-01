@@ -41,7 +41,7 @@ export const dataVisualizationAppearance: PresentationDictionary = {
       declarations: {
         background: 'var(--tp-popover)',
         color: 'var(--tp-popover-foreground)',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
         'border-radius': 'var(--tp-radius-lg)',
         'box-shadow': 'var(--tp-shadow-lg)',
         'font-size': 'var(--tp-text-xs)',

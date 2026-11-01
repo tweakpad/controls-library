@@ -11,6 +11,7 @@ import type * as widgetsTextEditorTypes from '../../widgets/text-editor/types.js
 /** Props of {@link TextEditor}, the React binding of `<tp-text-editor>`. */
 export type TextEditorProps = ElementProps<
   TpTextEditor,
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'

@@ -8,6 +8,7 @@ export const Spinner = /*#__PURE__*/ createBinding(TpSpinner, 'Spinner', {
   lanes: {},
 }) as ElementBinding<
   TpSpinner,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

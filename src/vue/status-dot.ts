@@ -8,6 +8,7 @@ export const StatusDot = /*#__PURE__*/ createBinding(TpStatusDot, 'StatusDot', {
   lanes: {},
 }) as ElementBinding<
   TpStatusDot,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

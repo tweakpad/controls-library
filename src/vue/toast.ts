@@ -9,6 +9,7 @@ export const Toast = /*#__PURE__*/ createBinding(TpToast, 'Toast', {
   lanes: {},
 }) as ElementBinding<
   TpToast,
+  | 'appearance'
   | 'container'
   | 'density'
   | 'disabled'

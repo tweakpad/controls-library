@@ -8,6 +8,7 @@ export const MoTextSplit = /*#__PURE__*/ createBinding(TpMoTextSplit, 'MoTextSpl
   lanes: {},
 }) as ElementBinding<
   TpMoTextSplit,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

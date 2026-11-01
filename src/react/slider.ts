@@ -11,6 +11,7 @@ import type * as foundationTypes from '../foundation/types.js';
 /** Props of {@link Slider}, the React binding of `<tp-slider>`. */
 export type SliderProps = ElementProps<
   TpSlider,
+  | 'appearance'
   | 'buffered'
   | 'defaultValue'
   | 'density'
@@ -83,6 +84,7 @@ export const Slider = /*#__PURE__*/ createBinding<SliderProps>(
 /** Props of {@link SliderThumb}, the React binding of `<tp-slider-thumb>`. */
 export type SliderThumbProps = ElementProps<
   TpSliderThumb,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'formOwner'

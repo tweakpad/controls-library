@@ -12,6 +12,7 @@ export const Calendar = /*#__PURE__*/ createBinding(TpCalendar, 'Calendar', {
   model: 'value',
 }) as ElementBinding<
   TpCalendar,
+  | 'appearance'
   | 'buttonVariant'
   | 'calendarAdapter'
   | 'captionLayout'

@@ -29,17 +29,7 @@ export const nativeSelectAppearance: PresentationDictionary = {
     {
       selector: '&:hover:not(:disabled)',
       declarations: {
-        background:
-          'light-dark(transparent, color-mix(in oklab, var(--tp-input) 50%, transparent))',
-      },
-    },
-    {
-      selector: '&[aria-invalid="true"]',
-      declarations: {
-        'border-color':
-          'light-dark(var(--tp-destructive), color-mix(in oklab, var(--tp-destructive) 50%, transparent))',
-        'outline-color':
-          'light-dark(color-mix(in oklab, var(--tp-destructive) 20%, transparent), color-mix(in oklab, var(--tp-destructive) 40%, transparent))',
+        background: 'var(--tp-control)',
       },
     },
     {

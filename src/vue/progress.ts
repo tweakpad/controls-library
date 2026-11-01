@@ -8,6 +8,7 @@ export const Progress = /*#__PURE__*/ createBinding(TpProgress, 'Progress', {
   lanes: {},
 }) as ElementBinding<
   TpProgress,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'format'

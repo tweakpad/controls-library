@@ -25,10 +25,11 @@ export const alertAppearance: PresentationDictionary = {
   ],
   'alert-description': [
     { selector: '&', declarations: { color: 'var(--tp-muted-foreground)' } },
-    {
-      selector: ":host(:is([severity='success'], [severity='warning'], [severity='danger'])) &",
+    // A severity's tint carries one text tone, as a status variant does.
+    ...calloutTints.map((severity) => ({
+      selector: `:host([severity='${severity}']) &`,
       declarations: { color: 'inherit' },
-    },
+    })),
     { selector: '& ::slotted(p)', declarations: { margin: '0' } },
   ],
   'alert-mark': [{ selector: '&', declarations: { 'padding-block-start': 'var(--tp-space-0-5)' } }],

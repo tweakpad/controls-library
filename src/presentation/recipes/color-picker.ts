@@ -1,8 +1,7 @@
 import { motionTransition } from '../motion.js';
 import type { PresentationDeclarations, PresentationDictionary } from '../resolver.js';
 import { activeRing, colorThumbRing, focusRing, ringMix, thumb } from './shared/handle.js';
-import { popupBorder } from './shared/surface.js';
-import { swatchCorner, swatchFill } from './shared/swatch.js';
+import { swatchCorner, swatchEdge, swatchEdgeRing, swatchFill } from './shared/swatch.js';
 
 // Widgets Specification 6.1 Presentation: value-domain paint arrives from the widget as the
 // inline custom properties `--_tp-color-picker-paint` (an <image> list) and
@@ -132,7 +131,7 @@ export const colorPickerAppearance: PresentationDictionary = {
         'inline-size': 'var(--tp-control-height-md)',
         'block-size': 'var(--tp-control-height-md)',
         'border-radius': swatchCorner,
-        border: popupBorder,
+        border: swatchEdge,
         ...checker,
       },
     },
@@ -142,7 +141,7 @@ export const colorPickerAppearance: PresentationDictionary = {
   ],
   // The fill covers the Toggle, which clips it to its own radius (rounded square, round, or
   // the joined strip geometry); the fill itself stays square.
-  'color-picker-swatch': [{ declarations: { ...checker } }],
+  'color-picker-swatch': [{ declarations: { ...checker, 'box-shadow': swatchEdgeRing } }],
   'color-picker-swatch-shape-round': [],
   'color-picker-swatch-shape-square': [],
   'color-picker-swatch-item': [

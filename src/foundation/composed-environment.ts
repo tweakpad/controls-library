@@ -80,7 +80,16 @@ export class ComposedEnvironmentObserver {
       this.#observer.observe(node, {
         attributes: true,
         attributeOldValue: true,
-        attributeFilter: ['dir', 'lang', 'class', 'style', 'slot', 'data-theme', 'density'],
+        attributeFilter: [
+          'dir',
+          'lang',
+          'class',
+          'style',
+          'slot',
+          'data-theme',
+          'density',
+          'appearance',
+        ],
       });
       if ((node as Element).localName === 'slot') {
         const slot = node as HTMLSlotElement;

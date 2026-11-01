@@ -8,6 +8,7 @@ export const Label = /*#__PURE__*/ createBinding(TpLabel, 'Label', {
   lanes: {},
 }) as ElementBinding<
   TpLabel,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'for'

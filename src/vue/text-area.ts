@@ -12,6 +12,7 @@ export const TextArea = /*#__PURE__*/ createBinding(TpTextArea, 'TextArea', {
   model: 'value',
 }) as ElementBinding<
   TpTextArea,
+  | 'appearance'
   | 'autocomplete'
   | 'defaultValue'
   | 'density'

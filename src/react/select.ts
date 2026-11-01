@@ -21,6 +21,7 @@ export type SelectProps = ElementProps<
   | 'alignItemWithTrigger'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'
@@ -155,6 +156,7 @@ export const Select = /*#__PURE__*/ createBinding<SelectProps>(
 /** Props of {@link SelectChipRemove}, the React binding of `<tp-select-chip-remove>`. */
 export type SelectChipRemoveProps = ElementProps<
   TpSelectChipRemove,
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -198,6 +200,7 @@ export const SelectChipRemove = /*#__PURE__*/ createBinding<SelectChipRemoveProp
 /** Props of {@link SelectClear}, the React binding of `<tp-select-clear>`. */
 export type SelectClearProps = ElementProps<
   TpSelectClear,
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -241,6 +244,7 @@ export const SelectClear = /*#__PURE__*/ createBinding<SelectClearProps>(
 /** Props of {@link SelectOption}, the React binding of `<tp-select-option>`. */
 export type SelectOptionProps = ElementProps<
   TpSelectOption,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'index'
@@ -275,6 +279,7 @@ export const SelectOption = /*#__PURE__*/ createBinding<SelectOptionProps>(
 /** Props of {@link SelectTrigger}, the React binding of `<tp-select-trigger>`. */
 export type SelectTriggerProps = ElementProps<
   TpSelectTrigger,
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'

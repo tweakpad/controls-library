@@ -9,6 +9,7 @@ export const Markdown = /*#__PURE__*/ createBinding(TpMarkdown, 'Markdown', {
   lanes: {},
 }) as ElementBinding<
   TpMarkdown,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'elements'

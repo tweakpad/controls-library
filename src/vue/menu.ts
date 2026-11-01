@@ -20,6 +20,7 @@ export const Menu = /*#__PURE__*/ createBinding(TpMenu, 'Menu', {
   | 'align'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'
@@ -110,6 +111,7 @@ export const MenuCheckboxItem = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMenuCheckboxItem,
+  | 'appearance'
   | 'checked'
   | 'closeOnClick'
   | 'defaultChecked'
@@ -144,6 +146,7 @@ export const MenuItem = /*#__PURE__*/ createBinding(TpMenuItem, 'MenuItem', {
   lanes: {},
 }) as ElementBinding<
   TpMenuItem,
+  | 'appearance'
   | 'closeOnClick'
   | 'density'
   | 'disabled'
@@ -172,6 +175,7 @@ export const MenuRadioGroup = /*#__PURE__*/ createBinding(TpMenuRadioGroup, 'Men
   model: 'value',
 }) as ElementBinding<
   TpMenuRadioGroup,
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'
@@ -199,6 +203,7 @@ export const MenuRadioItem = /*#__PURE__*/ createBinding(TpMenuRadioItem, 'MenuR
   lanes: {},
 }) as ElementBinding<
   TpMenuRadioItem,
+  | 'appearance'
   | 'closeOnClick'
   | 'density'
   | 'disabled'

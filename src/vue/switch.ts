@@ -12,6 +12,7 @@ export const Switch = /*#__PURE__*/ createBinding(TpSwitch, 'Switch', {
   model: 'checked',
 }) as ElementBinding<
   TpSwitch,
+  | 'appearance'
   | 'checkboxGroup'
   | 'checked'
   | 'defaultChecked'

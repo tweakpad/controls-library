@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Toast}, the React binding of `<tp-toast>`. */
 export type ToastProps = ElementProps<
   TpToast,
+  | 'appearance'
   | 'container'
   | 'density'
   | 'disabled'

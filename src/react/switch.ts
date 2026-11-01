@@ -9,6 +9,7 @@ import type * as foundationTypes from '../foundation/types.js';
 /** Props of {@link Switch}, the React binding of `<tp-switch>`. */
 export type SwitchProps = ElementProps<
   TpSwitch,
+  | 'appearance'
   | 'checkboxGroup'
   | 'checked'
   | 'defaultChecked'

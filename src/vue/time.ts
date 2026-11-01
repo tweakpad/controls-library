@@ -9,6 +9,7 @@ export const Time = /*#__PURE__*/ createBinding(TpTime, 'Time', {
   lanes: {},
 }) as ElementBinding<
   TpTime,
+  | 'appearance'
   | 'datetime'
   | 'density'
   | 'disabled'

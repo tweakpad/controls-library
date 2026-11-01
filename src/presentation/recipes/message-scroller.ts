@@ -33,7 +33,7 @@ export const messageScrollerAppearance: PresentationDictionary = {
       declarations: {
         background: 'var(--tp-background)',
         color: 'var(--tp-foreground)',
-        'border-color': 'var(--tp-border)',
+        'border-color': 'var(--tp-edge)',
         'border-radius': 'var(--tp-radius-full)',
         transition: motionTransition(['opacity', 'translate'], 'fast'),
         opacity: '1',

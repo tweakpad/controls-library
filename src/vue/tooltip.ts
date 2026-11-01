@@ -14,6 +14,7 @@ export const Tooltip = /*#__PURE__*/ createBinding(TpTooltip, 'Tooltip', {
   | 'align'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'

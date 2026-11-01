@@ -23,7 +23,11 @@ export const oneTimeCodeAppearance: PresentationDictionary = {
         'inline-size': 'var(--tp-control-height-md)',
         'block-size': 'var(--tp-control-height-md)',
         'border-inline-start-width': '0',
+        'border-inline-end-width': 'var(--tp-joined-edge-width)',
         'border-radius': '0',
+        // The fill stays inside the edge: where the edge is transparent (the flat appearance), the
+        // lines between slots read as gaps cut through the fill.
+        'background-clip': 'padding-box',
       },
     },
     {
@@ -37,6 +41,7 @@ export const oneTimeCodeAppearance: PresentationDictionary = {
     {
       selector: '&:last-child',
       declarations: {
+        'border-inline-end-width': 'var(--tp-border-width)',
         'border-start-end-radius': 'var(--tp-radius-lg)',
         'border-end-end-radius': 'var(--tp-radius-lg)',
       },

@@ -8,6 +8,7 @@ export const Button = /*#__PURE__*/ createBinding(TpButton, 'Button', {
   lanes: {},
 }) as ElementBinding<
   TpButton,
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'

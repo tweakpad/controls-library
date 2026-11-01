@@ -10,6 +10,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type DescriptionListProps = ElementProps<
   TpDescriptionList,
   | 'align'
+  | 'appearance'
   | 'defaultOpen'
   | 'density'
   | 'disabled'
@@ -47,6 +48,7 @@ export const DescriptionList = /*#__PURE__*/ createBinding<DescriptionListProps>
 /** Props of {@link DescriptionListItem}, the React binding of `<tp-description-list-item>`. */
 export type DescriptionListItemProps = ElementProps<
   TpDescriptionListItem,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

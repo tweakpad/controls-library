@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Card}, the React binding of `<tp-card>`. */
 export type CardProps = ElementProps<
   TpCard,
+  | 'appearance'
   | 'borders'
   | 'density'
   | 'disabled'

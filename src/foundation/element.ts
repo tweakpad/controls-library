@@ -2,6 +2,7 @@ import { LitElement, css, unsafeCSS } from 'lit';
 import type { CSSResultGroup, PropertyDeclarations, PropertyValues } from 'lit';
 import type { Direction, Orientation } from './types.js';
 import { cancelMotions, type MotionPolicy } from './motion.js';
+import { appearanceDefaultDeclarations, flatDeclarations, type Appearance } from './appearance.js';
 import { densityDerivedDeclarations, type Density } from './density.js';
 import { dispatchTpEvent } from './events.js';
 import type { Diagnostic, DiagnosticSeverity } from './services.js';
@@ -26,6 +27,7 @@ export class TpElement extends LitElement {
     orientation: { type: String, reflect: true },
     motionPolicy: { type: String, attribute: 'motion-policy', reflect: true },
     density: { type: String, reflect: true },
+    appearance: { type: String, reflect: true },
     partPresentation: { attribute: false },
     partContracts: { attribute: false },
   };
@@ -62,6 +64,16 @@ export class TpElement extends LitElement {
     :host([density='default']),
     :host([density='compact']) {
       ${unsafeCSS(densityDerivedDeclarations())}
+    }
+
+    /* An appearance region on a library element, as the default stylesheet's document rules state
+       it. */
+    :host([appearance='flat']) {
+      ${unsafeCSS(flatDeclarations())}
+    }
+
+    :host([appearance='default']) {
+      ${unsafeCSS(appearanceDefaultDeclarations())}
     }
 
     :host([hidden]) {
@@ -120,6 +132,12 @@ export class TpElement extends LitElement {
    * element follows the enclosing region.
    */
   density: Density | undefined;
+  /**
+   * The appearance of this element and everything inside it: `flat` removes the edges of
+   * components and panels and separates them by fill; `default` restores the bordered look inside
+   * a flat region. Unset, the element follows the enclosing region.
+   */
+  appearance: Appearance | undefined;
   partPresentation: PartPresentation = {};
   partContracts: Record<string, ComponentPartContract> = {};
   renderPart(name: string, state: PartState, options: PartRenderOptions = {}): unknown {

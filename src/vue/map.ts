@@ -15,6 +15,7 @@ export const Map = /*#__PURE__*/ createBinding(TpMap, 'Map', {
   lanes: { selectedPin: 'onSelectedPinChange' },
 }) as ElementBinding<
   TpMap,
+  | 'appearance'
   | 'controls'
   | 'controlsOrientation'
   | 'controlsPosition'
@@ -64,6 +65,7 @@ export const MapControl = /*#__PURE__*/ createBinding(TpMapControl, 'MapControl'
 }) as ElementBinding<
   TpMapControl,
   | 'action'
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -92,6 +94,7 @@ export const MapOverlay = /*#__PURE__*/ createBinding(TpMapOverlay, 'MapOverlay'
   | 'align'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'
@@ -165,6 +168,7 @@ export const MapPin = /*#__PURE__*/ createBinding(TpMapPin, 'MapPin', {
 }) as ElementBinding<
   TpMapPin,
   | 'anchor'
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

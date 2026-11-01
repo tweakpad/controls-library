@@ -12,7 +12,7 @@ export const themeSwitcherAppearance: PresentationDictionary = {
     { declarations: { '--_tp-switch-spacing': 'var(--tp-control-height-sm)' } },
     {
       selector: '&::part(switch)',
-      declarations: { background: 'var(--tp-muted)', 'border-color': 'var(--tp-border)' },
+      declarations: { background: 'var(--tp-muted)', 'border-color': 'var(--tp-control-border)' },
     },
     { selector: '&::part(switch)::before', declarations: { opacity: '0' } },
     {

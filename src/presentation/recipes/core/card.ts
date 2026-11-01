@@ -8,7 +8,7 @@ export const cardCoreAppearance: PresentationDictionary = {
     rule({
       '--_tp-card-spacing': 'var(--tp-space-4)',
       'font-size': 'var(--tp-text-sm)',
-      border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+      border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
       'border-radius': 'var(--tp-radius-xl)',
       color: 'var(--tp-card-foreground)',
       background: 'var(--tp-card)',

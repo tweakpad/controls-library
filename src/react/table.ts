@@ -16,6 +16,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Table}, the React binding of `<tp-table>`. */
 export type TableProps = ElementProps<
   TpTable,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -47,6 +48,7 @@ export const Table = /*#__PURE__*/ createBinding<TableProps>(
 /** Props of {@link TableBody}, the React binding of `<tp-table-body>`. */
 export type TableBodyProps = ElementProps<
   TpTableBody,
+  | 'appearance'
   | 'colSpan'
   | 'density'
   | 'disabled'
@@ -75,6 +77,7 @@ export const TableBody = /*#__PURE__*/ createBinding<TableBodyProps>(
 /** Props of {@link TableCaption}, the React binding of `<tp-table-caption>`. */
 export type TableCaptionProps = ElementProps<
   TpTableCaption,
+  | 'appearance'
   | 'colSpan'
   | 'density'
   | 'disabled'
@@ -103,6 +106,7 @@ export const TableCaption = /*#__PURE__*/ createBinding<TableCaptionProps>(
 /** Props of {@link TableCell}, the React binding of `<tp-table-cell>`. */
 export type TableCellProps = ElementProps<
   TpTableCell,
+  | 'appearance'
   | 'colSpan'
   | 'density'
   | 'disabled'
@@ -131,6 +135,7 @@ export const TableCell = /*#__PURE__*/ createBinding<TableCellProps>(
 /** Props of {@link TableFooter}, the React binding of `<tp-table-footer>`. */
 export type TableFooterProps = ElementProps<
   TpTableFooter,
+  | 'appearance'
   | 'colSpan'
   | 'density'
   | 'disabled'
@@ -159,6 +164,7 @@ export const TableFooter = /*#__PURE__*/ createBinding<TableFooterProps>(
 /** Props of {@link TableHead}, the React binding of `<tp-table-head>`. */
 export type TableHeadProps = ElementProps<
   TpTableHead,
+  | 'appearance'
   | 'colSpan'
   | 'density'
   | 'disabled'
@@ -187,6 +193,7 @@ export const TableHead = /*#__PURE__*/ createBinding<TableHeadProps>(
 /** Props of {@link TableHeader}, the React binding of `<tp-table-header>`. */
 export type TableHeaderProps = ElementProps<
   TpTableHeader,
+  | 'appearance'
   | 'colSpan'
   | 'density'
   | 'disabled'
@@ -215,6 +222,7 @@ export const TableHeader = /*#__PURE__*/ createBinding<TableHeaderProps>(
 /** Props of {@link TableRow}, the React binding of `<tp-table-row>`. */
 export type TableRowProps = ElementProps<
   TpTableRow,
+  | 'appearance'
   | 'colSpan'
   | 'density'
   | 'disabled'

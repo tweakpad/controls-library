@@ -9,6 +9,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link QrCode}, the React binding of `<tp-qr-code>`. */
 export type QrCodeProps = ElementProps<
   TpQrCode,
+  | 'appearance'
   | 'copyable'
   | 'density'
   | 'disabled'

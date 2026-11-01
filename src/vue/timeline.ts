@@ -10,6 +10,7 @@ export const Timeline = /*#__PURE__*/ createBinding(TpTimeline, 'Timeline', {
 }) as ElementBinding<
   TpTimeline,
   | 'align'
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -32,6 +33,7 @@ export const TimelineItem = /*#__PURE__*/ createBinding(TpTimelineItem, 'Timelin
 }) as ElementBinding<
   TpTimelineItem,
   | 'align'
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

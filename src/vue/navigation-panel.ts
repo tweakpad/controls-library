@@ -37,6 +37,7 @@ export const NavigationPanel = /*#__PURE__*/ createBinding(TpNavigationPanel, 'N
   lanes: { compactOpen: 'onCompactOpenChange', expanded: 'onExpandedChange' },
 }) as ElementBinding<
   TpNavigationPanel,
+  | 'appearance'
   | 'collapseMode'
   | 'collapsed'
   | 'compact'
@@ -83,6 +84,7 @@ export const NavigationPanelAction = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpNavigationPanelAction,
   | 'active'
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -123,6 +125,7 @@ export const NavigationPanelBadge = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelBadge,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'interactive'
@@ -148,6 +151,7 @@ export const NavigationPanelContent = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelContent,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -174,6 +178,7 @@ export const NavigationPanelDrawer = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   NavigationPanelDrawerElement,
   | 'activeSnapPoint'
+  | 'appearance'
   | 'backdrop'
   | 'closeOnEscape'
   | 'closeOnOutsideInteraction'
@@ -237,6 +242,7 @@ export const NavigationPanelFooter = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelFooter,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -260,6 +266,7 @@ export const NavigationPanelGroup = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelGroup,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -284,6 +291,7 @@ export const NavigationPanelGroupAction = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpNavigationPanelGroupAction,
   | 'active'
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -324,6 +332,7 @@ export const NavigationPanelGroupContent = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelGroupContent,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -347,6 +356,7 @@ export const NavigationPanelGroupLabel = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelGroupLabel,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -370,6 +380,7 @@ export const NavigationPanelHeader = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelHeader,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -395,6 +406,7 @@ export const NavigationPanelInput = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelInput,
+  | 'appearance'
   | 'autocomplete'
   | 'defaultValue'
   | 'density'
@@ -450,6 +462,7 @@ export const NavigationPanelInset = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelInset,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -473,6 +486,7 @@ export const NavigationPanelItem = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelItem,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -497,6 +511,7 @@ export const NavigationPanelLink = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpNavigationPanelLink,
   | 'active'
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -537,6 +552,7 @@ export const NavigationPanelLoadingPlaceholder = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelLoadingPlaceholder,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -561,6 +577,7 @@ export const NavigationPanelMenu = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelMenu,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -585,6 +602,7 @@ export const NavigationPanelResizeRail = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpNavigationPanelResizeRail,
   | 'active'
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -625,6 +643,7 @@ export const NavigationPanelSeparator = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelSeparator,
+  | 'appearance'
   | 'decorative'
   | 'density'
   | 'disabled'
@@ -649,6 +668,7 @@ export const NavigationPanelSubitem = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelSubitem,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -673,6 +693,7 @@ export const NavigationPanelSublink = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpNavigationPanelSublink,
   | 'active'
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -713,6 +734,7 @@ export const NavigationPanelSubmenu = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationPanelSubmenu,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -737,6 +759,7 @@ export const NavigationPanelTrigger = /*#__PURE__*/ createBinding(
 ) as ElementBinding<
   TpNavigationPanelTrigger,
   | 'active'
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'

@@ -10,6 +10,7 @@ export const Carousel = /*#__PURE__*/ createBinding(TpCarousel, 'Carousel', {
   lanes: {},
 }) as ElementBinding<
   TpCarousel,
+  | 'appearance'
   | 'autoplay'
   | 'defaultValue'
   | 'density'

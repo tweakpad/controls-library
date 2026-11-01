@@ -35,6 +35,7 @@ import type * as foundationTypes from '../foundation/types.js';
 /** Props of {@link NavigationPanel}, the React binding of `<tp-navigation-panel>`. */
 export type NavigationPanelProps = ElementProps<
   TpNavigationPanel,
+  | 'appearance'
   | 'collapseMode'
   | 'collapsed'
   | 'compact'
@@ -85,6 +86,7 @@ export const NavigationPanel = /*#__PURE__*/ createBinding<NavigationPanelProps>
 export type NavigationPanelActionProps = ElementProps<
   TpNavigationPanelAction,
   | 'active'
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -126,6 +128,7 @@ export const NavigationPanelAction = /*#__PURE__*/ createBinding<NavigationPanel
 /** Props of {@link NavigationPanelBadge}, the React binding of `<tp-navigation-panel-badge>`. */
 export type NavigationPanelBadgeProps = ElementProps<
   TpNavigationPanelBadge,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'interactive'
@@ -152,6 +155,7 @@ export const NavigationPanelBadge = /*#__PURE__*/ createBinding<NavigationPanelB
 /** Props of {@link NavigationPanelContent}, the React binding of `<tp-navigation-panel-content>`. */
 export type NavigationPanelContentProps = ElementProps<
   TpNavigationPanelContent,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -177,6 +181,7 @@ export const NavigationPanelContent = /*#__PURE__*/ createBinding<NavigationPane
 export type NavigationPanelDrawerProps = ElementProps<
   NavigationPanelDrawerElement,
   | 'activeSnapPoint'
+  | 'appearance'
   | 'backdrop'
   | 'closeOnEscape'
   | 'closeOnOutsideInteraction'
@@ -244,6 +249,7 @@ export const NavigationPanelDrawer = /*#__PURE__*/ createBinding<NavigationPanel
 /** Props of {@link NavigationPanelFooter}, the React binding of `<tp-navigation-panel-footer>`. */
 export type NavigationPanelFooterProps = ElementProps<
   TpNavigationPanelFooter,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -268,6 +274,7 @@ export const NavigationPanelFooter = /*#__PURE__*/ createBinding<NavigationPanel
 /** Props of {@link NavigationPanelGroup}, the React binding of `<tp-navigation-panel-group>`. */
 export type NavigationPanelGroupProps = ElementProps<
   TpNavigationPanelGroup,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -293,6 +300,7 @@ export const NavigationPanelGroup = /*#__PURE__*/ createBinding<NavigationPanelG
 export type NavigationPanelGroupActionProps = ElementProps<
   TpNavigationPanelGroupAction,
   | 'active'
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -335,6 +343,7 @@ export const NavigationPanelGroupAction =
 /** Props of {@link NavigationPanelGroupContent}, the React binding of `<tp-navigation-panel-group-content>`. */
 export type NavigationPanelGroupContentProps = ElementProps<
   TpNavigationPanelGroupContent,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -360,6 +369,7 @@ export const NavigationPanelGroupContent =
 /** Props of {@link NavigationPanelGroupLabel}, the React binding of `<tp-navigation-panel-group-label>`. */
 export type NavigationPanelGroupLabelProps = ElementProps<
   TpNavigationPanelGroupLabel,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -385,6 +395,7 @@ export const NavigationPanelGroupLabel =
 /** Props of {@link NavigationPanelHeader}, the React binding of `<tp-navigation-panel-header>`. */
 export type NavigationPanelHeaderProps = ElementProps<
   TpNavigationPanelHeader,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -409,6 +420,7 @@ export const NavigationPanelHeader = /*#__PURE__*/ createBinding<NavigationPanel
 /** Props of {@link NavigationPanelInput}, the React binding of `<tp-navigation-panel-input>`. */
 export type NavigationPanelInputProps = ElementProps<
   TpNavigationPanelInput,
+  | 'appearance'
   | 'autocomplete'
   | 'defaultValue'
   | 'density'
@@ -467,6 +479,7 @@ export const NavigationPanelInput = /*#__PURE__*/ createBinding<NavigationPanelI
 /** Props of {@link NavigationPanelInset}, the React binding of `<tp-navigation-panel-inset>`. */
 export type NavigationPanelInsetProps = ElementProps<
   TpNavigationPanelInset,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -491,6 +504,7 @@ export const NavigationPanelInset = /*#__PURE__*/ createBinding<NavigationPanelI
 /** Props of {@link NavigationPanelItem}, the React binding of `<tp-navigation-panel-item>`. */
 export type NavigationPanelItemProps = ElementProps<
   TpNavigationPanelItem,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -516,6 +530,7 @@ export const NavigationPanelItem = /*#__PURE__*/ createBinding<NavigationPanelIt
 export type NavigationPanelLinkProps = ElementProps<
   TpNavigationPanelLink,
   | 'active'
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -557,6 +572,7 @@ export const NavigationPanelLink = /*#__PURE__*/ createBinding<NavigationPanelLi
 /** Props of {@link NavigationPanelLoadingPlaceholder}, the React binding of `<tp-navigation-panel-loading-placeholder>`. */
 export type NavigationPanelLoadingPlaceholderProps = ElementProps<
   TpNavigationPanelLoadingPlaceholder,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -583,6 +599,7 @@ export const NavigationPanelLoadingPlaceholder =
 /** Props of {@link NavigationPanelMenu}, the React binding of `<tp-navigation-panel-menu>`. */
 export type NavigationPanelMenuProps = ElementProps<
   TpNavigationPanelMenu,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -608,6 +625,7 @@ export const NavigationPanelMenu = /*#__PURE__*/ createBinding<NavigationPanelMe
 export type NavigationPanelResizeRailProps = ElementProps<
   TpNavigationPanelResizeRail,
   | 'active'
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -650,6 +668,7 @@ export const NavigationPanelResizeRail =
 /** Props of {@link NavigationPanelSeparator}, the React binding of `<tp-navigation-panel-separator>`. */
 export type NavigationPanelSeparatorProps = ElementProps<
   TpNavigationPanelSeparator,
+  | 'appearance'
   | 'decorative'
   | 'density'
   | 'disabled'
@@ -675,6 +694,7 @@ export const NavigationPanelSeparator = /*#__PURE__*/ createBinding<NavigationPa
 /** Props of {@link NavigationPanelSubitem}, the React binding of `<tp-navigation-panel-subitem>`. */
 export type NavigationPanelSubitemProps = ElementProps<
   TpNavigationPanelSubitem,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -700,6 +720,7 @@ export const NavigationPanelSubitem = /*#__PURE__*/ createBinding<NavigationPane
 export type NavigationPanelSublinkProps = ElementProps<
   TpNavigationPanelSublink,
   | 'active'
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -741,6 +762,7 @@ export const NavigationPanelSublink = /*#__PURE__*/ createBinding<NavigationPane
 /** Props of {@link NavigationPanelSubmenu}, the React binding of `<tp-navigation-panel-submenu>`. */
 export type NavigationPanelSubmenuProps = ElementProps<
   TpNavigationPanelSubmenu,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -766,6 +788,7 @@ export const NavigationPanelSubmenu = /*#__PURE__*/ createBinding<NavigationPane
 export type NavigationPanelTriggerProps = ElementProps<
   TpNavigationPanelTrigger,
   | 'active'
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'

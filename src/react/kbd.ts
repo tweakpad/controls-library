@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Kbd}, the React binding of `<tp-kbd>`. */
 export type KbdProps = ElementProps<
   TpKbd,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -36,6 +37,7 @@ export const Kbd = /*#__PURE__*/ createBinding<KbdProps>(
 /** Props of {@link KbdGroup}, the React binding of `<tp-kbd-group>`. */
 export type KbdGroupProps = ElementProps<
   TpKbdGroup,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

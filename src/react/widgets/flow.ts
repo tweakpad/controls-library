@@ -16,6 +16,7 @@ import type * as widgetsFlowTypes from '../../widgets/flow/types.js';
 /** Props of {@link Flow}, the React binding of `<tp-flow>`. */
 export type FlowProps = ElementProps<
   TpFlow,
+  | 'appearance'
   | 'autoLayout'
   | 'background'
   | 'confirmDelete'

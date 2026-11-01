@@ -19,7 +19,7 @@ export const attachmentAppearance: PresentationDictionary = {
         'padding-inline': 'var(--tp-space-2-5)',
         gap: 'var(--tp-space-2)',
         'border-radius': 'var(--tp-radius-lg)',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
         background: 'var(--tp-card)',
         color: 'var(--tp-card-foreground)',
         'box-shadow': 'none',
@@ -120,8 +120,8 @@ export const attachmentAppearance: PresentationDictionary = {
     {
       selector: ":host([status='error']) &",
       declarations: {
-        background: 'color-mix(in oklab, var(--tp-destructive) 10%, transparent)',
-        color: 'var(--tp-destructive)',
+        background: 'var(--tp-destructive-subtle)',
+        color: 'var(--tp-destructive-subtle-foreground)',
       },
     },
     {
@@ -146,7 +146,10 @@ export const attachmentAppearance: PresentationDictionary = {
         'margin-block-start': 'var(--tp-space-0-5)',
       },
     },
-    { selector: ":host([status='error']) &", declarations: { color: 'var(--tp-destructive)' } },
+    {
+      selector: ":host([status='error']) &",
+      declarations: { color: 'var(--tp-destructive-subtle-foreground)' },
+    },
   ],
   'attachment-actions': [{ declarations: { gap: 'var(--tp-space-1)' } }],
   'attachment-trigger': [

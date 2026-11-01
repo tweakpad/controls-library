@@ -10,6 +10,7 @@ import type * as foundationTypes from '../foundation/types.js';
 export type ColorInputProps = ElementProps<
   TpColorInput,
   | 'alpha'
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'

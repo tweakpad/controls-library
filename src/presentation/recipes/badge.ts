@@ -17,7 +17,7 @@ export const badgeAppearance: PresentationDictionary = {
         'white-space': 'nowrap',
         '--_tp-icon-extent': 'var(--tp-icon-size-xs)',
         'text-decoration': 'none',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
       },
     },
     {
@@ -31,7 +31,7 @@ export const badgeAppearance: PresentationDictionary = {
         ...focusRing,
       },
     },
-    // Solid status pills keep their own fill color as the focused border.
+    // Status pills take their role as the focused border.
     ...(['destructive', 'success', 'warning'] as const).map((variant) => ({
       selector: `:host([interactive][variant="${variant}"]) &:is(button,a):focus-visible`,
       declarations: { 'border-color': `var(--tp-${variant})` },

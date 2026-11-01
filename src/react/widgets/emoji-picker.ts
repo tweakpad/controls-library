@@ -10,6 +10,7 @@ import type * as widgetsEmojiPickerTypes from '../../widgets/emoji-picker/types.
 /** Props of {@link EmojiPicker}, the React binding of `<tp-emoji-picker>`. */
 export type EmojiPickerProps = ElementProps<
   TpEmojiPicker,
+  | 'appearance'
   | 'categoryBar'
   | 'columns'
   | 'custom'

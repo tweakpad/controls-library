@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link TextTransform}, the React binding of `<tp-text-transform>`. */
 export type TextTransformProps = ElementProps<
   TpTextTransform,
+  | 'appearance'
   | 'currency'
   | 'decimals'
   | 'density'

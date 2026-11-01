@@ -10,6 +10,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Cursor}, the React binding of `<tp-cursor>`. */
 export type CursorProps = ElementProps<
   TpCursor,
+  | 'appearance'
   | 'damping'
   | 'density'
   | 'disabled'
@@ -50,6 +51,7 @@ export const Cursor = /*#__PURE__*/ createBinding<CursorProps>(
 /** Props of {@link CursorZone}, the React binding of `<tp-cursor-zone>`. */
 export type CursorZoneProps = ElementProps<
   TpCursorZone,
+  | 'appearance'
   | 'damping'
   | 'density'
   | 'disabled'

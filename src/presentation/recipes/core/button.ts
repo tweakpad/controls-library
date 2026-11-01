@@ -17,13 +17,12 @@ export const buttonSizes = [
 ] as const;
 
 /**
- * In dark schemes the outline variant takes the field fill and border, so an outline control sits
- * with Input, Select and date-picker triggers instead of the page color.
+ * The outline variant takes the control fill and edge, so an outline control sits with Input,
+ * Select and date-picker triggers instead of the page color.
  */
 export const outlineFieldPaint: PresentationRule = rule({
-  background:
-    'light-dark(var(--tp-background), color-mix(in oklab, var(--tp-input) 30%, transparent))',
-  'border-color': 'light-dark(var(--tp-border), var(--tp-input))',
+  background: 'var(--tp-control)',
+  'border-color': 'var(--tp-input)',
 });
 
 const button: Record<string, readonly PresentationRule[]> = {

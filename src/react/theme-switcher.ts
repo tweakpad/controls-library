@@ -9,6 +9,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link ThemeSwitcher}, the React binding of `<tp-theme-switcher>`. */
 export type ThemeSwitcherProps = ElementProps<
   TpThemeSwitcher,
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'

@@ -10,6 +10,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type CodeBlockProps = ElementProps<
   TpCodeBlock,
   | 'addedLines'
+  | 'appearance'
   | 'code'
   | 'collapsedLines'
   | 'collapsible'

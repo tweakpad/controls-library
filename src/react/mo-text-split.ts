@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link MoTextSplit}, the React binding of `<tp-mo-text-split>`. */
 export type MoTextSplitProps = ElementProps<
   TpMoTextSplit,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

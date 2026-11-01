@@ -48,7 +48,7 @@ export const fieldAppearance: PresentationDictionary = {
   'field-error': [
     {
       declarations: {
-        color: 'var(--tp-destructive)',
+        color: 'var(--tp-destructive-subtle-foreground)',
         'font-size': 'var(--tp-text-sm)',
         'font-weight': 'var(--tp-font-normal)',
         'overflow-wrap': 'anywhere',

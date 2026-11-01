@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link DataVisualization}, the React binding of `<tp-data-visualization>`. */
 export type DataVisualizationProps = ElementProps<
   TpDataVisualization,
+  | 'appearance'
   | 'data'
   | 'density'
   | 'description'

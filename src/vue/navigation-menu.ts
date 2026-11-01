@@ -16,6 +16,7 @@ export const NavigationMenu = /*#__PURE__*/ createBinding(TpNavigationMenu, 'Nav
   | 'align'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'
@@ -95,6 +96,7 @@ export const NavigationMenuItem = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpNavigationMenuItem,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

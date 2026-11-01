@@ -14,5 +14,8 @@ export const statusAppearance: readonly PresentationRule[] = [
       padding: 'var(--tp-space-4)',
     },
   },
-  { selector: ':host([data-status="error"]) &', declarations: { color: 'var(--tp-destructive)' } },
+  {
+    selector: ':host([data-status="error"]) &',
+    declarations: { color: 'var(--tp-destructive-subtle-foreground)' },
+  },
 ];

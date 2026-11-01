@@ -11,6 +11,7 @@ export const Collapsible = /*#__PURE__*/ createBinding(TpCollapsible, 'Collapsib
   model: 'open',
 }) as ElementBinding<
   TpCollapsible,
+  | 'appearance'
   | 'contentAlignment'
   | 'defaultOpen'
   | 'density'

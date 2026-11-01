@@ -76,11 +76,12 @@ export class DesignTokensView extends LitElement {
 
   override connectedCallback() {
     super.connectedCallback();
-    // The Density toolbar writes the document element; the theme switcher writes this host.
+    // The Density and Appearance toolbars write the document element; the theme switcher writes
+    // this host.
     this.#observer = new MutationObserver(this.#remeasure);
     this.#observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['data-tp-density', 'style', 'class'],
+      attributeFilter: ['density', 'appearance', 'style', 'class'],
     });
     this.#observer.observe(this, { attributes: true, attributeFilter: ['style', 'data-theme'] });
     // The System theme follows the device without writing an attribute.

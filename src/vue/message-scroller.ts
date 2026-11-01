@@ -15,6 +15,7 @@ export const MessageScroller = /*#__PURE__*/ createBinding(TpMessageScroller, 'M
   lanes: {},
 }) as ElementBinding<
   TpMessageScroller,
+  | 'appearance'
   | 'defaultPinned'
   | 'density'
   | 'disabled'
@@ -51,6 +52,7 @@ export const MessageScrollerContent = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMessageScrollerContent,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -75,6 +77,7 @@ export const MessageScrollerItem = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMessageScrollerItem,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -100,6 +103,7 @@ export const MessageScrollerReturnControl = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMessageScrollerReturnControl,
+  | 'appearance'
   | 'ariaLabel'
   | 'behavior'
   | 'density'
@@ -140,6 +144,7 @@ export const MessageScrollerViewport = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpMessageScrollerViewport,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

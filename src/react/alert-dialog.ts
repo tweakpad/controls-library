@@ -8,6 +8,7 @@ import type * as foundationSurfaceState from '../foundation/surface-state.js';
 /** Props of {@link AlertDialog}, the React binding of `<tp-alert-dialog>`. */
 export type AlertDialogProps = ElementProps<
   TpAlertDialog,
+  | 'appearance'
   | 'backdrop'
   | 'closeOnEscape'
   | 'closeOnOutsideInteraction'

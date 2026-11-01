@@ -11,6 +11,7 @@ export const Dialog = /*#__PURE__*/ createBinding(TpDialog, 'Dialog', {
   model: 'open',
 }) as ElementBinding<
   TpDialog,
+  | 'appearance'
   | 'backdrop'
   | 'closeOnEscape'
   | 'closeOnOutsideInteraction'

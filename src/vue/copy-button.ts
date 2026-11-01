@@ -9,6 +9,7 @@ export const CopyButton = /*#__PURE__*/ createBinding(TpCopyButton, 'CopyButton'
   lanes: {},
 }) as ElementBinding<
   TpCopyButton,
+  | 'appearance'
   | 'copiedLabel'
   | 'data'
   | 'density'

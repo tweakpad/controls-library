@@ -72,8 +72,16 @@ const choiceItem: readonly PresentationRule[] = [
   },
 ];
 const ghost: readonly PresentationRule[] = [];
+// A destructive command reads in the destructive text tone and highlights with its tinted fill.
 const destructive: readonly PresentationRule[] = [
-  { declarations: { color: 'var(--tp-accent-foreground)' } },
+  { declarations: { color: 'var(--tp-destructive-subtle-foreground)' } },
+  {
+    selector: '&[data-highlighted]:not([data-disabled], [aria-disabled="true"])',
+    declarations: {
+      background: 'var(--tp-destructive-subtle)',
+      color: 'var(--tp-destructive-subtle-foreground)',
+    },
+  },
 ];
 const root = (prefix: 'menu'): Record<string, readonly PresentationRule[]> => ({
   [prefix]: [],

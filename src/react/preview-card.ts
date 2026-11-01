@@ -11,6 +11,7 @@ export type PreviewCardProps = ElementProps<
   | 'align'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'

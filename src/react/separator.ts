@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Separator}, the React binding of `<tp-separator>`. */
 export type SeparatorProps = ElementProps<
   TpSeparator,
+  | 'appearance'
   | 'decorative'
   | 'density'
   | 'disabled'

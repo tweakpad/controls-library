@@ -2,11 +2,12 @@ import type { PresentationRule } from '../../resolver.js';
 import { rule } from '../shared/variant.js';
 
 const accordion: Record<string, readonly PresentationRule[]> = {};
+// The root's frame (the outline variant) is an outer edge; item lines are dividers.
 accordion.accordion = [
   rule({
     gap: '0',
     overflow: 'visible',
-    border: '0 var(--tp-border-style) var(--tp-border)',
+    border: '0 var(--tp-border-style) var(--tp-edge)',
     'border-radius': '0',
     background: 'transparent',
   }),

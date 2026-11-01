@@ -9,6 +9,7 @@ export const Kbd = /*#__PURE__*/ createBinding(TpKbd, 'Kbd', {
   lanes: {},
 }) as ElementBinding<
   TpKbd,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -32,6 +33,7 @@ export const KbdGroup = /*#__PURE__*/ createBinding(TpKbdGroup, 'KbdGroup', {
   lanes: {},
 }) as ElementBinding<
   TpKbdGroup,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

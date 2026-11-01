@@ -8,6 +8,7 @@ export const TextTransform = /*#__PURE__*/ createBinding(TpTextTransform, 'TextT
   lanes: {},
 }) as ElementBinding<
   TpTextTransform,
+  | 'appearance'
   | 'currency'
   | 'decimals'
   | 'density'

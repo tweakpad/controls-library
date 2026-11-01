@@ -17,6 +17,7 @@ export type CommandListProps = ElementProps<
   | 'alignItemWithTrigger'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'
@@ -156,6 +157,7 @@ export const CommandList = /*#__PURE__*/ createBinding<CommandListProps>(
 /** Props of {@link CommandPalette}, the React binding of `<tp-command-palette>`. */
 export type CommandPaletteProps = ElementProps<
   TpCommandPalette,
+  | 'appearance'
   | 'backdrop'
   | 'closeOnEscape'
   | 'closeOnOutsideInteraction'

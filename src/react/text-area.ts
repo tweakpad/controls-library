@@ -9,6 +9,7 @@ import type * as foundationTypes from '../foundation/types.js';
 /** Props of {@link TextArea}, the React binding of `<tp-text-area>`. */
 export type TextAreaProps = ElementProps<
   TpTextArea,
+  | 'appearance'
   | 'autocomplete'
   | 'defaultValue'
   | 'density'

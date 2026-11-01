@@ -37,8 +37,8 @@ export function variantPresentation(
     ];
   if (variant === 'plain')
     return [rule({ background: 'transparent', 'border-color': 'transparent', color: 'inherit' })];
-  // Solid role fills: primary, secondary and the status roles with a foreground pair.
-  if (['default', 'secondary', 'destructive', 'success', 'warning'].includes(variant)) {
+  // Solid role fills: primary and secondary with their foreground pair.
+  if (variant === 'default' || variant === 'secondary') {
     const role = variant === 'default' ? 'primary' : variant;
     const rules = [
       rule({
@@ -50,7 +50,26 @@ export function variantPresentation(
     if (isInteractive)
       rules.push(
         fillColor(
-          `color-mix(in oklab, var(--tp-${role}) ${['destructive', 'success', 'warning'].includes(variant) ? 85 : 80}%, light-dark(var(--tp-foreground), var(--tp-background)))`,
+          `color-mix(in oklab, var(--tp-${role}) 80%, light-dark(var(--tp-foreground), var(--tp-background)))`,
+          primitive,
+        ),
+        fillShown(interactive),
+      );
+    return rules;
+  }
+  // Status variants: the role's tinted fill, its text tone and its edge. Hover deepens the tint.
+  if (['destructive', 'success', 'warning'].includes(variant)) {
+    const rules = [
+      rule({
+        background: `var(--tp-${variant}-subtle)`,
+        color: `var(--tp-${variant}-subtle-foreground)`,
+        'border-color': `var(--tp-${variant}-border)`,
+      }),
+    ];
+    if (isInteractive)
+      rules.push(
+        fillColor(
+          `color-mix(in oklab, var(--tp-${variant}) 12%, var(--tp-${variant}-subtle))`,
           primitive,
         ),
         fillShown(interactive),
@@ -76,10 +95,7 @@ export function variantPresentation(
         ),
       );
     else if (isInteractive)
-      rules.push(
-        fillColor('color-mix(in oklab, var(--tp-input) 50%, transparent)', primitive),
-        fillShown(interactive),
-      );
+      rules.push(fillColor('var(--tp-control-strong)', primitive), fillShown(interactive));
     return rules;
   }
   // No invented treatment for unresolved cataloged variants.

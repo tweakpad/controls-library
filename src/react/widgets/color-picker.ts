@@ -14,6 +14,7 @@ export type ColorPickerProps = ElementProps<
   TpColorPicker,
   | 'allowWheelScrub'
   | 'alpha'
+  | 'appearance'
   | 'defaultFormat'
   | 'defaultHarmony'
   | 'defaultOpen'

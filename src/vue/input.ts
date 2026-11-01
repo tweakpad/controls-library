@@ -12,6 +12,7 @@ export const Input = /*#__PURE__*/ createBinding(TpInput, 'Input', {
   model: 'value',
 }) as ElementBinding<
   TpInput,
+  | 'appearance'
   | 'autocomplete'
   | 'defaultValue'
   | 'density'

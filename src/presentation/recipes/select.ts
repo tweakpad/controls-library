@@ -1,5 +1,5 @@
 import type { PresentationDictionary } from '../resolver.js';
-import { insetFocusRing } from './shared/focus.js';
+import { insetFocusRing, invalidFocusRing } from './shared/focus.js';
 import { popupBorderColor } from './shared/surface.js';
 import {
   anchoredPresenceAppearance,
@@ -88,16 +88,12 @@ export const selectAppearance: PresentationDictionary = {
     {
       selector: '&:hover:not(:disabled, [aria-disabled="true"])',
       declarations: {
-        background:
-          'light-dark(transparent, color-mix(in oklab, var(--tp-input) 50%, transparent))',
+        background: 'var(--tp-control)',
       },
     },
     { selector: '&[data-placeholder]', declarations: { color: 'var(--tp-muted-foreground)' } },
     { selector: '&[data-invalid]', declarations: { 'border-color': 'var(--tp-destructive)' } },
-    {
-      selector: '&[data-invalid]:focus-visible',
-      declarations: { 'outline-color': 'var(--tp-destructive)' },
-    },
+    { selector: '&[data-invalid]:focus-visible', declarations: invalidFocusRing },
     { selector: '&[data-disabled]', declarations: { cursor: 'not-allowed' } },
   ].map((rule) => ({
     ...rule,

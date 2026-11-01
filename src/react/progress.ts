@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Progress}, the React binding of `<tp-progress>`. */
 export type ProgressProps = ElementProps<
   TpProgress,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'format'

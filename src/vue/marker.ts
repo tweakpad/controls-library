@@ -8,6 +8,7 @@ export const Marker = /*#__PURE__*/ createBinding(TpMarker, 'Marker', {
   lanes: {},
 }) as ElementBinding<
   TpMarker,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link CopyButton}, the React binding of `<tp-copy-button>`. */
 export type CopyButtonProps = ElementProps<
   TpCopyButton,
+  | 'appearance'
   | 'copiedLabel'
   | 'data'
   | 'density'

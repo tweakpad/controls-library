@@ -8,6 +8,7 @@ export const Badge = /*#__PURE__*/ createBinding(TpBadge, 'Badge', {
   lanes: {},
 }) as ElementBinding<
   TpBadge,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'interactive'

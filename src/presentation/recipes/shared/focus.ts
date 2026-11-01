@@ -17,9 +17,12 @@ export const insetFocusRing: PresentationDeclarations = {
 };
 
 /**
- * The ring of a focused invalid control: the destructive color at full strength. Invalid
- * paint tints its resting outline; a focused control must not inherit that tint.
+ * The ring of a focused invalid field: the field focus ring (an edge in the ring color and a half
+ * strength halo of it) drawn in the destructive color, so focus and error read in one red.
  */
 export const invalidFocusRing: PresentationDeclarations = {
-  outline: 'var(--tp-ring-width) var(--tp-border-style) var(--tp-destructive)',
+  'border-color': 'var(--tp-destructive)',
+  outline:
+    'var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-destructive) 50%, transparent)',
+  'outline-offset': '0',
 };

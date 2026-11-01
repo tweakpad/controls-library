@@ -17,7 +17,9 @@ Spacing is the exception: the `space-*` roles, control heights and icon sizes de
 ## Token families
 
 - Color pairs: `background`/`foreground`, `card`/`card-foreground`, `popover`/`popover-foreground`, `primary`/`primary-foreground`, `secondary`/`secondary-foreground`, `muted`/`muted-foreground`, `accent`/`accent-foreground`, `destructive`/`destructive-foreground`, `success`/`success-foreground`, and `warning`/`warning-foreground`.
-- Unpaired colors: `border`, `input`, `ring`, and `chart-1` through `chart-5`.
+- Status tints: for each of `primary`, `destructive`, `success` and `warning`, a tinted fill `<role>-subtle`, its text tone `<role>-subtle-foreground` and an edge `<role>-border`. They derive from the role, so a theme that sets only `--tp-destructive` gets a matching set; a theme can also set them directly.
+- Lines and fills: `border` draws dividers, `edge` the outer edge of a component or panel, and `input` the edge of a field or an outline control. `control` fills fields and outline controls, and `control-strong` is their stronger fill for hover and disabled states. `control-border` is the boundary of checkboxes and radios, and `choice` and `choice-foreground` the fill and dot of a chosen radio.
+- Unpaired colors: `ring`, and `chart-1` through `chart-5`.
 - Syntax colors: one role per scope of highlighted code: `syntax-comment`, `syntax-keyword`, `syntax-string`, `syntax-number`, `syntax-function`, `syntax-type`, `syntax-constant`, `syntax-variable`, `syntax-property`, `syntax-tag`, `syntax-attribute`, `syntax-operator`, `syntax-inserted` and `syntax-deleted`. See [Code block](components/code-block.mdx#theming).
 - Content colors: `content-<hue>` and `content-<hue>-foreground` for the hues `gray`, `brown`, `orange`, `yellow`, `green`, `blue`, `purple`, `pink` and `red`. See [Content colors](#content-colors).
 - Spacing: `spacing` and `spacing-compact`, the seed of each [density](#density) mode, plus the derived `space-*` scale: `space-0`, `space-0-5`, `space-1`, `space-1-5`, `space-2`, `space-2-5`, `space-3`, `space-4`, `space-5`, `space-6`, `space-8`, `space-10`, `space-12` and `space-16`. Each equals `spacing` times its suffix; a trailing `-5` is the half step.
@@ -89,7 +91,7 @@ A theme may leave the content colors out. A missing surface role then paints no 
 
 Library-authored percentage variations use the semantic color roles with `color-mix(in oklab, …)`. The mix percentage is documented where the interaction rule is defined; it is not a new token such as `--tp-input-hover`. Base role values can still use any valid CSS color notation.
 
-For example, a hovered Button paints its hover color as a layer between its own fill and its content. A ghost Button's layer is `color-mix(in oklab, var(--tp-input) 50%, transparent)`, a translucent mix that lets the surface behind the Button show through. [Button](components/button.mdx#hover-colors) lists the mix of each variant and the fill it sits on.
+For example, a hovered Button paints its hover color as a layer between its own fill and its content. A ghost or outline Button's layer is the `control-strong` role; a status variant such as `destructive` deepens its tint with `color-mix(in oklab, var(--tp-destructive) 12%, var(--tp-destructive-subtle))`.
 
 `transparent` is an alpha operand or a no-paint value, not a replacement for a content-bearing surface role. Selected and focused states continue to use their semantic `accent` and `ring` roles; `--tp-opacity-disabled` remains a non-color state token.
 
@@ -208,6 +210,41 @@ A theme sets the seed of each mode on `:root`: `--tp-spacing` for the default mo
   --tp-spacing-compact: 0.2rem;
 }
 ```
+
+## Status colors
+
+Status variants, such as a `destructive` Button or a `success` Badge, paint the role's tinted fill, its text tone and its edge: `--tp-destructive-subtle`, `--tp-destructive-subtle-foreground` and `--tp-destructive-border`. The `default` and `secondary` variants keep their solid fill and foreground. An Alert paints its severity the same way: the tinted fill, the edge, and the text tone for its title, description and icon; `informational` uses the primary role. Error messages and destructive menu commands use the destructive text tone, so they stay readable on any surface.
+
+## Flat appearance
+
+The token set has two appearance modes. `default` draws an edge around components and panels: cards, popups, fields, outline controls and status variants. `flat` removes those edges and separates components by fill instead: panels take a fill a step from the page, fields and outline controls a step from panels, and status variants keep their tint without an edge. Checkboxes and radios lose their boundary too and show as filled marks; a chosen radio is a plain primary fill with no dot (`choice`, `choice-foreground`). Dividers, focus rings, shadows and corner radii stay the same.
+
+Set `appearance="flat"` on any element to make it and everything inside it flat, and `appearance="default"` to return part of a flat region to the default look. Regions nest in any order and combine with [density](#density):
+
+```html
+<main>
+  <tp-card>…</tp-card>
+  <aside appearance="flat" density="compact">
+    <tp-input variant="inline" label="Radius"></tp-input>
+    <tp-badge variant="success">Live</tp-badge>
+    <section appearance="default">
+      <tp-button variant="outline">Apply</tp-button>
+    </section>
+  </aside>
+</main>
+```
+
+| Role                          | default                                | flat                                     |
+| ----------------------------- | -------------------------------------- | ---------------------------------------- |
+| `edge`, `input`               | the `border` color                     | transparent                              |
+| `control-border`              | the foreground over the background     | transparent                              |
+| `choice`, `choice-foreground` | the control fill and the primary color | the primary color, with no dot           |
+| `<role>-border`               | the role over the background           | transparent                              |
+| `card`                        | the theme's card color                 | the background with 4% of the foreground |
+| `control`                     | transparent in light, a tint in dark   | the card with 10% of the foreground      |
+| `control-strong`              | half of the `input` color              | the card with 15% of the foreground      |
+
+Library elements also take `appearance` as an attribute or a property (`element.appearance = 'flat'`, or `appearance` in the framework bindings), which works inside other shadow roots. Popups opened from a region keep its appearance, also when they are portaled to the document body.
 
 ## Default spacing
 

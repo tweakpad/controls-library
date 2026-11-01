@@ -14,6 +14,7 @@ export const Tabs = /*#__PURE__*/ createBinding(TpTabs, 'Tabs', {
   | 'activateOnFocus'
   | 'activation'
   | 'activationDirection'
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'

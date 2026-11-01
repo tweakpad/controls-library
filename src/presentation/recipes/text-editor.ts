@@ -43,12 +43,8 @@ import { nativeChoiceAppearance } from './shared/selection-control.js';
 import { selectionFill, selectionLine } from './shared/selection.js';
 import { resizeSeparatorRules } from './shared/separator.js';
 import { statusAppearance } from './shared/status.js';
-import {
-  floatingToolbarAppearance,
-  floatingToolbarStructure,
-  popupBorderColor,
-} from './shared/surface.js';
-import { swatchCorner, swatchFill } from './shared/swatch.js';
+import { floatingToolbarAppearance, floatingToolbarStructure } from './shared/surface.js';
+import { swatchColorProperty, swatchCorner, swatchEdgeRing, swatchFill } from './shared/swatch.js';
 
 /**
  * The context bar editors (`uwg-te-req-pres-9`) enter sliding down from under the fixed toolbar
@@ -141,7 +137,7 @@ function contentColorRules(colors: readonly TextEditorColor[]): readonly Present
 /**
  * The tones of a callout block (`uwg-te-req-blocks-6`): its `tone` attribute, which the HTML
  * profile writes as `data-tone`, tints the callout surface as an Alert of the same severity. A tone
- * names an alert kind or a severity; `note`, `important` and any other tone keep the surface's text.
+ * names an alert kind or a severity; a callout without a known tone keeps the plain surface.
  */
 function calloutToneRules(callout: string): readonly PresentationRule[] {
   return calloutTints.map((severity) => {
@@ -474,7 +470,7 @@ export const textEditorAppearance: PresentationDictionary = {
       selector: '&[data-swatch="fill"]',
       declarations: {
         'border-radius': swatchCorner,
-        'box-shadow': `inset 0 0 0 var(--tp-border-width) ${popupBorderColor}`,
+        'box-shadow': swatchEdgeRing,
       },
     },
     ...TEXT_EDITOR_COLORS.flatMap((hue): PresentationRule[] => [
@@ -484,10 +480,13 @@ export const textEditorAppearance: PresentationDictionary = {
       },
       {
         selector: `&[data-swatch="fill"][data-color="${hue}"]`,
-        declarations: swatchFill(
-          `linear-gradient(var(--tp-content-${hue}), var(--tp-content-${hue}))`,
-          'calc(var(--tp-icon-size-md) / 4)',
-        ),
+        declarations: {
+          ...swatchFill(
+            `linear-gradient(var(--tp-content-${hue}), var(--tp-content-${hue}))`,
+            'calc(var(--tp-icon-size-md) / 4)',
+          ),
+          [swatchColorProperty]: `var(--tp-content-${hue})`,
+        },
       },
     ]),
   ],

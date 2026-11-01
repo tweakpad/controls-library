@@ -11,6 +11,7 @@ export const Toggle = /*#__PURE__*/ createBinding(TpToggle, 'Toggle', {
   model: 'pressed',
 }) as ElementBinding<
   TpToggle,
+  | 'appearance'
   | 'ariaLabel'
   | 'defaultPressed'
   | 'density'

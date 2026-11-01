@@ -17,7 +17,7 @@ export const menubarAppearance: PresentationDictionary = {
         padding: 'calc(var(--tp-space-1) - var(--tp-border-width))',
         gap: 'var(--tp-space-0-5)',
         'border-radius': 'var(--tp-radius-lg)',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
       },
     },
   ],

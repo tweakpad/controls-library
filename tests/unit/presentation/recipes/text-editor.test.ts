@@ -197,7 +197,8 @@ export function literalColorOffenders(list: readonly PresentationDictionary[]): 
         const text = String(value).replace(/--[\w-]+/gu, '');
         return (
           /#[0-9a-f]{3,8}\b/iu.test(text) ||
-          /\b(?:rgba?|hsla?|hwb|lab|lch|oklab|oklch|color)\(/iu.test(text) ||
+          // A color function by its own name; `contrast-color()` derives from a role.
+          /(?<![\w-])(?:rgba?|hsla?|hwb|lab|lch|oklab|oklch|color)\(/iu.test(text) ||
           NAMED_COLORS.test(text)
         );
       })
@@ -574,6 +575,10 @@ describe('text editor recipe', () => {
     const tones = content.filter((rule) => rule.selector?.includes('[data-tone='));
     expect(tones.map((rule) => [rule.selector, rule.declarations])).toEqual([
       [
+        '& .tp-te-callout[data-tone="note"], & .tp-te-callout[data-tone="important"], & .tp-te-callout[data-tone="informational"]',
+        calloutTint('informational'),
+      ],
+      [
         '& .tp-te-callout[data-tone="tip"], & .tp-te-callout[data-tone="success"]',
         calloutTint('success'),
       ],
@@ -584,7 +589,7 @@ describe('text editor recipe', () => {
       ],
     ]);
     // The Alert recipe takes the same tints, and Markdown alerts the same kind severities.
-    expect(calloutTints).toEqual(['success', 'warning', 'danger']);
+    expect(calloutTints).toEqual(['informational', 'success', 'warning', 'danger']);
     expect(alertKindSeverity).toMatchObject({ note: 'informational', tip: 'success' });
     // The tones follow the surface rule, which they override by specificity.
     const surface = content.findIndex((rule) => rule.selector === '& .tp-te-callout');

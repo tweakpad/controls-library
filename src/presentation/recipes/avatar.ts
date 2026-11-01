@@ -18,7 +18,7 @@ export const avatarAppearance: PresentationDictionary = {
         content: "''",
         position: 'absolute',
         inset: '0',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
         'border-radius': 'inherit',
         'pointer-events': 'none',
       },

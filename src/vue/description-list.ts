@@ -13,6 +13,7 @@ export const DescriptionList = /*#__PURE__*/ createBinding(TpDescriptionList, 'D
 }) as ElementBinding<
   TpDescriptionList,
   | 'align'
+  | 'appearance'
   | 'defaultOpen'
   | 'density'
   | 'disabled'
@@ -47,6 +48,7 @@ export const DescriptionListItem = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpDescriptionListItem,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

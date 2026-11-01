@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Color roles tuner</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      body {
+        margin: 0;
+        background: var(--tp-background);
+        color: var(--tp-foreground);
+        font-family: var(--tp-font-sans);
+      }
+      .tuner {
+        display: grid;
+        grid-template-columns: minmax(20rem, 26rem) 1fr;
+        block-size: 100dvh;
+      }
+      .controls {
+        overflow: auto;
+        padding: var(--tp-space-4);
+        display: grid;
+        align-content: start;
+        gap: var(--tp-space-6);
+        border-inline-end: var(--tp-border-width) var(--tp-border-style) var(--tp-border);
+      }
+      .controls h1,
+      .controls h2,
+      .surface h2 {
+        margin: 0;
+        font-size: var(--tp-text-sm);
+        font-weight: var(--tp-font-semibold);
+      }
+      .controls h1 {
+        font-size: var(--tp-text-lg);
+      }
+      .group {
+        display: grid;
+        gap: var(--tp-space-2);
+      }
+      .note {
+        margin: 0;
+        color: var(--tp-muted-foreground);
+        font-size: var(--tp-text-xs);
+      }
+      .pair {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: var(--tp-space-2);
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--tp-space-2);
+      }
+      .surface {
+        overflow: auto;
+        padding: var(--tp-space-6);
+        display: grid;
+        align-content: start;
+        gap: var(--tp-space-8);
+        background: var(--tp-background);
+        color: var(--tp-foreground);
+      }
+      .surface section {
+        display: grid;
+        gap: var(--tp-space-3);
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--tp-space-3);
+      }
+      .section-list {
+        display: grid;
+        gap: var(--tp-space-8);
+      }
+      .surface .part-heading {
+        font-size: var(--tp-text-lg);
+        padding-block-start: var(--tp-space-4);
+        border-block-start: var(--tp-border-width) var(--tp-border-style) var(--tp-border);
+      }
+      .example {
+        min-inline-size: 0;
+      }
+      .probe {
+        display: none;
+      }
+      .stack {
+        display: grid;
+        gap: var(--tp-space-3);
+        max-inline-size: 36rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="./fixture.ts"></script>
+  </body>
+</html>

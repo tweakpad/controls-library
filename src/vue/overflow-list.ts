@@ -9,6 +9,7 @@ export const OverflowList = /*#__PURE__*/ createBinding(TpOverflowList, 'Overflo
   lanes: {},
 }) as ElementBinding<
   TpOverflowList,
+  | 'appearance'
   | 'collapseFrom'
   | 'density'
   | 'disabled'

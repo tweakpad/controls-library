@@ -9,6 +9,7 @@ import type * as foundationTypes from '../foundation/types.js';
 /** Props of {@link NativeSelect}, the React binding of `<tp-native-select>`. */
 export type NativeSelectProps = ElementProps<
   TpNativeSelect,
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'

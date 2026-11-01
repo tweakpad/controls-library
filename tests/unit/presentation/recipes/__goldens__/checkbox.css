@@ -1,7 +1,7 @@
 /* tp-checkbox appearance */
 /* checkbox */
 &{gap:var(--tp-space-2);color:var(--tp-foreground);background:transparent;border:0;padding:0;font:inherit;font-size:var(--tp-text-sm);text-align:start;min-block-size:var(--tp-control-height-xs)}
-& > .box{border:var(--tp-border-width) var(--tp-border-style) var(--tp-input);background:light-dark(transparent, color-mix(in oklab, var(--tp-input) 30%, transparent));box-shadow:var(--tp-shadow-sm)}
+& > .box{border:var(--tp-border-width) var(--tp-border-style) var(--tp-control-border);background:var(--tp-control);box-shadow:var(--tp-shadow-sm)}
 &:focus-visible{outline:none}
 &:focus-visible > .box{border-color:var(--tp-ring);outline:var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-ring) 50%, transparent);outline-offset:0}
 &[data-invalid] > .box{border-color:var(--tp-destructive)}
@@ -14,8 +14,8 @@
 &{box-sizing:border-box;border:var(--tp-border-width) var(--tp-border-style) var(--tp-input);border-radius:var(--tp-radius-lg);background:var(--tp-muted);font-size:var(--tp-text-sm);font-weight:var(--tp-font-normal);line-height:var(--tp-leading-normal);color:var(--tp-foreground);min-block-size:var(--tp-control-height-md);gap:var(--tp-space-2);padding-inline-start:var(--tp-space-2-5);padding-inline-end:var(--tp-space-3)}
 &:focus-visible > .box{outline:none}
 &:focus-visible{border-color:var(--tp-ring);outline:var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-ring) 50%, transparent);outline-offset:0}
-&[data-invalid]{border-color:var(--tp-destructive);outline:var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-destructive) 20%, transparent);outline-offset:0}
-&[data-invalid]:focus-visible{outline:var(--tp-ring-width) var(--tp-border-style) var(--tp-destructive)}
+&[data-invalid]{border-color:var(--tp-destructive)}
+&[data-invalid]:focus-visible{border-color:var(--tp-destructive);outline:var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-destructive) 50%, transparent);outline-offset:0}
 /* checkbox-indicator */
 &{color:inherit}
 

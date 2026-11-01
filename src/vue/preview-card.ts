@@ -14,6 +14,7 @@ export const PreviewCard = /*#__PURE__*/ createBinding(TpPreviewCard, 'PreviewCa
   | 'align'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'

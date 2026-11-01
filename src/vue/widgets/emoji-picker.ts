@@ -13,6 +13,7 @@ export const EmojiPicker = /*#__PURE__*/ createBinding(TpEmojiPicker, 'EmojiPick
   model: 'value',
 }) as ElementBinding<
   TpEmojiPicker,
+  | 'appearance'
   | 'categoryBar'
   | 'columns'
   | 'custom'

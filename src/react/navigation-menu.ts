@@ -13,6 +13,7 @@ export type NavigationMenuProps = ElementProps<
   | 'align'
   | 'alignOffset'
   | 'anchor'
+  | 'appearance'
   | 'arrowBorderColor'
   | 'arrowBorderWidth'
   | 'arrowHeight'
@@ -96,6 +97,7 @@ export const NavigationMenu = /*#__PURE__*/ createBinding<NavigationMenuProps>(
 /** Props of {@link NavigationMenuItem}, the React binding of `<tp-navigation-menu-item>`. */
 export type NavigationMenuItemProps = ElementProps<
   TpNavigationMenuItem,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

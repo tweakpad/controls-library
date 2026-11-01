@@ -17,6 +17,7 @@ export const ColorPicker = /*#__PURE__*/ createBinding(TpColorPicker, 'ColorPick
   TpColorPicker,
   | 'allowWheelScrub'
   | 'alpha'
+  | 'appearance'
   | 'defaultFormat'
   | 'defaultHarmony'
   | 'defaultOpen'

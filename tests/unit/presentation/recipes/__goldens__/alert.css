@@ -1,16 +1,20 @@
 /* tp-alert appearance */
 /* alert */
-&{column-gap:var(--tp-space-2);padding:var(--tp-space-2) var(--tp-space-2-5);border:var(--tp-border-width) var(--tp-border-style) var(--tp-border);border-radius:var(--tp-radius-lg);background:var(--tp-card);color:var(--tp-card-foreground);font-size:var(--tp-text-sm);box-shadow:var(--tp-shadow-none)}
+&{column-gap:var(--tp-space-2);padding:var(--tp-space-2) var(--tp-space-2-5);border:var(--tp-border-width) var(--tp-border-style) var(--tp-edge);border-radius:var(--tp-radius-lg);background:var(--tp-card);color:var(--tp-card-foreground);font-size:var(--tp-text-sm);box-shadow:var(--tp-shadow-none)}
 &{row-gap:var(--tp-space-2)}
 & > .body{gap:var(--tp-space-0-5)}
-:host([severity='success']) &{color:color-mix(in oklab, var(--tp-success) 85%, var(--tp-card-foreground))}
-:host([severity='warning']) &{color:color-mix(in oklab, var(--tp-warning) 85%, var(--tp-card-foreground))}
-:host([severity='danger']) &{color:color-mix(in oklab, var(--tp-destructive) 85%, var(--tp-card-foreground))}
+:host([severity='informational']) &{background:var(--tp-primary-subtle);border-color:var(--tp-primary-border);color:var(--tp-primary-subtle-foreground)}
+:host([severity='success']) &{background:var(--tp-success-subtle);border-color:var(--tp-success-border);color:var(--tp-success-subtle-foreground)}
+:host([severity='warning']) &{background:var(--tp-warning-subtle);border-color:var(--tp-warning-border);color:var(--tp-warning-subtle-foreground)}
+:host([severity='danger']) &{background:var(--tp-destructive-subtle);border-color:var(--tp-destructive-border);color:var(--tp-destructive-subtle-foreground)}
 /* alert-title */
 &{font-weight:var(--tp-font-medium)}
 /* alert-description */
 &{color:var(--tp-muted-foreground)}
-:host(:is([severity='success'], [severity='warning'], [severity='danger'])) &{color:inherit}
+:host([severity='informational']) &{color:inherit}
+:host([severity='success']) &{color:inherit}
+:host([severity='warning']) &{color:inherit}
+:host([severity='danger']) &{color:inherit}
 & ::slotted(p){margin:0}
 /* alert-action */
 &{gap:var(--tp-space-2)}

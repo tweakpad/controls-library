@@ -19,6 +19,7 @@ export const Flow = /*#__PURE__*/ createBinding(TpFlow, 'Flow', {
   model: 'value',
 }) as ElementBinding<
   TpFlow,
+  | 'appearance'
   | 'autoLayout'
   | 'background'
   | 'confirmDelete'

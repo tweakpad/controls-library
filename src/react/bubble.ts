@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type BubbleProps = ElementProps<
   TpBubble,
   | 'align'
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
@@ -36,6 +37,7 @@ export const Bubble = /*#__PURE__*/ createBinding<BubbleProps>(
 /** Props of {@link BubbleGroup}, the React binding of `<tp-bubble-group>`. */
 export type BubbleGroupProps = ElementProps<
   TpBubbleGroup,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

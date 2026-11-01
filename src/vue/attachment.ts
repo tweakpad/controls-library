@@ -9,6 +9,7 @@ export const Attachment = /*#__PURE__*/ createBinding(TpAttachment, 'Attachment'
   lanes: {},
 }) as ElementBinding<
   TpAttachment,
+  | 'appearance'
   | 'density'
   | 'description'
   | 'disabled'
@@ -40,6 +41,7 @@ export const AttachmentGroup = /*#__PURE__*/ createBinding(TpAttachmentGroup, 'A
   lanes: {},
 }) as ElementBinding<
   TpAttachmentGroup,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

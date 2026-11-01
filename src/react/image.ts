@@ -10,6 +10,7 @@ import type * as foundationServices from '../foundation/services.js';
 export type ImageProps = ElementProps<
   TpImage,
   | 'alt'
+  | 'appearance'
   | 'crossOrigin'
   | 'density'
   | 'disabled'
@@ -62,6 +63,7 @@ export const Image = /*#__PURE__*/ createBinding<ImageProps>(
 /** Props of {@link ImageGroup}, the React binding of `<tp-image-group>`. */
 export type ImageGroupProps = ElementProps<
   TpImageGroup,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link VisuallyHidden}, the React binding of `<tp-visually-hidden>`. */
 export type VisuallyHiddenProps = ElementProps<
   TpVisuallyHidden,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

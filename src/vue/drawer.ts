@@ -21,6 +21,7 @@ export const Drawer = /*#__PURE__*/ createBinding(TpDrawer, 'Drawer', {
 }) as ElementBinding<
   TpDrawer,
   | 'activeSnapPoint'
+  | 'appearance'
   | 'backdrop'
   | 'closeOnEscape'
   | 'closeOnOutsideInteraction'
@@ -98,6 +99,7 @@ export const DrawerSwipeArea = /*#__PURE__*/ createBinding(TpDrawerSwipeArea, 'D
   lanes: {},
 }) as ElementBinding<
   TpDrawerSwipeArea,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'for'

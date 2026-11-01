@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link MoTextMirror}, the React binding of `<tp-mo-text-mirror>`. */
 export type MoTextMirrorProps = ElementProps<
   TpMoTextMirror,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

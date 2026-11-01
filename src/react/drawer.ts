@@ -18,6 +18,7 @@ import type * as foundationSurfaceState from '../foundation/surface-state.js';
 export type DrawerProps = ElementProps<
   TpDrawer,
   | 'activeSnapPoint'
+  | 'appearance'
   | 'backdrop'
   | 'closeOnEscape'
   | 'closeOnOutsideInteraction'
@@ -118,6 +119,7 @@ export const DrawerProvider = /*#__PURE__*/ createBinding<DrawerProviderProps>(
 /** Props of {@link DrawerSwipeArea}, the React binding of `<tp-drawer-swipe-area>`. */
 export type DrawerSwipeAreaProps = ElementProps<
   TpDrawerSwipeArea,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'for'

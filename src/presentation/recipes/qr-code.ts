@@ -15,7 +15,7 @@ export const qrCodeAppearance: PresentationDictionary = {
     {
       declarations: {
         'color-scheme': 'light',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
         'border-radius': 'var(--tp-radius-xl)',
         'background-color': 'var(--tp-qr-code-background, var(--tp-background))',
       },

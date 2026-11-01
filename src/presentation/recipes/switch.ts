@@ -7,11 +7,13 @@ import {
   inlineControlRings,
   inlineControlSurface,
 } from './shared/inline-control.js';
-const invalidPaint = {
-  'border-color':
-    'light-dark(var(--tp-destructive), color-mix(in oklab, var(--tp-destructive) 50%, transparent))',
+// An invalid track takes the destructive edge; focused, it rings as a focused track does, in the
+// destructive color.
+const invalidPaint = { 'border-color': 'var(--tp-destructive)' };
+const invalidFocusPaint = {
+  'border-color': 'var(--tp-destructive)',
   'box-shadow':
-    '0 0 0 var(--tp-ring-width) light-dark(color-mix(in oklab, var(--tp-destructive) 20%, transparent), color-mix(in oklab, var(--tp-destructive) 40%, transparent))',
+    '0 0 0 var(--tp-ring-width) color-mix(in oklab, var(--tp-destructive) 50%, transparent)',
 };
 /** Switch paint; translated geometry remains structural. */
 export const switchAppearance: PresentationDictionary = {
@@ -23,7 +25,7 @@ export const switchAppearance: PresentationDictionary = {
     {
       declarations: {
         background:
-          'light-dark(var(--tp-input), color-mix(in oklab, var(--tp-input) 80%, transparent))',
+          'light-dark(var(--tp-border), color-mix(in oklab, var(--tp-border) 80%, transparent))',
         border: 'var(--tp-border-width) var(--tp-border-style) transparent',
         'border-radius': 'var(--tp-radius-full)',
       },
@@ -44,7 +46,7 @@ export const switchAppearance: PresentationDictionary = {
     },
     {
       selector: '&[data-invalid][data-focus-visible]:focus-visible',
-      declarations: { 'outline-color': 'var(--tp-destructive)', ...invalidPaint },
+      declarations: { 'outline-color': 'var(--tp-destructive)', ...invalidFocusPaint },
     },
     {
       selector: '&[data-invalid]',

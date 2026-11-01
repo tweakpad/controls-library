@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Attachment}, the React binding of `<tp-attachment>`. */
 export type AttachmentProps = ElementProps<
   TpAttachment,
+  | 'appearance'
   | 'density'
   | 'description'
   | 'disabled'
@@ -44,6 +45,7 @@ export const Attachment = /*#__PURE__*/ createBinding<AttachmentProps>(
 /** Props of {@link AttachmentGroup}, the React binding of `<tp-attachment-group>`. */
 export type AttachmentGroupProps = ElementProps<
   TpAttachmentGroup,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

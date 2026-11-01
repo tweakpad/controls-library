@@ -13,6 +13,7 @@ export type FileUploadProps = ElementProps<
   | 'accept'
   | 'allowDrop'
   | 'allowDuplicates'
+  | 'appearance'
   | 'autoUpload'
   | 'capture'
   | 'clearable'

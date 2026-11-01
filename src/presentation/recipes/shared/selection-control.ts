@@ -24,8 +24,8 @@ export const selectionControl: readonly PresentationRule[] = [
   {
     selector: '& > .box',
     declarations: {
-      border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-input)',
-      background: 'light-dark(transparent, color-mix(in oklab, var(--tp-input) 30%, transparent))',
+      border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-control-border)',
+      background: 'var(--tp-control)',
       'box-shadow': 'var(--tp-shadow-sm)',
     },
   },
@@ -66,9 +66,14 @@ export const checkboxRules: readonly PresentationRule[] = [
 export const radioItemRules: readonly PresentationRule[] = [
   ...selectionControl,
   { selector: '& > .box', declarations: { 'border-radius': 'var(--tp-radius-full)' } },
+  // The chosen radio's fill and dot are roles, so an appearance can ring or fill it.
   {
     selector: '&[data-checked] > .box',
-    declarations: { 'border-color': 'var(--tp-primary)', color: 'var(--tp-primary)' },
+    declarations: {
+      background: 'var(--tp-choice)',
+      color: 'var(--tp-choice-foreground)',
+      'border-color': 'var(--tp-primary)',
+    },
   },
 ];
 

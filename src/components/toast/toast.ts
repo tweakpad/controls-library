@@ -362,7 +362,15 @@ export class TpToast extends TpElement {
     this.#themeObserver.observe(this.ownerDocument.documentElement, {
       subtree: true,
       attributes: true,
-      attributeFilter: ['class', 'style', 'data-theme', 'dir', 'motion-policy', 'density'],
+      attributeFilter: [
+        'class',
+        'style',
+        'data-theme',
+        'dir',
+        'motion-policy',
+        'density',
+        'appearance',
+      ],
     });
   }
   override disconnectedCallback(): void {

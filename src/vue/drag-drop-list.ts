@@ -19,6 +19,7 @@ export const DragDropList = /*#__PURE__*/ createBinding(TpDragDropList, 'DragDro
   | 'activation'
   | 'alignment'
   | 'announcements'
+  | 'appearance'
   | 'autoScroll'
   | 'collisionDetector'
   | 'collisionPriority'

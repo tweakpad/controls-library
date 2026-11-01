@@ -8,6 +8,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link ToggleGroup}, the React binding of `<tp-toggle-group>`. */
 export type ToggleGroupProps = ElementProps<
   TpToggleGroup,
+  | 'appearance'
   | 'defaultValue'
   | 'density'
   | 'disabled'

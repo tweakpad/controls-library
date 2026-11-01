@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import { FLAT_ROLES } from '../../../src/foundation/appearance.js';
 import { DENSITY_DERIVED_ROLES } from '../../../src/foundation/density.js';
 import { TEXT_EDITOR_COLORS } from '../../../src/foundation/text-editor/palette.js';
 import {
@@ -172,6 +173,24 @@ describe('foundational styling tokens', () => {
       expect(styles).toMatch(
         /\[density='default'\] \{\s*--tp-spacing: var\(--_tp-spacing-default\);/u,
       );
+    });
+
+    it('states the flat appearance and its default restore as library hosts do', () => {
+      const declarations = (selector: string) =>
+        [
+          ...(
+            new RegExp(`^\\[appearance='${selector}'\\] \\{([\\s\\S]*?)^\\}`, 'mu').exec(
+              styles,
+            )?.[1] ?? ''
+          ).matchAll(/(--tp-[\w-]+)\s*:\s*([^;]+);/gu),
+        ].map(([, name, value]) => [name, value!.trim()]);
+      expect(declarations('flat')).toEqual(FLAT_ROLES.map(([name, value]) => [name, value]));
+      expect(declarations('default')).toEqual(
+        FLAT_ROLES.map(([name]) => [name, `var(--_${name.slice(2)}-default)`]),
+      );
+      // The root keeps each default value for the restore.
+      for (const [name] of FLAT_ROLES)
+        expect(styles).toContain(`--_${name.slice(2)}-default: var(${name});`);
     });
 
     it('ships a complete default token set with compatible light and dark modes (ccx-defined)', () => {

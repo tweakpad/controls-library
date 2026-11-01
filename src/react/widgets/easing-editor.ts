@@ -11,6 +11,7 @@ export type EasingEditorProps = ElementProps<
   TpEasingEditor,
   | 'adapter'
   | 'adapters'
+  | 'appearance'
   | 'defaultAdapter'
   | 'defaultDuration'
   | 'defaultPresetsOpen'

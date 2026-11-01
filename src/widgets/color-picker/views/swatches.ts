@@ -2,7 +2,7 @@ import { html, nothing } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { TpValueChangeEvent } from '../../../foundation/events.js';
 import { parseColor } from '../../../foundation/color/parse.js';
-import { flatGradient, serializeColor } from '../../../foundation/color/serialize.js';
+import { displayColor, flatGradient, serializeColor } from '../../../foundation/color/serialize.js';
 
 /** One labelled grid or strip of swatches. */
 export interface SwatchRow {
@@ -48,7 +48,10 @@ export function renderSwatchRow(row: SwatchRow, options: SwatchRowOptions) {
       ><span
         class="swatch"
         part="color-picker-swatch"
-        style=${styleMap({ '--_tp-color-picker-paint': flatGradient(parsed) })}
+        style=${styleMap({
+          '--_tp-color-picker-paint': flatGradient(parsed),
+          '--_tp-swatch-color': displayColor(parsed, 1),
+        })}
       ></span
     ></tp-toggle>`;
   });

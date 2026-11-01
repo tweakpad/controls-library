@@ -13,6 +13,7 @@ export const DataVisualization = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpDataVisualization,
+  | 'appearance'
   | 'data'
   | 'density'
   | 'description'

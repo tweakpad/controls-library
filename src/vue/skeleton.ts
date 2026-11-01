@@ -9,6 +9,7 @@ export const Skeleton = /*#__PURE__*/ createBinding(TpSkeleton, 'Skeleton', {
 }) as ElementBinding<
   TpSkeleton,
   | 'animated'
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

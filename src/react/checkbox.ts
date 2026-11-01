@@ -9,6 +9,7 @@ import type * as foundationTypes from '../foundation/types.js';
 /** Props of {@link Checkbox}, the React binding of `<tp-checkbox>`. */
 export type CheckboxProps = ElementProps<
   TpCheckbox,
+  | 'appearance'
   | 'checkboxGroup'
   | 'checked'
   | 'defaultChecked'

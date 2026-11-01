@@ -35,6 +35,7 @@ type Tags = {
     TpColorPicker,
     | 'allowWheelScrub'
     | 'alpha'
+    | 'appearance'
     | 'defaultFormat'
     | 'defaultHarmony'
     | 'defaultOpen'
@@ -92,6 +93,7 @@ type Tags = {
     TpEasingEditor,
     | 'adapter'
     | 'adapters'
+    | 'appearance'
     | 'defaultAdapter'
     | 'defaultDuration'
     | 'defaultPresetsOpen'
@@ -141,6 +143,7 @@ type Tags = {
   >;
   'tp-emoji-picker': Tag<
     TpEmojiPicker,
+    | 'appearance'
     | 'categoryBar'
     | 'columns'
     | 'custom'
@@ -203,6 +206,7 @@ type Tags = {
   >;
   'tp-flow': Tag<
     TpFlow,
+    | 'appearance'
     | 'autoLayout'
     | 'background'
     | 'confirmDelete'
@@ -334,6 +338,7 @@ type Tags = {
   >;
   'tp-text-editor': Tag<
     TpTextEditor,
+    | 'appearance'
     | 'defaultValue'
     | 'density'
     | 'disabled'

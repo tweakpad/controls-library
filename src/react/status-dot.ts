@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link StatusDot}, the React binding of `<tp-status-dot>`. */
 export type StatusDotProps = ElementProps<
   TpStatusDot,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

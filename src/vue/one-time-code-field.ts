@@ -17,6 +17,7 @@ export const OneTimeCodeField = /*#__PURE__*/ createBinding(
   },
 ) as ElementBinding<
   TpOneTimeCodeField,
+  | 'appearance'
   | 'autoSubmit'
   | 'autocomplete'
   | 'characterPredicate'

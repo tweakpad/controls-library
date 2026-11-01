@@ -17,8 +17,14 @@ export const markerAppearance: PresentationDictionary = {
       },
     },
     { selector: ':host([tone="accent"]) &', declarations: { color: 'var(--tp-primary)' } },
-    { selector: ':host([tone="danger"]) &', declarations: { color: 'var(--tp-destructive)' } },
-    { selector: ':host([tone="success"]) &', declarations: { color: 'var(--tp-success)' } },
+    {
+      selector: ':host([tone="danger"]) &',
+      declarations: { color: 'var(--tp-destructive-subtle-foreground)' },
+    },
+    {
+      selector: ':host([tone="success"]) &',
+      declarations: { color: 'var(--tp-success-subtle-foreground)' },
+    },
     {
       selector: ':host([variant="separator"]) &::before, :host([variant="separator"]) &::after',
       declarations: {

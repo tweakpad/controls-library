@@ -9,6 +9,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link List}, the React binding of `<tp-list>`. */
 export type ListProps = ElementProps<
   TpList,
+  | 'appearance'
   | 'ariaLabel'
   | 'density'
   | 'disabled'
@@ -34,6 +35,7 @@ export const List = /*#__PURE__*/ createBinding<ListProps>(
 /** Props of {@link ListItem}, the React binding of `<tp-list-item>`. */
 export type ListItemProps = ElementProps<
   TpListItem,
+  | 'appearance'
   | 'density'
   | 'description'
   | 'disabled'
@@ -64,6 +66,7 @@ export const ListItem = /*#__PURE__*/ createBinding<ListItemProps>(
 /** Props of {@link ListSeparator}, the React binding of `<tp-list-separator>`. */
 export type ListSeparatorProps = ElementProps<
   TpListSeparator,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'

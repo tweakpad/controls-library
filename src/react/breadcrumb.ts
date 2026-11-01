@@ -7,6 +7,7 @@ import type * as foundationServices from '../foundation/services.js';
 /** Props of {@link Breadcrumb}, the React binding of `<tp-breadcrumb>`. */
 export type BreadcrumbProps = ElementProps<
   TpBreadcrumb,
+  | 'appearance'
   | 'density'
   | 'disabled'
   | 'invalid'
