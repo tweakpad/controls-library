@@ -680,7 +680,7 @@ export class TpSelect extends TpFormElement<unknown> {
     collection: this.#collection,
     selection: this.#selection,
     values: (value) => this.#values(value),
-    text: (value) => this.#text(value),
+    text: (value) => this.#selectedText(value),
     select: (record, event) => this.selectOption(record, event),
     selectionFree: () => this.selectionFree,
     eventName: () => this.inputValueEventName,
@@ -806,6 +806,9 @@ export class TpSelect extends TpFormElement<unknown> {
   #previousFocus: Element | null = null;
   #focusPending = false;
   #wasOpen = false;
+  /** The selected text the query last took, and whether the list was closed then. */
+  #queryLabel: string | undefined;
+  #queryClosed = true;
   #space = false;
   readonly #pointer = new SelectPointer<ChoiceModelRecord>(() =>
     this.ownerDocument.defaultView!.performance.now(),
@@ -904,6 +907,36 @@ export class TpSelect extends TpFormElement<unknown> {
   /** Whether a searchable list takes its query from an external owner. */
   get #externalQuery(): boolean {
     return this.searchable && this.queryOwner !== null;
+  }
+
+  /**
+   * A single searchable Select whose query no one supplies shows the selected option's text: from
+   * the first render, when the selection or its text changes, and again once the list has closed,
+   * so a query typed without choosing gives way to the selection.
+   */
+  #syncQueryLabel(): void {
+    const closed = !this.open && !['starting', 'open', 'ending'].includes(this.#presence.state);
+    if (
+      !this.searchable ||
+      this.multiple ||
+      this.selectionFree ||
+      this.inline ||
+      this.#externalQuery ||
+      this.#query.providedValue !== undefined ||
+      this.defaultInputValue !== undefined
+    ) {
+      this.#queryClosed = closed;
+      return;
+    }
+    const label = this.#selectedText(this.#selection.value);
+    const due = label !== this.#queryLabel || (closed && !this.#queryClosed);
+    this.#queryLabel = label;
+    this.#queryClosed = closed;
+    if (!due || this.#query.value === label) return;
+    this.#query.completion = '';
+    // The first text is the query's initial value, not a change.
+    if (!this.hasUpdated) this.#query.state.reconcile(label);
+    else this.#query.state.set(label, label ? 'programmatic' : 'input-clear');
   }
 
   /**
@@ -1026,6 +1059,7 @@ export class TpSelect extends TpFormElement<unknown> {
       (value) => this.itemToLabel?.(value) ?? this.#text(value),
     );
     this.#collection.setSource(this.#model.records);
+    this.#syncQueryLabel();
     this.#query.sync(previousHighlight);
     this.#layoutRows();
     if (this.searchable && this.virtualized && !this.items)
@@ -2345,6 +2379,8 @@ export class TpSelect extends TpFormElement<unknown> {
     this.#selection.reset();
     this.#query.state.reset();
     this.#query.completion = '';
+    // A query that shows the selection takes its text again.
+    this.#queryLabel = undefined;
     this.close();
     this.#syncForm();
   }
@@ -2390,6 +2426,10 @@ export class TpSelect extends TpFormElement<unknown> {
   }
   #text(value: unknown): string {
     return this.itemToText?.(value) ?? (value == null ? '' : String(value));
+  }
+  /** The text of a selected value: its option's text, which an item press puts in the query. */
+  #selectedText(value: unknown): string {
+    return value == null ? '' : (this.#collection.selected(value)?.text ?? this.#text(value));
   }
   #state(): PartState {
     return {
