@@ -176,20 +176,22 @@ describe('highlighted command rows carry an inset ring', () => {
     );
   });
 
-  it('rings the highlighted Select option and Emoji picker item after their highlight fill', () => {
-    for (const [family, part] of [
-      [selectPresentation, 'select-option'],
-      [emojiPickerPresentation, 'emoji-picker-item'],
-    ] as const) {
-      const text = css(family, part);
-      expectOrder(
-        text,
-        `[part~="${part}"][data-highlighted]:not([data-disabled]){`,
-        `[part~="${part}"]:is(:focus-visible, [data-highlighted]):not([data-disabled]){outline:${ring};${inset}}`,
-      );
-      // The base paint's `outline:0` precedes the ring, so the ring wins.
-      expect(text.indexOf('outline:0')).toBeLessThan(text.indexOf(inset));
-    }
+  it('rings the highlighted Emoji picker item after its highlight fill', () => {
+    const part = 'emoji-picker-item';
+    const text = css(emojiPickerPresentation, part);
+    expectOrder(
+      text,
+      `[part~="${part}"][data-highlighted]:not([data-disabled]){`,
+      `[part~="${part}"]:is(:focus-visible, [data-highlighted]):not([data-disabled]){outline:${ring};${inset}}`,
+    );
+    // The base paint's `outline:0` precedes the ring, so the ring wins.
+    expect(text.indexOf('outline:0')).toBeLessThan(text.indexOf(inset));
+  });
+
+  it('shows the highlighted Select option by its fill alone, without a ring', () => {
+    const text = css(selectPresentation, 'select-option');
+    expect(text).toContain('[part~="select-option"][data-highlighted]:not([data-disabled]){');
+    expect(text).not.toContain(inset);
   });
 
   it('never rings a hover-only state', () => {

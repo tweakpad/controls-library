@@ -1,5 +1,5 @@
 import type { PresentationDictionary } from '../resolver.js';
-import { insetFocusRing, invalidFocusRing } from './shared/focus.js';
+import { invalidFocusRing } from './shared/focus.js';
 import {
   anchoredPresenceAppearance,
   popupSpacingAppearance,
@@ -188,14 +188,11 @@ export const selectAppearance: PresentationDictionary = {
         outline: '0',
       },
     },
+    // The highlighted option, by pointer or keyboard, shows by its fill alone: the accent fill
+    // stands apart from the list surface in lightness, not only in hue.
     {
       selector: '&[data-highlighted]:not([data-disabled])',
       declarations: { background: 'var(--tp-accent)', color: 'var(--tp-accent-foreground)' },
-    },
-    // The highlighted option is where the keyboard is; its fill alone is a color-only cue.
-    {
-      selector: '&:is(:focus-visible, [data-highlighted]):not([data-disabled])',
-      declarations: insetFocusRing,
     },
     {
       selector: '&[data-disabled]',
