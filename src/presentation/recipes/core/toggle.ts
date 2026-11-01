@@ -1,12 +1,19 @@
 import type { PresentationDictionary } from '../../resolver.js';
 import { controlSizePresentation, rule, variantPresentation } from '../shared/variant.js';
+import { pressedEdge } from '../shared/edges.js';
 import { buttonCoreAppearance, buttonSizes, outlineFieldPaint } from './button.js';
 
 export const toggleCoreAppearance: PresentationDictionary = {
   toggle: [
     ...buttonCoreAppearance.button!,
+    // The pressed paint is a role set, so an appearance can ring or fill it; the ring sits inside
+    // the border, clear of joined seams and of the focus outline.
     rule(
-      { background: 'var(--tp-muted)', color: 'var(--tp-foreground)' },
+      {
+        background: 'var(--tp-pressed)',
+        color: 'var(--tp-pressed-foreground)',
+        'box-shadow': pressedEdge.ring,
+      },
       '&[aria-pressed="true"]',
     ),
   ],

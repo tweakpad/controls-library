@@ -55,6 +55,7 @@ const GROUPS = [
       { fill: 'control', text: 'foreground' },
       { fill: 'control-strong', text: 'foreground' },
       { fill: 'choice', text: 'choice-foreground' },
+      { fill: 'pressed', text: 'pressed-foreground', edge: 'pressed-border' },
     ],
     lines: ['border', 'edge', 'input', 'control-border', 'ring'],
   },

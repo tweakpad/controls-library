@@ -45,6 +45,13 @@
      the control fill; the flat one fills it with no dot. */
   --tp-choice: var(--tp-control);
   --tp-choice-foreground: var(--tp-primary);
+
+  /* A pressed Toggle: its fill, its content and its edge. The default appearance tints it in the
+     accent and rings it in the primary color, so the edge carries the state; the flat one, which
+     has no edges, fills it with the primary color. */
+  --tp-pressed: var(--tp-accent);
+  --tp-pressed-foreground: var(--tp-accent-foreground);
+  --tp-pressed-border: var(--tp-primary);
   --tp-ring: light-dark(#6d5dfc, #a78bfa);
 
   /* Status tints, derived from each role: a fill over the background, the role's text tone on that
@@ -110,6 +117,9 @@
   --_tp-control-border-default: var(--tp-control-border);
   --_tp-choice-default: var(--tp-choice);
   --_tp-choice-foreground-default: var(--tp-choice-foreground);
+  --_tp-pressed-default: var(--tp-pressed);
+  --_tp-pressed-foreground-default: var(--tp-pressed-foreground);
+  --_tp-pressed-border-default: var(--tp-pressed-border);
   --_tp-joined-edge-width-default: var(--tp-joined-edge-width);
   --_tp-primary-border-default: var(--tp-primary-border);
   --_tp-destructive-border-default: var(--tp-destructive-border);
@@ -303,6 +313,9 @@
   --tp-control-border: transparent;
   --tp-choice: var(--tp-primary);
   --tp-choice-foreground: var(--tp-primary);
+  --tp-pressed: var(--tp-primary);
+  --tp-pressed-foreground: var(--tp-primary-foreground);
+  --tp-pressed-border: transparent;
   --tp-joined-edge-width: var(--tp-border-width-strong);
   --tp-primary-border: transparent;
   --tp-destructive-border: transparent;
@@ -320,6 +333,9 @@
   --tp-control-border: var(--_tp-control-border-default);
   --tp-choice: var(--_tp-choice-default);
   --tp-choice-foreground: var(--_tp-choice-foreground-default);
+  --tp-pressed: var(--_tp-pressed-default);
+  --tp-pressed-foreground: var(--_tp-pressed-foreground-default);
+  --tp-pressed-border: var(--_tp-pressed-border-default);
   --tp-joined-edge-width: var(--_tp-joined-edge-width-default);
   --tp-primary-border: var(--_tp-primary-border-default);
   --tp-destructive-border: var(--_tp-destructive-border-default);

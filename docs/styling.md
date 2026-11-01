@@ -18,7 +18,7 @@ Spacing is the exception: the `space-*` roles, control heights and icon sizes de
 
 - Color pairs: `background`/`foreground`, `card`/`card-foreground`, `popover`/`popover-foreground`, `primary`/`primary-foreground`, `secondary`/`secondary-foreground`, `muted`/`muted-foreground`, `accent`/`accent-foreground`, `destructive`/`destructive-foreground`, `success`/`success-foreground`, and `warning`/`warning-foreground`.
 - Status tints: for each of `primary`, `destructive`, `success` and `warning`, a tinted fill `<role>-subtle`, its text tone `<role>-subtle-foreground` and an edge `<role>-border`. They derive from the role, so a theme that sets only `--tp-destructive` gets a matching set; a theme can also set them directly.
-- Lines and fills: `border` draws dividers, `edge` the outer edge of a component or panel, and `input` the edge of a field or an outline control. `control` fills fields and outline controls, and `control-strong` is their stronger fill for hover and disabled states. `control-border` is the boundary of checkboxes and radios, and `choice` and `choice-foreground` the fill and dot of a chosen radio.
+- Lines and fills: `border` draws dividers, `edge` the outer edge of a component or panel, and `input` the edge of a field or an outline control. `control` fills fields and outline controls, and `control-strong` is their stronger fill for hover and disabled states. `control-border` is the boundary of checkboxes and radios, `choice` and `choice-foreground` the fill and dot of a chosen radio, and `pressed`, `pressed-foreground` and `pressed-border` the fill, content and edge of a pressed Toggle.
 - Unpaired colors: `ring`, and `chart-1` through `chart-5`.
 - Syntax colors: one role per scope of highlighted code: `syntax-comment`, `syntax-keyword`, `syntax-string`, `syntax-number`, `syntax-function`, `syntax-type`, `syntax-constant`, `syntax-variable`, `syntax-property`, `syntax-tag`, `syntax-attribute`, `syntax-operator`, `syntax-inserted` and `syntax-deleted`. See [Code block](components/code-block.mdx#theming).
 - Content colors: `content-<hue>` and `content-<hue>-foreground` for the hues `gray`, `brown`, `orange`, `yellow`, `green`, `blue`, `purple`, `pink` and `red`. See [Content colors](#content-colors).
@@ -236,7 +236,7 @@ In a joined group (Button group, Toggle group, Field group) the seam between mem
 
 ## Flat appearance
 
-The token set has two appearance modes. `default` draws an edge around components and panels: cards, popups, fields, outline controls and status variants. `flat` removes those edges and separates components by fill instead: panels take a fill a step from the page, fields and outline controls a step from panels, and status variants keep their tint without an edge. Checkboxes and radios lose their boundary too and show as filled marks; a chosen radio is a plain primary fill with no dot (`choice`, `choice-foreground`). Dividers, focus rings, shadows and corner radii stay the same.
+The token set has two appearance modes. `default` draws an edge around components and panels: cards, popups, fields, outline controls and status variants. `flat` removes those edges and separates components by fill instead: panels take a fill a step from the page, fields and outline controls a step from panels, and status variants keep their tint without an edge. Checkboxes and radios lose their boundary too and show as filled marks; a chosen radio is a plain primary fill with no dot (`choice`, `choice-foreground`), and a pressed Toggle a primary fill with no edge (`pressed`, `pressed-foreground`, `pressed-border`). Dividers, focus rings, shadows and corner radii stay the same.
 
 Set `appearance="flat"` on any element to make it and everything inside it flat, and `appearance="default"` to return part of a flat region to the default look. Regions nest in any order and combine with [density](#density):
 
@@ -253,15 +253,16 @@ Set `appearance="flat"` on any element to make it and everything inside it flat,
 </main>
 ```
 
-| Role                          | default                                | flat                                     |
-| ----------------------------- | -------------------------------------- | ---------------------------------------- |
-| `edge`, `input`               | the `border` color                     | transparent                              |
-| `control-border`              | the foreground over the background     | transparent                              |
-| `choice`, `choice-foreground` | the control fill and the primary color | the primary color, with no dot           |
-| `<role>-border`               | the role over the background           | transparent                              |
-| `card`                        | the theme's card color                 | the background with 4% of the foreground |
-| `control`                     | transparent in light, a tint in dark   | the card with 10% of the foreground      |
-| `control-strong`              | half of the `input` color              | the card with 15% of the foreground      |
+| Role                                              | default                                     | flat                                     |
+| ------------------------------------------------- | ------------------------------------------- | ---------------------------------------- |
+| `edge`, `input`                                   | the `border` color                          | transparent                              |
+| `control-border`                                  | the foreground over the background          | transparent                              |
+| `choice`, `choice-foreground`                     | the control fill and the primary color      | the primary color, with no dot           |
+| `pressed`, `pressed-foreground`, `pressed-border` | the accent and an edge in the primary color | the primary color, with no edge          |
+| `<role>-border`                                   | the role over the background                | transparent                              |
+| `card`                                            | the theme's card color                      | the background with 4% of the foreground |
+| `control`                                         | transparent in light, a tint in dark        | the card with 10% of the foreground      |
+| `control-strong`                                  | half of the `input` color                   | the card with 15% of the foreground      |
 
 Library elements also take `appearance` as an attribute or a property (`element.appearance = 'flat'`, or `appearance` in the framework bindings), which works inside other shadow roots. Popups opened from a region keep its appearance, also when they are portaled to the document body.
 

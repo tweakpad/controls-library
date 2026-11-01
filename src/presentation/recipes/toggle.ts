@@ -8,10 +8,12 @@ export const toggleAppearance: PresentationDictionary = {
   toggle: [
     // A Toggle is never narrower than its height.
     { declarations: { 'min-inline-size': 'var(--tp-control-height-md)' } },
-    // Keep pressed paint distinct when a consumer moves the pointer onto it.
+    // A pressed Toggle under the pointer deepens its own fill; the neutral hover layer stays hidden.
     {
       selector: pressedInteraction,
-      declarations: { background: 'var(--tp-muted)', color: 'var(--tp-foreground)' },
+      declarations: {
+        background: 'color-mix(in oklab, var(--tp-pressed-foreground) 10%, var(--tp-pressed))',
+      },
     },
     fillHidden(pressedInteraction),
   ],

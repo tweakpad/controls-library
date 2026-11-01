@@ -7,7 +7,7 @@ const owner = 'src/presentation/recipes/shared/edges.ts';
 
 /** Line and control-fill roles: only the edge module names them. */
 const lineRole =
-  /var\(--tp-(?:border|edge|hairline|input|control|control-strong|control-border|(?:primary|destructive|success|warning)-border)\)/gu;
+  /var\(--tp-(?:border|edge|hairline|input|control|control-strong|control-border|(?:primary|destructive|success|warning|pressed)-border)\)/gu;
 /** A line color mixed from the foreground over transparency, which bypasses every role. */
 const foregroundLine = /color-mix\(in oklab,\s*var\(--tp-foreground\)\s*\d+%,\s*transparent\)/gu;
 

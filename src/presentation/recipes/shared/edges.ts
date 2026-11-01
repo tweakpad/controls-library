@@ -33,6 +33,9 @@ export const markEdge = kind('var(--tp-control-border)');
 /** A divider: separators, table rows, header and footer lines, guides. */
 export const divider = kind('var(--tp-border)');
 
+/** The edge of a pressed Toggle, which carries its pressed state. */
+export const pressedEdge = kind('var(--tp-pressed-border)');
+
 /** The edge of a status role's tinted fill: status variants and alerts. */
 export const statusEdge = (role: 'primary' | 'destructive' | 'success' | 'warning'): EdgeKind =>
   kind(`var(--tp-${role}-border)`);
