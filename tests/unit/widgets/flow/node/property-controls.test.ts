@@ -166,3 +166,36 @@ describe('flow property controls keep the text being edited', () => {
     }
   });
 });
+
+describe('Inline color property', () => {
+  it('is a node-body row whose popup picker opens from an inline Color input', async () => {
+    const { INLINE_PROPERTY_CONTROLS, defaultPropertyControls } =
+      await import('../../../../../src/widgets/flow/node/property-controls.js');
+    expect(INLINE_PROPERTY_CONTROLS.has('color')).toBe(true);
+    const context = (inline: boolean) =>
+      ({
+        definition: { key: 'tint', label: 'tint', control: 'color' },
+        id: 'tint-control',
+        value: '#ffffff',
+        inline,
+        disabled: false,
+        readOnly: false,
+      }) as unknown as Parameters<NonNullable<typeof defaultPropertyControls.color>>[0];
+    const trigger = (inline: boolean) => {
+      const result = defaultPropertyControls.color!(context(inline)) as {
+        values: unknown[];
+      };
+      return result.values.find(
+        (value): value is { strings: readonly string[]; values: unknown[] } =>
+          typeof value === 'object' && value !== null && 'strings' in value,
+      );
+    };
+    const inline = trigger(true);
+    expect(inline?.strings.join('')).toContain('<tp-color-input');
+    expect(inline?.strings.join('')).toContain('slot="trigger"');
+    expect(inline?.strings.join('')).toContain('variant="inline"');
+    expect(inline?.values).toContain('tint');
+    // The inspector keeps the picker's own swatch trigger inside its Field.
+    expect(trigger(false)).toBeUndefined();
+  });
+});

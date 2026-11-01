@@ -23,6 +23,7 @@ export const INLINE_PROPERTY_CONTROLS: ReadonlySet<FlowPropertyControl> = new Se
   'select',
   'switch',
   'checkbox',
+  'color',
 ]);
 
 function optionItems(context: FlowPropertyControlContext) {
@@ -149,6 +150,8 @@ export const defaultPropertyControls: FlowPropertyControls = {
       aria-label=${context.inline ? nothing : context.definition.label}
       >${context.inline ? context.definition.label : nothing}</tp-checkbox
     >`,
+  // Inline, the popup picker opens from an inline Color input: the row shows the label, the
+  // swatch and the color text.
   color: (context) =>
     html`<tp-color-picker
       class="control"
@@ -159,7 +162,16 @@ export const defaultPropertyControls: FlowPropertyControls = {
       ?disabled=${context.disabled}
       ?readonly=${context.readOnly}
       aria-label=${context.definition.label}
-    ></tp-color-picker>`,
+      >${
+        context.inline
+          ? html`<tp-color-input
+              slot="trigger"
+              variant="inline"
+              label=${context.definition.label}
+            ></tp-color-input>`
+          : nothing
+      }</tp-color-picker
+    >`,
   easing: (context) =>
     html`<tp-easing-editor
       class="control"

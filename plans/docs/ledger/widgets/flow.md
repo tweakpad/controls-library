@@ -50,3 +50,4 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+| prose | In a node body, `slider`, `number`… | `color` renders inline in node bodies (issue #29); list extended, one clause appended |

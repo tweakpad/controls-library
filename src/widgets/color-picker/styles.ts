@@ -234,8 +234,9 @@ export const colorPickerStyles = css`
     pointer-events: none;
   }
 
-  .footer:not(:has(*)) {
-    display: none;
+  /* An empty footer leaves no row, so the root's gap does not follow the trigger or panel. */
+  .footer[hidden] {
+    display: none !important;
   }
 
   .popup-panel {

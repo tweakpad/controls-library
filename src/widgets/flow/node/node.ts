@@ -40,6 +40,7 @@ import { TpSelect } from '../../../components/select/select.js';
 import { TpSwitch } from '../../../components/switch/switch.js';
 import { TpCheckbox } from '../../../components/checkbox/checkbox.js';
 import { TpColorPicker } from '../../color-picker/color-picker.js';
+import { TpColorInput } from '../../../components/color-input/color-input.js';
 import { TpEasingEditor } from '../../easing-editor/easing-editor.js';
 import { TpFlowPort, PORT_ACTIVATE } from './port.js';
 import { TpFlowNodeResizer, NODE_RESIZE } from './resizer.js';
@@ -176,6 +177,7 @@ export class TpFlowNode extends TpElement {
       TpSwitch,
       TpCheckbox,
       TpColorPicker,
+      TpColorInput,
       TpEasingEditor,
     ];
   }

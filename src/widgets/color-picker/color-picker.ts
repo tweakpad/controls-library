@@ -1612,8 +1612,12 @@ export class TpColorPicker extends TpFormElement<string> {
       },
       content: html`${label}${panel}${this.renderPart('color-picker-footer', state, {
         tag: 'div',
-        properties: { part: 'color-picker-footer', class: 'footer' },
-        content: html`<slot name="footer"></slot>`,
+        properties: {
+          part: 'color-picker-footer',
+          class: 'footer',
+          hidden: !this.querySelector(':scope > [slot="footer"]'),
+        },
+        content: html`<slot name="footer" @slotchange=${() => this.requestUpdate()}></slot>`,
       })}`,
     });
   }
