@@ -22,6 +22,16 @@ export function joinedControlPresentation(
     ...(first
       ? {}
       : { [vertical ? 'border-block-start-width' : 'border-inline-start-width']: '0' }),
+    // Each member's end edge is the seam to the next: `joined-edge-width` wide, with the fill kept
+    // inside it, so where the edge is transparent (the flat appearance) the seam reads as a gap
+    // cut through the fills instead of one surface.
+    ...(last
+      ? {}
+      : {
+          [vertical ? 'border-block-end-width' : 'border-inline-end-width']:
+            'var(--tp-joined-edge-width)',
+        }),
+    'background-clip': 'padding-box',
     // Vertical members stretch to the widest member without losing their own extent
     // (a fixed `inline-size: 100%` collapses square icon controls in a fit-content group).
     ...(vertical ? { 'min-inline-size': '100%' } : {}),

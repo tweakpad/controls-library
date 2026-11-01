@@ -55,10 +55,12 @@ export class TpElement extends LitElement {
        so it also applies where that stylesheet does not reach (inside another shadow root). */
     :host([density='default']) {
       --tp-spacing: var(--_tp-spacing-default);
+      --tp-type-scale: var(--_tp-type-scale-default);
     }
 
     :host([density='compact']) {
       --tp-spacing: var(--tp-spacing-compact);
+      --tp-type-scale: var(--tp-type-scale-compact);
     }
 
     :host([density='default']),

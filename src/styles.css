@@ -175,12 +175,13 @@
   --tp-font-emoji:
     'Apple Color Emoji', 'Noto Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Twemoji Mozilla',
     'Android Emoji', emojisymbols, sans-serif;
-  --tp-text-xs: 0.75rem;
-  --tp-text-sm: 0.875rem;
-  --tp-text-base: 1rem;
-  --tp-text-lg: 1.125rem;
-  --tp-text-xl: 1.25rem;
-  --tp-text-2xl: 1.5rem;
+
+  /* One type scale seed per density mode: `type-scale` for the default mode and
+     `type-scale-compact` for the compact mode; every `text-*` size is its rem size times the seed
+     of its region (see the density rules below). */
+  --tp-type-scale: 1;
+  --tp-type-scale-compact: 0.9;
+  --_tp-type-scale-default: var(--tp-type-scale);
   --tp-font-normal: 400;
   --tp-font-medium: 500;
   --tp-font-semibold: 600;
@@ -242,10 +243,12 @@
    document. Library elements carry the same rules on their host (`DENSITY_DERIVED_ROLES`). */
 [density='default'] {
   --tp-spacing: var(--_tp-spacing-default);
+  --tp-type-scale: var(--_tp-type-scale-default);
 }
 
 [density='compact'] {
   --tp-spacing: var(--tp-spacing-compact);
+  --tp-type-scale: var(--tp-type-scale-compact);
 }
 
 :root,
@@ -276,6 +279,12 @@
   --tp-shadow-sm: 0 calc(var(--tp-spacing) / 4) var(--tp-space-1) rgb(0 0 0 / 16%);
   --tp-shadow-md: 0 var(--tp-space-1) var(--tp-space-5) rgb(0 0 0 / 18%);
   --tp-shadow-lg: 0 var(--tp-space-3) var(--tp-space-12) rgb(0 0 0 / 20%);
+  --tp-text-xs: calc(0.75rem * var(--tp-type-scale));
+  --tp-text-sm: calc(0.875rem * var(--tp-type-scale));
+  --tp-text-base: calc(1rem * var(--tp-type-scale));
+  --tp-text-lg: calc(1.125rem * var(--tp-type-scale));
+  --tp-text-xl: calc(1.25rem * var(--tp-type-scale));
+  --tp-text-2xl: calc(1.5rem * var(--tp-type-scale));
 }
 
 /* Appearance modes: a `flat` region removes the edges of components and panels and separates them

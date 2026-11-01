@@ -120,12 +120,16 @@ describe('Toggle and Toggle group sizes', () => {
       'border-end-start-radius': '0',
       'border-end-end-radius': '0',
       'border-inline-start-width': '0',
+      'border-inline-end-width': 'var(--tp-joined-edge-width)',
+      'background-clip': 'padding-box',
     });
     expect(toggleGroupJoinedPresentation(0, 3, 'horizontal', false, false, true)).toEqual({
       'border-start-start-radius': 'var(--tp-radius-lg)',
       'border-start-end-radius': '0',
       'border-end-start-radius': 'var(--tp-radius-lg)',
       'border-end-end-radius': '0',
+      'border-inline-end-width': 'var(--tp-joined-edge-width)',
+      'background-clip': 'padding-box',
     });
     expect(toggleGroupJoinedPresentation(1, 3, 'horizontal', true, false, false)).toEqual({
       'border-start-start-radius': '0',
@@ -133,6 +137,8 @@ describe('Toggle and Toggle group sizes', () => {
       'border-end-start-radius': '0',
       'border-end-end-radius': '0',
       'border-inline-start-width': '0',
+      'border-inline-end-width': 'var(--tp-joined-edge-width)',
+      'background-clip': 'padding-box',
       'padding-inline-start': 'var(--tp-space-1-5)',
       'padding-inline-end': 'var(--tp-space-2)',
     });

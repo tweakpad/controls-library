@@ -24,6 +24,10 @@ export const questionnaireStyles = css`
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: start;
+
+    /* The row centers where the minimum target is taller than the content, as in a compact
+       region, so the extra height splits evenly instead of collecting under the content. */
+    align-content: center;
     position: relative;
     cursor: pointer;
     min-block-size: var(--tp-target-size-min);
