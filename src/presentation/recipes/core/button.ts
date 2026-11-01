@@ -1,4 +1,5 @@
 import type { PresentationDictionary, PresentationRule } from '../../resolver.js';
+import { controlFill, fieldEdge, variantEdgeProperty } from '../shared/edges.js';
 import { controlSizePresentation, rule, variantPresentation } from '../shared/variant.js';
 
 /**
@@ -21,8 +22,9 @@ export const buttonSizes = [
  * Select and date-picker triggers instead of the page color.
  */
 export const outlineFieldPaint: PresentationRule = rule({
-  background: 'var(--tp-control)',
-  'border-color': 'var(--tp-input)',
+  background: controlFill,
+  'border-color': fieldEdge.color,
+  [variantEdgeProperty]: fieldEdge.color,
 });
 
 const button: Record<string, readonly PresentationRule[]> = {

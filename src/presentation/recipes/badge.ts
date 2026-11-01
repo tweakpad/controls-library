@@ -1,5 +1,6 @@
 import type { PresentationDictionary } from '../resolver.js';
 import { focusRing } from './shared/focus.js';
+import { surfaceEdge } from './shared/edges.js';
 
 export const badgeAppearance: PresentationDictionary = {
   badge: [
@@ -17,7 +18,7 @@ export const badgeAppearance: PresentationDictionary = {
         'white-space': 'nowrap',
         '--_tp-icon-extent': 'var(--tp-icon-size-xs)',
         'text-decoration': 'none',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
+        border: surfaceEdge.border,
       },
     },
     {

@@ -1,5 +1,6 @@
 import { motionTransition } from '../../motion.js';
 import type { PresentationRule } from '../../resolver.js';
+import { controlFillStrong, divider, statusEdge, variantEdgeProperty } from './edges.js';
 import { fillColor, fillShown } from './fill.js';
 
 export const rule = (
@@ -14,7 +15,13 @@ export const interactive =
 // The variant's fill layer color yields the same way to a composed role's layer color.
 const primitive = ':where(&)';
 
-/** Shared paint only. Geometry and interaction policy are not inferred from a variant. */
+/** No visible edge: a joined group cuts the seam through the fills. */
+const noEdge = { [variantEdgeProperty]: 'initial' };
+
+/**
+ * Shared paint only. Geometry and interaction policy are not inferred from a variant. Each variant
+ * names its visible edge (`--_tp-variant-edge`), which a joined group draws as the seam.
+ */
 export function variantPresentation(
   variant: string,
   isInteractive = false,
@@ -25,6 +32,7 @@ export function variantPresentation(
         background: 'var(--tp-muted)',
         color: 'var(--tp-foreground)',
         'border-color': 'transparent',
+        ...noEdge,
       }),
     ];
   if (variant === 'tinted')
@@ -33,10 +41,18 @@ export function variantPresentation(
         background: 'color-mix(in oklab, var(--tp-primary) 15%, var(--tp-background))',
         color: 'var(--tp-foreground)',
         'border-color': 'transparent',
+        ...noEdge,
       }),
     ];
   if (variant === 'plain')
-    return [rule({ background: 'transparent', 'border-color': 'transparent', color: 'inherit' })];
+    return [
+      rule({
+        background: 'transparent',
+        'border-color': 'transparent',
+        color: 'inherit',
+        ...noEdge,
+      }),
+    ];
   // Solid role fills: primary and secondary with their foreground pair.
   if (variant === 'default' || variant === 'secondary') {
     const role = variant === 'default' ? 'primary' : variant;
@@ -45,6 +61,7 @@ export function variantPresentation(
         background: `var(--tp-${role})`,
         color: `var(--tp-${role}-foreground)`,
         'border-color': `var(--tp-${role})`,
+        ...noEdge,
       }),
     ];
     if (isInteractive)
@@ -63,7 +80,8 @@ export function variantPresentation(
       rule({
         background: `var(--tp-${variant}-subtle)`,
         color: `var(--tp-${variant}-subtle-foreground)`,
-        'border-color': `var(--tp-${variant}-border)`,
+        'border-color': statusEdge(variant as 'destructive').color,
+        [variantEdgeProperty]: statusEdge(variant as 'destructive').color,
       }),
     ];
     if (isInteractive)
@@ -81,7 +99,8 @@ export function variantPresentation(
       rule({
         color: 'var(--tp-foreground)',
         background: variant === 'outline' ? 'var(--tp-background)' : 'transparent',
-        'border-color': variant === 'outline' ? 'var(--tp-border)' : 'transparent',
+        'border-color': variant === 'outline' ? divider.color : 'transparent',
+        ...(variant === 'outline' ? { [variantEdgeProperty]: divider.color } : noEdge),
         ...(isInteractive && variant !== 'link'
           ? { transition: motionTransition(['color', 'border-color'], 'fast') }
           : {}),
@@ -95,7 +114,7 @@ export function variantPresentation(
         ),
       );
     else if (isInteractive)
-      rules.push(fillColor('var(--tp-control-strong)', primitive), fillShown(interactive));
+      rules.push(fillColor(controlFillStrong, primitive), fillShown(interactive));
     return rules;
   }
   // No invented treatment for unresolved cataloged variants.

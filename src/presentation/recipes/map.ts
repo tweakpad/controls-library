@@ -2,6 +2,7 @@ import { motionTransition } from '../motion.js';
 import type { PresentationDictionary } from '../resolver.js';
 import { focusRing } from './shared/focus.js';
 import { statusAppearance } from './shared/status.js';
+import { surfaceEdge } from './shared/edges.js';
 
 /** Default Map appearance (`ucl21-map` map-l-presentation): existing token roles only. */
 export const mapAppearance: PresentationDictionary = {
@@ -9,7 +10,7 @@ export const mapAppearance: PresentationDictionary = {
     {
       declarations: {
         'border-radius': 'var(--tp-radius-lg)',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
+        border: surfaceEdge.border,
         background: 'var(--tp-muted)',
         color: 'var(--tp-foreground)',
       },

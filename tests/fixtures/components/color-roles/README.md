@@ -21,4 +21,5 @@ built package.
   in the flat appearance under `[appearance='flat']`, each as `light-dark(light, dark)`. The tuning
   stays in this browser until "Reset to library values".
 - `colorRolesAPI` exposes `overrides()`, `appearance()`, `scheme()`, `role(name, scheme?)`,
-  `ratio(text, fill)` and `css()`.
+  `ratio(text, fill)`, `css()` and `flatEdges()`: in the flat appearance, every visible
+  four-sided edge that flat should have removed (empty when it reaches every component).

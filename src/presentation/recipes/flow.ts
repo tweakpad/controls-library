@@ -1,5 +1,6 @@
 import { ambientAnimation, motionTransition, presenceMotion } from '../motion.js';
 import type { PresentationDictionary, PresentationRule } from '../resolver.js';
+import { divider, floatEdge, surfaceEdge } from './shared/edges.js';
 import { focusRing } from './shared/focus.js';
 import { activeRing, thumb } from './shared/handle.js';
 import { inlineControlLabel } from './shared/inline-control.js';
@@ -7,7 +8,6 @@ import { selectionFill, selectionLine } from './shared/selection.js';
 import {
   floatingToolbarAppearance,
   floatingToolbarStructure,
-  popupBorder,
   sectionFooterAppearance,
   surfaceAppearance,
 } from './shared/surface.js';
@@ -16,7 +16,7 @@ import {
 // content supplied by the engine; every color below resolves through tokens. The composed
 // regions use the library Card, List item, Badge, Marker, Button group and handle recipes.
 
-const hairline = 'color-mix(in oklab, var(--tp-foreground) 10%, transparent)';
+const gridLine = 'color-mix(in oklab, var(--tp-foreground) 10%, transparent)';
 const dots = 'color-mix(in oklab, var(--tp-foreground) 18%, transparent)';
 const edgeStroke = 'color-mix(in oklab, var(--tp-foreground) 35%, transparent)';
 const edgeHover = 'color-mix(in oklab, var(--tp-foreground) 55%, transparent)';
@@ -81,7 +81,7 @@ export const flowAppearance: PresentationDictionary = {
         background: 'var(--tp-background)',
         color: 'var(--tp-foreground)',
         'font-size': 'var(--tp-text-sm)',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
+        border: surfaceEdge.border,
         'border-radius': 'var(--tp-radius-lg)',
       },
     },
@@ -133,13 +133,13 @@ export const flowAppearance: PresentationDictionary = {
     {
       declarations: {
         background: 'var(--tp-background)',
-        'border-block-end': 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        'border-block-end': divider.border,
       },
     },
   ],
   'flow-background': [],
   'flow-background-pattern': [
-    { declarations: { fill: dots, stroke: hairline } },
+    { declarations: { fill: dots, stroke: gridLine } },
     { selector: '&[data-pattern="dots"]', declarations: { stroke: 'none' } },
     {
       selector: '&[data-pattern="lines"], &[data-pattern="cross"]',
@@ -228,7 +228,7 @@ export const flowAppearance: PresentationDictionary = {
       declarations: {
         'background-color': 'var(--tp-card)',
         color: 'var(--tp-card-foreground)',
-        border: `var(--tp-border-width) var(--tp-border-style) ${hairline}`,
+        border: floatEdge.border,
         'border-radius': 'var(--tp-radius-lg)',
         'box-shadow': 'var(--tp-shadow-sm)',
         'font-size': 'var(--tp-text-sm)',
@@ -252,7 +252,7 @@ export const flowAppearance: PresentationDictionary = {
         'background-color':
           'color-mix(in oklab, var(--_tp-flow-tone, var(--tp-muted-foreground)) 15%, var(--tp-background))',
         color: 'var(--_tp-flow-tone, var(--tp-foreground))',
-        border: `var(--tp-border-width) var(--tp-border-style) ${hairline}`,
+        border: floatEdge.border,
       },
     },
     // Beside a title and a description the tile spans both lines: the header's line (the title,
@@ -564,7 +564,7 @@ export const flowAppearance: PresentationDictionary = {
         'inline-size': 'var(--_tp-flow-minimap)',
         'block-size': 'calc(var(--_tp-flow-minimap) * 0.75)',
         'background-color': 'var(--tp-card)',
-        border: popupBorder,
+        border: floatEdge.border,
         'border-radius': 'var(--tp-radius-md)',
         'box-shadow': 'var(--tp-shadow-sm)',
         overflow: 'clip',
@@ -622,7 +622,7 @@ export const flowAppearance: PresentationDictionary = {
   'flow-palette-header': [
     {
       declarations: {
-        'border-block-end': 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        'border-block-end': divider.border,
       },
     },
     { selector: '& .title', declarations: { 'font-weight': 'var(--tp-font-medium)' } },
@@ -676,7 +676,7 @@ export const flowAppearance: PresentationDictionary = {
   'flow-inspector-header': [
     {
       declarations: {
-        'border-block-end': 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        'border-block-end': divider.border,
       },
     },
     { selector: '& .title', declarations: { 'font-weight': 'var(--tp-font-medium)' } },

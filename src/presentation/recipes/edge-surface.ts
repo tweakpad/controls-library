@@ -1,4 +1,5 @@
 import type { PresentationRule } from '../resolver.js';
+import { surfaceEdge } from './shared/edges.js';
 
 type Edge = 'left' | 'right' | 'top' | 'bottom' | 'inline-start' | 'inline-end';
 const freeEdges = {
@@ -21,7 +22,7 @@ export function edgeSurfaceAppearance(
       return {
         selector,
         declarations: {
-          [`border-${border}`]: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
+          [`border-${border}`]: surfaceEdge.border,
           ...Object.fromEntries(
             corners.map((corner) => [`border-${corner}-radius`, 'var(--tp-radius-lg)']),
           ),

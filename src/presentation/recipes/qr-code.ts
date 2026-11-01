@@ -1,4 +1,5 @@
 import type { PresentationDictionary } from '../resolver.js';
+import { surfaceEdge } from './shared/edges.js';
 
 // The tile is bordered, rounded and light in every scheme, 192 px by default with the quiet zone
 // inside. A scoped light color scheme resolves every light-dark() role inside it to its light
@@ -15,7 +16,7 @@ export const qrCodeAppearance: PresentationDictionary = {
     {
       declarations: {
         'color-scheme': 'light',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
+        border: surfaceEdge.border,
         'border-radius': 'var(--tp-radius-xl)',
         'background-color': 'var(--tp-qr-code-background, var(--tp-background))',
       },

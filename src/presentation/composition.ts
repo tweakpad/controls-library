@@ -1,3 +1,4 @@
+import { seamColor } from './recipes/shared/edges.js';
 import type { PresentationDeclarations } from './resolver.js';
 
 /** The same logical seam geometry for ButtonGroup and zero-spacing ToggleGroup. */
@@ -22,14 +23,15 @@ export function joinedControlPresentation(
     ...(first
       ? {}
       : { [vertical ? 'border-block-start-width' : 'border-inline-start-width']: '0' }),
-    // Each member's end edge is the seam to the next: `joined-edge-width` wide, with the fill kept
-    // inside it, so where the edge is transparent (the flat appearance) the seam reads as a gap
-    // cut through the fills instead of one surface.
+    // The group owns each seam: a member's end edge toward the next is `joined-edge-width` wide,
+    // in the member's own visible edge (its variant names it), or a cut through the fills where it
+    // has none or the appearance makes edges transparent; the fill stays inside the edge.
     ...(last
       ? {}
       : {
           [vertical ? 'border-block-end-width' : 'border-inline-end-width']:
             'var(--tp-joined-edge-width)',
+          [vertical ? 'border-block-end-color' : 'border-inline-end-color']: seamColor,
         }),
     'background-clip': 'padding-box',
     // Vertical members stretch to the widest member without losing their own extent

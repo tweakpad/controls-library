@@ -1,6 +1,7 @@
 import { fillLayer, fillLayerHost } from '../motion.js';
 import type { PresentationDictionary } from '../resolver.js';
 import { fillColor } from './shared/fill.js';
+import { divider } from './shared/edges.js';
 
 /** Whether a row's cells show their fill layer; each row resets it for nested tables. */
 const rowFill = '--_tp-table-row-fill';
@@ -13,7 +14,7 @@ const cells = [
       'box-sizing': 'border-box',
       'text-align': 'start',
       'vertical-align': 'middle',
-      'border-block-end': 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+      'border-block-end': divider.border,
     },
   },
   { selector: '&[data-sticky-column]', declarations: { background: 'inherit' } },
@@ -58,7 +59,7 @@ export const tableAppearance: PresentationDictionary = {
       declarations: {
         background: 'color-mix(in oklab, var(--tp-muted) 50%, var(--tp-background))',
         'font-weight': 'var(--tp-font-medium)',
-        'border-block-start': 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        'border-block-start': divider.border,
       },
     },
   ],

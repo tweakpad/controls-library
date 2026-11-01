@@ -1,5 +1,6 @@
 import { motionTransition } from '../../motion.js';
 import type { PresentationRule } from '../../resolver.js';
+import { divider } from './edges.js';
 
 /** Shared scrollbar track and thumb paint (Scroll area, Carousel and other shared scrollbars). */
 export const scrollbarRules: readonly PresentationRule[] = [
@@ -21,7 +22,7 @@ export const scrollbarRules: readonly PresentationRule[] = [
 ];
 
 export const scrollbarThumbRules: readonly PresentationRule[] = [
-  { declarations: { background: 'var(--tp-border)', 'border-radius': 'var(--tp-radius-full)' } },
+  { declarations: { background: divider.color, 'border-radius': 'var(--tp-radius-full)' } },
   {
     selector: '&[data-orientation="vertical"]',
     declarations: { 'min-height': 'min(var(--tp-space-4), 100%)' },

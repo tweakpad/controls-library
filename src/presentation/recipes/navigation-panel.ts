@@ -12,6 +12,7 @@ import {
 } from './shared/navigation-row.js';
 import { fillColor } from './shared/fill.js';
 import { packedExtent } from './shared/target.js';
+import { divider, surfaceEdge } from './shared/edges.js';
 
 const parts = [
   'navigation-panel',
@@ -56,7 +57,7 @@ export const navigationPanelAppearance: PresentationDictionary = {
       declarations: {
         'border-radius': 'var(--tp-radius-lg)',
         'box-shadow': 'var(--tp-shadow-sm)',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
+        border: surfaceEdge.border,
       },
     },
   ],
@@ -240,7 +241,7 @@ export const navigationPanelAppearance: PresentationDictionary = {
   ],
   'navigation-panel-input': [{ declarations: { background: 'var(--tp-background)' } }],
   'navigation-panel-separator': [
-    { declarations: { margin: 'var(--tp-space-2) 0', background: 'var(--tp-border)' } },
+    { declarations: { margin: 'var(--tp-space-2) 0', background: divider.color } },
   ],
 };
 export const navigationPanelStructure: PresentationDictionary = {

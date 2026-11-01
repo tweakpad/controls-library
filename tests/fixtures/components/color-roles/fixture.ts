@@ -469,8 +469,57 @@ new MutationObserver(() => update()).observe(surface!, {
 });
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => update());
 
+/**
+ * Marks that keep their edge in every appearance: value paint (swatches, handles, plot dots) and
+ * the cursor label. State marks (checked, selected) and explicit outline variants are told apart
+ * by their state or host instead.
+ */
+const keptMarks =
+  /(?:^|\s)(?:slider-thumb|color-input-chip|color-picker-[\w-]*(?:swatch|preview|thumb|handle|marker)[\w-]*|timeline-item-dot|content)(?:\s|$)/u;
+
+/**
+ * Every visible four-sided edge in the preview that the flat appearance should have removed:
+ * walked through shadow roots, skipping edges painted in their own fill color, explicit outline
+ * variants, checked or selected marks, and the marks above. Empty when flat reaches everything.
+ */
+function flatEdges(): string[] {
+  const found = new Set<string>();
+  const visible = (color: string) => !/rgba\(0, 0, 0, 0\)|transparent|\/ 0\)$/u.test(color);
+  const visit = (root: ParentNode, section: string) => {
+    for (const element of root.querySelectorAll('*')) {
+      const style = getComputedStyle(element);
+      const box = element.getBoundingClientRect();
+      const sides = ['Top', 'Right', 'Bottom', 'Left'].filter(
+        (side) =>
+          parseFloat(style.getPropertyValue(`border-${side.toLowerCase()}-width`)) > 0 &&
+          style.getPropertyValue(`border-${side.toLowerCase()}-style`) !== 'none' &&
+          visible(style.getPropertyValue(`border-${side.toLowerCase()}-color`)),
+      );
+      const host = (element.getRootNode() as ShadowRoot).host as Element | undefined;
+      const part = element.getAttribute('part') ?? '';
+      const kept =
+        style.borderTopColor === style.backgroundColor ||
+        host?.getAttribute('variant') === 'outline' ||
+        element.closest('[data-checked], [data-selected], [data-pressed]') !== null ||
+        element.matches('[aria-invalid="true"], [data-invalid]') ||
+        keptMarks.test(part);
+      if (sides.length === 4 && box.width > 6 && box.height > 6 && !kept)
+        found.add(
+          `${section}: ${element.localName}[${part || element.className}] ${style.borderTopColor}`,
+        );
+      if (element.shadowRoot) visit(element.shadowRoot, section);
+    }
+  };
+  for (const section of surface?.querySelectorAll<HTMLElement>(
+    ':scope > section, .section-list > section',
+  ) ?? [])
+    visit(section, section.querySelector('h2')?.textContent ?? '');
+  return [...found];
+}
+
 Object.assign(window, {
   colorRolesAPI: {
+    flatEdges,
     overrides: () => overrides,
     appearance: () => appearance,
     scheme: surfaceScheme,

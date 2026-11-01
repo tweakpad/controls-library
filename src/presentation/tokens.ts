@@ -37,6 +37,7 @@ export const TOKEN_FAMILIES = {
     'warning-border',
     'border',
     'edge',
+    'hairline',
     'input',
     'control',
     'control-strong',

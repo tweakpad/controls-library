@@ -2,28 +2,28 @@
 /* button */
 &{appearance:none;border:var(--tp-border-width) var(--tp-border-style) transparent;border-radius:var(--tp-radius-lg);font:inherit;font-weight:var(--tp-font-medium);text-decoration:none}
 /* button-variant-default */
-&{background:var(--tp-primary);color:var(--tp-primary-foreground);border-color:var(--tp-primary)}
+&{background:var(--tp-primary);color:var(--tp-primary-foreground);border-color:var(--tp-primary);--_tp-variant-edge:initial}
 :where(&)::before{background-color:color-mix(in oklab, var(--tp-primary) 80%, light-dark(var(--tp-foreground), var(--tp-background)))}
 &:where(:not(:disabled, [aria-disabled="true"]):is(:hover, [data-popup-open]))::before{opacity:1}
 /* button-variant-secondary */
-&{background:var(--tp-secondary);color:var(--tp-secondary-foreground);border-color:var(--tp-secondary)}
+&{background:var(--tp-secondary);color:var(--tp-secondary-foreground);border-color:var(--tp-secondary);--_tp-variant-edge:initial}
 :where(&)::before{background-color:color-mix(in oklab, var(--tp-secondary) 80%, light-dark(var(--tp-foreground), var(--tp-background)))}
 &:where(:not(:disabled, [aria-disabled="true"]):is(:hover, [data-popup-open]))::before{opacity:1}
 /* button-variant-destructive */
-&{background:var(--tp-destructive-subtle);color:var(--tp-destructive-subtle-foreground);border-color:var(--tp-destructive-border)}
+&{background:var(--tp-destructive-subtle);color:var(--tp-destructive-subtle-foreground);border-color:var(--tp-destructive-border);--_tp-variant-edge:var(--tp-destructive-border)}
 :where(&)::before{background-color:color-mix(in oklab, var(--tp-destructive) 12%, var(--tp-destructive-subtle))}
 &:where(:not(:disabled, [aria-disabled="true"]):is(:hover, [data-popup-open]))::before{opacity:1}
 /* button-variant-outline */
-&{color:var(--tp-foreground);background:var(--tp-background);border-color:var(--tp-border);transition:color calc(var(--tp-duration-fast) * var(--tp-motion-scale) * 1) var(--tp-easing-standard), border-color calc(var(--tp-duration-fast) * var(--tp-motion-scale) * 1) var(--tp-easing-standard)}
+&{color:var(--tp-foreground);background:var(--tp-background);border-color:var(--tp-border);--_tp-variant-edge:var(--tp-border);transition:color calc(var(--tp-duration-fast) * var(--tp-motion-scale) * 1) var(--tp-easing-standard), border-color calc(var(--tp-duration-fast) * var(--tp-motion-scale) * 1) var(--tp-easing-standard)}
 :where(&)::before{background-color:var(--tp-control-strong)}
 &:where(:not(:disabled, [aria-disabled="true"]):is(:hover, [data-popup-open]))::before{opacity:1}
-&{background:var(--tp-control);border-color:var(--tp-input)}
+&{background:var(--tp-control);border-color:var(--tp-input);--_tp-variant-edge:var(--tp-input)}
 /* button-variant-ghost */
-&{color:var(--tp-foreground);background:transparent;border-color:transparent;transition:color calc(var(--tp-duration-fast) * var(--tp-motion-scale) * 1) var(--tp-easing-standard), border-color calc(var(--tp-duration-fast) * var(--tp-motion-scale) * 1) var(--tp-easing-standard)}
+&{color:var(--tp-foreground);background:transparent;border-color:transparent;--_tp-variant-edge:initial;transition:color calc(var(--tp-duration-fast) * var(--tp-motion-scale) * 1) var(--tp-easing-standard), border-color calc(var(--tp-duration-fast) * var(--tp-motion-scale) * 1) var(--tp-easing-standard)}
 :where(&)::before{background-color:var(--tp-control-strong)}
 &:where(:not(:disabled, [aria-disabled="true"]):is(:hover, [data-popup-open]))::before{opacity:1}
 /* button-variant-link */
-&{color:var(--tp-foreground);background:transparent;border-color:transparent}
+&{color:var(--tp-foreground);background:transparent;border-color:transparent;--_tp-variant-edge:initial}
 &:not(:disabled, [aria-disabled="true"]):is(:hover, :focus-visible){text-decoration:underline}
 /* button-size-xs */
 &{min-block-size:var(--tp-control-height-xs);block-size:var(--tp-control-height-xs);padding-block:0;padding-inline:var(--tp-space-2);gap:var(--tp-space-1);font-size:var(--tp-text-xs);border-radius:var(--tp-radius-md);--_tp-icon-extent:var(--tp-icon-size-xs)}

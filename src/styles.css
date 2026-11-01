@@ -28,13 +28,14 @@
   --tp-warning: light-dark(#b45309, #f59e0b);
   --tp-warning-foreground: light-dark(#fff, #18181b);
 
-  /* Lines: `border` draws dividers, `edge` the outer edge of a component or panel, and `input` the
-     edge of a field or an outline control. `control` fills fields and outline controls;
+  /* Lines: `border` draws dividers, `edge` the outer edge of a component or panel, `hairline` the
+     fine edge of floating and value surfaces, and `input` the edge of a field or an outline control. `control` fills fields and outline controls;
      `control-strong` is the stronger fill of hovered outline and ghost controls and disabled
      fields. `control-border` is the boundary of checkboxes and radios, at a non-text contrast
      against the page. */
   --tp-border: light-dark(#d4d4d8, #3f3f46);
   --tp-edge: var(--tp-border);
+  --tp-hairline: color-mix(in oklab, var(--tp-foreground) 10%, transparent);
   --tp-input: var(--tp-border);
   --tp-control: light-dark(transparent, color-mix(in oklab, var(--tp-input) 30%, transparent));
   --tp-control-strong: color-mix(in oklab, var(--tp-input) 50%, transparent);
@@ -101,6 +102,7 @@
   /* The default values of the roles the flat appearance redefines, which a `default` region inside
      a flat one restores. */
   --_tp-edge-default: var(--tp-edge);
+  --_tp-hairline-default: var(--tp-hairline);
   --_tp-input-default: var(--tp-input);
   --_tp-card-default: var(--tp-card);
   --_tp-control-default: var(--tp-control);
@@ -293,6 +295,7 @@
    (`FLAT_ROLES`). */
 [appearance='flat'] {
   --tp-edge: transparent;
+  --tp-hairline: transparent;
   --tp-input: transparent;
   --tp-card: color-mix(in oklab, var(--tp-foreground) 4%, var(--tp-background));
   --tp-control: color-mix(in oklab, var(--tp-foreground) 10%, var(--tp-card));
@@ -309,6 +312,7 @@
 
 [appearance='default'] {
   --tp-edge: var(--_tp-edge-default);
+  --tp-hairline: var(--_tp-hairline-default);
   --tp-input: var(--_tp-input-default);
   --tp-card: var(--_tp-card-default);
   --tp-control: var(--_tp-control-default);

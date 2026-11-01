@@ -1,6 +1,6 @@
 import { motionTransition } from '../../motion.js';
 import type { PresentationDeclarations, PresentationRule } from '../../resolver.js';
-import { focusRing } from './focus.js';
+import { focusHalo, focusRing } from './focus.js';
 
 export { focusRing };
 
@@ -34,7 +34,7 @@ export const colorThumbRing: PresentationDeclarations = {
 };
 
 export const activeRing: PresentationDeclarations = {
-  'box-shadow': `0 0 0 var(--tp-border-width) ${ringMix}, 0 0 0 calc(var(--tp-ring-width) * 1.5) color-mix(in oklab, var(--tp-ring) 50%, transparent)`,
+  'box-shadow': `0 0 0 var(--tp-border-width) ${ringMix}, 0 0 0 calc(var(--tp-ring-width) * 1.5) ${focusHalo}`,
 };
 
 /** A handle of `size` whose hidden input's focus-visible rings it and whose drag marks it active. */

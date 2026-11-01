@@ -1,6 +1,6 @@
 import { motionTransition } from '../motion.js';
 import type { PresentationDictionary, PresentationRule } from '../resolver.js';
-import { focusRing } from './shared/focus.js';
+import { focusHalo, focusRing } from './shared/focus.js';
 import { handleSurface } from './shared/handle.js';
 import {
   inlineControlEdge,
@@ -74,8 +74,7 @@ export const sliderAppearance: PresentationDictionary = {
       selector:
         '&:hover:not([data-disabled]), &:has(input:focus-visible), &[data-active]:not([data-disabled])',
       declarations: {
-        'box-shadow':
-          '0 0 0 calc(var(--tp-ring-width) * 1.5) color-mix(in oklab, var(--tp-ring) 50%, transparent)',
+        'box-shadow': `0 0 0 calc(var(--tp-ring-width) * 1.5) ${focusHalo}`,
       },
     },
     // The halo is shared with hover; keyboard focus adds the ring.

@@ -1,6 +1,5 @@
 import type { PresentationDictionary } from '../resolver.js';
 import { insetFocusRing, invalidFocusRing } from './shared/focus.js';
-import { popupBorderColor } from './shared/surface.js';
 import {
   anchoredPresenceAppearance,
   popupSpacingAppearance,
@@ -15,6 +14,7 @@ import {
 } from './shared/inline-control.js';
 import { motionTransition } from '../motion.js';
 import { controlStepDeclarations } from './shared/variant.js';
+import { controlFill, floatEdge } from './shared/edges.js';
 
 /**
  * A matched range of option text (Text search highlighting). Matched text keeps the option's color and gains weight, with the native mark background removed.
@@ -88,7 +88,7 @@ export const selectAppearance: PresentationDictionary = {
     {
       selector: '&:hover:not(:disabled, [aria-disabled="true"])',
       declarations: {
-        background: 'var(--tp-control)',
+        background: controlFill,
       },
     },
     { selector: '&[data-placeholder]', declarations: { color: 'var(--tp-muted-foreground)' } },
@@ -145,7 +145,7 @@ export const selectAppearance: PresentationDictionary = {
       declarations: {
         padding: '0',
         'box-shadow': 'var(--tp-shadow-md)',
-        'border-color': popupBorderColor,
+        'border-color': floatEdge.color,
         'border-radius': 'var(--tp-radius-lg)',
         // At least three space-12 steps wide.
         'min-inline-size': 'max(var(--tp-anchor-width, 0px), calc(var(--tp-space-12) * 3))',

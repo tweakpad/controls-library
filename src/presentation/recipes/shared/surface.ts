@@ -1,12 +1,13 @@
 import { presenceMotion } from '../../motion.js';
 import type { PresentationRule } from '../../resolver.js';
 import { rule } from './variant.js';
+import { divider, floatEdge, surfaceEdge } from './edges.js';
 
 /** Floating surface paint shared by popups, dialogs, toasts and attachments. */
 export const surfaceAppearance: readonly PresentationRule[] = [
   rule({
     padding: 'var(--tp-space-3)',
-    border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
+    border: surfaceEdge.border,
     'border-radius': 'var(--tp-radius-lg)',
     color: 'var(--tp-popover-foreground)',
     background: 'var(--tp-popover)',
@@ -26,7 +27,7 @@ export const surfaceFadeAppearance: readonly PresentationRule[] = [
 export const sectionFooterAppearance: readonly PresentationRule[] = [
   rule({
     background: 'var(--tp-muted)',
-    'border-block-start': 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+    'border-block-start': divider.border,
   }),
 ];
 // One section rhythm for every Dialog-family surface, including Drawer's content wrapper.
@@ -55,19 +56,15 @@ export function dialogSectionAppearance(wrapper = '') {
   ];
 }
 
-/** The hairline of floating popups: a 10% foreground mix (popover, menu and command surfaces). */
-export const popupBorderColor = 'color-mix(in oklab, var(--tp-foreground) 10%, transparent)';
-export const popupBorder = `var(--tp-border-width) var(--tp-border-style) ${popupBorderColor}`;
-
 /**
  * The floating toolbar surface of the contextual Toolbar profile, shared by the flow node toolbar
- * and the text editor's selection toolbar: a card fill with the popup hairline and a small shadow.
+ * and the text editor's selection toolbar: a card fill with the floating edge and a small shadow.
  */
 export const floatingToolbarAppearance: readonly PresentationRule[] = [
   {
     declarations: {
       'background-color': 'var(--tp-card)',
-      border: popupBorder,
+      border: floatEdge.border,
       'border-radius': 'var(--tp-radius-md)',
       'box-shadow': 'var(--tp-shadow-sm)',
       padding: 'var(--tp-space-1)',

@@ -1,8 +1,10 @@
+import { focusHalo } from './focus.js';
 import { iconGraphicAttributes, iconPathAttributes } from '../../../foundation/icon-graphic.js';
 import { checkIcon } from '../../../icons/check.js';
 import { minusIcon } from '../../../icons/minus.js';
 import type { IconDefinition } from '../../../icons/types.js';
 import type { PresentationRule } from '../../resolver.js';
+import { controlFill, markEdge } from './edges.js';
 
 // Checkbox and Radio controls and their indicators.
 // The label is consumer content; only the control box receives selection paint.
@@ -24,8 +26,8 @@ export const selectionControl: readonly PresentationRule[] = [
   {
     selector: '& > .box',
     declarations: {
-      border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-control-border)',
-      background: 'var(--tp-control)',
+      border: markEdge.border,
+      background: controlFill,
       'box-shadow': 'var(--tp-shadow-sm)',
     },
   },
@@ -34,8 +36,7 @@ export const selectionControl: readonly PresentationRule[] = [
     selector: '&:focus-visible > .box',
     declarations: {
       'border-color': 'var(--tp-ring)',
-      outline:
-        'var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-ring) 50%, transparent)',
+      outline: `var(--tp-ring-width) var(--tp-border-style) ${focusHalo}`,
       'outline-offset': '0',
     },
   },

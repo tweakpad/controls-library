@@ -1,4 +1,4 @@
-import { css, html, nothing, svg, type PropertyValues } from 'lit';
+import { css, html, nothing, svg, unsafeCSS, type PropertyValues } from 'lit';
 import { GlowRenderer, type GlowLook } from '../../foundation/border-ring/glow-renderer.js';
 import {
   parseCornerRadius,
@@ -14,6 +14,7 @@ import { observeResize } from '../../foundation/observation.js';
 import { registerProperty } from '../../foundation/register-property.js';
 import { ViewportTrigger } from '../../foundation/viewport-trigger.js';
 import { setPartComposition } from '../../presentation/controller.js';
+import { divider } from '../../presentation/recipes/shared/edges.js';
 import { surfaceMember } from './group-members.js';
 
 /**
@@ -304,7 +305,7 @@ export const surfaceBorderStyles = css`
 
   /* The line where it is not lit: the surface's own border look. */
   .line {
-    stroke: var(--_tp-surface-border-color, var(--tp-border));
+    stroke: var(--_tp-surface-border-color, ${unsafeCSS(divider.color)});
     stroke-width: var(--_tp-surface-border-w, 1px);
   }
 

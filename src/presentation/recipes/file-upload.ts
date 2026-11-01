@@ -4,6 +4,7 @@ import { emptyStateAppearance } from './empty-state.js';
 import { fillColor, fillShown } from './shared/fill.js';
 import { invalidFocusRing } from './shared/focus.js';
 import { fieldFocus, fieldInvalid } from './shared/text-control.js';
+import { controlFill, fieldEdge } from './shared/edges.js';
 
 /**
  * File upload appearance (CL `fupl-q2`): the Dropzone is an Empty state surface with a dashed
@@ -21,8 +22,8 @@ export const fileUploadAppearance: PresentationDictionary = {
         // Empty state rhythm: header items 2 apart, the content row 4 below (see hint/trigger).
         gap: 'var(--tp-space-2)',
         'border-radius': 'var(--tp-radius-lg)',
-        border: 'var(--tp-border-width) dashed var(--tp-input)',
-        background: 'var(--tp-control)',
+        border: `var(--tp-border-width) dashed ${fieldEdge.color}`,
+        background: controlFill,
         color: 'var(--tp-foreground)',
         cursor: 'pointer',
         transition: motionTransition(['border-color', 'outline-color'], 'fast'),

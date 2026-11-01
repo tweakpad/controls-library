@@ -35,7 +35,7 @@ const TRIGGERS: readonly SegmentBorderTrigger[] = ['none', 'always', 'hover', 'f
  * @csspart mo-segment-border-line - The border line under the segments.
  * @csspart mo-segment-border-glow - The canvas of the glowing segments.
  * @csspart mo-segment-border-bloom - The canvas of the blurred light around the glowing segments.
- * @cssprop --tp-mo-segment-border-color - Color of the line under the segments; `transparent` leaves only the segments. Default `var(--tp-border)`.
+ * @cssprop --tp-mo-segment-border-color - Color of the line under the segments; `transparent` leaves only the segments. Default: the `border` role.
  * @cssprop --tp-mo-segment-border-width - Line width. Default the surface's border width.
  * @cssprop --tp-mo-segment-border-radius - Corner radius without a surface child. Default `var(--tp-radius-lg)`.
  * @cssprop --tp-mo-segment-border-glow-colors - Colors of glowing segments, spread evenly around the border, each blending into the next along the hue circle. Default the theme's sky, violet and pink chart colors (`--tp-chart-2`, `--tp-chart-1`, `--tp-chart-5`).

@@ -9,6 +9,7 @@ import {
   codeSurfaceFill,
   codeTypography,
 } from './shared/code-surface.js';
+import { divider } from './shared/edges.js';
 
 /** Scoped tokens read their `--tp-syntax-*` role; adapter colors win through `light-dark()`. */
 const tokenColors: PresentationRule[] = [
@@ -51,7 +52,7 @@ export const codeBlockAppearance: PresentationDictionary = {
         'min-block-size': 'var(--tp-control-height-md)',
         'padding-block': 'var(--tp-space-1)',
         'padding-inline': 'var(--tp-space-4) var(--tp-space-2)',
-        'border-block-end': 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        'border-block-end': divider.border,
       },
     },
   ],
@@ -162,7 +163,7 @@ export const codeBlockAppearance: PresentationDictionary = {
     {
       declarations: {
         padding: 'var(--tp-space-1)',
-        'border-block-start': 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        'border-block-start': divider.border,
         'font-family': 'var(--tp-font-sans)',
       },
     },

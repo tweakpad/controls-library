@@ -1,6 +1,6 @@
 import { presenceMotion } from '../motion.js';
 import { insetFocusRing } from './shared/focus.js';
-import { popupBorder, popupBorderColor } from './shared/surface.js';
+import { divider, floatEdge } from './shared/edges.js';
 import type { PresentationRule } from '../resolver.js';
 
 /** One default inset for command, navigation and selection popup surfaces. */
@@ -73,7 +73,7 @@ export const commandSurfaceAppearance: readonly PresentationRule[] = [
       background: 'color-mix(in oklab, var(--tp-popover) 70%, transparent)',
       'backdrop-filter': 'blur(var(--tp-space-10)) saturate(1.5)',
       'border-radius': 'var(--tp-radius-lg)',
-      border: popupBorder,
+      border: floatEdge.border,
       'box-shadow': 'var(--tp-shadow-md)',
       'font-size': 'var(--tp-text-sm)',
       // A surface kept in a shadow root (portal off) must not inherit its trigger's
@@ -87,7 +87,8 @@ export const commandSurfaceAppearance: readonly PresentationRule[] = [
 ];
 
 export const commandItemHighlightAppearance = {
-  background: popupBorderColor,
+  // The highlight is a tint over the translucent surface, not a line.
+  background: 'color-mix(in oklab, var(--tp-foreground) 10%, transparent)',
   color: 'var(--tp-accent-foreground)',
   outline: 'none',
 };
@@ -166,7 +167,7 @@ export const commandLabelAppearance: readonly PresentationRule[] = [
 export const commandSeparatorAppearance: readonly PresentationRule[] = [
   {
     declarations: {
-      'background-color': 'var(--tp-border)',
+      'background-color': divider.color,
       border: '0',
       // The separator owns its internal whitespace, using the surface inset.
       // Content-box paint keeps the line thin without sibling margins.

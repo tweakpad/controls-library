@@ -59,12 +59,12 @@
 /* flow-node-card */
 &[data-shape="panel"]{--_tp-flow-node-header-fill:color-mix(in oklab, var(--_tp-flow-tone, var(--tp-muted)) 25%, var(--tp-card))}
 /* flow-node-shell */
-&{background-color:var(--tp-card);color:var(--tp-card-foreground);border:var(--tp-border-width) var(--tp-border-style) color-mix(in oklab, var(--tp-foreground) 10%, transparent);border-radius:var(--tp-radius-lg);box-shadow:var(--tp-shadow-sm);font-size:var(--tp-text-sm)}
+&{background-color:var(--tp-card);color:var(--tp-card-foreground);border:var(--tp-border-width) var(--tp-border-style) var(--tp-hairline);border-radius:var(--tp-radius-lg);box-shadow:var(--tp-shadow-sm);font-size:var(--tp-text-sm)}
 &[data-shape="panel"]{background-color:color-mix(in oklab, var(--_tp-flow-tone, var(--tp-muted)) 25%, var(--tp-card))}
 /* flow-node-header */
 &{gap:var(--tp-space-2)}
 /* flow-node-icon */
-&{inline-size:var(--tp-icon-size-lg);block-size:var(--tp-icon-size-lg);border-radius:var(--tp-radius-md);background-color:color-mix(in oklab, var(--_tp-flow-tone, var(--tp-muted-foreground)) 15%, var(--tp-background));color:var(--_tp-flow-tone, var(--tp-foreground));border:var(--tp-border-width) var(--tp-border-style) color-mix(in oklab, var(--tp-foreground) 10%, transparent)}
+&{inline-size:var(--tp-icon-size-lg);block-size:var(--tp-icon-size-lg);border-radius:var(--tp-radius-md);background-color:color-mix(in oklab, var(--_tp-flow-tone, var(--tp-muted-foreground)) 15%, var(--tp-background));color:var(--_tp-flow-tone, var(--tp-foreground));border:var(--tp-border-width) var(--tp-border-style) var(--tp-hairline)}
 &[data-lines="2"]{inline-size:calc(1lh + var(--tp-text-xs) * var(--tp-leading-tight));block-size:calc(1lh + var(--tp-text-xs) * var(--tp-leading-tight))}
 /* flow-node-title */
 &{font-weight:var(--tp-font-medium);color:var(--tp-card-foreground)}
@@ -86,7 +86,7 @@
 /* flow-node-group */
 &{border:var(--tp-border-width) dashed color-mix(in oklab, var(--_tp-flow-tone, var(--tp-foreground)) 40%, transparent);border-radius:var(--tp-radius-xl);background-color:color-mix(in oklab, var(--_tp-flow-tone, var(--tp-muted)) 8%, transparent)}
 /* flow-node-toolbar */
-&{background-color:var(--tp-card);border:var(--tp-border-width) var(--tp-border-style) color-mix(in oklab, var(--tp-foreground) 10%, transparent);border-radius:var(--tp-radius-md);box-shadow:var(--tp-shadow-sm);padding:var(--tp-space-1)}
+&{background-color:var(--tp-card);border:var(--tp-border-width) var(--tp-border-style) var(--tp-hairline);border-radius:var(--tp-radius-md);box-shadow:var(--tp-shadow-sm);padding:var(--tp-space-1)}
 /* flow-node-resizer */
 /* flow-node-resizer-line */
 &{border:var(--tp-border-width) dashed var(--tp-primary);pointer-events:none}
@@ -188,7 +188,7 @@
 /* flow-selection-bounds */
 &{border:var(--tp-border-width) dotted color-mix(in oklab, var(--tp-primary) 80%, transparent);border-radius:var(--tp-radius-sm);cursor:grab}
 /* flow-minimap */
-&{--_tp-flow-minimap-node:color-mix(in oklab, var(--tp-foreground) 15%, transparent);--_tp-flow-minimap-mask:color-mix(in oklab, var(--tp-muted) 60%, transparent);--_tp-flow-minimap-viewport:var(--tp-primary);inline-size:var(--_tp-flow-minimap);block-size:calc(var(--_tp-flow-minimap) * 0.75);background-color:var(--tp-card);border:var(--tp-border-width) var(--tp-border-style) color-mix(in oklab, var(--tp-foreground) 10%, transparent);border-radius:var(--tp-radius-md);box-shadow:var(--tp-shadow-sm);overflow:clip}
+&{--_tp-flow-minimap-node:color-mix(in oklab, var(--tp-foreground) 15%, transparent);--_tp-flow-minimap-mask:color-mix(in oklab, var(--tp-muted) 60%, transparent);--_tp-flow-minimap-viewport:var(--tp-primary);inline-size:var(--_tp-flow-minimap);block-size:calc(var(--_tp-flow-minimap) * 0.75);background-color:var(--tp-card);border:var(--tp-border-width) var(--tp-border-style) var(--tp-hairline);border-radius:var(--tp-radius-md);box-shadow:var(--tp-shadow-sm);overflow:clip}
 &[data-pannable]{cursor:grab}
 &[data-panning]{cursor:grabbing}
 /* flow-minimap-node */

@@ -1,15 +1,14 @@
 import { motionTransition } from '../motion.js';
 import type { PresentationDeclarations, PresentationDictionary } from '../resolver.js';
 import { activeRing, colorThumbRing, focusRing, ringMix, thumb } from './shared/handle.js';
-import { swatchCorner, swatchEdge, swatchEdgeRing, swatchFill } from './shared/swatch.js';
+import { floatEdge, swatchEdge } from './shared/edges.js';
+import { swatchCorner, swatchFill } from './shared/swatch.js';
 
 // Widgets Specification 6.1 Presentation: value-domain paint arrives from the widget as the
 // inline custom properties `--_tp-color-picker-paint` (an <image> list) and
 // `--_tp-color-picker-thumb-paint` (a <color>); every rule below resolves through tokens.
 // Markers are 12px rings and tracks are 4px over a checkerboard, built from the library tokens
 // and the Slider thumb recipe.
-
-const hairline = 'color-mix(in oklab, var(--tp-foreground) 10%, transparent)';
 
 /** Checkerboard from the background and muted roles under the widget's paint layer. */
 const checker = swatchFill(
@@ -25,7 +24,7 @@ const markerRing: PresentationDeclarations = {
 
 const surfaceFrame: PresentationDeclarations = {
   'border-radius': 'var(--tp-radius-lg)',
-  'box-shadow': `inset 0 0 0 var(--tp-border-width) ${hairline}`,
+  'box-shadow': floatEdge.ring,
   'background-image': 'var(--_tp-color-picker-paint)',
 };
 
@@ -91,7 +90,7 @@ export const colorPickerAppearance: PresentationDictionary = {
         'border-radius': 'var(--tp-radius-full)',
         'background-color': 'var(--tp-background)',
         'background-image': 'var(--_tp-color-picker-paint)',
-        'box-shadow': `inset 0 0 0 var(--tp-border-width) ${hairline}`,
+        'box-shadow': floatEdge.ring,
       },
     },
   ],
@@ -102,7 +101,7 @@ export const colorPickerAppearance: PresentationDictionary = {
         height: 'var(--_tp-color-picker-track)',
         'border-radius': 'var(--tp-radius-full)',
         ...checker,
-        'box-shadow': `inset 0 0 0 var(--tp-border-width) ${hairline}`,
+        'box-shadow': floatEdge.ring,
       },
     },
   ],
@@ -131,7 +130,7 @@ export const colorPickerAppearance: PresentationDictionary = {
         'inline-size': 'var(--tp-control-height-md)',
         'block-size': 'var(--tp-control-height-md)',
         'border-radius': swatchCorner,
-        border: swatchEdge,
+        border: swatchEdge.border,
         ...checker,
       },
     },
@@ -141,7 +140,7 @@ export const colorPickerAppearance: PresentationDictionary = {
   ],
   // The fill covers the Toggle, which clips it to its own radius (rounded square, round, or
   // the joined strip geometry); the fill itself stays square.
-  'color-picker-swatch': [{ declarations: { ...checker, 'box-shadow': swatchEdgeRing } }],
+  'color-picker-swatch': [{ declarations: { ...checker, 'box-shadow': swatchEdge.ring } }],
   'color-picker-swatch-shape-round': [],
   'color-picker-swatch-shape-square': [],
   'color-picker-swatch-item': [
@@ -292,7 +291,7 @@ export const colorPickerAppearance: PresentationDictionary = {
       declarations: {
         'border-radius': 'var(--tp-radius-full)',
         'background-image': 'var(--_tp-color-picker-paint)',
-        'box-shadow': `inset 0 0 0 var(--tp-border-width) ${hairline}`,
+        'box-shadow': floatEdge.ring,
       },
     },
     {
@@ -340,7 +339,7 @@ export const colorPickerAppearance: PresentationDictionary = {
       declarations: {
         'border-radius': 'var(--tp-radius-full)',
         'background-image': 'var(--_tp-color-picker-paint)',
-        'box-shadow': `inset 0 0 0 var(--tp-border-width) ${hairline}`,
+        'box-shadow': floatEdge.ring,
       },
     },
   ],

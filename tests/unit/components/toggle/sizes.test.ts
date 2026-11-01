@@ -121,6 +121,7 @@ describe('Toggle and Toggle group sizes', () => {
       'border-end-end-radius': '0',
       'border-inline-start-width': '0',
       'border-inline-end-width': 'var(--tp-joined-edge-width)',
+      'border-inline-end-color': 'var(--_tp-variant-edge, transparent)',
       'background-clip': 'padding-box',
     });
     expect(toggleGroupJoinedPresentation(0, 3, 'horizontal', false, false, true)).toEqual({
@@ -129,6 +130,7 @@ describe('Toggle and Toggle group sizes', () => {
       'border-end-start-radius': 'var(--tp-radius-lg)',
       'border-end-end-radius': '0',
       'border-inline-end-width': 'var(--tp-joined-edge-width)',
+      'border-inline-end-color': 'var(--_tp-variant-edge, transparent)',
       'background-clip': 'padding-box',
     });
     expect(toggleGroupJoinedPresentation(1, 3, 'horizontal', true, false, false)).toEqual({
@@ -138,6 +140,7 @@ describe('Toggle and Toggle group sizes', () => {
       'border-end-end-radius': '0',
       'border-inline-start-width': '0',
       'border-inline-end-width': 'var(--tp-joined-edge-width)',
+      'border-inline-end-color': 'var(--_tp-variant-edge, transparent)',
       'background-clip': 'padding-box',
       'padding-inline-start': 'var(--tp-space-1-5)',
       'padding-inline-end': 'var(--tp-space-2)',

@@ -44,7 +44,8 @@ import { selectionFill, selectionLine } from './shared/selection.js';
 import { resizeSeparatorRules } from './shared/separator.js';
 import { statusAppearance } from './shared/status.js';
 import { floatingToolbarAppearance, floatingToolbarStructure } from './shared/surface.js';
-import { swatchColorProperty, swatchCorner, swatchEdgeRing, swatchFill } from './shared/swatch.js';
+import { swatchColorProperty, swatchEdge } from './shared/edges.js';
+import { swatchCorner, swatchFill } from './shared/swatch.js';
 
 /**
  * The context bar editors (`uwg-te-req-pres-9`) enter sliding down from under the fixed toolbar
@@ -470,7 +471,7 @@ export const textEditorAppearance: PresentationDictionary = {
       selector: '&[data-swatch="fill"]',
       declarations: {
         'border-radius': swatchCorner,
-        'box-shadow': swatchEdgeRing,
+        'box-shadow': swatchEdge.ring,
       },
     },
     ...TEXT_EDITOR_COLORS.flatMap((hue): PresentationRule[] => [

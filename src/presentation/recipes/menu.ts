@@ -73,10 +73,16 @@ const choiceItem: readonly PresentationRule[] = [
 ];
 const ghost: readonly PresentationRule[] = [];
 // A destructive command reads in the destructive text tone and highlights with its tinted fill.
+// It keys on the item's own `data-variant`, which follows the item's `variant` and else the
+// Menu's `item-variant`; the Menu's axis alone cannot reach a single destructive item.
 const destructive: readonly PresentationRule[] = [
-  { declarations: { color: 'var(--tp-destructive-subtle-foreground)' } },
   {
-    selector: '&[data-highlighted]:not([data-disabled], [aria-disabled="true"])',
+    selector: '&[data-variant="destructive"]',
+    declarations: { color: 'var(--tp-destructive-subtle-foreground)' },
+  },
+  {
+    selector:
+      '&[data-variant="destructive"][data-highlighted]:not([data-disabled], [aria-disabled="true"])',
     declarations: {
       background: 'var(--tp-destructive-subtle)',
       color: 'var(--tp-destructive-subtle-foreground)',
@@ -87,9 +93,9 @@ const root = (prefix: 'menu'): Record<string, readonly PresentationRule[]> => ({
   [prefix]: [],
   [`${prefix}-trigger`]: popupTriggerAppearance,
   [`${prefix}-content`]: menuSurface,
-  [`${prefix}-item`]: menuItem,
+  [`${prefix}-item`]: [...menuItem, ...destructive],
   [`${prefix}-item-variant-ghost`]: ghost,
-  [`${prefix}-item-variant-destructive`]: destructive,
+  [`${prefix}-item-variant-destructive`]: [],
   [`${prefix}-checkbox-item`]: choiceItem,
   [`${prefix}-radio-group`]: [],
   [`${prefix}-radio-item`]: choiceItem,

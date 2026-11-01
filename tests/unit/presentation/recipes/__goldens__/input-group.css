@@ -1,6 +1,6 @@
 /* tp-input-group appearance */
 /* input-group */
-&{min-height:var(--tp-control-height-md);padding:0;border:var(--tp-border-width) var(--tp-border-style) var(--tp-input);border-radius:var(--tp-radius-lg);color:var(--tp-foreground);background:var(--tp-control);font:inherit;font-size:var(--tp-text-sm);line-height:var(--tp-leading-normal);min-inline-size:0}
+&{min-height:var(--tp-control-height-md);padding:0;border:var(--tp-border-width) var(--tp-border-style) var(--tp-input);--_tp-variant-edge:var(--tp-input);border-radius:var(--tp-radius-lg);color:var(--tp-foreground);background:var(--tp-control);font:inherit;font-size:var(--tp-text-sm);line-height:var(--tp-leading-normal);min-inline-size:0}
 &:focus-within{border-color:var(--tp-ring);outline:var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-ring) 50%, transparent);outline-offset:0}
 &[data-invalid]{border-color:var(--tp-destructive)}
 &[data-invalid]:focus-within{border-color:var(--tp-destructive);outline:var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-destructive) 50%, transparent);outline-offset:0}

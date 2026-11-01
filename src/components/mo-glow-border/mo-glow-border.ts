@@ -58,7 +58,7 @@ interface Timing {
  * @csspart mo-glow-border-line - The border line where the glow does not light it.
  * @csspart mo-glow-border-glow - The canvas of the lit line and its wash.
  * @csspart mo-glow-border-bloom - The canvas of the blurred light around the line.
- * @cssprop --tp-mo-glow-border-color - Line color where it is not lit. Default `var(--tp-border)`.
+ * @cssprop --tp-mo-glow-border-color - Line color where it is not lit. Default: the `border` role.
  * @cssprop --tp-mo-glow-border-width - Line width. Default the surface's border width.
  * @cssprop --tp-mo-glow-border-radius - Corner radius without a surface child. Default `var(--tp-radius-lg)`.
  * @cssprop --tp-mo-glow-border-colors - The glow's colors, spread evenly around the border, each blending into the next along the hue circle and the last back into the first. Default the theme's sky, violet and pink chart colors (`--tp-chart-2`, `--tp-chart-1`, `--tp-chart-5`).

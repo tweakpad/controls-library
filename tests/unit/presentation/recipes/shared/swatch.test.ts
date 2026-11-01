@@ -1,11 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { colorPickerAppearance } from '../../../../../src/presentation/recipes/color-picker.js';
-import {
-  swatchCorner,
-  swatchEdgeRing,
-  swatchFill,
-} from '../../../../../src/presentation/recipes/shared/swatch.js';
+import { swatchEdge } from '../../../../../src/presentation/recipes/shared/edges.js';
+import { swatchCorner, swatchFill } from '../../../../../src/presentation/recipes/shared/swatch.js';
 
 const pickerFill = (): ReturnType<typeof swatchFill> =>
   swatchFill('var(--_tp-color-picker-paint, none)', 'var(--_tp-color-picker-checker)');
@@ -45,7 +42,7 @@ describe('shared swatch fill box', () => {
 
   it('fills color picker swatches from the shared swatch set (`uwg-cp-tab-anatomy-r12`)', () => {
     expect(colorPickerAppearance['color-picker-swatch']).toEqual([
-      { declarations: { ...pickerFill(), 'box-shadow': swatchEdgeRing } },
+      { declarations: { ...pickerFill(), 'box-shadow': swatchEdge.ring } },
     ]);
   });
 

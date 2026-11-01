@@ -1,5 +1,5 @@
 import type { PresentationDictionary } from '../resolver.js';
-import { popupBorder } from './shared/surface.js';
+import { floatEdge } from './shared/edges.js';
 import { anchoredPresenceAppearance, popupSpacingAppearance } from './command-surface.js';
 
 /** Popover surface; placement and presence come from the shared owner. */
@@ -14,7 +14,7 @@ export const popoverAppearance: PresentationDictionary = {
         color: 'var(--tp-popover-foreground)',
         gap: 'var(--tp-space-2-5)',
         'border-radius': 'var(--tp-radius-lg)',
-        border: popupBorder,
+        border: floatEdge.border,
         'box-shadow': 'var(--tp-shadow-md)',
         'font-size': 'var(--tp-text-sm)',
       },

@@ -1,6 +1,7 @@
 import type { PresentationRule } from '../../resolver.js';
 import { at } from './document-content.js';
 import { selectionFill } from './selection.js';
+import { divider } from './edges.js';
 
 /** The inline and block padding of a document table cell: Table's cell padding. */
 export const documentCellPadding = 'var(--tp-space-2)';
@@ -39,7 +40,7 @@ export function documentTableRules(selectors: DocumentTableSelectors): readonly 
       'box-sizing': 'border-box',
       'text-align': 'start',
       'vertical-align': 'top',
-      border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+      border: divider.border,
     }),
     // The longhand, so a cell's own background replaces the header fill and the tint stays above.
     at(selectors.headerCell, {

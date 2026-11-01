@@ -1,6 +1,7 @@
 import type { PresentationDictionary } from '../resolver.js';
 import { inputRules } from './shared/text-control.js';
 import { controlStepDeclarations } from './shared/variant.js';
+import { controlFill } from './shared/edges.js';
 /** Native select layers its native extents over the shared Input boundary. */
 export const nativeSelectAppearance: PresentationDictionary = {
   // The host already applies the disabled opacity and cursor.
@@ -29,7 +30,7 @@ export const nativeSelectAppearance: PresentationDictionary = {
     {
       selector: '&:hover:not(:disabled)',
       declarations: {
-        background: 'var(--tp-control)',
+        background: controlFill,
       },
     },
     {

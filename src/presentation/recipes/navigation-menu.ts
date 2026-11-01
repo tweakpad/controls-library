@@ -1,5 +1,5 @@
 import { motionTransition, presenceMotion } from '../motion.js';
-import { popupBorder } from './shared/surface.js';
+import { floatEdge } from './shared/edges.js';
 import { packedExtent } from './shared/target.js';
 import type { PresentationDictionary, PresentationRule } from '../resolver.js';
 import {
@@ -24,7 +24,7 @@ const popup: readonly PresentationRule[] = [
       background: 'var(--tp-popover)',
       color: 'var(--tp-popover-foreground)',
       'border-radius': 'var(--tp-radius-lg)',
-      border: popupBorder,
+      border: floatEdge.border,
       'box-shadow': 'var(--tp-shadow-sm)',
     },
   },

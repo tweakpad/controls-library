@@ -1,6 +1,7 @@
 import { motionTransition } from '../../motion.js';
 import type { PresentationDeclarations, PresentationRule } from '../../resolver.js';
 import { codeFace } from './code-surface.js';
+import { divider } from './edges.js';
 
 // Document content profile sets (`dcp-binding`): one builder per role. Each takes the consumer's
 // selectors and, where the role spaces blocks, the consumer's flow variable names, so every
@@ -245,8 +246,7 @@ export function documentQuoteRules(quote: string): readonly PresentationRule[] {
     at(quote, {
       'margin-inline': '0',
       'padding-inline-start': 'var(--tp-space-4)',
-      'border-inline-start':
-        'var(--tp-border-width-strong) var(--tp-border-style) var(--tp-border)',
+      'border-inline-start': `var(--tp-border-width-strong) var(--tp-border-style) ${divider.color}`,
       color: 'var(--tp-muted-foreground)',
     }),
   ];

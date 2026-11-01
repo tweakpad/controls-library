@@ -218,6 +218,22 @@ A theme sets the seeds of each mode on `:root`: `--tp-spacing` and `--tp-type-sc
 
 Status variants, such as a `destructive` Button or a `success` Badge, paint the role's tinted fill, its text tone and its edge: `--tp-destructive-subtle`, `--tp-destructive-subtle-foreground` and `--tp-destructive-border`. The `default` and `secondary` variants keep their solid fill and foreground. An Alert paints its severity the same way: the tinted fill, the edge, and the text tone for its title, description and icon; `informational` uses the primary role. Error messages and destructive menu commands use the destructive text tone, so they stay readable on any surface.
 
+## Lines and edges
+
+Every line a component draws belongs to one kind, and each kind takes exactly one color role, so a theme or an appearance mode changes a kind everywhere at once:
+
+| Kind          | Draws                                                            | Role                   | Flat |
+| ------------- | ---------------------------------------------------------------- | ---------------------- | ---- |
+| Surface edge  | cards, panels, tables, code and callout surfaces, drawers        | `edge`                 | none |
+| Floating edge | menus, popovers, lists, floating toolbars, color picker surfaces | `hairline`             | none |
+| Field edge    | fields and outline controls                                      | `input`                | none |
+| Mark edge     | checkboxes, radios, switch tracks                                | `control-border`       | none |
+| Status edge   | status variants and alerts                                       | `<role>-border`        | none |
+| Divider       | separators, table rows, header and footer lines                  | `border`               | kept |
+| Swatch edge   | color swatches                                                   | the swatch's own color | kept |
+
+In a joined group (Button group, Toggle group, Field group) the seam between members takes the member's own edge, or cuts through the fills where the member has none, such as two `secondary` Buttons. In the flat appearance every seam is a cut, `joined-edge-width` wide. A Separator inside a joined group is part of that cut.
+
 ## Flat appearance
 
 The token set has two appearance modes. `default` draws an edge around components and panels: cards, popups, fields, outline controls and status variants. `flat` removes those edges and separates components by fill instead: panels take a fill a step from the page, fields and outline controls a step from panels, and status variants keep their tint without an edge. Checkboxes and radios lose their boundary too and show as filled marks; a chosen radio is a plain primary fill with no dot (`choice`, `choice-foreground`). Dividers, focus rings, shadows and corner radii stay the same.

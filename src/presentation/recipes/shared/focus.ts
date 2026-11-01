@@ -4,6 +4,11 @@ import type { PresentationDeclarations } from '../../resolver.js';
 // the 3:1 non-text contrast minimum against the surface, and it survives forced-colors
 // modes, which drop box-shadow halos. Halos may accompany a ring, never replace it.
 
+/** The half-strength halo that accompanies a focus ring on a field or a control's edge. */
+export const focusHalo = 'color-mix(in oklab, var(--tp-ring) 50%, transparent)';
+/** The same halo in the destructive color, for a focused invalid control. */
+export const invalidFocusHalo = 'color-mix(in oklab, var(--tp-destructive) 50%, transparent)';
+
 /** The focus ring, offset outside the control. */
 export const focusRing: PresentationDeclarations = {
   outline: 'var(--tp-ring-width) var(--tp-border-style) var(--tp-ring)',
@@ -22,7 +27,6 @@ export const insetFocusRing: PresentationDeclarations = {
  */
 export const invalidFocusRing: PresentationDeclarations = {
   'border-color': 'var(--tp-destructive)',
-  outline:
-    'var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-destructive) 50%, transparent)',
+  outline: `var(--tp-ring-width) var(--tp-border-style) ${invalidFocusHalo}`,
   'outline-offset': '0',
 };

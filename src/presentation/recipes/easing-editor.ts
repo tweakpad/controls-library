@@ -1,14 +1,13 @@
 import { motionTransition } from '../motion.js';
 import type { PresentationDictionary } from '../resolver.js';
 import { activeRing, focusRing, thumb } from './shared/handle.js';
-import { popupBorder } from './shared/surface.js';
+import { floatEdge } from './shared/edges.js';
 
 // Widgets Specification 6.2 Presentation: the curve geometry, the thumbnails and the tick
 // positions are content supplied by the widget as SVG; every color below resolves through
 // tokens: axes at 0.1 opacity, a 4px marker filled on focus and a polyline stroke; the handle
 // rings are the shared widget handle recipe.
 
-const hairline = 'color-mix(in oklab, var(--tp-foreground) 10%, transparent)';
 const dots = 'color-mix(in oklab, var(--tp-foreground) 18%, transparent)';
 const tickMix = 'color-mix(in oklab, var(--tp-foreground) 55%, transparent)';
 
@@ -73,7 +72,7 @@ export const easingEditorAppearance: PresentationDictionary = {
       selector: '&[data-overlay]',
       declarations: {
         'border-radius': 'var(--tp-radius-lg)',
-        border: popupBorder,
+        border: floatEdge.border,
         'background-color': 'color-mix(in oklab, var(--tp-background) 94%, transparent)',
         'box-shadow': 'var(--tp-shadow-md)',
         padding: 'var(--tp-space-2)',
@@ -116,7 +115,7 @@ export const easingEditorAppearance: PresentationDictionary = {
     { declarations: { color: 'var(--tp-primary)' } },
     {
       selector: '& .thumb-box',
-      declarations: { fill: 'none', stroke: hairline, 'stroke-width': '1px' },
+      declarations: { fill: 'none', stroke: floatEdge.color, 'stroke-width': '1px' },
     },
     {
       selector: '& .thumb-curve',

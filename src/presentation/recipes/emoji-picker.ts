@@ -2,7 +2,7 @@ import type { PresentationDictionary } from '../resolver.js';
 import { commandPaletteAppearance } from './command-palette.js';
 import { selectAppearance } from './select.js';
 import { insetFocusRing } from './shared/focus.js';
-import { popupBorder, popupBorderColor } from './shared/surface.js';
+import { floatEdge } from './shared/edges.js';
 
 // Widgets Specification 6.4 Presentation: the surface, search, list, labels and options take
 // the Command palette and Select recipes; the glyphs and custom images are content. Extents
@@ -45,10 +45,10 @@ export const emojiPickerAppearance: PresentationDictionary = {
       },
     },
   ],
-  // The inline picker is its own surface: the Command palette surface with the popup border.
+  // The inline picker is its own surface: the Command palette surface with the floating edge.
   'emoji-picker-picker-inline': [
     ...commandPaletteAppearance['command-palette']!,
-    { declarations: { border: popupBorder, overflow: 'hidden' } },
+    { declarations: { border: floatEdge.border, overflow: 'hidden' } },
   ],
   'emoji-picker-picker-popup': [],
   'emoji-picker-popup': [{ declarations: { 'border-radius': 'inherit', overflow: 'hidden' } }],
@@ -66,7 +66,7 @@ export const emojiPickerAppearance: PresentationDictionary = {
   'emoji-picker-clear': [],
   'emoji-picker-list': [
     ...selectAppearance['select-list']!,
-    { declarations: { 'border-block-start': `var(--tp-border-width) solid ${popupBorderColor}` } },
+    { declarations: { 'border-block-start': `var(--tp-border-width) solid ${floatEdge.color}` } },
   ],
   'emoji-picker-group': selectAppearance['select-group']!,
   'emoji-picker-group-label': [
@@ -115,7 +115,7 @@ export const emojiPickerAppearance: PresentationDictionary = {
       declarations: {
         gap: 'var(--_tp-emoji-picker-space)',
         padding: 'var(--_tp-emoji-picker-space)',
-        'border-block-start': `var(--tp-border-width) solid ${popupBorderColor}`,
+        'border-block-start': `var(--tp-border-width) solid ${floatEdge.color}`,
       },
     },
   ],

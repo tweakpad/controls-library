@@ -1,5 +1,6 @@
 import { motionTransition } from '../motion.js';
 import type { PresentationDictionary } from '../resolver.js';
+import { markEdge } from './shared/edges.js';
 
 /**
  * Theme switcher paint over the composed Switch, Button and Toggle group. The switch keeps a
@@ -12,7 +13,7 @@ export const themeSwitcherAppearance: PresentationDictionary = {
     { declarations: { '--_tp-switch-spacing': 'var(--tp-control-height-sm)' } },
     {
       selector: '&::part(switch)',
-      declarations: { background: 'var(--tp-muted)', 'border-color': 'var(--tp-control-border)' },
+      declarations: { background: 'var(--tp-muted)', 'border-color': markEdge.color },
     },
     { selector: '&::part(switch)::before', declarations: { opacity: '0' } },
     {

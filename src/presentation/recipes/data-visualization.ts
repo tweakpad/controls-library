@@ -1,5 +1,6 @@
 import type { PresentationDictionary } from '../resolver.js';
 import { popupSpacingAppearance } from './command-surface.js';
+import { surfaceEdge } from './shared/edges.js';
 /** Chart anatomy, tooltip treatment, common popup inset and theme palette. */
 export const dataVisualizationAppearance: PresentationDictionary = {
   'data-visualization': [
@@ -41,7 +42,7 @@ export const dataVisualizationAppearance: PresentationDictionary = {
       declarations: {
         background: 'var(--tp-popover)',
         color: 'var(--tp-popover-foreground)',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
+        border: surfaceEdge.border,
         'border-radius': 'var(--tp-radius-lg)',
         'box-shadow': 'var(--tp-shadow-lg)',
         'font-size': 'var(--tp-text-xs)',

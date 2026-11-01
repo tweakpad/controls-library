@@ -1,6 +1,7 @@
 import type { PresentationDictionary } from '../../resolver.js';
 import { sectionFooterAppearance } from '../shared/surface.js';
 import { rule } from '../shared/variant.js';
+import { divider, surfaceEdge } from '../shared/edges.js';
 
 export const cardCoreAppearance: PresentationDictionary = {
   card: [
@@ -8,7 +9,7 @@ export const cardCoreAppearance: PresentationDictionary = {
     rule({
       '--_tp-card-spacing': 'var(--tp-space-4)',
       'font-size': 'var(--tp-text-sm)',
-      border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
+      border: surfaceEdge.border,
       'border-radius': 'var(--tp-radius-xl)',
       color: 'var(--tp-card-foreground)',
       background: 'var(--tp-card)',
@@ -20,7 +21,7 @@ export const cardCoreAppearance: PresentationDictionary = {
   'card-header': [
     rule({
       background: 'var(--tp-card)',
-      'border-block-end': 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+      'border-block-end': divider.border,
     }),
     rule({ 'border-width': '0' }, ':host([borders="off"]) &'),
   ],

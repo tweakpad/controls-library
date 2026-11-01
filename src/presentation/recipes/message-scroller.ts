@@ -1,6 +1,7 @@
 import type { PresentationDictionary } from '../resolver.js';
 import { motionTransition } from '../motion.js';
 import { css } from 'lit';
+import { surfaceEdge } from './shared/edges.js';
 
 /** Shadow-scoped keyframe for the shared viewport recipe. */
 export const messageScrollerFadeKeyframes = css`
@@ -33,7 +34,7 @@ export const messageScrollerAppearance: PresentationDictionary = {
       declarations: {
         background: 'var(--tp-background)',
         color: 'var(--tp-foreground)',
-        'border-color': 'var(--tp-edge)',
+        'border-color': surfaceEdge.color,
         'border-radius': 'var(--tp-radius-full)',
         transition: motionTransition(['opacity', 'translate'], 'fast'),
         opacity: '1',

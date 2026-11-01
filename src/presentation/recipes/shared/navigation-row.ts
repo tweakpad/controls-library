@@ -1,6 +1,7 @@
 import type { PresentationRule } from '../../resolver.js';
 import { fillColor, fillShown } from './fill.js';
 import { packedExtent } from './target.js';
+import { divider } from './edges.js';
 
 /** Accent row highlight: content color plus the accent fill layer, which fades. */
 export function rowHighlight(selector: string): PresentationRule[] {
@@ -53,7 +54,7 @@ export const collapsedContext =
   ':host-context(tp-navigation-panel-item[data-collapsed]:not([data-compact])[data-collapse-mode="compact"]) ';
 
 /** Sub-level guide: the border role and width of a sub-level line. */
-export const subLevelGuideColor = 'var(--tp-border)';
+export const subLevelGuideColor = divider.color;
 export const subLevelGuideWidth = 'var(--tp-border-width)';
 export const subLevelGuideLine = `${subLevelGuideWidth} var(--tp-border-style) ${subLevelGuideColor}`;
 /** The separation between sub-level rows. */

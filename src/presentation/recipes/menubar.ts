@@ -5,6 +5,7 @@ import {
   popupTriggerAppearance,
 } from './command-surface.js';
 import { menuItem, menuSurface, subTrigger } from './menu.js';
+import { surfaceEdge } from './shared/edges.js';
 
 /** Menubar strip and its menus, built from Menu's command rows and surfaces. */
 export const menubarAppearance: PresentationDictionary = {
@@ -17,7 +18,7 @@ export const menubarAppearance: PresentationDictionary = {
         padding: 'calc(var(--tp-space-1) - var(--tp-border-width))',
         gap: 'var(--tp-space-0-5)',
         'border-radius': 'var(--tp-radius-lg)',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
+        border: surfaceEdge.border,
       },
     },
   ],

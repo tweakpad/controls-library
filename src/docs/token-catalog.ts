@@ -183,6 +183,7 @@ export function contrastSurfaces(role: RequiredTokenRole): readonly RequiredToke
 const PREVIEW_OVERRIDES: Partial<Record<RequiredTokenRole, PreviewKind>> = {
   border: 'line',
   edge: 'line',
+  hairline: 'line',
   'control-border': 'line',
   input: 'line',
   ring: 'ring',
@@ -269,7 +270,8 @@ export const DESCRIPTIONS = {
   'warning-subtle-foreground': 'Warning text tone on its tinted fill and on surfaces.',
   'warning-border': 'Edge of warning status fills.',
   border: 'Separators and lines.',
-  edge: 'Outer edge of a component or panel, such as cards, popups and tables.',
+  edge: 'Outer edge of a component or panel, such as cards and tables.',
+  hairline: 'Fine edge of floating surfaces (menus, popovers, lists, toolbars) and value surfaces.',
   input: 'Edge of fields and outline controls.',
   control: 'Fill of fields and outline controls.',
   'control-strong':

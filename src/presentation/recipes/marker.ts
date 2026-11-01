@@ -1,5 +1,6 @@
 import type { PresentationDictionary } from '../resolver.js';
 import { focusRing } from './shared/focus.js';
+import { divider } from './shared/edges.js';
 
 export const markerAppearance: PresentationDictionary = {
   marker: [
@@ -32,7 +33,7 @@ export const markerAppearance: PresentationDictionary = {
         'block-size': 'var(--tp-border-width)',
         'min-inline-size': '0',
         flex: '1',
-        background: 'var(--tp-border)',
+        background: divider.color,
       },
     },
     {
@@ -46,7 +47,7 @@ export const markerAppearance: PresentationDictionary = {
     {
       selector: ':host([variant="border"]) &',
       declarations: {
-        'border-block-end': 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        'border-block-end': divider.border,
         'padding-block-end': 'var(--tp-space-2)',
       },
     },

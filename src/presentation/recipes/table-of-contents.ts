@@ -1,5 +1,6 @@
 import { motionTransition } from '../motion.js';
 import type { PresentationDictionary } from '../resolver.js';
+import { divider } from './shared/edges.js';
 
 /** Default Table of contents appearance (`ucl20-table-of-contents`): text and spacing. */
 export const tableOfContentsAppearance: PresentationDictionary = {
@@ -25,7 +26,7 @@ export const tableOfContentsAppearance: PresentationDictionary = {
   'table-of-contents-rail': [
     {
       declarations: {
-        'border-inline-start': 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        'border-inline-start': divider.border,
       },
     },
   ],
@@ -87,7 +88,7 @@ export const tableOfContentsAppearance: PresentationDictionary = {
   'table-of-contents-mark': [
     {
       declarations: {
-        color: 'var(--tp-border)',
+        color: divider.color,
         transition: motionTransition(['color'], 'fast'),
       },
     },

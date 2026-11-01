@@ -32,12 +32,12 @@
 &::before{background-color:color-mix(in oklab,var(--tp-muted) 50%,transparent)}
 &:not([data-disabled], [data-checked]):hover::before{opacity:1}
 &[data-checked]{background:var(--tp-muted);border-color:color-mix(in oklab,var(--tp-primary) 40%,transparent)}
-&:has(>input:focus-visible){border-color:var(--tp-ring);outline:var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab,var(--tp-ring) 50%,transparent)}
+&:has(>input:focus-visible){border-color:var(--tp-ring);outline:var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-ring) 50%, transparent)}
 &[data-invalid]{border-color:var(--tp-destructive)}
 & .choice-copy{gap:var(--tp-space-0-5);line-height:var(--tp-leading-normal)}
 & .choice-description{color:var(--tp-muted-foreground)}
 /* questionnaire-input-region */
-& > input{min-height:var(--tp-control-height-md);padding:var(--tp-space-1) var(--tp-space-2-5);border:var(--tp-border-width) var(--tp-border-style) var(--tp-input);border-radius:var(--tp-radius-lg);color:var(--tp-foreground);background:var(--tp-control);font:inherit;font-size:var(--tp-text-sm);line-height:var(--tp-leading-normal)}
+& > input{min-height:var(--tp-control-height-md);padding:var(--tp-space-1) var(--tp-space-2-5);border:var(--tp-border-width) var(--tp-border-style) var(--tp-input);--_tp-variant-edge:var(--tp-input);border-radius:var(--tp-radius-lg);color:var(--tp-foreground);background:var(--tp-control);font:inherit;font-size:var(--tp-text-sm);line-height:var(--tp-leading-normal)}
 & > input::placeholder{color:var(--tp-muted-foreground)}
 & > input[data-mono]{font-family:var(--tp-font-mono)}
 & > input:focus-visible{border-color:var(--tp-ring);outline:var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-ring) 50%, transparent);outline-offset:0}

@@ -1,7 +1,9 @@
+import { focusHalo } from './shared/focus.js';
 import type { PresentationDictionary } from '../resolver.js';
 import { nativeChoiceAppearance } from './shared/selection-control.js';
 import { inputRules } from './shared/text-control.js';
 import { fillColor, fillShown } from './shared/fill.js';
+import { controlFill, fieldEdge } from './shared/edges.js';
 /** Questionnaire appearance; native constituents share existing recipes. */
 export const questionnaireAppearance: PresentationDictionary = {
   questionnaire: [{ declarations: { gap: 'var(--tp-space-4)' } }],
@@ -41,10 +43,10 @@ export const questionnaireAppearance: PresentationDictionary = {
       declarations: {
         gap: 'var(--tp-space-2-5)',
         padding: 'var(--tp-space-2-5) var(--tp-space-3)',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-input)',
+        border: fieldEdge.border,
         'border-radius': 'var(--tp-radius-lg)',
         'font-size': 'var(--tp-text-sm)',
-        background: 'var(--tp-control)',
+        background: controlFill,
       },
     },
     // An unchosen mark sits on the choice's control fill, so it takes the page color: a hole cut
@@ -67,8 +69,7 @@ export const questionnaireAppearance: PresentationDictionary = {
       selector: '&:has(>input:focus-visible)',
       declarations: {
         'border-color': 'var(--tp-ring)',
-        outline:
-          'var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab,var(--tp-ring) 50%,transparent)',
+        outline: `var(--tp-ring-width) var(--tp-border-style) ${focusHalo}`,
       },
     },
     { selector: '&[data-invalid]', declarations: { 'border-color': 'var(--tp-destructive)' } },

@@ -15,6 +15,7 @@ export type Appearance = 'default' | 'flat';
  */
 export const FLAT_ROLES: readonly (readonly [name: string, value: string])[] = [
   ['--tp-edge', 'transparent'],
+  ['--tp-hairline', 'transparent'],
   ['--tp-input', 'transparent'],
   ['--tp-card', 'color-mix(in oklab, var(--tp-foreground) 4%, var(--tp-background))'],
   ['--tp-control', 'color-mix(in oklab, var(--tp-foreground) 10%, var(--tp-card))'],

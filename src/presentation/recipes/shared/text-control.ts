@@ -1,30 +1,31 @@
 import type { PresentationRule } from '../../resolver.js';
-import { invalidFocusRing } from './focus.js';
+import { controlFill, controlFillStrong, fieldEdge, variantEdgeProperty } from './edges.js';
+import { focusHalo, invalidFocusRing } from './focus.js';
 
 // Input and Text area share their boundary paint.
 // The library control-height token supplies the locally governed default extent.
 export const fieldBoundary = {
   'min-height': 'var(--tp-control-height-md)',
   padding: 'var(--tp-space-1) var(--tp-space-2-5)',
-  border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-input)',
+  border: fieldEdge.border,
+  [variantEdgeProperty]: fieldEdge.color,
   'border-radius': 'var(--tp-radius-lg)',
   color: 'var(--tp-foreground)',
-  background: 'var(--tp-control)',
+  background: controlFill,
   font: 'inherit',
   'font-size': 'var(--tp-text-sm)',
   'line-height': 'var(--tp-leading-normal)',
 };
 export const fieldFocus = {
   'border-color': 'var(--tp-ring)',
-  outline:
-    'var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-ring) 50%, transparent)',
+  outline: `var(--tp-ring-width) var(--tp-border-style) ${focusHalo}`,
   'outline-offset': '0',
 };
 /** An invalid field at rest: its edge in the destructive color, with no ring of its own. */
 export const fieldInvalid = {
   'border-color': 'var(--tp-destructive)',
 };
-export const disabledBackground = 'var(--tp-control-strong)';
+export const disabledBackground = controlFillStrong;
 
 /**
  * A native editor joined into a surrounding boundary (Input group, inline Input): the boundary

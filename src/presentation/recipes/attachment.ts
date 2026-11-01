@@ -1,6 +1,8 @@
+import { focusHalo } from './shared/focus.js';
 import type { PresentationDictionary } from '../resolver.js';
 import { motionTransition } from '../motion.js';
 import { fillColor, fillShown } from './shared/fill.js';
+import { statusEdge, surfaceEdge } from './shared/edges.js';
 /** Attachment appearance mapped to shared theme roles. */
 export const attachmentAppearance: PresentationDictionary = {
   attachment: [
@@ -19,7 +21,7 @@ export const attachmentAppearance: PresentationDictionary = {
         'padding-inline': 'var(--tp-space-2-5)',
         gap: 'var(--tp-space-2)',
         'border-radius': 'var(--tp-radius-lg)',
-        border: 'var(--tp-border-width) var(--tp-border-style) var(--tp-edge)',
+        border: surfaceEdge.border,
         background: 'var(--tp-card)',
         color: 'var(--tp-card-foreground)',
         'box-shadow': 'none',
@@ -71,7 +73,7 @@ export const attachmentAppearance: PresentationDictionary = {
     {
       selector: '&[data-status="error"]',
       declarations: {
-        'border-color': 'color-mix(in oklab, var(--tp-destructive) 30%, transparent)',
+        'border-color': statusEdge('destructive').color,
       },
     },
     fillColor('color-mix(in oklab, var(--tp-muted) 50%, var(--tp-card))'),
@@ -79,8 +81,7 @@ export const attachmentAppearance: PresentationDictionary = {
     {
       selector: '&:focus-within',
       declarations: {
-        outline:
-          'var(--tp-border-width) solid color-mix(in oklab, var(--tp-ring) 50%, transparent)',
+        outline: `var(--tp-border-width) solid ${focusHalo}`,
       },
     },
     // Keyboard focus on the trigger or an action rings the whole card at full strength.

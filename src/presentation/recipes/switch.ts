@@ -1,19 +1,19 @@
 import { motionTransition } from '../motion.js';
 import type { PresentationDictionary } from '../resolver.js';
 import { fillColor, fillShown } from './shared/fill.js';
-import { focusRing } from './shared/focus.js';
+import { focusHalo, focusRing, invalidFocusHalo } from './shared/focus.js';
 import {
   inlineControlLabel,
   inlineControlRings,
   inlineControlSurface,
 } from './shared/inline-control.js';
+import { divider } from './shared/edges.js';
 // An invalid track takes the destructive edge; focused, it rings as a focused track does, in the
 // destructive color.
 const invalidPaint = { 'border-color': 'var(--tp-destructive)' };
 const invalidFocusPaint = {
   'border-color': 'var(--tp-destructive)',
-  'box-shadow':
-    '0 0 0 var(--tp-ring-width) color-mix(in oklab, var(--tp-destructive) 50%, transparent)',
+  'box-shadow': `0 0 0 var(--tp-ring-width) ${invalidFocusHalo}`,
 };
 /** Switch paint; translated geometry remains structural. */
 export const switchAppearance: PresentationDictionary = {
@@ -24,8 +24,7 @@ export const switchAppearance: PresentationDictionary = {
     },
     {
       declarations: {
-        background:
-          'light-dark(var(--tp-border), color-mix(in oklab, var(--tp-border) 80%, transparent))',
+        background: `light-dark(${divider.color}, color-mix(in oklab, ${divider.color} 80%, transparent))`,
         border: 'var(--tp-border-width) var(--tp-border-style) transparent',
         'border-radius': 'var(--tp-radius-full)',
       },
@@ -40,8 +39,7 @@ export const switchAppearance: PresentationDictionary = {
       declarations: {
         ...focusRing,
         'border-color': 'var(--tp-ring)',
-        'box-shadow':
-          '0 0 0 var(--tp-ring-width) color-mix(in oklab, var(--tp-ring) 50%, transparent)',
+        'box-shadow': `0 0 0 var(--tp-ring-width) ${focusHalo}`,
       },
     },
     {

@@ -1,4 +1,5 @@
 import type { PresentationDictionary } from '../resolver.js';
+import { divider } from './shared/edges.js';
 
 export const timelineAppearance: PresentationDictionary = {
   timeline: [{ declarations: { color: 'var(--tp-foreground)' } }],
@@ -7,7 +8,7 @@ export const timelineAppearance: PresentationDictionary = {
     {
       declarations: {
         'border-radius': 'var(--tp-radius-full)',
-        border: 'var(--tp-border-width-strong) var(--tp-border-style) var(--tp-border)',
+        border: `var(--tp-border-width-strong) var(--tp-border-style) ${divider.color}`,
         'background-color': 'var(--tp-background)',
       },
     },

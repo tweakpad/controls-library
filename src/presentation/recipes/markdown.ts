@@ -12,6 +12,7 @@ import {
   documentStrongRules,
   type DocumentFlowVariables,
 } from './shared/document-content.js';
+import { divider } from './shared/edges.js';
 
 const sm = ':host([size="sm"]) &';
 const flow: DocumentFlowVariables = {
@@ -70,7 +71,7 @@ export const markdownAppearance: PresentationDictionary = {
     {
       declarations: {
         'padding-block-start': `var(${flow.flow})`,
-        'border-block-start': 'var(--tp-border-width) var(--tp-border-style) var(--tp-border)',
+        'border-block-start': divider.border,
         'font-size': 'var(--tp-text-sm)',
         color: 'var(--tp-muted-foreground)',
       },
