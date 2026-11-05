@@ -164,10 +164,14 @@ entries['vue-adapter'] = vueAdapterEntry;
 /** Budgets of the framework bindings, in gzip bytes: a shared adapter, and what one binding adds. */
 const ADAPTER_BUDGET = 1000;
 const BINDING_BUDGET = 350;
+const BUNDLE_EXTERNALS = [/^lit($|\/)/, /^@lit\//, /^react($|\/)/, /^vue$/];
+// Gzip is not additive: subtracting a large component bundle from a bound one can make the
+// binding appear larger than it is. Measure flagged bindings again with component code external.
+const BINDING_EXTERNALS = [...BUNDLE_EXTERNALS, /\/dist\/(?:components|widgets)\//];
 
 // Each entry is bundled independently: a multi-entry build would introduce shared chunks
 // and change the compression of a component used alone. Keep concurrency bounded.
-async function measure(input, external = [/^lit($|\/)/, /^@lit\//, /^react($|\/)/, /^vue$/]) {
+async function measure(input, external = BUNDLE_EXTERNALS) {
   const bundle = await rolldown({
     input,
     cwd: work,
@@ -230,10 +234,21 @@ for (const component of components) {
       );
     // A binding adds the shared adapter (measured on its own) and its own definition.
     const added = bound.gzip - result.gzip - results.get(`${name}-adapter`).gzip;
-    if (added > BINDING_BUDGET)
-      violations.push(
-        `${component.tagName}: its ${name} binding adds ${added} B gzip beyond the adapter (budget ${BINDING_BUDGET} B)`,
+    if (added > BINDING_BUDGET) {
+      const isolated = await measure(
+        entries[`direct-${name}--${component.tagName}`],
+        BINDING_EXTERNALS,
       );
+      if (isolated.modules.has(classByTag.get(component.tagName).module))
+        throw new Error(
+          `size-report: failed to externalize ${component.tagName} for binding measurement`,
+        );
+      const overhead = isolated.gzip - results.get(`${name}-adapter`).gzip;
+      if (overhead > BINDING_BUDGET)
+        violations.push(
+          `${component.tagName}: its ${name} binding adds ${overhead} B gzip beyond the adapter (budget ${BINDING_BUDGET} B)`,
+        );
+    }
     framework[name] = { bytes: bound.bytes, gzip: bound.gzip };
   }
   Object.assign(component, {
