@@ -99,4 +99,13 @@ describe('calendar date and selection model', () => {
     );
     expect(arabic.every((label) => [...label].length <= 2)).toBe(true);
   });
+
+  it('gives the narrow weekday labels on request, for cells too small for the short ones', () => {
+    const narrow = Array.from({ length: 7 }, (_, day) =>
+      gregorianCalendarAdapter.weekdayLabel(day, 'en-US', 'narrow'),
+    );
+    expect(narrow).toEqual(['S', 'M', 'T', 'W', 'T', 'F', 'S']);
+    // The short form keeps its own cache entry.
+    expect(gregorianCalendarAdapter.weekdayLabel(0, 'en-US')).toBe('Sun');
+  });
 });

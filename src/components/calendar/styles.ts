@@ -156,8 +156,24 @@ export const calendarStyles = css`
   }
 
   .weekday {
+    position: relative;
     overflow: hidden;
     white-space: nowrap;
+  }
+
+  /* The narrow labels show when a short label overflows its cell; the short labels stay laid out,
+     out of flow and hidden, so their widths keep deciding. */
+  .weekday-narrow {
+    display: none;
+  }
+
+  .grid[data-narrow-weekdays] .weekday-short {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .grid[data-narrow-weekdays] .weekday-narrow {
+    display: inline;
   }
 
   .footer[hidden] {

@@ -29,7 +29,11 @@ export interface CalendarAdapter {
   startOfMonth(date: string): string;
   dayOfWeek(date: string): number;
   format(date: string, locale: string | undefined, style: 'day' | 'month' | 'accessible'): string;
-  weekdayLabel(dayOfWeek: number, locale: string | undefined): string;
+  /**
+   * The column label of a weekday: `short` (the default) is an abbreviation that fits a day cell,
+   * `narrow` the locale's shortest form, usually one character, for cells too small for it.
+   */
+  weekdayLabel(dayOfWeek: number, locale: string | undefined, width?: 'short' | 'narrow'): string;
   weekNumber?(date: string, weekStartsOn: number, minimalDays: number): number;
 }
 
@@ -117,8 +121,8 @@ export const gregorianCalendarAdapter: CalendarAdapter = {
     else if (this.compare(date, firstWeek(year + 1)) >= 0) start = firstWeek(year + 1);
     return Math.floor(this.differenceInDays(date, start) / 7) + 1;
   },
-  weekdayLabel(dayOfWeek, locale) {
-    return gregorianWeekdayLabels(locale)[modulo(dayOfWeek, 7)]!;
+  weekdayLabel(dayOfWeek, locale, width = 'short') {
+    return gregorianWeekdayLabels(locale, width)[modulo(dayOfWeek, 7)]!;
   },
 };
 
@@ -127,10 +131,14 @@ const weekdayLabelCache = new Map<string, readonly string[]>();
 /**
  * Short weekday labels, or the locale's narrow labels when any short label is longer
  * than an abbreviation (for example Arabic, Hebrew and Thai full names), so a column
- * header fits a day cell. One form is used for the whole week.
+ * header fits a day cell; `narrow` always gives the narrow labels. One form is used for the
+ * whole week.
  */
-function gregorianWeekdayLabels(locale: string | undefined): readonly string[] {
-  const key = locale ?? '';
+function gregorianWeekdayLabels(
+  locale: string | undefined,
+  width: 'short' | 'narrow',
+): readonly string[] {
+  const key = `${width}:${locale ?? ''}`;
   const cached = weekdayLabelCache.get(key);
   if (cached) return cached;
   const format = (weekday: 'short' | 'narrow') => {
@@ -139,10 +147,11 @@ function gregorianWeekdayLabels(locale: string | undefined): readonly string[] {
       formatter.format(new Date(Date.UTC(2021, 7, 1 + day))),
     );
   };
-  const short = format('short');
-  const labels = short.some((label) => [...label.replace(/\.$/u, '')].length > 4)
-    ? format('narrow')
-    : short;
+  const short = width === 'narrow' ? [] : format('short');
+  const labels =
+    width === 'narrow' || short.some((label) => [...label.replace(/\.$/u, '')].length > 4)
+      ? format('narrow')
+      : short;
   weekdayLabelCache.set(key, labels);
   return labels;
 }

@@ -508,6 +508,76 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     return this.calendarAdapter.format(date, this.#locale(), 'month');
   }
 
+  /**
+   * A weekday column header. Without a weekday formatter it holds the short label and the narrow
+   * one: the short label shows while every short label fits its cell, and stays laid out (hidden)
+   * otherwise so its width keeps being measured; the header is named by the short label.
+   */
+  #renderWeekday(day: number): unknown {
+    const custom = this.formatters.weekday?.(day);
+    if (custom !== undefined)
+      return this.#part('weekday', {
+        tag: 'span',
+        properties: { class: 'weekday', role: 'columnheader' },
+        content: custom,
+      });
+    const locale = this.#locale();
+    const short = this.calendarAdapter.weekdayLabel(day, locale);
+    return this.#part('weekday', {
+      tag: 'span',
+      properties: { class: 'weekday', role: 'columnheader', 'aria-label': short },
+      // The hidden form leaves the accessibility tree with its visibility; the label names both.
+      content: html`<span class="weekday-short">${short}</span
+        ><span class="weekday-narrow"
+          >${this.calendarAdapter.weekdayLabel(day, locale, 'narrow')}</span
+        >`,
+    });
+  }
+
+  /** Whether a short weekday label overflows its cell, so the headers show the narrow labels. */
+  #narrowWeekdays = false;
+  #weekdayObserver: ResizeObserver | undefined;
+  #observedWeekdays: readonly Element[] = [];
+
+  /** Observes the first month's short labels and their cell, whose sizes decide the label form. */
+  #observeWeekdays(): void {
+    const labels = [
+      ...this.renderRoot.querySelectorAll<HTMLElement>('.month:first-of-type .weekday-short'),
+    ];
+    const targets = labels.length ? [labels[0]!.parentElement!, ...labels] : [];
+    if (
+      targets.length === this.#observedWeekdays.length &&
+      targets.every((target, index) => target === this.#observedWeekdays[index])
+    )
+      return;
+    this.#weekdayObserver?.disconnect();
+    this.#observedWeekdays = targets;
+    if (!targets.length) {
+      if (this.#narrowWeekdays) {
+        this.#narrowWeekdays = false;
+        this.requestUpdate();
+      }
+      return;
+    }
+    this.#weekdayObserver ??= new (this.ownerDocument.defaultView ?? window).ResizeObserver(
+      this.#measureWeekdays,
+    );
+    for (const target of targets) this.#weekdayObserver.observe(target);
+  }
+
+  /** Layout widths, which a scaling entrance transform leaves untouched. */
+  readonly #measureWeekdays = (): void => {
+    const [cell, ...labels] = this.#observedWeekdays as HTMLElement[];
+    if (!cell || !cell.isConnected) return;
+    const style = getComputedStyle(cell);
+    const available =
+      cell.clientWidth - parseFloat(style.paddingInlineStart) - parseFloat(style.paddingInlineEnd);
+    const narrow = available > 0 && labels.some((label) => label.offsetWidth > available);
+    if (narrow === this.#narrowWeekdays) return;
+    this.#narrowWeekdays = narrow;
+    this.requestUpdate();
+  };
+
   #renderMonth(month: string, monthIndex: number): unknown {
     const weekStart = this.#resolvedWeekStart();
     const weekdays = Array.from({ length: 7 }, (_, index) => (weekStart + index) % 7);
@@ -530,6 +600,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
           'aria-labelledby': `${this.#calendarId}-month-${monthIndex}`,
           'aria-multiselectable': this.selectionMode !== 'single' ? 'true' : null,
           'data-week-numbers': weekNumbers,
+          'data-narrow-weekdays': this.#narrowWeekdays,
         },
         content: html` ${this.#part('weekdays', {
           properties: { class: 'weekdays', role: 'row' },
@@ -543,7 +614,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
                 })
               : nothing
           }
-          ${weekdays.map((day) => this.#part('weekday', { tag: 'span', properties: { class: 'weekday', role: 'columnheader' }, content: this.formatters.weekday?.(day) ?? this.calendarAdapter.weekdayLabel(day, this.#locale()) }))}`,
+          ${weekdays.map((day) => this.#renderWeekday(day))}`,
         })}
         ${this.#part('weeks', {
           properties: { class: 'weeks', role: 'rowgroup' },
@@ -685,6 +756,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
 
   protected override updated(changed: PropertyValues<this>): void {
     super.updated(changed);
+    this.#observeWeekdays();
     void this.#syncChildren();
     this.#syncFormState();
     const error = this.#configurationError();
@@ -717,6 +789,12 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     this.#requestSelection(this.#defaultSelection, 'form-reset', new Event('reset'));
   }
 
+  override connectedCallback(): void {
+    super.connectedCallback();
+    // A moved calendar does not render again; it resumes measuring its weekday labels.
+    if (this.hasUpdated) this.#observeWeekdays();
+  }
+
   override disconnectedCallback(): void {
     this.#childGeneration += 1;
     for (const { release, member } of this.#registered.values()) {
@@ -726,6 +804,8 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     this.#registered.clear();
     this.#focusGeneration += 1;
     this.#pendingFocusDate = '';
+    this.#weekdayObserver?.disconnect();
+    this.#observedWeekdays = [];
     super.disconnectedCallback();
   }
 
