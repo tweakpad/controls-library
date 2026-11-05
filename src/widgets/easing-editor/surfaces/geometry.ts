@@ -59,6 +59,18 @@ export function curveRange(curve: EasingCurve | null): ProgressionRange {
   return fitRange({ min, max });
 }
 
+/**
+ * How far the preview shape travels past its end size, as a factor of it: the curve's furthest
+ * progression from 0 (at least 1). The scale previews shrink the shape by it, so the peak of an
+ * overshoot reaches the edge of the graph instead of being clipped by it.
+ */
+export function previewExtent(curve: EasingCurve | null): number {
+  if (!curve) return 1;
+  const range = progressionRange(easingFunction(curve));
+  const extent = Math.max(1, range.max, -range.min);
+  return Number.isFinite(extent) ? extent : 1;
+}
+
 /** Fraction of the plot extent (0 at the left or bottom, 1 at the right or top) of a value. */
 export function axisFraction(value: number, range: ProgressionRange): number {
   const span = range.max - range.min || 1;

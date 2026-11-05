@@ -41,7 +41,7 @@ A press inside a handle keeps the pointer's offset from its center, so the handl
 
 Points stay between their neighbours on the time axis; the first and last points keep 0% and 100%. Delete or Backspace on a focused point removes it, and the Add point and Remove point Buttons do the same from the keyboard: Add inserts a point halfway between the focused point and the next, Remove drops the focused inner point.
 
-Spring rows (mass, stiffness, damping, velocity) and parametric rows (power exponent, back overshoot, elastic amplitude and period, steps count) show a Label, a Slider and a value field under the NumberField behavior; the Bézier control points have no rows: they are edited on the graph and in the expression field. The family and direction themselves come from the presets. Slider drags propose once per frame and commit on release; Escape during a Slider drag restores the pre-drag value, as the graph does.
+Spring rows (mass, stiffness, damping, velocity) and parametric rows (power exponent, back overshoot, elastic amplitude and period, steps count) are inline Sliders with the name and value inside the bar: a click on the value, or Enter or F2 on the thumb, types it, clamped to the range and snapped to the step; the Bézier control points have no rows: they are edited on the graph and in the expression field. The family and direction themselves come from the presets. Slider drags propose once per frame and commit on release; Escape during a Slider drag restores the pre-drag value, as the graph does.
 
 The curve model is exported from `@tweakpad/ui/widgets`: `parseEasingCurve`, `serializeEasingCurve`, `easingFunction`, `sampleEasing`, `toCssEasing`, `convertEasingCurve`, `springSettleTime` and the record types.
 
@@ -64,7 +64,7 @@ document.querySelector('#easing-dialog-trigger').addEventListener('click', () =>
 
 ### Duration and preview
 
-`duration` is the time in seconds that the preview, the frames bar and the exports use; `duration-min`, `duration-max` and `duration-step` set the range of its Slider. `timing="false"` hides the row and drops the time from the CSS export. `preview` picks what animates behind the graph: `scale` (the default), `scale-x`, `scale-y`, `rotation` or `none`.
+`duration` is the time in seconds that the preview, the frames bar and the exports use; `duration-min`, `duration-max` and `duration-step` set the range of its Slider. `timing="false"` hides the row and drops the time from the CSS export. `preview` picks what animates behind the graph: `scale` (the default), `scale-x`, `scale-y`, `rotation` or `none`. A scale preview of a curve that overshoots ends smaller than the graph, so the peak of the overshoot reaches the graph's edge.
 
 <Preview
   title="Rotation preview"
@@ -73,11 +73,11 @@ document.querySelector('#easing-dialog-trigger').addEventListener('click', () =>
 
 The frames bar under the graph draws 40 ticks at the eased positions, so they bunch where the motion is slow. `frames="false"` hides it, `preview-controls="false"` hides the play and preview mode Buttons, and `preset-picker="false"` removes the presets for a curve that should only be tuned by hand.
 
-With `previewControls` (default true) a Button in the header shows the current mode and cycles to the next one on each press, replaying the preview. The preview replays on every settled change (a release, a key, a field commit, a preset, a conversion), on every settled duration change (a Slider release or key, a field commit, a time typed in the expression field) and on the play Button, running for the duration with the CSS easing through the motion role `preview`. Under reduced motion it completes without motion and the frames bar remains the timing reference.
+With `previewControls` (default true) a Button in the header shows the current mode and cycles to the next one on each press, replaying the preview. The preview replays on every settled change (a release, a key, a typed value, a preset, a conversion), on every settled duration change (a Slider release, key or typed value, a time typed in the expression field) and on the play Button, running for the duration with the CSS easing through the motion role `preview`. Under reduced motion it completes without motion and the frames bar remains the timing reference.
 
 ### Presets
 
-Presets are a property, set from data. Each group becomes a section of tiles with a thumbnail of the curve; the tile whose value matches the current curve stays pressed. The preset picker lists the built-in table (Basic, Spring, and one group per easing family with its four directions) or the groups supplied through `presets`. Pressing a tile proposes and commits with `item-press` (`keyboard` from the keyboard) and `presetId` in the metadata, and restarts the preview from the start, also when the tile is already the current one.
+Presets are a property, set from data. Each group becomes a section of tiles with a thumbnail of the curve; the tile whose value matches the current curve stays pressed. The preset picker lists the built-in table (Basic, shown first without a heading, Spring, and one group per easing family, its tiles named by direction: In, Out, In-Out, Out-In) or the groups supplied through `presets`. Pressing a tile proposes and commits with `item-press` (`keyboard` from the keyboard) and `presetId` in the metadata, and restarts the preview from the start, also when the tile is already the current one.
 
 <Preview
   title="Design system presets"
@@ -202,8 +202,8 @@ The editor is a form control: the canonical string submits under `name`, `requir
 
 ### Keyboard
 
-Every handle and point has a Time and a Progression range input: arrows step by 0.01, Shift, Control or Meta with an arrow and Page Up or Page Down by 0.1, Alt with an arrow by 0.001, Home and End reach the bounds of the focused axis (0–1 for time, −1 to 2 for progression). The time axis does not mirror in right-to-left writing. Keyboard changes commit immediately. The Tabs, Toggle groups, Selects, Sliders and fields keep their own keyboard contracts.
+Every handle and point has a Time and a Progression range input: arrows step by 0.01, Shift, Control or Meta with an arrow and Page Up or Page Down by 0.1, Alt with an arrow by 0.001, Home and End reach the bounds of the focused axis (0–1 for time, −1 to 2 for progression). The time axis does not mirror in right-to-left writing. Keyboard changes commit immediately. The Tabs, Toggle groups, Selects, Sliders and the expression field keep their own keyboard contracts.
 
 ### Constituents and accessibility
 
-The root is a group named by `label` (default "Easing"). Handle and point inputs are sliders named `Label: Control point 1 Time` or `Label: Point 2 Progression` with three-decimal value text; the graph is a group, the frames bar an image, the preview shape hidden. Presets are toggles named by the preset, one roving stop per group. Focus order: header (Tabs, play, preview mode Button, presets Toggle), presets in the extended layout, graph inputs, controls, duration, footer (adapter, output, Copy). `strings` overrides every visible and accessible name; `locale` formats the fields.
+The root is a group named by `label` (default "Easing"). Handle and point inputs are sliders named `Label: Control point 1 Time` or `Label: Point 2 Progression` with three-decimal value text; the graph is a group, the frames bar an image, the preview shape hidden. Presets are toggles named by the preset, one roving stop per group. Focus order: header (Tabs, play, preview mode Button, presets Toggle), presets in the extended layout, graph inputs, controls, duration, footer (adapter, output, Copy). `strings` overrides every visible and accessible name; `locale` formats the Slider values.

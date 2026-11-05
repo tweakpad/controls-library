@@ -9,6 +9,8 @@ export interface PresetGroupOptions {
   readonly selected: string | null;
   readonly disabled: boolean;
   readonly readOnly: boolean;
+  /** The first group shows no heading, so its tiles start level with the graph. */
+  readonly hideFirstHeading?: boolean;
   readonly onChange: (event: TpValueChangeEvent<readonly string[]>) => void;
 }
 
@@ -33,7 +35,7 @@ export function renderPresetGroups(
   groups: readonly EasingPresetGroup[],
   options: PresetGroupOptions,
 ) {
-  return groups.map((group) => {
+  return groups.map((group, index) => {
     const items = group.presets.map((preset) => {
       const points = presetThumbnail(preset.value);
       if (!points) return nothing;
@@ -50,8 +52,11 @@ export function renderPresetGroups(
       >`;
     });
     return html`<div class="preset-group" part="easing-editor-preset-group" data-group=${group.id}>
-      <tp-label class="heading">${group.label}</tp-label
-      ><tp-toggle-group
+      ${
+        options.hideFirstHeading && index === 0
+          ? nothing
+          : html`<tp-label class="heading">${group.label}</tp-label>`
+      }<tp-toggle-group
         class="presets"
         variant="outline"
         .spacing=${1}

@@ -145,7 +145,7 @@ describe('easing editor presets and adapters', () => {
     expect(presets).toHaveLength(38);
     expect(new Set(presets.map((preset) => preset.id)).size).toBe(38);
     for (const preset of presets) expect(parseEasingCurve(preset.value), preset.id).not.toBeNull();
-    expect(presets.find((preset) => preset.id === 'sine-in-out')?.label).toBe('Sine in-out');
+    expect(presets.find((preset) => preset.id === 'sine-in-out')?.label).toBe('In-Out');
   });
 
   it('formats the CSS adapter with and without the duration', () => {

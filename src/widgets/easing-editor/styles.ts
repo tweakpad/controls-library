@@ -202,8 +202,8 @@ export const easingEditorStyles = css`
     z-index: 1;
   }
 
+  /* The duration row is a .parameter; its Slider carries the duration class too. */
   .controls,
-  .duration,
   .footer-row {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -212,13 +212,8 @@ export const easingEditorStyles = css`
 
   .parameter {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: end;
+    grid-template-columns: minmax(0, 1fr);
     min-inline-size: 0;
-  }
-
-  .parameter > .field {
-    inline-size: calc(var(--tp-spacing) * 20);
   }
 
   .selectors {
@@ -257,16 +252,17 @@ export const easingEditorStyles = css`
     min-inline-size: 0;
   }
 
-  .field tp-input {
-    inline-size: 100%;
-  }
-
   tp-easing-editor-frames {
     display: block;
     block-size: var(--_tp-easing-editor-frames, var(--tp-space-3));
   }
 
   .footer:not(:has(*)) {
+    display: none;
+  }
+
+  /* A Bézier curve has no parameter rows: the empty row takes no gap of the column. */
+  .controls:not(:has(*)) {
     display: none;
   }
 
@@ -347,6 +343,15 @@ export const easingSurfaceStyles = css`
     inline-size: 100%;
     block-size: 100%;
     will-change: transform;
+  }
+
+  /* A scale preview ends smaller by the curve's overshoot, so its peak meets the graph's edge. */
+  .preview-layer:is([data-mode='scale'], [data-mode='scale-x']) > .shape {
+    inline-size: calc(100% / var(--_tp-easing-editor-preview-extent, 1));
+  }
+
+  .preview-layer:is([data-mode='scale'], [data-mode='scale-y']) > .shape {
+    block-size: calc(100% / var(--_tp-easing-editor-preview-extent, 1));
   }
 
   .handle,

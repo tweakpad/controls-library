@@ -35,7 +35,14 @@ import { previewKeyframes } from '../preview.js';
 import { DEFAULT_STRINGS, resolveStrings } from '../strings.js';
 import { easingSurfaceStyles } from '../styles.js';
 import type { EasingEditorStrings, EasingPreviewMode } from '../types.js';
-import { axisAt, axisFraction, curvePolyline, curveRange, shownCurve } from './geometry.js';
+import {
+  axisAt,
+  axisFraction,
+  curvePolyline,
+  curveRange,
+  previewExtent,
+  shownCurve,
+} from './geometry.js';
 
 /** What the graph proposes to its owner: a whole record, the cause and the commit policy. */
 export interface EasingSurfaceChangeDetail {
@@ -128,6 +135,8 @@ export class TpEasingEditorGraph extends TpElement {
   /** The latest drag position and the unclamped value it maps to. */
   #latest: DragAnchor | undefined;
   #range: ProgressionRange = { min: 0, max: 1 };
+  /** The curve's furthest progression (at least 1): the scale previews leave room for it. */
+  #previewExtent = 1;
 
   /** The widget hosting this surface, for axis resolution of the shared family. */
   get presentationOwner(): HTMLElement | null {
@@ -606,6 +615,7 @@ export class TpEasingEditorGraph extends TpElement {
 
   protected override willUpdate(changed: PropertyValues<this>): void {
     super.willUpdate(changed);
+    if (changed.has('curve')) this.#previewExtent = previewExtent(this.curve);
     if (changed.has('curve') || changed.has('shownRange')) {
       const range = this.shownRange ?? curveRange(this.curve);
       // A zoom during a drag re-anchors at the latest position, so the value under a still
@@ -806,6 +816,7 @@ export class TpEasingEditorGraph extends TpElement {
               'aria-hidden': 'true',
               'data-mode': this.preview,
               'data-playing': this.#playing,
+              style: { '--_tp-easing-editor-preview-extent': String(this.#previewExtent) },
             },
             content: html`<span ${bindPart({ class: 'shape' }, [this.#shapeReference])}></span>`,
           });

@@ -1,5 +1,5 @@
 import { EASING_DIRECTIONS } from '../../foundation/easing/types.js';
-import type { EasingEditorStrings, EasingPresetGroup } from './types.js';
+import type { EasingEditorStrings, EasingPreset, EasingPresetGroup } from './types.js';
 
 const DIRECTION_NAME: Readonly<Record<string, keyof EasingEditorStrings>> = {
   in: 'directionIn',
@@ -18,6 +18,23 @@ const FAMILIES: ReadonlyArray<readonly [string, keyof EasingEditorStrings]> = [
   ['bounce', 'familyBounce'],
 ];
 
+const FAMILY_GROUP_IDS: ReadonlySet<string> = new Set(FAMILIES.map(([family]) => family));
+const EASE_DIRECTION_IDS: ReadonlySet<string> = new Set(['ease-in', 'ease-out', 'ease-in-out']);
+
+/**
+ * The full name of a built-in preset, for places away from its group (the graph badge): the
+ * family presets and the CSS ease directions are named by their direction alone in the grid.
+ */
+export function builtinPresetTitle(
+  group: EasingPresetGroup,
+  preset: EasingPreset,
+  strings: EasingEditorStrings,
+): string {
+  if (FAMILY_GROUP_IDS.has(group.id)) return `${group.label} ${preset.label}`;
+  if (EASE_DIRECTION_IDS.has(preset.id)) return `${strings.presetEase} ${preset.label}`;
+  return preset.label;
+}
+
 /**
  * The built-in preset table (Widgets 6.2 Properties): basic CSS easings, four springs and one
  * group per classic easing family with the four directions. Labels come from the strings so a locale
@@ -29,7 +46,8 @@ export function builtinPresetGroups(strings: EasingEditorStrings): readonly Easi
     label: strings[name],
     presets: EASING_DIRECTIONS.map((direction) => ({
       id: `${family}-${direction}`,
-      label: `${strings[name]} ${strings[DIRECTION_NAME[direction]!].toLowerCase()}`,
+      // The group already names the family: each preset is named by its direction alone.
+      label: strings[DIRECTION_NAME[direction]!],
       value: `${family}(${direction})`,
     })),
   }));

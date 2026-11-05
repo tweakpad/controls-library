@@ -418,7 +418,7 @@ export async function assertKinds(): Promise<Report> {
   const badge = () => root.querySelector('tp-badge.badge')?.textContent?.trim();
   target.setValue('ease-in');
   await settle(target);
-  checks.push(check('a preset value names the preset', badge() === 'Ease in', badge()));
+  checks.push(check('a preset value names the preset', badge() === 'Ease In', badge()));
   target.setValue('cubic-bezier(0.42, 0.1, 1, 1)');
   await settle(target);
   checks.push(check('a manual curve reads as Custom', badge() === 'Custom', badge()));
@@ -582,7 +582,7 @@ export async function assertPresets(): Promise<Report> {
   };
   checks.push(check('current preset tile is pressed', pressed?.pressed === true, pressed?.pressed));
   const title = root.querySelector('tp-badge.badge')!.textContent?.trim();
-  checks.push(check('badge shows the preset name', title === 'Ease out', title));
+  checks.push(check('badge shows the preset name', title === 'Ease Out', title));
   const captured = capture(target, LANES);
   pressToggle(root.querySelector('tp-toggle.preset[value="bounce-out"]')!);
   await settle(target);
@@ -611,7 +611,7 @@ export async function assertPresets(): Promise<Report> {
     ),
   );
   const newTitle = root.querySelector('tp-badge.badge')!.textContent?.trim();
-  checks.push(check('badge follows the preset', newTitle === 'Bounce out', newTitle));
+  checks.push(check('badge follows the preset', newTitle === 'Bounce Out', newTitle));
   // The replay after a pick runs the picked easing, not the previous one.
   {
     const shape = graphOf(target).shadowRoot.querySelector<HTMLElement>('.shape')!;

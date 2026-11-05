@@ -113,6 +113,8 @@ export const easingEditorAppearance: PresentationDictionary = {
   ],
   'easing-editor-preset-thumb': [
     { declarations: { color: 'var(--tp-primary)' } },
+    // The selected preset's fill is the primary hue: its curve takes the pressed foreground.
+    { selector: '[data-pressed] > &', declarations: { color: 'var(--tp-pressed-foreground)' } },
     {
       selector: '& .thumb-box',
       declarations: { fill: 'none', stroke: floatEdge.color, 'stroke-width': '1px' },
@@ -263,7 +265,6 @@ export const easingEditorStructure: PresentationDictionary = {
   'easing-editor-controls': [{ declarations: { gap: 'var(--tp-space-2)' } }],
   'easing-editor-parameter': [{ declarations: { gap: 'var(--tp-space-2)' } }],
   'easing-editor-duration': [{ declarations: { gap: 'var(--tp-space-2)' } }],
-  'easing-editor-field': [{ declarations: { 'min-inline-size': 'calc(var(--tp-spacing) * 14)' } }],
   'easing-editor-frames': [{ declarations: { 'block-size': '100%' } }],
   'easing-editor-footer': [
     { declarations: { display: 'flex', 'justify-content': 'flex-end', gap: 'var(--tp-space-2)' } },

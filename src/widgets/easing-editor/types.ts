@@ -21,8 +21,7 @@ export const EASING_PREVIEW_CYCLE: readonly EasingPreviewMode[] = [
   'scale-y',
   'rotation',
 ];
-export type EasingEditorSurface =
-  'graph' | 'slider' | 'field' | 'preset' | 'tabs' | 'point' | 'expression';
+export type EasingEditorSurface = 'graph' | 'slider' | 'preset' | 'tabs' | 'point' | 'expression';
 
 /** One preset of the picker: a name and a canonical easing string. */
 export interface EasingPreset {

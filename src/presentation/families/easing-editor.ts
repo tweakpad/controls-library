@@ -112,9 +112,9 @@ const definition: ComponentDefinition = {
     {
       name: 'easing-editor-parameter',
       axes: ['size'],
-      description: 'One parameter row: a Label, a Slider and a value field.',
+      description: 'One parameter row: an inline Slider whose value can be typed.',
     },
-    { name: 'easing-editor-slider', axes: ['size'], description: 'A parameter Slider.' },
+    { name: 'easing-editor-slider', axes: ['size'], description: 'A parameter inline Slider.' },
     {
       name: 'easing-editor-slider-track',
       axes: ['size'],
@@ -129,11 +129,6 @@ const definition: ComponentDefinition = {
       name: 'easing-editor-slider-thumb',
       axes: ['size'],
       description: "A parameter Slider's thumb.",
-    },
-    {
-      name: 'easing-editor-field',
-      axes: ['size'],
-      description: 'A numeric value field beside a Slider.',
     },
     {
       name: 'easing-editor-add-point',
@@ -209,7 +204,6 @@ export const easingEditorPresentation = definePresentation({
       '[part~="easing-editor-controls"]': 'easing-editor-controls',
       '[part~="easing-editor-parameter"]': 'easing-editor-parameter',
       'tp-slider.parameter-slider': 'easing-editor-slider',
-      '[part~="easing-editor-field"]': 'easing-editor-field',
       'tp-button.add-point': 'easing-editor-add-point',
       'tp-button.remove-point': 'easing-editor-remove-point',
       '[part~="easing-editor-duration"]': 'easing-editor-duration',

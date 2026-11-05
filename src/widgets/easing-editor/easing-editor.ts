@@ -5,16 +5,13 @@ import { ControllableState } from '../../foundation/controllable-state.js';
 import { TpValueChangeEvent, TpValueCommitEvent } from '../../foundation/events.js';
 import type { ChangeReason, ValueChangeDetail } from '../../foundation/types.js';
 import { defaultTrue } from '../../foundation/converters.js';
-import { CleanupScope } from '../../foundation/services.js';
 import { containNestedEvents } from '../../foundation/nested-events.js';
 import { surfaceInteraction } from '../../foundation/surface-focus.js';
 import type { CustomElementConstructorWithTag } from '../../foundation/define.js';
-import { NumberFieldController } from '../../foundation/number-field/controller.js';
 import { setPartComposition } from '../../presentation/controller.js';
 import { easingEditorPresentation } from '../../presentation/families/easing-editor.js';
 import { TpSlider } from '../../components/slider/slider.js';
 import type { SliderValue } from '../../components/slider/types.js';
-import { TpInput } from '../../components/input/input.js';
 import { TpInputGroup } from '../../components/input-group/input-group.js';
 import { TpSelect } from '../../components/select/select.js';
 import { TpButton } from '../../components/button/button.js';
@@ -49,7 +46,7 @@ import {
   withEasingParameter,
   type EasingParameter,
 } from './parameters.js';
-import { builtinPresetGroups } from './presets.js';
+import { builtinPresetGroups, builtinPresetTitle } from './presets.js';
 import { resolveStrings } from './strings.js';
 import { easingEditorStyles } from './styles.js';
 import {
@@ -94,15 +91,6 @@ interface ImmediateCommit {
   readonly source: Event | undefined;
   readonly previous: string;
   readonly metadata: EasingEditorChangeMetadata;
-}
-interface NumberFieldBinding {
-  readonly controller: NumberFieldController;
-  readonly root: HTMLElement;
-  readonly input: TpInput;
-  readonly scope: CleanupScope;
-  readonly key: string;
-  definition: EasingParameterDefinition;
-  previous: string | null;
 }
 interface ProposeOptions {
   readonly immediate?: boolean;
@@ -186,7 +174,6 @@ export class TpEasingEditor extends TpFormElement<string> {
       TpEasingEditorExpression,
       TpBadge,
       TpSlider,
-      TpInput,
       TpInputGroup,
       TpSelect,
       TpButton,
@@ -312,7 +299,6 @@ export class TpEasingEditor extends TpFormElement<string> {
   #playing = false;
   #suppressedSlider: TpSlider | null = null;
   #sliderReason: 'track-press' | 'drag' | undefined;
-  #numberFields = new Map<string, NumberFieldBinding>();
   #registeredParts = new Map<Element, () => void>();
   #composed = new WeakSet<Element>();
   #composition: object | undefined;
@@ -511,8 +497,6 @@ export class TpEasingEditor extends TpFormElement<string> {
   override disconnectedCallback(): void {
     this.#dragSnapshot = undefined;
     this.#suppressedSlider = null;
-    for (const binding of this.#numberFields.values()) this.#disposeField(binding);
-    this.#numberFields.clear();
     for (const release of this.#registeredParts.values()) release();
     this.#registeredParts.clear();
     cancelMotions(this);
@@ -552,7 +536,6 @@ export class TpEasingEditor extends TpFormElement<string> {
     this.toggleAttribute('data-presets-open', this.layout === 'compact' && this.presetsOpen);
     this.setFormValue(this.value || null, this.value);
     this.setRequiredValidity(this.required && !this.value, this.#strings.valueMissing);
-    this.#syncNumberFields();
     this.#syncComposition();
     void this.#registerNestedParts();
     this.#syncRange();
@@ -1007,77 +990,6 @@ export class TpEasingEditor extends TpFormElement<string> {
     this.#replayPreview();
   };
 
-  // ---- fields --------------------------------------------------------------------------------
-
-  #fieldChange(binding: NumberFieldBinding, event: TpValueChangeEvent<number | null>): void {
-    if (event.target !== binding.input) return;
-    event.stopPropagation();
-    const { value, reason, sourceEvent } = event.detail;
-    if (value === null) return;
-    const clamped = clampParameter(binding.definition, value);
-    if (binding.key === 'duration') {
-      const next = this.#clampDuration(clamped);
-      const accepted = this.#durationState.set(next, reason, sourceEvent);
-      if (!accepted && this.duration !== next) {
-        event.preventDefault();
-        return;
-      }
-      binding.controller.update({ value: this.duration });
-      return;
-    }
-    const curve = this.#curve;
-    if (!curve) return;
-    if (binding.previous === null) binding.previous = this.value;
-    const accepted = this.#proposeCurve(
-      withEasingParameter(curve, binding.definition.key, clamped),
-      reason,
-      sourceEvent,
-      { surface: 'field', parameter: binding.definition.key },
-    );
-    if (!accepted) {
-      event.preventDefault();
-      return;
-    }
-    // Accept the controlled field proposal synchronously so the NumberField keeps editing.
-    binding.controller.update({ value: clamped });
-  }
-
-  #fieldCommit(binding: NumberFieldBinding, event: TpValueCommitEvent<number | null>): void {
-    if (event.target !== binding.input) return;
-    event.stopPropagation();
-    if (binding.key === 'duration') {
-      // A committed duration replays the preview, as a committed curve does.
-      this.#replayPreview();
-      return;
-    }
-    const previous = binding.previous ?? this.value;
-    binding.previous = null;
-    this.#emitCommit(
-      this.value,
-      previous,
-      event.detail.reason,
-      event.detail.sourceEvent,
-      this.#metadata({ surface: 'field', parameter: binding.definition.key }),
-    );
-  }
-
-  #fieldOptions(definition: EasingParameterDefinition, current: number) {
-    // The Number field's step is its validity grid: never coarser than the display precision.
-    const step = Math.min(definition.step, 10 ** -definition.precision);
-    return {
-      value: Number(formatParameter(definition, current)),
-      minimum: definition.min,
-      maximum: definition.max,
-      step,
-      smallStep: Math.min(definition.smallStep, step),
-      largeStep: definition.largeStep,
-      format: { maximumFractionDigits: definition.precision, useGrouping: false },
-      ...(this.locale ? { locale: this.locale } : {}),
-      disabled: this.effectiveDisabled,
-      readOnly: this.readOnly,
-    };
-  }
-
   #durationDefinition(): EasingParameterDefinition {
     const precision = Math.max(0, Math.min(4, Math.ceil(-Math.log10(this.durationStep || 0.01))));
     return {
@@ -1090,81 +1002,6 @@ export class TpEasingEditor extends TpFormElement<string> {
       precision,
       default: 0.7,
     };
-  }
-
-  #definitionByKey(key: string): [EasingParameterDefinition, number] | undefined {
-    if (key === 'duration') return [this.#durationDefinition(), this.duration];
-    // Field keys are scoped (`param:x1`) so the duration field never collides with a parameter.
-    const bare = key.startsWith('param:') ? key.slice('param:'.length) : key;
-    const parameter = easingParameters(this.#curve).find((entry) => entry.definition.key === bare);
-    return parameter ? [parameter.definition, parameter.value] : undefined;
-  }
-
-  #syncNumberFields(): void {
-    for (const [key, binding] of this.#numberFields)
-      if (
-        !binding.input.isConnected ||
-        binding.root.dataset.numberField !== key ||
-        binding.root.querySelector('tp-input') !== binding.input
-      ) {
-        this.#disposeField(binding);
-        this.#numberFields.delete(key);
-      }
-    for (const root of this.renderRoot.querySelectorAll<HTMLElement>('[data-number-field]')) {
-      const key = root.dataset.numberField!;
-      const resolved = this.#definitionByKey(key);
-      const input = root.querySelector<TpInput>('tp-input');
-      if (!resolved || !input) continue;
-      const [definition, current] = resolved;
-      const binding = this.#numberFields.get(key);
-      if (binding) {
-        binding.definition = definition;
-        const { value, ...options } = this.#fieldOptions(definition, current);
-        binding.controller.update(
-          Object.is(binding.controller.value, value) ? options : { ...options, value },
-        );
-        continue;
-      }
-      if (!input.hasUpdated) {
-        void input.updateComplete.then(() => this.requestUpdate());
-        continue;
-      }
-      const scope = new CleanupScope();
-      const controller = new NumberFieldController(
-        root,
-        input,
-        this.#fieldOptions(definition, current),
-      );
-      const created: NumberFieldBinding = {
-        controller,
-        root,
-        input,
-        scope,
-        key,
-        definition,
-        previous: null,
-      };
-      const group =
-        root.localName === 'tp-input-group'
-          ? root
-          : root.querySelector<HTMLElement>('tp-input-group');
-      if (group) scope.add(controller.registerGroup(group).dispose);
-      scope.listen(input, 'tp-value-change' as keyof GlobalEventHandlersEventMap, (event) =>
-        this.#fieldChange(created, event as unknown as TpValueChangeEvent<number | null>),
-      );
-      scope.listen(input, 'tp-value-commit' as keyof GlobalEventHandlersEventMap, (event) =>
-        this.#fieldCommit(created, event as unknown as TpValueCommitEvent<number | null>),
-      );
-      scope.listen(input, 'tp-field-value' as keyof GlobalEventHandlersEventMap, (event) =>
-        event.stopPropagation(),
-      );
-      this.#numberFields.set(key, created);
-    }
-  }
-
-  #disposeField(binding: NumberFieldBinding): void {
-    binding.scope.dispose();
-    binding.controller.dispose();
   }
 
   // ---- kinds, presets, selectors -------------------------------------------------------------
@@ -1472,8 +1309,14 @@ export class TpEasingEditor extends TpFormElement<string> {
     const curve = this.#curve;
     if (!curve) return strings.empty;
     const id = this.presetId;
-    const preset = id ? this.#presetById(id) : undefined;
-    return preset ? preset.label : strings.kindCustom;
+    if (!id) return strings.kindCustom;
+    for (const group of this.#presetGroups()) {
+      const preset = group.presets.find((entry) => entry.id === id);
+      if (!preset) continue;
+      // A built-in preset named by its direction alone needs its family away from its group.
+      return this.presets.length ? preset.label : builtinPresetTitle(group, preset, strings);
+    }
+    return strings.kindCustom;
   }
 
   /** The matching preset's name (or the kind) floats over the graph's bottom-right corner. */
@@ -1567,6 +1410,8 @@ export class TpEasingEditor extends TpFormElement<string> {
       selected: this.presetId,
       disabled: this.effectiveDisabled,
       readOnly: this.readOnly,
+      // The built-in table opens with the basic easings, which need no heading.
+      hideFirstHeading: !this.presets.length,
       onChange: this.#presetChange,
     });
     return this.renderPart(
@@ -1669,9 +1514,9 @@ export class TpEasingEditor extends TpFormElement<string> {
           class: 'parameter',
           'data-parameter': definition.key,
         },
-        content: html`${this.#renderSlider(definition, value, name, (event) =>
+        content: this.#renderSlider(definition, value, name, (event) =>
           this.#sliderChange(parameter, event),
-        )}${this.#renderField(`param:${definition.key}`, name)}`,
+        ),
       },
     );
   }
@@ -1682,10 +1527,14 @@ export class TpEasingEditor extends TpFormElement<string> {
     name: string,
     onChange: (event: TpValueChangeEvent<SliderValue | undefined>) => void,
     extra: Record<string, unknown> = {},
+    unit: Intl.NumberFormatOptions = {},
   ) {
     const label = this.#dimensionLabel(name);
     return html`<tp-slider
       class=${`parameter-slider ${definition.key}`}
+      variant="inline"
+      editable-value
+      .copyable=${false}
       exportparts="slider-track: easing-editor-slider-track, slider-range: easing-editor-slider-range, slider-thumb: easing-editor-slider-thumb"
       label=${name}
       thumb-alignment="edge"
@@ -1693,6 +1542,8 @@ export class TpEasingEditor extends TpFormElement<string> {
       .maximum=${definition.max}
       .step=${definition.step}
       .largeStep=${definition.largeStep}
+      .format=${{ ...unit, maximumFractionDigits: definition.precision, useGrouping: false }}
+      .locale=${this.locale}
       .formAssociatedValue=${false}
       .value=${Number(formatParameter(definition, current))}
       .getAccessibleLabel=${() => label}
@@ -1709,19 +1560,6 @@ export class TpEasingEditor extends TpFormElement<string> {
     ></tp-slider>`;
   }
 
-  /** One editor: the Input group host is the field part and the NumberField root. */
-  #renderField(key: string, name: string, suffix?: string) {
-    return html`<tp-input-group class="field" part="easing-editor-field" data-number-field=${key}
-      ><tp-input
-        mono
-        label=${this.#dimensionLabel(name)}
-        ?disabled=${this.effectiveDisabled}
-        ?readonly=${this.readOnly}
-      ></tp-input
-      >${suffix ? html`<span slot="suffix">${suffix}</span>` : nothing}</tp-input-group
-    >`;
-  }
-
   #renderDuration() {
     if (!this.timing) return nothing;
     const strings = this.#strings;
@@ -1736,15 +1574,14 @@ export class TpEasingEditor extends TpFormElement<string> {
           class: 'duration parameter',
           'data-parameter': 'duration',
         },
-        content: html`${this.#renderSlider(
+        content: this.#renderSlider(
           definition,
           this.duration,
           strings.duration,
           this.#durationSliderChange,
-          {
-            '@tp-value-commit': this.#durationSliderCommit,
-          },
-        )}${this.#renderField('duration', strings.duration, strings.seconds)}`,
+          { '@tp-value-commit': this.#durationSliderCommit },
+          { style: 'unit', unit: 'second', unitDisplay: 'narrow' },
+        ),
       },
     );
   }
