@@ -1,6 +1,7 @@
 // `@tweakpad/ui/widgets`: widget classes, types, the widget catalog and the widget presentation
 // aggregates. Registration lives in `@tweakpad/ui/register/widgets`. One line per widget folder,
 // alphabetical, mirroring `src/components/index.ts`:
+export * from './color-gradient-input/index.js';
 export * from './color-picker/index.js';
 export * from './easing-editor/index.js';
 export * from './emoji-picker/index.js';

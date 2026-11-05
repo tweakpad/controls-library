@@ -199,6 +199,7 @@ import {
   VisuallyHidden,
 } from '../../../src/react/index.js';
 import {
+  ColorGradientInput,
   ColorPicker,
   EasingEditor,
   EmojiPicker,
@@ -429,6 +430,7 @@ import type { TpTooltip as TpTooltipType } from '../../../src/components/tooltip
 import type { TpTreeItem as TpTreeItemType } from '../../../src/components/tree-view/tree-item.js';
 import type { TpTreeView as TpTreeViewType } from '../../../src/components/tree-view/tree-view.js';
 import type { TpVisuallyHidden as TpVisuallyHiddenType } from '../../../src/components/visually-hidden/visually-hidden.js';
+import type { TpColorGradientInput as TpColorGradientInputType } from '../../../src/widgets/color-gradient-input/color-gradient-input.js';
 import type { TpColorPicker as TpColorPickerType } from '../../../src/widgets/color-picker/color-picker.js';
 import type { TpEasingEditor as TpEasingEditorType } from '../../../src/widgets/easing-editor/easing-editor.js';
 import type { TpEmojiPicker as TpEmojiPickerType } from '../../../src/widgets/emoji-picker/emoji-picker.js';
@@ -654,6 +656,7 @@ export const elements: ReactElement[] = [
   <TreeItem ref={(element: TpTreeItemType | null) => void element} />,
   <TreeView ref={(element: TpTreeViewType<never> | null) => void element} />,
   <VisuallyHidden ref={(element: TpVisuallyHiddenType | null) => void element} />,
+  <ColorGradientInput ref={(element: TpColorGradientInputType | null) => void element} />,
   <ColorPicker ref={(element: TpColorPickerType | null) => void element} />,
   <EasingEditor ref={(element: TpEasingEditorType | null) => void element} />,
   <EmojiPicker ref={(element: TpEmojiPickerType | null) => void element} />,

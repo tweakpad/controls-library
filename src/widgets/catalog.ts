@@ -12,6 +12,7 @@ type WidgetTuple = readonly [WidgetEntry['name'], `tp-${string}`, WidgetEntry['k
 /** Public widgets in sidebar order: `[name, tag, kind]`. */
 export const widgetCatalog = [
   ['Color picker', 'tp-color-picker', 'flattening-compound'],
+  ['Color gradient input', 'tp-color-gradient-input', 'flattening-compound'],
   ['Easing editor', 'tp-easing-editor', 'flattening-compound'],
   ['Flow', 'tp-flow', 'flattening-compound'],
   ['Emoji picker', 'tp-emoji-picker', 'flattening-compound'],

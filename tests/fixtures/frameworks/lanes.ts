@@ -390,6 +390,21 @@ export const laneRows: LaneRow[] = [
     settle: 400,
   },
   {
+    entry: 'tp-color-gradient-input',
+    binding: 'ColorGradientInput',
+    lane: 'value',
+    initial: [
+      { position: 0, color: '#1d4ed8' },
+      { position: 1, color: '#60a5fa' },
+    ],
+    propose: call('setValue', [
+      { position: 0, color: '#1d4ed8' },
+      { position: 0.5, color: '#5eead4' },
+      { position: 1, color: '#60a5fa' },
+    ]),
+    props: { label: 'Fill' },
+  },
+  {
     entry: 'tp-easing-editor',
     binding: 'EasingEditor',
     lane: 'value',

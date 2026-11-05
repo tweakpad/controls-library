@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Color gradient input verification</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      body {
+        margin: 0;
+        background: var(--tp-background);
+        color: var(--tp-foreground);
+        font-family: var(--tp-font-sans);
+      }
+      main {
+        margin: 24px auto;
+        padding: 20px;
+        max-width: 560px;
+        display: grid;
+        gap: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Color gradient input verification</h1>
+      <tp-button id="before" variant="outline">Before</tp-button>
+      <tp-color-gradient-input
+        id="default"
+        label="Fill"
+        default-selected="1"
+        default-value='[{"position":0,"color":"#1d4ed8"},{"position":0.45,"color":"#5eead4"},{"position":0.75,"color":"#2563eb"},{"position":1,"color":"#60a5fa"}]'
+      ></tp-color-gradient-input>
+      <form id="form">
+        <tp-color-gradient-input
+          id="field"
+          name="ramp"
+          label="Ramp"
+          default-value='[{"position":0,"color":"#000000"},{"position":1,"color":"#ffffff"}]'
+        ></tp-color-gradient-input>
+        <tp-button id="reset" type="reset" variant="outline">Reset</tp-button>
+      </form>
+      <tp-color-gradient-input
+        id="rtl"
+        dir="rtl"
+        label="Mirrored"
+        default-value='[{"position":0,"color":"#0f172a","midpoint":0.2},{"position":1,"color":"#e2e8f0"}]'
+      ></tp-color-gradient-input>
+      <tp-color-gradient-input
+        id="sm"
+        size="sm"
+        label="Small"
+        default-value='[{"position":0,"color":"#facc15"},{"position":1,"color":"rgb(250 204 21 / 0)"}]'
+      ></tp-color-gradient-input>
+      <tp-color-gradient-input
+        id="readonly"
+        readonly
+        label="Read-only"
+        default-value='[{"position":0,"color":"#22c55e"},{"position":1,"color":"#3b82f6"}]'
+      ></tp-color-gradient-input>
+      <tp-color-gradient-input
+        id="disabled"
+        disabled
+        label="Disabled"
+        default-value='[{"position":0,"color":"#22c55e"},{"position":1,"color":"#3b82f6"}]'
+      ></tp-color-gradient-input>
+      <tp-button id="after" variant="outline">After</tp-button>
+    </main>
+    <script type="module" src="./fixture.ts"></script>
+  </body>
+</html>

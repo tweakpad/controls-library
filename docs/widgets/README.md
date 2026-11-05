@@ -45,6 +45,7 @@ of a canvas.
 
 ## Published widgets
 
+- [Color gradient input](color-gradient-input.mdx): `tp-color-gradient-input`.
 - [Color picker](color-picker.mdx): `tp-color-picker`.
 - [Easing editor](easing-editor.mdx): `tp-easing-editor`.
 - [Emoji picker](emoji-picker.mdx): `tp-emoji-picker`, with the data helpers in `@tweakpad/ui/emoji`.
