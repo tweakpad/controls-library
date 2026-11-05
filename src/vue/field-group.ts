@@ -19,7 +19,8 @@ export const FieldGroup = /*#__PURE__*/ createBinding(TpFieldGroup, 'FieldGroup'
   | 'partContracts'
   | 'partPresentation'
   | 'readOnly'
-  | 'required',
+  | 'required'
+  | 'variant',
   {
     'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
   }

@@ -3,6 +3,7 @@ import { html } from 'lit';
 import { libraryDocs } from './library-docs.js';
 
 interface FieldGroupStoryArgs {
+  variant: 'default' | 'inline';
   orientation: 'horizontal' | 'vertical';
   joined: boolean;
   label: string;
@@ -13,11 +14,18 @@ const meta: Meta<FieldGroupStoryArgs> = {
   component: 'tp-field-group',
   parameters: { docs: libraryDocs('components/field-group') },
   args: {
+    variant: 'default',
     orientation: 'horizontal',
     joined: true,
     label: 'Size',
   },
   argTypes: {
+    variant: {
+      control: 'radio',
+      options: ['default', 'inline'],
+      description: 'Inline shows the label and the values in one compact row.',
+      table: { category: 'Layout', defaultValue: { summary: 'default' } },
+    },
     orientation: {
       control: 'radio',
       options: ['horizontal', 'vertical'],
@@ -37,6 +45,7 @@ const meta: Meta<FieldGroupStoryArgs> = {
   },
   render: (args) => html`
     <tp-field-group
+      variant=${args.variant}
       orientation=${args.orientation}
       .joined=${args.joined}
       label=${args.label}

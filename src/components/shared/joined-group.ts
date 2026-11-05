@@ -2,6 +2,7 @@ import { css, html, type PropertyValues } from 'lit';
 import { TpElement } from '../../foundation/element.js';
 import { setPartComposition } from '../../presentation/controller.js';
 import { joinedControlPresentation } from '../../presentation/composition.js';
+import type { PartPresentation } from '../../presentation/resolver.js';
 import { groupMember, type GroupMember } from './group-members.js';
 
 /** Family part names a joined group registers on its root, member boundaries and separators. */
@@ -119,6 +120,35 @@ export abstract class TpJoinedGroup extends TpElement {
     if (member?.part === TEXT_SEGMENT && !this.groupParts.text) return [undefined];
     return [member];
   }
+  /**
+   * The presentation a member takes at `index` of a seam run of `count`, keyed by the member's own
+   * parts; `undefined` keeps its own look. Joined groups cut seams into the member's boundary.
+   */
+  protected memberPresentation(
+    member: GroupMember,
+    index: number,
+    count: number,
+  ): PartPresentation | undefined {
+    return this.joined
+      ? {
+          [member.part]: {
+            styleHook: joinedControlPresentation(index, count, this.orientation, null),
+          },
+        }
+      : undefined;
+  }
+  /** Changes whenever `memberPresentation` would answer differently for the same position. */
+  protected get memberPresentationKey(): string {
+    return `${this.joined}:${this.orientation}`;
+  }
+  /** Further attributes in the members' light tree whose changes re-sync the group. */
+  protected get observedMemberAttributes(): readonly string[] {
+    return [];
+  }
+  /** Called after each membership sync with the members in order. */
+  protected membersSynced(members: readonly GroupMember[]): void {
+    void members;
+  }
   /** Releases policy-specific composition for children that are no longer direct members. */
   protected prune(children: readonly Element[]): void {
     void children;
@@ -183,7 +213,7 @@ export abstract class TpJoinedGroup extends TpElement {
         end = index;
       while (start > 0 && members[start - 1]) start--;
       while (end + 1 < members.length && members[end + 1]) end++;
-      const key = `${this.joined && !nested}:${this.orientation}:${index - start}:${end - start + 1}`;
+      const key = `${this.memberPresentationKey}:${nested}:${index - start}:${end - start + 1}`;
       const previous = this.#bindings.get(member.host);
       if (
         previous?.element === member.element &&
@@ -204,20 +234,12 @@ export abstract class TpJoinedGroup extends TpElement {
       setPartComposition(
         member.host,
         this,
-        this.joined && !nested && !separator
-          ? {
-              [member.part]: {
-                styleHook: joinedControlPresentation(
-                  index - start,
-                  end - start + 1,
-                  this.orientation,
-                  null,
-                ),
-              },
-            }
+        !nested && !separator
+          ? this.memberPresentation(member, index - start, end - start + 1)
           : undefined,
       );
     }
+    this.membersSynced(members.filter((member): member is GroupMember => !!member));
   };
   override connectedCallback(): void {
     super.connectedCallback();
@@ -226,7 +248,14 @@ export abstract class TpJoinedGroup extends TpElement {
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ['hidden', 'slot', 'orientation', 'aria-label', 'aria-labelledby'],
+      attributeFilter: [
+        'hidden',
+        'slot',
+        'orientation',
+        'aria-label',
+        'aria-labelledby',
+        ...this.observedMemberAttributes,
+      ],
     });
     this.schedule();
   }

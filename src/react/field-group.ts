@@ -18,7 +18,8 @@ export type FieldGroupProps = ElementProps<
   | 'partContracts'
   | 'partPresentation'
   | 'readOnly'
-  | 'required',
+  | 'required'
+  | 'variant',
   {
     onTpDiagnostic: CustomEvent<foundationServices.Diagnostic>;
   }

@@ -1520,7 +1520,8 @@ type Tags = {
     | 'partContracts'
     | 'partPresentation'
     | 'readOnly'
-    | 'required',
+    | 'required'
+    | 'variant',
     { 'tp-diagnostic': CustomEvent<foundationServices.Diagnostic> }
   >;
   'tp-file-upload': Tag<

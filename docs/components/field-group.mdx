@@ -53,27 +53,20 @@ An editor that declares its own `inline-size` or `flex` keeps it. Inside a conta
 
 ### Mixed members
 
-Buttons and Toggles can join beside the editors, for example a lock between width and height. A Separator divides editors and takes the perpendicular orientation automatically.
+Buttons and Toggles can join beside the editors. A Separator divides editors and takes the perpendicular orientation automatically.
 
-Input, Input group, Text area, Select and Native select are editor members. Button and Toggle can join beside them, for example a lock toggle next to a width/height pair, and Menu or Popover participate through their slotted trigger; popup content is never a member.
+Input, Input group, Text area, Select and Native select are editor members. Button and Toggle can join beside them, and Menu or Popover participate through their slotted trigger; popup content is never a member.
 
 Hidden members (`hidden`) do not participate. Reordering, removing or replacing a member updates the seams and part registrations without replacing other controls. Content that is not a member splits the group into independent seam runs.
 
 <Preview
-  title="Toggle and separator"
+  title="Separator"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:24rem">
-  <tp-field-group label="Image size">
-    <tp-input-group><span slot="prefix">W</span><tp-input label="Width" default-value="1920"></tp-input></tp-input-group>
-    <tp-toggle variant="outline" aria-label="Lock aspect ratio" default-pressed>Lock</tp-toggle>
-    <tp-input-group><span slot="prefix">H</span><tp-input label="Height" default-value="1080"></tp-input></tp-input-group>
-  </tp-field-group>
-  <tp-field-group label="Price range">
-    <tp-input-group><span slot="prefix">$</span><tp-input label="Minimum price" default-value="20"></tp-input></tp-input-group>
-    <tp-separator></tp-separator>
-    <tp-input-group><span slot="prefix">$</span><tp-input label="Maximum price" default-value="150"></tp-input></tp-input-group>
-  </tp-field-group>
-</div>`}
+  code={`<tp-field-group label="Price range" style="max-inline-size:24rem">
+  <tp-input-group><span slot="prefix">$</span><tp-input label="Minimum price" default-value="20"></tp-input></tp-input-group>
+  <tp-separator></tp-separator>
+  <tp-input-group><span slot="prefix">$</span><tp-input label="Maximum price" default-value="150"></tp-input></tp-input-group>
+</tp-field-group>`}
 />
 
 ### Member states
@@ -121,6 +114,31 @@ Set the `joined` property to `false` to keep every editor's own corners with the
 </tp-field-group>`}
   script={`document.querySelector('#field-group-demo-unjoined').joined = false;`}
 />
+
+### Inline
+
+<Preview
+  title="Inline"
+  align="stretch"
+  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:20rem;margin-inline:auto">
+  <tp-input variant="inline" label="Layer" default-value="Header card"></tp-input>
+  <tp-field-group variant="inline" label="Position">
+    <tp-input-group><span slot="prefix">X</span><tp-input label="X" default-value="120"></tp-input></tp-input-group>
+    <tp-input-group><span slot="prefix">Y</span><tp-input label="Y" default-value="48"></tp-input></tp-input-group>
+  </tp-field-group>
+  <tp-field-group variant="inline" label="Size">
+    <tp-input-group><span slot="prefix">W</span><tp-input label="Width" default-value="1280"></tp-input></tp-input-group>
+    <tp-input-group><span slot="prefix">H</span><tp-input label="Height" default-value="720"></tp-input></tp-input-group>
+  </tp-field-group>
+  <tp-field-group variant="inline" label="Rotation">
+    <tp-input-group><span slot="prefix">X</span><tp-input label="Rotation X" default-value="0"></tp-input></tp-input-group>
+    <tp-input-group><span slot="prefix">Y</span><tp-input label="Rotation Y" default-value="45"></tp-input></tp-input-group>
+    <tp-input-group><span slot="prefix">Z</span><tp-input label="Rotation Z" default-value="90"></tp-input></tp-input-group>
+  </tp-field-group>
+</div>`}
+/>
+
+`variant="inline"` fits the group into one row the height of a control, with `label` at the start and the values at the end, so it stacks with other inline controls such as an inline Input. Each editor becomes a segment of the row: its prefix, then its value, as wide as its text. The row carries the boundary, the focus ring and the invalid state, and a press on the label edits the first value.
 
 ### In widgets
 
