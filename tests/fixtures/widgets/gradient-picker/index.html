@@ -25,52 +25,40 @@
     <main>
       <h1>Gradient picker verification</h1>
       <tp-button id="before" variant="outline">Before</tp-button>
-      <tp-gradient-picker
-        id="default"
-        label="Fill"
-        default-selected="1"
-        default-value='[{"position":0,"color":"#1d4ed8"},{"position":0.45,"color":"#5eead4"},{"position":0.75,"color":"#2563eb"},{"position":1,"color":"#60a5fa"}]'
-      ></tp-gradient-picker>
+      <tp-gradient-picker id="default" label="Fill" default-selected="1">
+        <tp-gradient-stop position="0" color="#1d4ed8"></tp-gradient-stop>
+        <tp-gradient-stop position="0.45" color="#5eead4"></tp-gradient-stop>
+        <tp-gradient-stop position="0.75" color="#2563eb"></tp-gradient-stop>
+        <tp-gradient-stop position="1" color="#60a5fa"></tp-gradient-stop>
+      </tp-gradient-picker>
       <form id="form">
-        <tp-gradient-picker
-          id="field"
-          name="ramp"
-          label="Ramp"
-          default-value='[{"position":0,"color":"#000000"},{"position":1,"color":"#ffffff"}]'
-        ></tp-gradient-picker>
+        <tp-gradient-picker id="field" name="ramp" label="Ramp">
+          <tp-gradient-stop position="0" color="#000000"></tp-gradient-stop>
+          <tp-gradient-stop position="1" color="#ffffff"></tp-gradient-stop>
+        </tp-gradient-picker>
         <tp-button id="reset" type="reset" variant="outline">Reset</tp-button>
       </form>
-      <tp-gradient-picker
-        id="rtl"
-        dir="rtl"
-        label="Mirrored"
-        default-value='[{"position":0,"color":"#0f172a","midpoint":0.2},{"position":1,"color":"#e2e8f0"}]'
-      ></tp-gradient-picker>
-      <tp-gradient-picker
-        id="sm"
-        size="sm"
-        label="Small"
-        default-value='[{"position":0,"color":"#facc15"},{"position":1,"color":"rgb(250 204 21 / 0)"}]'
-      ></tp-gradient-picker>
-      <tp-gradient-picker
-        id="readonly"
-        readonly
-        label="Read-only"
-        default-value='[{"position":0,"color":"#22c55e"},{"position":1,"color":"#3b82f6"}]'
-      ></tp-gradient-picker>
-      <tp-gradient-picker
-        id="disabled"
-        disabled
-        label="Disabled"
-        default-value='[{"position":0,"color":"#22c55e"},{"position":1,"color":"#3b82f6"}]'
-      ></tp-gradient-picker>
-      <tp-gradient-picker
-        id="sky"
-        variant="field"
-        label="Sky"
-        default-selected="0"
-        default-value='[{"x":0.2,"y":0.3,"color":"#f97316"},{"x":0.55,"y":0.65,"color":"#7c3aed"},{"x":0.85,"y":0.25,"color":"#0ea5e9"}]'
-      ></tp-gradient-picker>
+      <tp-gradient-picker id="rtl" dir="rtl" label="Mirrored">
+        <tp-gradient-stop position="0" color="#0f172a" midpoint="0.2"></tp-gradient-stop>
+        <tp-gradient-stop position="1" color="#e2e8f0"></tp-gradient-stop>
+      </tp-gradient-picker>
+      <tp-gradient-picker id="sm" size="sm" label="Small">
+        <tp-gradient-stop position="0" color="#facc15"></tp-gradient-stop>
+        <tp-gradient-stop position="1" color="rgb(250 204 21 / 0)"></tp-gradient-stop>
+      </tp-gradient-picker>
+      <tp-gradient-picker id="readonly" readonly label="Read-only">
+        <tp-gradient-stop position="0" color="#22c55e"></tp-gradient-stop>
+        <tp-gradient-stop position="1" color="#3b82f6"></tp-gradient-stop>
+      </tp-gradient-picker>
+      <tp-gradient-picker id="disabled" disabled label="Disabled">
+        <tp-gradient-stop position="0" color="#22c55e"></tp-gradient-stop>
+        <tp-gradient-stop position="1" color="#3b82f6"></tp-gradient-stop>
+      </tp-gradient-picker>
+      <tp-gradient-picker id="sky" variant="field" label="Sky" default-selected="0">
+        <tp-gradient-stop x="0.2" y="0.3" color="#f97316"></tp-gradient-stop>
+        <tp-gradient-stop x="0.55" y="0.65" color="#7c3aed"></tp-gradient-stop>
+        <tp-gradient-stop x="0.85" y="0.25" color="#0ea5e9"></tp-gradient-stop>
+      </tp-gradient-picker>
       <tp-button id="after" variant="outline">After</tp-button>
     </main>
     <script type="module" src="./fixture.ts"></script>

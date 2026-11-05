@@ -1,4 +1,5 @@
 export { TpGradientPicker } from './gradient-picker.js';
+export { TpGradientStop } from './gradient-stop.js';
 export type {
   GradientPickerSelectionChangeCallback,
   GradientPickerSize,

@@ -120,4 +120,8 @@ export const gradientPickerAppearance: PresentationDictionary = {
     { selector: '&[data-dragging]', declarations: activeRing },
   ],
   'gradient-picker-remove': [],
+  // On the field it glides between corners instead of jumping.
+  'gradient-picker-remove-variant-field': [
+    { declarations: { transition: motionTransition(['translate'], 'fast') } },
+  ],
 };

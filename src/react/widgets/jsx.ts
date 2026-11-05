@@ -6,6 +6,7 @@ import type { TpEasingEditor } from '../../widgets/easing-editor/easing-editor.j
 import type { TpEmojiPicker } from '../../widgets/emoji-picker/emoji-picker.js';
 import type { TpFlow } from '../../widgets/flow/flow.js';
 import type { TpGradientPicker } from '../../widgets/gradient-picker/gradient-picker.js';
+import type { TpGradientStop } from '../../widgets/gradient-picker/gradient-stop.js';
 import type { TpTextEditor } from '../../widgets/text-editor/text-editor.js';
 import type * as foundationColorTypes from '../../foundation/color/types.js';
 import type * as foundationEvents from '../../foundation/events.js';
@@ -384,6 +385,28 @@ type Tags = {
       'tp-selection-change': foundationEvents.TpValueChangeEvent<number>;
       'tp-value-change': foundationEvents.TpValueChangeEvent<widgetsGradientPickerGradientPicker.GradientPickerValue>;
       'tp-value-commit': foundationEvents.TpValueCommitEvent<widgetsGradientPickerGradientPicker.GradientPickerValue>;
+    }
+  >;
+  'tp-gradient-stop': Tag<
+    TpGradientStop,
+    | 'appearance'
+    | 'color'
+    | 'density'
+    | 'disabled'
+    | 'invalid'
+    | 'midpoint'
+    | 'motionPolicy'
+    | 'orientation'
+    | 'partContracts'
+    | 'partPresentation'
+    | 'position'
+    | 'readOnly'
+    | 'required'
+    | 'x'
+    | 'y',
+    {
+      'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
+      'tp-gradient-stop-change': Event;
     }
   >;
   'tp-text-editor': Tag<

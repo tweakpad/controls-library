@@ -12,12 +12,12 @@ const examples = {
   'tp-color-picker': () =>
     html`<tp-color-picker label="Accent" name="accent" default-value="#6d5dfc"></tp-color-picker>`,
   'tp-gradient-picker': () =>
-    html`<tp-gradient-picker
-      label="Fill"
-      name="fill"
-      default-value='[{"position":0,"color":"#1d4ed8"},{"position":0.45,"color":"#5eead4"},{"position":0.75,"color":"#2563eb"},{"position":1,"color":"#60a5fa"}]'
-      default-selected="1"
-    ></tp-gradient-picker>`,
+    html`<tp-gradient-picker label="Fill" name="fill" default-selected="1">
+      <tp-gradient-stop position="0" color="#1d4ed8"></tp-gradient-stop>
+      <tp-gradient-stop position="0.45" color="#5eead4"></tp-gradient-stop>
+      <tp-gradient-stop position="0.75" color="#2563eb"></tp-gradient-stop>
+      <tp-gradient-stop position="1" color="#60a5fa"></tp-gradient-stop>
+    </tp-gradient-picker>`,
   'tp-easing-editor': () =>
     html`<tp-easing-editor
       label="Motion"

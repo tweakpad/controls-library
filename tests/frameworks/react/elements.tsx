@@ -204,6 +204,7 @@ import {
   EmojiPicker,
   Flow,
   GradientPicker,
+  GradientStop,
   TextEditor,
 } from '../../../src/react/widgets/index.js';
 import type { TpAccordionItem as TpAccordionItemType } from '../../../src/components/accordion/accordion-item.js';
@@ -435,6 +436,7 @@ import type { TpEasingEditor as TpEasingEditorType } from '../../../src/widgets/
 import type { TpEmojiPicker as TpEmojiPickerType } from '../../../src/widgets/emoji-picker/emoji-picker.js';
 import type { TpFlow as TpFlowType } from '../../../src/widgets/flow/flow.js';
 import type { TpGradientPicker as TpGradientPickerType } from '../../../src/widgets/gradient-picker/gradient-picker.js';
+import type { TpGradientStop as TpGradientStopType } from '../../../src/widgets/gradient-picker/gradient-stop.js';
 import type { TpTextEditor as TpTextEditorType } from '../../../src/widgets/text-editor/text-editor.js';
 
 export const elements: ReactElement[] = [
@@ -661,5 +663,6 @@ export const elements: ReactElement[] = [
   <EmojiPicker ref={(element: TpEmojiPickerType | null) => void element} />,
   <Flow ref={(element: TpFlowType | null) => void element} />,
   <GradientPicker ref={(element: TpGradientPickerType | null) => void element} />,
+  <GradientStop ref={(element: TpGradientStopType | null) => void element} />,
   <TextEditor ref={(element: TpTextEditorType | null) => void element} />,
 ];

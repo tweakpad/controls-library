@@ -7,16 +7,21 @@ tag: tp-gradient-picker
 <Preview
   title="Gradient picker"
   align="stretch"
-  code={`<tp-gradient-picker label="Fill" name="fill" default-selected="1" default-value='[{"position":0,"color":"#1d4ed8"},{"position":0.45,"color":"#5eead4"},{"position":0.75,"color":"#2563eb"},{"position":1,"color":"#60a5fa"}]' style="max-inline-size:28rem;margin-inline:auto"></tp-gradient-picker>`}
+  code={`<tp-gradient-picker label="Fill" name="fill" default-selected="1" style="max-inline-size:28rem;margin-inline:auto">
+  <tp-gradient-stop position="0" color="#1d4ed8"></tp-gradient-stop>
+  <tp-gradient-stop position="0.45" color="#5eead4"></tp-gradient-stop>
+  <tp-gradient-stop position="0.75" color="#2563eb"></tp-gradient-stop>
+  <tp-gradient-stop position="1" color="#60a5fa"></tp-gradient-stop>
+</tp-gradient-picker>`}
 />
 
 ## Usage
 
-The default `linear` variant edits stops along a track; the `field` variant edits color anchors placed anywhere on a field (see Field gradients below). In the linear variant the value is a list of stops, each `{ position, color, midpoint? }`: `position` runs from 0 to 1 along the gradient, `color` is any CSS color notation, and `midpoint` is where, within the span to the next stop, the two colors mix half and half (0.5 when left out). `value` always reads back sorted by position. The stops describe no particular renderer: draw them with CSS, a canvas or a shader.
+The default `linear` variant edits stops along a track; the `field` variant edits color anchors placed anywhere on a field (see Field gradients below). Declare the stops as `tp-gradient-stop` children: `position` runs from 0 to 1 along the gradient, `color` is any CSS color notation, and `midpoint` is where, within the span to the next stop, the two colors mix half and half (0.5 when left out). `value` reads them back as records, `{ position, color, midpoint? }`, sorted by position. The stops describe no particular renderer: draw them with CSS, a canvas or a shader.
 
 Press the track to add a stop in the gradient's own color at that point; it is selected and follows the pointer until release. Drag a stop to move it, past its neighbors if you like; it keeps its color, its midpoint and its selection. Drag a diamond above the track to move a midpoint. Escape during a drag puts everything back. The Button at the end removes the selected stop; `min-stops` (2 by default) is the fewest the gradient keeps, and `removable="false"` hides the Button.
 
-`default-value` takes the stops as JSON; `value` and `defaultValue` take them as an array. Changes arrive as `tp-value-change` proposals while you drag and as one `tp-value-commit` when the gesture settles. In a form, the stops submit as JSON under `name`.
+The picker writes every edit back to its children, moving, adding and removing `tp-gradient-stop` elements, so the markup always shows the current gradient; a stop you change, add or remove yourself updates the picker, and a form reset restores the markup as first written. Where a framework renders the children, pass records instead: `defaultValue` starts an uncontrolled picker, and `value` makes it controlled, ignoring any children. Changes arrive as `tp-value-change` proposals while you drag and as one `tp-value-commit` when the gesture settles. In a form, the stops submit as JSON under `name`.
 
 ### Composing a stop editor
 
@@ -26,7 +31,11 @@ The element edits the stops only and opens nothing. A stop's color, its location
   title="Stop controls"
   align="stretch"
   code={`<div id="gradient-compose" style="display:grid;gap:var(--tp-space-2);max-inline-size:24rem;margin-inline:auto">
-  <tp-gradient-picker label="Fill" default-selected="0" default-value='[{"position":0,"color":"#f97316"},{"position":0.6,"color":"#db2777"},{"position":1,"color":"#7c3aed"}]'></tp-gradient-picker>
+  <tp-gradient-picker label="Fill" default-selected="0">
+    <tp-gradient-stop position="0" color="#f97316"></tp-gradient-stop>
+    <tp-gradient-stop position="0.6" color="#db2777"></tp-gradient-stop>
+    <tp-gradient-stop position="1" color="#7c3aed"></tp-gradient-stop>
+  </tp-gradient-picker>
   <tp-color-input variant="inline" label="Stop color"></tp-color-input>
   <tp-input variant="inline" label="Location" type="number" unit="%" min="0" max="100"></tp-input>
   <tp-input variant="inline" label="Rotation" type="number" unit="deg" min="0" max="360" default-value="90"></tp-input>
@@ -60,7 +69,10 @@ customElements.whenDefined('tp-gradient-picker').then(() => gradient.updateCompl
 <Preview
   title="Midpoints"
   align="stretch"
-  code={`<tp-gradient-picker label="Shade" default-value='[{"position":0,"color":"#0f172a","midpoint":0.2},{"position":1,"color":"#e2e8f0"}]' style="max-inline-size:28rem;margin-inline:auto"></tp-gradient-picker>`}
+  code={`<tp-gradient-picker label="Shade" style="max-inline-size:28rem;margin-inline:auto">
+  <tp-gradient-stop position="0" color="#0f172a" midpoint="0.2"></tp-gradient-stop>
+  <tp-gradient-stop position="1" color="#e2e8f0"></tp-gradient-stop>
+</tp-gradient-picker>`}
 />
 
 A diamond above the track marks each midpoint. Moving it toward a stop keeps the other stop's color longer; it stays between 5 % and 95 % of its span, and stops at one position leave no midpoint to move.
@@ -90,8 +102,15 @@ ramp.fillRect(x, 0, 1, canvas.height);
   title="Small and read-only"
   align="stretch"
   code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:24rem;margin-inline:auto">
-  <tp-gradient-picker label="Glow" size="sm" default-value='[{"position":0,"color":"#facc15"},{"position":1,"color":"rgb(250 204 21 / 0)"}]'></tp-gradient-picker>
-  <tp-gradient-picker label="Preset" readonly removable="false" default-value='[{"position":0,"color":"#22c55e"},{"position":0.5,"color":"#06b6d4"},{"position":1,"color":"#3b82f6"}]'></tp-gradient-picker>
+  <tp-gradient-picker label="Glow" size="sm">
+    <tp-gradient-stop position="0" color="#facc15"></tp-gradient-stop>
+    <tp-gradient-stop position="1" color="rgb(250 204 21 / 0)"></tp-gradient-stop>
+  </tp-gradient-picker>
+  <tp-gradient-picker label="Preset" readonly removable="false">
+    <tp-gradient-stop position="0" color="#22c55e"></tp-gradient-stop>
+    <tp-gradient-stop position="0.5" color="#06b6d4"></tp-gradient-stop>
+    <tp-gradient-stop position="1" color="#3b82f6"></tp-gradient-stop>
+  </tp-gradient-picker>
 </div>`}
 />
 
@@ -100,10 +119,14 @@ ramp.fillRect(x, 0, 1, canvas.height);
 <Preview
   title="Field"
   align="stretch"
-  code={`<tp-gradient-picker variant="field" label="Sky" default-selected="0" default-value='[{"x":0.2,"y":0.3,"color":"#f97316"},{"x":0.55,"y":0.65,"color":"#7c3aed"},{"x":0.85,"y":0.25,"color":"#0ea5e9"}]' style="max-inline-size:28rem;margin-inline:auto"></tp-gradient-picker>`}
+  code={`<tp-gradient-picker variant="field" label="Sky" default-selected="0" style="max-inline-size:28rem;margin-inline:auto">
+  <tp-gradient-stop x="0.2" y="0.3" color="#f97316"></tp-gradient-stop>
+  <tp-gradient-stop x="0.55" y="0.65" color="#7c3aed"></tp-gradient-stop>
+  <tp-gradient-stop x="0.85" y="0.25" color="#0ea5e9"></tp-gradient-stop>
+</tp-gradient-picker>`}
 />
 
-`variant="field"` places color anchors anywhere on a field, each `{ x, y, color }` with `x` and `y` from 0 to 1 from the top start; every point of the field blends all anchors, each weighted by how close it is. Drag an anchor to move it, double press the field's empty space to add one in the field's own color there, and remove the selected one with the Button or Delete. A field keeps 1 to 8 anchors unless `min-stops` and `max-stops` say otherwise, and `value` keeps the anchors in their given order.
+`variant="field"` places color anchors anywhere on a field: `tp-gradient-stop` children with `x` and `y` from 0 to 1 from the top start, read back as `{ x, y, color }`; every point of the field blends all anchors, each weighted by how close it is. Drag an anchor to move it, double press the field's empty space to add one in the field's own color there, and remove the selected one with Delete or the Button that floats in a corner of the field while an anchor is selected; it moves to the top corner while the anchor sits under it. A field keeps 1 to 8 anchors unless `min-stops` and `max-stops` say otherwise, and `value` keeps the anchors in their given order.
 
 `falloff` sets how an anchor's weight drops with distance: `inverse-distance` (the default) divides by the distance raised to `power`, and `gaussian` is a bell that narrows as `power` grows (0.4 to 6, 2.2 by default). `warp-amplitude` (0 to 0.6) and `warp-frequency` (0.3 to 4) bend the borders between colors into waves. `projection="equirectangular"` (the default) reads `x` as longitude and `y` as latitude, so the field wraps at its left and right edges as an environment map does; `projection="plane"` measures straight across a flat field. Like the stops' colors, these are settings you bind to your own controls.
 
@@ -111,7 +134,11 @@ ramp.fillRect(x, 0, 1, canvas.height);
   title="Field settings"
   align="stretch"
   code={`<div id="gradient-field-settings" style="display:grid;gap:var(--tp-space-2);max-inline-size:24rem;margin-inline:auto">
-  <tp-gradient-picker variant="field" label="Backdrop" projection="plane" default-value='[{"x":0.15,"y":0.2,"color":"#fde68a"},{"x":0.8,"y":0.35,"color":"#f472b6"},{"x":0.45,"y":0.85,"color":"#312e81"}]'></tp-gradient-picker>
+  <tp-gradient-picker variant="field" label="Backdrop" projection="plane">
+    <tp-gradient-stop x="0.15" y="0.2" color="#fde68a"></tp-gradient-stop>
+    <tp-gradient-stop x="0.8" y="0.35" color="#f472b6"></tp-gradient-stop>
+    <tp-gradient-stop x="0.45" y="0.85" color="#312e81"></tp-gradient-stop>
+  </tp-gradient-picker>
   <tp-select variant="inline" label="Falloff" default-value="inverse-distance">
     <option value="inverse-distance">Inverse distance</option>
     <option value="gaussian">Gaussian</option>

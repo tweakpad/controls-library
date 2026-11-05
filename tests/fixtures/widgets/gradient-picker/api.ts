@@ -354,5 +354,83 @@ export async function assertField(): Promise<ReturnType<typeof result>> {
   checks.push(
     check('Delete removes the focused anchor', element.value.length === 7, element.value.length),
   );
+  // The remove Button floats in the field's bottom end corner, and moves up while the selected
+  // anchor sits under it; without a selection it hides.
+  const remove = root.querySelector<HTMLElement>('.field-surface > .remove')!;
+  element.setStop(element.selected, { x: 0.98, y: 0.97 });
+  await settle(element);
+  checks.push(check('it moves off an anchor in its corner', remove.hasAttribute('data-raised')));
+  element.setStop(element.selected, { x: 0.3, y: 0.5 });
+  await settle(element);
+  checks.push(check('and back once the anchor leaves', !remove.hasAttribute('data-raised')));
+  (element as unknown as { setSelected(index: number): boolean }).setSelected(-1);
+  await settle(element);
+  checks.push(check('it hides without a selection', getComputedStyle(remove).display === 'none'));
+  return result(checks);
+}
+
+/**
+ * Markup: the picker's edits are written to its `tp-gradient-stop` children, and the author's
+ * changes to them (an attribute, an added or removed stop) update the picker; a form reset
+ * restores the markup as first written.
+ */
+export async function assertMarkup(): Promise<ReturnType<typeof result>> {
+  const element = byId('field');
+  const form = document.getElementById('form') as HTMLFormElement;
+  const checks: Check[] = [];
+  const children = () => [...element.querySelectorAll(':scope > tp-gradient-stop')];
+  const written = () =>
+    children()
+      .map((child) => `${child.getAttribute('position')}:${child.getAttribute('color')}`)
+      .join(',');
+  const first = children()[0]!;
+  element.setStop(1, { color: '#ff0000' });
+  await settle(element);
+  checks.push(
+    check('an edit is written to its child', written() === '0:#000000,1:#ff0000', written()),
+  );
+  checks.push(check('the unchanged stop keeps its element', children()[0] === first));
+  const drag = pointer(element);
+  await drag.press(0.5);
+  await drag.up();
+  checks.push(check('an added stop gets a child', children().length === 3, written()));
+  checks.push(
+    check('in gradient order', children()[1]!.getAttribute('position') === '0.5', written()),
+  );
+  children()[1]!.setAttribute('color', '#00ff00');
+  await settle(element);
+  checks.push(
+    check(
+      'an author attribute updates the stop',
+      element.value[1]?.color === '#00ff00',
+      element.value,
+    ),
+  );
+  const extra = document.createElement('tp-gradient-stop');
+  extra.setAttribute('position', '0.25');
+  extra.setAttribute('color', '#0000ff');
+  element.append(extra);
+  await settle(element);
+  checks.push(check('an author stop is added', element.value.length === 4, element.value));
+  (extra as HTMLElement & { position: number }).position = 0.75;
+  await settle(element);
+  await settle(element);
+  checks.push(
+    check(
+      'an author property reflects and updates',
+      element.value[2]?.position === 0.75,
+      element.value,
+    ),
+  );
+  extra.remove();
+  await settle(element);
+  checks.push(
+    check('an author removal removes the stop', element.value.length === 3, element.value),
+  );
+  form.reset();
+  await settle(element);
+  checks.push(
+    check('reset restores the markup as written', written() === '0:#000000,1:#ffffff', written()),
+  );
   return result(checks);
 }

@@ -19,6 +19,7 @@ import { displayColor } from '../../foundation/color/serialize.js';
 import type { ColorValue } from '../../foundation/color/types.js';
 import { trashIcon } from '../../icons/trash.js';
 import { TpButton } from '../../components/button/button.js';
+import { TpGradientStop } from './gradient-stop.js';
 import { rangeHandleStyles } from '../../components/shared/control-styles.js';
 import { gradientPickerPresentation } from '../../presentation/families/gradient-picker.js';
 import {
@@ -72,18 +73,44 @@ type Active = { readonly kind: Kind; index: number };
 type Axis = 'x' | 'y';
 type Entry = Partial<GradientStop> & Partial<FieldGradientAnchor>;
 
-/** Stops or anchors written as JSON in the `default-value` attribute. */
-const listConverter = {
-  fromAttribute(value: string | null): GradientPickerValue | undefined {
-    if (value === null) return undefined;
-    try {
-      const parsed: unknown = JSON.parse(value);
-      return Array.isArray(parsed) ? (parsed as GradientPickerValue) : undefined;
-    } catch {
-      return undefined;
-    }
-  },
-};
+/** Stops or anchors saved as JSON in the form state. */
+function parseList(value: string): GradientPickerValue | undefined {
+  try {
+    const parsed: unknown = JSON.parse(value);
+    return Array.isArray(parsed) ? (parsed as GradientPickerValue) : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+const STOP_TAG = 'tp-gradient-stop';
+const STOP_ATTRIBUTES = ['position', 'color', 'midpoint', 'x', 'y'] as const;
+
+/** A stop child's declaration, from its attributes (its properties reflect to them). */
+function readStop(element: Element): Entry {
+  const number = (name: string): number | undefined => {
+    const text = element.getAttribute(name);
+    const parsed = text === null || text.trim() === '' ? Number.NaN : Number(text);
+    return Number.isFinite(parsed) ? parsed : undefined;
+  };
+  const entry: Record<string, unknown> = { color: element.getAttribute('color') ?? '' };
+  for (const name of ['position', 'midpoint', 'x', 'y'] as const) {
+    const value = number(name);
+    if (value !== undefined) entry[name] = value;
+  }
+  return entry as Entry;
+}
+
+/** Writes a stop or anchor into a stop child's attributes, dropping those it does not use. */
+function writeStop(element: Element, entry: Entry): void {
+  for (const name of STOP_ATTRIBUTES) {
+    const value = entry[name];
+    const text =
+      value === undefined || (name === 'midpoint' && value === 0.5) ? null : String(value);
+    if (text === null) element.removeAttribute(name);
+    else if (element.getAttribute(name) !== text) element.setAttribute(name, text);
+  }
+}
 
 /** Whether two values hold the same stops or anchors, field by field. */
 function sameEntries(a: GradientPickerValue, b: GradientPickerValue): boolean {
@@ -118,6 +145,8 @@ const FIELD_RESOLUTION = 320;
  * stops only: a stop's color, the gradient's angle or shape and how it is drawn belong to the
  * controls and the renderer an app composes around it, through `value` and `selected`.
  *
+ * @slot - `tp-gradient-stop` children declaring the stops or anchors; the picker writes its edits
+ * back to them. Without them, `value` or `defaultValue` supplies the stops as records.
  * @fires tp-value-change - Cancelable proposal of new stops or anchors: live while a handle is
  * dragged, and for each key, press and removal.
  * @fires tp-value-commit - Settled stops or anchors: once per drag on release, and at once for
@@ -136,13 +165,13 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
   static tagName = 'tp-gradient-picker';
   /** Library elements this element renders; defining it defines them too. */
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {
-    return [TpButton];
+    return [TpButton, TpGradientStop];
   }
   static override presentation = gradientPickerPresentation;
   static override properties = {
     ...TpFormElement.properties,
     value: { attribute: false, noAccessor: true },
-    defaultValue: { attribute: 'default-value', converter: listConverter },
+    defaultValue: { attribute: false },
     selected: { type: Number, noAccessor: true },
     defaultSelected: { type: Number, attribute: 'default-selected' },
     variant: { type: String, reflect: true },
@@ -306,8 +335,15 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
           calc(var(--_tp-gradient-picker-stop) / -2);
       }
 
-      .root[data-variant='field'] .remove {
-        grid-row: 1;
+      /* Field: the remove Button floats in a corner of the field, at the bottom end, and moves to
+         the top end while the selected anchor sits under it (see #placeRemove). */
+      .field-surface .remove {
+        position: absolute;
+        z-index: 4;
+        inset-block-end: var(--tp-space-2);
+        inset-inline-end: var(--tp-space-2);
+        margin: 0;
+        translate: 0 var(--_tp-gradient-picker-remove-shift, 0);
       }
 
       ${rangeHandleStyles('.stop, .midpoint')}
@@ -320,7 +356,10 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
     `,
   ];
 
-  /** Stops or anchors the element starts with when `value` is not set. */
+  /**
+   * Stops or anchors, as records, the element starts with when neither `value` nor
+   * `tp-gradient-stop` children supply them.
+   */
   defaultValue: GradientPickerValue | undefined;
   /** The selected index when `selected` is not set; `-1` selects none. */
   defaultSelected: number | undefined;
@@ -399,12 +438,20 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
     readControlledValue: () =>
       this.#provided === undefined ? undefined : this.#normalize(this.#provided),
     readDefaultValue: () =>
-      this.defaultValue === undefined ? undefined : this.#normalize(this.defaultValue),
-    hasDefaultValue: () => this.defaultValue !== undefined,
+      this.#markupDefault ??
+      (this.defaultValue === undefined ? undefined : this.#normalize(this.defaultValue)),
+    hasDefaultValue: () => this.defaultValue !== undefined || this.#markupDefault !== undefined,
     equals: sameEntries,
     onChange: (event) => this.onValueChange?.(event),
-    onCommit: (value, previous, reason) =>
-      this.emit('tp-field-value', { value, previousValue: previous, reason }),
+    onCommit: (value, previous, reason) => {
+      if (this.#markup && !this.controlled) {
+        // A reset returns the markup to its written state, from which author changes count again.
+        if (reason === 'form-reset') this.#edited = false;
+        else if (!sameEntries(value, this.#readStops() ?? [])) this.#edited = true;
+        this.#writeStops(value);
+      }
+      this.emit('tp-field-value', { value, previousValue: previous, reason });
+    },
     diagnostic: (message) => this.diagnose('gradient-picker-state', message),
   });
   readonly #selectedState = new ControllableState<number>({
@@ -529,6 +576,7 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
     super.connectedCallback();
     // Field discovers its control through this marker.
     this.setAttribute('data-field-control', '');
+    this.addEventListener('tp-gradient-stop-change', this.#stopsChanged);
   }
 
   override disconnectedCallback(): void {
@@ -539,11 +587,87 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
     this.#fieldObserver?.disconnect();
     this.#fieldObserver = undefined;
     this.#endGesture();
+    this.removeEventListener('tp-gradient-stop-change', this.#stopsChanged);
     super.disconnectedCallback();
+  }
+
+  // ---- markup --------------------------------------------------------------------------------
+
+  /** Whether the stops are declared as `tp-gradient-stop` children, which then mirror the value. */
+  #markup = false;
+  /** The stops the markup declared, which a form reset restores. */
+  #markupDefault: GradientPickerValue | undefined;
+
+  #stopElements(): Element[] {
+    return [...this.children].filter((child) => child.localName === STOP_TAG);
+  }
+
+  /** The stops the children declare, or `undefined` when the picker has none. */
+  #readStops(): GradientPickerValue | undefined {
+    const elements = this.#stopElements();
+    if (!elements.length && !this.#markup) return undefined;
+    return this.#normalize(elements.map(readStop) as GradientPickerValue);
+  }
+
+  /** Whether the picker has written an edit to its children since the markup was read. */
+  #edited = false;
+
+  /**
+   * A child was added, removed or changed. The picker's own writes read back as the value; any
+   * other change is the author's and becomes the value. Until the picker's first edit it also
+   * becomes the reset default, so markup that arrives while the page parses counts as written.
+   */
+  readonly #stopsChanged = (): void => {
+    if (this.controlled) return;
+    const read = this.#readStops();
+    if (!read) return;
+    this.#markup = true;
+    if (sameEntries(read, this.value)) return;
+    if (!this.#edited) this.#markupDefault = read;
+    this.#state.reconcile(read);
+  };
+
+  /**
+   * Mirrors the value into the stop children: an unchanged stop keeps its element, a changed one
+   * takes a spare element, new ones are created, leftovers are removed, all in gradient order.
+   */
+  #writeStops(value: GradientPickerValue): void {
+    const elements = this.#stopElements();
+    const entries = value as readonly Entry[];
+    const used = new Set<Element>();
+    const matched = entries.map((entry) => {
+      const element = elements.find(
+        (candidate) =>
+          !used.has(candidate) &&
+          sameEntries([readStop(candidate)] as GradientPickerValue, [entry] as GradientPickerValue),
+      );
+      if (element) used.add(element);
+      return element;
+    });
+    const spare = elements.filter((element) => !used.has(element));
+    const ordered = matched.map((element, index) => {
+      const target = element ?? spare.shift() ?? this.ownerDocument.createElement(STOP_TAG);
+      writeStop(target, entries[index]!);
+      return target;
+    });
+    for (const element of spare) element.remove();
+    const current = this.#stopElements();
+    if (
+      current.length !== ordered.length ||
+      current.some((element, index) => element !== ordered[index])
+    )
+      for (const element of ordered) this.append(element);
   }
 
   protected override willUpdate(changed: PropertyValues<this>): void {
     super.willUpdate(changed);
+    if (!this.hasUpdated) {
+      const read = this.#readStops();
+      if (read) {
+        this.#markup = true;
+        this.#markupDefault = read;
+      }
+    }
     this.#state.initialize();
     this.#selectedState.initialize();
     // A variant reads its own fields: an uncontrolled value takes the new variant's shape.
@@ -563,6 +687,38 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
       this.requestUpdate();
     }
     this.#drawField();
+    this.#placeRemove();
+  }
+
+  /**
+   * Keeps the field's remove Button off the anchor it acts on: it takes the bottom end corner, and
+   * the top end corner while the dragged or selected anchor reaches into the bottom one.
+   */
+  #placeRemove(): void {
+    const surface = this.#fieldSurface;
+    const button = surface?.querySelector<HTMLElement>(':scope > .remove');
+    if (!this.#field || !surface || !button || button.hidden) return;
+    const index = this.#active?.kind === 'anchor' ? this.#active.index : this.selected;
+    const anchor = this.#anchors[index];
+    const width = surface.clientWidth;
+    const height = surface.clientHeight;
+    const handle = surface.querySelector<HTMLElement>('.anchor');
+    // The anchor's handle and a gap around it may not touch the Button.
+    const reach = (handle?.offsetWidth ?? 20) / 2 + 8;
+    const left = button.offsetLeft;
+    const top = button.offsetTop;
+    const under =
+      !!anchor &&
+      anchor.x * width > left - reach &&
+      anchor.x * width < left + button.offsetWidth + reach &&
+      anchor.y * height > top - reach &&
+      anchor.y * height < top + button.offsetHeight + reach;
+    const inset = height - top - button.offsetHeight;
+    button.toggleAttribute('data-raised', under);
+    button.style.setProperty(
+      '--_tp-gradient-picker-remove-shift',
+      under ? `${-(height - 2 * inset - button.offsetHeight)}px` : '0px',
+    );
   }
 
   protected override resetFormValue(): void {
@@ -571,7 +727,7 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
 
   override formStateRestoreCallback(state: string | File | FormData | null): void {
     if (typeof state !== 'string') return;
-    const value = listConverter.fromAttribute(state);
+    const value = parseList(state);
     if (value)
       this.#state.set(this.#normalize(value), 'programmatic', undefined, { cancelable: false });
   }
@@ -760,6 +916,7 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
         const height = Math.max(1, Math.round((width * box.height) / box.width));
         this.#fieldSize = { width, height };
         this.#drawField();
+        this.#placeRemove();
       },
     );
     this.#fieldObserver.observe(element);
@@ -865,7 +1022,7 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
     if (!surface || !this.#editable || this.value.length >= this.#maxStops) return;
     // A press captured by an anchor retargets the double press: test what lies under it.
     const under = (this.renderRoot as ShadowRoot).elementFromPoint(event.clientX, event.clientY);
-    if (under?.closest('.anchor')) return;
+    if (under?.closest('.anchor, .remove')) return;
     const box = surface.getBoundingClientRect();
     if (!box.width || !box.height) return;
     const previous = this.value;
@@ -1209,7 +1366,7 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
     </div>`;
   }
 
-  #renderField(state: Record<string, unknown>, selected: number) {
+  #renderField(state: Record<string, unknown>, selected: number, remove: unknown) {
     const anchors = this.#anchors;
     return html`<div
       ${bindPart(
@@ -1228,6 +1385,7 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
         properties: { part: 'gradient-picker-field', class: 'field', 'aria-hidden': 'true' },
       })}
       ${anchors.map((anchor, index) => this.#renderAnchor(anchor, index, anchors.length, selected))}
+      ${remove}
     </div>`;
   }
 
@@ -1244,37 +1402,41 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
       selected,
     };
     const canRemove = this.#editable && selected >= 0 && value.length > this.#minStops;
-    return this.renderPart('gradient-picker', state, {
-      tag: 'div',
-      properties: {
-        part: 'gradient-picker',
-        class: 'root',
-        role: 'group',
-        'aria-label': this.label || this.getAttribute('aria-label') || text.label,
-        'data-variant': this.variant,
-        'data-dragging': this.#dragging,
-        style: field
-          ? {}
-          : {
-              '--_tp-gradient-picker-paint': gradientTrackPaint(this.#stops, this.interpolation),
-              '--_tp-gradient-picker-axis': this.direction === 'rtl' ? 'to left' : 'to right',
-            },
-      },
-      content: html`${field ? this.#renderField(state, selected) : this.#renderLinear(state, selected)}${
-        this.removable
-          ? html`<tp-button
-              class="remove"
-              part="gradient-picker-remove"
-              variant="ghost"
-              size="icon-sm"
-              .icon=${trashIcon}
-              .ariaLabel=${text.remove}
-              ?disabled=${!canRemove}
-              @click=${this.#removePress}
-            ></tp-button>`
-          : nothing
-      }`,
-    });
+    // On the field the Button floats over the colors, so it takes a surface of its own, and it
+    // shows only while an anchor is selected and can be edited.
+    const remove = this.removable
+      ? html`<tp-button
+          class="remove"
+          part="gradient-picker-remove"
+          variant=${field ? 'secondary' : 'ghost'}
+          size="icon-sm"
+          .icon=${trashIcon}
+          .ariaLabel=${text.remove}
+          ?hidden=${field && !(this.#editable && selected >= 0)}
+          ?disabled=${!canRemove}
+          @click=${this.#removePress}
+        ></tp-button>`
+      : nothing;
+    return html`${this.renderPart('gradient-picker', state, {
+        tag: 'div',
+        properties: {
+          part: 'gradient-picker',
+          class: 'root',
+          role: 'group',
+          'aria-label': this.label || this.getAttribute('aria-label') || text.label,
+          'data-variant': this.variant,
+          'data-dragging': this.#dragging,
+          style: field
+            ? {}
+            : {
+                '--_tp-gradient-picker-paint': gradientTrackPaint(this.#stops, this.interpolation),
+                '--_tp-gradient-picker-axis': this.direction === 'rtl' ? 'to left' : 'to right',
+              },
+        },
+        content: field
+          ? this.#renderField(state, selected, remove)
+          : html`${this.#renderLinear(state, selected)}${remove}`,
+      })}<slot hidden @slotchange=${this.#stopsChanged}></slot>`;
   }
 }
 

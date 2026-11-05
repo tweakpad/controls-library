@@ -43,8 +43,9 @@ const definition: ComponentDefinition = {
     },
     {
       name: 'gradient-picker-remove',
-      axes: ['size'],
-      description: 'The Button that removes the selected stop.',
+      axes: ['size', 'variant'],
+      description:
+        'The Button that removes the selected stop: after the track, or floating in a corner of the field.',
     },
   ],
 };
