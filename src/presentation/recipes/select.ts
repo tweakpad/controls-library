@@ -12,7 +12,6 @@ import {
   inlineControlSurface,
   inlineControlValue,
 } from './shared/inline-control.js';
-import { motionTransition } from '../motion.js';
 import { controlStepDeclarations } from './shared/variant.js';
 import { controlFill, floatEdge } from './shared/edges.js';
 
@@ -101,7 +100,7 @@ export const selectAppearance: PresentationDictionary = {
   })),
   'select-value': [{ declarations: { gap: 'var(--tp-space-1-5)' } }],
   // Inline variant: the trigger is the shared inline row; the label sits at its start and the
-  // selection at its end, brightening while the row is hovered, open or focused.
+  // selection at its end.
   'select-trigger-variant-inline': [
     {
       declarations: {
@@ -119,11 +118,10 @@ export const selectAppearance: PresentationDictionary = {
   })),
   'select-trigger-label-variant-inline': [{ declarations: inlineControlLabel }],
   'select-value-variant-inline': [
-    { declarations: { ...inlineControlValue, transition: motionTransition(['color'], 'fast') } },
+    { declarations: inlineControlValue },
     {
-      selector:
-        '[part~="select-trigger"]:is(:hover, :focus-visible, [data-open]):not([data-placeholder]) &',
-      declarations: { color: 'var(--tp-foreground)' },
+      selector: '[part~="select-trigger"][data-placeholder] &',
+      declarations: { color: 'var(--tp-muted-foreground)' },
     },
   ],
   'select-content': [

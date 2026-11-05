@@ -30,7 +30,9 @@ describe('Select inline variant', () => {
     expect(resolve('default').parts['select-trigger-label']).toEqual([]);
     expect(resolve('inline').parts['select-trigger-label']!.length).toBeGreaterThan(0);
     expect(
-      resolve('inline').parts['select-value']!.some((rule) => rule.selector?.includes(':hover')),
+      resolve('inline').parts['select-value']!.some((rule) =>
+        rule.selector?.includes('[data-placeholder]'),
+      ),
     ).toBe(true);
   });
 });

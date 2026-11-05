@@ -20,20 +20,20 @@ export const inlineControlFill = 'color-mix(in oklab, var(--tp-primary) 30%, tra
 /** The edge where the fill ends, and marks inside the fill. */
 export const inlineControlEdge = 'var(--tp-primary)';
 
-/** The label at the row's inline start. */
+/** The label at the row's inline start, muted so the value stands out. */
 export const inlineControlLabel: PresentationDeclarations = {
   'font-size': 'var(--tp-text-sm)',
   'font-weight': 'var(--tp-font-normal)',
   'line-height': 'var(--tp-leading-normal)',
-  color: 'var(--tp-foreground)',
+  color: 'var(--tp-muted-foreground)',
 };
 
-/** The value at the row's inline end; it brightens while the row is in use. */
+/** The value at the row's inline end, in the foreground. */
 export const inlineControlValue: PresentationDeclarations = {
   'font-size': 'var(--tp-text-sm)',
   'line-height': 'var(--tp-leading-normal)',
   'font-variant-numeric': 'tabular-nums',
-  color: 'var(--tp-muted-foreground)',
+  color: 'var(--tp-foreground)',
 };
 
 /**

@@ -1,5 +1,4 @@
 import type { PresentationDictionary } from '../resolver.js';
-import { motionTransition } from '../motion.js';
 import { outlineFieldPaint } from './core/button.js';
 import { fillHidden } from './shared/fill.js';
 import { focusRing, insetFocusRing } from './shared/focus.js';
@@ -20,7 +19,7 @@ import {
 import { controlSizePresentation, rule, variantPresentation } from './shared/variant.js';
 
 const control = '[part~="color-input-control"]';
-// The chip insets from the swatch like the Color picker's trigger preview.
+// In an inline row the chip insets from the swatch.
 const chipInset = 'calc(var(--tp-spacing) * 3)';
 
 export const colorInputAppearance: PresentationDictionary = {
@@ -58,6 +57,14 @@ export const colorInputAppearance: PresentationDictionary = {
       ...swatchFill('var(--_tp-color-input-paint, none)', 'var(--_tp-color-input-checker)'),
     }),
   ],
+  // Default: the chip fills the button inside its border.
+  'color-input-chip-variant-default': [
+    rule({
+      'inline-size': '100%',
+      'block-size': '100%',
+      'border-radius': 'calc(var(--tp-radius-lg) - var(--tp-border-width))',
+    }),
+  ],
   // Inline: the row is the shared inline control row and owns the boundary, rings and fill; the
   // value text joins it as in an Input group, and the chip sits at the row's end.
   'color-input-row-variant-inline': [
@@ -87,7 +94,7 @@ export const colorInputAppearance: PresentationDictionary = {
     ),
     rule(insetFocusRing, `&:has(> ${control}:focus-visible)`),
   ],
-  // The value reads like the other inline values: muted at rest, the foreground while in use.
+  // The value reads like the other inline values.
   'color-input-value': [
     { selector: joinedEditorSelector, declarations: joinedEditor },
     // The editor is an Input with its own paint; the row's value paint wins in any sheet order.
@@ -98,10 +105,8 @@ export const colorInputAppearance: PresentationDictionary = {
         'text-align': 'end',
         'padding-inline': '0',
         color: inlineControlValue.color!,
-        transition: motionTransition(['color'], 'fast'),
       },
       '&[data-tp-presentation-part]',
     ),
-    rule({ color: 'var(--tp-foreground)' }, '&[data-tp-presentation-part]:is(:hover, :focus)'),
   ],
 };

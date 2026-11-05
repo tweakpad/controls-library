@@ -288,9 +288,7 @@ export const flowAppearance: PresentationDictionary = {
   'flow-node-row': [{ declarations: { 'font-size': 'var(--tp-text-xs)' } }],
   // Port and property labels take the inline fields' label role wherever the row places them
   // (title or trailing slot), muted beside the fields.
-  'flow-node-row-label': [
-    { declarations: { ...inlineControlLabel, color: 'var(--tp-muted-foreground)' } },
-  ],
+  'flow-node-row-label': [{ declarations: inlineControlLabel }],
   'flow-node-row-control': [],
   'flow-node-footer': [
     { declarations: { 'font-size': 'var(--tp-text-xs)', color: 'var(--tp-muted-foreground)' } },

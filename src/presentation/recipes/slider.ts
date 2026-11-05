@@ -191,13 +191,7 @@ export const sliderAppearance: PresentationDictionary = {
     { selector: '&:has(input:focus-visible)', declarations: { outline: 'none' } },
   ]),
   'slider-label-variant-inline': horizontal([{ declarations: inlineControlLabel }]),
-  'slider-output-variant-inline': horizontal([
-    { declarations: { ...inlineControlValue, transition: motionTransition(['color'], 'fast') } },
-    {
-      selector: '[part~="slider"]:is(:hover, [data-pointing], [data-dragging], [data-focused]) &',
-      declarations: { color: 'var(--tp-foreground)' },
-    },
-  ]),
+  'slider-output-variant-inline': horizontal([{ declarations: inlineControlValue }]),
   // The typed value: the Input's editor joined to the bar, reading as the value it replaces.
   'slider-value-editor': [
     {
@@ -205,7 +199,6 @@ export const sliderAppearance: PresentationDictionary = {
       declarations: {
         ...joinedEditor,
         ...inlineControlValue,
-        color: 'var(--tp-foreground)',
         'field-sizing': 'content',
         'min-inline-size': '3ch',
         'min-height': '0',

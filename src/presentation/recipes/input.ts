@@ -1,5 +1,4 @@
 import type { PresentationDictionary } from '../resolver.js';
-import { motionTransition } from '../motion.js';
 import {
   inlineControlLabel,
   inlineControlRings,
@@ -35,17 +34,11 @@ export const inputAppearance: PresentationDictionary = {
     { selector: '&[data-disabled]', declarations: { background: disabledBackground } },
   ],
   'input-label-variant-inline': [{ declarations: inlineControlLabel }],
-  // The value reads like the other inline values: muted at rest, the foreground while in use.
+  // The value reads like the other inline values.
   'input-variant-inline': [
     { declarations: { 'min-height': joinedEditorMinHeight, 'block-size': joinedEditorMinHeight } },
     { selector: joinedEditorSelector, declarations: joinedEditor },
-    {
-      declarations: {
-        color: inlineControlValue.color!,
-        transition: motionTransition(['color'], 'fast'),
-      },
-    },
-    { selector: '&:is(:hover, :focus)', declarations: { color: 'var(--tp-foreground)' } },
+    { declarations: { color: inlineControlValue.color! } },
     // A number value sits centered between the Stepper's Buttons, in place of the browser's spin
     // buttons; tabular digits keep its width, and with it the Buttons, steady while it steps.
     {
