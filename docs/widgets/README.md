@@ -45,12 +45,12 @@ of a canvas.
 
 ## Published widgets
 
-- [Color gradient input](color-gradient-input.mdx): `tp-color-gradient-input`.
 - [Color picker](color-picker.mdx): `tp-color-picker`.
 - [Easing editor](easing-editor.mdx): `tp-easing-editor`.
 - [Emoji picker](emoji-picker.mdx): `tp-emoji-picker`, with the data helpers in `@tweakpad/ui/emoji`.
 - [Flow](flow.mdx): `tp-flow` with the public constituents `tp-flow-node`, `tp-flow-edge` and
   `tp-flow-port`, and the DOM-free engine `@tweakpad/ui/flow`.
+- [Gradient picker](gradient-picker.mdx): `tp-gradient-picker`.
 - [Text editor](text-editor.mdx): `tp-text-editor`, with the engine contract and the editor
   tools in `@tweakpad/ui/text-editor` and one entry per engine adapter,
   `@tweakpad/ui/text-editor/adapters/tiptap` and `@tweakpad/ui/text-editor/adapters/lexical`.

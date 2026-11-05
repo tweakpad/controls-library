@@ -1,6 +1,6 @@
 import type { PresentationFamily } from '../family.js';
 import { colorPickerPresentation } from './color-picker.js';
-import { colorGradientInputPresentation } from './color-gradient-input.js';
+import { gradientPickerPresentation } from './gradient-picker.js';
 import { easingEditorPresentation } from './easing-editor.js';
 import { flowPresentation } from './flow.js';
 import { emojiPickerPresentation } from './emoji-picker.js';
@@ -13,7 +13,7 @@ import { textEditorPresentation } from './text-editor.js';
  */
 export const widgetPresentationFamilies: readonly PresentationFamily[] = [
   colorPickerPresentation,
-  colorGradientInputPresentation,
+  gradientPickerPresentation,
   easingEditorPresentation,
   flowPresentation,
   emojiPickerPresentation,

@@ -11,8 +11,8 @@ import {
 } from './shared/handle.js';
 import { swatchFill } from './shared/swatch.js';
 
-// The gradient stop editor (`tp-color-gradient-input`). The element supplies its gradient as
-// `--_tp-color-gradient-input-paint` (an <image>) and each stop's color as `--_tp-handle-paint`;
+// The gradient stop editor (`tp-gradient-picker`). The element supplies its gradient as
+// `--_tp-gradient-picker-paint` (an <image>) and each stop's color as `--_tp-handle-paint`;
 // every rule below resolves through tokens and the shared handle and swatch recipes.
 
 const sizes = (
@@ -22,17 +22,19 @@ const sizes = (
   row: string,
   checker: string,
 ): PresentationDeclarations => ({
-  '--_tp-color-gradient-input-track': track,
-  '--_tp-color-gradient-input-stop': stop,
-  '--_tp-color-gradient-input-midpoint': midpoint,
-  '--_tp-color-gradient-input-row': row,
-  '--_tp-color-gradient-input-checker': checker,
+  '--_tp-gradient-picker-track': track,
+  '--_tp-gradient-picker-stop': stop,
+  '--_tp-gradient-picker-midpoint': midpoint,
+  '--_tp-gradient-picker-row': row,
+  '--_tp-gradient-picker-checker': checker,
 });
 
-const stopSize = 'var(--_tp-color-gradient-input-stop)';
+const stopSize = 'var(--_tp-gradient-picker-stop)';
 
-export const colorGradientInputAppearance: PresentationDictionary = {
-  'color-gradient-input': [
+export const gradientPickerAppearance: PresentationDictionary = {
+  'gradient-picker': [
+    // The field's aspect; an environment map's is 2:1.
+    { declarations: { '--_tp-gradient-picker-aspect': '5 / 3' } },
     {
       declarations: sizes(
         'var(--tp-space-4)',
@@ -43,7 +45,7 @@ export const colorGradientInputAppearance: PresentationDictionary = {
       ),
     },
   ],
-  'color-gradient-input-size-sm': [
+  'gradient-picker-size-sm': [
     {
       declarations: sizes(
         'var(--tp-space-3)',
@@ -55,21 +57,31 @@ export const colorGradientInputAppearance: PresentationDictionary = {
     },
   ],
   // The gradient over a transparency checker, so translucent stops read.
-  'color-gradient-input-track': [
+  'gradient-picker-track': [
     {
       declarations: {
         'border-radius': 'var(--tp-radius-full)',
         ...swatchFill(
-          'var(--_tp-color-gradient-input-paint, none)',
-          'var(--_tp-color-gradient-input-checker)',
+          'var(--_tp-gradient-picker-paint, none)',
+          'var(--_tp-gradient-picker-checker)',
         ),
+        'box-shadow': floatEdge.ring,
+      },
+    },
+  ],
+  // The field over a transparency checker, so translucent anchors read.
+  'gradient-picker-field': [
+    {
+      declarations: {
+        'border-radius': 'var(--tp-radius-md)',
+        ...swatchFill('none', 'var(--_tp-gradient-picker-checker)'),
         'box-shadow': floatEdge.ring,
       },
     },
   ],
   // A stop shows its own color inside a ring in the background color; the selected stop takes
   // the near-white ring every color marker wears and grows a little.
-  'color-gradient-input-stop': [
+  'gradient-picker-stop': [
     {
       declarations: {
         'inline-size': stopSize,
@@ -90,7 +102,7 @@ export const colorGradientInputAppearance: PresentationDictionary = {
     { selector: '&[data-dragging]', declarations: activeRing },
   ],
   // A midpoint is a small diamond in the muted tone, ringed like the other handles.
-  'color-gradient-input-midpoint': [
+  'gradient-picker-midpoint': [
     {
       declarations: {
         'border-radius': 'calc(var(--tp-radius-sm) * 0.4)',
@@ -107,5 +119,5 @@ export const colorGradientInputAppearance: PresentationDictionary = {
     { selector: '&[data-focus-visible]', declarations: focusRing },
     { selector: '&[data-dragging]', declarations: activeRing },
   ],
-  'color-gradient-input-remove': [],
+  'gradient-picker-remove': [],
 };

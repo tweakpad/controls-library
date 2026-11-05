@@ -2,11 +2,11 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 import type { DefineSetupFnComponent } from 'vue';
 import type { EventPropName } from '../adapter.js';
-import type { TpColorGradientInput } from '../../widgets/color-gradient-input/color-gradient-input.js';
 import type { TpColorPicker } from '../../widgets/color-picker/color-picker.js';
 import type { TpEasingEditor } from '../../widgets/easing-editor/easing-editor.js';
 import type { TpEmojiPicker } from '../../widgets/emoji-picker/emoji-picker.js';
 import type { TpFlow } from '../../widgets/flow/flow.js';
+import type { TpGradientPicker } from '../../widgets/gradient-picker/gradient-picker.js';
 import type { TpTextEditor } from '../../widgets/text-editor/text-editor.js';
 import type * as foundationColorTypes from '../../foundation/color/types.js';
 import type * as foundationEvents from '../../foundation/events.js';
@@ -20,11 +20,11 @@ import type * as foundationServices from '../../foundation/services.js';
 import type * as foundationTextEditorController from '../../foundation/text-editor/controller.js';
 import type * as foundationTextEditorEngine from '../../foundation/text-editor/engine.js';
 import type * as foundationTypes from '../../foundation/types.js';
-import type * as widgetsColorGradientInputModel from '../../widgets/color-gradient-input/model.js';
 import type * as widgetsColorPickerColorHarmony from '../../widgets/color-picker/color/harmony.js';
 import type * as widgetsColorPickerTypes from '../../widgets/color-picker/types.js';
 import type * as widgetsEmojiPickerTypes from '../../widgets/emoji-picker/types.js';
 import type * as widgetsFlowTypes from '../../widgets/flow/types.js';
+import type * as widgetsGradientPickerGradientPicker from '../../widgets/gradient-picker/gradient-picker.js';
 import type * as widgetsTextEditorTypes from '../../widgets/text-editor/types.js';
 
 /** A tag Vue templates write: its own properties and `@tp-…` listeners. */
@@ -36,48 +36,6 @@ type Tag<E extends HTMLElement, F extends keyof E, V> = DefineSetupFnComponent<
 
 /** Every tag, with its properties and events. */
 type Tags = {
-  'tp-color-gradient-input': Tag<
-    TpColorGradientInput,
-    | 'appearance'
-    | 'defaultSelected'
-    | 'defaultValue'
-    | 'density'
-    | 'disabled'
-    | 'formOwner'
-    | 'inputElementReference'
-    | 'interpolation'
-    | 'invalid'
-    | 'label'
-    | 'minStops'
-    | 'motionPolicy'
-    | 'name'
-    | 'orientation'
-    | 'partContracts'
-    | 'partPresentation'
-    | 'readOnly'
-    | 'removable'
-    | 'required'
-    | 'selected'
-    | 'size'
-    | 'step'
-    | 'strings'
-    | 'value',
-    {
-      'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
-      'tp-field-value': CustomEvent<{
-        value: readonly widgetsColorGradientInputModel.ColorGradientStop[];
-        previousValue: readonly widgetsColorGradientInputModel.ColorGradientStop[];
-        reason: foundationTypes.ChangeReason;
-      }>;
-      'tp-selection-change': foundationEvents.TpValueChangeEvent<number>;
-      'tp-value-change': foundationEvents.TpValueChangeEvent<
-        readonly widgetsColorGradientInputModel.ColorGradientStop[]
-      >;
-      'tp-value-commit': foundationEvents.TpValueCommitEvent<
-        readonly widgetsColorGradientInputModel.ColorGradientStop[]
-      >;
-    }
-  >;
   'tp-color-picker': Tag<
     TpColorPicker,
     | 'allowWheelScrub'
@@ -381,6 +339,51 @@ type Tags = {
         >
       >;
       'tp-viewport-change': foundationEvents.TpValueChangeEvent<foundationFlowTypes.FlowViewport>;
+    }
+  >;
+  'tp-gradient-picker': Tag<
+    TpGradientPicker,
+    | 'appearance'
+    | 'defaultSelected'
+    | 'defaultValue'
+    | 'density'
+    | 'disabled'
+    | 'falloff'
+    | 'formOwner'
+    | 'inputElementReference'
+    | 'interpolation'
+    | 'invalid'
+    | 'label'
+    | 'maxStops'
+    | 'minStops'
+    | 'motionPolicy'
+    | 'name'
+    | 'orientation'
+    | 'partContracts'
+    | 'partPresentation'
+    | 'power'
+    | 'projection'
+    | 'readOnly'
+    | 'removable'
+    | 'required'
+    | 'selected'
+    | 'size'
+    | 'step'
+    | 'strings'
+    | 'value'
+    | 'variant'
+    | 'warpAmplitude'
+    | 'warpFrequency',
+    {
+      'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
+      'tp-field-value': CustomEvent<{
+        value: widgetsGradientPickerGradientPicker.GradientPickerValue;
+        previousValue: widgetsGradientPickerGradientPicker.GradientPickerValue;
+        reason: foundationTypes.ChangeReason;
+      }>;
+      'tp-selection-change': foundationEvents.TpValueChangeEvent<number>;
+      'tp-value-change': foundationEvents.TpValueChangeEvent<widgetsGradientPickerGradientPicker.GradientPickerValue>;
+      'tp-value-commit': foundationEvents.TpValueCommitEvent<widgetsGradientPickerGradientPicker.GradientPickerValue>;
     }
   >;
   'tp-text-editor': Tag<

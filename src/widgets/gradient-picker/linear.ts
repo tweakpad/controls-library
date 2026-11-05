@@ -7,7 +7,7 @@ import { color, type ColorValue } from '../../foundation/color/types.js';
  * One color stop of a gradient. The record says nothing about how a renderer draws it: CSS, a
  * canvas or a shader can read the same stops.
  */
-export interface ColorGradientStop {
+export interface GradientStop {
   /** Where the stop sits along the gradient, from 0 to 1. */
   readonly position: number;
   /** The stop's color, in any CSS Color 4 notation. */
@@ -20,7 +20,7 @@ export interface ColorGradientStop {
 }
 
 /** The color space two neighboring stops mix in. */
-export type ColorGradientInterpolation = 'oklab' | 'srgb';
+export type GradientInterpolation = 'oklab' | 'srgb';
 
 /** The closest a midpoint comes to either stop of its span. */
 export const MIDPOINT_MIN = 0.05;
@@ -33,7 +33,7 @@ const clamp = (value: number, min: number, max: number): number =>
 const round = (value: number): number => Math.round(value * 1e4) / 1e4;
 
 /** A stop with a finite position in range and, when one is given, a midpoint in range. */
-function normalizeStop(stop: ColorGradientStop): ColorGradientStop {
+function normalizeStop(stop: GradientStop): GradientStop {
   const position = Number.isFinite(stop.position) ? round(clamp(stop.position, 0, 1)) : 0;
   const midpoint =
     stop.midpoint === undefined || !Number.isFinite(stop.midpoint)
@@ -50,22 +50,19 @@ function normalizeStop(stop: ColorGradientStop): ColorGradientStop {
  * The stops in gradient order with positions and midpoints in range; stops at the same position
  * keep their given order. An even midpoint (0.5) is left out.
  */
-export function normalizeColorGradientStops(
-  stops: readonly ColorGradientStop[] | null | undefined,
-): readonly ColorGradientStop[] {
+export function normalizeGradientStops(
+  stops: readonly GradientStop[] | null | undefined,
+): readonly GradientStop[] {
   if (!Array.isArray(stops)) return [];
   return stops
-    .filter((stop): stop is ColorGradientStop => !!stop && typeof stop === 'object')
+    .filter((stop): stop is GradientStop => !!stop && typeof stop === 'object')
     .map((stop, index) => ({ stop: normalizeStop(stop), index }))
     .sort((a, b) => a.stop.position - b.stop.position || a.index - b.index)
     .map((entry) => entry.stop);
 }
 
 /** Whether two stop lists describe the same gradient. */
-export function sameColorGradientStops(
-  a: readonly ColorGradientStop[],
-  b: readonly ColorGradientStop[],
-): boolean {
+export function sameGradientStops(a: readonly GradientStop[], b: readonly GradientStop[]): boolean {
   if (a === b) return true;
   if (a.length !== b.length) return false;
   return a.every(
@@ -86,11 +83,11 @@ export function midpointWeight(t: number, midpoint = 0.5): number {
   return at ** (Math.log(0.5) / Math.log(hint));
 }
 
-function parsed(stop: ColorGradientStop): ColorValue {
+function parsed(stop: GradientStop): ColorValue {
   return parseColor(stop.color) ?? TRANSPARENT;
 }
 
-function mix(a: ColorValue, b: ColorValue, t: number, space: ColorGradientInterpolation) {
+function mix(a: ColorValue, b: ColorValue, t: number, space: GradientInterpolation) {
   if (space === 'oklab') return mixColors(a, b, t);
   const from = convertColor(a, 'srgb');
   const to = convertColor(b, 'srgb');
@@ -107,12 +104,12 @@ function mix(a: ColorValue, b: ColorValue, t: number, space: ColorGradientInterp
  * the two neighboring stops mixed in `interpolation` and eased by the first one's midpoint. A
  * stop whose color does not parse reads as transparent. With no stops, transparent.
  */
-export function sampleColorGradient(
-  stops: readonly ColorGradientStop[],
+export function sampleLinearGradient(
+  stops: readonly GradientStop[],
   t: number,
-  interpolation: ColorGradientInterpolation = 'oklab',
+  interpolation: GradientInterpolation = 'oklab',
 ): ColorValue {
-  const list = normalizeColorGradientStops(stops);
+  const list = normalizeGradientStops(stops);
   if (!list.length) return TRANSPARENT;
   const at = clamp(Number.isFinite(t) ? t : 0, 0, 1);
   const first = list[0]!;
@@ -133,35 +130,35 @@ export function sampleColorGradient(
  * An `<image>` that paints the gradient left to right for the element's own track, sampled from
  * the model so midpoints and the interpolation space show as any renderer of the stops would.
  */
-export function colorGradientTrackPaint(
-  stops: readonly ColorGradientStop[],
-  interpolation: ColorGradientInterpolation = 'oklab',
+export function gradientTrackPaint(
+  stops: readonly GradientStop[],
+  interpolation: GradientInterpolation = 'oklab',
   samples = 64,
 ): string {
-  const list = normalizeColorGradientStops(stops);
+  const list = normalizeGradientStops(stops);
   if (!list.length) return 'none';
   const entries: string[] = [];
   const count = Math.max(2, Math.round(samples));
   for (let index = 0; index <= count; index++) {
     const t = index / count;
     entries.push(
-      `${displayColor(sampleColorGradient(list, t, interpolation))} ${(t * 100).toFixed(2)}%`,
+      `${displayColor(sampleLinearGradient(list, t, interpolation))} ${(t * 100).toFixed(2)}%`,
     );
   }
-  return `linear-gradient(var(--_tp-color-gradient-input-axis, to right), ${entries.join(', ')})`;
+  return `linear-gradient(var(--_tp-gradient-picker-axis, to right), ${entries.join(', ')})`;
 }
 
 /** Stops after a stop is added at `position` in the gradient's own color there, as hex. */
-export function insertColorGradientStop(
-  stops: readonly ColorGradientStop[],
+export function insertGradientStop(
+  stops: readonly GradientStop[],
   position: number,
-  interpolation: ColorGradientInterpolation = 'oklab',
-): { stops: readonly ColorGradientStop[]; index: number } {
-  const list = normalizeColorGradientStops(stops);
+  interpolation: GradientInterpolation = 'oklab',
+): { stops: readonly GradientStop[]; index: number } {
+  const list = normalizeGradientStops(stops);
   const at = round(clamp(position, 0, 1));
-  const added: ColorGradientStop = {
+  const added: GradientStop = {
     position: at,
-    color: serializeColor(sampleColorGradient(list, at, interpolation), 'hex'),
+    color: serializeColor(sampleLinearGradient(list, at, interpolation), 'hex'),
   };
   let index = list.findIndex((stop) => stop.position > at);
   if (index < 0) index = list.length;
@@ -173,16 +170,16 @@ export function insertColorGradientStop(
  * Stops after the stop at `index` of `stops` moves to `position`. It passes its neighbors when
  * moved beyond them, keeping its color and midpoint; `index` is where it lands.
  */
-export function moveColorGradientStop(
-  stops: readonly ColorGradientStop[],
+export function moveGradientStop(
+  stops: readonly GradientStop[],
   index: number,
   position: number,
-): { stops: readonly ColorGradientStop[]; index: number } {
-  const list = normalizeColorGradientStops(stops);
+): { stops: readonly GradientStop[]; index: number } {
+  const list = normalizeGradientStops(stops);
   const moving = list[index];
   if (!moving) return { stops: list, index };
   const at = round(clamp(position, 0, 1));
-  const moved: ColorGradientStop = { ...moving, position: at };
+  const moved: GradientStop = { ...moving, position: at };
   const rest = list.filter((_, candidate) => candidate !== index);
   // Among equal positions it stays on the side it came from: it passes a neighbor only by
   // going beyond it.
@@ -194,12 +191,12 @@ export function moveColorGradientStop(
 }
 
 /** Stops after the midpoint after the stop at `index` moves to `midpoint`. */
-export function moveColorGradientMidpoint(
-  stops: readonly ColorGradientStop[],
+export function moveGradientMidpoint(
+  stops: readonly GradientStop[],
   index: number,
   midpoint: number,
-): readonly ColorGradientStop[] {
-  const list = normalizeColorGradientStops(stops);
+): readonly GradientStop[] {
+  const list = normalizeGradientStops(stops);
   if (index < 0 || index >= list.length - 1) return list;
   return list.map((stop, candidate) =>
     candidate === index ? normalizeStop({ ...stop, midpoint }) : stop,
@@ -207,12 +204,12 @@ export function moveColorGradientMidpoint(
 }
 
 /** Stops without the stop at `index`; `null` when that would leave fewer than `minimum`. */
-export function removeColorGradientStop(
-  stops: readonly ColorGradientStop[],
+export function removeGradientStop(
+  stops: readonly GradientStop[],
   index: number,
   minimum = 2,
-): readonly ColorGradientStop[] | null {
-  const list = normalizeColorGradientStops(stops);
+): readonly GradientStop[] | null {
+  const list = normalizeGradientStops(stops);
   if (index < 0 || index >= list.length || list.length - 1 < Math.max(0, minimum)) return null;
   return list.filter((_, candidate) => candidate !== index);
 }

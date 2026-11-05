@@ -390,8 +390,8 @@ export const laneRows: LaneRow[] = [
     settle: 400,
   },
   {
-    entry: 'tp-color-gradient-input',
-    binding: 'ColorGradientInput',
+    entry: 'tp-gradient-picker',
+    binding: 'GradientPicker',
     lane: 'value',
     initial: [
       { position: 0, color: '#1d4ed8' },

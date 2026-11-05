@@ -47,6 +47,8 @@ function deep(x: number, y: number): Element | null {
 
 /** Pointer sessions at fractions of the track, on the track row or the midpoint row. */
 export function pointer(element: Gradient) {
+  // Hit testing only finds what is in the viewport.
+  element.scrollIntoView({ block: 'center' });
   const root = element.shadowRoot!;
   let current = { x: 0, y: 0 };
   const at = (fraction: number, row: 'stop' | 'midpoint') => {
@@ -157,7 +159,7 @@ export async function assertControlled(): Promise<ReturnType<typeof result>> {
     { position: 1, color: '#ffffff' },
   ];
   const make = (writeBack: boolean) => {
-    const element = document.createElement('tp-color-gradient-input') as Gradient;
+    const element = document.createElement('tp-gradient-picker') as Gradient;
     element.setAttribute('label', writeBack ? 'Late owner' : 'Silent owner');
     element.value = initial;
     element.onValueChange = (event) => {
@@ -231,6 +233,126 @@ export async function assertStates(): Promise<ReturnType<typeof result>> {
   await rtlDrag.up();
   checks.push(
     check('RTL adds at the pressed position', rtl.value[1]?.position === 0.25, rtl.value),
+  );
+  return result(checks);
+}
+
+interface Anchor {
+  readonly x: number;
+  readonly y: number;
+  readonly color: string;
+}
+
+/**
+ * Field variant: an anchor drags in two dimensions; a double press on empty space adds one in the
+ * sampled color; Escape restores; at most eight; the arrows move the focused anchor; the canvas
+ * repaints after an edit.
+ */
+export async function assertField(): Promise<ReturnType<typeof result>> {
+  const element = byId('sky') as unknown as Gradient & { value: readonly Anchor[] };
+  element.scrollIntoView({ block: 'center' });
+  await settle(element);
+  const root = element.shadowRoot!;
+  const checks: Check[] = [];
+  const box = () => root.querySelector('.field-surface')!.getBoundingClientRect();
+  const fire = (type: string, x: number, y: number) =>
+    deep(x, y)?.dispatchEvent(
+      new PointerEvent(type, {
+        bubbles: true,
+        composed: true,
+        cancelable: true,
+        pointerId: 1,
+        pointerType: 'mouse',
+        isPrimary: true,
+        button: type === 'pointermove' ? -1 : 0,
+        buttons: type === 'pointerup' ? 0 : 1,
+        clientX: x,
+        clientY: y,
+      }),
+    );
+  const center = (index: number) => {
+    const handle = root.querySelectorAll('.anchor')[index]!.getBoundingClientRect();
+    return { x: handle.left + handle.width / 2, y: handle.top + handle.height / 2 };
+  };
+  const painted = () => root.querySelector('canvas')!.toDataURL();
+  const before = painted();
+  const start = center(0);
+  fire('pointerdown', start.x, start.y);
+  await settle(element);
+  fire('pointermove', box().left + box().width * 0.4, box().top + box().height * 0.8);
+  await settle(element);
+  fire('pointerup', box().left + box().width * 0.4, box().top + box().height * 0.8);
+  await settle(element);
+  const moved = element.value[0]!;
+  checks.push(
+    check('an anchor drags in two dimensions', moved.x === 0.4 && moved.y === 0.8, moved),
+  );
+  checks.push(check('the field repaints', painted() !== before));
+  const snapshot = JSON.stringify(element.value);
+  const second = center(1);
+  fire('pointerdown', second.x, second.y);
+  await settle(element);
+  fire('pointermove', box().left + 4, box().top + 4);
+  await settle(element);
+  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+  await settle(element);
+  fire('pointerup', box().left + 4, box().top + 4);
+  await settle(element);
+  checks.push(check('Escape restores the anchors', JSON.stringify(element.value) === snapshot));
+  const press = (x: number, y: number) => {
+    const point = { x: box().left + box().width * x, y: box().top + box().height * y };
+    deep(point.x, point.y)?.dispatchEvent(
+      new MouseEvent('dblclick', {
+        bubbles: true,
+        composed: true,
+        clientX: point.x,
+        clientY: point.y,
+      }),
+    );
+  };
+  press(0.5, 0.1);
+  await settle(element);
+  const added = element.value[3];
+  checks.push(check('a double press adds an anchor', element.value.length === 4, element.value));
+  checks.push(
+    check('in the sampled color, as hex', /^#[0-9a-f]{6}$/.test(added?.color ?? ''), added),
+  );
+  checks.push(check('and selects it', element.selected === 3, element.selected));
+  const centerOfFirst = center(0);
+  const before4 = element.value.length;
+  deep(centerOfFirst.x, centerOfFirst.y)?.dispatchEvent(
+    new MouseEvent('dblclick', {
+      bubbles: true,
+      composed: true,
+      clientX: centerOfFirst.x,
+      clientY: centerOfFirst.y,
+    }),
+  );
+  await settle(element);
+  checks.push(check('a double press on an anchor adds none', element.value.length === before4));
+  for (let index = 0; index < 6; index++) press(0.1 + index * 0.15, 0.95);
+  await settle(element);
+  checks.push(check('at most eight anchors', element.value.length === 8, element.value.length));
+  const input = root.querySelector<HTMLInputElement>('input[data-kind="anchor"][data-index="1"]')!;
+  input.focus();
+  const was = element.value[1]!;
+  for (const key of ['ArrowRight', 'ArrowUp'])
+    input.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+  await settle(element);
+  const now = element.value[1]!;
+  checks.push(
+    check(
+      'arrows move it across and up',
+      Math.abs(now.x - was.x - 0.01) < 1e-6 && Math.abs(was.y - now.y - 0.01) < 1e-6,
+      [was, now],
+    ),
+  );
+  input.dispatchEvent(
+    new KeyboardEvent('keydown', { key: 'Delete', bubbles: true, cancelable: true }),
+  );
+  await settle(element);
+  checks.push(
+    check('Delete removes the focused anchor', element.value.length === 7, element.value.length),
   );
   return result(checks);
 }
