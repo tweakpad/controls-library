@@ -24,6 +24,7 @@
 | C-02 | Control is the shared inline row; label at the start, box at the end; row rings on keyboard focus and validity | `cbin-prop-0` | `shared/inline-control.ts` | `checkbox-variant-inline`, `.box { order: 1 }` | ### Inline | V-01, V-02 | passed | rows 32px, label at 571 |
 | C-03 | Press anywhere on the row toggles; Space toggles | `cbin-q1` | existing Checkbox behavior | unchanged | ### Inline | V-02 | passed | real click and Space |
 | C-04 | Without its own label, the Field's label fills the row | `sltk-f2` | Slider, Select, Input | `rendersFieldLabel`, slot fallback | ### Inline | V-03 | passed | Recycled stock row |
+| C-05 | `icon` slot: an inline Checkbox shows slotted content before its row, outside the row's boundary; the box takes no space while empty | pending spec amendment (user request 2026-11-05) | shared inline row | `renderInlineIcon`, `inlineIconStyles`, `checkbox-icon` part, `inlineControlIcon` recipe | ### Inline | V-07 | passed | flex host: the box leads the row |
 
 | Issue | Concrete missing/conflicting contract | Affected dependencies | Proposed resolution | Authority / resolution evidence | Status |
 | ----- | ------------------------------------- | --------------------- | ------------------- | ------------------------------- | ------ |
@@ -67,6 +68,7 @@
 | V-04 | C-02; regression | `switchAPI.runAssertions()` vs clean HEAD copy | same results | 92/93 both; `scoped-primary-token` fails on HEAD too | DevTools fixtures | passed | The failure predates this change. |
 | V-05 | C-02; accessibility automation | axe, dark and light | no violations | none | injected axe-core | passed | Both schemes clean. |
 | V-06 | C-02; update cost regression | `inline-update-cost` fixture: 40 inline checkboxes in one shadow root, controlled value, hook on instance 0; 20 value changes and 30 updates per frame; dist from 3eeb6b4 vs this tree | no presentation refresh and no attribute rewritten to its own value per value change; hook kept; forced refresh changes nothing | 46.3 → 14.1 records per change (28 → 0 no-op), refresh 4 → 0; 87 → 70 µs per update, frame 10.0 → 8.1 ms; safety 0 differences; real click toggles | DevTools MCP, `tests/fixtures/components/inline-update-cost/` (`counters`, `startTiming`, `safety`), baseline `tmp/inline-update-cost/baseline.json` | passed | Shared fix for tweakpad/ui#26. Two class-selector bindings still query the render root per update. |
+| V-07 | C-05; visual, accessibility | inline stack with and without an icon, dark and light, flat, compact; axe | icon centered on the row's height, gutter 8 px, row narrows by the icon and gap, no change without one; no new violations | as expected | DevTools screenshots, measurement, injected axe-core, `tmp/component-verification/field-group/expanded/stack.js` | passed | slider label contrast over its fill is pre-existing (fails without the icon too) |
 
 ## Early integration checkpoint
 

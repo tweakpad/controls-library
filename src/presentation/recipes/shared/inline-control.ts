@@ -37,6 +37,18 @@ export const inlineControlValue: PresentationDeclarations = {
   color: 'var(--tp-foreground)',
 };
 
+/** A unit after the value, such as `px`: muted beside the value it qualifies. */
+export const inlineControlUnit: PresentationDeclarations = {
+  'font-size': 'var(--tp-text-sm)',
+  'line-height': 'var(--tp-leading-normal)',
+  color: 'var(--tp-muted-foreground)',
+};
+
+/** The icon before a row, outside its boundary, muted like the label it leads. */
+export const inlineControlIcon: PresentationDeclarations = {
+  color: 'var(--tp-muted-foreground)',
+};
+
 /**
  * Focus and validity rings of a row surface. `owner` selects the element carrying the `focus`
  * condition and the `data-invalid` marker, when the row is not that element itself; a row around

@@ -43,6 +43,7 @@
 | C-20 | The inner field's value, field, input and change events never leave the Slider | `sltk-q3` (one change, one commit) | — | stopped at `[data-value-editor]` | — | V-15 | passed | E06 exact event list |
 | C-21 | `slider-value-editor` part: the Input's editor joined to the bar (joined-editor recipe) and the row ring while typing | `sltk-pub-1`, `sltk-detail-1` | Input group joined control | `registerPart('slider-value-editor', editor)`; recipe `joinedEditor` + `inlineControlValue`; ring `:has([data-value-editor]:focus-within)` | API Reference (part) | V-17 | passed | screenshots dark/light |
 | C-22 | `copyable` (default true): an inline row shows a Copy button for its value beside the label while hovered or focused; `copyable="false"` removes it; none while disabled or empty | pending spec amendment (user request 2026-11-05) | Copy button (`tp-copy-button`), `components/shared/inline-copy.ts` | `copyable`, `renderInlineCopy` in the header; inline header gap space-2 | ### Inline | V-20 | passed | real hover, click and Tab in DevTools |
+| C-23 | `icon` slot: an inline slider shows slotted content before its row, outside the row's boundary; the box takes no space while empty | pending spec amendment (user request 2026-11-05) | shared inline row | `renderInlineIcon`, `inlineIconStyles`, `slider-icon` part, `inlineControlIcon` recipe | ### Inline | V-21 | passed | fill still tracks the value in the narrowed bar |
 
 | Issue | Concrete missing/conflicting contract | Affected dependencies | Proposed resolution | Authority / resolution evidence | Status |
 | ----- | ------------------------------------- | --------------------- | ------------------- | ------------------------------- | ------ |
@@ -109,6 +110,7 @@
 | V-18 | C-18; accessibility | a11y tree while editing; axe on the section and document | spinbutton "Brush opacity" (Number field, 0–1) beside the slider | as expected; document axe clean; section-scoped axe flags only the disabled row's label contrast (inactive control, existing disabled paint) | DevTools snapshot, injected axe-core | passed | no screen-reader run |
 | V-19 | C-16–C-21; regression | slider fixture (14 helpers), ticks-inline (ticks, inline), React and Vue lane `tp-slider` + smoke 201 | unchanged | 119/119; 6/6, 8/8; lane passed, 0 failures | DevTools fixtures | passed | `npm test`, typecheck, lint green |
 | V-20 | C-22; behavior, visual | inline bar; click the Copy button | button beside the label (header gap now space-2, 8 px); copies the formatted value; the value does not move | as expected | DevTools click, evaluate, measurement | passed | `copyable` (default true), 2026-11-05. |
+| V-21 | C-23; visual, accessibility | inline stack with and without an icon, dark and light, flat, compact; axe | icon centered on the row's height, gutter 8 px, row narrows by the icon and gap, no change without one; no new violations | as expected | DevTools screenshots, measurement, injected axe-core, `tmp/component-verification/field-group/expanded/stack.js` | passed | slider label contrast over its fill is pre-existing (fails without the icon too) |
 
 ## Early integration checkpoint
 
@@ -157,3 +159,4 @@
 - Older out-of-scope gaps: the slider fixture's C07 dispatched moves without `buttons` (repaired); a decimal native input reports `valuenow` with float noise (1.2000000476837158), pre-existing.
 - Changed source revisions / reopened gates: none open.
 - 2026-11-05: inline `copyable` Copy button (shared `components/shared/inline-copy.ts`, `inlineControlCopy` recipe); the live spec does not describe it yet, amendment pending.
+- 2026-11-05: inline `icon` slot outside the row (shared `components/shared/inline-icon.ts`, `inlineControlIcon` recipe); amendment pending.

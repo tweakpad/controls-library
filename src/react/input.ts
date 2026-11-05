@@ -42,6 +42,7 @@ export type InputProps = ElementProps<
   | 'selectionStart'
   | 'step'
   | 'type'
+  | 'unit'
   | 'value'
   | 'variant',
   {

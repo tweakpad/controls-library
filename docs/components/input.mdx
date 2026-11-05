@@ -138,3 +138,24 @@ A number value sits between a decrement and an increment arrow in place of the b
   <tp-input variant="inline" label="Opacity" name="opacity" type="number" step="0.05" precision="2" min="0" max="1" default-value="0.8"></tp-input>
 </div>`}
 />
+
+`unit` shows a unit after the value, such as `px`, `rem` or `deg`; it is not part of the value, and the editor announces it as its description. An Icon in the `icon` slot leads the row, outside its boundary.
+
+<Preview
+  title="Units and icons"
+  align="stretch"
+  code={`<div id="input-inline-units" style="display:grid;gap:var(--tp-space-2);max-inline-size:22rem;margin-inline:auto">
+  <tp-input variant="inline" label="Corner radius" name="radius" type="number" unit="px" min="0" default-value="12">
+    <tp-icon slot="icon" data-icon="radius"></tp-icon>
+  </tp-input>
+  <tp-input variant="inline" label="Letter spacing" name="tracking" type="number" unit="em" step="0.01" default-value="0.02">
+    <tp-icon slot="icon" data-icon="tracking"></tp-icon>
+  </tp-input>
+  <tp-input variant="inline" label="Skew" name="skew" type="number" unit="deg" min="-45" max="45" default-value="0"></tp-input>
+</div>`}
+  script={`const icons = {
+  radius: { viewBox: '0 0 24 24', paths: [{ d: 'M4 20V11a7 7 0 0 1 7-7h9', strokeWidth: 2 }] },
+  tracking: { viewBox: '0 0 24 24', paths: [{ d: 'M3 18 7 6l4 12M4.5 14h5M14 18l3-12 3 12', strokeWidth: 2 }] },
+};
+for (const icon of document.querySelectorAll('#input-inline-units tp-icon')) icon.icon = icons[icon.dataset.icon];`}
+/>

@@ -215,6 +215,7 @@ import type * as componentsCopyButtonCopyButton from '../components/copy-button/
 import type * as componentsCursorCursor from '../components/cursor/cursor.js';
 import type * as componentsDataVisualizationTypes from '../components/data-visualization/types.js';
 import type * as componentsDrawerTypes from '../components/drawer/types.js';
+import type * as componentsFieldGroupFieldGroup from '../components/field-group/field-group.js';
 import type * as componentsFieldTypes from '../components/field/types.js';
 import type * as componentsFileUploadTypes from '../components/file-upload/types.js';
 import type * as componentsMarkdownTypes from '../components/markdown/types.js';
@@ -1510,8 +1511,11 @@ type Tags = {
   'tp-field-group': Tag<
     TpFieldGroup,
     | 'appearance'
+    | 'constraints'
     | 'density'
     | 'disabled'
+    | 'expandable'
+    | 'expanded'
     | 'invalid'
     | 'joined'
     | 'label'
@@ -1522,7 +1526,14 @@ type Tags = {
     | 'readOnly'
     | 'required'
     | 'variant',
-    { 'tp-diagnostic': CustomEvent<foundationServices.Diagnostic> }
+    {
+      'tp-constraint-change': CustomEvent<{
+        constraint: componentsFieldGroupFieldGroup.FieldGroupConstraint;
+        value: boolean;
+      }>;
+      'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
+      'tp-expanded-change': CustomEvent<{ value: boolean }>;
+    }
   >;
   'tp-file-upload': Tag<
     TpFileUpload,
@@ -1750,6 +1761,7 @@ type Tags = {
     | 'selectionStart'
     | 'step'
     | 'type'
+    | 'unit'
     | 'value'
     | 'variant',
     {
@@ -3673,6 +3685,7 @@ type Tags = {
     | 'selectionStart'
     | 'step'
     | 'type'
+    | 'unit'
     | 'value'
     | 'variant',
     {

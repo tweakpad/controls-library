@@ -23,8 +23,35 @@ const definition: ComponentDefinition = {
     {
       name: 'field-group',
       description:
-        'The joined row or column that holds the editors; in the inline variant, the row around the label and the values.',
+        'The joined row or column that holds the editors; in the inline variant, the layout of its row and, expanded, the rows of its values.',
       axes: ['orientation', 'variant'],
+    },
+    {
+      name: 'field-group-row',
+      description: 'The row of an inline Field group around its label and, collapsed, its values.',
+      axes: ['variant'],
+    },
+    {
+      name: 'field-group-icon',
+      description:
+        "The box before an inline Field group's row, outside its boundary, that holds the icon slot.",
+      axes: ['variant'],
+    },
+    {
+      name: 'field-group-toggle',
+      description: "The Button at the end of an expandable inline Field group's row.",
+    },
+    {
+      name: 'field-group-rows',
+      description: 'The rows of an expanded inline Field group, one per value, below its row.',
+    },
+    {
+      name: 'field-group-constraint',
+      description: 'The bracket beside the rows a constraint relates, around its toggle.',
+    },
+    {
+      name: 'field-group-constraint-toggle',
+      description: 'The Toggle that engages and releases a constraint.',
     },
     {
       name: 'field-group-value',
@@ -55,6 +82,12 @@ export const fieldGroupPresentation = definePresentation({
     'tp-field-group': {
       "[part~='field-group']": 'field-group',
       "[part~='field-group-label']": 'field-group-label',
+      "[part~='field-group-row']": 'field-group-row',
+      "[part~='field-group-icon']": 'field-group-icon',
+      "[part~='field-group-toggle']": 'field-group-toggle',
+      "[part~='field-group-rows']": 'field-group-rows',
+      "[part~='field-group-constraint']": 'field-group-constraint',
+      "[part~='field-group-constraint-toggle']": 'field-group-constraint-toggle',
     },
   },
   sources: [fieldGroupAppearance],

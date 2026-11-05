@@ -1,9 +1,11 @@
 import type { PresentationDictionary } from '../resolver.js';
 import {
   inlineControlCopy,
+  inlineControlIcon,
   inlineControlLabel,
   inlineControlRings,
   inlineControlSurface,
+  inlineControlUnit,
   inlineControlValue,
 } from './shared/inline-control.js';
 import {
@@ -37,6 +39,11 @@ export const inputAppearance: PresentationDictionary = {
   ],
   'input-label-variant-inline': [{ declarations: inlineControlLabel }],
   'input-copy': inlineControlCopy('[part~="input-row"]'),
+  'input-icon-variant-inline': [{ declarations: inlineControlIcon }],
+  // A unit follows its value with a thin space.
+  'input-unit-variant-inline': [
+    { declarations: { ...inlineControlUnit, 'margin-inline-start': 'var(--tp-space-1)' } },
+  ],
   // The value reads like the other inline values.
   'input-variant-inline': [
     { declarations: { 'min-height': joinedEditorMinHeight, 'block-size': joinedEditorMinHeight } },
@@ -55,6 +62,11 @@ export const inputAppearance: PresentationDictionary = {
         'text-align': 'center',
         'font-variant-numeric': 'tabular-nums',
       },
+    },
+    // With a unit, the value meets it, and the pair keeps its place while the value steps.
+    {
+      selector: '&[type="number"][data-unit]',
+      declarations: { 'text-align': 'end', 'padding-inline-end': '0' },
     },
     {
       selector:

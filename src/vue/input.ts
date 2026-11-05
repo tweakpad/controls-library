@@ -45,6 +45,7 @@ export const Input = /*#__PURE__*/ createBinding(TpInput, 'Input', {
   | 'selectionStart'
   | 'step'
   | 'type'
+  | 'unit'
   | 'value'
   | 'variant',
   {

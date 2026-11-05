@@ -1,5 +1,6 @@
 import type { PresentationDictionary } from '../resolver.js';
 import {
+  inlineControlIcon,
   inlineControlLabel,
   inlineControlRings,
   inlineControlSurface,
@@ -7,6 +8,7 @@ import {
 import { checkboxRules } from './shared/selection-control.js';
 
 export const checkboxAppearance: PresentationDictionary = {
+  'checkbox-icon-variant-inline': [{ declarations: inlineControlIcon }],
   checkbox: checkboxRules,
   // Inline variant: the control is the shared inline row, its label at the start inset like a
   // Select trigger's text and its box at the end inset like the trigger's chevron. The row

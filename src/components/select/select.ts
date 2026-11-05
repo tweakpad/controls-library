@@ -94,6 +94,7 @@ import { TpIcon } from '../icon/icon.js';
 import type { CustomElementConstructorWithTag } from '../../foundation/define.js';
 import { TpButton } from '../button/button.js';
 import { inlineCopy, renderInlineCopy } from '../shared/inline-copy.js';
+import { inlineIconStyles, renderInlineIcon } from '../shared/inline-icon.js';
 import { defaultTrue } from '../../foundation/converters.js';
 import { TpBadge } from '../badge/badge.js';
 import { TpInputGroup } from '../input-group/input-group.js';
@@ -121,6 +122,7 @@ interface SelectScrollExtent {
  * @slot - Native `option`, `optgroup` and `hr` children, or Select Options, declaring the choices
  * when `items` is unset.
  * @slot empty - Shown in place of the options when none matches the query.
+ * @slot icon - An Icon before an inline Select's trigger, outside its boundary.
  * @csspart select-action-host - The element around each trigger, clear and chip-remove button;
  *   style the buttons through their own parts.
  * @fires tp-value-change - Cancelable proposal of a new value, before it commits; `detail.value`,
@@ -131,6 +133,7 @@ interface SelectScrollExtent {
  * @fires tp-open-change-complete - `{ open }` after the list finishes opening or closing.
  * @fires tp-search-status - `{ status, query, total }` as a search source loads, settles or fails.
  * @fires tp-search-error - `{ error, query }` when a search source fails.
+ * @csspart select-icon - The box before an inline Select's trigger that holds the `icon` slot.
  * @csspart select-copy - The Copy button beside the label of an inline Select, shown while the
  * row is hovered or focused.
  */
@@ -241,7 +244,12 @@ export class TpSelect extends TpFormElement<unknown> {
     onOpenChange: { attribute: false },
     onOpenChangeComplete: { attribute: false },
   };
-  static override styles: CSSResultGroup = [TpElement.styles, anchoredArrowStyles, selectStyles];
+  static override styles: CSSResultGroup = [
+    TpElement.styles,
+    anchoredArrowStyles,
+    inlineIconStyles,
+    selectStyles,
+  ];
   #defaultValue: unknown = undefined;
   /**
    * The initial selection of an uncontrolled Select, restored on form reset; an array with
@@ -1232,7 +1240,7 @@ export class TpSelect extends TpFormElement<unknown> {
           .icon=${chevronRightIcon}
         ></tp-icon>`,
     });
-    return html`${this.#part('select', state, { properties: { class: 'select-root', 'data-open': this.open, 'data-closed': !this.open }, content: html`${trigger}${copy}` })}
+    return html`${renderInlineIcon('select-icon', this.#inline)}${this.#part('select', state, { properties: { class: 'select-root', 'data-open': this.open, 'data-closed': !this.open }, content: html`${trigger}${copy}` })}
       <input
         class="visually-hidden"
         tabindex="-1"

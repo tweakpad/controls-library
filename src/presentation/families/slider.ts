@@ -48,6 +48,12 @@ const definition: ComponentDefinition = {
       axes: ['orientation', 'variant'],
     },
     {
+      name: 'slider-icon',
+      description:
+        "The box before an inline slider's bar, outside its boundary, that holds the icon slot.",
+      axes: ['variant'],
+    },
+    {
       name: 'slider-copy',
       description:
         'The Copy button beside the label of an inline slider, shown while the bar is hovered or focused.',
@@ -88,6 +94,7 @@ export const sliderPresentation = definePresentation({
   definition,
   bindings: {
     'tp-slider': {
+      '[part~="slider-icon"]': 'slider-icon',
       '[part~="slider"]': 'slider',
       '[part~="slider-track"]': 'slider-track',
       '[part~="slider-range"]': 'slider-range',

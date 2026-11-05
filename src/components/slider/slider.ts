@@ -60,6 +60,7 @@ import type {
 import { sliderPresentation } from '../../presentation/families/slider.js';
 import { TpInput } from '../input/input.js';
 import { inlineCopy, renderInlineCopy } from '../shared/inline-copy.js';
+import { inlineIconStyles, renderInlineIcon } from '../shared/inline-icon.js';
 import { TpSliderThumb } from './slider-thumb.js';
 import type { CustomElementConstructorWithTag } from '../../foundation/define.js';
 
@@ -105,6 +106,7 @@ interface Drag {
  * them the Slider renders one per value.
  * @slot label - A rich visible label in place of `label`.
  * @slot value - Custom content of the value output above the track.
+ * @slot icon - An Icon before an inline slider's bar, outside its boundary.
  * @fires tp-value-change - Cancelable proposal of new values while dragging or adjusting;
  * `detail.value`, `detail.previousValue`, `detail.reason` and `detail.metadata.activeThumbIndex`.
  * @fires tp-value-commit - After a drag is released or a keyboard change is accepted, with the
@@ -112,6 +114,7 @@ interface Drag {
  * @fires tp-field-value - After a value commits; an enclosing Field tracks its dirty state from it.
  * @fires tp-slider-pointer-change - `{ value, ratio }` as the pointer hovers the track without
  * dragging, `null` when it leaves; for previews such as a media timeline's thumbnail.
+ * @csspart slider-icon - The box before an inline slider's bar that holds the `icon` slot.
  * @csspart slider-copy - The Copy button beside the label of an inline slider, shown while the bar
  * is hovered or focused.
  */
@@ -161,7 +164,7 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
       converter: defaultTrue,
     },
   };
-  static override styles = [TpElement.styles, sliderStyles];
+  static override styles = [TpElement.styles, inlineIconStyles, sliderStyles];
   /**
    * The initial value of an uncontrolled slider, restored on form reset: a number, or several for a
    * range.
@@ -1516,7 +1519,7 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
             bottom: `calc(${ratio(first)}% + ${startInset}px)`,
             height: `calc(${ratio(last) - ratio(first)}% + ${endInset - startInset}px)`,
           };
-    return this.renderPart('slider', state, {
+    return html`${renderInlineIcon('slider-icon', inline)}${this.renderPart('slider', state, {
       tag: 'div',
       properties: {
         class: 'root',
@@ -1659,7 +1662,7 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
                   )}`
           }
         </div>`,
-    });
+    })}`;
   }
   #controlBinding() {
     // Control is structural anatomy, deliberately without a new public paint identity.

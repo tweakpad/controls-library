@@ -23,6 +23,7 @@ import { fillLayerStyles } from '../../presentation/motion.js';
 import { colorInputPresentation } from '../../presentation/families/color-input.js';
 import { TpInput } from '../input/input.js';
 import { inlineCopy, renderInlineCopy } from '../shared/inline-copy.js';
+import { inlineIconStyles, renderInlineIcon } from '../shared/inline-icon.js';
 import type { CustomElementConstructorWithTag } from '../../foundation/define.js';
 import type {
   ColorInputPicker,
@@ -49,6 +50,9 @@ interface PickSession {
  * typed text commits; `detail.value`, `detail.previousValue` and `detail.reason`.
  * @fires tp-value-commit - When an interaction settles: the picker closes, or typed text commits.
  * @fires tp-field-value - After a value commits; an enclosing Field tracks its dirty state from it.
+ * @slot icon - An Icon before an inline Color input's row, outside its boundary.
+ * @csspart color-input-icon - The box before an inline Color input's row that holds the `icon`
+ * slot.
  * @csspart color-input-copy - The Copy button beside the label of an inline Color input, shown
  * while the row is hovered or focused.
  */
@@ -77,6 +81,7 @@ export class TpColorInput extends TpFormElement<string> {
   };
   static override styles = [
     TpFormElement.styles,
+    inlineIconStyles,
     css`
       :host {
         display: inline-block;
@@ -657,11 +662,15 @@ export class TpColorInput extends TpFormElement<string> {
     if (!showSwatch) this.#control = null;
     if (!showValue) this.#valueEditor = null;
     const swatch = showSwatch ? this.#renderSwatch(state, markers) : nothing;
-    return this.renderPart('color-input', state, {
-      tag: 'div',
-      properties: { ...markers, class: 'root' },
-      content: inline ? this.#renderRow(state, markers, swatch, showValue) : swatch,
-    });
+    return html`${renderInlineIcon('color-input-icon', inline)}${this.renderPart(
+      'color-input',
+      state,
+      {
+        tag: 'div',
+        properties: { ...markers, class: 'root' },
+        content: inline ? this.#renderRow(state, markers, swatch, showValue) : swatch,
+      },
+    )}`;
   }
 }
 

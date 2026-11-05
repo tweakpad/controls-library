@@ -22,6 +22,12 @@ const definition: ComponentDefinition = {
       axes: ['variant'],
     },
     {
+      name: 'checkbox-icon',
+      description:
+        "The box before an inline Checkbox's row, outside its boundary, that holds the icon slot.",
+      axes: ['variant'],
+    },
+    {
       name: 'checkbox-indicator',
       description: 'The check or mixed mark inside the box, shown while checked or mixed.',
     },
@@ -32,6 +38,7 @@ export const checkboxPresentation = definePresentation({
   definition,
   bindings: {
     'tp-checkbox': {
+      '[part~="checkbox-icon"]': 'checkbox-icon',
       '.root': 'checkbox',
       '.indicator': 'checkbox-indicator',
     },

@@ -38,6 +38,17 @@ const definition: ComponentDefinition = {
       axes: ['variant'],
     },
     {
+      name: 'input-icon',
+      description:
+        "The box before an inline Input's row, outside its boundary, that holds the icon slot.",
+      axes: ['variant'],
+    },
+    {
+      name: 'input-unit',
+      description: 'The unit after the value of an inline Input, such as px.',
+      axes: ['variant'],
+    },
+    {
       name: 'input-stepper',
       description:
         "The decrement and increment Buttons at the end of an inline number Input's row, in place of the browser's spin buttons.",
@@ -75,6 +86,8 @@ export const inputPresentation = definePresentation({
       '[part~="input-label"]': 'input-label',
       '[part~="input-copy"]': 'input-copy',
       '[part~="input-stepper"]': 'input-stepper',
+      '[part~="input-icon"]': 'input-icon',
+      '[part~="input-unit"]': 'input-unit',
       '[part~="input-decrement"]': 'input-decrement',
       '[part~="input-increment"]': 'input-increment',
     },

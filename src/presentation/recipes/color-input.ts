@@ -4,6 +4,7 @@ import { fillHidden } from './shared/fill.js';
 import { focusRing, insetFocusRing } from './shared/focus.js';
 import {
   inlineControlCopy,
+  inlineControlIcon,
   inlineControlLabel,
   inlineControlRings,
   inlineControlSurface,
@@ -24,6 +25,7 @@ const control = '[part~="color-input-control"]';
 const chipInset = 'calc(var(--tp-spacing) * 3)';
 
 export const colorInputAppearance: PresentationDictionary = {
+  'color-input-icon-variant-inline': [{ declarations: inlineControlIcon }],
   'color-input': [],
   // A focused swatch of an invalid input rings in the destructive color, in both variants.
   'color-input-swatch': [

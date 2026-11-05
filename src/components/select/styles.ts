@@ -86,6 +86,12 @@ export const selectStyles = css`
     display: block;
   }
 
+  /* A block box, so it flows beside the icon instead of wrapping below it. */
+  :host([variant='inline']:not([searchable])) .select-root {
+    display: flex;
+    inline-size: auto;
+  }
+
   :host([variant='inline']:not([searchable])) .select-trigger-label {
     flex: 0 1 auto;
     min-inline-size: 0;

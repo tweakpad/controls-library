@@ -31,6 +31,12 @@ const definition: ComponentDefinition = {
       axes: ['size'],
     },
     {
+      name: 'switch-icon',
+      description:
+        "The box before an inline Switch's row, outside its boundary, that holds the icon slot.",
+      axes: ['variant'],
+    },
+    {
       name: 'switch-row',
       description: 'The row of an inline Switch around its label and track.',
       axes: ['variant'],
@@ -42,6 +48,7 @@ export const switchPresentation = definePresentation({
   definition,
   bindings: {
     'tp-switch': {
+      '[part~="switch-icon"]': 'switch-icon',
       '.root': 'switch',
       '.thumb': 'switch-thumb',
       '.row': 'switch-row',

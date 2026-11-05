@@ -6,6 +6,7 @@ import {
   inlineControlCopy,
   inlineControlEdge,
   inlineControlFill,
+  inlineControlIcon,
   inlineControlLabel,
   inlineControlRings,
   inlineControlSurface,
@@ -33,6 +34,7 @@ const horizontal = (rules: PresentationRule[]): PresentationRule[] =>
     selector: (rule.selector ?? '&').replace('&', '&:not([data-orientation="vertical"])'),
   }));
 export const sliderAppearance: PresentationDictionary = {
+  'slider-icon-variant-inline': [{ declarations: inlineControlIcon }],
   slider: [
     { declarations: { gap: 'var(--tp-space-2)' } },
     { selector: '& > .header', declarations: { gap: 'var(--tp-space-3)' } },

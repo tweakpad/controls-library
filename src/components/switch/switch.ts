@@ -14,6 +14,7 @@ import type { SwitchState } from './types.js';
 import { switchPresentation } from '../../presentation/families/switch.js';
 import { fillLayerStyles } from '../../presentation/motion.js';
 import { TpLabel } from '../label/label.js';
+import { inlineIconStyles, renderInlineIcon } from '../shared/inline-icon.js';
 import type { CustomElementConstructorWithTag } from '../../foundation/define.js';
 
 /** The track border is transparent, so its checked fill covers the border box. */
@@ -33,6 +34,8 @@ const SWITCH_THUMB_MARKERS = BOOLEAN_CONTROL_MARKERS.filter((key) => key !== 'in
  *
  * @slot - The inline label; a press on it toggles the switch.
  * @slot thumb - Decorative content inside the thumb, such as a small icon.
+ * @slot icon - An Icon before an inline Switch's row, outside its boundary.
+ * @csspart switch-icon - The box before an inline Switch's row that holds the `icon` slot.
  * @csspart switch-row - The row of an inline Switch around its label and track.
  */
 export class TpSwitch extends TpCheckbox {
@@ -52,6 +55,7 @@ export class TpSwitch extends TpCheckbox {
   };
   static override styles = [
     TpElement.styles,
+    inlineIconStyles,
     css`
       :host {
         display: inline-flex;
@@ -237,7 +241,7 @@ export class TpSwitch extends TpCheckbox {
       ><slot @slotchange=${this.#syncLabel}>${fieldLabel}</slot></tp-label
     >`;
     if (!inline) return html`${track}${label}`;
-    return this.renderPart('switch-row', state, {
+    const row = this.renderPart('switch-row', state, {
       tag: 'div',
       properties: {
         class: 'row',
@@ -251,6 +255,7 @@ export class TpSwitch extends TpCheckbox {
       },
       content: html`${label}${track}`,
     });
+    return html`${renderInlineIcon('switch-icon', true)}${row}`;
   }
   protected override updated(changed: PropertyValues<this>): void {
     super.updated(changed);

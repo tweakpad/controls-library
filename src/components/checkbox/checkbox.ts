@@ -10,6 +10,7 @@ import { nearestCheckboxGroup } from '../../foundation/checkbox-group.js';
 import { PresenceController } from '../../foundation/presence.js';
 import { componentHandlingPrevented } from '../../foundation/part.js';
 import type { HostProperties } from '../../foundation/part.js';
+import { inlineIconStyles, renderInlineIcon } from '../shared/inline-icon.js';
 import { createId } from '../../foundation/id.js';
 import type { ChangeReason } from '../../foundation/types.js';
 import { checkIcon } from '../../icons/check.js';
@@ -60,6 +61,8 @@ export type CheckboxVariant = 'default' | 'inline';
  * never competes with a form's submit key.
  *
  * @slot - The inline label; a press on it toggles the box.
+ * @slot icon - An Icon before an inline Checkbox's row, outside its boundary.
+ * @csspart checkbox-icon - The box before an inline Checkbox's row that holds the `icon` slot.
  * @fires tp-value-change - Cancelable proposal of a new checked state before it commits;
  * `detail.value`, `detail.previousValue` and the `detail.reason` for the change.
  * @fires tp-field-value - After the checked state commits, with the same `value`, `previousValue`
@@ -88,6 +91,7 @@ export class TpCheckbox extends TpFormElement {
   static override styles = [
     TpElement.styles,
     selectionBoxStyles,
+    inlineIconStyles,
     css`
       :host {
         display: inline-flex;
@@ -290,7 +294,7 @@ export class TpCheckbox extends TpFormElement {
   protected override associationTarget(): HTMLElement | null {
     return this.controlElement;
   }
-  protected override render() {
+  protected override render(): unknown {
     const state = this.booleanControlState();
     const { checked, indeterminate: mixed } = state;
     const indicator = this.renderPart('checkbox-indicator', state, {
@@ -308,14 +312,14 @@ export class TpCheckbox extends TpFormElement {
       },
       content: html`<tp-icon .icon=${mixed ? minusIcon : checkIcon}></tp-icon>`,
     });
-    return this.renderBooleanControl(
+    return html`${renderInlineIcon('checkbox-icon', this.variant === 'inline')}${this.renderBooleanControl(
       state,
       // An inline row without a label of its own shows its Field's label.
       html`<span class="box" aria-hidden="true">${indicator}</span
         ><span class="label"
           ><slot>${this.variant === 'inline' ? this.fieldLabel : ''}</slot></span
         >`,
-    );
+    )}`;
   }
   protected get booleanControlIdentifier(): string {
     return this.identifier || this.#identifier;

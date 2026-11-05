@@ -3,7 +3,7 @@
 ## Delivery and source record
 
 - Component(s) / public identity: Field group, `tp-field-group`
-- Requested work / claim: bounded change: an inline variant for 2- and 3-value tuples (W/H, X/Y, X/Y/Z) that reads and stacks like the other inline controls and stays borderless in flat mode; remove the lock toggle from the documentation example.
+- Requested work / claim: bounded change: an inline variant for 2- and 3-value tuples (W/H, X/Y, X/Y/Z) that reads and stacks like the other inline controls and stays borderless in flat mode; remove the lock toggle from the documentation example. Then (2026-11-05): an expanded mode (attribute, or a toggle at the row's end) showing each value on an indented inline row below the main row; a flexible constraint system, added on demand per group, with a lock toggle bracketing the related rows; units after numeric values; an icon before the row outside its boundary.
 - Scope source: user instruction, 2026-11-05.
 - In-scope changes and existing gaps: `variant="inline"`, its row and label parts, member segments, docs, story control. The default variant is unchanged; no other Field group capability was re-verified.
 - Repository baseline / unrelated changes: `development` with the uncommitted `copyable` work of the same session preserved.
@@ -25,11 +25,15 @@
 | C-03 | The row rings on focus within and turns invalid when a member is invalid; a press on the label edits the first value | pending spec amendment | inline Input row rings and label press | `inlineControlRings`, `membersSynced` data-invalid, `#rowPress` | ### Inline | V-02, V-04 | passed | real click, type, invalid |
 | C-04 | Flat mode: no added edge or depth | Foundation appearance modes | `FLAT_ROLES` | row uses role tokens only | ### Inline | V-05 | passed | row edge transparent, no inner edges |
 | C-06 | Number segments: Arrow keys step on the step grid (Shift ×10) within `min`/`max`, a committed value rounds to the decimals of `step`, off-step or out-of-range values show the row invalid, a long value scrolls inside its segment (max 8ch), no spin buttons | pending spec amendment (user request 2026-11-05) | Input `#step`, `#numberKeyDown`, `#commitNumber` | Input Arrow stepping for every number Input; `field-group-value` registered part hides spin buttons; segment `max-inline-size` | ### Inline | V-08 | passed | real keys, typing and Tab in DevTools |
+| C-07 | `expandable` and `expanded` (default false): expanded, the row keeps the label (and the toggle) and each member becomes an indented inline row of its own below it, prefix as its label, value at the end, unit after it, own ring and invalid state; `expandable` adds a chevron Button at the row's end (`aria-expanded`, `tp-expanded-change` cancelable); a press on an expanded row's label collapses it | pending spec amendment (user request 2026-11-05) | inline Input / Select rows; Input group | `expandable`, `expanded`, `field-group-row`, `field-group-rows`, `field-group-toggle` parts; `memberPresentation` expanded hooks; slot moves between row and rows | ### Expanded | V-09, V-10 | passed | real clicks in DevTools |
+| C-08 | `constraints`: objects naming members by editor `name` or editor position, a toggle `label`, `engaged` (default false) and a `rule` (`proportional`, or a function of `{ source, values, reference }`); while engaged, an edit of one value writes the others live, snapped to their step grid and in their precision, and their change events follow the source's commit; expanded, a bracket spans the related rows around a Toggle (`tp-constraint-change` cancelable); state survives a re-created list | pending spec amendment (user request 2026-11-05) | Toggle; link and unlink icons | `#valueInput`, `#write`, `#valueChange`, `#renderConstraints`, `field-group-constraint` parts; exported types | ### Constraints | V-10, V-11 | passed | real typing and keys in DevTools |
+| C-09 | `icon` slot before the inline row, outside its boundary; units in Input group `suffix` | pending spec amendment (user request 2026-11-05) | shared `inline-icon.ts` | `field-group-icon` part, grid column before the row | ### Inline | V-09 | passed | shared with the other inline families |
 | C-05 | Lock toggle removed from the documentation example | user instruction | — | docs preview and two sentences | ### Mixed members | V-06 | passed | forced edits listed in the docs ledger |
 
 | Issue | Concrete missing/conflicting contract | Affected dependencies | Proposed resolution | Authority / resolution evidence | Status |
 | ----- | ------------------------------------- | --------------------- | ------------------- | ------------------------------- | ------ |
 | S-01 | §22.11 has no variant axis, label part or inline segment behavior | Field group docs, bindings | amend §22.11 after the user confirms | user request 2026-11-05 | pending |
+| S-02 | §22.11 has no expanded mode, constraints, units or icon slot | Field group docs, bindings | amend §22.11 after the user confirms | user request 2026-11-05 | pending |
 
 ## Architecture and reuse
 
@@ -72,6 +76,10 @@
 | V-05 | C-04; visual | stack inside `appearance="flat"` | no row edge, no inner edge or depth | as expected | DevTools screenshot | passed | Row border computed `rgba(0, 0, 0, 0)` in flat; inspected on screen. |
 | V-06 | C-05; docs | docs page | no lock toggle; Separator preview keeps Price range | as expected | `check-docs.mjs components/field-group` | passed | Page check passes with three forced-edit ledger rows. |
 | V-07 | C-01, C-03; accessibility | axe on the stack; group names | no violations; each group named, each editor keeps its label | as expected | injected axe-core, evaluate | passed | no screen-reader run |
+| V-09 | C-07, C-09; visual | stack: Position expandable (icon), Size expandable expanded with an engaged aspect constraint, Rotation expanded (icon) with a released X/Y constraint, Select, Color input, Slider, Switch, Checkbox with icons; dark | main rows 32 px; expanded rows indented by the gutter, right edges aligned, prefix leads, value and unit end the row 1.5 spacing apart; bracket from row middle to row middle broken by the Toggle | as expected | DevTools screenshots, `tmp/component-verification/field-group/expanded/stack.js` | passed | dead space after the unit (flex boundary) and a touching unit found and fixed |
+| V-10 | C-07, C-08; real input | click Expand Position; click Link X and Y; Rotation Y Shift+ArrowUp; Width select + type 1920; Width Shift+ArrowUp, ArrowUp | Position expands, chevron turns; toggle pressed; Y 55, X stays 0 (zero reference); Height 1080 live; 1290 → 726, 1291 → 726, both valid; change order width then height | as expected | DevTools click, type_text, press_key, evaluate | passed | dependents first committed before the source; deferred after it |
+| V-11 | C-07, C-08; visual | flat appearance; light scheme with compact density | no row or member edges in flat, brackets kept; compact rows and brackets follow the control heights | as expected | DevTools screenshots | passed | — |
+| V-12 | C-07, C-08; accessibility | axe on the stack; accessibility tree | Expand Position / Expand Size buttons with expanded state; Keep aspect ratio pressed; each spinbutton keeps its label; no new violations | as expected | snapshot, injected axe-core | passed | slider fill contrast pre-existing; no screen-reader run |
 | V-08 | C-06; real input | Rotation Y (step 0.1, ±360): ArrowUp, Shift+ArrowUp ×3, ArrowDown; type 45.4323232323232323, Tab; out-of-range 445.4; default number Input 0.7 ArrowUp ×4 | 45.1, 46, 47, 46.9; long text scrolls inside Y, row keeps its width, no spin buttons, no inner outline; commits 45.4 valid; 445.4 invalid row; default Input 1 at max | as expected | DevTools click, press_key, type_text, evaluate | passed | Chrome shows `1` for `1.0` in a focused number input; Meta+A does not select through DevTools. |
 
 ## Early integration checkpoint
@@ -87,7 +95,7 @@
 | Gate                                  | Status  | Required exit evidence / remaining work                                               |
 | ------------------------------------- | ------- | ------------------------------------------------------------------------------------- |
 | 0. Sources and scope                  | passed | §22.11 read; scope from the user's request. |
-| 1. Capability mapping                 | passed | C-01…C-05; S-01 pending spec amendment. |
+| 1. Capability mapping                 | passed | C-01…C-09; S-01, S-02 pending spec amendment. |
 | 2. Architecture and composition reuse | passed | joined-group hook; shared inline recipes. |
 | 3. Behavior                           | passed | V-02, V-03, V-04. |
 | 4. Presentation and customization     | passed | `field-group-inline.test.ts`; V-05. |
@@ -107,7 +115,7 @@
 
 ## Completion / handoff
 
-- Change summary: Field group `variant="inline"` for 2- and 3-value tuples on the shared inline row; lock toggle removed from the docs.
+- Change summary: Field group `variant="inline"` for 2- and 3-value tuples on the shared inline row; lock toggle removed from the docs; then expanded mode, constraints, the icon slot, and Input `unit`.
 - Actual delivery claim: the inline variant and the docs change; the default variant only regression-checked (V-03).
 - Record checker: see the final report.
 - Non-browser checks: `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`, check-docs.

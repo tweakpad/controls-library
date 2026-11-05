@@ -38,6 +38,7 @@
 | C-16 | Presentation: parts and keys per §17 Color input; outline swatch, inline row surface, rings | `cinp-presentation-keys` | — | family `color-input`, recipe | API Reference (CSS parts) | V-11, V-13 | passed | screenshots both schemes |
 | C-17 | Framework bindings `ColorInput` (React, Vue) and tag types | `ucl24-no-branch` | — | generated | docs/frameworks.md | V-14 | passed | lanes and smoke |
 | C-18 | `copyable` (default true): an inline row shows a Copy button for its value beside the label while hovered or focused; `copyable="false"` removes it; none while disabled or empty | pending spec amendment (user request 2026-11-05) | Copy button (`tp-copy-button`), `components/shared/inline-copy.ts` | `copyable`, `renderInlineCopy` after the end group, `#rowPress` guard | ### Inline | V-19 | passed | real hover, click and Tab in DevTools |
+| C-19 | `icon` slot: an inline Color input shows slotted content before its row, outside the row's boundary; the box takes no space while empty | pending spec amendment (user request 2026-11-05) | shared inline row | `renderInlineIcon`, `inlineIconStyles`, `color-input-icon` part, `inlineControlIcon` recipe | ### Inline | V-20 | passed | real render in DevTools |
 
 | Issue | Concrete missing/conflicting contract | Affected dependencies | Proposed resolution | Authority / resolution evidence | Status |
 | ----- | ------------------------------------- | --------------------- | ------------------- | ------------------------------- | ------ |
@@ -108,6 +109,7 @@
 | V-17 | C-01, C-08, C-12, C-14, C-16, C-17; non-browser | `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`, `check-docs`, `npm run size:report`, `npm run test:package` | pass | pass; lint only reports the pre-existing `text-control.ts` | commands | passed | Observed in the session; recorded above. |
 | V-18 | C-10, C-16; update cost regression | `inline-update-cost` fixture: 40 inline color inputs in one shadow root, controlled value, hook on instance 0; 20 value changes and 30 updates per frame; dist from 3eeb6b4 vs this tree | no presentation refresh and no attribute rewritten to its own value per value change; hook kept; forced refresh changes nothing | 62.2 → 5 records per change (57 → 0 no-op), refresh 2 → 0; 120 → 90 µs per update, frame 9.2 → 7.4 ms; safety 0 differences; color picker fixture 107/107 | DevTools MCP, `tests/fixtures/components/inline-update-cost/` (`counters`, `startTiming`, `safety`), baseline `tmp/inline-update-cost/baseline.json` | passed | Shared fix for tweakpad/ui#26. |
 | V-19 | C-18; behavior, visual | inline row; click the Copy button | button beside the label, 8 px after it; copies `#0f766e`; the picker does not open, value unchanged | as expected | DevTools click, evaluate | passed | `copyable` (default true), 2026-11-05. |
+| V-20 | C-19; visual, accessibility | inline stack with and without an icon, dark and light, flat, compact; axe | icon centered on the row's height, gutter 8 px, row narrows by the icon and gap, no change without one; no new violations | as expected | DevTools screenshots, measurement, injected axe-core, `tmp/component-verification/field-group/expanded/stack.js` | passed | slider label contrast over its fill is pre-existing (fails without the icon too) |
 
 ## Early integration checkpoint
 
@@ -155,3 +157,4 @@
 - Older out-of-scope gaps: SSR attribute naming (tweakpad/ui#25).
 - Changed source revisions / reopened gates: none open.
 - 2026-11-05: inline `copyable` Copy button (shared `components/shared/inline-copy.ts`, `inlineControlCopy` recipe); the live spec does not describe it yet, amendment pending.
+- 2026-11-05: inline `icon` slot outside the row (shared `components/shared/inline-icon.ts`, `inlineControlIcon` recipe); amendment pending.

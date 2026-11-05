@@ -453,6 +453,7 @@ export type NavigationPanelInputProps = ElementProps<
   | 'selectionStart'
   | 'step'
   | 'type'
+  | 'unit'
   | 'value'
   | 'variant',
   {

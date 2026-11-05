@@ -2,7 +2,11 @@ import { describe, expect, it } from 'vitest';
 import { inputPresentation } from '../../../src/presentation/families/input.js';
 import { inputGroupAppearance } from '../../../src/presentation/recipes/input-group.js';
 import { resolveComponentPresentation } from '../../../src/presentation/resolver.js';
-import { inlineControlSurface } from '../../../src/presentation/recipes/shared/inline-control.js';
+import {
+  inlineControlIcon,
+  inlineControlSurface,
+  inlineControlUnit,
+} from '../../../src/presentation/recipes/shared/inline-control.js';
 import { joinedEditor } from '../../../src/presentation/recipes/shared/text-control.js';
 
 const resolve = (variant: string) =>
@@ -37,5 +41,17 @@ describe('Input inline variant', () => {
         (rule) => rule.declarations === joinedEditor,
       ),
     ).toBe(true);
+  });
+
+  it('mutes the unit and the outside icon, and lets a number value meet its unit', () => {
+    const parts = resolve('inline').parts;
+    expect(parts['input-unit']![0]!.declarations).toMatchObject(inlineControlUnit);
+    expect(parts['input-icon']![0]!.declarations).toEqual(inlineControlIcon);
+    expect(
+      parts['input']!.find((rule) => rule.selector === '&[type="number"][data-unit]')!.declarations[
+        'text-align'
+      ],
+    ).toBe('end');
+    expect(resolve('default').parts['input-unit']).toEqual([]);
   });
 });

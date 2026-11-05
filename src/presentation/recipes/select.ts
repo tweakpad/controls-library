@@ -9,6 +9,7 @@ import {
 import { inputRules } from './shared/text-control.js';
 import {
   inlineControlCopy,
+  inlineControlIcon,
   inlineControlLabel,
   inlineControlSurface,
   inlineControlValue,
@@ -43,6 +44,7 @@ const emptyStateRules: PresentationDictionary[string] = [
 
 /** Select appearance over the shared field and surface base. */
 export const selectAppearance: PresentationDictionary = {
+  'select-icon-variant-inline': [{ declarations: inlineControlIcon }],
   select: [],
   'select-input': [
     {

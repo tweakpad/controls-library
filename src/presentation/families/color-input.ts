@@ -34,6 +34,12 @@ const definition: ComponentDefinition = {
       axes,
     },
     {
+      name: 'color-input-icon',
+      description:
+        "The box before an inline Color input's row, outside its boundary, that holds the icon slot.",
+      axes: ['variant'],
+    },
+    {
       name: 'color-input-copy',
       description:
         'The Copy button beside the label of an inline Color input, shown while the row is hovered or focused.',
@@ -67,6 +73,7 @@ export const colorInputPresentation = definePresentation({
   definition,
   bindings: {
     'tp-color-input': {
+      '[part~="color-input-icon"]': 'color-input-icon',
       '[part~="color-input"]': 'color-input',
       '[part~="color-input-row"]': 'color-input-row',
       '[part~="color-input-label"]': 'color-input-label',

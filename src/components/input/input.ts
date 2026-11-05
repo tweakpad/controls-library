@@ -13,6 +13,7 @@ import { TpTextControl } from '../field/text-control.js';
 import { TpButton } from '../button/button.js';
 import { TpIcon } from '../icon/icon.js';
 import { inlineCopy, renderInlineCopy } from '../shared/inline-copy.js';
+import { inlineIconStyles, renderInlineIcon } from '../shared/inline-icon.js';
 import { inputPresentation } from '../../presentation/families/input.js';
 
 /** `inline`: one compact row with the label at the start and the value at the end. */
@@ -24,8 +25,11 @@ export type InputVariant = 'default' | 'inline';
  * label, help text, errors and validation.
  *
  * @slot - Holds the native input the element renders; leave it empty.
+ * @slot icon - An Icon before an inline Input's row, outside its boundary.
  * @csspart input-row - The row of an inline Input around its label and editor.
  * @csspart input-label - The label at the start of an inline Input's row.
+ * @csspart input-icon - The box before an inline Input's row that holds the `icon` slot.
+ * @csspart input-unit - The unit after the value of an inline Input, such as `px`.
  * @csspart input-copy - The Copy button beside the label of an inline Input, shown while the row is
  * hovered or focused.
  * @csspart input-stepper - The decrement and increment Buttons around the value at the end of an
@@ -50,9 +54,11 @@ export class TpInput extends TpTextControl {
     precision: { type: Number },
     variant: { type: String, reflect: true },
     copyable: { converter: defaultTrue, reflect: true },
+    unit: { type: String },
   };
   static override styles = [
     ...TpTextControl.styles,
+    inlineIconStyles,
     css`
       /* Inline: one row across its container, the label at the start and the value at the end. */
       :host([variant='inline']) {
@@ -79,6 +85,11 @@ export class TpInput extends TpTextControl {
       .row ::slotted([data-tp-editor]) {
         flex: 1 1 0;
         text-align: end;
+      }
+
+      .unit {
+        flex: none;
+        white-space: nowrap;
       }
 
       /* The copy action follows the value in the tree and sits beside the label. */
@@ -136,6 +147,11 @@ export class TpInput extends TpTextControl {
    * or focused; `copyable="false"` removes it. Password, file and hidden types never offer it.
    */
   copyable = true;
+  /**
+   * A unit an inline Input shows after its value, such as `px`, `rem` or `deg`; it is not part of
+   * the value. The editor announces it as its description.
+   */
+  unit = '';
   /** An inline Input shows its Field's label inside its row. */
   override get rendersFieldLabel(): boolean {
     return this.variant === 'inline';
@@ -149,7 +165,7 @@ export class TpInput extends TpTextControl {
       readOnly: this.effectiveReadOnly,
       invalid: this.effectiveInvalid,
     };
-    return renderPart('input-row', state, this.partContracts['input-row'], {
+    const row = renderPart('input-row', state, this.partContracts['input-row'], {
       tag: 'div',
       properties: {
         class: 'row',
@@ -172,13 +188,26 @@ export class TpInput extends TpTextControl {
               content: label,
             })
           : nothing
-      }${this.type === 'number' ? this.#stepper(state, editor) : editor}${renderInlineCopy({
-        part: 'input-copy',
-        value: this.value,
-        name: label,
-        enabled:
-          this.copyable && !state.disabled && !['password', 'file', 'hidden'].includes(this.type),
-      })}`,
+      }${this.type === 'number' ? this.#stepper(state, editor) : html`${editor}${this.#unit(state)}`}${renderInlineCopy(
+        {
+          part: 'input-copy',
+          value: this.value,
+          name: label,
+          enabled:
+            this.copyable && !state.disabled && !['password', 'file', 'hidden'].includes(this.type),
+        },
+      )}`,
+    });
+    return html`${renderInlineIcon('input-icon', true)}${row}`;
+  }
+
+  /** The unit after an inline value; the editor announces it as its description. */
+  #unit(state: { disabled: boolean; readOnly: boolean; invalid: boolean }) {
+    if (!this.unit) return nothing;
+    return renderPart('input-unit', state, this.partContracts['input-unit'], {
+      tag: 'span',
+      properties: { class: 'unit', part: 'input-unit', 'aria-hidden': 'true' },
+      content: this.unit,
     });
   }
 
@@ -189,7 +218,7 @@ export class TpInput extends TpTextControl {
    * browser's spin buttons. They stay out of the tab order and the accessibility tree: the focused
    * editor steps with the Arrow keys and keeps its spin button semantics.
    */
-  #stepper(state: { disabled: boolean; readOnly: boolean }, editor: unknown) {
+  #stepper(state: { disabled: boolean; readOnly: boolean; invalid: boolean }, editor: unknown) {
     const disabled = state.disabled || state.readOnly;
     const button = (direction: -1 | 1) =>
       html`<tp-button
@@ -216,11 +245,9 @@ export class TpInput extends TpTextControl {
         part: 'input-stepper',
         style: { '--_tp-input-chars': String(chars) },
       },
-      content: html`<span aria-hidden="true" class="step">${button(-1)}</span>${editor}<span
-          aria-hidden="true"
-          class="step"
-          >${button(1)}</span
-        >`,
+      content: html`<span aria-hidden="true" class="step">${button(-1)}</span>${editor}${this.#unit(
+          state,
+        )}<span aria-hidden="true" class="step">${button(1)}</span>`,
     });
   }
 
@@ -237,6 +264,15 @@ export class TpInput extends TpTextControl {
   }
 
   /** A number value in its precision; other text as it is. */
+  /**
+   * A number value in this Input's precision, as stepping and committing round it; other text as
+   * it is.
+   * @internal
+   */
+  formatNumber(text: string): string {
+    return this.#format(text);
+  }
+
   #format(text: string): string {
     const precision = this.#precision;
     const number = Number(text);
@@ -417,6 +453,9 @@ export class TpInput extends TpTextControl {
       '.required': this.required,
       ...(this.label ? { 'aria-label': this.label } : {}),
       'aria-invalid': this.effectiveInvalid ? 'true' : nothing,
+      'data-unit': this.variant === 'inline' && this.unit ? '' : nothing,
+      // The unit is drawn in the Input's own tree, out of the editor's reach; it describes it.
+      'aria-description': this.variant === 'inline' && this.unit ? this.unit : nothing,
       '@input': this.#numberInput,
       '@change': this.#numberCommit,
       '@paste': this.pasted,

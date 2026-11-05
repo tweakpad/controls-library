@@ -16,6 +16,7 @@ interface Args {
   required: boolean;
   mono: boolean;
   variant: InputVariant;
+  unit: string;
 }
 const meta: Meta<Args> = {
   title: 'Components/Input',
@@ -26,6 +27,7 @@ const meta: Meta<Args> = {
     type: 'text',
     label: 'Project name',
     variant: 'default',
+    unit: '',
     placeholder: 'Name your project',
     disabled: false,
     readOnly: false,
@@ -52,6 +54,7 @@ const meta: Meta<Args> = {
     },
     label: { control: 'text' },
     variant: { control: 'select', options: ['default', 'inline'] },
+    unit: { control: 'text', description: 'Inline: a unit after the value, such as px.' },
     placeholder: { control: 'text' },
     disabled: { control: 'boolean' },
     readOnly: { control: 'boolean' },
@@ -70,6 +73,7 @@ const meta: Meta<Args> = {
       .type=${args.type}
       .label=${args.label}
       .variant=${args.variant}
+      .unit=${args.unit}
       .placeholder=${args.placeholder}
       .disabled=${args.disabled}
       .readOnly=${args.readOnly}

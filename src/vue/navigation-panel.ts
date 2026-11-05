@@ -439,6 +439,7 @@ export const NavigationPanelInput = /*#__PURE__*/ createBinding(
   | 'selectionStart'
   | 'step'
   | 'type'
+  | 'unit'
   | 'value'
   | 'variant',
   {

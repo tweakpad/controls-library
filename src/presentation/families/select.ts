@@ -31,6 +31,12 @@ const definition: ComponentDefinition = {
       axes: ['variant'],
     },
     {
+      name: 'select-icon',
+      description:
+        "The box before an inline Select's trigger, outside its boundary, that holds the icon slot.",
+      axes: ['variant'],
+    },
+    {
       name: 'select-copy',
       description:
         'The Copy button beside the label of an inline Select, shown while the row is hovered or focused.',
@@ -120,6 +126,7 @@ export const selectPresentation = definePresentation({
   definition,
   bindings: {
     'tp-select': {
+      '[part~="select-icon"]': 'select-icon',
       '[part~="select-anchor"]': 'select-anchor',
       '[part~="select-input"]': 'select-input',
       '[part~="select-clear"]': 'select-clear',

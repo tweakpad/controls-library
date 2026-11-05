@@ -19,6 +19,10 @@
 &[data-checked]{background:light-dark(var(--tp-background), var(--tp-primary-foreground))}
 /* switch-thumb-size-sm */
 /* switch-thumb-size-default */
+/* switch-icon */
+/* switch-icon-variant-default */
+/* switch-icon-variant-inline */
+&{color:var(--tp-muted-foreground)}
 /* switch-row */
 /* switch-row-variant-default */
 /* switch-row-variant-inline */

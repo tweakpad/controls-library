@@ -16,6 +16,10 @@
 &:focus-visible{border-color:var(--tp-ring);outline:var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-ring) 50%, transparent);outline-offset:0}
 &[data-invalid]{border-color:var(--tp-destructive)}
 &[data-invalid]:focus-visible{border-color:var(--tp-destructive);outline:var(--tp-ring-width) var(--tp-border-style) color-mix(in oklab, var(--tp-destructive) 50%, transparent);outline-offset:0}
+/* checkbox-icon */
+/* checkbox-icon-variant-default */
+/* checkbox-icon-variant-inline */
+&{color:var(--tp-muted-foreground)}
 /* checkbox-indicator */
 &{color:inherit}
 

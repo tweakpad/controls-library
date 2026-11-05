@@ -3,6 +3,7 @@ import type { PresentationDictionary } from '../resolver.js';
 import { fillColor, fillShown } from './shared/fill.js';
 import { focusHalo, focusRing, invalidFocusHalo } from './shared/focus.js';
 import {
+  inlineControlIcon,
   inlineControlLabel,
   inlineControlRings,
   inlineControlSurface,
@@ -17,6 +18,7 @@ const invalidFocusPaint = {
 };
 /** Switch paint; translated geometry remains structural. */
 export const switchAppearance: PresentationDictionary = {
+  'switch-icon-variant-inline': [{ declarations: inlineControlIcon }],
   switch: [
     {
       selector: '& ~ tp-label:not([hidden])',
