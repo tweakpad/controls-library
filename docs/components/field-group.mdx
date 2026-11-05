@@ -123,22 +123,24 @@ Set the `joined` property to `false` to keep every editor's own corners with the
   code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:20rem;margin-inline:auto">
   <tp-input variant="inline" label="Layer" default-value="Header card"></tp-input>
   <tp-field-group variant="inline" label="Position">
-    <tp-input-group><span slot="prefix">X</span><tp-input label="X" default-value="120"></tp-input></tp-input-group>
-    <tp-input-group><span slot="prefix">Y</span><tp-input label="Y" default-value="48"></tp-input></tp-input-group>
+    <tp-input-group><span slot="prefix">X</span><tp-input label="X" type="number" default-value="120"></tp-input></tp-input-group>
+    <tp-input-group><span slot="prefix">Y</span><tp-input label="Y" type="number" default-value="48"></tp-input></tp-input-group>
   </tp-field-group>
   <tp-field-group variant="inline" label="Size">
-    <tp-input-group><span slot="prefix">W</span><tp-input label="Width" default-value="1280"></tp-input></tp-input-group>
-    <tp-input-group><span slot="prefix">H</span><tp-input label="Height" default-value="720"></tp-input></tp-input-group>
+    <tp-input-group><span slot="prefix">W</span><tp-input label="Width" type="number" default-value="1280"></tp-input></tp-input-group>
+    <tp-input-group><span slot="prefix">H</span><tp-input label="Height" type="number" default-value="720"></tp-input></tp-input-group>
   </tp-field-group>
   <tp-field-group variant="inline" label="Rotation">
-    <tp-input-group><span slot="prefix">X</span><tp-input label="Rotation X" default-value="0"></tp-input></tp-input-group>
-    <tp-input-group><span slot="prefix">Y</span><tp-input label="Rotation Y" default-value="45"></tp-input></tp-input-group>
-    <tp-input-group><span slot="prefix">Z</span><tp-input label="Rotation Z" default-value="90"></tp-input></tp-input-group>
+    <tp-input-group><span slot="prefix">X</span><tp-input label="Rotation X" type="number" min="-180" max="180" default-value="0"></tp-input></tp-input-group>
+    <tp-input-group><span slot="prefix">Y</span><tp-input label="Rotation Y" type="number" min="-180" max="180" default-value="45"></tp-input></tp-input-group>
+    <tp-input-group><span slot="prefix">Z</span><tp-input label="Rotation Z" type="number" min="-180" max="180" default-value="90"></tp-input></tp-input-group>
   </tp-field-group>
 </div>`}
 />
 
 `variant="inline"` fits the group into one row the height of a control, with `label` at the start and the values at the end, so it stacks with other inline controls such as an inline Input. Each editor becomes a segment of the row: its prefix, then its value, as wide as its text. The row carries the boundary, the focus ring and the invalid state, and a press on the label edits the first value.
+
+Number values step with the Arrow keys, ten steps at a time with Shift, and keep to their `step`, `min` and `max`; a committed value rounds to the decimals of `step`. A value off the step or out of range shows the whole row invalid, and a long value scrolls inside its own segment.
 
 ### In widgets
 

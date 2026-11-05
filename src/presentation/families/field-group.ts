@@ -27,6 +27,11 @@ const definition: ComponentDefinition = {
       axes: ['orientation', 'variant'],
     },
     {
+      name: 'field-group-value',
+      description: "The native editor of each segment in an inline Field group's row.",
+      axes: ['variant'],
+    },
+    {
       name: 'field-group-label',
       description: "The label at the start of an inline Field group's row.",
       axes: ['variant'],

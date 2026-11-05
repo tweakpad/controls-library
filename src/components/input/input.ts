@@ -353,10 +353,12 @@ export class TpInput extends TpTextControl {
     this.inputElement?.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
-  /** The Arrow keys step an inline number value through the same path, ten steps with Shift. */
+  /**
+   * The Arrow keys step a number value on the step grid, rounded to its precision, ten steps with
+   * Shift, as the inline arrows do.
+   */
   readonly #numberKeyDown = (event: KeyboardEvent): void => {
     if (
-      this.variant === 'inline' &&
       this.type === 'number' &&
       (event.key === 'ArrowUp' || event.key === 'ArrowDown') &&
       !event.defaultPrevented &&

@@ -30,6 +30,10 @@ const segmentValue: PresentationDeclarations = {
   'field-sizing': 'content',
   'inline-size': 'auto',
   'min-inline-size': '1ch',
+  // A long value scrolls inside its own segment instead of pushing the row's others out.
+  'max-inline-size': '8ch',
+  // The row rings for its segments, the invalid one included.
+  'outline-style': 'none',
   'padding-inline-start': '0',
   'padding-inline-end': '0',
   'text-align': 'end',
@@ -156,12 +160,42 @@ export class TpFieldGroup extends TpJoinedGroup {
     return { [member.part]: { styleHook: segmentBoundary } };
   }
 
-  /** The row shows a member's invalid state, since segments draw no ring of their own. */
+  #values = new Map<HTMLElement, () => void>();
+
+  /**
+   * The row shows a member's invalid state, since segments draw no ring of their own, and each
+   * segment's native editor takes the group's value part for what a style hook cannot reach.
+   */
   protected override membersSynced(members: readonly GroupMember[]): void {
+    const inline = this.variant === 'inline';
     const invalid =
-      this.variant === 'inline' &&
-      members.some((member) => !!member.host.querySelector('[aria-invalid="true"]'));
+      inline && members.some((member) => !!member.host.querySelector('[aria-invalid="true"]'));
     this.renderRoot.querySelector('.group')?.toggleAttribute('data-invalid', invalid);
+    const values = new Set<HTMLElement>();
+    if (inline)
+      for (const member of members) {
+        const host = member.host as GroupMember['host'] & { inputElement?: HTMLElement | null };
+        const native =
+          host.inputElement ?? host.querySelector<HTMLElement>('input, textarea') ?? null;
+        if (native) values.add(native);
+      }
+    for (const [native, release] of this.#values)
+      if (!values.has(native)) {
+        release();
+        this.#values.delete(native);
+      }
+    for (const native of values)
+      if (!this.#values.has(native))
+        this.#values.set(
+          native,
+          this.presentationController.registerPart('field-group-value', native),
+        );
+  }
+
+  override disconnectedCallback(): void {
+    super.disconnectedCallback();
+    for (const release of this.#values.values()) release();
+    this.#values.clear();
   }
 
   /** A press on the label or between the values edits the first value, as a label press does. */

@@ -24,6 +24,7 @@
 | C-02 | Inline members become segments: prefix, value as wide as its text, suffix; no edge, fill, ring or radius of their own | pending spec amendment | Input group addons; joined-group member composition | `memberPresentation` hooks on `input`, `input-group`, `input-group-addon`, `input-group-control` | ### Inline | V-01, V-03 | passed | longhand hooks restore the joined seams exactly |
 | C-03 | The row rings on focus within and turns invalid when a member is invalid; a press on the label edits the first value | pending spec amendment | inline Input row rings and label press | `inlineControlRings`, `membersSynced` data-invalid, `#rowPress` | ### Inline | V-02, V-04 | passed | real click, type, invalid |
 | C-04 | Flat mode: no added edge or depth | Foundation appearance modes | `FLAT_ROLES` | row uses role tokens only | ### Inline | V-05 | passed | row edge transparent, no inner edges |
+| C-06 | Number segments: Arrow keys step on the step grid (Shift ×10) within `min`/`max`, a committed value rounds to the decimals of `step`, off-step or out-of-range values show the row invalid, a long value scrolls inside its segment (max 8ch), no spin buttons | pending spec amendment (user request 2026-11-05) | Input `#step`, `#numberKeyDown`, `#commitNumber` | Input Arrow stepping for every number Input; `field-group-value` registered part hides spin buttons; segment `max-inline-size` | ### Inline | V-08 | passed | real keys, typing and Tab in DevTools |
 | C-05 | Lock toggle removed from the documentation example | user instruction | — | docs preview and two sentences | ### Mixed members | V-06 | passed | forced edits listed in the docs ledger |
 
 | Issue | Concrete missing/conflicting contract | Affected dependencies | Proposed resolution | Authority / resolution evidence | Status |
@@ -71,6 +72,7 @@
 | V-05 | C-04; visual | stack inside `appearance="flat"` | no row edge, no inner edge or depth | as expected | DevTools screenshot | passed | Row border computed `rgba(0, 0, 0, 0)` in flat; inspected on screen. |
 | V-06 | C-05; docs | docs page | no lock toggle; Separator preview keeps Price range | as expected | `check-docs.mjs components/field-group` | passed | Page check passes with three forced-edit ledger rows. |
 | V-07 | C-01, C-03; accessibility | axe on the stack; group names | no violations; each group named, each editor keeps its label | as expected | injected axe-core, evaluate | passed | no screen-reader run |
+| V-08 | C-06; real input | Rotation Y (step 0.1, ±360): ArrowUp, Shift+ArrowUp ×3, ArrowDown; type 45.4323232323232323, Tab; out-of-range 445.4; default number Input 0.7 ArrowUp ×4 | 45.1, 46, 47, 46.9; long text scrolls inside Y, row keeps its width, no spin buttons, no inner outline; commits 45.4 valid; 445.4 invalid row; default Input 1 at max | as expected | DevTools click, press_key, type_text, evaluate | passed | Chrome shows `1` for `1.0` in a focused number input; Meta+A does not select through DevTools. |
 
 ## Early integration checkpoint
 

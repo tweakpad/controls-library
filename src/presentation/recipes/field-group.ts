@@ -23,5 +23,13 @@ export const fieldGroupAppearance: PresentationDictionary = {
     ...inlineControlRings('&', ':focus-within'),
   ],
   'field-group-label-variant-inline': [{ declarations: inlineControlLabel }],
+  // A segment's number value steps with the Arrow keys; the browser's spin buttons stay hidden.
+  'field-group-value-variant-inline': [
+    {
+      selector: '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button',
+      declarations: { appearance: 'none', margin: '0' },
+    },
+    { selector: '&[type="number"]', declarations: { appearance: 'textfield' } },
+  ],
   'field-group-separator': joinedGroupSeparator,
 };

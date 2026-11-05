@@ -128,3 +128,4 @@
 - Older out-of-scope gaps: none found.
 - Changed source revisions / reopened gates: none open.
 - 2026-11-05: inline `copyable` Copy button (shared `components/shared/inline-copy.ts`, `inlineControlCopy` recipe); the live spec does not describe it yet, amendment pending.
+- 2026-11-05: the Arrow-key stepping of C-07 now applies to every number Input, not only inline ones (Field group inline segments); default Input 0.7 → 1 at max with step 0.1 checked in DevTools.
