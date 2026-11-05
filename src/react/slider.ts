@@ -13,6 +13,7 @@ export type SliderProps = ElementProps<
   TpSlider,
   | 'appearance'
   | 'buffered'
+  | 'copyable'
   | 'defaultValue'
   | 'density'
   | 'disabled'

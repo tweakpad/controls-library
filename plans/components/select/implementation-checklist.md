@@ -28,6 +28,7 @@
 | C-06 | Searchable Select keeps the default look | `slin-prop-1` | — | `#inline` excludes searchable; recipe scoped `:not([data-searchable])` | ### Inline | V-01 | passed | screenshot |
 | C-08 | Inline opens the List below the row with the shared popup entrance and exit (align item with trigger defaults off, as in searchable mode) | `slin-prop-1` | searchable default `alignItemWithTrigger` | `alignItemWithTrigger` getter; `anchoredPresenceAppearance` | ### Inline | V-07 | passed | opacity 0→1 over ~13 frames, fade-out on close, list below the row |
 | C-07 | Behavior unchanged: open, keyboard select, close, focus | `slin-q1` | existing Select | no behavior change | — | V-04, V-05 | passed | real click + ArrowDown + Enter |
+| C-09 | `copyable` (default true): an inline row shows a Copy button for its value beside the label while hovered or focused; `copyable="false"` removes it; none while disabled or empty | pending spec amendment (user request 2026-11-05) | Copy button (`tp-copy-button`), `components/shared/inline-copy.ts` | `copyable`, `renderInlineCopy` beside the trigger, `.copy-space` anchor in the trigger | ### Inline | V-09 | passed | real hover, click and Tab in DevTools |
 
 | Issue | Concrete missing/conflicting contract | Affected dependencies | Proposed resolution | Authority / resolution evidence | Status |
 | ----- | ------------------------------------- | --------------------- | ------------------- | ------------------------------- | ------ |
@@ -74,6 +75,7 @@
 | V-07 | C-08; motion | open and close `#paper`, sample opacity per frame | entrance and exit transitions run | as expected | DevTools evaluate + screenshot | passed | Same presence recipe as searchable Select and menus. |
 | V-06 | C-02, C-03; accessibility automation | axe on `inline.html` dark and light | no violations | none | injected axe-core | passed | Both schemes clean. |
 | V-08 | C-02, C-08; update cost regression | `inline-update-cost` fixture: 40 inline selects in one shadow root, controlled value, hook on instance 0; 20 value changes and 30 updates per frame; dist from 3eeb6b4 vs this tree | no presentation refresh and no attribute rewritten to its own value per value change; hook kept; forced refresh changes nothing | 82.6 → 3 records per change (75 → 0 no-op), updates 3 → 1, querySelectorAll 69.2 → 0.1; 120 → 83 µs per update, frame 13.2 → 5.2 ms; safety 0 differences; real input: open, choose, reopen shows the check on the new value; select fixture 27/31 | DevTools MCP, `tests/fixtures/components/inline-update-cost/` (`counters`, `startTiming`, `safety`), baseline `tmp/inline-update-cost/baseline.json` | passed | Shared fix for tweakpad/ui#26; options that are not rendered settle their indicator presence. The 4 failing select checks fail on the 3eeb6b4 package too. |
+| V-09 | C-09; behavior, visual, accessibility | inline row with a selection and one with a placeholder; click the Copy button | button outside the combobox, anchored beside the label (8 px); copies the selection text "Push"; the list stays closed; no button without a selection | as expected | DevTools click, snapshot, measurement | passed | `copyable` (default true), 2026-11-05. |
 
 ## Early integration checkpoint
 
@@ -120,3 +122,4 @@
 - Required failures or blocked checks: none caused by this change.
 - Older out-of-scope gaps: 4 Select fixture checks fail on HEAD as well (modal lease in shadow scopes, scroll repeat, adoption paint, icon length tokens).
 - Changed source revisions / reopened gates: none open.
+- 2026-11-05: inline `copyable` Copy button (shared `components/shared/inline-copy.ts`, `inlineControlCopy` recipe); the live spec does not describe it yet, amendment pending.

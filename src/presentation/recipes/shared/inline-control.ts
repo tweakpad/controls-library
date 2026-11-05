@@ -1,4 +1,5 @@
 import type { PresentationDeclarations, PresentationRule } from '../../resolver.js';
+import { motionTransition } from '../../motion.js';
 import { invalidFocusRing } from './focus.js';
 import { fieldBoundary, fieldFocus, fieldInvalid } from './text-control.js';
 
@@ -51,5 +52,26 @@ export function inlineControlRings(
     { selector: on('[data-invalid]'), declarations: fieldInvalid },
     // Equal specificity: the later invalid paint would tint the focus ring away.
     { selector: on(`[data-invalid]${focus}`), declarations: invalidFocusRing },
+  ];
+}
+
+/**
+ * The Copy button beside a row's label: hidden at rest, shown while `row` (a selector for the
+ * element that hovers and holds focus) is hovered or focused, and while it confirms a copy.
+ */
+export function inlineControlCopy(row: string): PresentationRule[] {
+  return [
+    {
+      declarations: {
+        opacity: '0',
+        'pointer-events': 'none',
+        transition: motionTransition(['opacity'], 'fast'),
+      },
+    },
+    {
+      selector: `${row}:is(:hover, :focus-within) &`,
+      declarations: { opacity: '1', 'pointer-events': 'auto' },
+    },
+    { selector: '&[data-copied]', declarations: { opacity: '1', 'pointer-events': 'auto' } },
   ];
 }

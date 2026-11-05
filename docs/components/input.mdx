@@ -126,6 +126,8 @@ Native form serialization follows the editable input's current representation, i
 
 `variant="inline"` fits the Input into one row the height of a control, with `label` at the start and the value at the end, so it stacks with other inline controls such as an inline Select. A press on the label edits the value. Inside a Field, the Field's label moves into the row.
 
+While the row is hovered or focused, a Copy button beside the label copies the value; `copyable="false"` removes it. Password and file Inputs never show it.
+
 A number value sits between a decrement and an increment arrow in place of the browser's spin buttons. Hold an arrow to keep stepping; the Arrow keys step the focused value too, ten steps at a time with Shift. `step` sets how far each step moves, and `precision` how many decimals the value keeps and shows, which defaults to the decimals of `step`.
 
 <Preview

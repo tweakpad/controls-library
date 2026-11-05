@@ -44,6 +44,7 @@ export const Autocomplete = /*#__PURE__*/ createBinding(TpAutocomplete, 'Autocom
   | 'columns'
   | 'completionMode'
   | 'container'
+  | 'copyable'
   | 'defaultInputValue'
   | 'defaultOpen'
   | 'defaultValue'

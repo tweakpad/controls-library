@@ -14,6 +14,7 @@ export const Input = /*#__PURE__*/ createBinding(TpInput, 'Input', {
   TpInput,
   | 'appearance'
   | 'autocomplete'
+  | 'copyable'
   | 'defaultValue'
   | 'density'
   | 'disabled'

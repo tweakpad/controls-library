@@ -59,6 +59,7 @@ import type {
 } from './types.js';
 import { sliderPresentation } from '../../presentation/families/slider.js';
 import { TpInput } from '../input/input.js';
+import { inlineCopy, renderInlineCopy } from '../shared/inline-copy.js';
 import { TpSliderThumb } from './slider-thumb.js';
 import type { CustomElementConstructorWithTag } from '../../foundation/define.js';
 
@@ -111,12 +112,14 @@ interface Drag {
  * @fires tp-field-value - After a value commits; an enclosing Field tracks its dirty state from it.
  * @fires tp-slider-pointer-change - `{ value, ratio }` as the pointer hovers the track without
  * dragging, `null` when it leaves; for previews such as a media timeline's thumbnail.
+ * @csspart slider-copy - The Copy button beside the label of an inline slider, shown while the bar
+ * is hovered or focused.
  */
 export class TpSlider extends TpFormElement<SliderValue | undefined> implements SliderThumbOwner {
   static tagName = 'tp-slider';
   /** Library elements this element renders; defining it defines them too. */
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {
-    return [TpSliderThumb, TpInput];
+    return [TpSliderThumb, TpInput, ...inlineCopy.elements];
   }
   static override presentation = sliderPresentation;
   static override properties = {
@@ -131,6 +134,7 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
     ticks: { type: Number },
     snapToTicks: { type: Boolean, attribute: 'snap-to-ticks' },
     editableValue: { type: Boolean, attribute: 'editable-value' },
+    copyable: { converter: defaultTrue, reflect: true },
     largeStep: { type: Number, attribute: 'large-step' },
     minStepsBetweenValues: { type: Number, attribute: 'min-steps-between-values' },
     variant: { type: String, reflect: true },
@@ -197,6 +201,11 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
    * the bar still does.
    */
   editableValue = false;
+  /**
+   * Shows a Copy button for the value text beside the label of an inline slider while the bar is
+   * hovered or focused; `copyable="false"` removes it.
+   */
+  copyable = true;
   /**
    * The value being typed: the thumb it moves, its editor, whether Escape cancelled it, and the key
    * that ended it (a commit on blur carries the field's own blur instead).
@@ -1555,6 +1564,12 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
                         ></tp-input
                       ></span>`
                     : html`<slot name="value">${state.formattedValues.join(' – ')}</slot>`,
+                })}${renderInlineCopy({
+                  part: 'slider-copy',
+                  value: state.formattedValues.join(' – '),
+                  name:
+                    this.#association.label || this.label || this.getAttribute('aria-label') || '',
+                  enabled: inline && this.copyable && !state.disabled,
                 })}
               </div>`
             : ''

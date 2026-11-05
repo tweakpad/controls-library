@@ -32,6 +32,12 @@ const definition: ComponentDefinition = {
       axes: ['variant'],
     },
     {
+      name: 'input-copy',
+      description:
+        'The Copy button beside the label of an inline Input, shown while the row is hovered or focused.',
+      axes: ['variant'],
+    },
+    {
       name: 'input-stepper',
       description:
         "The decrement and increment Buttons at the end of an inline number Input's row, in place of the browser's spin buttons.",
@@ -67,6 +73,7 @@ export const inputPresentation = definePresentation({
       input: 'input',
       '[part~="input-row"]': 'input-row',
       '[part~="input-label"]': 'input-label',
+      '[part~="input-copy"]': 'input-copy',
       '[part~="input-stepper"]': 'input-stepper',
       '[part~="input-decrement"]': 'input-decrement',
       '[part~="input-increment"]': 'input-increment',

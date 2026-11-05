@@ -35,6 +35,7 @@ export type AutocompleteProps = ElementProps<
   | 'columns'
   | 'completionMode'
   | 'container'
+  | 'copyable'
   | 'defaultInputValue'
   | 'defaultOpen'
   | 'defaultValue'

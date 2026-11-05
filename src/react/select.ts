@@ -41,6 +41,7 @@ export type SelectProps = ElementProps<
   | 'columns'
   | 'completionMode'
   | 'container'
+  | 'copyable'
   | 'defaultInputValue'
   | 'defaultOpen'
   | 'defaultValue'

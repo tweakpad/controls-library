@@ -37,6 +37,7 @@
 | C-15 | Widget default trigger is a Color input with picker none; authored trigger synced, re-proposed, contained, ARIA on its swatch | `uwg-cp-req-ana-trigger` | `ColorController` popup | `#syncColorTrigger`, `#registerAuthoredTrigger` | widgets/color-picker ### Popup | V-12 | passed | `assertColorInputTrigger` 18/18 |
 | C-16 | Presentation: parts and keys per §17 Color input; outline swatch, inline row surface, rings | `cinp-presentation-keys` | — | family `color-input`, recipe | API Reference (CSS parts) | V-11, V-13 | passed | screenshots both schemes |
 | C-17 | Framework bindings `ColorInput` (React, Vue) and tag types | `ucl24-no-branch` | — | generated | docs/frameworks.md | V-14 | passed | lanes and smoke |
+| C-18 | `copyable` (default true): an inline row shows a Copy button for its value beside the label while hovered or focused; `copyable="false"` removes it; none while disabled or empty | pending spec amendment (user request 2026-11-05) | Copy button (`tp-copy-button`), `components/shared/inline-copy.ts` | `copyable`, `renderInlineCopy` after the end group, `#rowPress` guard | ### Inline | V-19 | passed | real hover, click and Tab in DevTools |
 
 | Issue | Concrete missing/conflicting contract | Affected dependencies | Proposed resolution | Authority / resolution evidence | Status |
 | ----- | ------------------------------------- | --------------------- | ------------------- | ------------------------------- | ------ |
@@ -106,6 +107,7 @@
 | V-16 | C-07, C-16; accessibility automation | injected axe-core, dark and light | no violations | none | evaluate | passed | Observed in the session; recorded above. |
 | V-17 | C-01, C-08, C-12, C-14, C-16, C-17; non-browser | `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`, `check-docs`, `npm run size:report`, `npm run test:package` | pass | pass; lint only reports the pre-existing `text-control.ts` | commands | passed | Observed in the session; recorded above. |
 | V-18 | C-10, C-16; update cost regression | `inline-update-cost` fixture: 40 inline color inputs in one shadow root, controlled value, hook on instance 0; 20 value changes and 30 updates per frame; dist from 3eeb6b4 vs this tree | no presentation refresh and no attribute rewritten to its own value per value change; hook kept; forced refresh changes nothing | 62.2 → 5 records per change (57 → 0 no-op), refresh 2 → 0; 120 → 90 µs per update, frame 9.2 → 7.4 ms; safety 0 differences; color picker fixture 107/107 | DevTools MCP, `tests/fixtures/components/inline-update-cost/` (`counters`, `startTiming`, `safety`), baseline `tmp/inline-update-cost/baseline.json` | passed | Shared fix for tweakpad/ui#26. |
+| V-19 | C-18; behavior, visual | inline row; click the Copy button | button beside the label, 8 px after it; copies `#0f766e`; the picker does not open, value unchanged | as expected | DevTools click, evaluate | passed | `copyable` (default true), 2026-11-05. |
 
 ## Early integration checkpoint
 
@@ -152,3 +154,4 @@
 - Required failures or blocked checks: the browser's picker window cannot be driven through DevTools; picks are applied through the input (V-03).
 - Older out-of-scope gaps: SSR attribute naming (tweakpad/ui#25).
 - Changed source revisions / reopened gates: none open.
+- 2026-11-05: inline `copyable` Copy button (shared `components/shared/inline-copy.ts`, `inlineControlCopy` recipe); the live spec does not describe it yet, amendment pending.

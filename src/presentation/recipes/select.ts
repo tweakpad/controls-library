@@ -8,6 +8,7 @@ import {
 } from './command-surface.js';
 import { inputRules } from './shared/text-control.js';
 import {
+  inlineControlCopy,
   inlineControlLabel,
   inlineControlSurface,
   inlineControlValue,
@@ -117,6 +118,7 @@ export const selectAppearance: PresentationDictionary = {
     selector: (rule.selector ?? '&').replaceAll('&', '&:not([data-searchable])'),
   })),
   'select-trigger-label-variant-inline': [{ declarations: inlineControlLabel }],
+  'select-copy': inlineControlCopy('[part~="select"]'),
   'select-value-variant-inline': [
     { declarations: inlineControlValue },
     {

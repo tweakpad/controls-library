@@ -3,6 +3,7 @@ import { outlineFieldPaint } from './core/button.js';
 import { fillHidden } from './shared/fill.js';
 import { focusRing, insetFocusRing } from './shared/focus.js';
 import {
+  inlineControlCopy,
   inlineControlLabel,
   inlineControlRings,
   inlineControlSurface,
@@ -80,6 +81,7 @@ export const colorInputAppearance: PresentationDictionary = {
   ],
   'color-input-row-size-sm': [rule({ 'min-block-size': 'var(--tp-control-height-sm)' })],
   'color-input-label-variant-inline': [rule(inlineControlLabel)],
+  'color-input-copy': inlineControlCopy('[part~="color-input-row"]'),
   'color-input-swatch-variant-inline': [
     // Inside the row's borders, over the size step's control extent.
     rule(

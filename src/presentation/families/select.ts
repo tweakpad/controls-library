@@ -31,6 +31,12 @@ const definition: ComponentDefinition = {
       axes: ['variant'],
     },
     {
+      name: 'select-copy',
+      description:
+        'The Copy button beside the label of an inline Select, shown while the row is hovered or focused.',
+      axes: ['variant'],
+    },
+    {
       name: 'select-value',
       description: 'The selection or the placeholder inside the trigger.',
       axes: ['variant'],
@@ -126,6 +132,7 @@ export const selectPresentation = definePresentation({
       '[part~="select"]': 'select',
       '[part~="select-trigger"]': 'select-trigger',
       '[part~="select-trigger-label"]': 'select-trigger-label',
+      '[part~="select-copy"]': 'select-copy',
       '[part~="select-value"]': 'select-value',
       '[part~="select-content"]': 'select-content',
       '[part~="select-list"]': 'select-list',

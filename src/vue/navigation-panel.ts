@@ -408,6 +408,7 @@ export const NavigationPanelInput = /*#__PURE__*/ createBinding(
   TpNavigationPanelInput,
   | 'appearance'
   | 'autocomplete'
+  | 'copyable'
   | 'defaultValue'
   | 'density'
   | 'disabled'

@@ -50,6 +50,7 @@ export const Select = /*#__PURE__*/ createBinding(TpSelect, 'Select', {
   | 'columns'
   | 'completionMode'
   | 'container'
+  | 'copyable'
   | 'defaultInputValue'
   | 'defaultOpen'
   | 'defaultValue'

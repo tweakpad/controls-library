@@ -48,6 +48,12 @@ const definition: ComponentDefinition = {
       axes: ['orientation', 'variant'],
     },
     {
+      name: 'slider-copy',
+      description:
+        'The Copy button beside the label of an inline slider, shown while the bar is hovered or focused.',
+      axes: ['orientation', 'variant'],
+    },
+    {
       name: 'slider-output',
       description: 'The formatted value beside the label.',
       axes: ['orientation', 'variant'],
@@ -87,6 +93,7 @@ export const sliderPresentation = definePresentation({
       '[part~="slider-range"]': 'slider-range',
       '[part~="slider-thumb"]': 'slider-thumb',
       '[part~="slider-label"]': 'slider-label',
+      '[part~="slider-copy"]': 'slider-copy',
       '[part~="slider-output"]': 'slider-output',
       '[part~="slider-buffer"]': 'slider-buffer',
       '[part~="slider-chapter"]': 'slider-chapter',

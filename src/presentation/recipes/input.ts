@@ -1,5 +1,6 @@
 import type { PresentationDictionary } from '../resolver.js';
 import {
+  inlineControlCopy,
   inlineControlLabel,
   inlineControlRings,
   inlineControlSurface,
@@ -30,10 +31,12 @@ export const inputAppearance: PresentationDictionary = {
         'padding-inline-start': 'var(--tp-space-2-5)',
       },
     },
-    ...inlineControlRings('&', ':focus-within'),
+    // The row rings while its value is edited; the copy action rings on its own.
+    ...inlineControlRings('&', ':focus-within:not(:has([part~="input-copy"]:focus-within))'),
     { selector: '&[data-disabled]', declarations: { background: disabledBackground } },
   ],
   'input-label-variant-inline': [{ declarations: inlineControlLabel }],
+  'input-copy': inlineControlCopy('[part~="input-row"]'),
   // The value reads like the other inline values.
   'input-variant-inline': [
     { declarations: { 'min-height': joinedEditorMinHeight, 'block-size': joinedEditorMinHeight } },

@@ -34,6 +34,12 @@ const definition: ComponentDefinition = {
       axes,
     },
     {
+      name: 'color-input-copy',
+      description:
+        'The Copy button beside the label of an inline Color input, shown while the row is hovered or focused.',
+      axes,
+    },
+    {
       name: 'color-input-swatch',
       description: 'The pressable frame around the chip that opens the picker.',
       axes,
@@ -64,6 +70,7 @@ export const colorInputPresentation = definePresentation({
       '[part~="color-input"]': 'color-input',
       '[part~="color-input-row"]': 'color-input-row',
       '[part~="color-input-label"]': 'color-input-label',
+      '[part~="color-input-copy"]': 'color-input-copy',
       '[part~="color-input-swatch"]': 'color-input-swatch',
       '[part~="color-input-chip"]': 'color-input-chip',
       '[part~="color-input-control"]': 'color-input-control',

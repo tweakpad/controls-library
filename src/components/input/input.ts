@@ -1,6 +1,7 @@
 import { css, html, nothing } from 'lit';
 import type { PropertyValues } from 'lit';
 import { autofillProperties } from '../../foundation/autofill.js';
+import { defaultTrue } from '../../foundation/converters.js';
 import { componentHandlingPrevented, renderPart } from '../../foundation/part.js';
 import { PressAndHold } from '../../foundation/press-and-hold.js';
 import { compositeControl } from '../../foundation/composite-control.js';
@@ -11,6 +12,7 @@ import { chevronRightIcon } from '../../icons/chevron-right.js';
 import { TpTextControl } from '../field/text-control.js';
 import { TpButton } from '../button/button.js';
 import { TpIcon } from '../icon/icon.js';
+import { inlineCopy, renderInlineCopy } from '../shared/inline-copy.js';
 import { inputPresentation } from '../../presentation/families/input.js';
 
 /** `inline`: one compact row with the label at the start and the value at the end. */
@@ -24,6 +26,8 @@ export type InputVariant = 'default' | 'inline';
  * @slot - Holds the native input the element renders; leave it empty.
  * @csspart input-row - The row of an inline Input around its label and editor.
  * @csspart input-label - The label at the start of an inline Input's row.
+ * @csspart input-copy - The Copy button beside the label of an inline Input, shown while the row is
+ * hovered or focused.
  * @csspart input-stepper - The decrement and increment Buttons around the value at the end of an
  * inline number Input's row.
  * @csspart input-decrement - The Button before the value that steps an inline number Input down.
@@ -33,7 +37,7 @@ export class TpInput extends TpTextControl {
   static tagName = 'tp-input';
   /** Library elements this element renders; defining it defines them too. */
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {
-    return [TpButton, TpIcon];
+    return [TpButton, TpIcon, ...inlineCopy.elements];
   }
   static override presentation = inputPresentation;
   static override properties = {
@@ -45,6 +49,7 @@ export class TpInput extends TpTextControl {
     pattern: { type: String },
     precision: { type: Number },
     variant: { type: String, reflect: true },
+    copyable: { converter: defaultTrue, reflect: true },
   };
   static override styles = [
     ...TpTextControl.styles,
@@ -61,7 +66,9 @@ export class TpInput extends TpTextControl {
         cursor: text;
       }
 
+      /* The label leads the row; the copy action follows it though the tree puts it last. */
       .label {
+        order: -2;
         flex: 0 1 auto;
         min-inline-size: 0;
         overflow: hidden;
@@ -72,6 +79,13 @@ export class TpInput extends TpTextControl {
       .row ::slotted([data-tp-editor]) {
         flex: 1 1 0;
         text-align: end;
+      }
+
+      /* The copy action follows the value in the tree and sits beside the label. */
+      .inline-copy {
+        flex: none;
+        order: -1;
+        cursor: default;
       }
 
       /* An inline number value sits between its decrement and increment Buttons. */
@@ -117,6 +131,11 @@ export class TpInput extends TpTextControl {
    * controls; an enclosing Field's label moves into the row.
    */
   variant: InputVariant = 'default';
+  /**
+   * Shows a Copy button for the value beside the label of an inline Input while the row is hovered
+   * or focused; `copyable="false"` removes it. Password, file and hidden types never offer it.
+   */
+  copyable = true;
   /** An inline Input shows its Field's label inside its row. */
   override get rendersFieldLabel(): boolean {
     return this.variant === 'inline';
@@ -140,6 +159,7 @@ export class TpInput extends TpTextControl {
         'data-invalid': state.invalid,
         // A press on the label edits the value, as a press on a label does.
         '@click': (event: MouseEvent) => {
+          if (componentHandlingPrevented(event)) return;
           if (event.target !== this.inputElement) this.inputElement?.focus();
         },
       },
@@ -152,7 +172,13 @@ export class TpInput extends TpTextControl {
               content: label,
             })
           : nothing
-      }${this.type === 'number' ? this.#stepper(state, editor) : editor}`,
+      }${this.type === 'number' ? this.#stepper(state, editor) : editor}${renderInlineCopy({
+        part: 'input-copy',
+        value: this.value,
+        name: label,
+        enabled:
+          this.copyable && !state.disabled && !['password', 'file', 'hidden'].includes(this.type),
+      })}`,
     });
   }
 

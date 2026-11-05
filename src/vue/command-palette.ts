@@ -48,6 +48,7 @@ export const CommandList = /*#__PURE__*/ createBinding(TpCommandList, 'CommandLi
   | 'columns'
   | 'completionMode'
   | 'container'
+  | 'copyable'
   | 'defaultInputValue'
   | 'defaultOpen'
   | 'defaultValue'

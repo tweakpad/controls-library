@@ -434,6 +434,7 @@ type Tags = {
     | 'columns'
     | 'completionMode'
     | 'container'
+    | 'copyable'
     | 'defaultInputValue'
     | 'defaultOpen'
     | 'defaultValue'
@@ -936,6 +937,7 @@ type Tags = {
     TpColorInput,
     | 'alpha'
     | 'appearance'
+    | 'copyable'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -995,6 +997,7 @@ type Tags = {
     | 'columns'
     | 'completionMode'
     | 'container'
+    | 'copyable'
     | 'defaultInputValue'
     | 'defaultOpen'
     | 'defaultValue'
@@ -1713,6 +1716,7 @@ type Tags = {
     TpInput,
     | 'appearance'
     | 'autocomplete'
+    | 'copyable'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -3635,6 +3639,7 @@ type Tags = {
     TpNavigationPanelInput,
     | 'appearance'
     | 'autocomplete'
+    | 'copyable'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -4436,6 +4441,7 @@ type Tags = {
     | 'columns'
     | 'completionMode'
     | 'container'
+    | 'copyable'
     | 'defaultInputValue'
     | 'defaultOpen'
     | 'defaultValue'
@@ -4681,6 +4687,7 @@ type Tags = {
     TpSlider,
     | 'appearance'
     | 'buffered'
+    | 'copyable'
     | 'defaultValue'
     | 'density'
     | 'disabled'

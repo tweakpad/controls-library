@@ -16,6 +16,7 @@ export const Slider = /*#__PURE__*/ createBinding(TpSlider, 'Slider', {
   TpSlider,
   | 'appearance'
   | 'buffered'
+  | 'copyable'
   | 'defaultValue'
   | 'density'
   | 'disabled'

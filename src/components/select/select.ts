@@ -93,6 +93,8 @@ import { selectPresentation } from '../../presentation/families/select.js';
 import { TpIcon } from '../icon/icon.js';
 import type { CustomElementConstructorWithTag } from '../../foundation/define.js';
 import { TpButton } from '../button/button.js';
+import { inlineCopy, renderInlineCopy } from '../shared/inline-copy.js';
+import { defaultTrue } from '../../foundation/converters.js';
 import { TpBadge } from '../badge/badge.js';
 import { TpInputGroup } from '../input-group/input-group.js';
 import { TpSpinner } from '../spinner/spinner.js';
@@ -129,6 +131,8 @@ interface SelectScrollExtent {
  * @fires tp-open-change-complete - `{ open }` after the list finishes opening or closing.
  * @fires tp-search-status - `{ status, query, total }` as a search source loads, settles or fails.
  * @fires tp-search-error - `{ error, query }` when a search source fails.
+ * @csspart select-copy - The Copy button beside the label of an inline Select, shown while the
+ * row is hovered or focused.
  */
 export class TpSelect extends TpFormElement<unknown> {
   static tagName = 'tp-select';
@@ -136,7 +140,7 @@ export class TpSelect extends TpFormElement<unknown> {
   readonly [SURFACE_HOST] = true as const;
   /** Library elements this element renders; defining it defines them too. */
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {
-    return [TpIcon, TpButton, TpBadge, TpInputGroup, TpSpinner];
+    return [TpIcon, TpButton, TpBadge, TpInputGroup, TpSpinner, ...inlineCopy.elements];
   }
   static override presentation = selectPresentation;
   static override properties = {
@@ -194,6 +198,7 @@ export class TpSelect extends TpFormElement<unknown> {
     placeholder: { type: String },
     label: { type: String },
     variant: { type: String, reflect: true },
+    copyable: { converter: defaultTrue, reflect: true },
     identifier: { type: String },
     autocomplete: { type: String },
     noAutofill: { type: Boolean, attribute: 'no-autofill', reflect: true },
@@ -420,6 +425,11 @@ export class TpSelect extends TpFormElement<unknown> {
    * controls; an enclosing Field's label moves into the row. A searchable Select keeps its look.
    */
   variant: SelectVariant = 'default';
+  /**
+   * Shows a Copy button for the selection's text beside the label of an inline Select while the
+   * row is hovered or focused; `copyable="false"` removes it.
+   */
+  copyable = true;
   /** ID of the trigger or the query; the list takes a related ID. */
   identifier = createId('tp-select');
   /** Autofill hint for the selection, such as `country`. */
@@ -1137,6 +1147,14 @@ export class TpSelect extends TpFormElement<unknown> {
         this.#collection.selected(value)?.label ?? this.itemToLabel?.(value) ?? this.#text(value),
     );
     const inlineLabel = this.#inline ? this.fieldLabel || this.label : '';
+    // The copy action cannot sit inside the trigger, which is itself the control: it follows the
+    // trigger and is placed over a space the trigger keeps beside its label.
+    const copy = renderInlineCopy({
+      part: 'select-copy',
+      value: selected.map(String).join(', '),
+      name: inlineLabel,
+      enabled: this.#inline && this.copyable && !this.effectiveDisabled,
+    });
     const value = this.#part('select-value', state, {
       tag: 'span',
       properties: { class: 'select-value', 'data-placeholder': !selected.length },
@@ -1209,9 +1227,12 @@ export class TpSelect extends TpFormElement<unknown> {
                 content: inlineLabel,
               })
             : nothing
-        }${value}<tp-icon size="var(--tp-icon-size-sm)" .icon=${chevronRightIcon}></tp-icon>`,
+        }${copy === nothing ? nothing : html`<span class="copy-space" aria-hidden="true"></span>`}${value}<tp-icon
+          size="var(--tp-icon-size-sm)"
+          .icon=${chevronRightIcon}
+        ></tp-icon>`,
     });
-    return html`${this.#part('select', state, { properties: { class: 'select-root', 'data-open': this.open, 'data-closed': !this.open }, content: trigger })}
+    return html`${this.#part('select', state, { properties: { class: 'select-root', 'data-open': this.open, 'data-closed': !this.open }, content: html`${trigger}${copy}` })}
       <input
         class="visually-hidden"
         tabindex="-1"

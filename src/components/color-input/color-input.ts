@@ -7,7 +7,7 @@ import { TpValueCommitEvent } from '../../foundation/events.js';
 import type { TpValueChangeEvent } from '../../foundation/events.js';
 import type { ChangeReason } from '../../foundation/types.js';
 import { stateMarkers } from '../../foundation/state-markers.js';
-import { preventComponentHandling } from '../../foundation/part.js';
+import { componentHandlingPrevented, preventComponentHandling } from '../../foundation/part.js';
 import { containNestedEvents } from '../../foundation/nested-events.js';
 import { defaultTrue } from '../../foundation/converters.js';
 import { parseColor } from '../../foundation/color/parse.js';
@@ -22,6 +22,7 @@ import type { ColorFormat, ColorValue } from '../../foundation/color/types.js';
 import { fillLayerStyles } from '../../presentation/motion.js';
 import { colorInputPresentation } from '../../presentation/families/color-input.js';
 import { TpInput } from '../input/input.js';
+import { inlineCopy, renderInlineCopy } from '../shared/inline-copy.js';
 import type { CustomElementConstructorWithTag } from '../../foundation/define.js';
 import type {
   ColorInputPicker,
@@ -48,12 +49,14 @@ interface PickSession {
  * typed text commits; `detail.value`, `detail.previousValue` and `detail.reason`.
  * @fires tp-value-commit - When an interaction settles: the picker closes, or typed text commits.
  * @fires tp-field-value - After a value commits; an enclosing Field tracks its dirty state from it.
+ * @csspart color-input-copy - The Copy button beside the label of an inline Color input, shown
+ * while the row is hovered or focused.
  */
 export class TpColorInput extends TpFormElement<string> {
   static tagName = 'tp-color-input';
   /** Library elements this element renders; defining it defines them too. */
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {
-    return [TpInput];
+    return [TpInput, ...inlineCopy.elements];
   }
   static override presentation = colorInputPresentation;
   static override properties = {
@@ -67,6 +70,7 @@ export class TpColorInput extends TpFormElement<string> {
     size: { type: String, reflect: true },
     showSwatch: { type: Boolean, attribute: 'show-swatch', converter: defaultTrue },
     showValue: { type: Boolean, attribute: 'show-value', converter: defaultTrue },
+    copyable: { converter: defaultTrue, reflect: true },
     label: { type: String },
     onValueChange: { attribute: false },
     onValueCommitted: { attribute: false },
@@ -97,7 +101,16 @@ export class TpColorInput extends TpFormElement<string> {
         cursor: pointer;
       }
 
+      /* The copy action follows the value in the tree and sits beside the label. */
+      .inline-copy {
+        flex: none;
+        order: -1;
+        cursor: default;
+      }
+
+      /* The label leads the row; the copy action follows it though the tree puts it last. */
       .label {
+        order: -2;
         flex: 0 1 auto;
         min-inline-size: 0;
         overflow: hidden;
@@ -183,6 +196,11 @@ export class TpColorInput extends TpFormElement<string> {
   showSwatch = true;
   /** Shows the editable value text in an inline row. */
   showValue = true;
+  /**
+   * Shows a Copy button for the color beside the label of an inline row while the row is hovered
+   * or focused; `copyable="false"` removes it.
+   */
+  copyable = true;
   /** Accessible name when no Field labels the input, and the label an inline input shows. */
   label = '';
   /**
@@ -603,7 +621,12 @@ export class TpColorInput extends TpFormElement<string> {
                 content: label,
               })
             : nothing
-        }<span class="end">${swatch}${editor}</span>`,
+        }<span class="end">${swatch}${editor}</span>${renderInlineCopy({
+          part: 'color-input-copy',
+          value: this.value,
+          name: label,
+          enabled: this.copyable && !state.disabled,
+        })}`,
     });
   }
 
@@ -615,6 +638,7 @@ export class TpColorInput extends TpFormElement<string> {
     const control = this.#control;
     const path = event.composedPath();
     if (
+      componentHandlingPrevented(event) ||
       !control ||
       path.includes(control) ||
       (this.#valueEditor && path.includes(this.#valueEditor))

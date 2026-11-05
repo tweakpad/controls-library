@@ -18,10 +18,14 @@ describe('Input inline variant', () => {
       expect(resolve(variant).missingKeys.filter((key) => key.includes('-variant-'))).toEqual([]);
   });
 
-  it('paints the row as the shared inline row, ringing on focus within', () => {
+  it('paints the row as the shared inline row, ringing while its value is edited', () => {
     const row = resolve('inline').parts['input-row']!;
     expect(row[0]!.declarations).toMatchObject({ background: inlineControlSurface.background });
-    expect(row.some((rule) => rule.selector === '&:focus-within')).toBe(true);
+    expect(
+      row.some(
+        (rule) => rule.selector === '&:focus-within:not(:has([part~="input-copy"]:focus-within))',
+      ),
+    ).toBe(true);
     expect(resolve('default').parts['input-row']).toEqual([]);
   });
 

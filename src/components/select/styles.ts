@@ -98,6 +98,22 @@ export const selectStyles = css`
     margin-inline-start: auto;
   }
 
+  /* The copy action follows the trigger and is placed over the space it keeps beside its label. */
+  .copy-space {
+    flex: none;
+    inline-size: var(--tp-control-height-xs);
+    block-size: var(--tp-control-height-xs);
+    anchor-name: --tp-select-copy;
+  }
+
+  .inline-copy {
+    position: absolute;
+    position-anchor: --tp-select-copy;
+    inset-block-start: anchor(start);
+    inset-inline-start: anchor(start);
+    cursor: default;
+  }
+
   .select-content {
     position: absolute;
     z-index: 1000;

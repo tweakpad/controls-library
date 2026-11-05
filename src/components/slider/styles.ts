@@ -127,7 +127,9 @@ export const sliderStyles = css`
     pointer-events: none;
   }
 
+  /* The label leads the bar; the copy action follows it though the tree puts it last. */
   :host([variant='inline']:not([orientation='vertical'])) [part~='slider-label'] {
+    order: -2;
     min-inline-size: 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -136,6 +138,13 @@ export const sliderStyles = css`
 
   :host([variant='inline']:not([orientation='vertical'])) [part~='slider-output'] {
     margin-inline-start: auto;
+  }
+
+  /* The copy action follows the value in the tree and sits beside the label. */
+  .inline-copy {
+    flex: none;
+    order: -1;
+    cursor: default;
   }
 
   /* An editable value takes its own presses: a click types it; the rest of the bar still sets it. */

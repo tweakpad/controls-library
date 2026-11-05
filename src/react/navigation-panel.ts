@@ -422,6 +422,7 @@ export type NavigationPanelInputProps = ElementProps<
   TpNavigationPanelInput,
   | 'appearance'
   | 'autocomplete'
+  | 'copyable'
   | 'defaultValue'
   | 'density'
   | 'disabled'

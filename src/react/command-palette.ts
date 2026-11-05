@@ -37,6 +37,7 @@ export type CommandListProps = ElementProps<
   | 'columns'
   | 'completionMode'
   | 'container'
+  | 'copyable'
   | 'defaultInputValue'
   | 'defaultOpen'
   | 'defaultValue'
