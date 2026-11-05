@@ -1,5 +1,18 @@
 # @tweakpad/ui
 
+## 0.2.4
+
+### Patch Changes
+
+- da4b9ae: Calendar now switches its weekday headers to narrow locale labels when the short labels do not fit their cells. The headers keep their short accessible names, and `CalendarAdapter.weekdayLabel` accepts an optional `narrow` width for custom adapters.
+- da4b9ae: Retint controls inside an Alert to match its severity, including actions and fields. Give pressed Toggles distinct theme roles and hover treatment. Align submenus with their parent menu items, and show highlighted Select options by their fill without an inset focus ring.
+- da4b9ae: Improve the shared component documentation and Storybook presentation with clearer API tables, source code styling, Bubble link visibility, and dark theme and loading screen styling.
+- da4b9ae: Simplify Easing editor controls with inline, editable Sliders for curve parameters and duration. Preset tiles use shorter labels within their groups while the graph badge keeps the full preset name. Improve the scale preview for curves that overshoot and remove empty space below Bézier curves.
+- da4b9ae: Add `variant="inline"` to Field group, placing its label and compound values in one compact row with a shared boundary, focus state, and validation state. Numeric members keep stepping, units, and their own form values. Inline groups can expand into individual editor rows with `expandable` and `expanded`, and `constraints` can keep related values proportional or apply a custom rule. Add an `icon` slot to inline controls and a `unit` property to inline Input.
+- da4b9ae: Show color properties in Flow nodes as inline rows with a label, swatch, and editable color text. The popup Color picker opens from that row; Color picker also hides its footer when no footer content is supplied.
+- da4b9ae: Add the Gradient picker widget for editing linear color stops and two-dimensional color anchors. `<tp-gradient-picker>` supports dragging and keyboard editing, midpoints, selection, controlled and uncontrolled values, form submission, and localized labels. Declare editable stops with `<tp-gradient-stop>` children; edits update those children, and form reset restores their initial values. The widget also exports functions to sample linear gradients and render field gradients for canvas or textures, plus generated framework bindings through the widgets entry points.
+- da4b9ae: Add a Copy button to inline Input, Select, Slider, and Color input rows when hovered or focused. It copies the displayed value and can be removed with `copyable="false"`. Refine inline row spacing and color presentation across these controls.
+
 ## 0.2.2
 
 ### Patch Changes
