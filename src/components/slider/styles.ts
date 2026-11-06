@@ -12,6 +12,28 @@ export const sliderStyles = css`
     min-inline-size: 0;
   }
 
+  .value-layout {
+    display: flex;
+    align-items: center;
+    gap: var(--tp-space-2);
+    min-inline-size: 0;
+  }
+
+  .value-layout > .root {
+    flex: 1;
+  }
+
+  .value-editor {
+    display: flex;
+    flex: 0 0 calc(var(--tp-spacing) * 16);
+    min-inline-size: 0;
+  }
+
+  .value-editor tp-input {
+    inline-size: 100%;
+    min-inline-size: 0;
+  }
+
   .header {
     display: flex;
     align-items: center;
@@ -127,7 +149,7 @@ export const sliderStyles = css`
     pointer-events: none;
   }
 
-  /* The label leads the bar; the copy action follows it though the tree puts it last. */
+  /* The label leads the bar and leaves room for the output. */
   :host([variant='inline']:not([orientation='vertical'])) [part~='slider-label'] {
     order: -2;
     min-inline-size: 0;
@@ -138,28 +160,6 @@ export const sliderStyles = css`
 
   :host([variant='inline']:not([orientation='vertical'])) [part~='slider-output'] {
     margin-inline-start: auto;
-  }
-
-  /* The copy action follows the value in the tree and sits beside the label. */
-  .inline-copy {
-    flex: none;
-    order: -1;
-    cursor: default;
-  }
-
-  /* An editable value takes its own presses: a click types it; the rest of the bar still sets it. */
-  :host([variant='inline']:not([orientation='vertical'])) [part~='slider-output'][data-editable] {
-    pointer-events: auto;
-    cursor: text;
-  }
-
-  .value-editor {
-    display: flex;
-  }
-
-  .value-editor tp-input {
-    inline-size: auto;
-    min-inline-size: 0;
   }
 
   :host([variant='inline']:not([orientation='vertical'])) .track {

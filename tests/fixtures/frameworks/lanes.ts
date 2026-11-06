@@ -129,7 +129,7 @@ export const laneRows: LaneRow[] = [
     lane: 'value',
     initial: 20,
     propose: call('setValue', 60),
-    props: { min: 0, max: 100, 'aria-label': 'Opacity' },
+    props: { min: 0, max: 100, variant: 'inline', editableValue: true, 'aria-label': 'Opacity' },
   },
   {
     entry: 'tp-text-area',

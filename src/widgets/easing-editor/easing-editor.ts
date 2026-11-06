@@ -1534,7 +1534,6 @@ export class TpEasingEditor extends TpFormElement<string> {
       class=${`parameter-slider ${definition.key}`}
       variant="inline"
       editable-value
-      .copyable=${false}
       exportparts="slider-track: easing-editor-slider-track, slider-range: easing-editor-slider-range, slider-thumb: easing-editor-slider-thumb"
       label=${name}
       thumb-alignment="edge"

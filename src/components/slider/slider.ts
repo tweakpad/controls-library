@@ -59,7 +59,6 @@ import type {
 } from './types.js';
 import { sliderPresentation } from '../../presentation/families/slider.js';
 import { TpInput } from '../input/input.js';
-import { inlineCopy, renderInlineCopy } from '../shared/inline-copy.js';
 import { inlineIconStyles, renderInlineIcon } from '../shared/inline-icon.js';
 import { TpSliderThumb } from './slider-thumb.js';
 import type { CustomElementConstructorWithTag } from '../../foundation/define.js';
@@ -72,6 +71,8 @@ interface ValueEdit {
   identity: string;
   cancelled: boolean;
   source: Event | undefined;
+  value: number;
+  signature: string;
   controller?: NumberFieldController;
   scope?: CleanupScope;
 }
@@ -114,15 +115,14 @@ interface Drag {
  * @fires tp-field-value - After a value commits; an enclosing Field tracks its dirty state from it.
  * @fires tp-slider-pointer-change - `{ value, ratio }` as the pointer hovers the track without
  * dragging, `null` when it leaves; for previews such as a media timeline's thumbnail.
+ * @csspart slider-value-editor - The number Input editor beside an inline bar with editable-value.
  * @csspart slider-icon - The box before an inline slider's bar that holds the `icon` slot.
- * @csspart slider-copy - The Copy button beside the label of an inline slider, shown while the bar
- * is hovered or focused.
  */
 export class TpSlider extends TpFormElement<SliderValue | undefined> implements SliderThumbOwner {
   static tagName = 'tp-slider';
   /** Library elements this element renders; defining it defines them too. */
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {
-    return [TpSliderThumb, TpInput, ...inlineCopy.elements];
+    return [TpSliderThumb, TpInput];
   }
   static override presentation = sliderPresentation;
   static override properties = {
@@ -137,7 +137,6 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
     ticks: { type: Number },
     snapToTicks: { type: Boolean, attribute: 'snap-to-ticks' },
     editableValue: { type: Boolean, attribute: 'editable-value' },
-    copyable: { converter: defaultTrue, reflect: true },
     largeStep: { type: Number, attribute: 'large-step' },
     minStepsBetweenValues: { type: Number, attribute: 'min-steps-between-values' },
     variant: { type: String, reflect: true },
@@ -198,21 +197,9 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
   ticks: number | undefined;
   /** Values snap to the ticks: the tick interval replaces `step` for pointer, keys and forms. */
   snapToTicks = false;
-  /**
-   * An inline slider with one value lets its value be typed: a click on the value, or Enter or F2
-   * on the thumb, edits it as a number. A press on the value then no longer moves it; the rest of
-   * the bar still does.
-   */
+  /** Shows a persistent number Input beside a scalar inline slider, outside its drag area. */
   editableValue = false;
-  /**
-   * Shows a Copy button for the value text beside the label of an inline slider while the bar is
-   * hovered or focused; `copyable="false"` removes it.
-   */
-  copyable = true;
-  /**
-   * The value being typed: the thumb it moves, its editor, whether Escape cancelled it, and the key
-   * that ended it (a commit on blur carries the field's own blur instead).
-   */
+  /** The adjacent field's binding and its last accepted Slider value. */
   #valueEdit: ValueEdit | null = null;
   /** The increment of Page Up, Page Down and arrow keys with Shift. */
   largeStep = 10;
@@ -413,16 +400,13 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
   get #inline(): boolean {
     return this.variant === 'inline' && this.orientation !== 'vertical';
   }
-  /** Whether the value can be typed now: an editable, enabled inline slider with one value. */
+  /** The scalar field stays visible in disabled and read-only states. */
   get #valueEditable(): boolean {
     return (
       this.editableValue &&
       this.#inline &&
       this.values.length === 1 &&
-      !this.effectiveDisabled &&
-      !this.readOnly &&
-      !this.indeterminate &&
-      !this.#configurationError
+      Number.isFinite(this.values[0])
     );
   }
   /** An inline slider shows its Field's label inside the bar. */
@@ -802,11 +786,6 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
     this.#syncFocusVisible(element);
     if (componentHandlingPrevented(event)) return;
     const thumb = element as TpSliderThumb;
-    if ((event.key === 'Enter' || event.key === 'F2') && this.#valueEditable) {
-      event.preventDefault();
-      this.#startValueEdit();
-      return;
-    }
     const state = this.thumbState(thumb);
     const large = event.shiftKey || event.metaKey || event.ctrlKey ? this.largeStep : this.#step;
     let value: number;
@@ -841,95 +820,107 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
     event.preventDefault();
     this.requestThumbValue(thumb, value, 'keyboard', event);
   }
-  /** Replaces the value text with a number field; the next update binds and focuses it. */
-  #startValueEdit(): void {
-    const thumb = this.#orderedThumbs()[0];
-    if (!this.#valueEditable || this.#valueEdit || !thumb) return;
-    const state = this.thumbState(thumb);
-    if (state.disabled || state.readOnly) return;
-    this.#valueEdit = { identity: thumb.inputId, cancelled: false, source: undefined };
-    this.requestUpdate();
-  }
-  readonly #valueClicked = (event: MouseEvent): void => {
-    if (event.button === 0 && !this.#valueEdit) this.#startValueEdit();
-  };
-  /**
-   * Binds the rendered editor to the Number field owner, which parses, constrains and commits the
-   * typed text, then focuses it with its text selected.
-   */
+  /** Binds the persistent adjacent Input to the shared number-field owner. */
   #bindValueEdit(): void {
-    const edit = this.#valueEdit;
-    if (!edit || edit.controller) return;
-    const root = this.renderRoot.querySelector<HTMLElement>('[data-value-editor]');
-    const input = root?.querySelector<TpInput>('tp-input');
-    if (!root || !input) return;
-    if (!input.hasUpdated) {
-      void input.updateComplete.then(() => this.requestUpdate());
+    if (!this.#valueEditable) {
+      this.#endValueEdit();
       return;
     }
-    const thumb = this.#thumbs.find((member) => member.inputId === edit.identity);
-    const scope = new CleanupScope();
-    const locale = this.locale || resolveLocale(this);
-    edit.scope = scope;
+    const root = this.renderRoot.querySelector<HTMLElement>('[data-value-editor]');
+    const input = root?.querySelector<TpInput>('tp-input');
+    const thumb = this.#orderedThumbs()[0];
+    if (!root || !input || !thumb || !this.isConnected) return;
+    if (!input.hasUpdated) {
+      void input.updateComplete.then(() => this.#bindValueEdit());
+      return;
+    }
+    if (this.#valueEdit && this.#valueEdit.identity !== thumb.inputId) this.#endValueEdit();
+    const value = this.values[0]!;
+    // An indeterminate/invalid Slider is disabled; its field must not construct invalid number options.
+    const valid = !this.indeterminate && !this.#configurationError;
+    const options = {
+      minimum: valid ? this.minimum : 0,
+      maximum: valid ? this.maximum : 100,
+      step: valid ? this.#step : 1,
+      locale: this.locale || resolveLocale(this) || [],
+      format: this.format ?? {},
+      disabled: this.thumbState(thumb).disabled || !!this.#configurationError,
+      readOnly: this.readOnly,
+    };
+    const signature = JSON.stringify(options);
+    const current = this.#valueEdit;
+    if (current?.controller) {
+      if (current.signature !== signature || current.value !== value) {
+        current.controller.update({ ...options, value });
+        current.value = value;
+        current.signature = signature;
+      }
+      return;
+    }
+    const edit: ValueEdit = {
+      identity: thumb.inputId,
+      cancelled: false,
+      source: undefined,
+      value,
+      signature,
+    };
+    this.#valueEdit = edit;
+    const scope = (edit.scope = new CleanupScope());
     edit.controller = new NumberFieldController(root, input, {
-      defaultValue: thumb ? this.thumbState(thumb).value : (this.values[0] ?? null),
-      minimum: this.minimum,
-      maximum: this.maximum,
-      step: this.#step,
-      ...(locale ? { locale } : {}),
-      ...(this.format ? { format: this.format } : {}),
+      ...options,
+      value,
+      // This field owns draft text only. Slider receives one proposal when the field commits.
+      onValueChange: (event) => edit.controller?.update({ value: event.detail.value }),
     });
     const editor = input.inputElement;
     if (editor) scope.add(this.presentationController.registerPart('slider-value-editor', editor));
-    // The field's own events stay inside: the Slider publishes the typed value as its own.
     for (const type of ['tp-value-change', 'tp-value-commit', 'tp-field-value', 'input', 'change'])
       scope.listen(root, type as keyof GlobalEventHandlersEventMap, (event: Event) => {
         if (type === 'tp-value-commit') this.#valueEditCommitted(event);
         event.stopPropagation();
       });
     scope.listen(root, 'keydown', this.#valueEditKey);
-    scope.listen(root, 'focusout', () => this.#endValueEdit());
-    editor?.focus({ preventScroll: true });
-    // The field writes its text in the Input's next update, which would move the caret to the end.
-    void input.updateComplete.then(() => {
-      if (this.#valueEdit === edit && editor instanceof HTMLInputElement) editor.select();
+    // Focus entry starts a fresh gesture after Escape or a previous commit.
+    scope.listen(root, 'focusin', () => {
+      edit.cancelled = false;
+      edit.source = undefined;
     });
   }
-  /** The field committed a typed value: the Thumb moves to it, unless Escape cancelled the edit. */
   #valueEditCommitted(event: Event): void {
     const edit = this.#valueEdit;
     const detail = (event as TpValueCommitEvent<number | null>).detail;
-    if (!edit || edit.cancelled || typeof detail?.value !== 'number') return;
-    this.#move(
-      edit.identity,
-      detail.value,
-      'input',
-      edit.source ?? detail.sourceEvent ?? event,
-      true,
-    );
+    if (!edit) return;
+    if (!edit.cancelled && typeof detail?.value === 'number')
+      this.#move(
+        edit.identity,
+        detail.value,
+        'input',
+        edit.source ?? detail.sourceEvent ?? event,
+        true,
+      );
+    // Reconcile after the field's blur handler, including a controlled rejection or empty text.
+    queueMicrotask(() => {
+      if (this.#valueEdit !== edit) return;
+      edit.value = this.values[0]!;
+      edit.controller?.update({ value: edit.value });
+    });
   }
-  /** Enter commits and Escape restores; both return focus to the Thumb, which ends the edit. */
   readonly #valueEditKey = (event: KeyboardEvent): void => {
     const edit = this.#valueEdit;
     if (!edit || event.isComposing || (event.key !== 'Enter' && event.key !== 'Escape')) return;
     event.preventDefault();
-    // Escape belongs to the edit, not to an enclosing Dialog or Popover.
     event.stopPropagation();
     edit.cancelled = event.key === 'Escape';
     edit.source = event;
-    const thumb = this.#thumbs.find((member) => member.inputId === edit.identity);
-    if (thumb) thumb.focus();
-    // Leaving the field committed (or discarded) the text; without a Thumb, end here.
-    this.#endValueEdit();
+    if (edit.cancelled) edit.controller?.update({ value: this.values[0]! });
+    this.#thumbs.find((member) => member.inputId === edit.identity)?.focus();
   };
-  /** The value text returns once the field has committed on blur, or the edit was cancelled. */
   #endValueEdit(): void {
     const edit = this.#valueEdit;
     if (!edit) return;
     this.#valueEdit = null;
     edit.scope?.dispose();
     edit.controller?.dispose();
-    this.requestUpdate();
   }
   #pointerDown = (event: PointerEvent): void => {
     if (
@@ -1482,10 +1473,10 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
     const labelText = this.label || (fieldLabel ? this.#association.label! : '');
     const label =
       labelText || this.querySelector('[slot="label"]') || this.partContracts['slider-label'];
+    const editable = this.#valueEditable;
     const output =
-      this.partContracts['slider-output'] || this.querySelector('[slot="value"]') || inline;
-    const editable = !!output && this.#valueEditable;
-    const editing = editable && !!this.#valueEdit;
+      !editable &&
+      (this.partContracts['slider-output'] || this.querySelector('[slot="value"]') || inline);
     const ordered = this.#orderedThumbs();
     const tickInset = ordered[0] ? this.#inset(ordered[0]) : 0;
     const ticks = sliderTicks(
@@ -1519,7 +1510,7 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
             bottom: `calc(${ratio(first)}% + ${startInset}px)`,
             height: `calc(${ratio(last) - ratio(first)}% + ${endInset - startInset}px)`,
           };
-    return html`${renderInlineIcon('slider-icon', inline)}${this.renderPart('slider', state, {
+    const bar = this.renderPart('slider', state, {
       tag: 'div',
       properties: {
         class: 'root',
@@ -1556,23 +1547,8 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
                       .join(' '),
                     'aria-live': 'off',
                     ...markers,
-                    'data-editable': editable,
-                    '@click': this.#valueClicked,
                   },
-                  content: editing
-                    ? html`<span class="value-editor" data-value-editor
-                        ><tp-input
-                          type="number"
-                          .label=${this.#association.label || this.label || this.getAttribute('aria-label') || ''}
-                        ></tp-input
-                      ></span>`
-                    : html`<slot name="value">${state.formattedValues.join(' – ')}</slot>`,
-                })}${renderInlineCopy({
-                  part: 'slider-copy',
-                  value: state.formattedValues.join(' – '),
-                  name:
-                    this.#association.label || this.label || this.getAttribute('aria-label') || '',
-                  enabled: inline && this.copyable && !state.disabled,
+                  content: html`<slot name="value">${state.formattedValues.join(' – ')}</slot>`,
                 })}
               </div>`
             : ''
@@ -1662,7 +1638,21 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
                   )}`
           }
         </div>`,
-    })}`;
+    });
+    const control = editable
+      ? html`<div class="value-layout">
+          ${bar}<span class="value-editor" data-value-editor>
+            <tp-input
+              type="number"
+              .label=${this.#association.label || this.label || this.getAttribute('aria-label') || 'Value'}
+              .disabled=${state.disabled}
+              .readOnly=${state.readOnly}
+              .invalid=${state.invalid}
+            ></tp-input>
+          </span>
+        </div>`
+      : bar;
+    return html`${renderInlineIcon('slider-icon', inline)}${control}`;
   }
   #controlBinding() {
     // Control is structural anatomy, deliberately without a new public paint identity.
@@ -1696,8 +1686,7 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
   protected override updated(changed: PropertyValues<this>): void {
     this.#refreshThumbs();
     super.updated(changed);
-    if (this.#valueEdit && !this.#valueEditable) this.#endValueEdit();
-    else this.#bindValueEdit();
+    this.#bindValueEdit();
     this.toggleAttribute('data-dragging', this.dragging);
     this.toggleAttribute('data-indeterminate', this.indeterminate);
     this.toggleAttribute('data-pointing', this.pointing);

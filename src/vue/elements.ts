@@ -4704,7 +4704,6 @@ type Tags = {
     TpSlider,
     | 'appearance'
     | 'buffered'
-    | 'copyable'
     | 'defaultValue'
     | 'density'
     | 'disabled'

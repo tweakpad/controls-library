@@ -54,20 +54,14 @@ const definition: ComponentDefinition = {
       axes: ['variant'],
     },
     {
-      name: 'slider-copy',
-      description:
-        'The Copy button beside the label of an inline slider, shown while the bar is hovered or focused.',
-      axes: ['orientation', 'variant'],
-    },
-    {
       name: 'slider-output',
       description: 'The formatted value beside the label.',
       axes: ['orientation', 'variant'],
     },
     {
-      // editableValue: the Input's editor joins the bar in place of the value text.
+      // editableValue: the adjacent Input keeps the bar's full drag area.
       name: 'slider-value-editor',
-      description: 'The editor of the value while it is typed, in place of the formatted value.',
+      description: 'The number Input editor beside the inline bar when editable-value is enabled.',
     },
     {
       // sec-148-slider mp-slider-media: optional non-semantic buffer ranges.
@@ -100,7 +94,6 @@ export const sliderPresentation = definePresentation({
       '[part~="slider-range"]': 'slider-range',
       '[part~="slider-thumb"]': 'slider-thumb',
       '[part~="slider-label"]': 'slider-label',
-      '[part~="slider-copy"]': 'slider-copy',
       '[part~="slider-output"]': 'slider-output',
       '[part~="slider-buffer"]': 'slider-buffer',
       '[part~="slider-chapter"]': 'slider-chapter',

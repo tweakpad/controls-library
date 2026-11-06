@@ -37,3 +37,5 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| prose | Spring rows (mass, stiffness, damping, velocity) and parametric rows | Approved contract 74703da7: no Copy action; editable-value composes a persistent adjacent Input, leaving the bar draggable. |

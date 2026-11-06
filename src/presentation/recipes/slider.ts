@@ -3,7 +3,6 @@ import type { PresentationDictionary, PresentationRule } from '../resolver.js';
 import { focusHalo, focusRing } from './shared/focus.js';
 import { handleSurface } from './shared/handle.js';
 import {
-  inlineControlCopy,
   inlineControlEdge,
   inlineControlFill,
   inlineControlIcon,
@@ -12,7 +11,6 @@ import {
   inlineControlSurface,
   inlineControlValue,
 } from './shared/inline-control.js';
-import { joinedEditor, joinedEditorSelector } from './shared/text-control.js';
 
 // Slider paint; geometry belongs to the family.
 
@@ -148,7 +146,7 @@ export const sliderAppearance: PresentationDictionary = {
   // ring the row.
   'slider-variant-inline': horizontal([
     { declarations: { '--_tp-slider-edge': '0' } },
-    // The header spaces its label, copy action and value like the other inline rows.
+    // The header spaces its label and value like the other inline rows.
     { selector: '& > .header', declarations: { gap: 'var(--tp-space-2)' } },
     {
       selector: '&:is(:hover, [data-pointing], [data-dragging], [data-focused])',
@@ -197,23 +195,8 @@ export const sliderAppearance: PresentationDictionary = {
   ]),
   'slider-label-variant-inline': horizontal([{ declarations: inlineControlLabel }]),
   'slider-output-variant-inline': horizontal([{ declarations: inlineControlValue }]),
-  'slider-copy': inlineControlCopy('[part~="slider"]'),
-  // The typed value: the Input's editor joined to the bar, reading as the value it replaces.
-  'slider-value-editor': [
-    {
-      selector: joinedEditorSelector,
-      declarations: {
-        ...joinedEditor,
-        ...inlineControlValue,
-        'field-sizing': 'content',
-        'min-inline-size': '3ch',
-        'min-height': '0',
-        height: 'auto',
-        padding: '0',
-        'text-align': 'end',
-      },
-    },
-  ],
+  // The adjacent editor keeps Input's own appearance; this public part remains customizable.
+  'slider-value-editor': [],
   // Ticks: hairlines across the track; the center tick is longer and stronger.
   'slider-tick': [
     {

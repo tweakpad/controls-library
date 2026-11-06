@@ -44,3 +44,5 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| prose | With `editable-value`, the value of an inline slider can also be typed. | Approved contract 74703da7: no Copy action; editable-value composes a persistent adjacent Input, leaving the bar draggable. |
