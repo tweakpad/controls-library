@@ -108,3 +108,55 @@ is not a guarantee. The scheduler executed 200 callbacks, fairly distributing 5-
 paints per plot across 60 frames, with every history bounded to 1024 samples. All 100 ordinary
 single-monitor updates were incremental (one initial full paint); no latest revision shifted
 pixels. The final dense raster repeat reproduced the corrected table above exactly.
+
+## Smooth clock scrolling and raster-atlas optimization (2026-11-06)
+
+The first live hero originally collected and painted at 10 Hz, visibly jumping several pixels
+per update. It now collects explicit timestamps at 10 Hz and follows a continuous clock at up to
+60 Hz. It displays one sample (100 ms) behind collection so both endpoints of the segment at the
+right edge are known. It never extrapolates or invents observations. Hidden collection is skipped;
+teardown disposes the bounded 256-sample stream. Push/latest behavior is unchanged.
+
+Scheduler repairs request the animation frame ahead of its deadline, carry the target rate phase
+through normal refresh jitter and skip missed periods without catch-up bursts. The element and
+scheduler use the same timestamp/deadline helper. Deterministic regressions cover jitter, 120 Hz
+and non-multiple 75 Hz displays. Clock paints reuse previous retention boundary maps between
+source revisions and numeric mapping comparisons replace per-frame string keys.
+
+The element's eligible cache now has two viewport widths. Integer motion advances its source
+rectangle, dirty columns draw into translated atlas coordinates, and one overlapping copy compacts
+it only when the viewport reaches the buffer end. Fractional presentation is one cropped image
+with the original guard pixels, avoiding wrap seams. Extra memory is one device-pixel viewport
+(approximately width x height x 4 bytes), independent of retained sample count. Solid backgrounds
+fill directly instead of compositing a cached background image.
+
+Actual automatic live-hero callbacks, 1592 x 192 CSS pixels, DPR 2, no concurrent tests/builds,
+matched three-second A/B with the same pacing and samples:
+
+| Cache | Paint CPU mean | Paint CPU p95 | Automatic paints | Full history self-copies |
+| --- | --- | --- | --- | --- |
+| Linear viewport shifted each frame | 0.339 ms | 0.500 ms | 180 | 180 |
+| Sliding raster atlas | 0.312 ms | 0.400 ms | 180 | 0 |
+
+Both delivered 16.666 ms mean intervals, 17.7 ms p95. Mean CPU improved about 8%; p95 improved
+about 20%. The strong structural gain is removal of repeated full-history copies; GPU totals
+are not available, so no GPU percentage is claimed. The initial uncontended 10 Hz hero measured
+0.383 ms mean/0.600 p95, but its lower paint frequency is not an equal-work A/B comparison.
+
+At a verified 320 x 100 CSS pixels/DPR 2, the automatic clock hero delivered 180 paints/30 samples
+in three seconds, 0.273 ms mean and 0.400 ms p95, 16.667 ms mean cadence, and zero ordinary full
+redraws. A 32-monitor budgeted 10 Hz dashboard delivered 229 callbacks across 60 frames, fair
+6-7 paints per monitor, mean aggregate 0.647 ms/frame and 1.200 ms p95; every stream retained 1024.
+
+Atlas raster comparisons covered 400 sparse pushes (many compactions), dense decimation, signed
+fills, gaps, dashed and step paths, latest revisions and reset. Their error levels match the old
+cache; reset difference is zero. The actual element's clock-vs-full check replayed 30 seconds of
+timestamps across retention wrap and multiple compactions: 240 incremental paints versus 241
+full paints, 256 retained samples, largest checkpoint mean difference 0.000922/255. Local JSON
+records are under tmp/component-verification/plot/smooth-scroll/. These browser readback checks
+are separate from performance timing and do not add readback to production.
+
+A live Chrome trace returned CLS 0 and no further insight sets. Exporting the raw trace to the
+local tmp path was denied by the MCP server's workspace policy; total GPU and GC timings remain
+unverified. The background full regression run was terminated when the user raised contention;
+only focused changed-area regressions are used for this follow-up.

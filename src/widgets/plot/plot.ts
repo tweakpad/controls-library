@@ -23,7 +23,12 @@ import {
 } from './geometry.js';
 import { PlotDecorations, plotRect, axisFormat } from './decorations.js';
 import { PlotHistoryRaster } from './history-raster.js';
-import { plotSchedulerFor, type PlotRenderHandle, type PlotRenderScheduler } from './scheduler.js';
+import {
+  plotFrameDeadline,
+  plotSchedulerFor,
+  type PlotRenderHandle,
+  type PlotRenderScheduler,
+} from './scheduler.js';
 import type { PlotStream } from './stream.js';
 import type {
   PlotAxis,
@@ -398,24 +403,25 @@ export class TpPlot extends TpElement {
     )
       return;
     this.#releaseAppearance = this.presentationController.subscribe(() => this.invalidate());
-    this.#history = new PlotHistoryRaster(this.ownerDocument);
+    this.#history = new PlotHistoryRaster(this.ownerDocument, true);
     this.#decorations = new PlotDecorations(this.ownerDocument);
     if (!this.#release) this.#release = this.#config.stream?.subscribe(() => this.#queue());
     this.#handle = (this.#config.scheduler ?? plotSchedulerFor(owner)).register({
       minimumInterval: this.#config?.maxFrameRate ? 1000 / this.#config.maxFrameRate : 0,
-      paint: () => {
+      paint: (timestamp) => {
         if (!this.#dirty || this.#config?.maxFrameRate === 0) return;
         if (this.#surface?.lost) {
           this.#suspend();
           return;
         }
-        const now = owner.performance.now(),
+        const now = timestamp,
           interval = this.#config!.maxFrameRate ? 1000 / this.#config!.maxFrameRate : Infinity;
-        if (now + 0.5 < this.#lastPaint + interval) {
+        const deadline = plotFrameDeadline(this.#lastPaint, interval, now);
+        if (deadline === undefined) {
           this.#queue();
           return;
         }
-        this.#lastPaint = now;
+        this.#lastPaint = deadline;
         this.#dirty = false;
         this.#surface?.paint();
         if (this.#config?.follow === 'clock' && this.#config.mode !== 'static') this.#queue();
@@ -565,7 +571,7 @@ export class TpPlot extends TpElement {
       ctx.beginPath();
       ctx.rect(rect.left, rect.top, rect.width, rect.height);
       ctx.clip();
-      ctx.drawImage(this.#history.canvas, rect.left - fraction, rect.top);
+      this.#history.composite(ctx, rect.left, rect.top, fraction);
       ctx.restore();
       this.#decorations?.paint(
         ctx,

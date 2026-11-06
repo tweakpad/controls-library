@@ -27,6 +27,18 @@ interface Job {
   last: number;
   disposed: boolean;
 }
+/** Preserve rate phase through normal frame jitter; late frames never trigger catch-up bursts. */
+export function plotFrameDeadline(
+  last: number,
+  interval: number,
+  time: number,
+): number | undefined {
+  const tolerance = Math.min(2, interval / 10);
+  if (time + tolerance < last + interval) return undefined;
+  if (!Number.isFinite(last) || interval === 0) return time;
+  const periods = Math.max(1, Math.floor((time - last + tolerance) / interval));
+  return last + periods * interval;
+}
 /** Shared deadline queue; clean jobs do not request frames, and due jobs rotate fairly. */
 export class PlotScheduler implements PlotRenderScheduler {
   readonly owner: Window;
@@ -107,11 +119,14 @@ export class PlotScheduler implements PlotRenderScheduler {
     }
     if (this.#frame !== undefined) return;
     const delay = due - windowFrames(this.owner).now();
-    if (delay > 1)
+    // Request the next display frame before its deadline. Waiting the entire
+    // interval and only then asking for rAF misses that refresh at 60 Hz.
+    const frameLead = 1000 / 60;
+    if (delay > frameLead + 2)
       this.#timer = this.owner.setTimeout(() => {
         this.#timer = undefined;
         this.#frame = windowFrames(this.owner).requestAnimationFrame(this.#run);
-      }, delay);
+      }, delay - frameLead);
     else this.#frame = windowFrames(this.owner).requestAnimationFrame(this.#run);
   };
   readonly #run = (time: number): void => {
@@ -119,10 +134,11 @@ export class PlotScheduler implements PlotRenderScheduler {
     const begin = windowFrames(this.owner).now();
     let count = 0;
     for (const job of [...this.#jobs]) {
-      if (job.disposed || job.suspended || !job.dirty || time + 0.5 < job.last + job.interval)
-        continue;
+      if (job.disposed || job.suspended || !job.dirty) continue;
+      const deadline = plotFrameDeadline(job.last, job.interval, time);
+      if (deadline === undefined) continue;
       job.dirty = false;
-      job.last = time;
+      job.last = deadline;
       this.#jobs.delete(job);
       this.#jobs.add(job);
       try {

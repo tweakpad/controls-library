@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-06T20:59:33.150Z",
+  "generatedAt": "2026-11-06T21:42:37.888Z",
   "version": "0.2.4",
   "method": "Each row imports and registers one component or widget from its public package entry. Rolldown tree-shakes and minifies an independent production JavaScript bundle, then measures its output before and after gzip. Required dependencies and embedded styles are included; Lit, optional engines, source maps and the separate global stylesheet are excluded. Each row's React and Vue sizes import its binding from @tweakpad/ui/react and @tweakpad/ui/vue the same way (the framework excluded); each adapter is measured alone. Sizes use kB of 1000 bytes.",
   "lit": { "bytes": 15977, "gzip": 6060 },
   "reactAdapter": { "bytes": 1100, "gzip": 603 },
   "vueAdapter": { "bytes": 1440, "gzip": 779 },
   "full": { "bytes": 2035880, "gzip": 574488 },
-  "fullWidgets": { "bytes": 1681469, "gzip": 485472 },
+  "fullWidgets": { "bytes": 1682251, "gzip": 485732 },
   "components": [
     {
       "name": "Flow",
@@ -738,10 +738,10 @@
       "name": "Plot",
       "tagName": "tp-plot",
       "section": "widgets",
-      "react": { "bytes": 81894, "gzip": 26063 },
-      "vue": { "bytes": 82167, "gzip": 26232 },
-      "bytes": 80992,
-      "gzip": 25806,
+      "react": { "bytes": 82672, "gzip": 26359 },
+      "vue": { "bytes": 82945, "gzip": 26503 },
+      "bytes": 81766,
+      "gzip": 26102,
       "modules": 43,
       "includes": []
     },

@@ -122,6 +122,16 @@ export class PlotDecorations {
       return;
     if (layer === 'back' && c.background === 'none' && !c.guides.some((g) => g.layer !== 'front'))
       return;
+    // A flat surface has no domain-dependent geometry to cache or composite.
+    if (
+      layer === 'back' &&
+      c.background === 'solid' &&
+      !c.guides.some((g) => g.layer !== 'front')
+    ) {
+      ctx.fillStyle = paint.surface;
+      ctx.fillRect(rect.left, rect.top, rect.width, rect.height);
+      return;
+    }
     const movingX = !!c.xAxis || c.grid.units === 'data' || c.guides.some((g) => g.axis === 'x');
     const key = JSON.stringify([generation, movingX ? x : null, y, rect, w, h, r]);
     if (key !== this.#key) {

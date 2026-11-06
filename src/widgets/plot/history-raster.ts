@@ -24,9 +24,11 @@ export interface PlotFrame {
 export class PlotHistoryRaster {
   readonly canvas: HTMLCanvasElement;
   readonly #dashes = new Map<string, PlotDashPhase>();
+  #offset = 0;
+  #width = 0;
   #last:
     | {
-        signature: string;
+        frame: PlotFrame;
         end: number;
         revision: number;
         fraction: number;
@@ -41,7 +43,10 @@ export class PlotHistoryRaster {
     redrawnColumns: 0,
     fallbackReason: null,
   };
-  constructor(owner: Document) {
+  constructor(
+    owner: Document,
+    readonly sliding = false,
+  ) {
     this.canvas = owner.createElement('canvas');
   }
   get stats(): PlotRenderStats {
@@ -49,12 +54,29 @@ export class PlotHistoryRaster {
   }
   reset(): void {
     this.#last = undefined;
+    this.#offset = 0;
   }
   dispose(): void {
     this.#last = undefined;
+    this.#offset = 0;
+    this.#width = 0;
     this.#dashes.clear();
     this.canvas.width = 0;
     this.canvas.height = 0;
+  }
+  /** Present one viewport from the bounded raster atlas, including its fractional guard. */
+  composite(ctx: CanvasRenderingContext2D, left: number, top: number, fraction: number): void {
+    ctx.drawImage(
+      this.canvas,
+      this.#offset,
+      0,
+      this.#width,
+      this.canvas.height,
+      left - fraction,
+      top,
+      this.#width,
+      this.canvas.height,
+    );
   }
   paint(f: PlotFrame): number {
     const { config: c, width: w, height: h, ratio } = f;
@@ -68,30 +90,26 @@ export class PlotHistoryRaster {
       [...f.views.values()].every((v) => v.monotonic);
     if (c.renderStrategy === 'incremental' && !eligible)
       throw new Error('Incremental Plot needs a monotonic stream, scrolling mode, fixed y domain.');
-    // The element advances generation when source/style/configuration changes.
-    // Keep the ordinary ingestion key independent of record size and CSS color strings.
-    const signature = [
-      w,
-      h,
-      ratio,
-      ...f.y,
-      f.x[1] - f.x[0],
-      f.generation,
-      c.mode,
-      c.renderStrategy,
-    ].join('|');
     const last = this.#last;
-    if (!last || last.signature !== signature) this.#dashes.clear();
+    const previous = last?.frame;
+    // Numeric comparisons avoid building an allocation-heavy string key every frame.
+    const sameMapping =
+      !!previous &&
+      previous.width === w &&
+      previous.height === h &&
+      previous.ratio === ratio &&
+      previous.y[0] === f.y[0] &&
+      previous.y[1] === f.y[1] &&
+      previous.x[1] - previous.x[0] === f.x[1] - f.x[0] &&
+      previous.generation === f.generation &&
+      previous.config.mode === c.mode &&
+      previous.config.renderStrategy === c.renderStrategy;
+    if (!sameMapping) this.#dashes.clear();
     const delta = stream?.changesSince(last?.revision ?? -1);
     const scale = w / (f.x[1] - f.x[0]);
     const distance = last ? (f.x[1] - last.end) * scale : 0;
     const coherent =
-      eligible &&
-      !!last &&
-      last.signature === signature &&
-      !delta?.reset &&
-      distance >= 0 &&
-      distance < w;
+      eligible && !!last && sameMapping && !delta?.reset && distance >= 0 && distance < w;
     const incremental = c.renderStrategy !== 'full' && coherent;
     for (const series of c.series) {
       const view = f.views.get(series.id);
@@ -107,7 +125,7 @@ export class PlotHistoryRaster {
         scale,
         h / (f.y[1] - f.y[0]),
         delta?.firstX ?? -Infinity,
-        !last || last.signature !== signature || !!delta?.reset,
+        !last || !sameMapping || !!delta?.reset,
       );
     }
     const ctx = this.canvas.getContext('2d')!;
@@ -119,17 +137,36 @@ export class PlotHistoryRaster {
     let strips: [number, number][] = [];
     const margin =
       Math.ceil((Math.max(1, ...c.series.map((s) => s.lineWidth ?? 1.5)) * ratio) / 2) + 2;
-    if (this.canvas.width !== cacheWidth || this.canvas.height !== h) {
-      this.canvas.width = cacheWidth;
+    const sliding = this.sliding && eligible && c.renderStrategy !== 'full';
+    const backingWidth = sliding ? cacheWidth * 2 : cacheWidth;
+    this.#width = cacheWidth;
+    if (this.canvas.width !== backingWidth || this.canvas.height !== h) {
+      this.canvas.width = backingWidth;
       this.canvas.height = h;
     }
     if (incremental && last) {
       if (move > 0) {
-        // Canvas snapshots its source before an overlapping self-copy. Copy compositing
-        // replaces alpha as well as color and clears the exposed right edge.
-        ctx.globalCompositeOperation = 'copy';
-        ctx.drawImage(this.canvas, move, 0, cacheWidth - move, h, 0, 0, cacheWidth - move, h);
-        ctx.globalCompositeOperation = 'source-over';
+        if (sliding && this.#offset + move + cacheWidth <= backingWidth) {
+          // Advance the viewport through the atlas without copying existing pixels.
+          this.#offset += move;
+        } else {
+          // Compact only when the viewport reaches the end of the bounded atlas.
+          // Copy compositing also clears the newly exposed right edge.
+          ctx.globalCompositeOperation = 'copy';
+          ctx.drawImage(
+            this.canvas,
+            this.#offset + move,
+            0,
+            cacheWidth - move,
+            h,
+            0,
+            0,
+            cacheWidth - move,
+            h,
+          );
+          ctx.globalCompositeOperation = 'source-over';
+          this.#offset = 0;
+        }
         this.#stats.shiftedDevicePixels += move;
       }
       const changed = delta?.firstX ?? Infinity;
@@ -156,7 +193,8 @@ export class PlotHistoryRaster {
       this.#stats.incrementalPaints++;
       this.#stats.fallbackReason = null;
     } else {
-      ctx.clearRect(0, 0, cacheWidth, h);
+      this.#offset = 0;
+      ctx.clearRect(0, 0, backingWidth, h);
       strips = [[0, cacheWidth]];
       this.#stats.strategy = 'full';
       this.#stats.fullRedraws++;
@@ -164,7 +202,7 @@ export class PlotHistoryRaster {
         ? 'initial'
         : !eligible
           ? 'ineligible'
-          : signature !== last.signature
+          : !sameMapping
             ? 'configuration'
             : delta?.reset
               ? 'source revision'
@@ -183,6 +221,7 @@ export class PlotHistoryRaster {
     }
     for (const [left, right] of merged) {
       ctx.save();
+      ctx.translate(this.#offset, 0);
       ctx.beginPath();
       ctx.rect(left, 0, right - left, h);
       ctx.clip();
@@ -220,11 +259,14 @@ export class PlotHistoryRaster {
       this.#stats.redrawnColumns += right - left;
     }
     this.#last = {
-      signature,
+      frame: f,
       end: f.x[1],
       revision: stream?.revision ?? 0,
       fraction,
-      firsts: new Map([...f.views].map(([id, v]) => [id, v.length ? v.at(0)[0] : Infinity])),
+      firsts:
+        sameMapping && last?.revision === (stream?.revision ?? 0)
+          ? last.firsts
+          : new Map([...f.views].map(([id, v]) => [id, v.length ? v.at(0)[0] : Infinity])),
     };
     return fraction;
   }

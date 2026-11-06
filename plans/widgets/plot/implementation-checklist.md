@@ -148,3 +148,70 @@ Final static rebuild verified stroke input value 1.5 with step 0.5 and no invali
 Focusing the Storybook axes switch and pressing real Space changed the hero's xAxis/yAxis to
 independent axis configurations while preserving all 240 data points. Temporary verification tab
 and servers on 5391/5392/5393 were closed; existing user Storybook on 6006 was preserved.
+
+## Live hero revision, 2026-11-06
+
+Scope: replace the first documentation/Default example with the user's supplied live graph-only
+reference. No widget API or rendering implementation changed. Reuse stays with tp-plot,
+createPlotStream, public series configuration and partPresentation hooks; no substitute canvas.
+The label part is visually hidden while the figure retains its accessible name. The native
+single timeout is demo-owned (10 Hz, hidden-document writes skipped, removed plot stops and
+releases its bounded stream). Initial 121 irregular samples fill a fixed 120-interval window;
+retention is 256. White line/subtle baseline fill and a dark surface match the supplied visual.
+No axes, legend, guide or extra controls are enabled by default. Other use cases remain unchanged.
+Bindings are unaffected: no public surface change.
+Verification: shared page checker passed 20 tests and one page. Build and Chrome observations
+are recorded below after execution. Older C-12/C-20 environmental gaps remain unchanged.
+
+## Smooth-scroll performance follow-up design
+
+User authorized profiling and optimization after the graph-only demo appeared choppy. Scope:
+C-06/C-10/C-11/C-19/C-20, with C-09 solid-background presentation equivalence as a dependency.
+Actual automatic source-story baseline (no tests/builds): 29 paints/3.2 s, mean 0.383 ms/p95
+0.600 ms; history mean 0.221 ms. Public CanvasSurface, PlotHistoryRaster and PlotDecorations
+methods were instrumented from the actual loaded module identities, restored after measurement.
+Planned repairs: keep native scheduler in existing owner, request rAF ahead of short deadlines;
+use its timestamp consistently in element rate checking. Direct solid background fill avoids an
+extra cached background canvas copy when no back guides/pattern is needed. Update hero to an
+explicit monotonic timestamp stream in scroll/clock mode, fixed y, 10 Hz samples and 60 Hz maximum
+paints. A one-sample display delay supplies the segment ahead of the right edge without invented
+extrapolation or sample catch-up. No new API, binding, theme token or rendering framework.
+Live Plot authority remains e2b945d3; push requires latest-follow, so clock motion uses scroll,
+which the current contract already supports. Existing shared owners and source/reuse maps apply.
+Test plan: deterministic scheduler deadline/fairness regressions, actual automatic callback/frame
+measurements before/after, stream retention and teardown; signed/full raster comparisons after
+solid-paint repair. Existing unrelated real hidden/GPU-total evidence gaps remain open.
+
+Follow-up source-backed internal design: the element's history cache uses a two-viewport raster
+atlas. Ordinary integer shifts advance its source rectangle; newly exposed logical strips are
+translated into atlas coordinates. The atlas compacts with one overlapping Canvas copy only when
+its bounded physical width is exhausted. Fractional composition is still a single drawImage,
+with no ring seam, repeated resampling or new public API. Extra backing storage is one viewport
+(plus guard), independent of retention. Static/full and standalone comparison paths retain their
+linear layout. Compare real element output and the atlas fixture against full rendering through
+many compactions, latest revisions, signed fills, dashed/step paths, fractional offsets and reset.
+
+Follow-up early integration evidence: actual graph-only hero uses the existing clock/scroll APIs,
+not push with an unsupported clock. Phase-preserving deadlines deliver 240 paints/240 display
+refreshes in four seconds, versus 205 callbacks/239 refreshes before the phase repair. At 1592 x
+192 CSS pixels/DPR2, matched automatic A/B: linear cache 0.339 ms mean/0.500 p95, atlas 0.312 ms
+mean/0.400 p95; 180 versus zero history self-copies in three seconds, same 60 Hz cadence. Ordinary
+paints stayed incremental. The atlas/full raster fixture across 400 sparse pushes matches the
+old cache's error levels (signed/dashed/steps), with no ordinary full redraw. Real element clock
+comparison through 30 seconds of timestamps: 240 incremental paints versus 241 full baseline;
+retention 256; max checkpoint mean pixel error 0.000922/255. No total GPU timing claim: raw trace
+export was denied by the MCP workspace policy, and returned insight set only reports CLS 0.
+Native Canvas timing wrappers were restored after each measurement. No build/test ran concurrently.
+
+Follow-up final verification: 9 affected unit files/48 tests passed; final scheduler replay adds the
+75 Hz regression and all 6 scheduler tests pass. Focused ESLint, Stylelint, formatting, production
+TypeScript, package build and 97-bundle size/tree-shaking checks pass. Bindings/public API are
+unchanged. Static Storybook build and isolated website build (116 pages/96 docs) pass; shared page
+checker passes 20 tests and one page. Both final built renderings were read through Chrome MCP:
+graph-only dark surface/white signal, no visible label/axes/legend, all six examples and generated
+API/Keyboard order preserved, no console warnings/errors. Each final hero advanced five samples
+and thirty incremental paints in 500 ms without another full redraw. Figure keeps its accessible
+name. Website clock is assigned before enabling clock-follow, avoiding a transient missing-clock
+configuration. Temporary verification tab and servers are closed; existing user server 6006 is
+preserved. This is a scoped performance/example repair, not a new full-widget conformance claim;
+older C-12/C-20 environment boundaries remain explicitly unresolved.

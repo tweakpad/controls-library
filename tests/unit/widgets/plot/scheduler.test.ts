@@ -63,6 +63,64 @@ describe('Plot scheduling', () => {
     expect(owner.frames.size + owner.timers.size).toBe(0);
     s.dispose();
   });
+  it('paints consecutive jittered refreshes without timers or accumulating rate drift', () => {
+    const owner = new Owner();
+    const scheduler = createPlotScheduler({ owner: owner.view });
+    let paints = 0;
+    const handle = scheduler.register({
+      minimumInterval: 1000 / 60,
+      paint: () => {
+        paints++;
+        handle.invalidate();
+      },
+    });
+    handle.invalidate();
+    for (let i = 0; i < 120; i++) {
+      owner.flush(i * (1000 / 60) + (i % 2 ? -0.8 : 0.8));
+      expect(owner.timers.size).toBe(0);
+    }
+    expect(paints).toBe(120);
+    owner.flush(10000);
+    expect(paints).toBe(121);
+    owner.flush(10001);
+    expect(paints).toBe(121);
+    scheduler.dispose();
+  });
+
+  it('retains the requested rate when display refresh is not a multiple of it', () => {
+    const owner = new Owner();
+    const scheduler = createPlotScheduler({ owner: owner.view });
+    let paints = 0;
+    const handle = scheduler.register({
+      minimumInterval: 1000 / 60,
+      paint: () => {
+        paints++;
+        handle.invalidate();
+      },
+    });
+    handle.invalidate();
+    for (let i = 0; i < 120; i++) owner.flush(i * (1000 / 75));
+    expect(paints).toBe(96);
+    scheduler.dispose();
+  });
+
+  it('keeps a 60 Hz cap on a 120 Hz display', () => {
+    const owner = new Owner();
+    const scheduler = createPlotScheduler({ owner: owner.view });
+    let paints = 0;
+    const handle = scheduler.register({
+      minimumInterval: 1000 / 60,
+      paint: () => {
+        paints++;
+        handle.invalidate();
+      },
+    });
+    handle.invalidate();
+    for (let i = 0; i < 120; i++) owner.flush(i * (1000 / 120));
+    expect(paints).toBe(60);
+    scheduler.dispose();
+  });
+
   it('rotates due jobs fairly and preserves dirty work through hidden/suspended states', () => {
     const owner = new Owner(),
       s = createPlotScheduler({ owner: owner.view, maxPlotsPerFrame: 1 });

@@ -22,3 +22,11 @@ No samples or benchmark timers run automatically after the initial data setup.
 - Framework props/smoke rows live under `tests/fixtures/frameworks/{react,vue}/`.
 
 Record actual results under `plans/widgets/plot/`, with local logs under `tmp/component-verification/plot/`.
+
+- `verifyPlotRaster` in `raster-check.ts` accepts `sliding` (default true) and `updates` (default 40).
+  Compare the two-viewport atlas with the legacy linear cache and full renderer; 400 sparse updates
+  exercise repeated atlas compaction. This fixture uses readback-friendly test canvases only.
+- `await verifySmoothPlot()` from `smooth-check.ts` compares the real element's clock-follow
+  composition with full rendering through 30 seconds of simulated timestamps, fractional shifts,
+  repeated atlas compaction and capacity wrap. It yields each display frame and releases both plots.
+  It is an opt-in raster check, not a performance benchmark.

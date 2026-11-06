@@ -5,7 +5,7 @@ The supplied references and approved API define these examples. API tables remai
 
 | Source capability | Page disposition |
 | --- | --- |
-| Bare waveform | Hero and Default story |
+| Live random signal (user reference, 2026-11-06) | Hero and Default story: graph only, dark surface, white irregular line and subtle fill; bounded timestamp history, 10 Hz collection and independently paced clock scrolling capped at 60 Hz, with 100 ms display latency; visible caption hidden through its part hook, accessible name retained. |
 | Single and signed areas | Areas and signed values |
 | Overlapping CPU monitors | Overlapping series |
 | Efficient history and latest revision | History preview, public Buttons |
@@ -22,3 +22,9 @@ Chrome DevTools MCP: all six full-width previews, Keyboard, API descriptions, no
 Real history Buttons advanced count by one and replaced the latest value without another sample.
 Storybook contains no Related; this leaf page has no inbound website Related cards. Original site
 and existing user development servers were preserved.
+
+Smooth-scroll follow-up: hero uses explicit timestamps, 10 Hz collection, 60 Hz maximum paint
+cadence and a documented 100 ms display delay. Final library/static Storybook/isolated website
+builds and page checker pass. Both final rendered pages were inspected through Chrome MCP;
+500 ms yielded five samples and thirty incremental paints with no ordinary full redraws, no
+visible caption/axes/legend and no console warnings/errors. Remaining five previews are preserved.

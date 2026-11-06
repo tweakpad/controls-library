@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
+import { ref } from 'lit/directives/ref.js';
+import { createPlotStream, type TpPlot } from '../../widgets/plot/index.js';
 import { libraryDocs } from '../library-docs.js';
 import type { PlotSeries } from '../../widgets/plot/types.js';
 interface Args {
@@ -18,13 +20,13 @@ const meta: Meta<Args> = {
   component: 'tp-plot',
   parameters: { docs: libraryDocs('widgets/plot') },
   args: {
-    label: 'Waveform',
-    background: 'none',
+    label: 'Live signal',
+    background: 'solid',
     axes: false,
     legend: false,
     interaction: 'none',
     lineWidth: 1.5,
-    fill: false,
+    fill: true,
     size: 'default',
   },
   argTypes: {
@@ -37,8 +39,9 @@ const meta: Meta<Args> = {
     fill: { control: 'boolean' },
     size: { control: 'select', options: ['sm', 'default', 'lg'] },
   },
-  render: (args) =>
-    html`<tp-plot
+  render: (args) => {
+    let dispose: (() => void) | undefined;
+    return html`<tp-plot
       .label=${args.label}
       .background=${args.background}
       .xAxis=${args.axes ? {} : false}
@@ -46,10 +49,52 @@ const meta: Meta<Args> = {
       .legend=${args.legend ? {} : false}
       .interaction=${args.interaction}
       .size=${args.size}
-      .series=${[{ id: 'wave', label: 'Amplitude', lineWidth: args.lineWidth, fill: args.fill ? { baseline: 0 } : false }] satisfies PlotSeries[]}
-      .data=${{ wave: points }}
+      mode="scroll"
+      follow="clock"
+      window="12000"
+      y-domain="0 100"
+      max-frame-rate="120"
+      .partPresentation=${{
+        'plot-label': { styleHook: { display: 'none' } },
+        'plot-surface': { styleHook: { '--tp-plot-surface': '#191d20' } },
+      }}
+      .series=${[{ id: 'signal', label: 'Signal', color: '#f4f4f5', lineWidth: args.lineWidth, fill: args.fill ? { baseline: 0, opacity: 0.07 } : false }] satisfies PlotSeries[]}
+      ${ref((element?: Element) => {
+        dispose?.();
+        dispose = undefined;
+        if (!element) return;
+        const plot = element as TpPlot;
+        const stream = createPlotStream({ seriesIds: ['signal'], capacity: 256 });
+        plot.stream = stream;
+        const next = () => 8 + Math.random() * 80;
+        const start = performance.now();
+        plot.clock = () => performance.now() - 100;
+        stream.appendBatch([
+          {
+            series: 'signal',
+            points: Array.from(
+              { length: 122 },
+              (_, i) => [start - 12100 + i * 100, next()] as const,
+            ),
+          },
+        ]);
+        const tick = () => {
+          if (!plot.isConnected) {
+            stream.dispose();
+            return;
+          }
+          if (!document.hidden) stream.append('signal', [performance.now(), next()]);
+          timer = window.setTimeout(tick, 100);
+        };
+        let timer = window.setTimeout(tick, 100);
+        dispose = () => {
+          window.clearTimeout(timer);
+          stream.dispose();
+        };
+      })}
       style="inline-size:100%;height:12rem"
-    ></tp-plot>`,
+    ></tp-plot>`;
+  },
 };
 export default meta;
 type Story = StoryObj<Args>;

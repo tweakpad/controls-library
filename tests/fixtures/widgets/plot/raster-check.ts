@@ -7,6 +7,8 @@ export function verifyPlotRaster(
   dense = false,
   variant: 'a' | 'b' | 'both' = 'both',
   filled = true,
+  sliding = true,
+  updates = 40,
 ) {
   const results: unknown[] = [];
   for (const interpolation of ['linear', 'step-before', 'step-after'] as const) {
@@ -52,11 +54,15 @@ export function verifyPlotRaster(
         font: style.font,
       };
     const views = new Map(stream.seriesIds.map((id) => [id, stream.view(id)])),
-      incremental = new PlotHistoryRaster(document),
+      incremental = new PlotHistoryRaster(document, sliding),
       full = new PlotHistoryRaster(document);
     // Keep readback from switching one renderer's raster backend midway through the comparison.
     incremental.canvas.getContext('2d', { willReadFrequently: true });
     full.canvas.getContext('2d', { willReadFrequently: true });
+    const output = document.createElement('canvas');
+    output.width = 240;
+    output.height = 100;
+    const outputContext = output.getContext('2d', { willReadFrequently: true })!;
     let generation = 0;
     const compare = (label: string) => {
       const domains = plotDomains(p, views),
@@ -99,7 +105,9 @@ export function verifyPlotRaster(
           scheduler: p.scheduler,
         },
       });
-      const a = incremental.canvas.getContext('2d')!.getImageData(0, 0, 240, 100).data,
+      outputContext.clearRect(0, 0, 240, 100);
+      incremental.composite(outputContext, 0, 0, 0);
+      const a = outputContext.getImageData(0, 0, 240, 100).data,
         b = full.canvas.getContext('2d')!.getImageData(0, 0, 240, 100).data;
       let total = 0,
         bad = 0;
@@ -139,7 +147,7 @@ export function verifyPlotRaster(
     for (let i = 0; i < (dense ? 1100 : 40); i++)
       stream.push({ a: Math.sin(i * 0.4) * 80, b: i % 9 === 0 ? null : Math.cos(i * 0.3) * 60 });
     const initial = compare('initial');
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < updates; i++) {
       stream.push({ a: Math.sin(i * 0.5) * 80, b: i % 9 === 0 ? null : Math.cos(i * 0.3) * 60 });
       compare('push');
     }
