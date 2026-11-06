@@ -215,3 +215,47 @@ name. Website clock is assigned before enabling clock-follow, avoiding a transie
 configuration. Temporary verification tab and servers are closed; existing user server 6006 is
 preserved. This is a scoped performance/example repair, not a new full-widget conformance claim;
 older C-12/C-20 environment boundaries remain explicitly unresolved.
+
+## Histogram example follow-up
+
+User supplied a distribution/bar reference and requested another use case. This is a docs/story
+composition change only (C-01/C-05/C-09/C-19); no widget or public API changes. Existing fill-to-zero
+paths render each interval's horizontal top, and null gaps separate bins; stroke disabled.
+Existing guide records provide dotted x/y lines, and public surface/label hooks apply the supplied
+palette while preserving the accessible figure name. No replacement canvas/chart or new bars API.
+The sample contains 50 pre-binned counts and no sampling timer. Existing source/family/reuse maps
+and spec head e2b945d3 apply. Histogram fixture is excluded from autodocs, and the shared page
+adds the preview under Usage without changing other examples or the live hero.
+Verification scope: shared page/affected docs checks, source/type/build, both final static renderings,
+actual bar gaps and dotted guides, stable idle paint count. Older hardware-measurement gaps remain.
+
+Histogram verification: live fixture and both built documentation renderings inspected through
+Chrome MCP. 50 separated bars (150 path points/50 null gaps), 11 dotted guides, proportional 16:9
+surface, no visible label/axes/legend; figure keeps Sample distribution name. Idle counters stayed
+unchanged over 600 ms. Seven previews render in each page, Histograms appears before existing
+Areas, and generated API/Keyboard remain in order. No console warnings/errors. Shared page
+checker passes 20 tests and the page; focused ESLint, full TypeScript, docs build, static Storybook
+and isolated website build (116 pages/96 docs) pass. No full regression suite was rerun for this
+composition-only change. No public surface/binding changes. Temporary verification tab/servers
+closed; existing Storybook server preserved.
+
+## Plot examples palette correction
+
+User clarified that reference colors were illustrative. All Plot docs/story compositions now use
+the library chart palette and default shared surface/guide recipes. Removed demo surface overrides
+and fixed hex/RGB colors; retained label visibility, data and geometry. Existing signed semantic
+negative color remains --tp-destructive, and other series already resolve chart palette roles.
+This affects C-16/C-19 example presentation only; no widget/API/binding changes. Verify the built
+shared page in light/dark and inspect actual Canvas-resolved palette colors and guide defaults.
+
+Palette correction verified: no fixed hex/RGB values remain in Plot story/docs examples. Actual
+histogram bar pixels resolve chart-1 to RGB(109,93,252); surface changes from RGB(244,244,245) in
+light to RGB(39,39,42) in dark. Guides use the shared default role, with no per-guide color override.
+All seven built Storybook and website previews retain palette roles (signed negative uses semantic
+destructive). The RGB light/dark surface pair above was verified in the library theme fixture;
+the website supplies its own current palette, where the resolved surface was RGB(23,23,23).
+Changing only host color-scheme does not switch the website application palette. Chrome visual
+checks found no application errors; repeated verification pixel reads produced the browser
+willReadFrequently performance advisory (test-only readback, not a production behavior). ESLint, shared-page checker
+(20 tests + page), docs/static Storybook/isolated website builds pass. No core/API/binding changes;
+no full regression suite rerun for this palette-only change. Temporary verification resources closed.

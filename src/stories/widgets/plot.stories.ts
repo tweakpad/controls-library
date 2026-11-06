@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { ref } from 'lit/directives/ref.js';
 import { createPlotStream, type TpPlot } from '../../widgets/plot/index.js';
 import { libraryDocs } from '../library-docs.js';
-import type { PlotSeries } from '../../widgets/plot/types.js';
+import type { PlotSeries, PlotPoint } from '../../widgets/plot/types.js';
 interface Args {
   label: string;
   background: 'none' | 'solid' | 'dots' | 'grid';
@@ -56,9 +56,8 @@ const meta: Meta<Args> = {
       max-frame-rate="120"
       .partPresentation=${{
         'plot-label': { styleHook: { display: 'none' } },
-        'plot-surface': { styleHook: { '--tp-plot-surface': '#191d20' } },
       }}
-      .series=${[{ id: 'signal', label: 'Signal', color: '#f4f4f5', lineWidth: args.lineWidth, fill: args.fill ? { baseline: 0, opacity: 0.07 } : false }] satisfies PlotSeries[]}
+      .series=${[{ id: 'signal', label: 'Signal', color: 'var(--tp-chart-1)', lineWidth: args.lineWidth, fill: args.fill ? { baseline: 0, opacity: 0.07 } : false }] satisfies PlotSeries[]}
       ${ref((element?: Element) => {
         dispose?.();
         dispose = undefined;
@@ -99,6 +98,45 @@ const meta: Meta<Args> = {
 export default meta;
 type Story = StoryObj<Args>;
 export const Default: Story = {};
+const histogramCounts = [
+  0, 0, 0, 5, 2, 4, 8, 12, 25, 14, 18, 13, 45, 25, 73, 66, 88, 79, 54, 52, 26, 43, 51, 40, 49, 50,
+  42, 60, 52, 34, 38, 29, 48, 47, 49, 31, 25, 15, 26, 23, 28, 23, 23, 14, 17, 0, 0, 2, 6, 0,
+];
+const histogramPoints: PlotPoint[] = histogramCounts.flatMap((count, i): PlotPoint[] => [
+  [i + 0.1, count],
+  [i + 0.9, count],
+  [i + 0.9, null],
+]);
+export const Histogram: Story = {
+  tags: ['!autodocs'],
+  render: () =>
+    html`<tp-plot
+      label="Sample distribution"
+      background="solid"
+      x-domain="0 50"
+      y-domain="0 100"
+      .series=${[{ id: 'counts', label: 'Count', line: false, color: 'var(--tp-chart-1)', fill: { baseline: 0, opacity: 1 } }] satisfies PlotSeries[]}
+      .data=${{ counts: histogramPoints }}
+      .partPresentation=${{
+        'plot-label': { styleHook: { display: 'none' } },
+      }}
+      .guides=${[
+        ...[0, 12, 24, 36, 48].map((value) => ({
+          id: 'x-' + value,
+          axis: 'x',
+          value,
+          dash: [1, 4],
+        })),
+        ...[0, 20, 40, 60, 80, 100].map((value) => ({
+          id: 'y-' + value,
+          axis: 'y',
+          value,
+          dash: [1, 4],
+        })),
+      ]}
+      style="inline-size:100%;height:auto;aspect-ratio:16/9"
+    ></tp-plot>`,
+};
 export const SignedArea: Story = {
   tags: ['!autodocs'],
   render: () =>

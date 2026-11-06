@@ -5,7 +5,8 @@ The supplied references and approved API define these examples. API tables remai
 
 | Source capability | Page disposition |
 | --- | --- |
-| Live random signal (user reference, 2026-11-06) | Hero and Default story: graph only, dark surface, white irregular line and subtle fill; bounded timestamp history, 10 Hz collection and independently paced clock scrolling capped at 60 Hz, with 100 ms display latency; visible caption hidden through its part hook, accessible name retained. |
+| Live random signal (user reference, 2026-11-06) | Hero and Default story: graph only, themed surface, chart-palette irregular line and subtle fill; bounded timestamp history, 10 Hz collection and independently paced clock scrolling capped at 60 Hz, with 100 ms display latency; visible caption hidden through its part hook, accessible name retained. |
+| Histogram (user reference, 2026-11-06) | Histograms preview and Histogram fixture: separated opaque chart-palette bars on the themed surface, dotted x/y guides using the default guide role, no visible labels or axes; existing baseline fills and null gaps, static interval counts. |
 | Single and signed areas | Areas and signed values |
 | Overlapping CPU monitors | Overlapping series |
 | Efficient history and latest revision | History preview, public Buttons |
@@ -28,3 +29,17 @@ cadence and a documented 100 ms display delay. Final library/static Storybook/is
 builds and page checker pass. Both final rendered pages were inspected through Chrome MCP;
 500 ms yielded five samples and thirty incremental paints with no ordinary full redraws, no
 visible caption/axes/legend and no console warnings/errors. Remaining five previews are preserved.
+
+Histogram follow-up: shared checker passes 20 tests and the page; TypeScript/ESLint and both builds
+pass. Both built pages inspected through Chrome MCP: seven previews including the histogram;
+50 bar gaps and 11 dotted guides, correct aspect ratio, no console warnings/errors, static idle.
+
+Palette correction requested by the user: reference colors describe geometry only. The live signal
+and histogram now use --tp-chart-1, surface paint inherits the shared Plot recipe (--tp-muted),
+and histogram guides inherit --tp-plot-guide. Remaining examples already use chart roles and the
+semantic destructive color for negative values. No fixed hex/RGB colors remain in Plot examples.
+
+Palette checks pass: seven examples on both built renderings, light/dark Canvas color resolution,
+no application errors (browser pixel-readback performance advisory during verification only);
+shared page 20 tests + page, ESLint and both docs builds pass. Library light/dark colors were
+verified separately from the website application palette, which is inherited as intended.
