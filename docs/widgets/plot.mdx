@@ -1,0 +1,161 @@
+---
+title: Plot
+description: Displays numeric lines and areas from static data or a bounded, scrolling history.
+tag: tp-plot
+---
+
+<Preview
+  title="Waveform"
+  align="stretch"
+  code={`<tp-plot id="plot-wave" label="Waveform" style="height:12rem"></tp-plot>`}
+  script={`const plot = document.querySelector('#plot-wave');
+plot.series = [{ id: 'wave', label: 'Amplitude' }];
+plot.data = { wave: Array.from({ length: 240 }, (_, i) => [i, Math.sin(i * Math.PI / 40)]) };`}
+/>
+
+## Usage
+
+A Plot can show a bare signal, several overlapping monitors or an area around a baseline. Supply samples as numeric `[x, y]` pairs. A `null` y leaves a gap. Configuration and data belong to the application; inspecting a sample leaves it unchanged.
+
+### Areas and signed values
+
+A fill closes to its baseline. Separate negative colors make changes around zero easier to read.
+
+<Preview
+  title="Signed load"
+  align="stretch"
+  code={`<tp-plot id="plot-signed" label="Signed load" description="Positive and negative deviation from the target." background="solid" y-domain="-1.2 1.2" style="height:12rem"></tp-plot>`}
+  script={`const plot = document.querySelector('#plot-signed');
+plot.series = [{ id: 'load', label: 'Deviation', fill: { baseline: 0 }, negativeColor: 'var(--tp-destructive)' }];
+plot.data = { load: Array.from({ length: 160 }, (_, i) => [i, Math.sin(i / 8) * Math.cos(i / 17)]) };
+plot.guides = [{ id: 'zero', axis: 'y', value: 0 }];`}
+/>
+
+### Overlapping series
+
+Each series has its own label and stroke. Areas overlap in series order. Use a dashed line as well as a different color to distinguish related measurements.
+
+<Preview
+  title="Service CPU"
+  align="stretch"
+  code={`<tp-plot id="plot-services" label="Service CPU" description="Two services sharing the same percentage scale." background="grid" y-domain="0 100" style="height:16rem"></tp-plot>`}
+  script={`const plot = document.querySelector('#plot-services');
+plot.series = [
+  { id: 'api', label: 'API', fill: { baseline: 0 } },
+  { id: 'worker', label: 'Worker', lineDash: [4, 2], fill: { baseline: 0 } },
+];
+plot.data = {
+  api: Array.from({ length: 120 }, (_, i) => [i, 35 + 25 * Math.sin(i / 7)]),
+  worker: Array.from({ length: 120 }, (_, i) => [i, 45 + 15 * Math.cos(i / 11)]),
+};
+plot.xAxis = { title: 'Sample' };
+plot.yAxis = { format: value => value + '%' };
+plot.legend = {};`}
+/>
+
+### History
+
+Push a new frame to advance a uniformly spaced history. Revise the latest sample when an observation is still changing. Eligible histories shift cached pixels and repaint the damaged columns; they keep raw samples for inspection.
+
+<Preview
+  title="Push and revise"
+  align="stretch"
+  code={`<div style="display:grid;gap:var(--tp-space-3)">
+  <tp-plot id="plot-history" label="CPU usage" description="Retains 256 samples and displays the last 120 intervals." mode="push" window="120" y-domain="0 100" background="grid" render-strategy="incremental" style="height:12rem"></tp-plot>
+  <div style="display:flex;gap:var(--tp-space-2)">
+    <tp-button id="plot-push" variant="outline">Next sample</tp-button>
+    <tp-button id="plot-revise" variant="outline">Revise latest</tp-button>
+  </div>
+</div>`}
+  script={`import { createPlotStream } from '@tweakpad/ui/widgets';
+const plot = document.querySelector('#plot-history');
+const stream = createPlotStream({ seriesIds: ['cpu'], xMode: 'index', capacity: 256 });
+plot.series = [{ id: 'cpu', label: 'CPU', fill: { baseline: 0 } }];
+plot.stream = stream;
+let index = 0;
+const next = () => stream.push({ cpu: 45 + 30 * Math.sin(index++ / 5) });
+for (let i = 0; i < 100; i++) next();
+document.querySelector('#plot-push').addEventListener('click', next);
+document.querySelector('#plot-revise').addEventListener('click', () => stream.replaceLatest('cpu', 60));`}
+/>
+
+For irregular timestamps, use an explicit stream and `mode="scroll"`. The window uses the same units as x. Time axes expect epoch milliseconds. Fixed y bounds keep the history mapping stable; automatic y ranges redraw when the range changes.
+
+<Code
+  language="typescript"
+  code={`import { createPlotStream } from '@tweakpad/ui/widgets';
+const stream = createPlotStream({ seriesIds: ['fps'], capacity: 1024 });
+plot.series = [{ id: 'fps', label: 'Frames per second' }];
+plot.stream = stream;
+plot.mode = 'scroll';
+plot.window = 10000;
+plot.yDomain = [0, 120];
+plot.xAxis = { type: 'time' };
+// Record from the application's existing frame loop.
+stream.append('fps', [Date.now(), 60]);`}
+/>
+
+### Backgrounds, axes and guides
+
+Axes, ticks and labels are independent. Pixel grids stay fixed while data moves; data grids follow the numeric domain. Guides can sit behind or in front of the series.
+
+<Preview
+  title="Guided signal"
+  align="stretch"
+  code={`<tp-plot id="plot-guides" label="Signal limits" background="dots" style="height:14rem"></tp-plot>`}
+  script={`const plot = document.querySelector('#plot-guides');
+plot.series = [{ id: 'signal', label: 'Signal', interpolation: 'step-after' }];
+plot.data = { signal: [[0, 10], [1, 35], [2, 20], [3, 60], [4, 45]] };
+plot.xAxis = { labels: false, ticks: false };
+plot.yAxis = { title: 'Level' };
+plot.guides = [
+  { id: 'limit', axis: 'y', value: 50, label: 'Limit', dash: [4, 3], layer: 'front' },
+  { id: 'event', axis: 'x', value: 2, label: 'Event' },
+];`}
+/>
+
+### Sampling and paint limits
+
+A stream retains observations independently of the paint rate. Share a scheduler across monitors to limit aggregate work. Collect FPS in the existing application loop; slower metrics can use an explicit sampler.
+
+<Code
+  language="typescript"
+  code={`import { createPlotScheduler, createPlotSampler } from '@tweakpad/ui/widgets';
+const dashboard = createPlotScheduler({ budgetMs: 1, maxPlotsPerFrame: 4 });
+plot.scheduler = dashboard;
+plot.maxFrameRate = 10;
+const sampler = createPlotSampler(stream, {
+  interval: 500,
+  read: () => [{ series: 'fps', points: [[Date.now(), readFramesPerSecond()]] }],
+});
+sampler.start();
+// Application teardown, after detaching the plot:
+sampler.dispose();
+dashboard.dispose();
+stream.dispose();`}
+/>
+
+Set the rate to zero for manual painting, then call `renderNow()` after updating data. `paused` freezes the picture while collection continues. Hidden and offscreen graphs suspend painting by default. Inspect `renderStats` to see how many full redraws and incremental paints occurred; `getSummary()` computes retained statistics only when requested.
+
+### Inspection and text alternatives
+
+Optional inspection reads original samples, including those reduced for drawing. Nearest x shows each series at or before the cursor without interpolation; nearest point selects by screen distance. Give an important graph an interpretation or an equivalent Table in its `table` slot. Passive monitoring produces no live announcements.
+
+<Preview
+  title="Inspect samples"
+  align="stretch"
+  code={`<tp-plot id="plot-inspect" label="Frame times" description="Most frames stay below the 16.7 ms target." interaction="inspect" style="height:12rem"></tp-plot>`}
+  script={`const plot = document.querySelector('#plot-inspect');
+plot.series = [{ id: 'frame', label: 'Milliseconds' }];
+plot.data = { frame: [[0, 12], [1, 15], [2, 22], [3, null], [4, 13], [5, 14]] };
+plot.guides = [{ id: 'target', axis: 'y', value: 16.7, label: 'Target' }];`}
+/>
+
+### Keyboard
+
+| Key                                                    | Action                                    |
+| ------------------------------------------------------ | ----------------------------------------- |
+| <Keys keys="ArrowLeft" /> / <Keys keys="ArrowRight" /> | Inspect the previous or next sample.      |
+| <Keys keys="Home" /> / <Keys keys="End" />             | Inspect the first or last visible sample. |
+| <Keys keys="ArrowUp" /> / <Keys keys="ArrowDown" />    | Inspect another series.                   |
+| <Keys keys="Escape" />                                 | Clear inspection.                         |

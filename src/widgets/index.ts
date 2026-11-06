@@ -6,6 +6,7 @@ export * from './easing-editor/index.js';
 export * from './emoji-picker/index.js';
 export * from './flow/index.js';
 export * from './gradient-picker/index.js';
+export * from './plot/index.js';
 export * from './text-editor/index.js';
 export * from './catalog.js';
 export { widgetPresentationFamilies } from '../presentation/families/widgets.js';

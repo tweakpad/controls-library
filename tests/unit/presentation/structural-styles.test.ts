@@ -360,6 +360,33 @@ function badgeHost(family = badgePresentation) {
 }
 
 describe('style pass of an update', () => {
+  it('notifies cached paint owners only when resolved appearance changes', () => {
+    const state = badgeHost();
+    const listener = vi.fn();
+    const release = state.controller.subscribe(listener);
+    state.controller.hostUpdated();
+    expect(listener).toHaveBeenCalledTimes(1);
+    state.controller.refresh();
+    state.controller.hostUpdated();
+    expect(listener).toHaveBeenCalledTimes(1);
+    state.host['variant'] = 'outline';
+    state.controller.hostUpdated();
+    expect(listener).toHaveBeenCalledTimes(2);
+    state.host['partPresentation'] = { badge: { styleHook: { color: 'red' } } };
+    state.controller.hostUpdated();
+    expect(listener).toHaveBeenCalledTimes(3);
+    state.controller.refresh();
+    expect(listener).toHaveBeenCalledTimes(3);
+    state.host['partPresentation'] = {};
+    state.controller.hostUpdated();
+    expect(listener).toHaveBeenCalledTimes(4);
+    release();
+    state.host['variant'] = 'ghost';
+    state.controller.hostUpdated();
+    expect(listener).toHaveBeenCalledTimes(4);
+    state.writes.mockRestore();
+  });
+
   it('skips the style pass when no presentation input changed', () => {
     const state = badgeHost();
     state.controller.hostUpdated();

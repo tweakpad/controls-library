@@ -20,6 +20,10 @@ export interface CanvasSurfaceOptions {
   readonly owner?: Window | null;
   /** Element whose `class`, `style` and theme attributes signal a theme change; defaults to the document element. */
   readonly themeRoot?: Element | null;
+  /** Optional external paint queue; lifecycle invalidations still use this surface. */
+  readonly schedule?: () => void;
+  /** Maximum backing pixel ratio; defaults to the device ratio. */
+  readonly maxPixelRatio?: () => number;
   readonly contextAttributes?: CanvasRenderingContext2DSettings;
 }
 
@@ -92,7 +96,7 @@ export class CanvasSurface {
     });
     if (owner) {
       const globals = owner as unknown as typeof globalThis;
-      this.#pixelRatio = owner.devicePixelRatio || 1;
+      this.#pixelRatio = this.#ratio();
       const Observer = globals.ResizeObserver;
       if (Observer) {
         const observer = new Observer((entries: ResizeObserverEntry[]) => this.#resized(entries));
@@ -139,6 +143,12 @@ export class CanvasSurface {
     this.#scheduler = undefined;
   }
 
+  /** Re-measure after an owner changes its DPR cap or layout configuration. */
+  refresh(): void {
+    this.#measure();
+    this.invalidate();
+  }
+
   /** Requests one repaint on the next frame; coalesces repeated requests. */
   invalidate(): void {
     this.#dirty = true;
@@ -146,6 +156,10 @@ export class CanvasSurface {
     const owner = this.#owner;
     if (owner?.document?.visibilityState === 'hidden') return;
     if (this.#deviceWidth === 0 || this.#deviceHeight === 0) return;
+    if (this.#options.schedule) {
+      this.#options.schedule();
+      return;
+    }
     this.#frame = this.#scheduler.animationFrame(() => {
       this.#frame = undefined;
       this.#paint();
@@ -167,14 +181,22 @@ export class CanvasSurface {
     if (!query) return;
     const release = scope.listen(query, 'change', () => {
       release();
-      this.#pixelRatio = owner.devicePixelRatio || 1;
+      this.#pixelRatio = this.#ratio();
       this.#measure();
       this.#watchPixelRatio(owner, scope);
       this.invalidate();
     });
   }
 
+  #ratio(): number {
+    return Math.min(
+      this.#owner?.devicePixelRatio || 1,
+      this.#options.maxPixelRatio?.() ?? Infinity,
+    );
+  }
+
   #measure(): void {
+    this.#adoptPixelRatio();
     const canvas = this.#options.canvas;
     const rect = canvas.getBoundingClientRect?.();
     // The client rect carries any CSS zoom or scale above the canvas, which the device pixels
@@ -190,8 +212,7 @@ export class CanvasSurface {
 
   /** A pixel-ratio change that reached layout before its media query fired is adopted here. */
   #adoptPixelRatio(): boolean {
-    const owner = this.#owner;
-    const ratio = owner?.devicePixelRatio || 1;
+    const ratio = this.#ratio();
     if (ratio === this.#pixelRatio) return false;
     this.#pixelRatio = ratio;
     return true;
@@ -203,7 +224,7 @@ export class CanvasSurface {
       this.#cssWidth = entry.contentRect.width;
       this.#cssHeight = entry.contentRect.height;
       const box = entry.devicePixelContentBoxSize?.[0];
-      if (box) {
+      if (box && !this.#options.maxPixelRatio) {
         this.#deviceWidth = box.inlineSize;
         this.#deviceHeight = box.blockSize;
       } else {
@@ -215,7 +236,7 @@ export class CanvasSurface {
   }
 
   #paint(): void {
-    if (!this.#scope || this.#lost) return;
+    if (!this.#scope || this.#lost || this.#owner?.document.visibilityState === 'hidden') return;
     const canvas = this.#options.canvas;
     const width = this.#deviceWidth;
     const height = this.#deviceHeight;

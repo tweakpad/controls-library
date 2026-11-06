@@ -33,6 +33,19 @@ const examples = {
     ></tp-flow>`,
   'tp-emoji-picker': () =>
     html`<tp-emoji-picker label="Reaction" name="reaction"></tp-emoji-picker>`,
+  'tp-plot': () =>
+    html`<tp-plot
+      label="Signal"
+      .series=${[{ id: 'signal', label: 'Amplitude' }]}
+      .data=${{
+        signal: [
+          [0, 0],
+          [1, 1],
+          [2, -1],
+          [3, 0],
+        ],
+      }}
+    ></tp-plot>`,
   'tp-text-editor': () => html`<tp-text-editor label="Field notes" name="notes"></tp-text-editor>`,
 } satisfies Record<WidgetTag, () => TemplateResult>;
 

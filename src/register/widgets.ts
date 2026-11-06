@@ -6,6 +6,7 @@ import { TpGradientStop } from '../widgets/gradient-picker/gradient-stop.js';
 import { TpEasingEditor } from '../widgets/easing-editor/easing-editor.js';
 import { TpFlow } from '../widgets/flow/flow.js';
 import { TpEmojiPicker } from '../widgets/emoji-picker/emoji-picker.js';
+import { TpPlot } from '../widgets/plot/plot.js';
 import { TpTextEditor } from '../widgets/text-editor/text-editor.js';
 import { defineElement } from '../foundation/define.js';
 
@@ -15,6 +16,7 @@ defineElement(TpGradientStop.tagName, TpGradientStop);
 defineElement(TpEasingEditor.tagName, TpEasingEditor);
 defineElement(TpFlow.tagName, TpFlow);
 defineElement(TpEmojiPicker.tagName, TpEmojiPicker);
+defineElement(TpPlot.tagName, TpPlot);
 defineElement(TpTextEditor.tagName, TpTextEditor);
 
 export * from '../widgets/index.js';

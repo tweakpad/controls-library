@@ -169,6 +169,15 @@ export class PresentationController implements ReactiveController {
   #refreshQueued = false;
   /** Inputs of the last style pass; an update with the same inputs skips it. */
   #signature: readonly unknown[] = [];
+  #appearanceListeners = new Set<() => void>();
+  #paintRecipe?: Recipe;
+  /** Subscribe cached native renderers to resolved recipe and terminal hook changes. */
+  subscribe(listener: () => void): () => void {
+    this.#appearanceListeners.add(listener);
+    return () => {
+      this.#appearanceListeners.delete(listener);
+    };
+  }
   #registrations = 0;
   #hostParts = new Map<string, () => void>();
   #lightParts = new Map<HTMLElement, Map<string, () => void>>();
@@ -394,7 +403,10 @@ export class PresentationController implements ReactiveController {
       this.#signature = signature;
       this.#writeStyles(recipe, definition.name);
     }
-    this.#applyHooks();
+    const hooksChanged = this.#applyHooks();
+    const recipeChanged = recipe !== this.#paintRecipe;
+    this.#paintRecipe = recipe;
+    if (recipeChanged || hooksChanged) for (const listener of this.#appearanceListeners) listener();
   }
   /** Everything the style pass reads besides the recipe: registered parts, their roots, owner state. */
   #signatureOf(recipe: Recipe): unknown[] {
@@ -473,21 +485,27 @@ export class PresentationController implements ReactiveController {
     for (const [element, hook] of this.#hooks) this.#undoHooks(element, hook);
     this.#hooks.clear();
   }
-  #undoHooks(element: HTMLElement, hook: AppliedHooks, keep?: AppliedHooks): void {
+  #undoHooks(element: HTMLElement, hook: AppliedHooks, keep?: AppliedHooks): boolean {
+    let changed = false;
     for (const token of hook.classes)
-      if (!keep?.classes.has(token) && element.classList.contains(token))
+      if (!keep?.classes.has(token) && element.classList.contains(token)) {
         element.classList.remove(token);
+        changed = true;
+      }
     for (const [property, state] of hook.styles)
       if (
         !keep?.styles.has(property) &&
         element.style.getPropertyValue(property) === state.applied
       ) {
+        changed = true;
         if (state.previous) element.style.setProperty(property, state.previous);
         else element.style.removeProperty(property);
       }
+    return changed;
   }
   /** Brings hook classes and styles to what the layers ask for, writing only the differences. */
-  #applyHooks(): void {
+  #applyHooks(): boolean {
+    let changed = false;
     const wanted = new Map<HTMLElement, { classes: Set<string>; styles: Map<string, string> }>();
     const layers = [...(compositions.get(this.host)?.values() ?? []), this.host.partPresentation];
     for (const layer of layers)
@@ -505,7 +523,7 @@ export class PresentationController implements ReactiveController {
             entry.styles.set(property, String(value));
         }
       }
-    if (!wanted.size && !this.#hooks.size) return;
+    if (!wanted.size && !this.#hooks.size) return false;
     const applied = new Map<HTMLElement, AppliedHooks>();
     for (const [element, next] of wanted) {
       const previous = this.#hooks.get(element);
@@ -513,10 +531,14 @@ export class PresentationController implements ReactiveController {
       for (const token of next.classes)
         if (previous?.classes.has(token)) {
           hook.classes.add(token);
-          if (!element.classList.contains(token)) element.classList.add(token);
+          if (!element.classList.contains(token)) {
+            element.classList.add(token);
+            changed = true;
+          }
         } else if (!element.classList.contains(token)) {
           // A class the element already had is not the hook's to remove later.
           element.classList.add(token);
+          changed = true;
           hook.classes.add(token);
         }
       for (const [property, value] of next.styles) {
@@ -530,6 +552,7 @@ export class PresentationController implements ReactiveController {
           continue;
         }
         const before = state?.previous ?? element.style.getPropertyValue(property);
+        changed = true;
         element.style.setProperty(property, value);
         hook.styles.set(property, {
           previous: before,
@@ -539,7 +562,9 @@ export class PresentationController implements ReactiveController {
       }
       applied.set(element, hook);
     }
-    for (const [element, hook] of this.#hooks) this.#undoHooks(element, hook, applied.get(element));
+    for (const [element, hook] of this.#hooks)
+      changed = this.#undoHooks(element, hook, applied.get(element)) || changed;
     this.#hooks = applied;
+    return changed;
   }
 }

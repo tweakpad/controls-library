@@ -4,6 +4,7 @@ import { gradientPickerPresentation } from './gradient-picker.js';
 import { easingEditorPresentation } from './easing-editor.js';
 import { flowPresentation } from './flow.js';
 import { emojiPickerPresentation } from './emoji-picker.js';
+import { plotPresentation } from './plot.js';
 import { textEditorPresentation } from './text-editor.js';
 
 /**
@@ -17,5 +18,6 @@ export const widgetPresentationFamilies: readonly PresentationFamily[] = [
   easingEditorPresentation,
   flowPresentation,
   emojiPickerPresentation,
+  plotPresentation,
   textEditorPresentation,
 ];

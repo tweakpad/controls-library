@@ -12,13 +12,15 @@ import type {
 
 export interface VisualizationMetadataProvider {
   owner: TpElement;
+  legendPart?: string;
+  seriesPart?: string;
   series: VisualizationSeriesMap;
   colors: Readonly<Record<string, string>>;
 }
 function requireProvider(
   provider: VisualizationMetadataProvider | undefined,
 ): VisualizationMetadataProvider {
-  if (!provider || provider.owner.localName !== 'tp-data-visualization')
+  if (!provider)
     throw new Error(
       'Data Visualization content requires a Root metadata provider. Use visualization.metadataProvider inside tp-data-visualization.',
     );
@@ -103,20 +105,24 @@ export function visualizationLegendContent(
   const visible = payload.filter((item) => item.type !== 'none');
   if (!visible.length) return nothing;
   return provider.owner.renderPart(
-    'data-visualization-legend',
+    provider.legendPart ?? 'data-visualization-legend',
     Object.freeze({ placement: options.placement ?? 'bottom' }),
     {
       tag: 'ul',
-      properties: { part: 'data-visualization-legend', class: 'legend', 'aria-label': 'Series' },
+      properties: {
+        part: provider.legendPart ?? 'data-visualization-legend',
+        class: 'legend',
+        'aria-label': 'Series',
+      },
       content: visible.map((item, index) => {
         const resolved = resolveVisualizationSeries(provider.series, item, options.nameKey);
         return provider.owner.renderPart(
-          'data-visualization-series',
+          provider.seriesPart ?? 'data-visualization-series',
           Object.freeze({ key: resolved.key }),
           {
             tag: 'li',
             properties: {
-              part: 'data-visualization-series',
+              part: provider.seriesPart ?? 'data-visualization-series',
               class: 'series-entry',
               'data-series': resolved.key,
             },

@@ -7,6 +7,7 @@ import type { TpEmojiPicker } from '../../widgets/emoji-picker/emoji-picker.js';
 import type { TpFlow } from '../../widgets/flow/flow.js';
 import type { TpGradientPicker } from '../../widgets/gradient-picker/gradient-picker.js';
 import type { TpGradientStop } from '../../widgets/gradient-picker/gradient-stop.js';
+import type { TpPlot } from '../../widgets/plot/plot.js';
 import type { TpTextEditor } from '../../widgets/text-editor/text-editor.js';
 import type * as foundationColorTypes from '../../foundation/color/types.js';
 import type * as foundationEvents from '../../foundation/events.js';
@@ -25,6 +26,7 @@ import type * as widgetsColorPickerTypes from '../../widgets/color-picker/types.
 import type * as widgetsEmojiPickerTypes from '../../widgets/emoji-picker/types.js';
 import type * as widgetsFlowTypes from '../../widgets/flow/types.js';
 import type * as widgetsGradientPickerGradientPicker from '../../widgets/gradient-picker/gradient-picker.js';
+import type * as widgetsPlotTypes from '../../widgets/plot/types.js';
 import type * as widgetsTextEditorTypes from '../../widgets/text-editor/types.js';
 
 /** A tag Preact renders: its own properties and `ontp-…` event listeners. */
@@ -404,6 +406,54 @@ type Tags = {
     {
       'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
       'tp-gradient-stop-change': Event;
+    }
+  >;
+  'tp-plot': Tag<
+    TpPlot,
+    | 'appearance'
+    | 'autoRange'
+    | 'background'
+    | 'clock'
+    | 'data'
+    | 'decimation'
+    | 'density'
+    | 'description'
+    | 'disabled'
+    | 'follow'
+    | 'grid'
+    | 'guides'
+    | 'inspectMode'
+    | 'interaction'
+    | 'invalid'
+    | 'label'
+    | 'legend'
+    | 'locale'
+    | 'maxFrameRate'
+    | 'maxPixelRatio'
+    | 'mode'
+    | 'motionPolicy'
+    | 'offscreen'
+    | 'orientation'
+    | 'partContracts'
+    | 'partPresentation'
+    | 'paused'
+    | 'readOnly'
+    | 'renderStrategy'
+    | 'required'
+    | 'scheduler'
+    | 'series'
+    | 'size'
+    | 'stream'
+    | 'strings'
+    | 'timeZone'
+    | 'window'
+    | 'xAxis'
+    | 'xDomain'
+    | 'yAxis'
+    | 'yDomain',
+    {
+      'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
+      'tp-inspection-change': CustomEvent<widgetsPlotTypes.PlotInspection | null>;
     }
   >;
   'tp-text-editor': Tag<

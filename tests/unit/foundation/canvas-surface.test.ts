@@ -85,6 +85,35 @@ function setup() {
 }
 
 describe('CanvasSurface', () => {
+  it('hands lifecycle invalidations to an external queue and applies a live DPR cap', () => {
+    FakeObserver.instances = [];
+    const owner = new FakeWindow(),
+      canvas = new FakeCanvas(),
+      render = vi.fn(),
+      schedule = vi.fn();
+    let cap = 1;
+    const surface = new CanvasSurface({
+      canvas: canvas as unknown as HTMLCanvasElement,
+      owner: owner as unknown as Window,
+      render,
+      schedule,
+      maxPixelRatio: () => cap,
+    });
+    surface.connect();
+    expect(schedule).toHaveBeenCalledOnce();
+    expect(owner.frames).toHaveLength(0);
+    surface.paint();
+    expect(render).toHaveBeenLastCalledWith(canvas.context, 100, 50, 1);
+    cap = 1.5;
+    surface.refresh();
+    surface.paint();
+    expect(render).toHaveBeenLastCalledWith(canvas.context, 150, 75, 1.5);
+    owner.document.visibilityState = 'hidden';
+    surface.paint();
+    expect(render).toHaveBeenCalledTimes(2);
+    surface.disconnect();
+    expect(FakeObserver.instances.every((o) => o.disconnected)).toBe(true);
+  });
   it('sizes the canvas at the device pixel ratio and paints once per invalidation batch', () => {
     const { owner, canvas, render, surface } = setup();
     surface.connect();

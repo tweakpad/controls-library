@@ -2,6 +2,7 @@
 // lane: one row per entry, rendered through the entry's binding with the composition it needs.
 // A row's properties must arrive on the element, a second render's changed properties and
 // children must reach it, and an event the element dispatches must reach its `onTp…` prop once.
+import { createPlotStream } from '../../../src/widgets/plot/stream.js';
 import { boldIcon } from '../../../src/icons/text-formatting.js';
 import type { LaneChild } from './lanes.js';
 
@@ -27,6 +28,8 @@ export interface PropRow {
   expected?: string[];
 }
 
+const plotHistory = createPlotStream({ seriesIds: ['signal'], xMode: 'index', capacity: 8 });
+plotHistory.push({ signal: 1 });
 const child = (
   binding: string,
   props: Record<string, unknown> = {},
@@ -568,6 +571,28 @@ export const propRows: PropRow[] = [
     // Without an installed engine the editor stays idle and says so.
     expected: ['text-editor-engine-missing'],
     update: { props: { placeholder: 'Add details' } },
+  },
+  {
+    entry: 'tp-plot',
+    binding: 'Plot',
+    props: {
+      label: 'Signal',
+      series: [{ id: 'signal', label: 'Amplitude' }],
+      stream: plotHistory,
+      maxFrameRate: 0,
+    },
+    update: { props: { label: 'Updated signal', background: 'grid' } },
+    event: {
+      type: 'tp-inspection-change',
+      fire: (element) =>
+        element.dispatchEvent(
+          new CustomEvent('tp-inspection-change', {
+            detail: { seriesId: 'signal', x: 1, y: 1, source: 'keyboard' },
+            bubbles: true,
+            composed: true,
+          }),
+        ),
+    },
   },
 ];
 

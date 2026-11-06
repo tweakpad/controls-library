@@ -16,6 +16,7 @@ export const widgetCatalog = [
   ['Easing editor', 'tp-easing-editor', 'flattening-compound'],
   ['Flow', 'tp-flow', 'flattening-compound'],
   ['Emoji picker', 'tp-emoji-picker', 'flattening-compound'],
+  ['Plot', 'tp-plot', 'flattening-compound'],
   ['Text editor', 'tp-text-editor', 'flattening-compound'],
 ] as const satisfies readonly WidgetTuple[];
 

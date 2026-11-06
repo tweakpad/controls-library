@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Plot verification</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      body {
+        background: var(--tp-background);
+        color: var(--tp-foreground);
+        font-family: var(--tp-font-sans);
+        margin: 32px;
+      }
+      main {
+        max-width: 700px;
+        display: grid;
+        gap: 24px;
+      }
+      tp-plot {
+        height: 180px;
+      }
+      #pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Plot verification</h1>
+      <div id="pair">
+        <tp-plot
+          id="incremental"
+          label="Signed history"
+          description="Positive and negative signal"
+          mode="push"
+          window="120"
+          y-domain="-100 100"
+          render-strategy="incremental"
+          max-frame-rate="60"
+          background="solid"
+        ></tp-plot
+        ><tp-plot
+          id="full"
+          label="Full rendering baseline"
+          description="Positive and negative signal"
+          mode="push"
+          window="120"
+          y-domain="-100 100"
+          render-strategy="full"
+          max-frame-rate="60"
+          background="solid"
+        ></tp-plot>
+      </div>
+      <tp-plot id="wave" label="Waveform"></tp-plot>
+    </main>
+    <script type="module">
+      import { benchmarkPlot } from './benchmark.ts';
+      import { TpPlot, createPlotStream } from '/src/widgets/plot/index.ts';
+      import { defineElement } from '/src/foundation/define.ts';
+      defineElement(TpPlot.tagName, TpPlot);
+      const stream = createPlotStream({ seriesIds: ['signal'], xMode: 'index', capacity: 256 });
+      const series = [
+        {
+          id: 'signal',
+          label: 'Signal',
+          fill: { baseline: 0 },
+          negativeColor: 'var(--tp-destructive)',
+        },
+      ];
+      for (const id of ['incremental', 'full']) {
+        const p = document.getElementById(id);
+        p.series = series;
+        p.stream = stream;
+      }
+      for (let i = 0; i < 100; i++) stream.push({ signal: Math.sin(i * 0.3) * 60 });
+      wave.series = [{ id: 'wave', label: 'Amplitude' }];
+      wave.data = { wave: Array.from({ length: 500 }, (_, i) => [i, Math.sin(i * 0.04)]) };
+      window.fixture = {
+        benchmark: benchmarkPlot,
+        stream,
+        push: (n) => {
+          for (let i = 0; i < n; i++)
+            stream.push({ signal: Math.sin((stream.revision + i) * 0.3) * 70 });
+        },
+        replace: (y) => stream.replaceLatest('signal', y),
+        plots: [incremental, full],
+        compare: () => {
+          const a = incremental.shadowRoot.querySelector('canvas'),
+            b = full.shadowRoot.querySelector('canvas');
+          const aa = a.getContext('2d').getImageData(0, 0, a.width, a.height).data,
+            bb = b.getContext('2d').getImageData(0, 0, b.width, b.height).data;
+          let total = 0,
+            bad = 0;
+          for (let i = 0; i < aa.length; i++) {
+            let d = Math.abs(aa[i] - bb[i]);
+            total += d;
+            if (d > 24) bad++;
+          }
+          return {
+            mean: total / aa.length,
+            badFraction: bad / aa.length,
+            width: a.width,
+            height: a.height,
+            stats: incremental.renderStats,
+          };
+        },
+      };
+    </script>
+  </body>
+</html>
