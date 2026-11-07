@@ -72,6 +72,22 @@ describe('design token catalog', () => {
     expect(hex([0, 0, 0, 128])).toBe('#00000080');
   });
 
+  it('keeps native selection readable in both schemes and exposes its contrast pair', () => {
+    const tokens = authoredTokens(stylesheet);
+    const resolve = (role: string): string => {
+      const value = tokens.get(role) ?? '';
+      const alias = /^var\(--tp-([a-z-]+)\)$/u.exec(value);
+      return alias ? resolve(alias[1]!) : value;
+    };
+    const fill = modes(resolve('selection'));
+    const text = modes(resolve('selection-foreground'));
+    for (const index of [0, 1])
+      expect(contrastRatio(rgba(text[index]!), rgba(fill[index]!))).toBeGreaterThanOrEqual(
+        MINIMUM_CONTRAST,
+      );
+    expect(contrastSurfaces('selection-foreground')).toEqual(['selection']);
+  });
+
   it('draws cubic-bezier and keyword curves only', () => {
     expect(bezierPoints('cubic-bezier(0.2, 0, 0, 1)')).toEqual([0.2, 0, 0, 1]);
     expect(bezierPoints('ease-in')).toEqual([0.42, 0, 1, 1]);

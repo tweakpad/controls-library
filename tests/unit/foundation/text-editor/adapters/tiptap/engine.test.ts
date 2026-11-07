@@ -438,7 +438,11 @@ describe('Tiptap mount and root (uwg-te-tab-engine r1, r12, r13; uwg-te-req-engi
 describe('Tiptap base CSS (uwg-te-req-pres-2, uwg-te-tab-engine r2)', () => {
   it('V-066: the base CSS names no literal color and holds only editing mechanics', () => {
     expect(TIPTAP_BASE_CSS).not.toMatch(/#[0-9a-f]{3,8}\b|rgba?\(|hsla?\(|oklch\(|color-mix\(/iu);
-    expect(TIPTAP_BASE_CSS).not.toMatch(/(?<![-\w])(?:color|background-color)\s*:/iu);
+    expect(TIPTAP_BASE_CSS).not.toMatch(/(?<![-\w])background-color\s*:/iu);
+    // Suppressing selection also restores the originating text's color, rather
+    // than inheriting the theme's foreground for a now-transparent highlight.
+    for (const [, value] of TIPTAP_BASE_CSS.matchAll(/(?<![-\w])color:\s*([^;]+);/gu))
+      expect(value).toBe('currentColor');
     // The only values that paint are transparent, which hide the native selection and caret.
     for (const [, value] of TIPTAP_BASE_CSS.matchAll(/(?:background|caret-color):\s*([^;]+);/gu))
       expect(value).toBe('transparent');

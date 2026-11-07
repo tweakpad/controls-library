@@ -9,6 +9,7 @@ import type { Diagnostic, DiagnosticSeverity } from './services.js';
 import { visuallyHiddenRule } from './visually-hidden.js';
 
 import { PresentationController } from '../presentation/controller.js';
+import { nativeSelectionCss } from '../presentation/recipes/shared/native-selection.js';
 import type { PresentationFamily } from '../presentation/family.js';
 import type { PartPresentation } from '../presentation/resolver.js';
 import { renderPart } from './part.js';
@@ -40,6 +41,8 @@ export class TpElement extends LitElement {
       box-sizing: border-box;
       color: var(--tp-foreground);
     }
+
+    ${unsafeCSS(nativeSelectionCss)}
 
     :host([motion-policy='reduce']) {
       --tp-motion-scale: 0;

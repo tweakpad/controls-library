@@ -11,6 +11,8 @@ export const TOKEN_FAMILIES = {
     'popover-foreground',
     'primary',
     'primary-foreground',
+    'selection',
+    'selection-foreground',
     'secondary',
     'secondary-foreground',
     'muted',

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Native selection verification</title>
+    <link id="theme" rel="stylesheet" href="/src/styles.css" />
+    <style>
+      body {
+        margin: var(--tp-space-6);
+        background: var(--tp-background);
+        color: var(--tp-foreground);
+      }
+      main {
+        display: grid;
+        gap: var(--tp-space-6);
+        max-inline-size: 48rem;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: start;
+        gap: var(--tp-space-6);
+      }
+      .scope {
+        --tp-selection: var(--tp-success);
+        --tp-selection-foreground: var(--tp-success-foreground);
+      }
+      tp-native-select {
+        min-inline-size: 12rem;
+      }
+      tp-input,
+      tp-text-area {
+        inline-size: 20rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Native selection verification</h1>
+      <form id="form" class="row">
+        <tp-field label="Notifications">
+          <tp-native-select id="multiple" multiple name="events" label="Notifications">
+            <option value="deploy" selected>Deploy finished</option>
+            <option value="failed" selected>Build failed</option>
+            <option value="review">Review requested</option>
+            <option value="mention">Mentioned in a comment</option>
+            <option value="disabled" disabled>Unavailable event</option>
+          </tp-native-select>
+        </tp-field>
+        <tp-button type="submit">Submit selection</tp-button>
+        <tp-button type="reset">Reset selection</tp-button>
+      </form>
+      <div class="row">
+        <tp-native-select id="small" size="sm" multiple label="Small list">
+          <option selected>First</option>
+          <option>Second</option>
+          <option>Third</option>
+          <option>Fourth</option>
+        </tp-native-select>
+        <tp-native-select id="compact" density="compact" multiple label="Compact list">
+          <option selected>First</option>
+          <option>Second</option>
+          <option>Third</option>
+          <option>Fourth</option>
+        </tp-native-select>
+        <tp-native-select id="grouped" dir="rtl" multiple label="Grouped RTL list">
+          <optgroup label="Group one">
+            <option selected>First</option>
+            <option>Second</option>
+          </optgroup>
+          <optgroup label="Group two">
+            <option selected>Third</option>
+            <option disabled>Disabled</option>
+          </optgroup>
+        </tp-native-select>
+        <tp-native-select id="scoped" class="scope" multiple label="Scoped selection">
+          <option selected>Independent selection color</option>
+          <option>Another option</option>
+        </tp-native-select>
+        <tp-native-select id="disabled" multiple disabled label="Disabled list">
+          <option selected>Selected disabled control</option>
+          <option>Another option</option>
+        </tp-native-select>
+      </div>
+      <div class="row">
+        <tp-input
+          id="input"
+          label="Selection input"
+          value="Select this native input text"
+        ></tp-input>
+        <tp-text-area
+          id="textarea"
+          label="Selection textarea"
+          value="Select this native textarea text"
+        ></tp-text-area>
+      </div>
+      <div class="scope">
+        <p id="text">
+          Selectable document text.
+          <span id="nested">Nested text follows its own token scope.</span>
+        </p>
+        <tp-input
+          id="scoped-input"
+          label="Scoped input"
+          value="Scoped native input text"
+        ></tp-input>
+      </div>
+      <p id="editable" contenteditable="true" role="textbox" aria-label="Editable text">
+        Native editable text selection.
+      </p>
+      <tp-easing-editor
+        id="easing"
+        label="Selection curve"
+        value="cubic-bezier(0.25, 0.1, 0.25, 1)"
+      ></tp-easing-editor>
+    </main>
+    <script type="module" src="./fixture.js"></script>
+  </body>
+</html>

@@ -50,6 +50,7 @@ describe('uwg-te-req-pres-2: the adapter’s base CSS', () => {
 .ProseMirror .tp-te-cell-selected *::selection,
 .ProseMirror .tp-te-table-selection *::selection {
   background: transparent;
+  color: currentColor;
 }
 .ProseMirror .tp-te-table-wrapper {
   overflow-x: auto;

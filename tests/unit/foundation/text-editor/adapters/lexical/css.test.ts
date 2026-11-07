@@ -46,6 +46,7 @@ describe('uwg-te-req-pres-2: the adapter’s base CSS', () => {
 [data-lexical-editor] .tp-te-cell-selected *::selection,
 [data-lexical-editor] .tp-te-table-selection *::selection {
   background-color: transparent;
+  color: currentColor;
 }
 `);
   });

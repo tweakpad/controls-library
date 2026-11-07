@@ -223,8 +223,8 @@ export const easingEditorAppearance: PresentationDictionary = {
     {
       selector: '& .source::selection',
       declarations: {
-        'background-color': 'color-mix(in oklab, var(--tp-primary) 30%, transparent)',
-        color: 'transparent',
+        'background-color': 'var(--_tp-native-selection-background, var(--tp-selection))',
+        color: 'var(--_tp-native-selection-foreground, var(--tp-selection-foreground))',
       },
     },
     {

@@ -2,6 +2,8 @@ import type { PresentationDictionary } from '../resolver.js';
 import { inputRules } from './shared/text-control.js';
 import { controlStepDeclarations } from './shared/variant.js';
 import { controlFill } from './shared/edges.js';
+import { popupItemSpacingAppearance, popupSpacingAppearance } from './command-surface.js';
+import { nativeOptionSelection } from './shared/native-selection.js';
 /** Native select layers its native extents over the shared Input boundary. */
 export const nativeSelectAppearance: PresentationDictionary = {
   // The host already applies the disabled opacity and cursor.
@@ -36,9 +38,12 @@ export const nativeSelectAppearance: PresentationDictionary = {
     {
       selector: '&[multiple]',
       declarations: {
+        ...popupSpacingAppearance[0]!.declarations,
         height: 'auto',
         'block-size': 'auto',
-        'padding-inline-end': 'var(--tp-space-2-5)',
+        'padding-inline': 'var(--_tp-popup-spacing)',
+        'padding-block': 'var(--_tp-popup-spacing)',
+        appearance: 'none',
       },
     },
     {
@@ -57,21 +62,37 @@ export const nativeSelectAppearance: PresentationDictionary = {
     {
       selector: 'select[multiple] &',
       declarations: {
+        ...popupItemSpacingAppearance[0]!.declarations,
         background: 'transparent',
         color: 'var(--tp-foreground)',
-        padding: 'var(--tp-space-1) var(--tp-space-2)',
+        font: 'inherit',
+        'box-sizing': 'border-box',
+        'line-height': 'var(--tp-leading-tight)',
       },
     },
     {
       selector: 'select[multiple] &:checked',
-      declarations: { background: 'var(--tp-primary)', color: 'var(--tp-primary-foreground)' },
+      declarations: nativeOptionSelection,
+    },
+    {
+      selector: 'select[multiple] &[data-size="sm"]',
+      declarations: {
+        'padding-block': 'var(--tp-space-0-5)',
+        'min-block-size': 'var(--tp-control-height-xs)',
+      },
     },
     {
       selector: 'select[multiple] &:disabled',
       declarations: { color: 'var(--tp-muted-foreground)' },
     },
   ],
-  'native-select-option-group': [{ declarations: { background: 'Canvas', color: 'CanvasText' } }],
+  'native-select-option-group': [
+    { declarations: { background: 'Canvas', color: 'CanvasText' } },
+    {
+      selector: 'select[multiple] &',
+      declarations: { background: 'transparent', color: 'var(--tp-foreground)', font: 'inherit' },
+    },
+  ],
   'native-select-indicator': [
     {
       declarations: {

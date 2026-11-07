@@ -30,5 +30,6 @@ export const LEXICAL_BASE_CSS = `${textMechanicsCss('[data-lexical-editor]')}[da
 [data-lexical-editor] .tp-te-cell-selected *::selection,
 [data-lexical-editor] .tp-te-table-selection *::selection {
   background-color: transparent;
+  color: currentColor;
 }
 `;

@@ -667,6 +667,8 @@ describe('uwg-te-req-pres-2: base CSS', () => {
         'caret-color',
         'user-select',
         'background-color',
+        // Suppressed native selection retains the originating text's own color.
+        'color',
       ]),
     );
     expect(css).toMatch(/background-color: transparent;/);
