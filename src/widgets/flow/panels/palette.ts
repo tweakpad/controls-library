@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../../../components/shared/scroll-edges.js';
 import { css, html, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { TpElement } from '../../../foundation/element.js';
 import type { TpValueChangeEvent } from '../../../foundation/events.js';
@@ -128,6 +129,13 @@ const paletteStyles = css`
  * placement and Enter inserts at once (`flow-palette-insert`).
  */
 export class TpFlowPalette extends TpElement {
+  constructor() {
+    super();
+    new NativeScrollEdges(this, {
+      viewports: () => [...this.renderRoot.querySelectorAll<HTMLElement>('.body')],
+    });
+  }
+
   static tagName = 'tp-flow-palette';
   static override presentation = flowPresentation;
   static get elementDependencies() {

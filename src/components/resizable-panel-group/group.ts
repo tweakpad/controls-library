@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { bindPart } from '../../foundation/part.js';
 import {
   ResizeSeparatorController,
@@ -42,6 +43,17 @@ import type { CustomElementConstructorWithTag } from '../../foundation/define.js
  * @fires tp-layout-change-complete - Once a resize settles, with the final `layout` and `sizes`; the place to save a layout.
  */
 export class TpResizablePanelGroup extends TpElement {
+  constructor() {
+    super();
+    new NativeScrollEdges(this, {
+      viewports: () => [...this.renderRoot.querySelectorAll<HTMLElement>('.group')],
+      content: () =>
+        this.#panels.flatMap((panel) => [
+          ...(panel.shadowRoot?.querySelectorAll<HTMLElement>('.panel') ?? []),
+        ]),
+    });
+  }
+
   static tagName = 'tp-resizable-panel-group';
   /** Library elements this element renders; defining it defines them too. */
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {

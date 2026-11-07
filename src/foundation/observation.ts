@@ -544,3 +544,29 @@ export function observeFonts(document: Document, callback: FontsCallback): () =>
     fontRegistries.delete(document);
   };
 }
+
+const selectionRegistries = new WeakMap<Document, Set<() => void>>();
+const selectionListeners = new WeakMap<Document, () => void>();
+/** Shares the document's selection signal; no listener survives the last subscriber. */
+export function observeSelection(document: Document, callback: () => void): () => void {
+  let callbacks = selectionRegistries.get(document);
+  if (!callbacks) {
+    callbacks = new Set();
+    const subscribers = callbacks;
+    const listener = () => {
+      for (const notify of subscribers) notify();
+    };
+    document.addEventListener('selectionchange', listener);
+    selectionRegistries.set(document, callbacks);
+    selectionListeners.set(document, listener);
+  }
+  callbacks.add(callback);
+  const subscribers = callbacks;
+  return () => {
+    subscribers.delete(callback);
+    if (subscribers.size || selectionRegistries.get(document) !== subscribers) return;
+    document.removeEventListener('selectionchange', selectionListeners.get(document)!);
+    selectionListeners.delete(document);
+    selectionRegistries.delete(document);
+  };
+}

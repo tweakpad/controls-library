@@ -52,7 +52,9 @@ export function affectsEnvironment(
   for (const name of changedStyleProperties(record.oldValue, next))
     if (
       ENVIRONMENT_PROPERTIES.has(name) ||
-      (name.startsWith('--') && !POSITIONING_PROPERTIES.has(name))
+      (name.startsWith('--') &&
+        !name.startsWith('--_tp-scroll-edge-') &&
+        !POSITIONING_PROPERTIES.has(name))
     )
       return true;
   return false;

@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../../../components/shared/scroll-edges.js';
 import { css, html, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { TpElement } from '../../../foundation/element.js';
 import { CleanupScope } from '../../../foundation/services.js';
@@ -305,6 +306,9 @@ export class TpFlowInspector extends TpElement {
 
   constructor() {
     super();
+    new NativeScrollEdges(this, {
+      viewports: () => [...this.renderRoot.querySelectorAll<HTMLElement>('.body')],
+    });
     // On the shadow root, where the target is the control itself; the host sees it retargeted
     // (uwg-fl-req-evt-3).
     containNestedEvents(this, {

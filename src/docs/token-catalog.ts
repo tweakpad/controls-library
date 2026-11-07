@@ -102,7 +102,7 @@ export const FAMILIES = {
   size: {
     title: 'Size',
     description:
-      'Block size of single-line controls, icon extents and the minimum pointer target. Control and icon sizes derive from the spacing seed.',
+      'Block size of single-line controls, icon extents and the minimum pointer target. Control and icon sizes derive from the spacing seed. Scroll-edge fade size controls the content gradient at native overflow edges; zero disables it.',
     value: 'length',
     preview: 'box-height',
   },
@@ -366,6 +366,8 @@ export const DESCRIPTIONS = {
   'icon-size-sm': 'Small icons.',
   'icon-size-md': 'Default icon extent.',
   'icon-size-lg': 'Large icons.',
+  'scroll-edge-fade-size':
+    'Maximum content fade at hidden native scroll edges. Defaults to 24px; 0px disables it.',
   'target-size-min':
     'Minimum pointer target. Smaller controls extend their hit area to it on touch; it is never a visual size.',
   'border-width': 'Default width of borders and separators.',

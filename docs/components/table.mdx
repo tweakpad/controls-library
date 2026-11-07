@@ -270,6 +270,8 @@ A Select in a cell works the same way for picking from a fixed list, such as rea
 
 Constrain the Table with ordinary CSS such as `max-block-size`, and it becomes a focusable scroll region named by `label`. `sticky-header`, `sticky-footer`, `sticky-start-columns` and `sticky-end-columns` pin each edge independently and follow RTL: here the region names and the half-year totals stay in view while the months scroll between them. Use normal table/column CSS for content width. The component measures actual column geometry; it has no fixed column-width or spacing attributes. A cell spanning across a pinned/unpinned boundary stays unpinned. Column offsets update after native layout changes, resizing, inserted/removed rows or changed spans.
 
+Set `style="--tp-scroll-edge-fade-size:0px"` on a Table to disable its scroll-edge fades independently. Other controls keep their inherited fade size.
+
 ### Wrapping text
 
 Cells keep their text on one line, so data columns stay aligned and a wide Table scrolls. For descriptions and other prose, set `white-space: normal` on the Table, a row or a cell. Sizes and alignment set on a head or cell reach its native cell: `min-inline-size` keeps a prose column readable on a narrow screen, and `inline-size` fixes a column's width.

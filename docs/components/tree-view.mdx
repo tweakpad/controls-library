@@ -123,9 +123,14 @@ The default record shape is `{ id, label, children?, hasChildren?, disabled? }`;
 
 <Preview
   title="From records, reorderable"
-  code={`<tp-tree-view id="tree-view-records" label="Sprint backlog" reorderable size="sm" style="inline-size:18rem"></tp-tree-view>`}
+  code={`<div id="tree-view-records-mount"></div>`}
   script={`await customElements.whenDefined('tp-tree-view');
-const tree = document.querySelector('#tree-view-records');
+const tree = document.createElement('tp-tree-view');
+tree.id = 'tree-view-records';
+tree.label = 'Sprint backlog';
+tree.size = 'sm';
+tree.reorderable = true;
+tree.style.cssText = 'inline-size:18rem';
 tree.defaultExpanded = ['checkout', 'search'];
 tree.defaultItems = [
   { id: 'checkout', label: 'Checkout redesign', children: [
@@ -137,7 +142,8 @@ tree.defaultItems = [
     { id: 'filters', label: 'Saved filters' },
   ] },
   { id: 'onboarding', label: 'Onboarding emails' },
-];`}
+];
+document.querySelector('#tree-view-records-mount').append(tree);`}
 />
 
 Drag a handle, or press Control+Enter (Command+Enter) on an item and move it with the arrow keys. Each move is proposed through a cancelable `tp-items-change`.
@@ -199,9 +205,14 @@ document.querySelector('#tree-view-render').prepend(tree);`}
 
 <Preview
   title="Virtualized"
-  code={`<tp-tree-view id="tree-view-virtual" label="Log archive" virtualized size="sm" style="inline-size:18rem;block-size:16rem"></tp-tree-view>`}
+  code={`<div id="tree-view-virtual-mount"></div>`}
   script={`await customElements.whenDefined('tp-tree-view');
-const tree = document.querySelector('#tree-view-virtual');
+const tree = document.createElement('tp-tree-view');
+tree.id = 'tree-view-virtual';
+tree.label = 'Log archive';
+tree.size = 'sm';
+tree.virtualized = true;
+tree.style.cssText = 'inline-size:18rem;block-size:16rem';
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 tree.defaultItems = [2024, 2025, 2026].map((year) => ({
   id: String(year),
@@ -219,7 +230,8 @@ tree.defaultItems = [2024, 2025, 2026].map((year) => ({
     })),
   })),
 }));
-tree.defaultExpanded = ['2026', '2026-10', '2026-10-14'];`}
+tree.defaultExpanded = ['2026', '2026-10', '2026-10-14'];
+document.querySelector('#tree-view-virtual-mount').append(tree);`}
 />
 
 The archive holds about 25,000 records; only a few dozen rows exist in the document at a time.
@@ -233,14 +245,18 @@ To own selection and expansion yourself, set `items`, `value` and `expanded` and
 <Preview
   title="Controlled lanes"
   code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:center">
-  <tp-tree-view id="tree-view-controlled" label="Help center" size="sm" style="inline-size:18rem"></tp-tree-view>
+  <div id="tree-view-controlled-mount"></div>
   <div style="display:flex;align-items:center;gap:var(--tp-space-3)">
     <output id="tree-view-controlled-status" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Selected: Refund policy</output>
     <tp-button id="tree-view-controlled-reveal" variant="outline" size="sm">Reveal selection</tp-button>
   </div>
 </div>`}
   script={`await customElements.whenDefined('tp-tree-view');
-const tree = document.querySelector('#tree-view-controlled');
+const tree = document.createElement('tp-tree-view');
+tree.id = 'tree-view-controlled';
+tree.label = 'Help center';
+tree.size = 'sm';
+tree.style.cssText = 'inline-size:18rem';
 const status = document.querySelector('#tree-view-controlled-status');
 const state = { value: ['refunds'], expanded: [] };
 tree.items = [
@@ -273,7 +289,8 @@ tree.addEventListener('tp-expanded-change', (event) => {
 });
 document.querySelector('#tree-view-controlled-reveal').addEventListener('click', () => {
   tree.revealItem(state.value[0] ?? 'refunds', { focus: true });
-});`}
+});
+document.querySelector('#tree-view-controlled-mount').append(tree);`}
 />
 
 The selected article starts hidden inside collapsed groups; Reveal selection expands its ancestors through `tp-expanded-change`, which the owner accepts.
@@ -284,9 +301,13 @@ A record with `hasChildren: true` shows a chevron before its children exist. On 
 
 <Preview
   title="Lazy folders"
-  code={`<tp-tree-view id="tree-view-lazy" label="Shared drive" size="sm" style="inline-size:18rem"></tp-tree-view>`}
+  code={`<div id="tree-view-lazy-mount"></div>`}
   script={`await customElements.whenDefined('tp-tree-view');
-const tree = document.querySelector('#tree-view-lazy');
+const tree = document.createElement('tp-tree-view');
+tree.id = 'tree-view-lazy';
+tree.label = 'Shared drive';
+tree.size = 'sm';
+tree.style.cssText = 'inline-size:18rem;block-size:10rem';
 const folders = {
   contracts: ['Northwind MSA 2026.pdf', 'Contoso NDA.pdf', 'Fabrikam renewal.pdf'],
   invoices: ['September.xlsx', 'August.xlsx'],
@@ -300,7 +321,8 @@ tree.loadChildren = async (item, { signal }) => {
   await new Promise((resolve) => setTimeout(resolve, 800));
   if (signal.aborted) return [];
   return folders[item.id].map((name) => ({ id: \`\${item.id}/\${name}\`, label: name }));
-};`}
+};
+document.querySelector('#tree-view-lazy-mount').append(tree);`}
 />
 
 `reloadChildren(id)` discards loaded children so the next expansion fetches them again.

@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { hiddenStyles } from '../shared/control-styles.js';
 import { createId } from '../../foundation/id.js';
@@ -229,6 +230,9 @@ export class TpCodeBlock extends TpElement {
 
   constructor() {
     super();
+    new NativeScrollEdges(this, {
+      viewports: () => [...this.renderRoot.querySelectorAll<HTMLElement>('pre')],
+    });
     this._tokens = plainTokens('');
     this._copied = false;
     this._overflowing = false;

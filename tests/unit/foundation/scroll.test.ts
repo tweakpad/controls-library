@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
+  nativeScrollEdges,
+  insetScrollport,
   isDocumentScroller,
   scrollport,
   visualViewportBox,
@@ -165,5 +167,87 @@ describe('wheelScrollContainer', () => {
     expect(wheelScrollContainer(wheel([contained, boundary], { deltaY: 10 }), boundary)).toBe(
       contained,
     );
+  });
+});
+
+describe('nativeScrollEdges', () => {
+  function viewport(
+    writingMode = 'horizontal-tb',
+    direction = 'ltr',
+    scrollLeft = 0,
+    scrollTop = 0,
+  ) {
+    return {
+      clientWidth: 100,
+      clientHeight: 80,
+      scrollWidth: 300,
+      scrollHeight: 180,
+      scrollLeft,
+      scrollTop,
+      ownerDocument: { defaultView: { getComputedStyle: () => ({ writingMode, direction }) } },
+    } as unknown as HTMLElement;
+  }
+  it('reports physical distances and clamps rubber-band overscroll', () => {
+    expect(nativeScrollEdges(viewport('horizontal-tb', 'ltr', 40, 20))).toMatchObject({
+      left: 40,
+      right: 160,
+      top: 20,
+      bottom: 80,
+    });
+    expect(nativeScrollEdges(viewport('horizontal-tb', 'ltr', -15, 150))).toMatchObject({
+      left: 0,
+      right: 200,
+      top: 100,
+      bottom: 0,
+    });
+  });
+  it('reads the negative native RTL range without reversing physical edges', () => {
+    expect(nativeScrollEdges(viewport('horizontal-tb', 'rtl', -40, 20))).toMatchObject({
+      left: 160,
+      right: 40,
+      xStart: 40,
+      xEnd: 160,
+      top: 20,
+      bottom: 80,
+    });
+  });
+  it.each([
+    ['vertical-rl', 'ltr', -40, 20, 160, 40, 20, 80],
+    ['vertical-rl', 'rtl', -40, -20, 160, 40, 80, 20],
+    ['vertical-lr', 'ltr', 40, 20, 40, 160, 20, 80],
+    ['vertical-lr', 'rtl', 40, -20, 40, 160, 80, 20],
+    ['sideways-lr', 'ltr', 40, -20, 40, 160, 80, 20],
+    ['sideways-lr', 'rtl', 40, 20, 40, 160, 20, 80],
+  ])('uses physical native offsets in %s / %s', (mode, dir, x, y, left, right, top, bottom) => {
+    expect(
+      nativeScrollEdges(viewport(mode as string, dir as string, x as number, y as number)),
+    ).toMatchObject({ left, right, top, bottom });
+  });
+});
+
+describe('scrollport content behind fixed controls', () => {
+  it('starts and ends the content rectangle beyond both scroll arrows', () => {
+    expect(insetScrollport(156, 445, { top: 22, bottom: 22 })).toEqual({
+      left: 0,
+      top: 22,
+      width: 156,
+      height: 401,
+    });
+  });
+  it('keeps the reached edge unchanged when its arrow is absent', () => {
+    expect(insetScrollport(156, 445, { bottom: 22 })).toEqual({
+      left: 0,
+      top: 0,
+      width: 156,
+      height: 423,
+    });
+  });
+  it('clamps oversized, negative and non-finite chrome extents', () => {
+    expect(insetScrollport(30, 20, { left: 40, right: 40, top: -1, bottom: NaN })).toEqual({
+      left: 30,
+      top: 0,
+      width: 0,
+      height: 20,
+    });
   });
 });

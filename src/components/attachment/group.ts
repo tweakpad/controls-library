@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { css, html } from 'lit';
 import { TpElement } from '../../foundation/element.js';
 import { attachmentPresentation } from '../../presentation/families/attachment.js';
@@ -8,6 +9,13 @@ import { attachmentPresentation } from '../../presentation/families/attachment.j
  * @slot - The Attachments.
  */
 export class TpAttachmentGroup extends TpElement {
+  constructor() {
+    super();
+    new NativeScrollEdges(this, {
+      viewports: () => [...this.renderRoot.querySelectorAll<HTMLElement>('.group')],
+    });
+  }
+
   static tagName = 'tp-attachment-group';
   static override presentation = attachmentPresentation;
   static override styles = [

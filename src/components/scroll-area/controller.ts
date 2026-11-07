@@ -1,3 +1,5 @@
+import { nativeScrollEdges, type ScrollEdges } from '../../foundation/scroll.js';
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { ScrollbarController } from '../../foundation/scrollbar.js';
 import { clamp } from '../../foundation/converters.js';
 import { observeScroll } from '../../foundation/observation.js';
@@ -16,7 +18,16 @@ export class ScrollAreaController {
   #state = { ...initialScrollAreaState };
   #offsets = { x: 0, y: 0 };
   readonly #bars: Record<Axis, ScrollbarController>;
+  readonly #edges: NativeScrollEdges;
+  #edgeState: ScrollEdges | undefined;
   constructor(readonly host: TpScrollArea) {
+    this.#edges = new NativeScrollEdges(host, {
+      viewports: () => (host.viewportElement ? [host.viewportElement] : []),
+      content: () => (host.contentElement ? [host.contentElement] : []),
+      threshold: () => host.overflowEdgeThreshold,
+      external: true,
+      read: (viewport) => this.#edgeState ?? nativeScrollEdges(viewport),
+    });
     const create = (axis: Axis) =>
       new ScrollbarController({
         read: () => {
@@ -91,7 +102,10 @@ export class ScrollAreaController {
   connect(): void {
     const view = this.host.ownerDocument.defaultView!;
     this.#resize = new view.ResizeObserver(this.schedule);
-    this.#mutations = new view.MutationObserver(this.schedule);
+    this.#mutations = new view.MutationObserver(() => {
+      this.#edges.invalidateContent();
+      this.schedule();
+    });
     this.#mutations.observe(this.host, {
       childList: true,
       subtree: true,
@@ -146,15 +160,9 @@ export class ScrollAreaController {
   measure(): void {
     const viewport = this.#viewport;
     if (!viewport || !this.host.isConnected) return;
-    const rtl = this.host.direction === 'rtl';
-    const ranges = {
-      x: Math.max(0, viewport.scrollWidth - viewport.clientWidth),
-      y: Math.max(0, viewport.scrollHeight - viewport.clientHeight),
-    };
-    const offsets = {
-      x: clamp(rtl ? -viewport.scrollLeft : viewport.scrollLeft, 0, ranges.x),
-      y: clamp(viewport.scrollTop, 0, ranges.y),
-    };
+    const edges = (this.#edgeState = nativeScrollEdges(viewport));
+    const ranges = { x: edges.rangeX, y: edges.rangeY };
+    const offsets = { x: edges.xStart, y: edges.yStart };
     const state: ScrollAreaState = {
       ...this.#state,
       x: ranges.x > 0,
@@ -174,6 +182,7 @@ export class ScrollAreaController {
     }
     this.#state = state;
     this.host.setScrollState(state);
+    this.#edges.schedule();
     const tracks = [...this.host.renderRoot.querySelectorAll<HTMLElement>('.track')];
     const horizontal = tracks.find((track) => track.dataset.orientation === 'horizontal');
     const vertical = tracks.find((track) => track.dataset.orientation === 'vertical');

@@ -10,6 +10,7 @@ import {
   observeMediaQuery,
   observeResize,
   observeScroll,
+  observeSelection,
   observeSubtree,
 } from '../../../src/foundation/observation.js';
 
@@ -326,5 +327,32 @@ describe('shared registries keep no subscriber (V-585)', () => {
     collect();
     for (const [name, first] of firsts) expect(first.deref(), name).toBeUndefined();
     for (const release of stay) release();
+  });
+});
+
+describe('shared selection source', () => {
+  it('shares and releases the native listener across independently reconnecting owners', () => {
+    const target = new CountingTarget();
+    const document = target as unknown as Document;
+    let a = 0,
+      b = 0;
+    const releaseA = observeSelection(document, () => a++);
+    const releaseB = observeSelection(document, () => b++);
+    expect(target.added).toBe(1);
+    target.dispatchEvent(new Event('selectionchange'));
+    expect([a, b]).toEqual([1, 1]);
+    releaseA();
+    releaseA();
+    expect(target.removed).toBe(0);
+    target.dispatchEvent(new Event('selectionchange'));
+    expect([a, b]).toEqual([1, 2]);
+    releaseB();
+    expect(target.removed).toBe(1);
+    const release = observeSelection(document, () => a++);
+    releaseA();
+    expect(target.removed).toBe(1);
+    release();
+    expect(target.added).toBe(2);
+    expect(target.removed).toBe(2);
   });
 });

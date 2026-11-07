@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { css, html, nothing, unsafeCSS } from 'lit';
 import type { PropertyValues } from 'lit';
 import { CollectionRegistry } from '../../foundation/collection.js';
@@ -67,6 +68,19 @@ const memberValue = (element: TabsMember): unknown =>
  *   or `setValue()`; `detail.metadata.activationDirection` says which way the selection moved.
  */
 export class TpTabs extends TpElement {
+  constructor() {
+    super();
+    new NativeScrollEdges(this, {
+      viewports: () => [...this.renderRoot.querySelectorAll<HTMLElement>('.list')],
+      content: (viewport) =>
+        [
+          ...viewport
+            .querySelector<HTMLSlotElement>('slot[name=tab]')!
+            .assignedElements({ flatten: true }),
+        ] as HTMLElement[],
+    });
+  }
+
   static tagName = 'tp-tabs';
   static override presentation = tabsPresentation;
   static override properties = {

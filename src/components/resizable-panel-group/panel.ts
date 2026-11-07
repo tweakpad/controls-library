@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { css, html, type PropertyValues } from 'lit';
 import { TpElement } from '../../foundation/element.js';
 import { createId } from '../../foundation/id.js';
@@ -14,6 +15,14 @@ import { resizablePanelGroupPresentation } from '../../presentation/families/res
  * @fires tp-resizable-member-change - Bubbles when the panel's configuration changes, so its group lays out again.
  */
 export class TpResizablePanel extends TpElement {
+  constructor() {
+    super();
+    new NativeScrollEdges(this, {
+      viewports: () => [this],
+      content: () => [...this.renderRoot.querySelectorAll<HTMLElement>('.panel')],
+    });
+  }
+
   static tagName = 'tp-resizable-panel';
   static override presentation = resizablePanelGroupPresentation;
   static override properties = {

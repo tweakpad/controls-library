@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../../components/shared/scroll-edges.js';
 import {
   html,
   nothing,
@@ -752,6 +753,18 @@ export class TpTextEditor extends TpFormElement<TextEditorSnapshot | null> {
 
   constructor() {
     super();
+    new NativeScrollEdges(this, {
+      selection: true,
+      viewports: () => [
+        ...this.renderRoot.querySelectorAll<HTMLElement>(
+          '[part~=text-editor-viewport], .tp-te-table-wrapper, .tp-te-code-block',
+        ),
+      ],
+      content: (viewport) =>
+        viewport.matches('[part~=text-editor-viewport]')
+          ? [...viewport.querySelectorAll<HTMLElement>('[part~=text-editor-content]')]
+          : ([...viewport.children] as HTMLElement[]),
+    });
     containNestedEvents(this, { types: NESTED_EVENT_TYPES, on: 'root' });
     this.#controller = new TextEditorController(this.#controllerHost());
     this.#router = new TextEditorRouter({

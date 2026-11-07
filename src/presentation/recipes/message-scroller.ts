@@ -1,34 +1,8 @@
 import type { PresentationDictionary } from '../resolver.js';
 import { motionTransition } from '../motion.js';
-import { css } from 'lit';
 import { surfaceEdge } from './shared/edges.js';
 
-/** Shadow-scoped keyframe for the shared viewport recipe. */
-export const messageScrollerFadeKeyframes = css`
-  @keyframes tp-message-scroller-fade-end {
-    from {
-      --_tp-message-scroller-fade: min(12%, var(--tp-space-10));
-    }
-
-    to {
-      --_tp-message-scroller-fade: 0%;
-    }
-  }
-`;
-
 export const messageScrollerAppearance: PresentationDictionary = {
-  'message-scroller-viewport': [
-    {
-      declarations: {
-        'mask-image':
-          'linear-gradient(to bottom, #000 0, #000 calc(100% - var(--_tp-message-scroller-fade, 0px)), transparent 100%)',
-        'mask-repeat': 'no-repeat',
-        animation: 'tp-message-scroller-fade-end 1ms ease-in-out both',
-        'animation-timeline': 'scroll(self y)',
-        'animation-range': 'calc(100% - var(--tp-space-12) * 2) 100%',
-      },
-    },
-  ],
   'message-scroller-return-control': [
     {
       declarations: {

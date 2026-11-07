@@ -52,7 +52,25 @@ export const nativeSelectAppearance: PresentationDictionary = {
       },
     },
   ],
-  'native-select-option': [{ declarations: { background: 'Canvas', color: 'CanvasText' } }],
+  'native-select-option': [
+    { declarations: { background: 'Canvas', color: 'CanvasText' } },
+    {
+      selector: 'select[multiple] &',
+      declarations: {
+        background: 'transparent',
+        color: 'var(--tp-foreground)',
+        padding: 'var(--tp-space-1) var(--tp-space-2)',
+      },
+    },
+    {
+      selector: 'select[multiple] &:checked',
+      declarations: { background: 'var(--tp-primary)', color: 'var(--tp-primary-foreground)' },
+    },
+    {
+      selector: 'select[multiple] &:disabled',
+      declarations: { color: 'var(--tp-muted-foreground)' },
+    },
+  ],
   'native-select-option-group': [{ declarations: { background: 'Canvas', color: 'CanvasText' } }],
   'native-select-indicator': [
     {

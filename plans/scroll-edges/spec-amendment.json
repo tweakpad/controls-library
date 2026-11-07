@@ -1,0 +1,1248 @@
+{
+  "status": "committed",
+  "projectId": "prj_c5a403a0-d1d5-4487-ac78-f4e545f46483",
+  "baseHead": "e2b945d3bae6e713645ecbe8faf85aa43c5e1a53",
+  "commit": {
+    "oid": "702a150e23c785173b76443fcb8ba1d4091f11cc",
+    "abbreviatedOid": "702a150e",
+    "message": "Define shared native scroll-edge fade token and observation contract",
+    "author": {
+      "name": "Ivan",
+      "email": "ivan@blindgazer.com"
+    },
+    "committedAt": "2026-11-06T22:23:47.000Z",
+    "parentOids": [
+      "e2b945d3bae6e713645ecbe8faf85aa43c5e1a53"
+    ],
+    "projectVersion": {
+      "major": 0,
+      "minor": 56,
+      "revision": 16
+    }
+  },
+  "usage": "Audit record only. Operations already applied. Read latest candidate before any future amendments; do not replay inserts.",
+  "batches": [
+    {
+      "documentId": "doc_cd3c4721-9f9b-4531-abab-a8bfdbac75f1",
+      "operations": [
+        {
+          "kind": "insert",
+          "parentId": "sec-184-scrollarea",
+          "node": {
+            "id": "f-scroll-edge-observation",
+            "type": "container",
+            "attrs": {
+              "slug": "scroll-edge-observation",
+              "constraints": []
+            },
+            "content": [
+              {
+                "id": "f-scroll-edge-observation-h",
+                "type": "heading",
+                "attrs": {
+                  "slug": null,
+                  "constraints": [],
+                  "level": 4
+                },
+                "content": [
+                  {
+                    "id": "f-scroll-edge-observation-h-t23",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": "Native scroll-edge presentation state"
+                  }
+                ],
+                "marks": [],
+                "text": null
+              },
+              {
+                "id": "f-scroll-edge-state",
+                "type": "requirement",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [
+                  {
+                    "id": "f-scroll-edge-state-t1",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": "A library-owned native scroll viewport "
+                  },
+                  {
+                    "id": "f-scroll-edge-state-t2",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "f-scroll-edge-state-t3",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " provide shared presentation adapters with clamped remaining overflow distances at both ends of each axis. Logical start/end mapping "
+                  },
+                  {
+                    "id": "f-scroll-edge-state-t4",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "f-scroll-edge-state-t5",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " follow the viewport writing mode and direction. Existing owner edge thresholds "
+                  },
+                  {
+                    "id": "f-scroll-edge-state-t6",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "f-scroll-edge-state-t7",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " remain authoritative; absent an owner threshold, the threshold is zero. An edge is active only when its remaining hidden content exceeds that threshold."
+                  }
+                ],
+                "marks": [],
+                "text": null
+              },
+              {
+                "id": "f-scroll-edge-owner",
+                "type": "requirement",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [
+                  {
+                    "id": "f-scroll-edge-owner-t8",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": "Adapters "
+                  },
+                  {
+                    "id": "f-scroll-edge-owner-t9",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "f-scroll-edge-owner-t10",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " reuse existing viewport observation and edge state where available, including ScrollArea, MessageScroller and the native Carousel transport. They "
+                  },
+                  {
+                    "id": "f-scroll-edge-owner-t11",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST NOT"
+                  },
+                  {
+                    "id": "f-scroll-edge-owner-t12",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " install competing scroll ownership, double-apply edge effects to one viewport, alter native scrolling physics, selection, hit testing, focus, anchoring or virtualized layout, or introduce permanent polling or an idle animation loop."
+                  }
+                ],
+                "marks": [],
+                "text": null
+              },
+              {
+                "id": "f-scroll-edge-lifecycle",
+                "type": "requirement",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [
+                  {
+                    "id": "f-scroll-edge-lifecycle-t13",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": "Scroll, programmatic movement, content changes, resize and direction changes "
+                  },
+                  {
+                    "id": "f-scroll-edge-lifecycle-t14",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "f-scroll-edge-lifecycle-t15",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " reconcile edge presentation in coalesced work, at most once per animation frame. Disconnect or adoption "
+                  },
+                  {
+                    "id": "f-scroll-edge-lifecycle-t16",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "f-scroll-edge-lifecycle-t17",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " release listeners and observers and cancel pending work. Fixed controls, sticky headers, scrollbars, resize handles and focus indicators "
+                  },
+                  {
+                    "id": "f-scroll-edge-lifecycle-t18",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "f-scroll-edge-lifecycle-t19",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " remain outside the faded content layer, and focused items and editor carets "
+                  },
+                  {
+                    "id": "f-scroll-edge-lifecycle-t20",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "f-scroll-edge-lifecycle-t21",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " remain visible in its unfaded region."
+                  }
+                ],
+                "marks": [],
+                "text": null
+              },
+              {
+                "id": "f-scroll-edge-ref",
+                "type": "paragraph",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [
+                  {
+                    "id": "f-scroll-edge-ref-a",
+                    "type": "anchor-reference",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": [],
+                      "label": "Component Library scroll-edge presentation",
+                      "target": "cl-scroll-edge-treatment"
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": null
+                  },
+                  {
+                    "id": "f-scroll-edge-ref-t22",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " defines the visual token, clipping limits, customization and accessibility requirements."
+                  }
+                ],
+                "marks": [],
+                "text": null
+              }
+            ],
+            "marks": [],
+            "text": null
+          }
+        }
+      ]
+    },
+    {
+      "documentId": "doc_8077bf7c-0361-48f3-ac87-53b983bd89b3",
+      "operations": [
+        {
+          "kind": "insert",
+          "parentId": "sec-cl-5-design-token-system",
+          "node": {
+            "id": "cl-scroll-edge-treatment",
+            "type": "container",
+            "attrs": {
+              "slug": "scroll-edge-treatment",
+              "constraints": []
+            },
+            "content": [
+              {
+                "id": "cl-scroll-edge-treatment-h",
+                "type": "heading",
+                "attrs": {
+                  "slug": null,
+                  "constraints": [],
+                  "level": 3
+                },
+                "content": [
+                  {
+                    "id": "cl-scroll-edge-treatment-h-t1",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": "Scroll-edge presentation"
+                  }
+                ],
+                "marks": [],
+                "text": null
+              },
+              {
+                "id": "cl-scroll-edge-token",
+                "type": "requirement",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [
+                  {
+                    "id": "cl-scroll-edge-token-t2",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": "Conforming token sets "
+                  },
+                  {
+                    "id": "cl-scroll-edge-token-t3",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "cl-scroll-edge-token-t4",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " define scroll-edge-fade-size as --tp-scroll-edge-fade-size, a non-negative CSS length defaulting to 24px. Zero "
+                  },
+                  {
+                    "id": "cl-scroll-edge-token-t5",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "cl-scroll-edge-token-t6",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " disable the effect. The token "
+                  },
+                  {
+                    "id": "cl-scroll-edge-token-t7",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "cl-scroll-edge-token-t8",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " inherit for global, subtree and per-control customization. This adds no component attribute, style-selector token or fade-color token."
+                  }
+                ],
+                "marks": [],
+                "text": null
+              },
+              {
+                "id": "cl-scroll-edge-visual",
+                "type": "requirement",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [
+                  {
+                    "id": "cl-scroll-edge-visual-t9",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": "Library-owned native scroll viewports "
+                  },
+                  {
+                    "id": "cl-scroll-edge-visual-t10",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "cl-scroll-edge-visual-t11",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " present a smooth content-alpha gradient only at edges with remaining hidden content, revealing the actual underlying themed surface rather than assuming --tp-background. Each fade band "
+                  },
+                  {
+                    "id": "cl-scroll-edge-visual-t12",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "cl-scroll-edge-visual-t13",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " be limited to the minimum of token size, remaining overflow distance and one quarter of the visible scrollport dimension. Both axes and multiple edges "
+                  },
+                  {
+                    "id": "cl-scroll-edge-visual-t14",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "cl-scroll-edge-visual-t15",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " compose without erasing the central region. Reached boundaries and viewports without overflow "
+                  },
+                  {
+                    "id": "cl-scroll-edge-visual-t16",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST NOT"
+                  },
+                  {
+                    "id": "cl-scroll-edge-visual-t17",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " fade."
+                  }
+                ],
+                "marks": [],
+                "text": null
+              },
+              {
+                "id": "cl-scroll-edge-a11y",
+                "type": "requirement",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [
+                  {
+                    "id": "cl-scroll-edge-a11y-t18",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": "Fading "
+                  },
+                  {
+                    "id": "cl-scroll-edge-a11y-t19",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST NOT"
+                  },
+                  {
+                    "id": "cl-scroll-edge-a11y-t20",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " displace content, intercept input, change accessibility semantics or obscure fixed controls, sticky headers, scrollbars, resize handles, focus indicators or editing carets. It "
+                  },
+                  {
+                    "id": "cl-scroll-edge-a11y-t21",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "cl-scroll-edge-a11y-t22",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " be disabled in forced-colors mode. Reduced motion "
+                  },
+                  {
+                    "id": "cl-scroll-edge-a11y-t23",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "cl-scroll-edge-a11y-t24",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " retain the static cue; animated changes "
+                  },
+                  {
+                    "id": "cl-scroll-edge-a11y-t25",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "cl-scroll-edge-a11y-t26",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " obey the shared reduced-motion policy."
+                  }
+                ],
+                "marks": [],
+                "text": null
+              },
+              {
+                "id": "cl-scroll-edge-scope",
+                "type": "requirement",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [
+                  {
+                    "id": "cl-scroll-edge-scope-t27",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": "The contract applies to library-owned native collection viewports, panel bodies, floating surfaces, widgets and embedded document scrollers. It "
+                  },
+                  {
+                    "id": "cl-scroll-edge-scope-t28",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST NOT"
+                  },
+                  {
+                    "id": "cl-scroll-edge-scope-t29",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " automatically style document/page scrolling, browser-internal input scrolling, Plot histories, map/graph drawing or pan/zoom clipping, or transform-only Carousel transports. Consumer-owned regions "
+                  },
+                  {
+                    "id": "cl-scroll-edge-scope-t30",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MAY"
+                  },
+                  {
+                    "id": "cl-scroll-edge-scope-t31",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " opt in through Scroll Area."
+                  }
+                ],
+                "marks": [],
+                "text": null
+              },
+              {
+                "id": "cl-scroll-edge-migration",
+                "type": "requirement",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [
+                  {
+                    "id": "cl-scroll-edge-migration-t32",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": "Citation truncation and Code Block collapsed-content fades "
+                  },
+                  {
+                    "id": "cl-scroll-edge-migration-t33",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "cl-scroll-edge-migration-t34",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " retain their separate semantics. Message Scroller's scroll fade "
+                  },
+                  {
+                    "id": "cl-scroll-edge-migration-t35",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "cl-scroll-edge-migration-t36",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " migrate to the common treatment without stacked effects. Custom token sets "
+                  },
+                  {
+                    "id": "cl-scroll-edge-migration-t37",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "cl-scroll-edge-migration-t38",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " add the role on migration. Runtime conformance "
+                  },
+                  {
+                    "id": "cl-scroll-edge-migration-t39",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "cl-scroll-edge-migration-t40",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " remain pending until affected viewports are integrated and verified. Verification "
+                  },
+                  {
+                    "id": "cl-scroll-edge-migration-t41",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [
+                      {
+                        "type": "normative-keyword",
+                        "attrs": {}
+                      }
+                    ],
+                    "text": "MUST"
+                  },
+                  {
+                    "id": "cl-scroll-edge-migration-t42",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " cover boundaries, both axes, RTL, dynamic/virtualized content, nested scrollers, custom surfaces, focus/caret visibility, forced colors, zero opt-out and idle-work absence."
+                  }
+                ],
+                "marks": [],
+                "text": null
+              },
+              {
+                "id": "cl-scroll-edge-state-ref",
+                "type": "paragraph",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [
+                  {
+                    "id": "cl-scroll-edge-state-ref-a",
+                    "type": "anchor-reference",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": [],
+                      "target": "f-scroll-edge-observation",
+                      "label": "Foundation native scroll-edge state"
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": null
+                  },
+                  {
+                    "id": "cl-scroll-edge-state-ref-t43",
+                    "type": "text",
+                    "attrs": {
+                      "slug": null,
+                      "constraints": []
+                    },
+                    "content": [],
+                    "marks": [],
+                    "text": " owns measurement, thresholds, scheduling and cleanup."
+                  }
+                ],
+                "marks": [],
+                "text": null
+              }
+            ],
+            "marks": [],
+            "text": null
+          }
+        },
+        {
+          "kind": "insert",
+          "parentId": "ucl21-scroll-area",
+          "node": {
+            "id": "cl-scroll-area-edge-ref",
+            "type": "paragraph",
+            "attrs": {
+              "slug": null,
+              "constraints": []
+            },
+            "content": [
+              {
+                "id": "cl-scroll-area-edge-ref-a",
+                "type": "anchor-reference",
+                "attrs": {
+                  "slug": null,
+                  "constraints": [],
+                  "target": "cl-scroll-edge-treatment",
+                  "label": "Shared scroll-edge presentation"
+                },
+                "content": [],
+                "marks": [],
+                "text": null
+              },
+              {
+                "id": "cl-scroll-area-edge-ref-b-t49",
+                "type": "text",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [],
+                "marks": [],
+                "text": " applies to the content layer using existing per-edge overflow state; scrollbars and corner remain unaffected."
+              }
+            ],
+            "marks": [],
+            "text": null
+          }
+        }
+      ]
+    },
+    {
+      "documentId": "doc_0d98facc-5a5d-4de2-bccb-7317abea0b9f",
+      "operations": [
+        {
+          "kind": "insert",
+          "parentId": "uwg-sec-scope-and-relationships",
+          "node": {
+            "id": "uwg-scroll-edge-contract",
+            "type": "requirement",
+            "attrs": {
+              "slug": null,
+              "constraints": []
+            },
+            "content": [
+              {
+                "id": "uwg-scroll-edge-contract-t44",
+                "type": "text",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [],
+                "marks": [],
+                "text": "Widget-owned native scroll regions "
+              },
+              {
+                "id": "uwg-scroll-edge-contract-t45",
+                "type": "text",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [],
+                "marks": [
+                  {
+                    "type": "normative-keyword",
+                    "attrs": {}
+                  }
+                ],
+                "text": "MUST"
+              },
+              {
+                "id": "uwg-scroll-edge-contract-t46",
+                "type": "text",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [],
+                "marks": [],
+                "text": " follow "
+              },
+              {
+                "id": "uwg-scroll-edge-contract-a",
+                "type": "anchor-reference",
+                "attrs": {
+                  "slug": null,
+                  "constraints": [],
+                  "target": "cl-scroll-edge-treatment",
+                  "label": "shared scroll-edge presentation"
+                },
+                "content": [],
+                "marks": [],
+                "text": null
+              },
+              {
+                "id": "uwg-scroll-edge-contract-b-t47",
+                "type": "text",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [],
+                "marks": [],
+                "text": " and "
+              },
+              {
+                "id": "uwg-scroll-edge-contract-c",
+                "type": "anchor-reference",
+                "attrs": {
+                  "slug": null,
+                  "constraints": [],
+                  "target": "f-scroll-edge-observation",
+                  "label": "Foundation observation"
+                },
+                "content": [],
+                "marks": [],
+                "text": null
+              },
+              {
+                "id": "uwg-scroll-edge-contract-d-t48",
+                "type": "text",
+                "attrs": {
+                  "slug": null,
+                  "constraints": []
+                },
+                "content": [],
+                "marks": [],
+                "text": ". This includes Text Editor viewports and embedded code/table scrollers, Emoji Picker lists/category tabs, Easing Editor presets and Flow inspector/palette panels through existing shared owners. Plot histories and map/graph drawing or pan/zoom clipping are excluded."
+              }
+            ],
+            "marks": [],
+            "text": null
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -125,6 +125,7 @@
   --_tp-destructive-border-default: var(--tp-destructive-border);
   --_tp-success-border-default: var(--tp-success-border);
   --_tp-warning-border-default: var(--tp-warning-border);
+  --tp-scroll-edge-fade-size: 24px;
   --tp-chart-1: #6d5dfc;
   --tp-chart-2: #0ea5e9;
   --tp-chart-3: #16a34a;
@@ -400,14 +401,6 @@ body {
   syntax: '<time>';
   inherits: true;
   initial-value: 560ms;
-}
-
-/* Scroll-aware edge mask.
-   Private interpolation state; the viewport recipe owns its application. */
-@property --_tp-message-scroller-fade {
-  syntax: '<length-percentage>';
-  inherits: false;
-  initial-value: 0%;
 }
 
 /* Media slider percentages published by tp-media-time-slider / tp-media-volume-slider

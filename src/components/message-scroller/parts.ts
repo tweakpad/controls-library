@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { css, html, type PropertyValues } from 'lit';
 import { hiddenStyles } from '../shared/control-styles.js';
 import { TpElement } from '../../foundation/element.js';
@@ -5,7 +6,6 @@ import { TpButton } from '../button/button.js';
 import { chevronDownIcon } from '../../icons/chevron-down.js';
 import { componentHandlingPrevented } from '../../foundation/part.js';
 import { MessageScrollerMember } from './context.js';
-import { messageScrollerFadeKeyframes } from '../../presentation/recipes/message-scroller.js';
 import { messageScrollerPresentation } from '../../presentation/families/message-scroller.js';
 import { buttonPresentation } from '../../presentation/families/button.js';
 
@@ -16,6 +16,13 @@ import { buttonPresentation } from '../../presentation/families/button.js';
  * @slot - The content.
  */
 export class TpMessageScrollerViewport extends TpElement {
+  constructor() {
+    super();
+    new NativeScrollEdges(this, {
+      viewports: () => [...this.renderRoot.querySelectorAll<HTMLElement>('.viewport')],
+    });
+  }
+
   static tagName = 'tp-message-scroller-viewport';
   static override presentation = messageScrollerPresentation;
   static override properties = {
@@ -25,7 +32,6 @@ export class TpMessageScrollerViewport extends TpElement {
   };
   static override styles = [
     TpElement.styles,
-    messageScrollerFadeKeyframes,
     css`
       :host {
         display: flex;

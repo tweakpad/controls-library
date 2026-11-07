@@ -124,6 +124,7 @@ export const TOKEN_FAMILIES = {
     'icon-size-md',
     'icon-size-lg',
     'target-size-min',
+    'scroll-edge-fade-size',
   ],
   border: [
     'border-width',

@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { bindPart } from '../../foundation/part.js';
 import type { CustomElementConstructorWithTag } from '../../foundation/define.js';
 import { optionalBoolean } from '../../foundation/converters.js';
@@ -56,6 +57,17 @@ interface ControlRecord {
  * @fires tp-open-change - Cancelable proposal to open or close the compact Drawer.
  */
 export class TpNavigationPanel extends TpElement {
+  constructor() {
+    super();
+    new NativeScrollEdges(this, {
+      viewports: () => [
+        ...(this.#view?.shadowRoot?.querySelectorAll<HTMLElement>(
+          '[part~=navigation-panel-content]',
+        ) ?? []),
+      ],
+    });
+  }
+
   static tagName = 'tp-navigation-panel';
   /** Library elements this element renders; defining it defines them too. */
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Scroll edge verification</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      body {
+        padding: 24px;
+        background: var(--tp-background);
+        color: var(--tp-foreground);
+        font-family: var(--tp-font-sans);
+      }
+      main {
+        display: grid;
+        gap: 20px;
+        max-width: 800px;
+      }
+      tp-scroll-area {
+        width: 320px;
+        height: 160px;
+        border: 1px solid var(--tp-edge);
+      }
+      .content {
+        width: 640px;
+        min-height: 480px;
+        background: repeating-linear-gradient(
+          0deg,
+          var(--tp-chart-1) 0 25px,
+          var(--tp-chart-2) 25px 50px
+        );
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Scroll edges</h1>
+      <tp-scroll-area id="area" axis="both" label="Two-axis content"
+        ><div class="content"><tp-button>Focusable content</tp-button></div></tp-scroll-area
+      >
+    </main>
+    <script type="module" src="./fixture.js"></script>
+  </body>
+</html>

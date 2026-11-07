@@ -51,6 +51,13 @@ describe('composed environment observation', () => {
     expect(affectsEnvironment(record('style', before, `${after} --tp-radius: 2px;`))).toBe(true);
   });
 
+  it('ignores per-frame scroll-edge geometry but observes the public distance token', () => {
+    expect(affectsEnvironment(record('style', '', '--_tp-scroll-edge-position: 0px 20px'))).toBe(
+      false,
+    );
+    expect(affectsEnvironment(record('style', '', '--tp-scroll-edge-fade-size: 0px'))).toBe(true);
+  });
+
   it('leaves a surface geometry inherited from an ancestor out of the environment', () => {
     let callback: ((records: unknown[]) => void) | undefined;
     class FakeMutationObserver {

@@ -170,3 +170,62 @@ function wheelMoves(
   const start = rtl ? -range : 0;
   return delta > 0 ? position < start + range - 1 : position > start + 1;
 }
+
+/** Native overflow distances, clamped against elastic overscroll, with physical and origin edges. */
+export interface ScrollEdges {
+  left: number;
+  right: number;
+  top: number;
+  bottom: number;
+  xStart: number;
+  xEnd: number;
+  yStart: number;
+  yEnd: number;
+  rangeX: number;
+  rangeY: number;
+  reverseX: boolean;
+  reverseY: boolean;
+}
+export function nativeScrollEdges(viewport: HTMLElement): ScrollEdges {
+  const style = viewport.ownerDocument.defaultView!.getComputedStyle(viewport);
+  const vertical = style.writingMode !== 'horizontal-tb';
+  const reverseX = vertical ? style.writingMode.endsWith('-rl') : style.direction === 'rtl';
+  const reverseY =
+    vertical &&
+    (style.writingMode === 'sideways-lr' ? style.direction !== 'rtl' : style.direction === 'rtl');
+  const rangeX = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+  const rangeY = Math.max(0, viewport.scrollHeight - viewport.clientHeight);
+  const x = Math.max(0, Math.min(rangeX, viewport.scrollLeft * (reverseX ? -1 : 1)));
+  const y = Math.max(0, Math.min(rangeY, viewport.scrollTop * (reverseY ? -1 : 1)));
+  return {
+    left: reverseX ? rangeX - x : x,
+    right: reverseX ? x : rangeX - x,
+    top: reverseY ? rangeY - y : y,
+    bottom: reverseY ? y : rangeY - y,
+    xStart: x,
+    xEnd: rangeX - x,
+    yStart: y,
+    yEnd: rangeY - y,
+    rangeX,
+    rangeY,
+    reverseX,
+    reverseY,
+  };
+}
+
+/** Physical CSS-pixel space covered by fixed chrome inside a native scrollport. */
+export interface ScrollportInsets {
+  top?: number;
+  right?: number;
+  bottom?: number;
+  left?: number;
+}
+/** The uncovered content rectangle; excessive or invalid insets cannot invert it. */
+export function insetScrollport(width: number, height: number, insets: ScrollportInsets = {}) {
+  const nonnegative = (n = 0) => (Number.isFinite(n) ? Math.max(0, n) : 0);
+  const left = Math.min(width, nonnegative(insets.left));
+  const right = Math.min(width - left, nonnegative(insets.right));
+  const top = Math.min(height, nonnegative(insets.top));
+  const bottom = Math.min(height - top, nonnegative(insets.bottom));
+  return { left, top, width: width - left - right, height: height - top - bottom };
+}

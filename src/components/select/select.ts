@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { applyForwardedNavigation, SelectQueryController } from './query.js';
 import { SURFACE_HOST, isSurfaceHost } from '../../foundation/surface-brand.js';
 import { autofillHint } from '../../foundation/autofill.js';
@@ -138,6 +139,18 @@ interface SelectScrollExtent {
  * row is hovered or focused.
  */
 export class TpSelect extends TpFormElement<unknown> {
+  constructor() {
+    super();
+    this.#scrollEdges = new NativeScrollEdges(this, {
+      viewports: () => (this.#list ? [this.#list] : []),
+      insets: () => this.#edgeInsets,
+      protectedElements: () => {
+        const option = this.#collection.element(this.#collection.highlighted);
+        return option ? [option] : [];
+      },
+    });
+  }
+
   static tagName = 'tp-select';
   /** @internal Marks the element as the owner of a floating surface. */
   readonly [SURFACE_HOST] = true as const;
@@ -800,6 +813,8 @@ export class TpSelect extends TpFormElement<unknown> {
   #trigger: HTMLElement | null = null;
   #content: HTMLElement | null = null;
   #list: HTMLElement | null = null;
+  readonly #scrollEdges: NativeScrollEdges;
+  #edgeInsets = { top: 0, bottom: 0 };
   #up: HTMLElement | null = null;
   #down: HTMLElement | null = null;
   #arrow: HTMLElement | null = null;
@@ -1284,7 +1299,7 @@ export class TpSelect extends TpFormElement<unknown> {
       reference: this.#ref('list', 'select-list', (element) => {
         this.#list = element;
       }),
-      content: html`${this.searchable ? this.#part('select-collection', state, { properties: { class: 'select-collection' }, reference: this.#ref('collection', '', (element) => (this.#collectionElement = element)), content: this.#selfWindow ? this.#windowNodes() : this.#nodes(this.#model.nodes) }) : this.#nodes(this.#model.nodes)}`,
+      content: html`${this.searchable ? this.#part('select-collection', state, { properties: { class: 'select-collection' }, reference: this.#ref('collection', '', (element) => (this.#collectionElement = element)), content: this.#selfWindow ? this.#windowNodes() : this.#nodes(this.#model.nodes) }) : html`<div class="scroll-content">${this.#nodes(this.#model.nodes)}</div>`}`,
     });
     const content = this.#part('select-content', state, {
       properties: {
@@ -2230,6 +2245,26 @@ export class TpSelect extends TpFormElement<unknown> {
   }
   #initialFocus(): void {
     if (!this.open) return;
+    // Placement can constrain the list after opening alignment was measured.
+    // Keep the selected option visible once that final placement has settled,
+    // including pointer openings that deliberately leave focus on the trigger.
+    if (!this.searchable && this.alignItemWithTrigger) {
+      const option = this.#collection.element(this.#collection.highlighted);
+      const scrollOptions = {
+        block: 'nearest',
+        inline: 'nearest',
+        container: 'nearest',
+      } as const;
+      option?.scrollIntoView(scrollOptions);
+      if (option && this.#list) {
+        const bounds = option.getBoundingClientRect();
+        const viewport = this.#list.getBoundingClientRect();
+        const top = viewport.top + (this.#up?.offsetHeight ?? 0);
+        const bottom = viewport.bottom - (this.#down?.offsetHeight ?? 0);
+        if (bounds.bottom > bottom) this.#list.scrollTop += bounds.bottom - bottom;
+        else if (bounds.top < top) this.#list.scrollTop -= top - bounds.top;
+      }
+    }
     const element = this.#focusTarget(this.initialFocus, true);
     if (element && isAvailable(element)) focusManaged(element);
   }
@@ -2333,6 +2368,8 @@ export class TpSelect extends TpFormElement<unknown> {
     };
   }
   #applyScroll(extent: SelectScrollExtent): void {
+    this.#edgeInsets = { top: extent.upHeight, bottom: extent.downHeight };
+    this.#scrollEdges.schedule();
     this.#upPresence.setPresent(extent.up);
     this.#downPresence.setPresent(extent.down);
     this.#list?.style.setProperty('--_tp-select-scroll-up-height', `${extent.upHeight}px`);

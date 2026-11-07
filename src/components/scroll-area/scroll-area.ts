@@ -72,6 +72,7 @@ export class TpScrollArea extends TpElement {
       }
 
       .content {
+        inline-size: fit-content;
         min-inline-size: 100%;
         display: flow-root;
       }

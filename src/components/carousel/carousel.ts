@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { EffectPresenter, type CarouselEffect } from '../../foundation/carousel/effect.js';
 import { html, nothing, type PropertyValues } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
@@ -98,6 +99,18 @@ interface Shell {
  * @fires tp-value-commit - After a new position commits, with the position and the previous one.
  */
 export class TpCarousel<T = unknown> extends TpElement {
+  constructor() {
+    super();
+    new NativeScrollEdges(this, {
+      viewports: () =>
+        this.options.transport === 'scroll'
+          ? [...this.renderRoot.querySelectorAll<HTMLElement>('.viewport')]
+          : [],
+      content: () =>
+        [...(this.renderRoot.querySelector('.track')?.children ?? [])] as HTMLElement[],
+    });
+  }
+
   static tagName = 'tp-carousel';
   /** Library elements this element renders; defining it defines them too. */
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {

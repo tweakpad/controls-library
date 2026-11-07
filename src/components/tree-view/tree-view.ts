@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { css, html, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
 import { TpElement } from '../../foundation/element.js';
@@ -363,6 +364,9 @@ export class TpTreeView<T = TreeViewItem>
 
   constructor() {
     super();
+    new NativeScrollEdges(this, {
+      viewports: () => [...this.renderRoot.querySelectorAll<HTMLElement>('[part~=viewport]')],
+    });
     this.addEventListener('keydown', this.#keydown);
     this.addEventListener('focusin', this.#focusin);
     this.addEventListener('focusout', this.#focusout);

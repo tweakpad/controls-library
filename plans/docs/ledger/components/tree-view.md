@@ -29,3 +29,8 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | From records, reorderable | Configure the tree before connecting it so the initial items and expansion lanes initialize correctly. |
+| preview | Virtualized | Configure the initial record source and expansion before the first render; preserve bounded virtualization. |
+| preview | Controlled lanes | Establish controlled items, value and expansion before connecting the tree; runtime mode changes are invalid. |
+| preview | Lazy folders | Configure the initial items and loader before connecting; constrain the viewport so loaded children exercise native scrolling. |

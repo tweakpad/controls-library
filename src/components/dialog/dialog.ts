@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { SURFACE_HOST } from '../../foundation/surface-brand.js';
 import {
   restoreLostFocus,
@@ -100,6 +101,18 @@ interface TriggerRecord {
  * @fires tp-open-change-complete - After the dialog finishes opening or closing; `detail.open`.
  */
 export class TpDialog extends TpElement {
+  constructor() {
+    super();
+    new NativeScrollEdges(this, {
+      viewports: () => [...this.surfaceRoot.querySelectorAll<HTMLElement>('.content, .body')],
+      content: (viewport) => [
+        ...viewport.querySelectorAll<HTMLElement>(
+          viewport.matches('.content') ? ':scope > .body' : ':scope > .scroll-content',
+        ),
+      ],
+    });
+  }
+
   static tagName = 'tp-dialog';
   /** @internal Brand shared by the library's surfaces. */
   readonly [SURFACE_HOST] = true as const;
@@ -591,7 +604,9 @@ export class TpDialog extends TpElement {
         },
         this.renderSurfaceChildren(
           html`${header}
-            <div class="body" ?hidden=${!this.hasBodyContent()}>${this.renderBody()}</div>
+            <div class="body" ?hidden=${!this.hasBodyContent()}>
+              <div class="scroll-content">${this.renderBody()}</div>
+            </div>
             ${footer}${close}`,
         ),
       )}`,

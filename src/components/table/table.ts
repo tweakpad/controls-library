@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { css, html, type PropertyValues } from 'lit';
 import { TpElement } from '../../foundation/element.js';
 import { tableSections } from './parts.js';
@@ -22,6 +23,14 @@ const parts: Record<string, string> = {
  * @slot - The caption, header, body and footer regions, or one authored native `table`.
  */
 export class TpTable extends TpElement {
+  constructor() {
+    super();
+    this.#scrollEdges = new NativeScrollEdges(this, {
+      viewports: () => [...this.renderRoot.querySelectorAll<HTMLElement>('.root')],
+      protectedElements: () => this.#stickyElements,
+    });
+  }
+
   static tagName = 'tp-table';
   static override presentation = tablePresentation;
   static override properties = {
@@ -88,6 +97,8 @@ export class TpTable extends TpElement {
   #frame: number | undefined;
   #table: HTMLTableElement | null = null;
   readonly #geometry = new TableGeometry();
+  readonly #scrollEdges: NativeScrollEdges;
+  #stickyElements: HTMLElement[] = [];
   #registerParts = (): void => {
     const native = [...this.children].some((child) => child.localName === 'table');
     if (this.#native !== native) {
@@ -131,6 +142,7 @@ export class TpTable extends TpElement {
   };
   #measure(): void {
     this.#geometry.clear();
+    this.#stickyElements = [];
     const table = this.#table;
     if (!table || !this.isConnected) return;
     this.#geometry.marker(
@@ -166,6 +178,7 @@ export class TpTable extends TpElement {
         (side === 'start') !== rtl ? rect.left - bounds.left : bounds.right - rect.right;
       return [{ ...record, side, offset: Math.max(0, offset) }];
     });
+    this.#stickyElements = pinned.map(({ cell }) => cell);
     for (const { cell, side, offset } of pinned) {
       this.#geometry.style(cell, 'position', 'sticky');
       this.#geometry.style(cell, `inset-inline-${side}`, `${offset}px`);
@@ -189,7 +202,9 @@ export class TpTable extends TpElement {
       this.#geometry.style(section, `inset-block-${edge}`, '0');
       this.#geometry.style(section, 'z-index', '2');
       this.#geometry.marker(section, 'data-sticky', edge);
+      this.#stickyElements.push(section);
     }
+    this.#scrollEdges.invalidateContent();
     const root = this.renderRoot.querySelector<HTMLElement>('.root');
     const scrollable =
       !!root &&
@@ -232,6 +247,7 @@ export class TpTable extends TpElement {
       this.ownerDocument.defaultView?.cancelAnimationFrame(this.#frame);
     this.#frame = undefined;
     this.#geometry.clear();
+    this.#stickyElements = [];
     for (const cleanup of this.#registrations.splice(0)) cleanup();
     super.disconnectedCallback();
   }

@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { bindPart } from '../../foundation/part.js';
 import { css, html, nothing } from 'lit';
 import { TpElement } from '../../foundation/element.js';
@@ -127,6 +128,21 @@ export class TpNavigationPanelHeader extends NavigationPanelLayoutPart {
  * @slot - The groups and menus.
  */
 export class TpNavigationPanelContent extends NavigationPanelLayoutPart {
+  constructor() {
+    super();
+    new NativeScrollEdges(this, {
+      viewports: () => [
+        this,
+        ...this.renderRoot.querySelectorAll<HTMLElement>('[part~=navigation-panel-content]'),
+      ],
+      content: () => [...this.renderRoot.querySelectorAll<HTMLElement>('.scroll-content')],
+    });
+  }
+
+  protected override defaultPartContent(): unknown {
+    return html`<div class="scroll-content"><slot></slot></div>`;
+  }
+
   static override styles = [
     NavigationPanelLayoutPart.styles,
     css`

@@ -1,3 +1,4 @@
+import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { anchoredArrowStyles } from '../shared/anchored-arrow.js';
 import { SURFACE_HOST } from '../../foundation/surface-brand.js';
 import { css, html, nothing } from 'lit';
@@ -117,6 +118,17 @@ export function targetOf(element: HTMLElement, depth = 0): HTMLElement {
  * @fires tp-open-change-complete - After the surface finishes opening or closing; `detail.open`.
  */
 export abstract class TpAnchoredSurface extends TpElement {
+  constructor() {
+    super();
+    new NativeScrollEdges(this, {
+      viewports: () => [
+        ...(this.popupElement?.querySelectorAll<HTMLElement>(
+          '.body:not([data-viewport-previous])',
+        ) ?? []),
+      ],
+    });
+  }
+
   readonly [SURFACE_HOST] = true as const;
   static override properties = {
     ...TpElement.properties,
@@ -759,11 +771,13 @@ export abstract class TpAnchoredSurface extends TpElement {
             ?data-viewport-current=${!previous}
             ?data-ending-style=${previous}
           >
-            ${entry.content}
+            <div class="scroll-content">${entry.content}</div>
           </div>`;
         },
       );
-    return html`<div class="body">${this.popupViewContent(this.payload)}</div>`;
+    return html`<div class="body">
+      <div class="scroll-content">${this.popupViewContent(this.payload)}</div>
+    </div>`;
   }
   /**
    * The arrow's box and outline, read only for a surface that shows its arrow: an unset width or
