@@ -101,6 +101,9 @@ interface TriggerRecord {
  * @fires tp-open-change-complete - After the dialog finishes opening or closing; `detail.open`.
  */
 export class TpDialog extends TpElement {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -121,6 +124,7 @@ export class TpDialog extends TpElement {
   }
   static override presentation = dialogPresentation;
   static override properties = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     open: { type: Boolean, noAccessor: true },
     defaultOpen: { type: Boolean, attribute: 'default-open' },

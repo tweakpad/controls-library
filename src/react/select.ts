@@ -98,6 +98,7 @@ export type SelectProps = ElementProps<
   | 'readOnly'
   | 'required'
   | 'scrollDownKeepMounted'
+  | 'scrollEdgeFade'
   | 'scrollUpKeepMounted'
   | 'searchDelay'
   | 'searchable'

@@ -21,6 +21,7 @@ export type ScrollAreaProps = ElementProps<
   | 'partPresentation'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'scrollbarVisibility'
   | 'scrollbars'
   | 'showCorner',

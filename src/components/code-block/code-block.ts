@@ -79,12 +79,16 @@ const COPIED_DURATION = 2000;
  * @fires tp-diagnostic - Highlighting failures and unknown languages.
  */
 export class TpCodeBlock extends TpElement {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   static tagName = 'tp-code-block';
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {
     return [TpButton, TpCopyButton, TpTooltip];
   }
   static override presentation = codeBlockPresentation;
   static override properties = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     code: { type: String },
     language: { type: String, reflect: true },

@@ -68,6 +68,9 @@ const memberValue = (element: TabsMember): unknown =>
  *   or `setValue()`; `detail.metadata.activationDirection` says which way the selection moved.
  */
 export class TpTabs extends TpElement {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -84,6 +87,7 @@ export class TpTabs extends TpElement {
   static tagName = 'tp-tabs';
   static override presentation = tabsPresentation;
   static override properties = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     value: { noAccessor: true },
     defaultValue: { attribute: 'default-value' },

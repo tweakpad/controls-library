@@ -54,3 +54,5 @@ Scroll to the middle: the sticky aside gets an opaque mask region while the
 article's visible edges keep their fade. Click a contents link; native navigation
 and the active indicator must work. This is default sticky-region protection,
 not a fade-disable rule on the article or the entire Scroll Area.
+
+Scroll-edge fades are now off by default. Add `scroll-edge-fade` to the component under test to exercise fade geometry; remove it to verify cleanup and the default unmodified content. The token changes appearance only.

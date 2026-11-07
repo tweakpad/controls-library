@@ -37,6 +37,7 @@ export type DialogProps = ElementProps<
   | 'portalIdentifier'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showCloseControl'
   | 'showFooter'
   | 'showHeader'

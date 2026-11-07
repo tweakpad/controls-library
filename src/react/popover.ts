@@ -62,6 +62,7 @@ export type PopoverProps = ElementProps<
   | 'provider'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showArrow'
   | 'showBackdrop'
   | 'showViewport'

@@ -43,6 +43,9 @@ import type { CustomElementConstructorWithTag } from '../../foundation/define.js
  * @fires tp-layout-change-complete - Once a resize settles, with the final `layout` and `sizes`; the place to save a layout.
  */
 export class TpResizablePanelGroup extends TpElement {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -61,6 +64,7 @@ export class TpResizablePanelGroup extends TpElement {
   }
   static override presentation = resizablePanelGroupPresentation;
   static override properties = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     sizes: { attribute: false, noAccessor: true },
     defaultSizes: { attribute: false },

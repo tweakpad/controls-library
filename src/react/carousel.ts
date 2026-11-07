@@ -35,6 +35,7 @@ export type CarouselProps<T = CarouselDefaults[0]> = ElementProps<
   | 'readOnly'
   | 'renderItem'
   | 'required'
+  | 'scrollEdgeFade'
   | 'value',
   {
     onTpDiagnostic: CustomEvent<foundationServices.Diagnostic>;

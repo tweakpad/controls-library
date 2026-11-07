@@ -36,6 +36,7 @@ export const CodeBlock = /*#__PURE__*/ createBinding(TpCodeBlock, 'CodeBlock', {
   | 'readOnly'
   | 'removedLines'
   | 'required'
+  | 'scrollEdgeFade'
   | 'wrap',
   {
     'tp-code-copy': CustomEvent<componentsCodeBlockCodeBlock.CodeCopyDetail>;

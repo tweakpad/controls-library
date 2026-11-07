@@ -79,6 +79,7 @@ export class NativeScrollEdges implements ReactiveController {
   #connected = false;
   #protected = new WeakMap<HTMLElement, HTMLElement[]>();
   readonly #refresh = (): void => {
+    if (!this.#connected) return;
     this.#protected = new WeakMap();
     this.schedule();
   };
@@ -90,6 +91,8 @@ export class NativeScrollEdges implements ReactiveController {
     host.addController(this);
   }
   hostConnected(): void {
+    if (!this.host.hasAttribute('scroll-edge-fade')) return;
+    this.#protected = new WeakMap();
     this.#owner = this.host.ownerDocument.defaultView;
     if (!this.#owner) return;
     this.#connected = true;
@@ -122,7 +125,10 @@ export class NativeScrollEdges implements ReactiveController {
     this.schedule();
   }
   hostUpdated(): void {
-    this.schedule();
+    const enabled = this.host.hasAttribute('scroll-edge-fade');
+    if (enabled && !this.#connected) this.hostConnected();
+    else if (!enabled && this.#connected) this.hostDisconnected();
+    else this.schedule();
   }
   hostDisconnected(): void {
     this.#connected = false;

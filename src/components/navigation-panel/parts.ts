@@ -128,6 +128,14 @@ export class TpNavigationPanelHeader extends NavigationPanelLayoutPart {
  * @slot - The groups and menus.
  */
 export class TpNavigationPanelContent extends NavigationPanelLayoutPart {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
+  static override properties = {
+    ...super.properties,
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
+  };
+
   constructor() {
     super();
     new NativeScrollEdges(this, {

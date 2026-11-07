@@ -65,6 +65,7 @@ export const Tooltip = /*#__PURE__*/ createBinding(TpTooltip, 'Tooltip', {
   | 'provider'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showArrow'
   | 'showBackdrop'
   | 'showViewport'

@@ -61,6 +61,7 @@ export const NavigationPanel = /*#__PURE__*/ createBinding(TpNavigationPanel, 'N
   | 'readOnly'
   | 'required'
   | 'responsiveAdapter'
+  | 'scrollEdgeFade'
   | 'shortcut'
   | 'shortcutAdapter'
   | 'side'
@@ -160,7 +161,8 @@ export const NavigationPanelContent = /*#__PURE__*/ createBinding(
   | 'partContracts'
   | 'partPresentation'
   | 'readOnly'
-  | 'required',
+  | 'required'
+  | 'scrollEdgeFade',
   {
     'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
   }
@@ -212,6 +214,7 @@ export const NavigationPanelDrawer = /*#__PURE__*/ createBinding(
   | 'portalIdentifier'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showCloseControl'
   | 'showFooter'
   | 'showHeader'

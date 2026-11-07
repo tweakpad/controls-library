@@ -129,6 +129,9 @@ const paletteStyles = css`
  * placement and Enter inserts at once (`flow-palette-insert`).
  */
 export class TpFlowPalette extends TpElement {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -142,6 +145,7 @@ export class TpFlowPalette extends TpElement {
     return [TpButton, TpIcon, TpInput, TpInputGroup, TpAccordion, TpAccordionItem];
   }
   static override properties = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     definitions: { attribute: false },
     categories: { attribute: false },

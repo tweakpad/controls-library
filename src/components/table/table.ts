@@ -23,6 +23,9 @@ const parts: Record<string, string> = {
  * @slot - The caption, header, body and footer regions, or one authored native `table`.
  */
 export class TpTable extends TpElement {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   constructor() {
     super();
     this.#scrollEdges = new NativeScrollEdges(this, {
@@ -34,6 +37,7 @@ export class TpTable extends TpElement {
   static tagName = 'tp-table';
   static override presentation = tablePresentation;
   static override properties = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     label: { type: String },
     layout: { type: String, reflect: true },

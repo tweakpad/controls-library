@@ -99,6 +99,9 @@ interface Shell {
  * @fires tp-value-commit - After a new position commits, with the position and the previous one.
  */
 export class TpCarousel<T = unknown> extends TpElement {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -118,6 +121,7 @@ export class TpCarousel<T = unknown> extends TpElement {
   }
   static override presentation = carouselPresentation;
   static override properties = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     value: { attribute: false },
     defaultValue: { attribute: false },

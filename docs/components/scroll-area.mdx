@@ -113,12 +113,12 @@ A Scroll Area keeps the browser's own scrolling (wheel, touch, keyboard, focus a
 
 ### Overflow markers
 
-The host exposes `data-overflow-y-start` and `data-overflow-y-end` while content is hidden past an edge. The default content fade follows hidden edges without fading the scrollbars. Set the inherited `--tp-scroll-edge-fade-size` token to change its maximum width (24px by default), or `0px` to disable it. The same token applies to native scrolling regions throughout the library. Scroll the viewport itself with the standard `scrollTo` and `scrollTop` APIs on `viewportElement`. No second scroll position or component change event is maintained. Horizontal offsets follow the native RTL model.
+The host exposes `data-overflow-y-start` and `data-overflow-y-end` while content is hidden past an edge. Content fades are off by default. Add `scroll-edge-fade` to enable them on this component. Remove the attribute to disable them. The inherited `--tp-scroll-edge-fade-size` theme token controls their maximum width (24px by default). Scroll the viewport itself with the standard `scrollTo` and `scrollTop` APIs on `viewportElement`. No second scroll position or component change event is maintained. Horizontal offsets follow the native RTL model.
 
 <Preview
   title="Edge fade"
   code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:start">
-  <tp-scroll-area id="scroll-area-fade" label="Terms of service" style="--tp-scroll-edge-fade-size:16px;block-size:10rem;inline-size:18rem;max-inline-size:100%">
+  <tp-scroll-area id="scroll-area-fade" label="Terms of service" scroll-edge-fade style="block-size:10rem;inline-size:18rem;max-inline-size:100%">
     <div style="display:grid;gap:var(--tp-space-3);font-size:var(--tp-text-sm);line-height:var(--tp-leading-relaxed)">
       <p style="margin:0">These terms govern your use of Tweakpad and any workspace you create or join.</p>
       <p style="margin:0">You keep ownership of the content you upload. You grant us the rights needed to host and display it to the people you share it with.</p>

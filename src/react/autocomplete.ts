@@ -92,6 +92,7 @@ export type AutocompleteProps = ElementProps<
   | 'readOnly'
   | 'required'
   | 'scrollDownKeepMounted'
+  | 'scrollEdgeFade'
   | 'scrollUpKeepMounted'
   | 'searchDelay'
   | 'searchable'

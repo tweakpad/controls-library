@@ -341,6 +341,7 @@ type Tags = {
     | 'portalIdentifier'
     | 'readOnly'
     | 'required'
+    | 'scrollEdgeFade'
     | 'showCloseControl'
     | 'showFooter'
     | 'showHeader'
@@ -406,7 +407,8 @@ type Tags = {
     | 'partContracts'
     | 'partPresentation'
     | 'readOnly'
-    | 'required',
+    | 'required'
+    | 'scrollEdgeFade',
     { 'tp-diagnostic': CustomEvent<foundationServices.Diagnostic> }
   >;
   'tp-autocomplete': Tag<
@@ -487,6 +489,7 @@ type Tags = {
     | 'readOnly'
     | 'required'
     | 'scrollDownKeepMounted'
+    | 'scrollEdgeFade'
     | 'scrollUpKeepMounted'
     | 'searchDelay'
     | 'searchable'
@@ -791,6 +794,7 @@ type Tags = {
     | 'readOnly'
     | 'renderItem'
     | 'required'
+    | 'scrollEdgeFade'
     | 'value',
     {
       'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
@@ -902,6 +906,7 @@ type Tags = {
     | 'readOnly'
     | 'removedLines'
     | 'required'
+    | 'scrollEdgeFade'
     | 'wrap',
     {
       'tp-code-copy': CustomEvent<componentsCodeBlockCodeBlock.CodeCopyDetail>;
@@ -1051,6 +1056,7 @@ type Tags = {
     | 'readOnly'
     | 'required'
     | 'scrollDownKeepMounted'
+    | 'scrollEdgeFade'
     | 'scrollUpKeepMounted'
     | 'searchDelay'
     | 'searchable'
@@ -1122,6 +1128,7 @@ type Tags = {
     | 'query'
     | 'readOnly'
     | 'required'
+    | 'scrollEdgeFade'
     | 'shouldFilter'
     | 'showCloseControl'
     | 'showFooter'
@@ -1308,6 +1315,7 @@ type Tags = {
     | 'portalIdentifier'
     | 'readOnly'
     | 'required'
+    | 'scrollEdgeFade'
     | 'showCloseControl'
     | 'showFooter'
     | 'showHeader'
@@ -1407,6 +1415,7 @@ type Tags = {
     | 'portalIdentifier'
     | 'readOnly'
     | 'required'
+    | 'scrollEdgeFade'
     | 'showCloseControl'
     | 'showFooter'
     | 'showHeader'
@@ -2005,6 +2014,7 @@ type Tags = {
     | 'provider'
     | 'readOnly'
     | 'required'
+    | 'scrollEdgeFade'
     | 'showArrow'
     | 'showBackdrop'
     | 'showViewport'
@@ -2859,6 +2869,7 @@ type Tags = {
     | 'provider'
     | 'readOnly'
     | 'required'
+    | 'scrollEdgeFade'
     | 'showArrow'
     | 'showBackdrop'
     | 'showViewport'
@@ -3126,7 +3137,8 @@ type Tags = {
     | 'partPresentation'
     | 'preserveOnPrepend'
     | 'readOnly'
-    | 'required',
+    | 'required'
+    | 'scrollEdgeFade',
     { 'tp-diagnostic': CustomEvent<foundationServices.Diagnostic> }
   >;
   'tp-mo-glow-border': Tag<
@@ -3364,6 +3376,7 @@ type Tags = {
     | 'provider'
     | 'readOnly'
     | 'required'
+    | 'scrollEdgeFade'
     | 'showArrow'
     | 'showBackdrop'
     | 'showViewport'
@@ -3421,6 +3434,7 @@ type Tags = {
     | 'readOnly'
     | 'required'
     | 'responsiveAdapter'
+    | 'scrollEdgeFade'
     | 'shortcut'
     | 'shortcutAdapter'
     | 'side'
@@ -3491,7 +3505,8 @@ type Tags = {
     | 'partContracts'
     | 'partPresentation'
     | 'readOnly'
-    | 'required',
+    | 'required'
+    | 'scrollEdgeFade',
     { 'tp-diagnostic': CustomEvent<foundationServices.Diagnostic> }
   >;
   'tp-navigation-panel-drawer': Tag<
@@ -3528,6 +3543,7 @@ type Tags = {
     | 'portalIdentifier'
     | 'readOnly'
     | 'required'
+    | 'scrollEdgeFade'
     | 'showCloseControl'
     | 'showFooter'
     | 'showHeader'
@@ -4068,6 +4084,7 @@ type Tags = {
     | 'provider'
     | 'readOnly'
     | 'required'
+    | 'scrollEdgeFade'
     | 'showArrow'
     | 'showBackdrop'
     | 'showViewport'
@@ -4135,6 +4152,7 @@ type Tags = {
     | 'provider'
     | 'readOnly'
     | 'required'
+    | 'scrollEdgeFade'
     | 'showArrow'
     | 'showBackdrop'
     | 'showViewport'
@@ -4326,7 +4344,8 @@ type Tags = {
     | 'partPresentation'
     | 'readOnly'
     | 'required'
-    | 'resizeBehavior',
+    | 'resizeBehavior'
+    | 'scrollEdgeFade',
     {
       'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
       'tp-panel-resize': CustomEvent<{
@@ -4358,6 +4377,7 @@ type Tags = {
     | 'readOnly'
     | 'required'
     | 'resizeTargetMinimumSize'
+    | 'scrollEdgeFade'
     | 'sizes'
     | 'withHandle',
     {
@@ -4389,6 +4409,7 @@ type Tags = {
     | 'partPresentation'
     | 'readOnly'
     | 'required'
+    | 'scrollEdgeFade'
     | 'scrollbarVisibility'
     | 'scrollbars'
     | 'showCorner',
@@ -4507,6 +4528,7 @@ type Tags = {
     | 'readOnly'
     | 'required'
     | 'scrollDownKeepMounted'
+    | 'scrollEdgeFade'
     | 'scrollUpKeepMounted'
     | 'searchDelay'
     | 'searchable'
@@ -4863,6 +4885,7 @@ type Tags = {
     | 'partPresentation'
     | 'readOnly'
     | 'required'
+    | 'scrollEdgeFade'
     | 'selectionPresentation'
     | 'stickyEndColumns'
     | 'stickyFooter'
@@ -5069,6 +5092,7 @@ type Tags = {
     | 'readOnly'
     | 'renderBeforeActivation'
     | 'required'
+    | 'scrollEdgeFade'
     | 'value'
     | 'variant',
     {
@@ -5384,6 +5408,7 @@ type Tags = {
     | 'provider'
     | 'readOnly'
     | 'required'
+    | 'scrollEdgeFade'
     | 'showArrow'
     | 'showBackdrop'
     | 'showViewport'
@@ -5453,6 +5478,7 @@ type Tags = {
     | 'renderItem'
     | 'reorderable'
     | 'required'
+    | 'scrollEdgeFade'
     | 'selectionMode'
     | 'selectionPropagation'
     | 'size'

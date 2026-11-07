@@ -29,6 +29,7 @@ export const Tabs = /*#__PURE__*/ createBinding(TpTabs, 'Tabs', {
   | 'readOnly'
   | 'renderBeforeActivation'
   | 'required'
+  | 'scrollEdgeFade'
   | 'value'
   | 'variant',
   {

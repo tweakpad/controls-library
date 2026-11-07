@@ -58,7 +58,8 @@ export type ResizablePanelProps = ElementProps<
   | 'partPresentation'
   | 'readOnly'
   | 'required'
-  | 'resizeBehavior',
+  | 'resizeBehavior'
+  | 'scrollEdgeFade',
   {
     onTpDiagnostic: CustomEvent<foundationServices.Diagnostic>;
     onTpPanelResize: CustomEvent<{
@@ -106,6 +107,7 @@ export type ResizablePanelGroupProps = ElementProps<
   | 'readOnly'
   | 'required'
   | 'resizeTargetMinimumSize'
+  | 'scrollEdgeFade'
   | 'sizes'
   | 'withHandle',
   {

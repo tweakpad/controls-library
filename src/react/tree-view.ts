@@ -77,6 +77,7 @@ export type TreeViewProps<T = TreeViewDefaults[0]> = ElementProps<
   | 'renderItem'
   | 'reorderable'
   | 'required'
+  | 'scrollEdgeFade'
   | 'selectionMode'
   | 'selectionPropagation'
   | 'size'

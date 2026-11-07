@@ -34,6 +34,7 @@ export const Carousel = /*#__PURE__*/ createBinding(TpCarousel, 'Carousel', {
   | 'readOnly'
   | 'renderItem'
   | 'required'
+  | 'scrollEdgeFade'
   | 'value',
   {
     'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;

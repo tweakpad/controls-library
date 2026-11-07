@@ -15,6 +15,9 @@ import { resizablePanelGroupPresentation } from '../../presentation/families/res
  * @fires tp-resizable-member-change - Bubbles when the panel's configuration changes, so its group lays out again.
  */
 export class TpResizablePanel extends TpElement {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -26,6 +29,7 @@ export class TpResizablePanel extends TpElement {
   static tagName = 'tp-resizable-panel';
   static override presentation = resizablePanelGroupPresentation;
   static override properties = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     defaultSize: { attribute: 'default-size' },
     minSize: { attribute: 'min-size' },

@@ -54,6 +54,7 @@ export const Drawer = /*#__PURE__*/ createBinding(TpDrawer, 'Drawer', {
   | 'portalIdentifier'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showCloseControl'
   | 'showFooter'
   | 'showHeader'

@@ -22,6 +22,7 @@ export const ScrollArea = /*#__PURE__*/ createBinding(TpScrollArea, 'ScrollArea'
   | 'partPresentation'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'scrollbarVisibility'
   | 'scrollbars'
   | 'showCorner',

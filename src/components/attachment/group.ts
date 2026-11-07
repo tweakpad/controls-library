@@ -9,6 +9,14 @@ import { attachmentPresentation } from '../../presentation/families/attachment.j
  * @slot - The Attachments.
  */
 export class TpAttachmentGroup extends TpElement {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
+  static override properties = {
+    ...super.properties,
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
+  };
+
   constructor() {
     super();
     new NativeScrollEdges(this, {

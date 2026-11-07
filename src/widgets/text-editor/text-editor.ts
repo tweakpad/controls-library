@@ -605,6 +605,9 @@ export function textEditorRouterConfig(
  * mounted content as its initial value rather than as an edit.
  */
 export class TpTextEditor extends TpFormElement<TextEditorSnapshot | null> {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   static tagName = 'tp-text-editor';
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {
     return [
@@ -628,6 +631,7 @@ export class TpTextEditor extends TpFormElement<TextEditorSnapshot | null> {
   }
   static override presentation = textEditorPresentation;
   static override properties: PropertyDeclarations = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpFormElement.properties,
     value: { attribute: false, noAccessor: true },
     engine: { attribute: false },

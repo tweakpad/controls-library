@@ -26,6 +26,7 @@ export type TabsProps = ElementProps<
   | 'readOnly'
   | 'renderBeforeActivation'
   | 'required'
+  | 'scrollEdgeFade'
   | 'value'
   | 'variant',
   {

@@ -54,7 +54,8 @@ export type AttachmentGroupProps = ElementProps<
   | 'partContracts'
   | 'partPresentation'
   | 'readOnly'
-  | 'required',
+  | 'required'
+  | 'scrollEdgeFade',
   {
     onTpDiagnostic: CustomEvent<foundationServices.Diagnostic>;
   }

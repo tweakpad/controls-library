@@ -34,6 +34,7 @@ export type CodeBlockProps = ElementProps<
   | 'readOnly'
   | 'removedLines'
   | 'required'
+  | 'scrollEdgeFade'
   | 'wrap',
   {
     onTpCodeCopy: CustomEvent<componentsCodeBlockCodeBlock.CodeCopyDetail>;

@@ -107,6 +107,7 @@ export const Select = /*#__PURE__*/ createBinding(TpSelect, 'Select', {
   | 'readOnly'
   | 'required'
   | 'scrollDownKeepMounted'
+  | 'scrollEdgeFade'
   | 'scrollUpKeepMounted'
   | 'searchDelay'
   | 'searchable'

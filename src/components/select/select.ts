@@ -139,6 +139,9 @@ interface SelectScrollExtent {
  * row is hovered or focused.
  */
 export class TpSelect extends TpFormElement<unknown> {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   constructor() {
     super();
     this.#scrollEdges = new NativeScrollEdges(this, {
@@ -160,6 +163,7 @@ export class TpSelect extends TpFormElement<unknown> {
   }
   static override presentation = selectPresentation;
   static override properties = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpFormElement.properties,
     searchable: { type: Boolean, reflect: true },
     inputValue: { type: String, attribute: 'input-value', noAccessor: true },

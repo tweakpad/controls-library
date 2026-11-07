@@ -55,7 +55,8 @@ export const ResizablePanel = /*#__PURE__*/ createBinding(TpResizablePanel, 'Res
   | 'partPresentation'
   | 'readOnly'
   | 'required'
-  | 'resizeBehavior',
+  | 'resizeBehavior'
+  | 'scrollEdgeFade',
   {
     'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
     'tp-panel-resize': CustomEvent<{
@@ -99,6 +100,7 @@ export const ResizablePanelGroup = /*#__PURE__*/ createBinding(
   | 'readOnly'
   | 'required'
   | 'resizeTargetMinimumSize'
+  | 'scrollEdgeFade'
   | 'sizes'
   | 'withHandle',
   {

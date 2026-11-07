@@ -119,12 +119,16 @@ export class TpTreeView<T = TreeViewItem>
   extends TpFormElement<readonly string[]>
   implements TreeItemOwner
 {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   static tagName = 'tp-tree-view';
   static override presentation = treeViewPresentation;
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {
     return [TpTreeItem, TpButton, TpIcon];
   }
   static override properties = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpFormElement.properties,
     value: { noAccessor: true, converter: idListConverter },
     defaultValue: { attribute: 'default-value', converter: idListConverter },

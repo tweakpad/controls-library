@@ -50,7 +50,8 @@ export const AttachmentGroup = /*#__PURE__*/ createBinding(TpAttachmentGroup, 'A
   | 'partContracts'
   | 'partPresentation'
   | 'readOnly'
-  | 'required',
+  | 'required'
+  | 'scrollEdgeFade',
   {
     'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
   }

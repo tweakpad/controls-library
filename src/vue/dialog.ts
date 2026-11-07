@@ -40,6 +40,7 @@ export const Dialog = /*#__PURE__*/ createBinding(TpDialog, 'Dialog', {
   | 'portalIdentifier'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showCloseControl'
   | 'showFooter'
   | 'showHeader'

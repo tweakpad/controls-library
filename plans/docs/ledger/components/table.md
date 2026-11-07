@@ -13,3 +13,5 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| prose | Scroll-edge fades are off by default. | User-directed correction: enable through scroll-edge-fade rather than a token override. |

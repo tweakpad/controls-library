@@ -155,7 +155,8 @@ export const MessageScrollerViewport = /*#__PURE__*/ createBinding(
   | 'partPresentation'
   | 'preserveOnPrepend'
   | 'readOnly'
-  | 'required',
+  | 'required'
+  | 'scrollEdgeFade',
   {
     'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
   }

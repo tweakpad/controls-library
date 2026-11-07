@@ -159,7 +159,8 @@ export type MessageScrollerViewportProps = ElementProps<
   | 'partPresentation'
   | 'preserveOnPrepend'
   | 'readOnly'
-  | 'required',
+  | 'required'
+  | 'scrollEdgeFade',
   {
     onTpDiagnostic: CustomEvent<foundationServices.Diagnostic>;
   }

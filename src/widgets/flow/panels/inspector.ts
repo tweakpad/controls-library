@@ -239,6 +239,9 @@ const inspectorStyles = css`
  * key, then `flow-inspector-commit`) and Cancel reverts silently.
  */
 export class TpFlowInspector extends TpElement {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   static tagName = 'tp-flow-inspector';
   static override presentation = flowPresentation;
   static get elementDependencies() {
@@ -264,6 +267,7 @@ export class TpFlowInspector extends TpElement {
     ];
   }
   static override properties = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     label: { type: String },
     node: { attribute: false },

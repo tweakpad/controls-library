@@ -73,6 +73,7 @@ export type MenuProps = ElementProps<
   | 'provider'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showArrow'
   | 'showBackdrop'
   | 'showViewport'

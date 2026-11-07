@@ -101,6 +101,7 @@ export const Autocomplete = /*#__PURE__*/ createBinding(TpAutocomplete, 'Autocom
   | 'readOnly'
   | 'required'
   | 'scrollDownKeepMounted'
+  | 'scrollEdgeFade'
   | 'scrollUpKeepMounted'
   | 'searchDelay'
   | 'searchable'

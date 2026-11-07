@@ -40,6 +40,7 @@ export const AlertDialog = /*#__PURE__*/ createBinding(TpAlertDialog, 'AlertDial
   | 'portalIdentifier'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showCloseControl'
   | 'showFooter'
   | 'showHeader'

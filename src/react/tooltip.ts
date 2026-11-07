@@ -62,6 +62,7 @@ export type TooltipProps = ElementProps<
   | 'provider'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showArrow'
   | 'showBackdrop'
   | 'showViewport'

@@ -61,6 +61,7 @@ export type PreviewCardProps = ElementProps<
   | 'provider'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showArrow'
   | 'showBackdrop'
   | 'showViewport'

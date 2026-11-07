@@ -118,6 +118,9 @@ export function targetOf(element: HTMLElement, depth = 0): HTMLElement {
  * @fires tp-open-change-complete - After the surface finishes opening or closing; `detail.open`.
  */
 export abstract class TpAnchoredSurface extends TpElement {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -131,6 +134,7 @@ export abstract class TpAnchoredSurface extends TpElement {
 
   readonly [SURFACE_HOST] = true as const;
   static override properties = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     open: { type: Boolean, noAccessor: true },
     defaultOpen: { type: Boolean, attribute: 'default-open', noAccessor: true },

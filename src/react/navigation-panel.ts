@@ -59,6 +59,7 @@ export type NavigationPanelProps = ElementProps<
   | 'readOnly'
   | 'required'
   | 'responsiveAdapter'
+  | 'scrollEdgeFade'
   | 'shortcut'
   | 'shortcutAdapter'
   | 'side'
@@ -164,7 +165,8 @@ export type NavigationPanelContentProps = ElementProps<
   | 'partContracts'
   | 'partPresentation'
   | 'readOnly'
-  | 'required',
+  | 'required'
+  | 'scrollEdgeFade',
   {
     onTpDiagnostic: CustomEvent<foundationServices.Diagnostic>;
   }
@@ -215,6 +217,7 @@ export type NavigationPanelDrawerProps = ElementProps<
   | 'portalIdentifier'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showCloseControl'
   | 'showFooter'
   | 'showHeader'

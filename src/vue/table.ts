@@ -29,6 +29,7 @@ export const Table = /*#__PURE__*/ createBinding(TpTable, 'Table', {
   | 'partPresentation'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'selectionPresentation'
   | 'stickyEndColumns'
   | 'stickyFooter'

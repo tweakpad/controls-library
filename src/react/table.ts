@@ -28,6 +28,7 @@ export type TableProps = ElementProps<
   | 'partPresentation'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'selectionPresentation'
   | 'stickyEndColumns'
   | 'stickyFooter'

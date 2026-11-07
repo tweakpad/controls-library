@@ -65,6 +65,7 @@ export type NavigationMenuProps = ElementProps<
   | 'provider'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showArrow'
   | 'showBackdrop'
   | 'showViewport'

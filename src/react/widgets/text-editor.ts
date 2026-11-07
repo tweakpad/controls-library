@@ -33,6 +33,7 @@ export type TextEditorProps = ElementProps<
   | 'placeholder'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'strings'
   | 'tools',
   {

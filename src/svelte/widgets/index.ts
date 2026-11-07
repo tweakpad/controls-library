@@ -480,6 +480,7 @@ type Tags = {
     | 'placeholder'
     | 'readOnly'
     | 'required'
+    | 'scrollEdgeFade'
     | 'strings'
     | 'tools',
     {

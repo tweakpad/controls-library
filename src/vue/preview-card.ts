@@ -64,6 +64,7 @@ export const PreviewCard = /*#__PURE__*/ createBinding(TpPreviewCard, 'PreviewCa
   | 'provider'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showArrow'
   | 'showBackdrop'
   | 'showViewport'

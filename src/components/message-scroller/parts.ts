@@ -16,6 +16,9 @@ import { buttonPresentation } from '../../presentation/families/button.js';
  * @slot - The content.
  */
 export class TpMessageScrollerViewport extends TpElement {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -26,6 +29,7 @@ export class TpMessageScrollerViewport extends TpElement {
   static tagName = 'tp-message-scroller-viewport';
   static override presentation = messageScrollerPresentation;
   static override properties = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     label: { type: String },
     preserveOnPrepend: { type: Boolean, attribute: 'preserve-on-prepend' },

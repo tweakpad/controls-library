@@ -57,6 +57,9 @@ interface ControlRecord {
  * @fires tp-open-change - Cancelable proposal to open or close the compact Drawer.
  */
 export class TpNavigationPanel extends TpElement {
+  /** Enables fades on this interface's native scroll areas. Off by default. */
+  scrollEdgeFade = false;
+
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -75,6 +78,7 @@ export class TpNavigationPanel extends TpElement {
   }
   static override presentation = navigationPanelPresentation;
   static override properties = {
+    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     expanded: { type: Boolean, noAccessor: true },
     defaultExpanded: { type: Boolean, attribute: 'default-expanded' },

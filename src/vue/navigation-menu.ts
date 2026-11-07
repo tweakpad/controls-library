@@ -68,6 +68,7 @@ export const NavigationMenu = /*#__PURE__*/ createBinding(TpNavigationMenu, 'Nav
   | 'provider'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showArrow'
   | 'showBackdrop'
   | 'showViewport'

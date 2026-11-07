@@ -34,6 +34,7 @@ export const TextEditor = /*#__PURE__*/ createBinding(TpTextEditor, 'TextEditor'
   | 'placeholder'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'strings'
   | 'tools',
   {

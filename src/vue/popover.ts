@@ -65,6 +65,7 @@ export const Popover = /*#__PURE__*/ createBinding(TpPopover, 'Popover', {
   | 'provider'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showArrow'
   | 'showBackdrop'
   | 'showViewport'

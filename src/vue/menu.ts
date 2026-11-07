@@ -76,6 +76,7 @@ export const Menu = /*#__PURE__*/ createBinding(TpMenu, 'Menu', {
   | 'provider'
   | 'readOnly'
   | 'required'
+  | 'scrollEdgeFade'
   | 'showArrow'
   | 'showBackdrop'
   | 'showViewport'

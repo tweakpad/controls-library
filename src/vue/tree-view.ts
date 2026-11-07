@@ -72,6 +72,7 @@ export const TreeView = /*#__PURE__*/ createBinding(TpTreeView, 'TreeView', {
   | 'renderItem'
   | 'reorderable'
   | 'required'
+  | 'scrollEdgeFade'
   | 'selectionMode'
   | 'selectionPropagation'
   | 'size'
