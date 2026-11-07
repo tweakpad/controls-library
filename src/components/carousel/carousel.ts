@@ -1,3 +1,4 @@
+import { Scrollable } from '../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { EffectPresenter, type CarouselEffect } from '../../foundation/carousel/effect.js';
 import { html, nothing, type PropertyValues } from 'lit';
@@ -98,10 +99,7 @@ interface Shell {
  * @fires tp-value-change - Cancelable proposal of a new position before it commits; a controlled carousel must publish the accepted `value`.
  * @fires tp-value-commit - After a new position commits, with the position and the previous one.
  */
-export class TpCarousel<T = unknown> extends TpElement {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
+export class TpCarousel<T = unknown> extends Scrollable(TpElement) {
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -121,7 +119,6 @@ export class TpCarousel<T = unknown> extends TpElement {
   }
   static override presentation = carouselPresentation;
   static override properties = {
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     value: { attribute: false },
     defaultValue: { attribute: false },

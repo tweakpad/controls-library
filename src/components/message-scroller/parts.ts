@@ -1,3 +1,4 @@
+import { Scrollable } from '../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { css, html, type PropertyValues } from 'lit';
 import { hiddenStyles } from '../shared/control-styles.js';
@@ -15,10 +16,7 @@ import { buttonPresentation } from '../../presentation/families/button.js';
  *
  * @slot - The content.
  */
-export class TpMessageScrollerViewport extends TpElement {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
+export class TpMessageScrollerViewport extends Scrollable(TpElement) {
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -29,7 +27,6 @@ export class TpMessageScrollerViewport extends TpElement {
   static tagName = 'tp-message-scroller-viewport';
   static override presentation = messageScrollerPresentation;
   static override properties = {
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     label: { type: String },
     preserveOnPrepend: { type: Boolean, attribute: 'preserve-on-prepend' },

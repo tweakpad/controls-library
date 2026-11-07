@@ -1,3 +1,4 @@
+import { Scrollable } from '../../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../../../components/shared/scroll-edges.js';
 import { css, html, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { TpElement } from '../../../foundation/element.js';
@@ -238,10 +239,7 @@ const inspectorStyles = css`
  * `flow-inspector-change`; in `explicit` mode they stay local until Save (one change per edited
  * key, then `flow-inspector-commit`) and Cancel reverts silently.
  */
-export class TpFlowInspector extends TpElement {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
+export class TpFlowInspector extends Scrollable(TpElement) {
   static tagName = 'tp-flow-inspector';
   static override presentation = flowPresentation;
   static get elementDependencies() {
@@ -267,7 +265,6 @@ export class TpFlowInspector extends TpElement {
     ];
   }
   static override properties = {
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     label: { type: String },
     node: { attribute: false },

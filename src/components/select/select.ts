@@ -1,3 +1,4 @@
+import { Scrollable } from '../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { applyForwardedNavigation, SelectQueryController } from './query.js';
 import { SURFACE_HOST, isSurfaceHost } from '../../foundation/surface-brand.js';
@@ -138,10 +139,7 @@ interface SelectScrollExtent {
  * @csspart select-copy - The Copy button beside the label of an inline Select, shown while the
  * row is hovered or focused.
  */
-export class TpSelect extends TpFormElement<unknown> {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
+export class TpSelect extends Scrollable(TpFormElement)<unknown> {
   constructor() {
     super();
     this.#scrollEdges = new NativeScrollEdges(this, {
@@ -163,7 +161,6 @@ export class TpSelect extends TpFormElement<unknown> {
   }
   static override presentation = selectPresentation;
   static override properties = {
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpFormElement.properties,
     searchable: { type: Boolean, reflect: true },
     inputValue: { type: String, attribute: 'input-value', noAccessor: true },

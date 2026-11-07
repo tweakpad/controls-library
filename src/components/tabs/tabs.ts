@@ -1,3 +1,4 @@
+import { Scrollable } from '../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { css, html, nothing, unsafeCSS } from 'lit';
 import type { PropertyValues } from 'lit';
@@ -67,10 +68,7 @@ const memberValue = (element: TabsMember): unknown =>
  * @fires tp-value-change - Cancelable proposal of the selected tab's `value`, from a press, a key
  *   or `setValue()`; `detail.metadata.activationDirection` says which way the selection moved.
  */
-export class TpTabs extends TpElement {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
+export class TpTabs extends Scrollable(TpElement) {
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -87,7 +85,6 @@ export class TpTabs extends TpElement {
   static tagName = 'tp-tabs';
   static override presentation = tabsPresentation;
   static override properties = {
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     value: { noAccessor: true },
     defaultValue: { attribute: 'default-value' },

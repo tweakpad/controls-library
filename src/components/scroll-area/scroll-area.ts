@@ -1,3 +1,4 @@
+import { Scrollable } from '../../foundation/scrollable.js';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
 import { TpElement } from '../../foundation/element.js';
@@ -19,14 +20,10 @@ import { scrollAreaPresentation } from '../../presentation/families/scroll-area.
  *
  * @slot - The scrolling content.
  */
-export class TpScrollArea extends TpElement {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
+export class TpScrollArea extends Scrollable(TpElement) {
   static tagName = 'tp-scroll-area';
   static override presentation = scrollAreaPresentation;
   static override properties = {
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     axis: { type: String, reflect: true },
     label: { type: String },

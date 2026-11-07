@@ -1,3 +1,4 @@
+import { Scrollable } from '../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { bindPart } from '../../foundation/part.js';
 import { css, html, nothing } from 'lit';
@@ -127,15 +128,7 @@ export class TpNavigationPanelHeader extends NavigationPanelLayoutPart {
  *
  * @slot - The groups and menus.
  */
-export class TpNavigationPanelContent extends NavigationPanelLayoutPart {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
-  static override properties = {
-    ...super.properties,
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
-  };
-
+export class TpNavigationPanelContent extends Scrollable(NavigationPanelLayoutPart) {
   constructor() {
     super();
     new NativeScrollEdges(this, {

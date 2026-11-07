@@ -1,3 +1,4 @@
+import { Scrollable } from '../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { SURFACE_HOST } from '../../foundation/surface-brand.js';
 import {
@@ -100,10 +101,7 @@ interface TriggerRecord {
  *   `detail.preventUnmountOnClose()` keeps the content mounted.
  * @fires tp-open-change-complete - After the dialog finishes opening or closing; `detail.open`.
  */
-export class TpDialog extends TpElement {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
+export class TpDialog extends Scrollable(TpElement) {
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -124,7 +122,6 @@ export class TpDialog extends TpElement {
   }
   static override presentation = dialogPresentation;
   static override properties = {
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     open: { type: Boolean, noAccessor: true },
     defaultOpen: { type: Boolean, attribute: 'default-open' },

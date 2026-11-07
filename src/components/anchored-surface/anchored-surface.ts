@@ -1,3 +1,4 @@
+import { Scrollable } from '../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { anchoredArrowStyles } from '../shared/anchored-arrow.js';
 import { SURFACE_HOST } from '../../foundation/surface-brand.js';
@@ -117,10 +118,7 @@ export function targetOf(element: HTMLElement, depth = 0): HTMLElement {
  *   On a close, `detail.preventUnmountOnClose()` keeps the content mounted.
  * @fires tp-open-change-complete - After the surface finishes opening or closing; `detail.open`.
  */
-export abstract class TpAnchoredSurface extends TpElement {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
+export abstract class TpAnchoredSurface extends Scrollable(TpElement) {
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -134,7 +132,6 @@ export abstract class TpAnchoredSurface extends TpElement {
 
   readonly [SURFACE_HOST] = true as const;
   static override properties = {
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     open: { type: Boolean, noAccessor: true },
     defaultOpen: { type: Boolean, attribute: 'default-open', noAccessor: true },

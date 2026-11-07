@@ -1,3 +1,4 @@
+import { Scrollable } from '../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { hiddenStyles } from '../shared/control-styles.js';
@@ -78,17 +79,13 @@ const COPIED_DURATION = 2000;
  * @fires tp-value-change - Cancelable `expanded` proposal (`trigger-press`, `imperative-action`).
  * @fires tp-diagnostic - Highlighting failures and unknown languages.
  */
-export class TpCodeBlock extends TpElement {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
+export class TpCodeBlock extends Scrollable(TpElement) {
   static tagName = 'tp-code-block';
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {
     return [TpButton, TpCopyButton, TpTooltip];
   }
   static override presentation = codeBlockPresentation;
   static override properties = {
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     code: { type: String },
     language: { type: String, reflect: true },

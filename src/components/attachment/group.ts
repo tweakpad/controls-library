@@ -1,3 +1,4 @@
+import { Scrollable } from '../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { css, html } from 'lit';
 import { TpElement } from '../../foundation/element.js';
@@ -8,15 +9,7 @@ import { attachmentPresentation } from '../../presentation/families/attachment.j
  *
  * @slot - The Attachments.
  */
-export class TpAttachmentGroup extends TpElement {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
-  static override properties = {
-    ...super.properties,
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
-  };
-
+export class TpAttachmentGroup extends Scrollable(TpElement) {
   constructor() {
     super();
     new NativeScrollEdges(this, {

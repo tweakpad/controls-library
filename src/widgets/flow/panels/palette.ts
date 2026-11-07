@@ -1,3 +1,4 @@
+import { Scrollable } from '../../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../../../components/shared/scroll-edges.js';
 import { css, html, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { TpElement } from '../../../foundation/element.js';
@@ -128,10 +129,7 @@ const paletteStyles = css`
  * columns. A search filters both. A chip is dragged onto the canvas; a pointer click arms
  * placement and Enter inserts at once (`flow-palette-insert`).
  */
-export class TpFlowPalette extends TpElement {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
+export class TpFlowPalette extends Scrollable(TpElement) {
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -145,7 +143,6 @@ export class TpFlowPalette extends TpElement {
     return [TpButton, TpIcon, TpInput, TpInputGroup, TpAccordion, TpAccordionItem];
   }
   static override properties = {
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     definitions: { attribute: false },
     categories: { attribute: false },

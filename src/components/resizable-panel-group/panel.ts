@@ -1,3 +1,4 @@
+import { Scrollable } from '../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { css, html, type PropertyValues } from 'lit';
 import { TpElement } from '../../foundation/element.js';
@@ -14,10 +15,7 @@ import { resizablePanelGroupPresentation } from '../../presentation/families/res
  * @fires tp-panel-resize - After the panel's committed size changes, with `size` and `previousSize` (each in pixels and as a percentage) and the panel `id`.
  * @fires tp-resizable-member-change - Bubbles when the panel's configuration changes, so its group lays out again.
  */
-export class TpResizablePanel extends TpElement {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
+export class TpResizablePanel extends Scrollable(TpElement) {
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -29,7 +27,6 @@ export class TpResizablePanel extends TpElement {
   static tagName = 'tp-resizable-panel';
   static override presentation = resizablePanelGroupPresentation;
   static override properties = {
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     defaultSize: { attribute: 'default-size' },
     minSize: { attribute: 'min-size' },

@@ -1,3 +1,4 @@
+import { Scrollable } from '../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../../components/shared/scroll-edges.js';
 import {
   html,
@@ -604,10 +605,7 @@ export function textEditorRouterConfig(
  * @fires tp-field-value - Once, when the engine first mounts, so a surrounding Field takes the
  * mounted content as its initial value rather than as an edit.
  */
-export class TpTextEditor extends TpFormElement<TextEditorSnapshot | null> {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
+export class TpTextEditor extends Scrollable(TpFormElement)<TextEditorSnapshot | null> {
   static tagName = 'tp-text-editor';
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {
     return [
@@ -631,7 +629,6 @@ export class TpTextEditor extends TpFormElement<TextEditorSnapshot | null> {
   }
   static override presentation = textEditorPresentation;
   static override properties: PropertyDeclarations = {
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpFormElement.properties,
     value: { attribute: false, noAccessor: true },
     engine: { attribute: false },

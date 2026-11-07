@@ -665,6 +665,7 @@ export default {
     'src/widgets/**/*.ts',
     'src/foundation/element.ts',
     'src/foundation/form-element.ts',
+    'src/foundation/scrollable.ts',
   ],
   outdir: 'dist',
   litelement: true,

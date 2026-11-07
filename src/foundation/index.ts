@@ -70,3 +70,5 @@ export * from './virtual-list.js';
 export * from './tree/index.js';
 export * from './search/index.js';
 export * from './resize-separator.js';
+
+export type { ScrollableInterface } from './scrollable.js';

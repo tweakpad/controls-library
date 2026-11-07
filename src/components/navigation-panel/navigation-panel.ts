@@ -1,3 +1,4 @@
+import { Scrollable } from '../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { bindPart } from '../../foundation/part.js';
 import type { CustomElementConstructorWithTag } from '../../foundation/define.js';
@@ -56,10 +57,7 @@ interface ControlRecord {
  * @fires tp-value-change - Cancelable proposal to expand or collapse the wide navigation; a controlled panel must publish the accepted `expanded`.
  * @fires tp-open-change - Cancelable proposal to open or close the compact Drawer.
  */
-export class TpNavigationPanel extends TpElement {
-  /** Enables fades on this interface's native scroll areas. Off by default. */
-  scrollEdgeFade = false;
-
+export class TpNavigationPanel extends Scrollable(TpElement) {
   constructor() {
     super();
     new NativeScrollEdges(this, {
@@ -78,7 +76,6 @@ export class TpNavigationPanel extends TpElement {
   }
   static override presentation = navigationPanelPresentation;
   static override properties = {
-    scrollEdgeFade: { type: Boolean, attribute: 'scroll-edge-fade', reflect: true },
     ...TpElement.properties,
     expanded: { type: Boolean, noAccessor: true },
     defaultExpanded: { type: Boolean, attribute: 'default-expanded' },
