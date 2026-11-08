@@ -248,11 +248,13 @@ export abstract class TpAnchoredSurface extends Scrollable(TpElement) {
         overflow: auto;
       }
 
-      /* Preserve the body's column flow across the measurable scroll-edge mask layer.
+      /* Preserve the body's flex flow across the measurable scroll-edge mask layer.
          The layer must keep its natural height so that overflowing rows remain scrollable. */
       .scroll-content {
         display: flex;
-        flex-direction: column;
+        flex-direction: inherit;
+        align-items: inherit;
+        justify-content: inherit;
         gap: inherit;
         flex: 0 0 auto;
         min-inline-size: 0;

@@ -19,6 +19,7 @@ export const popoverAppearance: PresentationDictionary = {
         'font-size': 'var(--tp-text-sm)',
       },
     },
+    { selector: '& > .arrow', declarations: { fill: 'var(--tp-popover)' } },
     ...anchoredPresenceAppearance,
   ],
   'popover-header': [

@@ -1,5 +1,6 @@
 /** Run only through Chrome DevTools MCP in a page that registers tp-menu and tp-popover. */
 export async function reviewScrollContentRepair() {
+  await Promise.race([Promise.all(['tp-menu', 'tp-popover', 'tp-tooltip', 'tp-button', 'tp-kbd'].map((tag) => customElements.whenDefined(tag))), new Promise((_, reject) => setTimeout(() => reject(new Error('Control registration timeout')), 10000))]);
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const settle = async (menu) => {
     await Promise.race([menu.updateComplete, wait(1000)]);
@@ -82,7 +83,29 @@ export async function reviewScrollContentRepair() {
   await settle(popover);
   const layer = popover.popupElement.querySelector('.scroll-content');
   results.push({ consumer: 'popover', wrapper: rect(layer), button: rect(button), failures: button.getBoundingClientRect().width < layer.clientWidth - 2 ? ['Popover child failed to stretch'] : [] });
+  popover.showArrow = true;
+  popover.style.setProperty('--tp-popover', 'rgb(12, 34, 56)');
+  for (const side of ['top', 'bottom', 'left', 'right']) {
+    popover.side = side;
+    await settle(popover);
+    const path = popover.popupElement.querySelector('.arrow path');
+    const fill = getComputedStyle(path).fill;
+    const background = getComputedStyle(popover.popupElement).backgroundColor;
+    results.push({ consumer: 'popover-arrow', side, fill, background, failures: fill === background ? [] : ['Arrow lost themed surface fill'] });
+  }
   popover.setOpen(false);
   popover.remove();
+  const tooltip = document.createElement('tp-tooltip');
+  tooltip.innerHTML = '<tp-button slot="trigger">Help</tp-button><span>Shortcut</span><tp-kbd>K</tp-kbd>';
+  const label = tooltip.querySelector('span');
+  const hint = tooltip.querySelector('tp-kbd');
+  document.body.append(tooltip);
+  tooltip.setOpen(true);
+  await settle(tooltip);
+  const tooltipLayer = tooltip.popupElement.querySelector('.scroll-content');
+  const row = getComputedStyle(tooltipLayer).flexDirection;
+  results.push({ consumer: 'tooltip', row, label: rect(label), hint: rect(hint), failures: row === 'row' && rect(hint).left >= rect(label).right - 1 ? [] : ['Tooltip inline content stacked'] });
+  tooltip.setOpen(false);
+  tooltip.remove();
   return results;
 }
