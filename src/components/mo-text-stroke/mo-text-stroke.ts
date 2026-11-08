@@ -65,18 +65,25 @@ export class TpMoTextStroke extends TextRevealElement {
 
   /**
    * Every word (or character, when characters are split) carries an outline of its own glyphs.
-   * Outlines are rebuilt after every split and line pass.
+   * Outlines are refreshed after every split and line pass without replacing animated nodes.
    */
   protected override afterSplit(): void {
-    for (const outline of this.querySelectorAll('[data-tp-outline]')) outline.remove();
+    this.layoutChanged();
+  }
+
+  protected override layoutChanged(): void {
     if (this.getClientRects().length === 0) return;
     const unit = this.querySelector("[data-tp-piece='char']") ? 'char' : 'word';
     const skip = (node: Node) => node instanceof Element && node.matches('[data-tp-text]');
     for (const piece of this.querySelectorAll<HTMLElement>(`[data-tp-piece='${unit}']`)) {
-      const outline = outlineGlyphs(piece, skip);
-      if (!outline) continue;
+      const existing = piece.querySelector<SVGSVGElement>(':scope > [data-tp-outline]');
+      const outline = outlineGlyphs(piece, skip, existing ?? undefined);
+      if (!outline) {
+        existing?.remove();
+        continue;
+      }
       outline.setAttribute('data-tp-outline', '');
-      piece.append(outline);
+      if (!existing) piece.append(outline);
     }
   }
 }

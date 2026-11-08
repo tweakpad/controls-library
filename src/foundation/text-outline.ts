@@ -66,16 +66,21 @@ export function fontAscent(doc: Document, font: string): number {
  * An `aria-hidden` SVG laid over `target`, with one stroked `<text>` per text run inside it, each at
  * its run's position and baseline. `skip` leaves out nodes (and their subtrees) that are not drawn,
  * such as visually hidden copies. Returns `null` when nothing in `target` is laid out.
+ * Passing an existing outline updates its text runs in place, preserving their motion state.
  */
 export function outlineGlyphs(
   target: HTMLElement,
   skip: (node: Node) => boolean = () => false,
+  outline?: SVGSVGElement,
 ): SVGSVGElement | null {
   const doc = target.ownerDocument;
   const view = doc.defaultView;
   if (!view) return null;
   const box = target.getBoundingClientRect();
-  const svg = createSvgElement(doc, 'svg', { 'aria-hidden': 'true', focusable: 'false' });
+  const svg =
+    outline ?? createSvgElement(doc, 'svg', { 'aria-hidden': 'true', focusable: 'false' });
+  const texts = [...svg.children];
+  let index = 0;
   const range = doc.createRange();
   const walker = doc.createTreeWalker(target, view.NodeFilter.SHOW_ALL, {
     acceptNode: (node) =>
@@ -92,13 +97,13 @@ export function outlineGlyphs(
     const rect = range.getClientRects()[0];
     if (!rect || rect.width === 0) continue;
     const style = view.getComputedStyle(parent);
-    const text = createSvgElement(doc, 'text', {
-      x: String(rect.left - box.left),
-      y: String(rect.top - box.top + fontAscent(doc, metricsFont(style))),
-    });
-    text.textContent = node.textContent;
+    const text = texts[index++] ?? createSvgElement(doc, 'text');
+    text.setAttribute('x', String(rect.left - box.left));
+    text.setAttribute('y', String(rect.top - box.top + fontAscent(doc, metricsFont(style))));
+    if (text.textContent !== node.textContent) text.textContent = node.textContent;
     text.setAttribute('style', outlineTextStyle(style));
-    svg.append(text);
+    if (!text.parentNode) svg.append(text);
   }
+  for (const text of texts.slice(index)) text.remove();
   return svg.childElementCount ? svg : null;
 }

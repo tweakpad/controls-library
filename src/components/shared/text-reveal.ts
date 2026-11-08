@@ -91,6 +91,8 @@ export abstract class TextRevealElement extends TpElement {
   protected abstract revealEffects(coordinator: RevealCoordinatorHost | undefined): string[];
   /** After every split and line pass, and when the effects change: build effect-owned pieces. */
   protected afterSplit(): void {}
+  /** Layout was measured without changing line membership; refresh effect-owned geometry. */
+  protected layoutChanged(): void {}
   /** The width changed without moving a word: aligned text moved inside its lines. */
   protected widthChanged(): void {}
   /** The element whose transitions and scrubbed animation time a piece's reveal. */
@@ -257,7 +259,10 @@ export abstract class TextRevealElement extends TpElement {
     apply: (boxes) => {
       this.#linesPending = this.#measuredBlind;
       if (this.#splitter.relayout(boxes)) this.#afterSplit();
-      else this.#discardOwnRecords();
+      else {
+        this.layoutChanged();
+        this.#discardOwnRecords();
+      }
     },
   };
 

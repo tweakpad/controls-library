@@ -10,3 +10,18 @@ Open `/tests/fixtures/components/mo-text-stroke/` on the Vite server (`npm run d
 6. Scroll the scrubbed case through the viewport and back: the outlines draw and the fill follows the scroll position in both directions.
 7. Accessibility tree: each text is read once; outlines are `aria-hidden`. Under emulated reduced motion the text is filled immediately and the events still fire.
 8. Light and dark themes, and a 400px viewport: outlines and fill follow the text color.
+
+## Responsive outlines (#36)
+
+Open `resize.html` on the same Vite server. In Chrome DevTools MCP, await
+`window.runResizeChecks()` and then `window.runScrubResizeCheck()`; every returned
+`passed` must be true. These assert fixed-width font changes for characters and
+words, existing SVG/text and running-animation identity, completed reveals,
+hidden/reconnected text, accessible-copy exclusion, link identity and shared siblings.
+The fixture sets dimensions and fonts deliberately to exercise responsive typography.
+
+After `runResizeChecks()`, change the viewport width through DevTools MCP and compare
+`window.outlineState(document.querySelector('#responsive'))`: the outline font must
+match the new HTML font, with `xError` below 0.1px. Repeat under light/dark appearance
+and reduced motion (the mid-animation assertion requires normal motion).
+Append `?built` to exercise the built package after `npm run build`.
