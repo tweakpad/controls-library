@@ -547,7 +547,11 @@ export function renderSettingsDialog(host: SettingsHost) {
             .icon=${xIcon}
           ></tp-button>
         </header>
-        <tp-scroll-area class="workspace-settings-scroll" label=${`${current[1]} settings`}>
+        <tp-scroll-area
+          class="workspace-settings-scroll"
+          scrollbar-visibility="scroll"
+          label=${`${current[1]} settings`}
+        >
           <div class="workspace-settings-body">
             ${heading(current[1], current[3])} ${sectionContent[host.settingsSection](host)}
           </div>
