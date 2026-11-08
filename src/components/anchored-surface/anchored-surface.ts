@@ -248,6 +248,16 @@ export abstract class TpAnchoredSurface extends Scrollable(TpElement) {
         overflow: auto;
       }
 
+      /* Preserve the body's column flow across the measurable scroll-edge mask layer.
+         The layer must keep its natural height so that overflowing rows remain scrollable. */
+      .scroll-content {
+        display: flex;
+        flex-direction: column;
+        gap: inherit;
+        flex: 0 0 auto;
+        min-inline-size: 0;
+      }
+
       /* The body scrolls, which clips what paints outside it: it keeps room for the focus rings of
          the controls at its edges and gives the room back in its margin, so its content keeps its
          place, and an item scrolled into view still stops at the content edge. Viewport entries
