@@ -3,8 +3,8 @@ import { html, type TemplateResult } from 'lit';
 import { ref } from 'lit/directives/ref.js';
 import type { TextEditorFormat, TpTextEditor } from '../../widgets/text-editor/index.js';
 import { setupBlockEditor } from './text-editor-blocks-example.js';
-import { setupClassicEditor } from './text-editor-classic-example.js';
-import { fieldNotes } from './text-editor-samples.js';
+import { createEngine } from './text-editor-engine.js';
+import { announcement, fieldNotes } from './text-editor-samples.js';
 import { setupSelectionToolbarEditor } from './text-editor-selection-example.js';
 import { textEditorStorySources } from './text-editor.examples.js';
 import { libraryDocs } from '../library-docs.js';
@@ -108,9 +108,12 @@ export default meta;
 type Story = StoryObj<Args>;
 
 export const Default: Story = {
-  name: 'Classic toolbar',
-  args: { label: 'Report' },
-  render: (args) => renderEditor(args, setupClassicEditor),
+  args: { label: 'Announcement', defaultValue: announcement, placeholder: '', name: '' },
+  render: (args) =>
+    renderEditor(args, (editor) => {
+      editor.layout = { selectionToolbar: [], blockMenu: [], suggestions: [], gutter: false };
+      editor.engine = createEngine();
+    }),
 };
 
 export const SelectionToolbar: Story = {

@@ -30,3 +30,17 @@ export const mentionNotes = [
   '<p><span data-type="mention" data-person="selma-raud" data-label="Selma Raud">@Selma Raud</span> ',
   'updates the tide table on Mondays. Type @ to mention someone else.</p>',
 ].join('');
+
+/** The announcement shown by the documentation hero and its Controls. */
+export const announcement = [
+  '<h2>Release 4.2 is out</h2>',
+  '<p>Search now covers <strong>every project</strong> in a workspace, and results arrive ',
+  'while you type instead of after you press Enter.</p>',
+  '<p>Also in this release:</p>',
+  '<ul>',
+  '<li><p>Drafts save offline and sync when the connection returns.</p></li>',
+  '<li><p>Exports keep their column widths in spreadsheets.</p></li>',
+  '<li><p>The sidebar remembers which sections you collapsed.</p></li>',
+  '</ul>',
+  '<p>Thanks to everyone who sent feedback during the beta.</p>',
+].join('');

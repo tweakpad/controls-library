@@ -48,10 +48,16 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
-| preview | Text editor | engine factories import from `@tweakpad/ui/text-editor/adapters/<engine>`; the main entry no longer exports them |
-| preview | Classic editor | engine factories import from `@tweakpad/ui/text-editor/adapters/<engine>`; the main entry no longer exports them |
-| preview | Node editor | engine factories import from `@tweakpad/ui/text-editor/adapters/<engine>`; the main entry no longer exports them |
-| preview | Custom nodes | engine factories import from `@tweakpad/ui/text-editor/adapters/<engine>`; the main entry no longer exports them |
-| preview | Markdown in and out | engine factories import from `@tweakpad/ui/text-editor/adapters/<engine>`; the main entry no longer exports them |
-| preview | In a form | engine factories import from `@tweakpad/ui/text-editor/adapters/<engine>`; the main entry no longer exports them |
-| preview | Read-only and disabled | engine factories import from `@tweakpad/ui/text-editor/adapters/<engine>`; the main entry no longer exports them |
+| preview | Text editor | engine factories import from `@tweakpad/ui/text-editor/adapters/<engine>`; the main entry no longer exports them; user-authorized repair installs promised optional features, aligns form actions, bounds demos and removes unnecessary table imports |
+| preview | Classic editor | engine factories import from `@tweakpad/ui/text-editor/adapters/<engine>`; the main entry no longer exports them; user-authorized repair installs promised optional features, aligns form actions, bounds demos and removes unnecessary table imports |
+| preview | Node editor | engine factories import from `@tweakpad/ui/text-editor/adapters/<engine>`; the main entry no longer exports them; user-authorized repair installs promised optional features, aligns form actions, bounds demos and removes unnecessary table imports |
+| preview | Custom nodes | engine factories import from `@tweakpad/ui/text-editor/adapters/<engine>`; the main entry no longer exports them; user-authorized repair installs promised optional features, aligns form actions, bounds demos and removes unnecessary table imports |
+| preview | Markdown in and out | engine factories import from `@tweakpad/ui/text-editor/adapters/<engine>`; the main entry no longer exports them; user-authorized repair installs promised optional features, aligns form actions, bounds demos and removes unnecessary table imports |
+| preview | In a form | engine factories import from `@tweakpad/ui/text-editor/adapters/<engine>`; the main entry no longer exports them; user-authorized repair installs promised optional features, aligns form actions, bounds demos and removes unnecessary table imports |
+| preview | Read-only and disabled | engine factories import from `@tweakpad/ui/text-editor/adapters/<engine>`; the main entry no longer exports them; user-authorized repair installs promised optional features, aligns form actions, bounds demos and removes unnecessary table imports |
+| preview | Custom blocks | User-authorized repair: bounded direct editor host, restore existing callout/embed sample content and omit unnecessary engine table modules |
+| preview | Image upload | User-authorized repair: bounded direct editor host and abort/resource cleanup |
+| preview | Core editor | User-authorized repair: bounded direct editor host and minimal engine setup |
+| prose | A classic editor keeps its tools | Replace obsolete imageUpload API with current feature factory |
+| prose | A node editor has no fixed toolbar | Explicitly require the optional feature factories |
+| prose | `nodes` adds blocks | Explicitly require the suggestions feature for mentions |

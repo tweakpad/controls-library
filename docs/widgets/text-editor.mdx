@@ -8,7 +8,7 @@ tag: tp-text-editor
   width="7"
   title="Text editor"
   align="stretch"
-  code={`<tp-stack  gap="3">
+  code={`<tp-stack gap="3">
   <tp-toggle-group
     id="text-editor-engine"
     label="Engine"
@@ -123,8 +123,6 @@ import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';
 import * as starterKit from '@tiptap/starter-kit';
 import * as list from '@tiptap/extension-list';
-import * as table from '@tiptap/extension-table';
-import * as tables from '@tiptap/pm/tables';
 import { createTiptapEngine } from '@tweakpad/ui/text-editor/adapters/tiptap';
 
 editor.engine = createTiptapEngine({
@@ -172,7 +170,7 @@ Each adapter is its own entry, `createTiptapEngine` in `@tweakpad/ui/text-editor
 
 ### Classic editor
 
-A classic editor keeps its tools in one toolbar above the document. Turn off the node surfaces in `layout` and list the toolbar groups you want; `tools` adds your own, such as this date stamp. The image tool stays disabled until `imageUpload` uploads the file and resolves its address.
+A classic editor keeps its tools in one toolbar above the document. Turn off the node surfaces in `layout` and list the toolbar groups you want; `tools` adds your own, such as this date stamp. The link tool comes from `textEditorLinks()`. For image uploads, install `textEditorImages({ upload })`, as in [Image upload](#image-upload).
 
 <Preview
   width="6"
@@ -184,10 +182,9 @@ import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';
 import * as starterKit from '@tiptap/starter-kit';
 import * as list from '@tiptap/extension-list';
-import * as table from '@tiptap/extension-table';
-import * as tables from '@tiptap/pm/tables';
 import { defineTextEditorTool } from '@tweakpad/ui/text-editor';
 import { createTiptapEngine } from '@tweakpad/ui/text-editor/adapters/tiptap';
+import { textEditorLinks } from '@tweakpad/ui/widgets';
 
 const insertDate = defineTextEditorTool({
   id: 'insert-date',
@@ -202,6 +199,7 @@ const insertDate = defineTextEditorTool({
 
 await customElements.whenDefined('tp-text-editor');
 const editor = document.querySelector('#text-editor-classic');
+editor.features = [textEditorLinks()];
 editor.tools = [insertDate];
 editor.layout = {
   toolbar: [['undo', 'redo'], ['bold', 'italic', 'link'], ['bullet-list', 'ordered-list'], ['insert-date']],
@@ -218,7 +216,7 @@ editor.defaultValue = [
   '<li><p>Deliveries for dock B arrive before noon.</p></li>',
   '</ul>',
 ].join('');
-editor.engine = createTiptapEngine({ core, state, history, starterKit, list, table, tables });`}
+editor.engine = createTiptapEngine({ core, state, history, starterKit, list });`}
 />
 
 Every control of the editor runs a tool. The fixed toolbar, the selection toolbar, the slash menu, the turn-into menu, the block menu and the row, column and cell menus of tables each place tools by identifier, and `layout` says which tools each of them shows, as groups of identifiers: `toolbar`, `selectionToolbar`, `slash`, `turnInto`, `blockMenu`, `tableRow`, `tableColumn` and `tableCell`. A key you leave out keeps its default groups and an empty list turns the surface off. `suggestions` names the suggestion lists that typing opens, only `slash` by default, and `gutter: false` hides the block gutter. Reading `layout` returns the effective layout, a good starting point for your own:
@@ -251,7 +249,7 @@ editor.layout = { toolbar: [...editor.layout.toolbar, ['insert-date']] };`} lang
 
 ### Node editor
 
-A node editor has no fixed toolbar: every block is a node. Point at a block for its gutter, whose grip drags the block or opens its menu; type `/` for the slash menu; select text for the selection toolbar. Set `layout.toolbar` to an empty list to get this style.
+A node editor has no fixed toolbar: every block is a node. Point at a block for its gutter, whose grip drags the block or opens its menu; type `/` for the slash menu; select text for the selection toolbar. Install the block, suggestion and selection-toolbar features, then set `layout.toolbar` to an empty list to get this style.
 
 <Preview
   width="7"
@@ -263,12 +261,12 @@ import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';
 import * as starterKit from '@tiptap/starter-kit';
 import * as list from '@tiptap/extension-list';
-import * as table from '@tiptap/extension-table';
-import * as tables from '@tiptap/pm/tables';
 import { createTiptapEngine } from '@tweakpad/ui/text-editor/adapters/tiptap';
+import { textEditorBlocks, textEditorSuggestions, textEditorSelectionToolbar } from '@tweakpad/ui/widgets';
 
 await customElements.whenDefined('tp-text-editor');
 const editor = document.querySelector('#text-editor-nodes');
+editor.features = [textEditorBlocks(), textEditorSuggestions(), textEditorSelectionToolbar()];
 // Nodes: no fixed toolbar; the gutter, slash menu, selection toolbar and block menu stay.
 editor.layout = { toolbar: [] };
 editor.defaultValue = [
@@ -282,7 +280,7 @@ editor.defaultValue = [
   '</ul>',
   '<blockquote><p>Bring a second logger next time; the old one drifts in cold water.</p></blockquote>',
 ].join('');
-editor.engine = createTiptapEngine({ core, state, history, starterKit, list, table, tables });`}
+editor.engine = createTiptapEngine({ core, state, history, starterKit, list });`}
 />
 
 Selecting text, or a range of table cells, shows a toolbar over the selection with the tools of `layout.selectionToolbar`. It shows at once and follows the selection without animating.
@@ -312,7 +310,7 @@ The block menu (`layout.blockMenu`) turns the selected blocks into another kind,
 
 Dragging a grip by more than 4 pixels moves its block, or the whole block selection when the block belongs to it; a list item moves with its nested items. A line marks where the blocks drop, before or after the block under the pointer; moving the pointer sideways nests a list item under the list item above it or brings it out again. Only list items nest. Escape cancels the drag. A drop is one `tp-text-editor-request` with reason `drag`; cancel it to keep the document as it is.
 
-Typing `/` opens the slash menu with the tools of `layout.slash`: block kinds, lists, tables, images and dividers by default, then every tool that joins the `*` entry. The trigger of a custom inline node opens its own list once `layout.suggestions` names it. The lists leave focus in the text: the arrow keys move through their items, and Enter or Tab inserts the highlighted one.
+Typing `/` opens the slash menu with the tools of `layout.slash`: block kinds, lists, tables, images and dividers by default, then every tool that joins the `*` entry. The trigger of a custom inline node opens its own list once the suggestions feature is installed and `layout.suggestions` names it. The lists leave focus in the text: the arrow keys move through their items, and Enter or Tab inserts the highlighted one.
 
 ### Custom nodes
 
@@ -328,10 +326,9 @@ import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';
 import * as starterKit from '@tiptap/starter-kit';
 import * as list from '@tiptap/extension-list';
-import * as table from '@tiptap/extension-table';
-import * as tables from '@tiptap/pm/tables';
 import { defineTextEditorBlock, defineTextEditorInline } from '@tweakpad/ui/text-editor';
 import { createTiptapEngine } from '@tweakpad/ui/text-editor/adapters/tiptap';
+import { textEditorBlocks, textEditorSuggestions, textEditorSelectionToolbar } from '@tweakpad/ui/widgets';
 
 const info = {
   viewBox: '0 0 24 24',
@@ -370,6 +367,7 @@ const mention = defineTextEditorInline({
 
 await customElements.whenDefined('tp-text-editor');
 const editor = document.querySelector('#text-editor-custom-nodes');
+editor.features = [textEditorBlocks(), textEditorSuggestions(), textEditorSelectionToolbar()];
 editor.nodes = [callout, mention];
 editor.layout = { toolbar: [], suggestions: ['slash', 'mention'] };
 editor.defaultValue = [
@@ -384,7 +382,7 @@ editor.defaultValue = [
   '</ul>',
   '<aside data-type="callout" data-tone="tip">The spare fenders are in locker 3.</aside>',
 ].join('');
-editor.engine = createTiptapEngine({ core, state, history, starterKit, list, table, tables });`}
+editor.engine = createTiptapEngine({ core, state, history, starterKit, list });`}
 />
 
 `defineTextEditorBlock()` defines a block, a textblock (`content: 'inline'`) or an atom (`content: 'none'`), and `defineTextEditorInline()` an inline atom inside text. Assign the definitions to `nodes`; a change remounts the engine and keeps the content.
@@ -398,16 +396,15 @@ An atom renders through its `view(host, attrs)`, which may return a cleanup func
 An inline node with `suggest` opens a list when its `trigger` character is typed. Its `source` receives `{ query, signal }` and returns the matching items, or a promise of them; a newer query, or the list closing, aborts the previous call through its signal. `label` names an item in the list and `attrs` turns the chosen item into the node's attributes.
 
 <Preview
+  width="7"
   title="Custom blocks"
   align="stretch"
-  code={`<div id="text-editor-custom-blocks"><tp-text-editor label="Mooring notes"></tp-text-editor></div>`}
+  code={`<tp-text-editor id="text-editor-custom-blocks" label="Mooring notes"></tp-text-editor>`}
   script={`import * as core from '@tiptap/core';
 import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';
 import * as starterKit from '@tiptap/starter-kit';
 import * as list from '@tiptap/extension-list';
-import * as table from '@tiptap/extension-table';
-import * as tables from '@tiptap/pm/tables';
 import { createTiptapEngine } from '@tweakpad/ui/text-editor/adapters/tiptap';
 import { defineTextEditorBlock } from '@tweakpad/ui/text-editor';
 import {
@@ -419,7 +416,7 @@ import { infoIcon } from '@tweakpad/ui/icons/info';
 
 /** A new editing engine from the installed Tiptap modules; every editor needs its own. */
 function createEngine() {
-  return createTiptapEngine({ core, state, history, starterKit, list, table, tables });
+  return createTiptapEngine({ core, state, history, starterKit, list });
 }
 
 /**
@@ -493,12 +490,18 @@ const embedBlock = defineTextEditorBlock({
 
 /** The blocks join the slash menu, and the block gutter moves and edits them like any block. */
 function setupCustomBlocks(editor) {
+  editor.defaultValue = [
+    '<h2>Mooring check</h2>',
+    '<aside data-type="callout" data-tone="warning">Wait for slack water before you board the dinghy.</aside>',
+    '<p>The tide table below is the harbour office page for this week.</p>',
+    '<figure data-type="embed" data-src="/pages/tide-table.html" data-title="Harbour tide table"></figure>',
+  ].join('');
   editor.nodes = [calloutBlock, embedBlock];
   editor.features = [textEditorBlocks(), textEditorSuggestions()];
   editor.engine = createEngine();
 }
 
-setupCustomBlocks(document.querySelector('#text-editor-custom-blocks tp-text-editor'));`}
+setupCustomBlocks(document.querySelector('#text-editor-custom-blocks'));`}
 />
 
 ### Content and formats
@@ -509,7 +512,7 @@ setupCustomBlocks(document.querySelector('#text-editor-custom-blocks tp-text-edi
   width="7"
   title="Markdown in and out"
   align="stretch"
-  code={`<tp-stack  gap="3">
+  code={`<tp-stack gap="3">
   <tp-text-editor id="text-editor-markdown" label="Visit log" format="markdown"></tp-text-editor>
   <tp-code-block id="text-editor-markdown-output" language="markdown" wrap></tp-code-block
   >
@@ -519,8 +522,6 @@ import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';
 import * as starterKit from '@tiptap/starter-kit';
 import * as list from '@tiptap/extension-list';
-import * as table from '@tiptap/extension-table';
-import * as tables from '@tiptap/pm/tables';
 import { createTiptapEngine } from '@tweakpad/ui/text-editor/adapters/tiptap';
 
 await customElements.whenDefined('tp-text-editor');
@@ -540,7 +541,7 @@ editor.defaultValue = [
 const show = () => (output.code = editor.getContent('markdown'));
 editor.addEventListener('tp-text-editor-ready', show);
 editor.addEventListener('tp-value-change', show);
-editor.engine = createTiptapEngine({ core, state, history, starterKit, list, table, tables });`}
+editor.engine = createTiptapEngine({ core, state, history, starterKit, list });`}
 />
 
 `format` is `html` (the default), `markdown`, `text` or `json`: the format of `defaultValue` and of the form value, and the default format of `getContent()` and `setContent()`. HTML, Markdown and text are portable: the library's converters produce them identically for every engine. `json` is the engine's own format; it keeps everything the engine stores, and only that engine reads it.
@@ -567,9 +568,9 @@ With `name`, the editor submits its document in `format`, and form reset restore
         format="markdown"
         placeholder="What changed in this release?"></tp-text-editor>
     </tp-field>
-    <tp-stack direction="row" gap="2">
-      <tp-button type="submit">Save notes</tp-button>
+    <tp-stack direction="row" gap="2" justify="end" wrap="wrap">
       <tp-button type="reset" variant="outline">Reset</tp-button>
+      <tp-button type="submit">Save notes</tp-button>
     </tp-stack>
     <output
       id="text-editor-form-output"
@@ -582,8 +583,6 @@ import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';
 import * as starterKit from '@tiptap/starter-kit';
 import * as list from '@tiptap/extension-list';
-import * as table from '@tiptap/extension-table';
-import * as tables from '@tiptap/pm/tables';
 import { createTiptapEngine } from '@tweakpad/ui/text-editor/adapters/tiptap';
 
 await customElements.whenDefined('tp-text-editor');
@@ -597,7 +596,7 @@ editor.defaultValue = [
   '- Drafts save offline.',
   '- Exports keep their column widths.',
 ].join('\\n');
-editor.engine = createTiptapEngine({ core, state, history, starterKit, list, table, tables });
+editor.engine = createTiptapEngine({ core, state, history, starterKit, list });
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   output.textContent = 'Saved:\\n' + new FormData(form).get('notes');
@@ -627,8 +626,6 @@ import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';
 import * as starterKit from '@tiptap/starter-kit';
 import * as list from '@tiptap/extension-list';
-import * as table from '@tiptap/extension-table';
-import * as tables from '@tiptap/pm/tables';
 import { createTiptapEngine } from '@tweakpad/ui/text-editor/adapters/tiptap';
 
 const content = {
@@ -646,7 +643,7 @@ await customElements.whenDefined('tp-text-editor');
 for (const editor of document.querySelectorAll('#text-editor-states tp-text-editor')) {
   editor.layout = { selectionToolbar: [], blockMenu: [], suggestions: [], gutter: false };
   editor.defaultValue = content[editor.label].join('');
-  editor.engine = createTiptapEngine({ core, state, history, starterKit, list, table, tables });
+  editor.engine = createTiptapEngine({ core, state, history, starterKit, list });
 }`}
 />
 
@@ -749,6 +746,29 @@ Grips beside the current row and column open the row and column menus (`layout.t
 
 Alt+F10 in a table moves focus to its controls: the cell handle when cells are selected, else the column grip. Tab and Shift+Tab move through the grips, the handle, the boundary and the add buttons, and Escape returns to the text with its selection. `stickyHeaders: true` keeps a copy of the header row in view while the rest of a long table scrolls.
 
+
+<Preview
+  width="7"
+  title="Tables"
+  align="stretch"
+  code={`<tp-text-editor id="text-editor-tables" label="Survey counts"></tp-text-editor>`}
+  script={`import * as core from '@tiptap/core';
+import * as state from '@tiptap/pm/state';
+import * as history from '@tiptap/pm/history';
+import * as starterKit from '@tiptap/starter-kit';
+import * as list from '@tiptap/extension-list';
+import { createTiptapEngine } from '@tweakpad/ui/text-editor/adapters/tiptap';
+import * as table from '@tiptap/extension-table';
+import * as tables from '@tiptap/pm/tables';
+import { textEditorTables } from '@tweakpad/ui/widgets';
+
+await customElements.whenDefined('tp-text-editor');
+const editor = document.querySelector('#text-editor-tables');
+editor.features = [textEditorTables({ stickyHeaders: true })];
+editor.defaultValue = '<table><thead><tr><th><p>Pool</p></th><th><p>Anemones</p></th></tr></thead><tbody><tr><td><p>North</p></td><td><p>42</p></td></tr><tr><td><p>South</p></td><td><p>28</p></td></tr></tbody></table>';
+editor.engine = createTiptapEngine({ core, state, history, starterKit, list, table, tables });`}
+/>
+
 ### Images
 
 The image tool inserts an image block without a source yet, which shows a File upload in its place: drop an image on it or click it to choose one. The file is checked against `accept` (`image/*` by default, in File upload's `accept` forms) and `maxFileSize` (bytes, or text with a unit such as `'10MB'`; no limit by default), then passed to `upload` with an abort signal and a progress callback, its progress shown. Once the hook resolves the image's source, the block becomes the image; a source outside the image policy, such as a `data:` URL, is reported and leaves the block waiting.
@@ -828,55 +848,78 @@ Under a strict content-security policy, the engine styles follow the library's `
 The images feature hands each new, pasted or dropped image file to `upload` with an abort signal and a progress callback; the image block shows the upload until the hook resolves its URL. `accept` and `maxFileSize` limit the files.
 
 <Preview
+  width="7"
   title="Image upload"
   align="stretch"
-  code={`<div id="text-editor-images"><tp-text-editor label="Survey photos"></tp-text-editor></div>`}
+  code={`<tp-text-editor id="text-editor-images" label="Survey photos"></tp-text-editor>`}
   script={`import * as core from '@tiptap/core';
 import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';
 import * as starterKit from '@tiptap/starter-kit';
 import * as list from '@tiptap/extension-list';
-import * as table from '@tiptap/extension-table';
-import * as tables from '@tiptap/pm/tables';
 import { createTiptapEngine } from '@tweakpad/ui/text-editor/adapters/tiptap';
 import { textEditorImages } from '@tweakpad/ui/widgets';
 
-/** A new editing engine from the installed Tiptap modules; every editor needs its own. */
 function createEngine() {
-  return createTiptapEngine({ core, state, history, starterKit, list, table, tables });
+  return createTiptapEngine({ core, state, history, starterKit, list });
 }
 
-/**
- * Sends the file to your storage and resolves the stored image's URL. This one stands in for it:
- * it reports progress in eight steps, stops when the upload is aborted and keeps the file in the page.
- */
-function upload(file, { signal, onProgress }) {
-  return new Promise((resolve, reject) => {
-    const total = Math.max(file.size, 1);
-    let sent = 0;
-    const timer = setInterval(() => {
-      sent = Math.min(total, sent + Math.ceil(total / 8));
-      onProgress(sent, total);
-      if (sent < total) return;
-      clearInterval(timer);
-      resolve(URL.createObjectURL(file));
-    }, 200);
-    signal.addEventListener('abort', () => {
-      clearInterval(timer);
-      reject(signal.reason);
-    });
-  });
-}
-
-/** The image tool, and pasted or dropped images: PNG, JPEG or WebP files up to 5 MB. */
+/** The image tool with a simulated upload, limited to PNG, JPEG and WebP up to 5 MB. */
 function setupImageUploads(editor) {
+  const urls = new Set();
+  const page = editor.ownerDocument.defaultView;
+  const release = () => {
+    observer.disconnect();
+    page.removeEventListener('pagehide', leave);
+    for (const url of urls) URL.revokeObjectURL(url);
+    urls.clear();
+  };
+  const leave = (event) => {
+    // A cached page still needs its images when the user returns.
+    if (!event.persisted) release();
+  };
+  const observer = new MutationObserver(() => {
+    if (!editor.isConnected) release();
+  });
+
+  /** Simulate storage: report progress, stop on abort and retain the image while the demo lives. */
+  function upload(file, { signal, onProgress }) {
+    return new Promise((resolve, reject) => {
+      if (signal.aborted) {
+        reject(signal.reason);
+        return;
+      }
+      const total = Math.max(file.size, 1);
+      let step = 0;
+      const abort = () => {
+        clearInterval(timer);
+        reject(signal.reason);
+      };
+      const timer = setInterval(() => {
+        const sent = Math.ceil(total * ++step / 8);
+        onProgress(sent, total);
+        if (signal.aborted || step < 8) return;
+        clearInterval(timer);
+        signal.removeEventListener('abort', abort);
+        const url = URL.createObjectURL(file);
+        urls.add(url);
+        // Observe removal only after an upload creates a resource that needs cleanup.
+        observer.observe(editor.ownerDocument, { childList: true, subtree: true });
+        page.addEventListener('pagehide', leave);
+        resolve(url);
+      }, 200);
+      signal.addEventListener('abort', abort, { once: true });
+    });
+  }
+
   editor.features = [
     textEditorImages({ upload, accept: 'image/png,image/jpeg,image/webp', maxFileSize: '5MB' }),
   ];
   editor.engine = createEngine();
 }
 
-setupImageUploads(document.querySelector('#text-editor-images tp-text-editor'));`}
+await customElements.whenDefined('tp-text-editor');
+setupImageUploads(document.querySelector('#text-editor-images'));`}
 />
 
 ### Core editor
@@ -884,22 +927,42 @@ setupImageUploads(document.querySelector('#text-editor-images tp-text-editor'));
 No features: an engine is all the editor needs. The fixed toolbar holds history, block kinds, marks, colors and alignment, and the page loads none of the feature code.
 
 <Preview
+  width="7"
   title="Core editor"
   align="stretch"
-  code={`<div id="text-editor-core"><tp-text-editor label="Plain notes"></tp-text-editor></div>`}
+  code={`<tp-text-editor id="text-editor-core" label="Plain notes"></tp-text-editor>`}
   script={`import * as core from '@tiptap/core';
 import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';
 import * as starterKit from '@tiptap/starter-kit';
 import * as list from '@tiptap/extension-list';
-import * as table from '@tiptap/extension-table';
-import * as tables from '@tiptap/pm/tables';
 import { createTiptapEngine } from '@tweakpad/ui/text-editor/adapters/tiptap';
 
-/** A new editing engine from the installed Tiptap modules; every editor needs its own. */
-function createEngine() {
-  return createTiptapEngine({ core, state, history, starterKit, list, table, tables });
-}
+await customElements.whenDefined('tp-text-editor');
+document.querySelector('#text-editor-core').engine = createTiptapEngine({ core, state, history, starterKit, list });`}
+/>
 
-document.querySelector('#text-editor-core tp-text-editor').engine = createEngine();`}
+### Selection toolbar
+
+Select text to show its formatting tools. This editor installs only the selection toolbar and links features, with no fixed toolbar or block gutter.
+
+<Preview
+  width="6"
+  title="Selection toolbar"
+  align="stretch"
+  code={`<tp-text-editor id="text-editor-selection" label="Review notes"></tp-text-editor>`}
+  script={`import * as core from '@tiptap/core';
+import * as state from '@tiptap/pm/state';
+import * as history from '@tiptap/pm/history';
+import * as starterKit from '@tiptap/starter-kit';
+import * as list from '@tiptap/extension-list';
+import { createTiptapEngine } from '@tweakpad/ui/text-editor/adapters/tiptap';
+import { textEditorSelectionToolbar, textEditorLinks } from '@tweakpad/ui/widgets';
+
+await customElements.whenDefined('tp-text-editor');
+const editor = document.querySelector('#text-editor-selection');
+editor.features = [textEditorSelectionToolbar(), textEditorLinks()];
+editor.layout = { toolbar: [] };
+editor.defaultValue = '<p>Select a few words to format them or add a link. Press Alt+F10 to reach the selection toolbar.</p>';
+editor.engine = createTiptapEngine({ core, state, history, starterKit, list });`}
 />
