@@ -5,9 +5,10 @@ tag: tp-native-select
 ---
 
 <Preview
+  width="3"
   title="Native select"
   align="stretch"
-  code={`<tp-field label="Region" description="Where your workspace data is stored." style="max-inline-size:22rem">
+  code={`<tp-field label="Region" description="Where your workspace data is stored.">
   <tp-native-select name="region" default-value="eu-west">
     <optgroup label="Europe">
       <option value="eu-west">Ireland (eu-west-1)</option>
@@ -34,9 +35,10 @@ Author plain `option` and `optgroup` children and the component mirrors them int
 `placeholder` adds a disabled empty first option, so nothing is chosen until the person picks. Add `required` and the empty value fails validation on submit.
 
 <Preview
+  width="3"
   title="Placeholder"
   align="stretch"
-  code={`<tp-field label="Team size" style="max-inline-size:22rem">
+  code={`<tp-field label="Team size">
   <tp-native-select name="team-size" placeholder="Select a range">
     <option value="1-10">1–10 people</option>
     <option value="11-50">11–50 people</option>
@@ -51,8 +53,10 @@ Author plain `option` and `optgroup` children and the component mirrors them int
 `size` sets the control height to match Input and Button. It is independent of the native listbox row count.
 
 <Preview
+  width="1"
+  align="stretch"
   title="Sizes"
-  code={`<tp-stack style="inline-size: 14rem" gap="3">
+  code={`<tp-stack  gap="3">
   <tp-native-select size="sm" label="Sort" default-value="recent">
     <option value="recent">Most recent</option>
     <option value="name">Name</option>
@@ -71,9 +75,10 @@ Author plain `option` and `optgroup` children and the component mirrors them int
 `multiple` renders the native multi-selection listbox and submits one entry per selected value, in option order. Set the value as an array through the `value` property.
 
 <Preview
+  width="3"
   title="Multiple"
   align="stretch"
-  code={`<tp-field label="Notify on" description="Hold Ctrl or ⌘ to select several." style="max-inline-size:22rem">
+  code={`<tp-field label="Notify on" description="Hold Ctrl or ⌘ to select several.">
   <tp-native-select name="events" multiple>
     <option value="deploy" selected>Deploy finished</option>
     <option value="failed" selected>Build failed</option>
@@ -88,9 +93,10 @@ Author plain `option` and `optgroup` children and the component mirrors them int
 Native Select participates in forms like Input: it submits its `name`, resets to its default and restores on navigation. Listen for `tp-value-change` to react to changes.
 
 <Preview
+  width="3"
   title="Form value"
   align="stretch"
-  code={`<form id="native-select-form" style="max-inline-size: 22rem">
+  code={`<form id="native-select-form">
   <tp-stack gap="3">
     <tp-field label="Billing cycle">
       <tp-native-select name="cycle" default-value="monthly">
@@ -100,8 +106,7 @@ Native Select participates in forms like Input: it submits its `name`, resets to
     </tp-field>
     <output
       id="native-select-output"
-      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
-      >cycle=monthly</output
+      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)">cycle=monthly</output
     >
   </tp-stack>
 </form>`}
@@ -119,9 +124,10 @@ form.addEventListener('tp-value-change', () => {
 Set `value` to own the selection and accept each proposal in `onValueChange` by assigning `event.detail.value`. Leave `value` unchanged to reject a pick; the native picker snaps back to the committed option. Controlled values absent from the options have no native selection and no submitted entry.
 
 <Preview
+  width="3"
   title="Controlled value"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 22rem" gap="3">
+  code={`<tp-stack  gap="3">
   <tp-field label="Seat limit" description="18 members are active in this workspace.">
     <tp-native-select id="native-select-seats" value="25">
       <option value="10">10 seats — \$96/mo</option>
@@ -131,8 +137,7 @@ Set `value` to own the selection and accept each proposal in `onValueChange` by 
   </tp-field>
   <output
     id="native-select-seats-note"
-    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
-    >Current plan: 25 seats.</output
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)">Current plan: 25 seats.</output
   >
 </tp-stack>`}
   script={`const select = document.querySelector('#native-select-seats');
@@ -153,9 +158,10 @@ select.onValueChange = (event) => {
 ### States
 
 <Preview
+  width="3"
   title="Disabled, read-only and invalid"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 22rem" gap="4">
+  code={`<tp-stack  gap="4">
   <tp-field label="Plan" disabled>
     <tp-native-select default-value="team">
       <option value="team">Team</option>

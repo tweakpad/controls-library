@@ -154,7 +154,6 @@ const meta = {
   },
   render: (args) =>
     html`<tp-image
-      style="max-inline-size: 40rem"
       .ratio=${args.ratio}
       .fit=${args.fit}
       .placeholder=${args.placeholder}

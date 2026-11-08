@@ -100,17 +100,16 @@ pagination.addEventListener('tp-value-change', (event) => {
 Pagination doesn't know about page size. Put a Select beside it, recompute `pages` when the size changes and send the reader back to page 1.
 
 <Preview
+  width="7"
   title="Rows per page"
   align="stretch"
   code={`<tp-stack
   id="pagination-rows"
-  style="max-inline-size: 40rem; margin-inline: auto; inline-size: 100%"
   direction="row"
   gap="4"
   align="center"
   justify="space-between"
-  wrap="wrap"
->
+  wrap="wrap">
   <tp-field label="Rows per page" orientation="horizontal">
     <tp-select default-value="25">
       <option value="10">10</option>
@@ -119,8 +118,7 @@ Pagination doesn't know about page size. Put a Select beside it, recompute `page
       <option value="100">100</option>
     </tp-select>
   </tp-field>
-  <output style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
-    >1–25 of 340 orders</output
+  <output style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)">1–25 of 340 orders</output
   >
   <tp-pagination label="Orders" page="1" pages="14"></tp-pagination>
 </tp-stack>`}

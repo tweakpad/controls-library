@@ -18,7 +18,7 @@ const row = (content: string) =>
 export const citationExamples = [
   markupExample(
     'Inline citations',
-    `<p style="max-inline-size:36rem">
+    `<p >
   Tidal turbines produce power on a timetable set by the moon
   <tp-citation href="https://tides.example/turbines" src="${tides}">tides.example</tp-citation>,
   so grid operators can plan storage weeks ahead
@@ -28,7 +28,7 @@ export const citationExamples = [
   ),
   markupExample(
     'Source preview',
-    `<p style="max-inline-size:36rem">
+    `<p >
   Turbine blades now last about twenty years underwater
   <tp-citation
     href="https://tides.example/turbines"
@@ -41,7 +41,7 @@ export const citationExamples = [
   ),
   markupExample(
     'Numbered references',
-    `<article style="max-inline-size:36rem"><tp-stack gap="4">
+    `<article ><tp-stack gap="4">
   <p style="margin:0">
     Output is predictable<tp-citation source="tidal-1" href="#tidal-1" superscript></tp-citation>
     and storage needs stay small<tp-citation source="tidal-2" href="#tidal-2" superscript></tp-citation>,

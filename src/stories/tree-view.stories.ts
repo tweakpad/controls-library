@@ -61,7 +61,6 @@ const meta = {
   render: (args) => html`
     <tp-tree-view
       label=${args.label}
-      style="max-inline-size: 18rem"
       selection-mode=${args.selectionMode}
       ?checkbox-selection=${args.checkboxSelection}
       ?selection-propagation=${args.selectionPropagation}

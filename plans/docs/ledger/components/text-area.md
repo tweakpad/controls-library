@@ -20,3 +20,7 @@
 | preview | Content and fixed sizing | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Character count | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Disabled and read-only | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Text area | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Mono | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Error | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

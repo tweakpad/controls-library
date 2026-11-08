@@ -38,7 +38,7 @@ export function PreviewCanvas({ preview }) {
     : undefined;
   return (
     <div
-      className="tp-docs-example-preview"
+      className={`tp-docs-example-preview${preview.width ? ` demo-frame demo-w-${preview.width}` : ''}`}
       data-align={preview.align || 'center'}
       ref={host}
       style={style}
@@ -50,7 +50,7 @@ export function Preview(props) {
   const context = React.useContext(LibraryDocContext);
   const preview = React.useMemo(
     () => props,
-    [props.code, props.script, props.viewport, props.align],
+    [props.code, props.script, props.viewport, props.align, props.width],
   );
   const components = React.useMemo(
     () => ({ Story: () => <PreviewCanvas preview={preview} /> }),

@@ -6,8 +6,10 @@ parts: [tp-tree-item]
 ---
 
 <Preview
+  width="1"
+  align="stretch"
   title="Tree view"
-  code={`<tp-tree-view id="tree-view-hero" label="Project files" default-expanded='["src", "components"]' default-value='["button.ts"]' style="inline-size:16rem">
+  code={`<tp-tree-view id="tree-view-hero" label="Project files" default-expanded='["src", "components"]' default-value='["button.ts"]'>
   <tp-tree-item value="src">
     <tp-icon slot="leading" data-icon="folder"></tp-icon>src
     <tp-tree-item value="components">
@@ -52,8 +54,10 @@ Forms: with `name`, each selected identifier is submitted as one entry, in tree 
 Multiple: pressing or Space toggles; Shift extends from the anchor; Control/Command toggles without moving the anchor; Shift+Arrow extends while moving; Shift+Space selects the range; Control+Shift+Home/End selects to an end; Control+A selects every visible enabled item.
 
 <Preview
+  width="2"
+  align="stretch"
   title="Permissions"
-  code={`<tp-tree-view label="Permissions" selection-mode="multiple" checkbox-selection selection-propagation default-expanded='["billing", "projects"]' default-value='["invoices", "create", "archive"]' style="inline-size:18rem">
+  code={`<tp-tree-view label="Permissions" selection-mode="multiple" checkbox-selection selection-propagation default-expanded='["billing", "projects"]' default-value='["invoices", "create", "archive"]'>
   <tp-tree-item value="billing">
     Billing
     <tp-tree-item value="invoices">View invoices</tp-tree-item>
@@ -109,8 +113,10 @@ tree.addEventListener('tp-action', (event) => {
 By default pressing a row toggles it. `expansion-trigger="indicator"` reserves the row press for selection and expands only from the chevron, which suits folders that are also selectable.
 
 <Preview
+  width="1"
+  align="stretch"
   title="Chevron only"
-  code={`<tp-tree-view label="Locations" expansion-trigger="indicator" default-expanded='["europe"]' default-value='["europe"]' style="inline-size:16rem">
+  code={`<tp-tree-view label="Locations" expansion-trigger="indicator" default-expanded='["europe"]' default-value='["europe"]'>
   <tp-tree-item value="europe">
     Europe
     <tp-tree-item value="berlin">Berlin</tp-tree-item>
@@ -398,8 +404,10 @@ document.querySelector('#tree-view-methods-reveal').addEventListener('click', ()
 ### Size and guides
 
 <Preview
+  width="1"
+  align="stretch"
   title="Small, no guides"
-  code={`<tp-tree-view label="Settings" size="sm" guides="none" default-expanded='["account"]' style="inline-size:14rem">
+  code={`<tp-tree-view label="Settings" size="sm" guides="none" default-expanded='["account"]'>
   <tp-tree-item value="account">
     Account
     <tp-tree-item value="profile">Profile</tp-tree-item>

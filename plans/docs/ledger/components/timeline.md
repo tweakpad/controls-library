@@ -25,3 +25,10 @@
 | --- | --- | --- |
 
 | preview | Changelog | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Timeline | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Step tracker | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Numbered steps | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Expandable phases | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Conversation | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Explicit status | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

@@ -15,9 +15,7 @@ export const bubbleDefaults: BubbleArgs = {
   label: 'Reply',
 };
 export function renderBubbleExample(args: BubbleArgs = bubbleDefaults) {
-  return html`<tp-bubble-group
-    style="inline-size:100%;max-inline-size:calc(var(--tp-spacing) * 140);margin-inline:auto;padding-block:var(--tp-space-6)"
-  >
+  return html`<tp-bubble-group style="padding-block:var(--tp-space-6)">
     <tp-bubble label="Question">Can you send the updated design?</tp-bubble>
     <tp-bubble
       .variant=${args.variant}

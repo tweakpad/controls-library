@@ -30,3 +30,10 @@
 | Kind | A text | Reason |
 | --- | --- | --- |
 | preview | Headline, group and caption | Text motion was renamed Text split (`tp-mo-text-split`) |
+
+| preview | Image | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Fallbacks | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Loading placeholders | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Hover zoom | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Card hover | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Staggered group | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

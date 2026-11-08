@@ -70,7 +70,6 @@ const meta: Meta<FieldGroupStoryArgs> = {
         orientation=${args.orientation}
         .joined=${args.joined}
         label=${args.label}
-        style="max-inline-size: calc(var(--tp-spacing) * 80)"
       >
         <tp-input-group>
           <span slot="prefix">W</span>

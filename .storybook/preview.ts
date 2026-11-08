@@ -144,13 +144,18 @@ const preview = definePreview({
     (story, context) => {
       const doc = (context.parameters.docs as { library?: LibraryDoc } | undefined)?.library;
       const hero = doc?.page.hero;
-      if (!hero || context.name !== 'Default') return story();
+      const width = (context.parameters.demoWidth as string | undefined) ?? hero?.width;
+      const frameClass = `tp-docs-example-preview${width && /^[1-8]$/.test(width) ? ` demo-frame demo-w-${width}` : ''}`;
+      if (!hero || context.name !== 'Default')
+        return width
+          ? html`<div class=${frameClass} data-align="stretch">${story()}</div>`
+          : story();
       if (!sameArgs(context.args, context.initialArgs))
-        return html`<div class="tp-docs-example-preview" data-align=${hero.align ?? 'center'}>
+        return html`<div class=${frameClass} data-align=${hero.align ?? 'center'}>
           <div style=${`display:flow-root;${heroRootSizing(hero.code)}`}>${story()}</div>
         </div>`;
       return html`<div
-        class="tp-docs-example-preview"
+        class=${frameClass}
         data-align=${hero.align ?? 'center'}
         ${ref((host) => {
           if (!host || mountedHeroes.has(host)) return;

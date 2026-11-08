@@ -1,12 +1,12 @@
 # Use-case styles: results ranked by property usage
 
-Baseline commit: a5c449b29b122a64eb9bc4ebf0b88de2db16d741. Inventory of the current working-tree sources; uncommitted changes are included.
+Baseline commit: f5094b0362d9c2e3e164ee5c6171953fc7e7a128. Inventory of the current working-tree sources; uncommitted changes are included.
 Regenerate this single report with `node scripts/audit-use-case-styles.mjs` using the existing built docs parser.
 
 ## Scope and counting
 
-308 source files, 97 published MDX pages, 745 previews, 1877 styling sites.
-1612 static inline attributes contain **3413 CSS declarations across 107 properties**.
+308 source files, 97 published MDX pages, 745 previews, 1534 styling sites.
+1269 static inline attributes contain **2654 CSS declarations across 107 properties**.
 
 The ranking counts authored declarations in static inline attributes, not rendered instances or defects.
 Documentation and story copies count separately because each snippet needs review. Repeated declarations in one attribute count separately too.
@@ -24,28 +24,28 @@ Flags below are review candidates, not confirmed dependency defects. Never hide 
 
 | Rank | CSS property | Occurrences | Docs declarations | Story declarations | Source files | Unique values |
 | ---: | --- | ---: | ---: | ---: | ---: | ---: |
-| 1 | [max-inline-size](#property-1) | 420 | 393 | 27 | 91 | 25 |
-| 2 | [inline-size](#property-2) | 387 | 371 | 16 | 68 | 44 |
-| 3 | [margin-inline](#property-3) | 267 | 263 | 4 | 55 | 1 |
-| 4 | [color](#property-4) | 266 | 264 | 2 | 64 | 15 |
-| 5 | [margin](#property-5) | 217 | 209 | 8 | 39 | 8 |
-| 6 | [font-size](#property-6) | 211 | 205 | 6 | 59 | 15 |
-| 7 | [block-size](#property-7) | 179 | 166 | 13 | 26 | 32 |
-| 8 | [border-radius](#property-8) | 163 | 157 | 6 | 23 | 6 |
-| 9 | [text-align](#property-9) | 157 | 152 | 5 | 17 | 3 |
-| 10 | [display](#property-10) | 138 | 130 | 8 | 45 | 4 |
-| 11 | [padding](#property-11) | 124 | 111 | 13 | 20 | 12 |
-| 12 | [gap](#property-12) | 97 | 90 | 7 | 39 | 15 |
-| 13 | [background](#property-13) | 58 | 56 | 2 | 7 | 15 |
-| 14 | [border](#property-14) | 58 | 55 | 3 | 17 | 5 |
-| 15 | [margin-block](#property-15) | 57 | 54 | 3 | 6 | 6 |
-| 16 | [font-weight](#property-16) | 55 | 53 | 2 | 17 | 8 |
-| 17 | [grid-template-columns](#property-17) | 54 | 50 | 4 | 27 | 31 |
-| 18 | [overflow](#property-18) | 38 | 38 | 0 | 8 | 3 |
-| 19 | [position](#property-19) | 30 | 28 | 2 | 6 | 3 |
-| 20 | [aspect-ratio](#property-20) | 29 | 27 | 2 | 6 | 5 |
-| 21 | [line-height](#property-21) | 28 | 24 | 4 | 11 | 11 |
-| 22 | [flex](#property-22) | 23 | 20 | 3 | 9 | 8 |
+| 1 | [color](#property-1) | 266 | 264 | 2 | 64 | 15 |
+| 2 | [inline-size](#property-2) | 237 | 222 | 15 | 48 | 44 |
+| 3 | [margin](#property-3) | 217 | 209 | 8 | 39 | 7 |
+| 4 | [font-size](#property-4) | 211 | 205 | 6 | 59 | 15 |
+| 5 | [block-size](#property-5) | 179 | 166 | 13 | 26 | 32 |
+| 6 | [border-radius](#property-6) | 163 | 157 | 6 | 23 | 6 |
+| 7 | [text-align](#property-7) | 157 | 152 | 5 | 17 | 3 |
+| 8 | [display](#property-8) | 137 | 129 | 8 | 45 | 4 |
+| 9 | [padding](#property-9) | 124 | 111 | 13 | 20 | 12 |
+| 10 | [gap](#property-10) | 96 | 89 | 7 | 39 | 15 |
+| 11 | [background](#property-11) | 58 | 56 | 2 | 7 | 15 |
+| 12 | [border](#property-12) | 58 | 55 | 3 | 17 | 5 |
+| 13 | [margin-block](#property-13) | 57 | 54 | 3 | 6 | 6 |
+| 14 | [max-inline-size](#property-14) | 57 | 53 | 4 | 25 | 15 |
+| 15 | [font-weight](#property-15) | 55 | 53 | 2 | 17 | 8 |
+| 16 | [grid-template-columns](#property-16) | 54 | 50 | 4 | 27 | 31 |
+| 17 | [overflow](#property-17) | 38 | 38 | 0 | 8 | 3 |
+| 18 | [position](#property-18) | 30 | 28 | 2 | 6 | 3 |
+| 19 | [aspect-ratio](#property-19) | 29 | 27 | 2 | 6 | 5 |
+| 20 | [line-height](#property-20) | 28 | 24 | 4 | 11 | 11 |
+| 21 | [flex](#property-21) | 23 | 20 | 3 | 9 | 8 |
+| 22 | [margin-inline](#property-22) | 23 | 23 | 0 | 10 | 1 |
 | 23 | [min-block-size](#property-23) | 23 | 22 | 1 | 9 | 8 |
 | 24 | [align-items](#property-24) | 20 | 17 | 3 | 15 | 2 |
 | 25 | [box-sizing](#property-25) | 16 | 16 | 0 | 5 | 2 |
@@ -138,491 +138,327 @@ Each row retains the target element, use-case label, exact value and source loca
 
 <a id="property-1"></a>
 
-### 1. max-inline-size — 420 occurrences
+### 1. color — 266 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
-| 22rem | 72 |
-| 28rem | 43 |
-| 26rem | 41 |
-| 100% | 38 |
-| 24rem | 35 |
-| 36rem | 33 |
-| 20rem | 30 |
-| 40rem | 29 |
-| 32rem | 27 |
-| 30rem | 26 |
-| 44rem | 13 |
-| 34rem | 11 |
-| 18rem | 5 |
-| 48rem | 3 |
-| calc(var(--tp-spacing) * 100) | 3 |
-| calc(var(--tp-spacing) * 80) | 2 |
-| 12rem | 1 |
-| 16rem | 1 |
-| 64rem | 1 |
-| calc(var(--tp-spacing) * 120) | 1 |
-| calc(var(--tp-spacing) * 140) | 1 |
-| calc(var(--tp-spacing) * 150) | 1 |
-| calc(var(--tp-spacing) * 160) | 1 |
-| calc(var(--tp-spacing) * 200) | 1 |
-| calc(var(--tp-spacing) * 64) | 1 |
+| var(--tp-muted-foreground) | 214 |
+| transparent | 21 |
+| white | 12 |
+| inherit | 3 |
+| var(--tp-destructive) | 3 |
+| var(--tp-background) | 2 |
+| var(--tp-primary) | 2 |
+| var(--tp-success) | 2 |
+| #fafafa | 1 |
+| black | 1 |
+| var(--tp-chart-1) | 1 |
+| var(--tp-chart-2) | 1 |
+| var(--tp-chart-3) | 1 |
+| var(--tp-foreground) | 1 |
+| var(--tp-warning) | 1 |
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/accordion | Accordion | tp-accordion | 34rem | layout/geometry — minimize | [docs/components/accordion.mdx:11](../../docs/components/accordion.mdx#L11) |
-| components/accordion | Multiple open items | tp-accordion | 34rem | layout/geometry — minimize | [docs/components/accordion.mdx:67](../../docs/components/accordion.mdx#L67) |
-| components/accordion | Positional content | tp-accordion | 34rem | layout/geometry — minimize | [docs/components/accordion.mdx:90](../../docs/components/accordion.mdx#L90) |
-| components/accordion | Disabled item | tp-accordion | 34rem | layout/geometry — minimize | [docs/components/accordion.mdx:117](../../docs/components/accordion.mdx#L117) |
-| components/accordion | Line-by-line reveal | tp-accordion | 34rem | layout/geometry — minimize | [docs/components/accordion.mdx:137](../../docs/components/accordion.mdx#L137) |
-| components/alert | Alert | tp-alert | 36rem | layout/geometry — minimize | [docs/components/alert.mdx:10](../../docs/components/alert.mdx#L10) |
-| components/alert | Severity | tp-stack | 36rem | layout/geometry — minimize | [docs/components/alert.mdx:26](../../docs/components/alert.mdx#L26) |
-| components/alert | Title slot and actions | tp-alert | 36rem | layout/geometry — minimize | [docs/components/alert.mdx:51](../../docs/components/alert.mdx#L51) |
-| components/alert | Live update | tp-stack | 36rem | layout/geometry — minimize | [docs/components/alert.mdx:66](../../docs/components/alert.mdx#L66) |
-| components/aspect-ratio | Aspect ratio | tp-aspect-ratio | 36rem | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:10](../../docs/components/aspect-ratio.mdx#L10) |
-| components/aspect-ratio | One ratio, three widths | figure | 100% | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:47](../../docs/components/aspect-ratio.mdx#L47) |
-| components/aspect-ratio | One ratio, three widths | figure | 100% | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:69](../../docs/components/aspect-ratio.mdx#L69) |
-| components/aspect-ratio | One ratio, three widths | figure | 100% | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:91](../../docs/components/aspect-ratio.mdx#L91) |
-| components/aspect-ratio | Cover and contain | div | 36rem | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:123](../../docs/components/aspect-ratio.mdx#L123) |
-| components/attachment | Attachment | tp-stack | 26rem | layout/geometry — minimize | [docs/components/attachment.mdx:11](../../docs/components/attachment.mdx#L11) |
-| components/attachment | Statuses | tp-stack | 26rem | layout/geometry — minimize | [docs/components/attachment.mdx:52](../../docs/components/attachment.mdx#L52) |
-| components/attachment | Image cards | tp-attachment-group | 36rem | layout/geometry — minimize | [docs/components/attachment.mdx:92](../../docs/components/attachment.mdx#L92) |
-| components/attachment | Scrollable groups | tp-stack | 30rem | layout/geometry — minimize | [docs/components/attachment.mdx:115](../../docs/components/attachment.mdx#L115) |
-| components/attachment | Title and description only | tp-stack | 26rem | layout/geometry — minimize | [docs/components/attachment.mdx:281](../../docs/components/attachment.mdx#L281) |
-| components/attachment | Preview trigger, download and retry | tp-stack | 26rem | layout/geometry — minimize | [docs/components/attachment.mdx:308](../../docs/components/attachment.mdx#L308) |
-| components/attachment | Sizes | tp-stack | 26rem | layout/geometry — minimize | [docs/components/attachment.mdx:391](../../docs/components/attachment.mdx#L391) |
-| components/attachment | Remove event | tp-stack | 26rem | layout/geometry — minimize | [docs/components/attachment.mdx:419](../../docs/components/attachment.mdx#L419) |
-| components/autocomplete | Autocomplete | tp-field | 22rem | layout/geometry — minimize | [docs/components/autocomplete.mdx:10](../../docs/components/autocomplete.mdx#L10) |
-| components/autocomplete | Prefix matching | tp-field | 22rem | layout/geometry — minimize | [docs/components/autocomplete.mdx:36](../../docs/components/autocomplete.mdx#L36) |
-| components/autocomplete | Grouped suggestions | tp-field | 22rem | layout/geometry — minimize | [docs/components/autocomplete.mdx:57](../../docs/components/autocomplete.mdx#L57) |
-| components/autocomplete | Inline completion | tp-field | 22rem | layout/geometry — minimize | [docs/components/autocomplete.mdx:80](../../docs/components/autocomplete.mdx#L80) |
-| components/autocomplete | Searching hidden fields | tp-field | 22rem | layout/geometry — minimize | [docs/components/autocomplete.mdx:98](../../docs/components/autocomplete.mdx#L98) |
-| components/autocomplete | Ranking over several fields | tp-field | 22rem | layout/geometry — minimize | [docs/components/autocomplete.mdx:120](../../docs/components/autocomplete.mdx#L120) |
-| components/autocomplete | Search source | tp-field | 22rem | layout/geometry — minimize | [docs/components/autocomplete.mdx:149](../../docs/components/autocomplete.mdx#L149) |
-| components/autocomplete | In a form | form | 22rem | layout/geometry — minimize | [docs/components/autocomplete.mdx:214](../../docs/components/autocomplete.mdx#L214) |
-| components/badge | Status in a list | tp-stack | 28rem | layout/geometry — minimize | [docs/components/badge.mdx:64](../../docs/components/badge.mdx#L64) |
-| components/breadcrumb | Long trail | div | 20rem | layout/geometry — minimize | [docs/components/breadcrumb.mdx:177](../../docs/components/breadcrumb.mdx#L177) |
-| components/bubble | Conversation | tp-stack | 32rem | layout/geometry — minimize | [docs/components/bubble.mdx:11](../../docs/components/bubble.mdx#L11) |
-| components/bubble | Variants | tp-stack | 32rem | layout/geometry — minimize | [docs/components/bubble.mdx:39](../../docs/components/bubble.mdx#L39) |
-| components/bubble | Alignment | tp-stack | 32rem | layout/geometry — minimize | [docs/components/bubble.mdx:59](../../docs/components/bubble.mdx#L59) |
-| components/bubble | Reactions | tp-stack | 32rem | layout/geometry — minimize | [docs/components/bubble.mdx:80](../../docs/components/bubble.mdx#L80) |
-| components/bubble | Rich content | tp-stack | 32rem | layout/geometry — minimize | [docs/components/bubble.mdx:107](../../docs/components/bubble.mdx#L107) |
-| components/bubble | Expandable message | tp-stack | 32rem | layout/geometry — minimize | [docs/components/bubble.mdx:120](../../docs/components/bubble.mdx#L120) |
-| components/bubble | Quick replies | tp-stack | 32rem | layout/geometry — minimize | [docs/components/bubble.mdx:148](../../docs/components/bubble.mdx#L148) |
-| components/button-group | Mixed controls | tp-stack | 26rem | layout/geometry — minimize | [docs/components/button-group.mdx:89](../../docs/components/button-group.mdx#L89) |
-| components/button-group | Steppers, labels and counts | tp-stack | 26rem | layout/geometry — minimize | [docs/components/button-group.mdx:106](../../docs/components/button-group.mdx#L106) |
-| components/button-group | Select and native select | tp-stack | 26rem | layout/geometry — minimize | [docs/components/button-group.mdx:242](../../docs/components/button-group.mdx#L242) |
-| components/button-group | Input groups and nesting | tp-stack | 28rem | layout/geometry — minimize | [docs/components/button-group.mdx:285](../../docs/components/button-group.mdx#L285) |
-| components/calendar | Quick picks | tp-card | 20rem | layout/geometry — minimize | [docs/components/calendar.mdx:175](../../docs/components/calendar.mdx#L175) |
-| components/calendar | In a popover | tp-field | 18rem | layout/geometry — minimize | [docs/components/calendar.mdx:306](../../docs/components/calendar.mdx#L306) |
-| components/card | Card | tp-card | 28rem | layout/geometry — minimize | [docs/components/card.mdx:9](../../docs/components/card.mdx#L9) |
-| components/card | Header action | tp-card | 28rem | layout/geometry — minimize | [docs/components/card.mdx:30](../../docs/components/card.mdx#L30) |
-| components/card | Content only | tp-card | 28rem | layout/geometry — minimize | [docs/components/card.mdx:43](../../docs/components/card.mdx#L43) |
-| components/card | Elevated | tp-card | 22rem | layout/geometry — minimize | [docs/components/card.mdx:80](../../docs/components/card.mdx#L80) |
-| components/card | Small | tp-card | 18rem | layout/geometry — minimize | [docs/components/card.mdx:95](../../docs/components/card.mdx#L95) |
-| components/carousel | Carousel | tp-carousel | 32rem | layout/geometry — minimize | [docs/components/carousel.mdx:10](../../docs/components/carousel.mdx#L10) |
-| components/carousel | Items per view | tp-carousel | 36rem | layout/geometry — minimize | [docs/components/carousel.mdx:83](../../docs/components/carousel.mdx#L83) |
-| components/carousel | Bullets inside | tp-carousel | 32rem | layout/geometry — minimize | [docs/components/carousel.mdx:104](../../docs/components/carousel.mdx#L104) |
-| components/carousel | Autoplay | tp-carousel | 28rem | layout/geometry — minimize | [docs/components/carousel.mdx:132](../../docs/components/carousel.mdx#L132) |
-| components/carousel | Vertical | tp-carousel | 22rem | layout/geometry — minimize | [docs/components/carousel.mdx:157](../../docs/components/carousel.mdx#L157) |
-| components/carousel | Crossfade | tp-carousel | 32rem | layout/geometry — minimize | [docs/components/carousel.mdx:184](../../docs/components/carousel.mdx#L184) |
-| components/carousel | Layered 3D | tp-carousel | 36rem | layout/geometry — minimize | [docs/components/carousel.mdx:250](../../docs/components/carousel.mdx#L250) |
-| components/carousel | Parallax | tp-carousel | 40rem | layout/geometry — minimize | [docs/components/carousel.mdx:383](../../docs/components/carousel.mdx#L383) |
-| components/carousel | Focus | tp-carousel | 40rem | layout/geometry — minimize | [docs/components/carousel.mdx:413](../../docs/components/carousel.mdx#L413) |
-| components/carousel | Shader transition | tp-stack | 36rem | layout/geometry — minimize | [docs/components/carousel.mdx:451](../../docs/components/carousel.mdx#L451) |
-| components/carousel | Virtual archive with controlled selection | div | 36rem | layout/geometry — minimize | [docs/components/carousel.mdx:613](../../docs/components/carousel.mdx#L613) |
-| components/carousel | Commit | tp-stack | 28rem | layout/geometry — minimize | [docs/components/carousel.mdx:650](../../docs/components/carousel.mdx#L650) |
-| components/checkbox | Field | tp-field | 22rem | layout/geometry — minimize | [docs/components/checkbox.mdx:23](../../docs/components/checkbox.mdx#L23) |
-| components/checkbox | Form values | form | 22rem | layout/geometry — minimize | [docs/components/checkbox.mdx:35](../../docs/components/checkbox.mdx#L35) |
-| components/checkbox | Select all | fieldset | 22rem | layout/geometry — minimize | [docs/components/checkbox.mdx:66](../../docs/components/checkbox.mdx#L66) |
-| components/checkbox | CheckboxGroupController | fieldset | 22rem | layout/geometry — minimize | [docs/components/checkbox.mdx:115](../../docs/components/checkbox.mdx#L115) |
-| components/checkbox | Inline | tp-stack | 22rem | layout/geometry — minimize | [docs/components/checkbox.mdx:177](../../docs/components/checkbox.mdx#L177) |
-| components/citation | Citation | p | 34rem | layout/geometry — minimize | [docs/components/citation.mdx:11](../../docs/components/citation.mdx#L11) |
-| components/citation | Source preview | p | 34rem | layout/geometry — minimize | [docs/components/citation.mdx:47](../../docs/components/citation.mdx#L47) |
-| components/citation | Numbered references | article | 34rem | layout/geometry — minimize | [docs/components/citation.mdx:67](../../docs/components/citation.mdx#L67) |
-| components/citation | Horizontal list | tp-citation-list | 34rem | layout/geometry — minimize | [docs/components/citation.mdx:110](../../docs/components/citation.mdx#L110) |
-| components/code-block | Code block | tp-code-block | 40rem | layout/geometry — minimize | [docs/components/code-block.mdx:10](../../docs/components/code-block.mdx#L10) |
-| components/code-block | Title slot | tp-code-block | 40rem | layout/geometry — minimize | [docs/components/code-block.mdx:32](../../docs/components/code-block.mdx#L32) |
-| components/code-block | Highlighted lines | tp-code-block | 40rem | layout/geometry — minimize | [docs/components/code-block.mdx:50](../../docs/components/code-block.mdx#L50) |
-| components/code-block | Diff | tp-code-block | 40rem | layout/geometry — minimize | [docs/components/code-block.mdx:67](../../docs/components/code-block.mdx#L67) |
-| components/code-block | Collapsible | tp-code-block | 40rem | layout/geometry — minimize | [docs/components/code-block.mdx:84](../../docs/components/code-block.mdx#L84) |
-| components/code-block | Shell | tp-code-block | 40rem | layout/geometry — minimize | [docs/components/code-block.mdx:113](../../docs/components/code-block.mdx#L113) |
-| components/code-block | CSS | tp-code-block | 40rem | layout/geometry — minimize | [docs/components/code-block.mdx:126](../../docs/components/code-block.mdx#L126) |
-| components/code-block | Token theme | tp-stack | 40rem | layout/geometry — minimize | [docs/components/code-block.mdx:142](../../docs/components/code-block.mdx#L142) |
-| components/collapsible | Collapsible | tp-collapsible | 28rem | layout/geometry — minimize | [docs/components/collapsible.mdx:10](../../docs/components/collapsible.mdx#L10) |
-| components/collapsible | Leading indicator | tp-collapsible | 28rem | layout/geometry — minimize | [docs/components/collapsible.mdx:30](../../docs/components/collapsible.mdx#L30) |
-| components/collapsible | Positional slots | tp-stack | 28rem | layout/geometry — minimize | [docs/components/collapsible.mdx:45](../../docs/components/collapsible.mdx#L45) |
-| components/collapsible | As a heading | tp-collapsible | 28rem | layout/geometry — minimize | [docs/components/collapsible.mdx:79](../../docs/components/collapsible.mdx#L79) |
-| components/collapsible | Searchable | tp-collapsible | 28rem | layout/geometry — minimize | [docs/components/collapsible.mdx:92](../../docs/components/collapsible.mdx#L92) |
-| components/collapsible | Open change | tp-stack | 28rem | layout/geometry — minimize | [docs/components/collapsible.mdx:113](../../docs/components/collapsible.mdx#L113) |
-| components/collapsible | Disabled | tp-collapsible | 28rem | layout/geometry — minimize | [docs/components/collapsible.mdx:136](../../docs/components/collapsible.mdx#L136) |
-| components/collapsible | Line-by-line reveal | tp-collapsible | 28rem | layout/geometry — minimize | [docs/components/collapsible.mdx:149](../../docs/components/collapsible.mdx#L149) |
-| components/color-input | Inline | tp-stack | 20rem | layout/geometry — minimize | [docs/components/color-input.mdx:27](../../docs/components/color-input.mdx#L27) |
-| components/color-input | Chip or text | tp-stack | 20rem | layout/geometry — minimize | [docs/components/color-input.mdx:41](../../docs/components/color-input.mdx#L41) |
-| components/color-input | Formats and alpha | tp-stack | 20rem | layout/geometry — minimize | [docs/components/color-input.mdx:64](../../docs/components/color-input.mdx#L64) |
-| components/color-input | Sizes | tp-stack | 20rem | layout/geometry — minimize | [docs/components/color-input.mdx:88](../../docs/components/color-input.mdx#L88) |
-| components/color-input | In a form | form | 20rem | layout/geometry — minimize | [docs/components/color-input.mdx:106](../../docs/components/color-input.mdx#L106) |
-| components/color-input | Disabled and read-only | tp-stack | 20rem | layout/geometry — minimize | [docs/components/color-input.mdx:123](../../docs/components/color-input.mdx#L123) |
-| components/color-input | Right-to-left | div | 20rem | layout/geometry — minimize | [docs/components/color-input.mdx:150](../../docs/components/color-input.mdx#L150) |
-| components/command-palette | Command palette | tp-stack | 28rem | layout/geometry — minimize | [docs/components/command-palette.mdx:10](../../docs/components/command-palette.mdx#L10) |
-| components/command-palette | Custom empty state | tp-command-palette | 28rem | layout/geometry — minimize | [docs/components/command-palette.mdx:94](../../docs/components/command-palette.mdx#L94) |
-| components/command-palette | Server-filtered list | tp-command-palette | 28rem | layout/geometry — minimize | [docs/components/command-palette.mdx:111](../../docs/components/command-palette.mdx#L111) |
-| components/copy-button | Copy button | tp-field | 24rem | layout/geometry — minimize | [docs/components/copy-button.mdx:10](../../docs/components/copy-button.mdx#L10) |
-| components/copy-button | Beside a value | dl | 26rem | layout/geometry — minimize | [docs/components/copy-button.mdx:50](../../docs/components/copy-button.mdx#L50) |
-| components/copy-button | In an input group and a field group | tp-stack | 26rem | layout/geometry — minimize | [docs/components/copy-button.mdx:65](../../docs/components/copy-button.mdx#L65) |
-| components/data-visualization | Data visualization | tp-data-visualization | 40rem | layout/geometry — minimize | [docs/components/data-visualization.mdx:10](../../docs/components/data-visualization.mdx#L10) |
-| components/data-visualization | Line chart | tp-data-visualization | 40rem | layout/geometry — minimize | [docs/components/data-visualization.mdx:112](../../docs/components/data-visualization.mdx#L112) |
-| components/data-visualization | Description and table | tp-data-visualization | 40rem | layout/geometry — minimize | [docs/components/data-visualization.mdx:177](../../docs/components/data-visualization.mdx#L177) |
-| components/description-list | Description list | tp-description-list | 24rem | layout/geometry — minimize | [docs/components/description-list.mdx:10](../../docs/components/description-list.mdx#L10) |
-| components/description-list | Record details | tp-card | 26rem | layout/geometry — minimize | [docs/components/description-list.mdx:30](../../docs/components/description-list.mdx#L30) |
-| components/description-list | Show more | tp-description-list | 24rem | layout/geometry — minimize | [docs/components/description-list.mdx:63](../../docs/components/description-list.mdx#L63) |
-| components/description-list | Summary row | tp-description-list | 34rem | layout/geometry — minimize | [docs/components/description-list.mdx:92](../../docs/components/description-list.mdx#L92) |
-| components/dialog | Container modality | section | 32rem | layout/geometry — minimize | [docs/components/dialog.mdx:82](../../docs/components/dialog.mdx#L82) |
-| components/drag-drop-list | Drag drop list | tp-drag-drop-list | 26rem | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:10](../../docs/components/drag-drop-list.mdx#L10) |
-| components/drag-drop-list | Commit events | tp-stack | 26rem | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:34](../../docs/components/drag-drop-list.mdx#L34) |
-| components/drag-drop-list | Variants and sizes | div | 40rem | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:67](../../docs/components/drag-drop-list.mdx#L67) |
-| components/drag-drop-list | Whole-row drag with swap | tp-drag-drop-list | 26rem | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:91](../../docs/components/drag-drop-list.mdx#L91) |
-| components/drag-drop-list | Custom rows and overlay | tp-stack | 30rem | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:111](../../docs/components/drag-drop-list.mdx#L111) |
-| components/drag-drop-list | Read-only | tp-drag-drop-list | 26rem | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:164](../../docs/components/drag-drop-list.mdx#L164) |
-| components/drag-drop-list | Board lanes | section | 40rem | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:181](../../docs/components/drag-drop-list.mdx#L181) |
-| components/drag-drop-list | Controlled lanes | section | 40rem | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:241](../../docs/components/drag-drop-list.mdx#L241) |
-| components/drag-drop-list | Approve before committing | section | 40rem | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:308](../../docs/components/drag-drop-list.mdx#L308) |
-| components/drag-drop-list | Vertical axis only | div | 26rem | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:370](../../docs/components/drag-drop-list.mdx#L370) |
-| components/empty-state | No results | tp-input-group | 22rem | layout/geometry — minimize | [docs/components/empty-state.mdx:71](../../docs/components/empty-state.mdx#L71) |
-| components/empty-state | In a card | tp-card | 28rem | layout/geometry — minimize | [docs/components/empty-state.mdx:88](../../docs/components/empty-state.mdx#L88) |
-| components/field-group | Field group | tp-field-group | 20rem | layout/geometry — minimize | [docs/components/field-group.mdx:10](../../docs/components/field-group.mdx#L10) |
-| components/field-group | Color channels | tp-stack | 26rem | layout/geometry — minimize | [docs/components/field-group.mdx:41](../../docs/components/field-group.mdx#L41) |
-| components/field-group | Separator | tp-field-group | 24rem | layout/geometry — minimize | [docs/components/field-group.mdx:71](../../docs/components/field-group.mdx#L71) |
-| components/field-group | Read-only and disabled | tp-field-group | 24rem | layout/geometry — minimize | [docs/components/field-group.mdx:87](../../docs/components/field-group.mdx#L87) |
-| components/field-group | Vertical | tp-field-group | 20rem | layout/geometry — minimize | [docs/components/field-group.mdx:101](../../docs/components/field-group.mdx#L101) |
-| components/field-group | Unjoined | tp-field-group | 24rem | layout/geometry — minimize | [docs/components/field-group.mdx:115](../../docs/components/field-group.mdx#L115) |
-| components/field-group | Inline | tp-stack | 20rem | layout/geometry — minimize | [docs/components/field-group.mdx:129](../../docs/components/field-group.mdx#L129) |
-| components/field-group | Expanded | tp-stack | 20rem | layout/geometry — minimize | [docs/components/field-group.mdx:177](../../docs/components/field-group.mdx#L177) |
-| components/field-group | Constraints | tp-field-group | 20rem | layout/geometry — minimize | [docs/components/field-group.mdx:220](../../docs/components/field-group.mdx#L220) |
-| components/field | Field | tp-field | 22rem | layout/geometry — minimize | [docs/components/field.mdx:10](../../docs/components/field.mdx#L10) |
-| components/field | Validate on blur | tp-field | 22rem | layout/geometry — minimize | [docs/components/field.mdx:26](../../docs/components/field.mdx#L26) |
-| components/field | Custom validator | tp-field | 22rem | layout/geometry — minimize | [docs/components/field.mdx:40](../../docs/components/field.mdx#L40) |
-| components/field | Horizontal | tp-stack | 28rem | layout/geometry — minimize | [docs/components/field.mdx:59](../../docs/components/field.mdx#L59) |
-| components/field | Slots | tp-field | 22rem | layout/geometry — minimize | [docs/components/field.mdx:86](../../docs/components/field.mdx#L86) |
-| components/field | Legend and group | tp-field | 24rem | layout/geometry — minimize | [docs/components/field.mdx:100](../../docs/components/field.mdx#L100) |
-| components/field | Disabled | tp-field | 22rem | layout/geometry — minimize | [docs/components/field.mdx:126](../../docs/components/field.mdx#L126) |
-| components/file-upload | File upload | tp-file-upload | 30rem | layout/geometry — minimize | [docs/components/file-upload.mdx:10](../../docs/components/file-upload.mdx#L10) |
-| components/file-upload | Custom text and compact size | tp-stack | 30rem | layout/geometry — minimize | [docs/components/file-upload.mdx:26](../../docs/components/file-upload.mdx#L26) |
-| components/file-upload | Rejected files | tp-file-upload | 30rem | layout/geometry — minimize | [docs/components/file-upload.mdx:50](../../docs/components/file-upload.mdx#L50) |
-| components/file-upload | Custom validator | tp-file-upload | 30rem | layout/geometry — minimize | [docs/components/file-upload.mdx:70](../../docs/components/file-upload.mdx#L70) |
-| components/file-upload | Chips | tp-file-upload | 30rem | layout/geometry — minimize | [docs/components/file-upload.mdx:111](../../docs/components/file-upload.mdx#L111) |
-| components/file-upload | Rows | tp-file-upload | 30rem | layout/geometry — minimize | [docs/components/file-upload.mdx:124](../../docs/components/file-upload.mdx#L124) |
-| components/file-upload | Image grid | tp-file-upload | 30rem | layout/geometry — minimize | [docs/components/file-upload.mdx:140](../../docs/components/file-upload.mdx#L140) |
-| components/file-upload | Upload adapter | tp-file-upload | 30rem | layout/geometry — minimize | [docs/components/file-upload.mdx:168](../../docs/components/file-upload.mdx#L168) |
-| components/file-upload | Field and form | tp-form | 30rem | layout/geometry — minimize | [docs/components/file-upload.mdx:222](../../docs/components/file-upload.mdx#L222) |
-| components/file-upload | Server rejection | tp-file-upload | 30rem | layout/geometry — minimize | [docs/components/file-upload.mdx:245](../../docs/components/file-upload.mdx#L245) |
-| components/form | Form | tp-form | 28rem | layout/geometry — minimize | [docs/components/form.mdx:10](../../docs/components/form.mdx#L10) |
-| components/form | Notification settings | tp-form | 28rem | layout/geometry — minimize | [docs/components/form.mdx:53](../../docs/components/form.mdx#L53) |
-| components/form | Validate on blur | tp-form | 24rem | layout/geometry — minimize | [docs/components/form.mdx:92](../../docs/components/form.mdx#L92) |
-| components/form | External errors | tp-form | 24rem | layout/geometry — minimize | [docs/components/form.mdx:113](../../docs/components/form.mdx#L113) |
-| components/form | Matching passwords | tp-form | 24rem | layout/geometry — minimize | [docs/components/form.mdx:134](../../docs/components/form.mdx#L134) |
-| components/form | Wait for async checks | tp-form | 24rem | layout/geometry — minimize | [docs/components/form.mdx:159](../../docs/components/form.mdx#L159) |
-| components/form | Repeated emails | tp-form | 28rem | layout/geometry — minimize | [docs/components/form.mdx:189](../../docs/components/form.mdx#L189) |
-| components/form | Disable while invalid | tp-form | 24rem | layout/geometry — minimize | [docs/components/form.mdx:251](../../docs/components/form.mdx#L251) |
-| components/image | Image | tp-image | 40rem | layout/geometry — minimize | [docs/components/image.mdx:14](../../docs/components/image.mdx#L14) |
-| components/image | Ratio and fit | div | 40rem | layout/geometry — minimize | [docs/components/image.mdx:36](../../docs/components/image.mdx#L36) |
-| components/image | Fallbacks | div | 32rem | layout/geometry — minimize | [docs/components/image.mdx:56](../../docs/components/image.mdx#L56) |
-| components/image | Loading placeholders | div | 32rem | layout/geometry — minimize | [docs/components/image.mdx:69](../../docs/components/image.mdx#L69) |
-| components/image | Hover zoom | div | 32rem | layout/geometry — minimize | [docs/components/image.mdx:86](../../docs/components/image.mdx#L86) |
-| components/image | Card hover | tp-card | 22rem | layout/geometry — minimize | [docs/components/image.mdx:97](../../docs/components/image.mdx#L97) |
-| components/image | Staggered group | tp-image-group | 40rem | layout/geometry — minimize | [docs/components/image.mdx:119](../../docs/components/image.mdx#L119) |
-| components/image | Reveal timing and repeat | div | 36rem | layout/geometry — minimize | [docs/components/image.mdx:132](../../docs/components/image.mdx#L132) |
-| components/image | Headline, group and caption | tp-scroll-trigger | 40rem | layout/geometry — minimize | [docs/components/image.mdx:154](../../docs/components/image.mdx#L154) |
-| components/image | Parallax in a scroller | div | 36rem | layout/geometry — minimize | [docs/components/image.mdx:178](../../docs/components/image.mdx#L178) |
-| components/image | Horizontal strip | div | 40rem | layout/geometry — minimize | [docs/components/image.mdx:251](../../docs/components/image.mdx#L251) |
-| components/image | Smoothing | div | 36rem | layout/geometry — minimize | [docs/components/image.mdx:264](../../docs/components/image.mdx#L264) |
-| components/input-group | Input group | tp-field | 24rem | layout/geometry — minimize | [docs/components/input-group.mdx:10](../../docs/components/input-group.mdx#L10) |
-| components/input-group | Text addons | tp-stack | 24rem | layout/geometry — minimize | [docs/components/input-group.mdx:41](../../docs/components/input-group.mdx#L41) |
-| components/input-group | Status addons | tp-stack | 24rem | layout/geometry — minimize | [docs/components/input-group.mdx:66](../../docs/components/input-group.mdx#L66) |
-| components/input-group | Actions | tp-stack | 24rem | layout/geometry — minimize | [docs/components/input-group.mdx:105](../../docs/components/input-group.mdx#L105) |
-| components/input-group | Button group composition | tp-stack | 28rem | layout/geometry — minimize | [docs/components/input-group.mdx:144](../../docs/components/input-group.mdx#L144) |
-| components/input-group | Interactive addons | tp-stack | 24rem | layout/geometry — minimize | [docs/components/input-group.mdx:180](../../docs/components/input-group.mdx#L180) |
-| components/input-group | Composer | tp-field | 30rem | layout/geometry — minimize | [docs/components/input-group.mdx:232](../../docs/components/input-group.mdx#L232) |
-| components/input-group | Native textarea | tp-input-group | 30rem | layout/geometry — minimize | [docs/components/input-group.mdx:254](../../docs/components/input-group.mdx#L254) |
-| components/input-group | Disabled and invalid | tp-stack | 24rem | layout/geometry — minimize | [docs/components/input-group.mdx:267](../../docs/components/input-group.mdx#L267) |
-| components/input | Input | tp-field | 22rem | layout/geometry — minimize | [docs/components/input.mdx:10](../../docs/components/input.mdx#L10) |
-| components/input | Types | tp-stack | 22rem | layout/geometry — minimize | [docs/components/input.mdx:26](../../docs/components/input.mdx#L26) |
-| components/input | Mono | tp-stack | 22rem | layout/geometry — minimize | [docs/components/input.mdx:46](../../docs/components/input.mdx#L46) |
-| components/input | Owner-shaped value | tp-field | 22rem | layout/geometry — minimize | [docs/components/input.mdx:63](../../docs/components/input.mdx#L63) |
-| components/input | Error | tp-field | 22rem | layout/geometry — minimize | [docs/components/input.mdx:81](../../docs/components/input.mdx#L81) |
-| components/input | Disabled and read-only | tp-stack | 22rem | layout/geometry — minimize | [docs/components/input.mdx:91](../../docs/components/input.mdx#L91) |
-| components/input | Inline | tp-stack | 22rem | layout/geometry — minimize | [docs/components/input.mdx:116](../../docs/components/input.mdx#L116) |
-| components/input | Number steps | tp-stack | 22rem | layout/geometry — minimize | [docs/components/input.mdx:147](../../docs/components/input.mdx#L147) |
-| components/input | Units and icons | tp-stack | 22rem | layout/geometry — minimize | [docs/components/input.mdx:177](../../docs/components/input.mdx#L177) |
-| components/kbd | Input group | tp-input-group | 22rem | layout/geometry — minimize | [docs/components/kbd.mdx:92](../../docs/components/kbd.mdx#L92) |
-| components/label | Label | tp-stack | 22rem | layout/geometry — minimize | [docs/components/label.mdx:10](../../docs/components/label.mdx#L10) |
-| components/label | By id and by nesting | tp-stack | 22rem | layout/geometry — minimize | [docs/components/label.mdx:27](../../docs/components/label.mdx#L27) |
-| components/label | Optional | tp-stack | 22rem | layout/geometry — minimize | [docs/components/label.mdx:46](../../docs/components/label.mdx#L46) |
-| components/list | List | tp-list | 30rem | layout/geometry — minimize | [docs/components/list.mdx:11](../../docs/components/list.mdx#L11) |
-| components/list | Content and actions | tp-stack | 30rem | layout/geometry — minimize | [docs/components/list.mdx:43](../../docs/components/list.mdx#L43) |
-| components/list | Variants and sizes | tp-stack | 30rem | layout/geometry — minimize | [docs/components/list.mdx:72](../../docs/components/list.mdx#L72) |
-| components/list | Media | tp-list | 30rem | layout/geometry — minimize | [docs/components/list.mdx:90](../../docs/components/list.mdx#L90) |
-| components/list | Divided list | tp-list | 30rem | layout/geometry — minimize | [docs/components/list.mdx:120](../../docs/components/list.mdx#L120) |
-| components/list | Header and footer | tp-list-item | 30rem | layout/geometry — minimize | [docs/components/list.mdx:145](../../docs/components/list.mdx#L145) |
-| components/list | Card grid | tp-list | 40rem | layout/geometry — minimize | [docs/components/list.mdx:158](../../docs/components/list.mdx#L158) |
-| components/list | Link rows | tp-list | 30rem | layout/geometry — minimize | [docs/components/list.mdx:190](../../docs/components/list.mdx#L190) |
-| components/list | Recordings | tp-list | 30rem | layout/geometry — minimize | [docs/components/list.mdx:228](../../docs/components/list.mdx#L228) |
-| components/list | People and invitations | tp-stack | calc(var(--tp-spacing) * 150) | layout/geometry — minimize | [docs/components/list.mdx:286](../../docs/components/list.mdx#L286) |
-| components/markdown | Markdown | tp-markdown | 36rem | layout/geometry — minimize | [docs/components/markdown.mdx:10](../../docs/components/markdown.mdx#L10) |
-| components/markdown | Script child | tp-markdown | 36rem | layout/geometry — minimize | [docs/components/markdown.mdx:39](../../docs/components/markdown.mdx#L39) |
-| components/markdown | Heading offset | tp-markdown | 36rem | layout/geometry — minimize | [docs/components/markdown.mdx:60](../../docs/components/markdown.mdx#L60) |
-| components/markdown | Code and alerts | tp-markdown | 36rem | layout/geometry — minimize | [docs/components/markdown.mdx:83](../../docs/components/markdown.mdx#L83) |
-| components/markdown | Small | tp-markdown | 24rem | layout/geometry — minimize | [docs/components/markdown.mdx:104](../../docs/components/markdown.mdx#L104) |
-| components/markdown | Streaming | tp-stack | 36rem | layout/geometry — minimize | [docs/components/markdown.mdx:129](../../docs/components/markdown.mdx#L129) |
-| components/markdown | Element policy | tp-markdown | 36rem | layout/geometry — minimize | [docs/components/markdown.mdx:165](../../docs/components/markdown.mdx#L165) |
-| components/markdown | Custom node rendering | tp-markdown | 36rem | layout/geometry — minimize | [docs/components/markdown.mdx:197](../../docs/components/markdown.mdx#L197) |
-| components/marker | Marker | tp-stack | 32rem | layout/geometry — minimize | [docs/components/marker.mdx:10](../../docs/components/marker.mdx#L10) |
-| components/marker | Variants | tp-stack | 32rem | layout/geometry — minimize | [docs/components/marker.mdx:28](../../docs/components/marker.mdx#L28) |
-| components/marker | Tones | tp-stack | 32rem | layout/geometry — minimize | [docs/components/marker.mdx:42](../../docs/components/marker.mdx#L42) |
-| components/marker | With icons | tp-stack | 32rem | layout/geometry — minimize | [docs/components/marker.mdx:59](../../docs/components/marker.mdx#L59) |
-| components/marker | Shimmer | tp-stack | 32rem | layout/geometry — minimize | [docs/components/marker.mdx:90](../../docs/components/marker.mdx#L90) |
-| components/marker | With an action | tp-stack | 32rem | layout/geometry — minimize | [docs/components/marker.mdx:103](../../docs/components/marker.mdx#L103) |
-| components/marker | Native hosts and layout | tp-stack | 32rem | layout/geometry — minimize | [docs/components/marker.mdx:120](../../docs/components/marker.mdx#L120) |
-| components/marker | Accordion label and drawer | tp-stack | 32rem | layout/geometry — minimize | [docs/components/marker.mdx:189](../../docs/components/marker.mdx#L189) |
-| components/media-player | Media Player | tp-media-player | 44rem | layout/geometry — minimize | [docs/components/media-player.mdx:14](../../docs/components/media-player.mdx#L14) |
-| components/media-player | Audio layout | tp-media-player | 36rem | layout/geometry — minimize | [docs/components/media-player.mdx:42](../../docs/components/media-player.mdx#L42) |
-| components/media-player | Audio | tp-media-player | 36rem | layout/geometry — minimize | [docs/components/media-player.mdx:58](../../docs/components/media-player.mdx#L58) |
-| components/media-player | Trimmed layout | tp-media-player | 44rem | layout/geometry — minimize | [docs/components/media-player.mdx:84](../../docs/components/media-player.mdx#L84) |
-| components/media-player | Custom top region | tp-media-player | 44rem | layout/geometry — minimize | [docs/components/media-player.mdx:110](../../docs/components/media-player.mdx#L110) |
-| components/media-player | Text tracks | tp-media-player | 44rem | layout/geometry — minimize | [docs/components/media-player.mdx:144](../../docs/components/media-player.mdx#L144) |
-| components/media-player | Custom bar | tp-media-player | 44rem | layout/geometry — minimize | [docs/components/media-player.mdx:173](../../docs/components/media-player.mdx#L173) |
-| components/media-player | Live with DVR (simulated) | tp-media-player | 44rem | layout/geometry — minimize | [docs/components/media-player.mdx:207](../../docs/components/media-player.mdx#L207) |
-| components/media-player | Tracks adapter (mock) | tp-media-player | 44rem | layout/geometry — minimize | [docs/components/media-player.mdx:240](../../docs/components/media-player.mdx#L240) |
-| components/media-player | French controls | tp-media-player | 44rem | layout/geometry — minimize | [docs/components/media-player.mdx:304](../../docs/components/media-player.mdx#L304) |
-| components/menu | Context invocation | div | 100% | layout/geometry — minimize | [docs/components/menu.mdx:147](../../docs/components/menu.mdx#L147) |
-| components/message-scroller | Message Scroller | tp-message-scroller | 28rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:11](../../docs/components/message-scroller.mdx#L11) |
-| components/message-scroller | Streaming | tp-stack | 28rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:71](../../docs/components/message-scroller.mdx#L71) |
-| components/message-scroller | Join marker as anchor | tp-stack | 28rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:167](../../docs/components/message-scroller.mdx#L167) |
-| components/message-scroller | Commands | tp-stack | 28rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:243](../../docs/components/message-scroller.mdx#L243) |
-| components/message-scroller | Outline and edges | div | 36rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:316](../../docs/components/message-scroller.mdx#L316) |
-| components/message-scroller | Prepend history | tp-stack | 28rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:423](../../docs/components/message-scroller.mdx#L423) |
-| components/message-scroller | Animated send | tp-stack | 28rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:502](../../docs/components/message-scroller.mdx#L502) |
-| components/message-scroller | Open at the start | tp-message-scroller | 28rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:560](../../docs/components/message-scroller.mdx#L560) |
-| components/message | Message | tp-stack | 26rem | layout/geometry — minimize | [docs/components/message.mdx:11](../../docs/components/message.mdx#L11) |
-| components/message | Sender sides | tp-stack | 26rem | layout/geometry — minimize | [docs/components/message.mdx:49](../../docs/components/message.mdx#L49) |
-| components/message | Header and footer | tp-stack | 26rem | layout/geometry — minimize | [docs/components/message.mdx:72](../../docs/components/message.mdx#L72) |
-| components/message | Sending and failed | tp-stack | 26rem | layout/geometry — minimize | [docs/components/message.mdx:90](../../docs/components/message.mdx#L90) |
-| components/message | Message group | tp-message-group | 26rem | layout/geometry — minimize | [docs/components/message.mdx:107](../../docs/components/message.mdx#L107) |
-| components/message | Footer actions | div | 26rem | layout/geometry — minimize | [docs/components/message.mdx:126](../../docs/components/message.mdx#L126) |
-| components/message | Attachment | tp-stack | 26rem | layout/geometry — minimize | [docs/components/message.mdx:152](../../docs/components/message.mdx#L152) |
-| components/message | Retry a failed message | div | 26rem | layout/geometry — minimize | [docs/components/message.mdx:187](../../docs/components/message.mdx#L187) |
-| components/native-select | Native select | tp-field | 22rem | layout/geometry — minimize | [docs/components/native-select.mdx:10](../../docs/components/native-select.mdx#L10) |
-| components/native-select | Placeholder | tp-field | 22rem | layout/geometry — minimize | [docs/components/native-select.mdx:39](../../docs/components/native-select.mdx#L39) |
-| components/native-select | Multiple | tp-field | 22rem | layout/geometry — minimize | [docs/components/native-select.mdx:76](../../docs/components/native-select.mdx#L76) |
-| components/native-select | Form value | form | 22rem | layout/geometry — minimize | [docs/components/native-select.mdx:93](../../docs/components/native-select.mdx#L93) |
-| components/native-select | Controlled value | tp-stack | 22rem | layout/geometry — minimize | [docs/components/native-select.mdx:124](../../docs/components/native-select.mdx#L124) |
-| components/native-select | Disabled, read-only and invalid | tp-stack | 22rem | layout/geometry — minimize | [docs/components/native-select.mdx:158](../../docs/components/native-select.mdx#L158) |
-| components/one-time-code-field | One-time code field | tp-card | 26rem | layout/geometry — minimize | [docs/components/one-time-code-field.mdx:9](../../docs/components/one-time-code-field.mdx#L9) |
-| components/overflow-list | Row limit | tp-resizable-panel-group | 36rem | layout/geometry — minimize | [docs/components/overflow-list.mdx:50](../../docs/components/overflow-list.mdx#L50) |
-| components/overflow-list | In a table | div | 34rem | layout/geometry — minimize | [docs/components/overflow-list.mdx:86](../../docs/components/overflow-list.mdx#L86) |
-| components/overflow-list | Custom count | div | 22rem | layout/geometry — minimize | [docs/components/overflow-list.mdx:140](../../docs/components/overflow-list.mdx#L140) |
-| components/pagination | Rows per page | tp-stack | 40rem | layout/geometry — minimize | [docs/components/pagination.mdx:107](../../docs/components/pagination.mdx#L107) |
-| components/preview-card | Preview Card | div | 18rem | layout/geometry — minimize | [docs/components/preview-card.mdx:13](../../docs/components/preview-card.mdx#L13) |
-| components/preview-card | Delays | tp-stack | 18rem | layout/geometry — minimize | [docs/components/preview-card.mdx:44](../../docs/components/preview-card.mdx#L44) |
-| components/preview-card | Placement and arrow | tp-stack | 16rem | layout/geometry — minimize | [docs/components/preview-card.mdx:64](../../docs/components/preview-card.mdx#L64) |
-| components/progress | Progress | tp-progress | 22rem | layout/geometry — minimize | [docs/components/progress.mdx:10](../../docs/components/progress.mdx#L10) |
-| components/progress | Bare and captioned | tp-stack | 22rem | layout/geometry — minimize | [docs/components/progress.mdx:27](../../docs/components/progress.mdx#L27) |
-| components/progress | Indeterminate | tp-progress | 22rem | layout/geometry — minimize | [docs/components/progress.mdx:43](../../docs/components/progress.mdx#L43) |
-| components/progress | Steps | tp-progress | 22rem | layout/geometry — minimize | [docs/components/progress.mdx:55](../../docs/components/progress.mdx#L55) |
-| components/progress | Import | tp-stack | 22rem | layout/geometry — minimize | [docs/components/progress.mdx:68](../../docs/components/progress.mdx#L68) |
-| components/progress | Formatted value | tp-stack | 22rem | layout/geometry — minimize | [docs/components/progress.mdx:98](../../docs/components/progress.mdx#L98) |
-| components/qr-code | Connect a device | tp-card | 20rem | layout/geometry — minimize | [docs/components/qr-code.mdx:22](../../docs/components/qr-code.mdx#L22) |
-| components/qr-code | Live value | tp-stack | 100% | layout/geometry — minimize | [docs/components/qr-code.mdx:67](../../docs/components/qr-code.mdx#L67) |
-| components/questionnaire | Questionnaire | div | 100% | layout/geometry — minimize | [docs/components/questionnaire.mdx:9](../../docs/components/questionnaire.mdx#L9) |
-| components/questionnaire | Choices and free text | div | 100% | layout/geometry — minimize | [docs/components/questionnaire.mdx:68](../../docs/components/questionnaire.mdx#L68) |
-| components/questionnaire | Skip and validate | div | 100% | layout/geometry — minimize | [docs/components/questionnaire.mdx:104](../../docs/components/questionnaire.mdx#L104) |
-| components/questionnaire | Resume a draft | tp-stack | 100% | layout/geometry — minimize | [docs/components/questionnaire.mdx:136](../../docs/components/questionnaire.mdx#L136) |
-| components/questionnaire | Follow-up question | div | 100% | layout/geometry — minimize | [docs/components/questionnaire.mdx:186](../../docs/components/questionnaire.mdx#L186) |
-| components/questionnaire | Number shortcuts | div | 100% | layout/geometry — minimize | [docs/components/questionnaire.mdx:246](../../docs/components/questionnaire.mdx#L246) |
-| components/questionnaire | Submit | tp-stack | 100% | layout/geometry — minimize | [docs/components/questionnaire.mdx:275](../../docs/components/questionnaire.mdx#L275) |
-| components/questionnaire | Checkpoint and cross-answer validation | tp-stack | 100% | layout/geometry — minimize | [docs/components/questionnaire.mdx:310](../../docs/components/questionnaire.mdx#L310) |
-| components/questionnaire | Disabled until answered | div | 100% | layout/geometry — minimize | [docs/components/questionnaire.mdx:376](../../docs/components/questionnaire.mdx#L376) |
-| components/questionnaire | Progress bar | div | 100% | layout/geometry — minimize | [docs/components/questionnaire.mdx:427](../../docs/components/questionnaire.mdx#L427) |
-| components/questionnaire | Animated questions | div | 100% | layout/geometry — minimize | [docs/components/questionnaire.mdx:480](../../docs/components/questionnaire.mdx#L480) |
-| components/questionnaire | Inside a Card | div | 100% | layout/geometry — minimize | [docs/components/questionnaire.mdx:541](../../docs/components/questionnaire.mdx#L541) |
-| components/scroll-area | Scroll Area | tp-scroll-area | 100% | layout/geometry — minimize | [docs/components/scroll-area.mdx:9](../../docs/components/scroll-area.mdx#L9) |
-| components/scroll-area | Horizontal | tp-scroll-area | 32rem | layout/geometry — minimize | [docs/components/scroll-area.mdx:53](../../docs/components/scroll-area.mdx#L53) |
-| components/scroll-area | Both axes | tp-scroll-area | 28rem | layout/geometry — minimize | [docs/components/scroll-area.mdx:86](../../docs/components/scroll-area.mdx#L86) |
-| components/scroll-area | Edge fade | tp-scroll-area | 100% | layout/geometry — minimize | [docs/components/scroll-area.mdx:169](../../docs/components/scroll-area.mdx#L169) |
-| components/scroll-trigger | Scroll Trigger | tp-scroll-trigger | 40rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:10](../../docs/components/scroll-trigger.mdx#L10) |
-| components/select | Select | tp-field | 20rem | layout/geometry — minimize | [docs/components/select.mdx:11](../../docs/components/select.mdx#L11) |
-| components/select | Groups and disabled options | tp-field | 20rem | layout/geometry — minimize | [docs/components/select.mdx:47](../../docs/components/select.mdx#L47) |
-| components/select | tp-select-option | tp-field | 20rem | layout/geometry — minimize | [docs/components/select.mdx:67](../../docs/components/select.mdx#L67) |
-| components/select | Multiple | tp-field | 20rem | layout/geometry — minimize | [docs/components/select.mdx:84](../../docs/components/select.mdx#L84) |
-| components/select | Searchable | tp-field | 20rem | layout/geometry — minimize | [docs/components/select.mdx:104](../../docs/components/select.mdx#L104) |
-| components/select | Chips | tp-field | 24rem | layout/geometry — minimize | [docs/components/select.mdx:138](../../docs/components/select.mdx#L138) |
-| components/select | Columns | tp-field | 20rem | layout/geometry — minimize | [docs/components/select.mdx:159](../../docs/components/select.mdx#L159) |
-| components/select | Items property | tp-field | 20rem | layout/geometry — minimize | [docs/components/select.mdx:182](../../docs/components/select.mdx#L182) |
-| components/select | Rich labels | tp-field | 20rem | layout/geometry — minimize | [docs/components/select.mdx:204](../../docs/components/select.mdx#L204) |
-| components/select | Virtualized time zones | tp-field | 20rem | layout/geometry — minimize | [docs/components/select.mdx:237](../../docs/components/select.mdx#L237) |
-| components/select | Search source | tp-field | 20rem | layout/geometry — minimize | [docs/components/select.mdx:256](../../docs/components/select.mdx#L256) |
-| components/select | Value change | tp-stack | 20rem | layout/geometry — minimize | [docs/components/select.mdx:292](../../docs/components/select.mdx#L292) |
-| components/select | Disabled, read-only and error | tp-stack | 20rem | layout/geometry — minimize | [docs/components/select.mdx:332](../../docs/components/select.mdx#L332) |
-| components/select | Inline | tp-stack | 22rem | layout/geometry — minimize | [docs/components/select.mdx:387](../../docs/components/select.mdx#L387) |
-| components/separator | Separator | tp-stack | 22rem | layout/geometry — minimize | [docs/components/separator.mdx:10](../../docs/components/separator.mdx#L10) |
-| components/separator | Between sections | tp-stack | 24rem | layout/geometry — minimize | [docs/components/separator.mdx:52](../../docs/components/separator.mdx#L52) |
-| components/skeleton | Pulse, sweep and none | tp-stack | 20rem | layout/geometry — minimize | [docs/components/skeleton.mdx:38](../../docs/components/skeleton.mdx#L38) |
-| components/skeleton | Video and description | tp-stack | 24rem | layout/geometry — minimize | [docs/components/skeleton.mdx:74](../../docs/components/skeleton.mdx#L74) |
-| components/skeleton | Settings form | tp-stack | 24rem | layout/geometry — minimize | [docs/components/skeleton.mdx:99](../../docs/components/skeleton.mdx#L99) |
-| components/skeleton | Table rows | tp-stack | 30rem | layout/geometry — minimize | [docs/components/skeleton.mdx:128](../../docs/components/skeleton.mdx#L128) |
-| components/slider | Slider | tp-slider | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:15](../../docs/components/slider.mdx#L15) |
-| components/slider | Price range | tp-slider | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:32](../../docs/components/slider.mdx#L32) |
-| components/slider | Push, swap and none | tp-stack | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:49](../../docs/components/slider.mdx#L49) |
-| components/slider | Currency and percent | tp-stack | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:89](../../docs/components/slider.mdx#L89) |
-| components/slider | Controlled range | tp-stack | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:127](../../docs/components/slider.mdx#L127) |
-| components/slider | Step and large step | tp-stack | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:151](../../docs/components/slider.mdx#L151) |
-| components/slider | Compact readout | div | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:203](../../docs/components/slider.mdx#L203) |
-| components/slider | Media timeline | tp-slider | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:223](../../docs/components/slider.mdx#L223) |
-| components/slider | Authored thumbs | tp-slider | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:233](../../docs/components/slider.mdx#L233) |
-| components/slider | Fixed start and added thumbs | tp-stack | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:261](../../docs/components/slider.mdx#L261) |
-| components/slider | Thumb alignment and right to left | tp-stack | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:287](../../docs/components/slider.mdx#L287) |
-| components/slider | Field and form | tp-form | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:300](../../docs/components/slider.mdx#L300) |
-| components/slider | Disabled and read-only | tp-stack | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:318](../../docs/components/slider.mdx#L318) |
-| components/slider | Change and commit | tp-stack | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:336](../../docs/components/slider.mdx#L336) |
-| components/slider | Rejecting values | tp-stack | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:365](../../docs/components/slider.mdx#L365) |
-| components/slider | Inline | tp-stack | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:418](../../docs/components/slider.mdx#L418) |
-| components/slider | Inline in a field | tp-field | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:454](../../docs/components/slider.mdx#L454) |
-| components/slider | Editable value | tp-stack | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:464](../../docs/components/slider.mdx#L464) |
-| components/slider | Ticks | tp-stack | 22rem | layout/geometry — minimize | [docs/components/slider.mdx:491](../../docs/components/slider.mdx#L491) |
-| components/status-dot | Service status | tp-list | 28rem | layout/geometry — minimize | [docs/components/status-dot.mdx:44](../../docs/components/status-dot.mdx#L44) |
-| components/status-dot | Compact column | div | 30rem | layout/geometry — minimize | [docs/components/status-dot.mdx:76](../../docs/components/status-dot.mdx#L76) |
-| components/switch | Settings | tp-stack | 26rem | layout/geometry — minimize | [docs/components/switch.mdx:23](../../docs/components/switch.mdx#L23) |
-| components/switch | Form value | tp-form | 26rem | layout/geometry — minimize | [docs/components/switch.mdx:65](../../docs/components/switch.mdx#L65) |
-| components/switch | Disabled and read-only | tp-stack | 26rem | layout/geometry — minimize | [docs/components/switch.mdx:91](../../docs/components/switch.mdx#L91) |
-| components/switch | Controlled | tp-stack | 26rem | layout/geometry — minimize | [docs/components/switch.mdx:137](../../docs/components/switch.mdx#L137) |
-| components/switch | Inline | tp-stack | 22rem | layout/geometry — minimize | [docs/components/switch.mdx:198](../../docs/components/switch.mdx#L198) |
-| components/tabs | Tabs | tp-tabs | 26rem | layout/geometry — minimize | [docs/components/tabs.mdx:10](../../docs/components/tabs.mdx#L10) |
-| components/tabs | Underline | tp-tabs | 28rem | layout/geometry — minimize | [docs/components/tabs.mdx:49](../../docs/components/tabs.mdx#L49) |
-| components/tabs | Vertical | tp-tabs | 30rem | layout/geometry — minimize | [docs/components/tabs.mdx:66](../../docs/components/tabs.mdx#L66) |
-| components/tabs | Automatic activation | tp-tabs | 24rem | layout/geometry — minimize | [docs/components/tabs.mdx:83](../../docs/components/tabs.mdx#L83) |
-| components/tabs | Change event and setValue | tp-stack | 26rem | layout/geometry — minimize | [docs/components/tabs.mdx:111](../../docs/components/tabs.mdx#L111) |
-| components/tabs | Controlled with a veto | tp-tabs | 26rem | layout/geometry — minimize | [docs/components/tabs.mdx:169](../../docs/components/tabs.mdx#L169) |
-| components/tabs | Disabled | tp-tabs | 26rem | layout/geometry — minimize | [docs/components/tabs.mdx:198](../../docs/components/tabs.mdx#L198) |
-| components/text-area | Text area | tp-field | 26rem | layout/geometry — minimize | [docs/components/text-area.mdx:10](../../docs/components/text-area.mdx#L10) |
-| components/text-area | Content and fixed sizing | tp-stack | 26rem | layout/geometry — minimize | [docs/components/text-area.mdx:26](../../docs/components/text-area.mdx#L26) |
-| components/text-area | Mono | tp-field | 28rem | layout/geometry — minimize | [docs/components/text-area.mdx:49](../../docs/components/text-area.mdx#L49) |
-| components/text-area | Error | tp-field | 26rem | layout/geometry — minimize | [docs/components/text-area.mdx:64](../../docs/components/text-area.mdx#L64) |
-| components/text-area | Character count | tp-stack | 26rem | layout/geometry — minimize | [docs/components/text-area.mdx:79](../../docs/components/text-area.mdx#L79) |
-| components/text-area | Form | tp-form | 26rem | layout/geometry — minimize | [docs/components/text-area.mdx:103](../../docs/components/text-area.mdx#L103) |
-| components/text-area | Disabled and read-only | tp-stack | 26rem | layout/geometry — minimize | [docs/components/text-area.mdx:121](../../docs/components/text-area.mdx#L121) |
-| components/text-transform | Text transform | dl | 24rem | layout/geometry — minimize | [docs/components/text-transform.mdx:10](../../docs/components/text-transform.mdx#L10) |
-| components/text-transform | Text transform | dd | 12rem | layout/geometry — minimize | [docs/components/text-transform.mdx:20](../../docs/components/text-transform.mdx#L20) |
-| components/text-transform | Plans | tp-table | 40rem | layout/geometry — minimize | [docs/components/text-transform.mdx:53](../../docs/components/text-transform.mdx#L53) |
-| components/text-transform | Uploads | tp-list | 30rem | layout/geometry — minimize | [docs/components/text-transform.mdx:91](../../docs/components/text-transform.mdx#L91) |
-| components/theme-switcher | Theme switcher | tp-card | 100% | layout/geometry — minimize | [docs/components/theme-switcher.mdx:9](../../docs/components/theme-switcher.mdx#L9) |
-| components/theme-switcher | Variants | tp-card | 100% | layout/geometry — minimize | [docs/components/theme-switcher.mdx:33](../../docs/components/theme-switcher.mdx#L33) |
-| components/theme-switcher | Small, defaulting to dark | tp-card | 100% | layout/geometry — minimize | [docs/components/theme-switcher.mdx:84](../../docs/components/theme-switcher.mdx#L84) |
-| components/theme-switcher | Explicit choices only | tp-card | 100% | layout/geometry — minimize | [docs/components/theme-switcher.mdx:106](../../docs/components/theme-switcher.mdx#L106) |
-| components/theme-switcher | Color scheme store | tp-card | 100% | layout/geometry — minimize | [docs/components/theme-switcher.mdx:141](../../docs/components/theme-switcher.mdx#L141) |
-| components/time | Time | ul | 24rem | layout/geometry — minimize | [docs/components/time.mdx:12](../../docs/components/time.mdx#L12) |
-| components/time | Due dates | tp-list | 24rem | layout/geometry — minimize | [docs/components/time.mdx:134](../../docs/components/time.mdx#L134) |
-| components/timeline | Timeline | tp-timeline | 20rem | layout/geometry — minimize | [docs/components/timeline.mdx:11](../../docs/components/timeline.mdx#L11) |
-| components/timeline | Step tracker | tp-timeline | 40rem | layout/geometry — minimize | [docs/components/timeline.mdx:46](../../docs/components/timeline.mdx#L46) |
-| components/timeline | Roadmap | tp-scroll-area | 44rem | layout/geometry — minimize | [docs/components/timeline.mdx:59](../../docs/components/timeline.mdx#L59) |
-| components/timeline | Numbered steps | tp-timeline | 24rem | layout/geometry — minimize | [docs/components/timeline.mdx:102](../../docs/components/timeline.mdx#L102) |
-| components/timeline | Expandable phases | tp-timeline | 32rem | layout/geometry — minimize | [docs/components/timeline.mdx:128](../../docs/components/timeline.mdx#L128) |
-| components/timeline | Conversation | tp-timeline | 40rem | layout/geometry — minimize | [docs/components/timeline.mdx:176](../../docs/components/timeline.mdx#L176) |
-| components/timeline | Changelog | tp-timeline | 32rem | layout/geometry — minimize | [docs/components/timeline.mdx:201](../../docs/components/timeline.mdx#L201) |
-| components/timeline | Explicit status | tp-timeline | 22rem | layout/geometry — minimize | [docs/components/timeline.mdx:238](../../docs/components/timeline.mdx#L238) |
-| components/tooltip | Cursor tracking | div | 100% | layout/geometry — minimize | [docs/components/tooltip.mdx:69](../../docs/components/tooltip.mdx#L69) |
-| components/visually-hidden | Filter results | tp-stack | 24rem | layout/geometry — minimize | [docs/components/visually-hidden.mdx:58](../../docs/components/visually-hidden.mdx#L58) |
-| components/visually-hidden | Repeated actions | tp-table | 32rem | layout/geometry — minimize | [docs/components/visually-hidden.mdx:94](../../docs/components/visually-hidden.mdx#L94) |
-| motion/text/text-mirror | Text mirror | p | 100% | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:9](../../docs/motion/text/text-mirror.mdx#L9) |
-| motion/text/text-mirror | From the center line | p | 28rem | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:28](../../docs/motion/text/text-mirror.mdx#L28) |
-| motion/text/text-mirror | Vertical seam | p | 32rem | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:41](../../docs/motion/text/text-mirror.mdx#L41) |
-| motion/text/text-mirror | Hide and reveal | p | 36rem | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:59](../../docs/motion/text/text-mirror.mdx#L59) |
-| motion/text/text-split | Text split | p | 100% | layout/geometry — minimize | [docs/motion/text/text-split.mdx:9](../../docs/motion/text/text-split.mdx#L9) |
-| motion/text/text-split | Inline formatting | p | 100% | layout/geometry — minimize | [docs/motion/text/text-split.mdx:127](../../docs/motion/text/text-split.mdx#L127) |
-| widgets/color-picker | Color input trigger | tp-color-picker | 20rem | layout/geometry — minimize | [docs/widgets/color-picker.mdx:36](../../docs/widgets/color-picker.mdx#L36) |
-| widgets/color-picker | Popup in a form | form | 24rem | layout/geometry — minimize | [docs/widgets/color-picker.mdx:48](../../docs/widgets/color-picker.mdx#L48) |
-| widgets/easing-editor | Easing editor | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:9](../../docs/widgets/easing-editor.mdx#L9) |
-| widgets/easing-editor | Spring and custom points | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:23](../../docs/widgets/easing-editor.mdx#L23) |
-| widgets/easing-editor | Spring and custom points | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:24](../../docs/widgets/easing-editor.mdx#L24) |
-| widgets/easing-editor | Rotation preview | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:71](../../docs/widgets/easing-editor.mdx#L71) |
-| widgets/easing-editor | Design system presets | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:84](../../docs/widgets/easing-editor.mdx#L84) |
-| widgets/easing-editor | Export for code | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:114](../../docs/widgets/easing-editor.mdx#L114) |
-| widgets/easing-editor | Commit and veto | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:140](../../docs/widgets/easing-editor.mdx#L140) |
-| widgets/easing-editor | Controlled owner | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:164](../../docs/widgets/easing-editor.mdx#L164) |
-| widgets/emoji-picker | Insert into a message | tp-stack | 28rem | layout/geometry — minimize | [docs/widgets/emoji-picker.mdx:47](../../docs/widgets/emoji-picker.mdx#L47) |
-| widgets/emoji-picker | Popup in a form | form | 24rem | layout/geometry — minimize | [docs/widgets/emoji-picker.mdx:202](../../docs/widgets/emoji-picker.mdx#L202) |
-| widgets/gradient-picker | Gradient picker | tp-gradient-picker | 28rem | layout/geometry — minimize | [docs/widgets/gradient-picker.mdx:10](../../docs/widgets/gradient-picker.mdx#L10) |
-| widgets/gradient-picker | Stop controls | tp-stack | 24rem | layout/geometry — minimize | [docs/widgets/gradient-picker.mdx:33](../../docs/widgets/gradient-picker.mdx#L33) |
-| widgets/gradient-picker | Midpoints | tp-gradient-picker | 28rem | layout/geometry — minimize | [docs/widgets/gradient-picker.mdx:80](../../docs/widgets/gradient-picker.mdx#L80) |
-| widgets/gradient-picker | Small and read-only | tp-stack | 24rem | layout/geometry — minimize | [docs/widgets/gradient-picker.mdx:112](../../docs/widgets/gradient-picker.mdx#L112) |
-| widgets/gradient-picker | Field | tp-gradient-picker | 28rem | layout/geometry — minimize | [docs/widgets/gradient-picker.mdx:130](../../docs/widgets/gradient-picker.mdx#L130) |
-| widgets/gradient-picker | Field settings | tp-stack | 24rem | layout/geometry — minimize | [docs/widgets/gradient-picker.mdx:144](../../docs/widgets/gradient-picker.mdx#L144) |
-| widgets/text-editor | Text editor | tp-stack | 44rem | layout/geometry — minimize | [docs/widgets/text-editor.mdx:10](../../docs/widgets/text-editor.mdx#L10) |
-| widgets/text-editor | Classic editor | div | 36rem | layout/geometry — minimize | [docs/widgets/text-editor.mdx:180](../../docs/widgets/text-editor.mdx#L180) |
-| widgets/text-editor | Node editor | div | 44rem | layout/geometry — minimize | [docs/widgets/text-editor.mdx:260](../../docs/widgets/text-editor.mdx#L260) |
-| widgets/text-editor | Custom nodes | div | 44rem | layout/geometry — minimize | [docs/widgets/text-editor.mdx:326](../../docs/widgets/text-editor.mdx#L326) |
-| widgets/text-editor | Markdown in and out | tp-stack | 44rem | layout/geometry — minimize | [docs/widgets/text-editor.mdx:514](../../docs/widgets/text-editor.mdx#L514) |
-| widgets/text-editor | In a form | form | 36rem | layout/geometry — minimize | [docs/widgets/text-editor.mdx:564](../../docs/widgets/text-editor.mdx#L564) |
-| widgets/text-editor | Read-only and disabled | tp-stack | 36rem | layout/geometry — minimize | [docs/widgets/text-editor.mdx:624](../../docs/widgets/text-editor.mdx#L624) |
-| components/autocomplete | Components/Autocomplete | div | 22rem | layout/geometry — minimize | [src/stories/autocomplete.stories.ts:121](../../src/stories/autocomplete.stories.ts#L121) |
-| compositions/citation.examples | citationExamples | p | 36rem | layout/geometry — minimize | [src/stories/citation.examples.ts:21](../../src/stories/citation.examples.ts#L21) |
-| compositions/citation.examples | citationExamples | p | 36rem | layout/geometry — minimize | [src/stories/citation.examples.ts:31](../../src/stories/citation.examples.ts#L31) |
-| compositions/citation.examples | citationExamples | article | 36rem | layout/geometry — minimize | [src/stories/citation.examples.ts:44](../../src/stories/citation.examples.ts#L44) |
-| components/data-visualization | Components/Data visualization | div | calc(var(--tp-spacing) * 200) | layout/geometry — minimize | [src/stories/data-visualization.stories.ts:34](../../src/stories/data-visualization.stories.ts#L34) |
-| components/description-list | Components/Description list | tp-description-list | 28rem | layout/geometry — minimize | [src/stories/description-list.stories.ts:78](../../src/stories/description-list.stories.ts#L78) |
-| components/field-group | Components/Field group | tp-field-group | calc(var(--tp-spacing) * 80) | layout/geometry — minimize | [src/stories/field-group.stories.ts:73](../../src/stories/field-group.stories.ts#L73) |
-| components/image | Components/Image | tp-image | 40rem | layout/geometry — minimize | [src/stories/image.stories.ts:157](../../src/stories/image.stories.ts#L157) |
-| compositions/map.examples | pinSvg | section | 64rem | layout/geometry — minimize | [src/stories/map.examples.ts:110](../../src/stories/map.examples.ts#L110) |
-| components/media-player | Components/Media player | tp-media-player | 48rem | layout/geometry — minimize | [src/stories/media-player.stories.ts:153](../../src/stories/media-player.stories.ts#L153) |
-| components/media-player | Default | div | 48rem | layout/geometry — minimize | [src/stories/media-player.stories.ts:200](../../src/stories/media-player.stories.ts#L200) |
-| compositions/presentation-primitives.examples | bubbleDefaults | tp-bubble-group | calc(var(--tp-spacing) * 140) | layout/geometry — minimize | [src/stories/presentation-primitives.examples.ts:19](../../src/stories/presentation-primitives.examples.ts#L19) |
-| compositions/questionnaire.examples | questionnaireExamples | div | 28rem | layout/geometry — minimize | [src/stories/questionnaire.examples.ts:88](../../src/stories/questionnaire.examples.ts#L88) |
-| components/questionnaire | Components/Questionnaire | div | 28rem | layout/geometry — minimize | [src/stories/questionnaire.stories.ts:42](../../src/stories/questionnaire.stories.ts#L42) |
-| components/scroll-area | Components/Scroll area | tp-scroll-area | 100% | layout/geometry — minimize | [src/stories/scroll-area.stories.ts:46](../../src/stories/scroll-area.stories.ts#L46) |
-| components/scroll-trigger | Components/Scroll trigger | div | 48rem | layout/geometry — minimize | [src/stories/scroll-trigger.stories.ts:121](../../src/stories/scroll-trigger.stories.ts#L121) |
-| compositions/skeleton.examples | skeletonExamples | tp-stack | calc(var(--tp-spacing) * 64) | layout/geometry — minimize | [src/stories/skeleton.examples.ts:60](../../src/stories/skeleton.examples.ts#L60) |
-| compositions/skeleton.examples | skeletonExamples | tp-card | calc(var(--tp-spacing) * 80) | layout/geometry — minimize | [src/stories/skeleton.examples.ts:73](../../src/stories/skeleton.examples.ts#L73) |
-| compositions/skeleton.examples | skeletonExamples | tp-stack | calc(var(--tp-spacing) * 100) | layout/geometry — minimize | [src/stories/skeleton.examples.ts:83](../../src/stories/skeleton.examples.ts#L83) |
-| compositions/skeleton.examples | skeletonExamples | div | calc(var(--tp-spacing) * 100) | layout/geometry — minimize | [src/stories/skeleton.examples.ts:91](../../src/stories/skeleton.examples.ts#L91) |
-| compositions/skeleton.examples | skeletonExamples | tp-stack | calc(var(--tp-spacing) * 120) | layout/geometry — minimize | [src/stories/skeleton.examples.ts:100](../../src/stories/skeleton.examples.ts#L100) |
-| compositions/table.examples | tableDefaults | tp-table | calc(var(--tp-spacing) * 160) | layout/geometry — minimize | [src/stories/table.examples.ts:226](../../src/stories/table.examples.ts#L226) |
-| motion/text/text-mirror | Motion/Text/Text mirror | p | 100% | layout/geometry — minimize | [src/stories/text-mirror.stories.ts:55](../../src/stories/text-mirror.stories.ts#L55) |
-| motion/text/text-split | Motion/Text/Text split | h2 | 36rem | layout/geometry — minimize | [src/stories/text-split.stories.ts:75](../../src/stories/text-split.stories.ts#L75) |
-| components/timeline | (file/setup/shared helper) | tp-timeline | 24rem | layout/geometry — minimize | [src/stories/timeline.stories.ts:10](../../src/stories/timeline.stories.ts#L10) |
-| components/tree-view | Components/Tree view | tp-tree-view | 18rem | layout/geometry — minimize | [src/stories/tree-view.stories.ts:64](../../src/stories/tree-view.stories.ts#L64) |
-| widgets/gradient-picker | Widgets/Gradient picker | tp-gradient-picker | calc(var(--tp-spacing) * 100) | layout/geometry — minimize | [src/stories/widgets/gradient-picker.stories.ts:90](../../src/stories/widgets/gradient-picker.stories.ts#L90) |
+| components/aspect-ratio | Aspect ratio | img | transparent | content appearance — review required | [docs/components/aspect-ratio.mdx:11](../../docs/components/aspect-ratio.mdx#L11) |
+| components/aspect-ratio | Common ratios | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/aspect-ratio.mdx:28](../../docs/components/aspect-ratio.mdx#L28) |
+| components/aspect-ratio | Common ratios | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/aspect-ratio.mdx:31](../../docs/components/aspect-ratio.mdx#L31) |
+| components/aspect-ratio | Common ratios | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/aspect-ratio.mdx:34](../../docs/components/aspect-ratio.mdx#L34) |
+| components/aspect-ratio | One ratio, three widths | img | transparent | content appearance — review required | [docs/components/aspect-ratio.mdx:54](../../docs/components/aspect-ratio.mdx#L54) |
+| components/aspect-ratio | One ratio, three widths | figcaption | var(--tp-muted-foreground) | content appearance — review required | [docs/components/aspect-ratio.mdx:60](../../docs/components/aspect-ratio.mdx#L60) |
+| components/aspect-ratio | One ratio, three widths | img | transparent | content appearance — review required | [docs/components/aspect-ratio.mdx:76](../../docs/components/aspect-ratio.mdx#L76) |
+| components/aspect-ratio | One ratio, three widths | figcaption | var(--tp-muted-foreground) | content appearance — review required | [docs/components/aspect-ratio.mdx:82](../../docs/components/aspect-ratio.mdx#L82) |
+| components/aspect-ratio | One ratio, three widths | img | transparent | content appearance — review required | [docs/components/aspect-ratio.mdx:98](../../docs/components/aspect-ratio.mdx#L98) |
+| components/aspect-ratio | One ratio, three widths | figcaption | var(--tp-muted-foreground) | content appearance — review required | [docs/components/aspect-ratio.mdx:104](../../docs/components/aspect-ratio.mdx#L104) |
+| components/aspect-ratio | Cover and contain | img | transparent | content appearance — review required | [docs/components/aspect-ratio.mdx:126](../../docs/components/aspect-ratio.mdx#L126) |
+| components/aspect-ratio | Cover and contain | img | transparent | content appearance — review required | [docs/components/aspect-ratio.mdx:129](../../docs/components/aspect-ratio.mdx#L129) |
+| components/autocomplete | In a form | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/autocomplete.mdx:240](../../docs/components/autocomplete.mdx#L240) |
+| components/avatar | Decorative avatar | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/avatar.mdx:162](../../docs/components/avatar.mdx#L162) |
+| components/bubble | Rich content | a | inherit | content appearance — review required | [docs/components/bubble.mdx:112](../../docs/components/bubble.mdx#L112) |
+| components/button-group | Select and native select | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/button-group.mdx:258](../../docs/components/button-group.mdx#L258) |
+| components/calendar | Week numbers | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/calendar.mdx:162](../../docs/components/calendar.mdx#L162) |
+| components/calendar | Value change | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/calendar.mdx:363](../../docs/components/calendar.mdx#L363) |
+| components/card | Header action | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/card.mdx:39](../../docs/components/card.mdx#L39) |
+| components/card | Small | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/card.mdx:108](../../docs/components/card.mdx#L108) |
+| components/carousel | Carousel | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:22](../../docs/components/carousel.mdx#L22) |
+| components/carousel | Carousel | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:35](../../docs/components/carousel.mdx#L35) |
+| components/carousel | Carousel | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:48](../../docs/components/carousel.mdx#L48) |
+| components/carousel | Carousel | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:60](../../docs/components/carousel.mdx#L60) |
+| components/carousel | Bullets inside | footer | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:103](../../docs/components/carousel.mdx#L103) |
+| components/carousel | Bullets inside | footer | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:107](../../docs/components/carousel.mdx#L107) |
+| components/carousel | Bullets inside | footer | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:111](../../docs/components/carousel.mdx#L111) |
+| components/carousel | Autoplay | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:132](../../docs/components/carousel.mdx#L132) |
+| components/carousel | Autoplay | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:136](../../docs/components/carousel.mdx#L136) |
+| components/carousel | Autoplay | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:140](../../docs/components/carousel.mdx#L140) |
+| components/carousel | Crossfade | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:194](../../docs/components/carousel.mdx#L194) |
+| components/carousel | Crossfade | tp-stack | var(--tp-background) | component presentation override — review required | [docs/components/carousel.mdx:198](../../docs/components/carousel.mdx#L198) |
+| components/carousel | Crossfade | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:223](../../docs/components/carousel.mdx#L223) |
+| components/carousel | Layered 3D | img | transparent | content appearance — review required | [docs/components/carousel.mdx:255](../../docs/components/carousel.mdx#L255) |
+| components/carousel | Layered 3D | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:264](../../docs/components/carousel.mdx#L264) |
+| components/carousel | Layered 3D | img | transparent | content appearance — review required | [docs/components/carousel.mdx:291](../../docs/components/carousel.mdx#L291) |
+| components/carousel | Layered 3D | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:300](../../docs/components/carousel.mdx#L300) |
+| components/carousel | Layered 3D | img | transparent | content appearance — review required | [docs/components/carousel.mdx:327](../../docs/components/carousel.mdx#L327) |
+| components/carousel | Layered 3D | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:336](../../docs/components/carousel.mdx#L336) |
+| components/carousel | Parallax | img | transparent | content appearance — review required | [docs/components/carousel.mdx:366](../../docs/components/carousel.mdx#L366) |
+| components/carousel | Parallax | img | transparent | content appearance — review required | [docs/components/carousel.mdx:369](../../docs/components/carousel.mdx#L369) |
+| components/carousel | Parallax | img | transparent | content appearance — review required | [docs/components/carousel.mdx:372](../../docs/components/carousel.mdx#L372) |
+| components/carousel | Parallax | img | transparent | content appearance — review required | [docs/components/carousel.mdx:375](../../docs/components/carousel.mdx#L375) |
+| components/carousel | Focus | img | transparent | content appearance — review required | [docs/components/carousel.mdx:397](../../docs/components/carousel.mdx#L397) |
+| components/carousel | Focus | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:398](../../docs/components/carousel.mdx#L398) |
+| components/carousel | Focus | img | transparent | content appearance — review required | [docs/components/carousel.mdx:401](../../docs/components/carousel.mdx#L401) |
+| components/carousel | Focus | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:402](../../docs/components/carousel.mdx#L402) |
+| components/carousel | Focus | img | transparent | content appearance — review required | [docs/components/carousel.mdx:405](../../docs/components/carousel.mdx#L405) |
+| components/carousel | Focus | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:406](../../docs/components/carousel.mdx#L406) |
+| components/carousel | Focus | img | transparent | content appearance — review required | [docs/components/carousel.mdx:409](../../docs/components/carousel.mdx#L409) |
+| components/carousel | Focus | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:410](../../docs/components/carousel.mdx#L410) |
+| components/carousel | Focus | img | transparent | content appearance — review required | [docs/components/carousel.mdx:413](../../docs/components/carousel.mdx#L413) |
+| components/carousel | Focus | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:414](../../docs/components/carousel.mdx#L414) |
+| components/carousel | Shader transition | img | transparent | content appearance — review required | [docs/components/carousel.mdx:471](../../docs/components/carousel.mdx#L471) |
+| components/carousel | Shader transition | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:481](../../docs/components/carousel.mdx#L481) |
+| components/carousel | Shader transition | img | transparent | content appearance — review required | [docs/components/carousel.mdx:507](../../docs/components/carousel.mdx#L507) |
+| components/carousel | Shader transition | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:517](../../docs/components/carousel.mdx#L517) |
+| components/carousel | Shader transition | img | transparent | content appearance — review required | [docs/components/carousel.mdx:543](../../docs/components/carousel.mdx#L543) |
+| components/carousel | Shader transition | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:553](../../docs/components/carousel.mdx#L553) |
+| components/carousel | Virtual archive with controlled selection | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:593](../../docs/components/carousel.mdx#L593) |
+| components/carousel | Commit | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:664](../../docs/components/carousel.mdx#L664) |
+| components/checkbox | Form values | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/checkbox.mdx:48](../../docs/components/checkbox.mdx#L48) |
+| components/checkbox | CheckboxGroupController | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/checkbox.mdx:130](../../docs/components/checkbox.mdx#L130) |
+| components/collapsible | Positional slots | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/collapsible.mdx:53](../../docs/components/collapsible.mdx#L53) |
+| components/collapsible | Positional slots | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/collapsible.mdx:62](../../docs/components/collapsible.mdx#L62) |
+| components/collapsible | Positional slots | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/collapsible.mdx:65](../../docs/components/collapsible.mdx#L65) |
+| components/collapsible | Open change | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/collapsible.mdx:123](../../docs/components/collapsible.mdx#L123) |
+| components/command-palette | Command palette | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/command-palette.mdx:19](../../docs/components/command-palette.mdx#L19) |
+| components/copy-button | Beside a value | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/copy-button.mdx:53](../../docs/components/copy-button.mdx#L53) |
+| components/copy-button | Beside a value | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/copy-button.mdx:56](../../docs/components/copy-button.mdx#L56) |
+| components/copy-button | Copy events | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/copy-button.mdx:120](../../docs/components/copy-button.mdx#L120) |
+| components/cursor | Cursor | span | var(--tp-background) | content appearance — review required | [docs/components/cursor.mdx:14](../../docs/components/cursor.mdx#L14) |
+| components/cursor | Spring | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/cursor.mdx:47](../../docs/components/cursor.mdx#L47) |
+| components/cursor | Spring | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/cursor.mdx:51](../../docs/components/cursor.mdx#L51) |
+| components/cursor | Zones | span | black | content appearance — review required | [docs/components/cursor.mdx:72](../../docs/components/cursor.mdx#L72) |
+| components/cursor | Zones | div | #fafafa | content appearance — review required | [docs/components/cursor.mdx:73](../../docs/components/cursor.mdx#L73) |
+| components/cursor | Zones | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/cursor.mdx:82](../../docs/components/cursor.mdx#L82) |
+| components/dialog | Container modality | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/dialog.mdx:92](../../docs/components/dialog.mdx#L92) |
+| components/drag-drop-list | Commit events | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/drag-drop-list.mdx:44](../../docs/components/drag-drop-list.mdx#L44) |
+| components/drag-drop-list | Custom rows and overlay | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/drag-drop-list.mdx:117](../../docs/components/drag-drop-list.mdx#L117) |
+| components/drag-drop-list | Board lanes | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/drag-drop-list.mdx:197](../../docs/components/drag-drop-list.mdx#L197) |
+| components/drag-drop-list | Controlled lanes | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/drag-drop-list.mdx:251](../../docs/components/drag-drop-list.mdx#L251) |
+| components/drag-drop-list | Approve before committing | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/drag-drop-list.mdx:321](../../docs/components/drag-drop-list.mdx#L321) |
+| components/empty-state | Bordered and filled | a | inherit | content appearance — review required | [docs/components/empty-state.mdx:111](../../docs/components/empty-state.mdx#L111) |
+| components/field | Slots | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/field.mdx:90](../../docs/components/field.mdx#L90) |
+| components/field | Slots | a | inherit | content appearance — review required | [docs/components/field.mdx:92](../../docs/components/field.mdx#L92) |
+| components/file-upload | Field and form | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/file-upload.mdx:238](../../docs/components/file-upload.mdx#L238) |
+| components/form | Form | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/form.mdx:29](../../docs/components/form.mdx#L29) |
+| components/form | Notification settings | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/form.mdx:79](../../docs/components/form.mdx#L79) |
+| components/form | Matching passwords | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/form.mdx:147](../../docs/components/form.mdx#L147) |
+| components/form | Wait for async checks | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/form.mdx:170](../../docs/components/form.mdx#L170) |
+| components/form | Repeated emails | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/form.mdx:211](../../docs/components/form.mdx#L211) |
+| components/icon | Icon | tp-stack | var(--tp-muted-foreground) | component presentation override — review required | [docs/components/icon.mdx:9](../../docs/components/icon.mdx#L9) |
+| components/icon | Decorative and labelled | tp-icon | var(--tp-success) | component presentation override — review required | [docs/components/icon.mdx:54](../../docs/components/icon.mdx#L54) |
+| components/icon | Size and color | tp-icon | var(--tp-muted-foreground) | component presentation override — review required | [docs/components/icon.mdx:76](../../docs/components/icon.mdx#L76) |
+| components/icon | Size and color | tp-icon | var(--tp-primary) | component presentation override — review required | [docs/components/icon.mdx:77](../../docs/components/icon.mdx#L77) |
+| components/icon | Custom definition | tp-icon | var(--tp-warning) | component presentation override — review required | [docs/components/icon.mdx:95](../../docs/components/icon.mdx#L95) |
+| components/image | Fallbacks | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/image.mdx:60](../../docs/components/image.mdx#L60) |
+| components/image | Reveal timing and repeat | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/image.mdx:143](../../docs/components/image.mdx#L143) |
+| components/image | Headline, group and caption | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/image.mdx:168](../../docs/components/image.mdx#L168) |
+| components/input-group | Status addons | tp-icon | var(--tp-success) | component presentation override — review required | [docs/components/input-group.mdx:80](../../docs/components/input-group.mdx#L80) |
+| components/list | Header and footer | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/list.mdx:149](../../docs/components/list.mdx#L149) |
+| components/list | Header and footer | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/list.mdx:152](../../docs/components/list.mdx#L152) |
+| components/list | Recordings | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/list.mdx:236](../../docs/components/list.mdx#L236) |
+| components/list | Recordings | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/list.mdx:240](../../docs/components/list.mdx#L240) |
+| components/list | Recordings | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/list.mdx:244](../../docs/components/list.mdx#L244) |
+| components/list | Recordings | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/list.mdx:254](../../docs/components/list.mdx#L254) |
+| components/list | People and invitations | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/list.mdx:350](../../docs/components/list.mdx#L350) |
+| components/map | Map | tp-map-pin | var(--tp-chart-1) | component presentation override — review required | [docs/components/map.mdx:20](../../docs/components/map.mdx#L20) |
+| components/map | Map | tp-map-pin | var(--tp-chart-2) | component presentation override — review required | [docs/components/map.mdx:30](../../docs/components/map.mdx#L30) |
+| components/map | Map | tp-map-pin | var(--tp-chart-3) | component presentation override — review required | [docs/components/map.mdx:40](../../docs/components/map.mdx#L40) |
+| components/map | Selected pin | tp-map-pin | var(--tp-primary) | component presentation override — review required | [docs/components/map.mdx:256](../../docs/components/map.mdx#L256) |
+| components/map | Status slot | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/map.mdx:364](../../docs/components/map.mdx#L364) |
+| components/marker | Native hosts and layout | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/marker.mdx:131](../../docs/components/marker.mdx#L131) |
+| components/media-player | Custom top region | tp-stack | white | component presentation override — review required | [docs/components/media-player.mdx:118](../../docs/components/media-player.mdx#L118) |
+| components/menu | Handling commands | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/menu.mdx:59](../../docs/components/menu.mdx#L59) |
+| components/menu | Context invocation | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/menu.mdx:147](../../docs/components/menu.mdx#L147) |
+| components/menubar | Active menu | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/menubar.mdx:111](../../docs/components/menubar.mdx#L111) |
+| components/message | Retry a failed message | span | var(--tp-destructive) | content appearance — review required | [docs/components/message.mdx:194](../../docs/components/message.mdx#L194) |
+| components/native-select | Form value | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/native-select.mdx:109](../../docs/components/native-select.mdx#L109) |
+| components/native-select | Controlled value | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/native-select.mdx:140](../../docs/components/native-select.mdx#L140) |
+| components/navigation-menu | Navigation menu | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-menu.mdx:24](../../docs/components/navigation-menu.mdx#L24) |
+| components/navigation-menu | Navigation menu | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-menu.mdx:32](../../docs/components/navigation-menu.mdx#L32) |
+| components/navigation-menu | Navigation menu | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-menu.mdx:40](../../docs/components/navigation-menu.mdx#L40) |
+| components/navigation-menu | Navigation menu | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-menu.mdx:48](../../docs/components/navigation-menu.mdx#L48) |
+| components/navigation-panel | Navigation panel | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-panel.mdx:64](../../docs/components/navigation-panel.mdx#L64) |
+| components/navigation-panel | Off-canvas | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-panel.mdx:117](../../docs/components/navigation-panel.mdx#L117) |
+| components/navigation-panel | Collapsible groups | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-panel.mdx:165](../../docs/components/navigation-panel.mdx#L165) |
+| components/navigation-panel | Drawer mode | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-panel.mdx:202](../../docs/components/navigation-panel.mdx#L202) |
+| components/navigation-panel | Floating | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-panel.mdx:232](../../docs/components/navigation-panel.mdx#L232) |
+| components/navigation-panel | Team switcher and row actions | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-panel.mdx:308](../../docs/components/navigation-panel.mdx#L308) |
+| components/one-time-code-field | Verify on completion | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/one-time-code-field.mdx:95](../../docs/components/one-time-code-field.mdx#L95) |
+| components/one-time-code-field | Controlled value | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/one-time-code-field.mdx:129](../../docs/components/one-time-code-field.mdx#L129) |
+| components/pagination | Router handling | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/pagination.mdx:33](../../docs/components/pagination.mdx#L33) |
+| components/pagination | Rows per page | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/pagination.mdx:121](../../docs/components/pagination.mdx#L121) |
+| components/popover | Separate anchor | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/popover.mdx:131](../../docs/components/popover.mdx#L131) |
+| components/popover | Open change | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/popover.mdx:159](../../docs/components/popover.mdx#L159) |
+| components/preview-card | Preview Card | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/preview-card.mdx:17](../../docs/components/preview-card.mdx#L17) |
+| components/preview-card | Preview Card | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/preview-card.mdx:18](../../docs/components/preview-card.mdx#L18) |
+| components/preview-card | Delays | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/preview-card.mdx:49](../../docs/components/preview-card.mdx#L49) |
+| components/preview-card | Placement and arrow | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/preview-card.mdx:66](../../docs/components/preview-card.mdx#L66) |
+| components/preview-card | Placement and arrow | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/preview-card.mdx:69](../../docs/components/preview-card.mdx#L69) |
+| components/preview-card | Not hoverable | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/preview-card.mdx:86](../../docs/components/preview-card.mdx#L86) |
+| components/questionnaire | Submit | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/questionnaire.mdx:282](../../docs/components/questionnaire.mdx#L282) |
+| components/questionnaire | Checkpoint and cross-answer validation | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/questionnaire.mdx:315](../../docs/components/questionnaire.mdx#L315) |
+| components/questionnaire | Clarification dialog | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/questionnaire.mdx:611](../../docs/components/questionnaire.mdx#L611) |
+| components/radio-group | Value change | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/radio-group.mdx:164](../../docs/components/radio-group.mdx#L164) |
+| components/resizable-panel-group | Resizable Panel Group | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:15](../../docs/components/resizable-panel-group.mdx#L15) |
+| components/resizable-panel-group | Resizable Panel Group | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:16](../../docs/components/resizable-panel-group.mdx#L16) |
+| components/resizable-panel-group | Resizable Panel Group | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:17](../../docs/components/resizable-panel-group.mdx#L17) |
+| components/resizable-panel-group | Resizable Panel Group | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:26](../../docs/components/resizable-panel-group.mdx#L26) |
+| components/resizable-panel-group | Resizable Panel Group | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:32](../../docs/components/resizable-panel-group.mdx#L32) |
+| components/resizable-panel-group | Bounds | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:58](../../docs/components/resizable-panel-group.mdx#L58) |
+| components/resizable-panel-group | Bounds | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:62](../../docs/components/resizable-panel-group.mdx#L62) |
+| components/resizable-panel-group | Vertical | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:80](../../docs/components/resizable-panel-group.mdx#L80) |
+| components/resizable-panel-group | Layout events | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:149](../../docs/components/resizable-panel-group.mdx#L149) |
+| components/resizable-panel-group | Persisted sizes | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:238](../../docs/components/resizable-panel-group.mdx#L238) |
+| components/resizable-panel-group | Disabled | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:276](../../docs/components/resizable-panel-group.mdx#L276) |
+| components/scroll-area | Both axes | tr | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-area.mdx:89](../../docs/components/scroll-area.mdx#L89) |
+| components/scroll-trigger | Scroll Trigger | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:22](../../docs/components/scroll-trigger.mdx#L22) |
+| components/scroll-trigger | Replay on entry | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:61](../../docs/components/scroll-trigger.mdx#L61) |
+| components/scroll-trigger | Replay on entry | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:64](../../docs/components/scroll-trigger.mdx#L64) |
+| components/scroll-trigger | Pinned scene | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:210](../../docs/components/scroll-trigger.mdx#L210) |
+| components/scroll-trigger | Pinned scene | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:217](../../docs/components/scroll-trigger.mdx#L217) |
+| components/scroll-trigger | Pinned scene | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:218](../../docs/components/scroll-trigger.mdx#L218) |
+| components/scroll-trigger | Reveal events | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:242](../../docs/components/scroll-trigger.mdx#L242) |
+| components/scroll-trigger | Reveal events | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:246](../../docs/components/scroll-trigger.mdx#L246) |
+| components/select | Value change | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/select.mdx:313](../../docs/components/select.mdx#L313) |
+| components/separator | Separator | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/separator.mdx:14](../../docs/components/separator.mdx#L14) |
+| components/slider | Change and commit | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/slider.mdx:343](../../docs/components/slider.mdx#L343) |
+| components/slider | Rejecting values | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/slider.mdx:380](../../docs/components/slider.mdx#L380) |
+| components/spinner | Spinner | tp-stack | var(--tp-muted-foreground) | component presentation override — review required | [docs/components/spinner.mdx:9](../../docs/components/spinner.mdx#L9) |
+| components/switch | Thumb icon | tp-icon | var(--tp-foreground) | component presentation override — review required | [docs/components/switch.mdx:167](../../docs/components/switch.mdx#L167) |
+| components/tabs | Change event and setValue | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/tabs.mdx:129](../../docs/components/tabs.mdx#L129) |
+| components/tabs | Controlled with a veto | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/tabs.mdx:183](../../docs/components/tabs.mdx#L183) |
+| components/text-area | Character count | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-area.mdx:93](../../docs/components/text-area.mdx#L93) |
+| components/text-transform | Text transform | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:12](../../docs/components/text-transform.mdx#L12) |
+| components/text-transform | Text transform | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:14](../../docs/components/text-transform.mdx#L14) |
+| components/text-transform | Text transform | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:16](../../docs/components/text-transform.mdx#L16) |
+| components/text-transform | Text transform | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:18](../../docs/components/text-transform.mdx#L18) |
+| components/text-transform | Text transform | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:20](../../docs/components/text-transform.mdx#L20) |
+| components/text-transform | Case and identifiers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:36](../../docs/components/text-transform.mdx#L36) |
+| components/text-transform | Case and identifiers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:37](../../docs/components/text-transform.mdx#L37) |
+| components/text-transform | Case and identifiers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:38](../../docs/components/text-transform.mdx#L38) |
+| components/text-transform | Case and identifiers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:39](../../docs/components/text-transform.mdx#L39) |
+| components/text-transform | Case and identifiers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:40](../../docs/components/text-transform.mdx#L40) |
+| components/text-transform | Case and identifiers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:41](../../docs/components/text-transform.mdx#L41) |
+| components/text-transform | Uploads | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:97](../../docs/components/text-transform.mdx#L97) |
+| components/text-transform | Uploads | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:101](../../docs/components/text-transform.mdx#L101) |
+| components/theme-switcher | Explicit choices only | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/theme-switcher.mdx:119](../../docs/components/theme-switcher.mdx#L119) |
+| components/time | Time | tp-time | var(--tp-muted-foreground) | component presentation override — review required | [docs/components/time.mdx:17](../../docs/components/time.mdx#L17) |
+| components/time | Time | tp-time | var(--tp-muted-foreground) | component presentation override — review required | [docs/components/time.mdx:23](../../docs/components/time.mdx#L23) |
+| components/time | Time | tp-time | var(--tp-muted-foreground) | component presentation override — review required | [docs/components/time.mdx:29](../../docs/components/time.mdx#L29) |
+| components/time | Modes | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:56](../../docs/components/time.mdx#L56) |
+| components/time | Modes | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:57](../../docs/components/time.mdx#L57) |
+| components/time | Modes | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:58](../../docs/components/time.mdx#L58) |
+| components/time | Modes | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:59](../../docs/components/time.mdx#L59) |
+| components/time | Due dates | span | var(--tp-destructive) | content appearance — review required | [docs/components/time.mdx:132](../../docs/components/time.mdx#L132) |
+| components/time | Calendar | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:148](../../docs/components/time.mdx#L148) |
+| components/time | Calendar | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:149](../../docs/components/time.mdx#L149) |
+| components/time | Calendar | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:150](../../docs/components/time.mdx#L150) |
+| components/time | Calendar | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:151](../../docs/components/time.mdx#L151) |
+| components/time | Precisions | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:188](../../docs/components/time.mdx#L188) |
+| components/time | Precisions | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:189](../../docs/components/time.mdx#L189) |
+| components/time | Precisions | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:190](../../docs/components/time.mdx#L190) |
+| components/time | Precisions | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:191](../../docs/components/time.mdx#L191) |
+| components/time | Precisions | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:192](../../docs/components/time.mdx#L192) |
+| components/time | Timers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:203](../../docs/components/time.mdx#L203) |
+| components/time | Timers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:204](../../docs/components/time.mdx#L204) |
+| components/time | Timers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:205](../../docs/components/time.mdx#L205) |
+| components/timeline | Timeline | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:15](../../docs/components/timeline.mdx#L15) |
+| components/timeline | Timeline | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:19](../../docs/components/timeline.mdx#L19) |
+| components/timeline | Timeline | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:23](../../docs/components/timeline.mdx#L23) |
+| components/timeline | Timeline | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:27](../../docs/components/timeline.mdx#L27) |
+| components/timeline | Step tracker | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:49](../../docs/components/timeline.mdx#L49) |
+| components/timeline | Step tracker | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:50](../../docs/components/timeline.mdx#L50) |
+| components/timeline | Step tracker | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:51](../../docs/components/timeline.mdx#L51) |
+| components/timeline | Step tracker | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:52](../../docs/components/timeline.mdx#L52) |
+| components/timeline | Roadmap | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:64](../../docs/components/timeline.mdx#L64) |
+| components/timeline | Roadmap | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:66](../../docs/components/timeline.mdx#L66) |
+| components/timeline | Roadmap | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:69](../../docs/components/timeline.mdx#L69) |
+| components/timeline | Roadmap | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:71](../../docs/components/timeline.mdx#L71) |
+| components/timeline | Roadmap | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:74](../../docs/components/timeline.mdx#L74) |
+| components/timeline | Roadmap | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:76](../../docs/components/timeline.mdx#L76) |
+| components/timeline | Roadmap | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:79](../../docs/components/timeline.mdx#L79) |
+| components/timeline | Roadmap | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:81](../../docs/components/timeline.mdx#L81) |
+| components/timeline | Roadmap | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:84](../../docs/components/timeline.mdx#L84) |
+| components/timeline | Roadmap | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:86](../../docs/components/timeline.mdx#L86) |
+| components/timeline | Roadmap | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:89](../../docs/components/timeline.mdx#L89) |
+| components/timeline | Roadmap | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:91](../../docs/components/timeline.mdx#L91) |
+| components/timeline | Numbered steps | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:109](../../docs/components/timeline.mdx#L109) |
+| components/timeline | Numbered steps | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:114](../../docs/components/timeline.mdx#L114) |
+| components/timeline | Numbered steps | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:119](../../docs/components/timeline.mdx#L119) |
+| components/timeline | Expandable phases | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:136](../../docs/components/timeline.mdx#L136) |
+| components/timeline | Expandable phases | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:143](../../docs/components/timeline.mdx#L143) |
+| components/timeline | Expandable phases | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:149](../../docs/components/timeline.mdx#L149) |
+| components/timeline | Expandable phases | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:156](../../docs/components/timeline.mdx#L156) |
+| components/timeline | Expandable phases | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:162](../../docs/components/timeline.mdx#L162) |
+| components/timeline | Changelog | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:211](../../docs/components/timeline.mdx#L211) |
+| components/timeline | Changelog | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:221](../../docs/components/timeline.mdx#L221) |
+| components/timeline | Changelog | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:228](../../docs/components/timeline.mdx#L228) |
+| components/timeline | Explicit status | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:244](../../docs/components/timeline.mdx#L244) |
+| components/timeline | Explicit status | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:245](../../docs/components/timeline.mdx#L245) |
+| components/timeline | Explicit status | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:246](../../docs/components/timeline.mdx#L246) |
+| components/timeline | Explicit status | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:247](../../docs/components/timeline.mdx#L247) |
+| components/toggle-group | Required choice | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/toggle-group.mdx:151](../../docs/components/toggle-group.mdx#L151) |
+| components/toggle | Change events | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/toggle.mdx:137](../../docs/components/toggle.mdx#L137) |
+| components/tooltip | Cursor tracking | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/tooltip.mdx:69](../../docs/components/tooltip.mdx#L69) |
+| components/tree-view | Opening items | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/tree-view.mdx:99](../../docs/components/tree-view.mdx#L99) |
+| components/tree-view | Rendered rows | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/tree-view.mdx:182](../../docs/components/tree-view.mdx#L182) |
+| components/tree-view | Controlled lanes | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/tree-view.mdx:271](../../docs/components/tree-view.mdx#L271) |
+| motion/surface/glow-border | Custom colors | span | var(--tp-muted-foreground) | content appearance — review required | [docs/motion/surface/glow-border.mdx:145](../../docs/motion/surface/glow-border.mdx#L145) |
+| widgets/color-picker | Popup in a form | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/color-picker.mdx:66](../../docs/widgets/color-picker.mdx#L66) |
+| widgets/color-picker | Commit events | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/color-picker.mdx:208](../../docs/widgets/color-picker.mdx#L208) |
+| widgets/easing-editor | Commit and veto | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/easing-editor.mdx:141](../../docs/widgets/easing-editor.mdx#L141) |
+| widgets/easing-editor | Controlled owner | code | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/easing-editor.mdx:165](../../docs/widgets/easing-editor.mdx#L165) |
+| widgets/emoji-picker | Picks | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/emoji-picker.mdx:28](../../docs/widgets/emoji-picker.mdx#L28) |
+| widgets/emoji-picker | Remembered tone | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/emoji-picker.mdx:87](../../docs/widgets/emoji-picker.mdx#L87) |
+| widgets/emoji-picker | Popup in a form | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/emoji-picker.mdx:214](../../docs/widgets/emoji-picker.mdx#L214) |
+| widgets/flow | Automatic layout | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/flow.mdx:333](../../docs/widgets/flow.mdx#L333) |
+| widgets/flow | Commit and selection | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/flow.mdx:409](../../docs/widgets/flow.mdx#L409) |
+| widgets/flow | Controlled owner | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/flow.mdx:453](../../docs/widgets/flow.mdx#L453) |
+| widgets/flow | In a form | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/flow.mdx:712](../../docs/widgets/flow.mdx#L712) |
+| widgets/text-editor | In a form | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/text-editor.mdx:576](../../docs/widgets/text-editor.mdx#L576) |
+| compositions/message.examples | Actions | span | var(--tp-destructive) | content appearance — review required | [src/stories/message.examples.ts:136](../../src/stories/message.examples.ts#L136) |
+| components/scroll-trigger | (file/setup/shared helper) | p | var(--tp-muted-foreground) | content appearance — review required | [src/stories/scroll-trigger.stories.ts:30](../../src/stories/scroll-trigger.stories.ts#L30) |
 
 <a id="property-2"></a>
 
-### 2. inline-size — 387 occurrences
+### 2. inline-size — 237 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
-| 100% | 234 |
-| 28rem | 14 |
-| 18rem | 13 |
+| 100% | 109 |
 | fit-content | 13 |
+| 18rem | 10 |
 | 15rem | 7 |
 | 60% | 7 |
 | 10rem | 6 |
 | 90% | 6 |
 | 12rem | 5 |
-| 16rem | 5 |
-| 22rem | 5 |
 | 45% | 5 |
 | 80% | 5 |
-| 14rem | 4 |
-| 20rem | 4 |
 | 32rem | 4 |
 | 36rem | 4 |
 | calc(var(--tp-spacing) * 20) | 4 |
-| 24rem | 3 |
+| 16rem | 3 |
+| 20rem | 3 |
 | calc(var(--tp-spacing) * 16) | 3 |
 | calc(var(--tp-spacing) * 25) | 3 |
 | calc(var(--tp-spacing) * 38) | 3 |
-| min(100%, 22rem) | 3 |
 | var(--tp-space-10) | 3 |
+| 14rem | 2 |
+| 22rem | 2 |
+| 24rem | 2 |
+| 28rem | 2 |
 | 6rem | 2 |
 | calc(var(--tp-spacing) * 24) | 2 |
+| min(100%, 22rem) | 2 |
 | min(100%, 24rem) | 2 |
 | min(100%, 26rem) | 2 |
 | 4.5rem | 1 |
@@ -651,46 +487,23 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/aspect-ratio | One ratio, three widths | figure | 10rem | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:47](../../docs/components/aspect-ratio.mdx#L47) |
 | components/aspect-ratio | One ratio, three widths | figure | 15rem | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:69](../../docs/components/aspect-ratio.mdx#L69) |
 | components/aspect-ratio | One ratio, three widths | figure | 20rem | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:91](../../docs/components/aspect-ratio.mdx#L91) |
-| components/aspect-ratio | Cover and contain | div | 100% | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:123](../../docs/components/aspect-ratio.mdx#L123) |
-| components/attachment | Attachment | tp-stack | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:11](../../docs/components/attachment.mdx#L11) |
-| components/attachment | Statuses | tp-stack | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:52](../../docs/components/attachment.mdx#L52) |
-| components/attachment | Image cards | tp-attachment-group | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:92](../../docs/components/attachment.mdx#L92) |
-| components/attachment | Image cards | tp-attachment-group | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:92](../../docs/components/attachment.mdx#L92) |
-| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:94](../../docs/components/attachment.mdx#L94) |
-| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:97](../../docs/components/attachment.mdx#L97) |
-| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:100](../../docs/components/attachment.mdx#L100) |
-| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:103](../../docs/components/attachment.mdx#L103) |
-| components/attachment | Scrollable groups | tp-stack | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:115](../../docs/components/attachment.mdx#L115) |
-| components/attachment | Scrollable groups | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:197](../../docs/components/attachment.mdx#L197) |
-| components/attachment | Scrollable groups | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:261](../../docs/components/attachment.mdx#L261) |
-| components/attachment | Title and description only | tp-stack | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:281](../../docs/components/attachment.mdx#L281) |
-| components/attachment | Preview trigger, download and retry | tp-stack | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:308](../../docs/components/attachment.mdx#L308) |
-| components/attachment | Sizes | tp-stack | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:391](../../docs/components/attachment.mdx#L391) |
-| components/attachment | Remove event | tp-stack | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:419](../../docs/components/attachment.mdx#L419) |
-| components/autocomplete | Autocomplete | tp-field | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:10](../../docs/components/autocomplete.mdx#L10) |
-| components/autocomplete | Autocomplete | tp-field | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:10](../../docs/components/autocomplete.mdx#L10) |
-| components/autocomplete | Autocomplete | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:11](../../docs/components/autocomplete.mdx#L11) |
-| components/autocomplete | Prefix matching | tp-field | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:36](../../docs/components/autocomplete.mdx#L36) |
-| components/autocomplete | Prefix matching | tp-field | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:36](../../docs/components/autocomplete.mdx#L36) |
-| components/autocomplete | Prefix matching | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:37](../../docs/components/autocomplete.mdx#L37) |
-| components/autocomplete | Grouped suggestions | tp-field | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:57](../../docs/components/autocomplete.mdx#L57) |
-| components/autocomplete | Grouped suggestions | tp-field | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:57](../../docs/components/autocomplete.mdx#L57) |
-| components/autocomplete | Grouped suggestions | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:58](../../docs/components/autocomplete.mdx#L58) |
-| components/autocomplete | Inline completion | tp-field | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:80](../../docs/components/autocomplete.mdx#L80) |
-| components/autocomplete | Inline completion | tp-field | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:80](../../docs/components/autocomplete.mdx#L80) |
-| components/autocomplete | Inline completion | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:81](../../docs/components/autocomplete.mdx#L81) |
-| components/autocomplete | Searching hidden fields | tp-field | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:98](../../docs/components/autocomplete.mdx#L98) |
-| components/autocomplete | Searching hidden fields | tp-field | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:98](../../docs/components/autocomplete.mdx#L98) |
-| components/autocomplete | Searching hidden fields | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:99](../../docs/components/autocomplete.mdx#L99) |
-| components/autocomplete | Ranking over several fields | tp-field | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:120](../../docs/components/autocomplete.mdx#L120) |
-| components/autocomplete | Ranking over several fields | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:121](../../docs/components/autocomplete.mdx#L121) |
-| components/autocomplete | Search source | tp-field | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:149](../../docs/components/autocomplete.mdx#L149) |
-| components/autocomplete | Search source | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:150](../../docs/components/autocomplete.mdx#L150) |
-| components/autocomplete | In a form | form | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:214](../../docs/components/autocomplete.mdx#L214) |
-| components/autocomplete | In a form | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:218](../../docs/components/autocomplete.mdx#L218) |
-| components/badge | Status in a list | tp-stack | 100% | layout/geometry — minimize | [docs/components/badge.mdx:64](../../docs/components/badge.mdx#L64) |
+| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:89](../../docs/components/attachment.mdx#L89) |
+| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:92](../../docs/components/attachment.mdx#L92) |
+| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:95](../../docs/components/attachment.mdx#L95) |
+| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:98](../../docs/components/attachment.mdx#L98) |
+| components/attachment | Scrollable groups | tp-stack | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:110](../../docs/components/attachment.mdx#L110) |
+| components/attachment | Scrollable groups | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:192](../../docs/components/attachment.mdx#L192) |
+| components/attachment | Scrollable groups | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:256](../../docs/components/attachment.mdx#L256) |
+| components/autocomplete | Autocomplete | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:12](../../docs/components/autocomplete.mdx#L12) |
+| components/autocomplete | Prefix matching | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:39](../../docs/components/autocomplete.mdx#L39) |
+| components/autocomplete | Grouped suggestions | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:61](../../docs/components/autocomplete.mdx#L61) |
+| components/autocomplete | Inline completion | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:85](../../docs/components/autocomplete.mdx#L85) |
+| components/autocomplete | Searching hidden fields | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:104](../../docs/components/autocomplete.mdx#L104) |
+| components/autocomplete | Ranking over several fields | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:127](../../docs/components/autocomplete.mdx#L127) |
+| components/autocomplete | Search source | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:157](../../docs/components/autocomplete.mdx#L157) |
+| components/autocomplete | In a form | tp-autocomplete | 100% | layout/geometry — minimize | [docs/components/autocomplete.mdx:226](../../docs/components/autocomplete.mdx#L226) |
 | components/breadcrumb | Long trail | div | 100% | layout/geometry — minimize | [docs/components/breadcrumb.mdx:177](../../docs/components/breadcrumb.mdx#L177) |
-| components/button-group | Steppers, labels and counts | tp-input | 5rem | layout/geometry — minimize | [docs/components/button-group.mdx:115](../../docs/components/button-group.mdx#L115) |
+| components/button-group | Steppers, labels and counts | tp-input | 5rem | layout/geometry — minimize | [docs/components/button-group.mdx:116](../../docs/components/button-group.mdx#L116) |
 | components/calendar | Calendar | tp-card | fit-content | layout/geometry — minimize | [docs/components/calendar.mdx:9](../../docs/components/calendar.mdx#L9) |
 | components/calendar | Range | tp-card | fit-content | layout/geometry — minimize | [docs/components/calendar.mdx:24](../../docs/components/calendar.mdx#L24) |
 | components/calendar | Multiple | tp-card | fit-content | layout/geometry — minimize | [docs/components/calendar.mdx:43](../../docs/components/calendar.mdx#L43) |
@@ -704,121 +517,45 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/calendar | French and Brazilian Portuguese | tp-card | fit-content | layout/geometry — minimize | [docs/components/calendar.mdx:245](../../docs/components/calendar.mdx#L245) |
 | components/calendar | French and Brazilian Portuguese | tp-card | fit-content | layout/geometry — minimize | [docs/components/calendar.mdx:254](../../docs/components/calendar.mdx#L254) |
 | components/calendar | Arabic, right to left | tp-card | fit-content | layout/geometry — minimize | [docs/components/calendar.mdx:289](../../docs/components/calendar.mdx#L289) |
-| components/calendar | In a popover | tp-field | 100% | layout/geometry — minimize | [docs/components/calendar.mdx:306](../../docs/components/calendar.mdx#L306) |
-| components/calendar | Value change | tp-card | fit-content | layout/geometry — minimize | [docs/components/calendar.mdx:349](../../docs/components/calendar.mdx#L349) |
-| components/card | Card | tp-card | 100% | layout/geometry — minimize | [docs/components/card.mdx:9](../../docs/components/card.mdx#L9) |
-| components/card | Header action | tp-card | 100% | layout/geometry — minimize | [docs/components/card.mdx:30](../../docs/components/card.mdx#L30) |
-| components/card | Content only | tp-card | 100% | layout/geometry — minimize | [docs/components/card.mdx:43](../../docs/components/card.mdx#L43) |
-| components/card | Elevated | tp-card | 100% | layout/geometry — minimize | [docs/components/card.mdx:80](../../docs/components/card.mdx#L80) |
-| components/card | Small | tp-card | 100% | layout/geometry — minimize | [docs/components/card.mdx:95](../../docs/components/card.mdx#L95) |
-| components/carousel | Layered 3D | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:266](../../docs/components/carousel.mdx#L266) |
-| components/carousel | Layered 3D | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:305](../../docs/components/carousel.mdx#L305) |
-| components/carousel | Layered 3D | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:344](../../docs/components/carousel.mdx#L344) |
-| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:385](../../docs/components/carousel.mdx#L385) |
-| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:388](../../docs/components/carousel.mdx#L388) |
-| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:391](../../docs/components/carousel.mdx#L391) |
-| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:394](../../docs/components/carousel.mdx#L394) |
-| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:415](../../docs/components/carousel.mdx#L415) |
-| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:419](../../docs/components/carousel.mdx#L419) |
-| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:423](../../docs/components/carousel.mdx#L423) |
-| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:427](../../docs/components/carousel.mdx#L427) |
-| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:431](../../docs/components/carousel.mdx#L431) |
-| components/carousel | Shader transition | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:489](../../docs/components/carousel.mdx#L489) |
-| components/carousel | Shader transition | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:527](../../docs/components/carousel.mdx#L527) |
-| components/carousel | Shader transition | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:565](../../docs/components/carousel.mdx#L565) |
-| components/citation | Numbered references | article | 100% | layout/geometry — minimize | [docs/components/citation.mdx:67](../../docs/components/citation.mdx#L67) |
-| components/citation | Horizontal list | tp-citation-list | 100% | layout/geometry — minimize | [docs/components/citation.mdx:110](../../docs/components/citation.mdx#L110) |
-| components/collapsible | Collapsible | tp-collapsible | 100% | layout/geometry — minimize | [docs/components/collapsible.mdx:10](../../docs/components/collapsible.mdx#L10) |
-| components/collapsible | Leading indicator | tp-collapsible | 100% | layout/geometry — minimize | [docs/components/collapsible.mdx:30](../../docs/components/collapsible.mdx#L30) |
-| components/collapsible | Positional slots | tp-stack | 100% | layout/geometry — minimize | [docs/components/collapsible.mdx:45](../../docs/components/collapsible.mdx#L45) |
-| components/collapsible | As a heading | tp-collapsible | 100% | layout/geometry — minimize | [docs/components/collapsible.mdx:79](../../docs/components/collapsible.mdx#L79) |
-| components/collapsible | Searchable | tp-collapsible | 100% | layout/geometry — minimize | [docs/components/collapsible.mdx:92](../../docs/components/collapsible.mdx#L92) |
-| components/collapsible | Open change | tp-stack | 100% | layout/geometry — minimize | [docs/components/collapsible.mdx:113](../../docs/components/collapsible.mdx#L113) |
-| components/collapsible | Disabled | tp-collapsible | 100% | layout/geometry — minimize | [docs/components/collapsible.mdx:136](../../docs/components/collapsible.mdx#L136) |
-| components/collapsible | Line-by-line reveal | tp-collapsible | 100% | layout/geometry — minimize | [docs/components/collapsible.mdx:149](../../docs/components/collapsible.mdx#L149) |
-| components/copy-button | Copy button | tp-field | 100% | layout/geometry — minimize | [docs/components/copy-button.mdx:10](../../docs/components/copy-button.mdx#L10) |
-| components/copy-button | Beside a value | dl | 100% | layout/geometry — minimize | [docs/components/copy-button.mdx:50](../../docs/components/copy-button.mdx#L50) |
-| components/copy-button | In an input group and a field group | tp-stack | 100% | layout/geometry — minimize | [docs/components/copy-button.mdx:65](../../docs/components/copy-button.mdx#L65) |
+| components/calendar | Value change | tp-card | fit-content | layout/geometry — minimize | [docs/components/calendar.mdx:351](../../docs/components/calendar.mdx#L351) |
+| components/carousel | Layered 3D | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:255](../../docs/components/carousel.mdx#L255) |
+| components/carousel | Layered 3D | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:291](../../docs/components/carousel.mdx#L291) |
+| components/carousel | Layered 3D | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:327](../../docs/components/carousel.mdx#L327) |
+| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:366](../../docs/components/carousel.mdx#L366) |
+| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:369](../../docs/components/carousel.mdx#L369) |
+| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:372](../../docs/components/carousel.mdx#L372) |
+| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:375](../../docs/components/carousel.mdx#L375) |
+| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:397](../../docs/components/carousel.mdx#L397) |
+| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:401](../../docs/components/carousel.mdx#L401) |
+| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:405](../../docs/components/carousel.mdx#L405) |
+| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:409](../../docs/components/carousel.mdx#L409) |
+| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:413](../../docs/components/carousel.mdx#L413) |
+| components/carousel | Shader transition | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:471](../../docs/components/carousel.mdx#L471) |
+| components/carousel | Shader transition | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:507](../../docs/components/carousel.mdx#L507) |
+| components/carousel | Shader transition | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:543](../../docs/components/carousel.mdx#L543) |
 | components/cursor | Cursor | span | 4.5rem | layout/geometry — minimize | [docs/components/cursor.mdx:14](../../docs/components/cursor.mdx#L14) |
 | components/cursor | Zones | span | 4rem | layout/geometry — minimize | [docs/components/cursor.mdx:72](../../docs/components/cursor.mdx#L72) |
 | components/cursor | Dot and ring | span | var(--tp-space-2) | layout/geometry — minimize | [docs/components/cursor.mdx:136](../../docs/components/cursor.mdx#L136) |
-| components/description-list | Description list | tp-description-list | 100% | layout/geometry — minimize | [docs/components/description-list.mdx:10](../../docs/components/description-list.mdx#L10) |
-| components/description-list | Record details | tp-card | 100% | layout/geometry — minimize | [docs/components/description-list.mdx:30](../../docs/components/description-list.mdx#L30) |
-| components/description-list | Show more | tp-description-list | 100% | layout/geometry — minimize | [docs/components/description-list.mdx:63](../../docs/components/description-list.mdx#L63) |
-| components/description-list | Summary row | tp-description-list | 100% | layout/geometry — minimize | [docs/components/description-list.mdx:92](../../docs/components/description-list.mdx#L92) |
-| components/description-list | Alignment and stacking | tp-description-list | 20rem | layout/geometry — minimize | [docs/components/description-list.mdx:108](../../docs/components/description-list.mdx#L108) |
-| components/description-list | Alignment and stacking | tp-description-list | 14rem | layout/geometry — minimize | [docs/components/description-list.mdx:114](../../docs/components/description-list.mdx#L114) |
+| components/description-list | Alignment and stacking | tp-description-list | 20rem | layout/geometry — minimize | [docs/components/description-list.mdx:115](../../docs/components/description-list.mdx#L115) |
+| components/description-list | Alignment and stacking | tp-description-list | 14rem | layout/geometry — minimize | [docs/components/description-list.mdx:121](../../docs/components/description-list.mdx#L121) |
 | components/dialog | Container modality | section | 100% | layout/geometry — minimize | [docs/components/dialog.mdx:82](../../docs/components/dialog.mdx#L82) |
-| components/drag-drop-list | Drag drop list | tp-drag-drop-list | 100% | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:10](../../docs/components/drag-drop-list.mdx#L10) |
-| components/drag-drop-list | Commit events | tp-stack | 100% | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:34](../../docs/components/drag-drop-list.mdx#L34) |
-| components/drag-drop-list | Variants and sizes | div | 100% | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:67](../../docs/components/drag-drop-list.mdx#L67) |
-| components/drag-drop-list | Whole-row drag with swap | tp-drag-drop-list | 100% | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:91](../../docs/components/drag-drop-list.mdx#L91) |
-| components/drag-drop-list | Custom rows and overlay | tp-stack | 100% | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:111](../../docs/components/drag-drop-list.mdx#L111) |
-| components/drag-drop-list | Read-only | tp-drag-drop-list | 100% | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:164](../../docs/components/drag-drop-list.mdx#L164) |
-| components/drag-drop-list | Board lanes | section | 100% | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:181](../../docs/components/drag-drop-list.mdx#L181) |
-| components/drag-drop-list | Controlled lanes | section | 100% | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:241](../../docs/components/drag-drop-list.mdx#L241) |
-| components/drag-drop-list | Approve before committing | section | 100% | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:308](../../docs/components/drag-drop-list.mdx#L308) |
-| components/drag-drop-list | Vertical axis only | div | 100% | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:370](../../docs/components/drag-drop-list.mdx#L370) |
 | components/empty-state | No results | tp-input-group | 100% | layout/geometry — minimize | [docs/components/empty-state.mdx:71](../../docs/components/empty-state.mdx#L71) |
-| components/file-upload | File upload | tp-file-upload | 100% | layout/geometry — minimize | [docs/components/file-upload.mdx:10](../../docs/components/file-upload.mdx#L10) |
-| components/file-upload | Custom text and compact size | tp-stack | 100% | layout/geometry — minimize | [docs/components/file-upload.mdx:26](../../docs/components/file-upload.mdx#L26) |
-| components/file-upload | Rejected files | tp-file-upload | 100% | layout/geometry — minimize | [docs/components/file-upload.mdx:50](../../docs/components/file-upload.mdx#L50) |
-| components/file-upload | Custom validator | tp-file-upload | 100% | layout/geometry — minimize | [docs/components/file-upload.mdx:70](../../docs/components/file-upload.mdx#L70) |
-| components/file-upload | Chips | tp-file-upload | 100% | layout/geometry — minimize | [docs/components/file-upload.mdx:111](../../docs/components/file-upload.mdx#L111) |
-| components/file-upload | Rows | tp-file-upload | 100% | layout/geometry — minimize | [docs/components/file-upload.mdx:124](../../docs/components/file-upload.mdx#L124) |
-| components/file-upload | Image grid | tp-file-upload | 100% | layout/geometry — minimize | [docs/components/file-upload.mdx:140](../../docs/components/file-upload.mdx#L140) |
-| components/file-upload | Upload adapter | tp-file-upload | 100% | layout/geometry — minimize | [docs/components/file-upload.mdx:168](../../docs/components/file-upload.mdx#L168) |
-| components/file-upload | Server rejection | tp-file-upload | 100% | layout/geometry — minimize | [docs/components/file-upload.mdx:245](../../docs/components/file-upload.mdx#L245) |
 | components/image | Ratio and fit | div | 100% | layout/geometry — minimize | [docs/components/image.mdx:36](../../docs/components/image.mdx#L36) |
-| components/image | Fallbacks | div | 100% | layout/geometry — minimize | [docs/components/image.mdx:56](../../docs/components/image.mdx#L56) |
-| components/image | Fallbacks | span | 100% | layout/geometry — minimize | [docs/components/image.mdx:59](../../docs/components/image.mdx#L59) |
-| components/image | Loading placeholders | div | 100% | layout/geometry — minimize | [docs/components/image.mdx:69](../../docs/components/image.mdx#L69) |
-| components/image | Loading placeholders | img | 100% | layout/geometry — minimize | [docs/components/image.mdx:72](../../docs/components/image.mdx#L72) |
-| components/image | Hover zoom | div | 100% | layout/geometry — minimize | [docs/components/image.mdx:86](../../docs/components/image.mdx#L86) |
-| components/image | Staggered group | tp-image-group | 100% | layout/geometry — minimize | [docs/components/image.mdx:119](../../docs/components/image.mdx#L119) |
-| components/image | Reveal timing and repeat | div | 100% | layout/geometry — minimize | [docs/components/image.mdx:132](../../docs/components/image.mdx#L132) |
-| components/image | Headline, group and caption | tp-scroll-trigger | 100% | layout/geometry — minimize | [docs/components/image.mdx:154](../../docs/components/image.mdx#L154) |
-| components/image | Parallax in a scroller | div | 100% | layout/geometry — minimize | [docs/components/image.mdx:178](../../docs/components/image.mdx#L178) |
-| components/image | Horizontal strip | div | 100% | layout/geometry — minimize | [docs/components/image.mdx:251](../../docs/components/image.mdx#L251) |
-| components/image | Smoothing | div | 100% | layout/geometry — minimize | [docs/components/image.mdx:264](../../docs/components/image.mdx#L264) |
-| components/input-group | Input group | tp-field | 100% | layout/geometry — minimize | [docs/components/input-group.mdx:10](../../docs/components/input-group.mdx#L10) |
-| components/input-group | Text addons | tp-stack | 100% | layout/geometry — minimize | [docs/components/input-group.mdx:41](../../docs/components/input-group.mdx#L41) |
-| components/input-group | Status addons | tp-stack | 100% | layout/geometry — minimize | [docs/components/input-group.mdx:66](../../docs/components/input-group.mdx#L66) |
-| components/input-group | Actions | tp-stack | 100% | layout/geometry — minimize | [docs/components/input-group.mdx:105](../../docs/components/input-group.mdx#L105) |
-| components/input-group | Button group composition | tp-stack | 100% | layout/geometry — minimize | [docs/components/input-group.mdx:144](../../docs/components/input-group.mdx#L144) |
+| components/image | Fallbacks | span | 100% | layout/geometry — minimize | [docs/components/image.mdx:60](../../docs/components/image.mdx#L60) |
+| components/image | Loading placeholders | img | 100% | layout/geometry — minimize | [docs/components/image.mdx:74](../../docs/components/image.mdx#L74) |
+| components/image | Reveal timing and repeat | div | 100% | layout/geometry — minimize | [docs/components/image.mdx:137](../../docs/components/image.mdx#L137) |
+| components/image | Parallax in a scroller | div | 100% | layout/geometry — minimize | [docs/components/image.mdx:186](../../docs/components/image.mdx#L186) |
+| components/image | Horizontal strip | div | 100% | layout/geometry — minimize | [docs/components/image.mdx:259](../../docs/components/image.mdx#L259) |
+| components/image | Smoothing | div | 100% | layout/geometry — minimize | [docs/components/image.mdx:272](../../docs/components/image.mdx#L272) |
 | components/input-group | Button group composition | tp-button-group | 100% | layout/geometry — minimize | [docs/components/input-group.mdx:147](../../docs/components/input-group.mdx#L147) |
-| components/input-group | Button group composition | tp-button-group | 100% | layout/geometry — minimize | [docs/components/input-group.mdx:158](../../docs/components/input-group.mdx#L158) |
-| components/input-group | Interactive addons | tp-stack | 100% | layout/geometry — minimize | [docs/components/input-group.mdx:180](../../docs/components/input-group.mdx#L180) |
-| components/input-group | Composer | tp-field | 100% | layout/geometry — minimize | [docs/components/input-group.mdx:232](../../docs/components/input-group.mdx#L232) |
-| components/input-group | Native textarea | tp-input-group | 100% | layout/geometry — minimize | [docs/components/input-group.mdx:254](../../docs/components/input-group.mdx#L254) |
-| components/input-group | Native textarea | textarea | 100% | layout/geometry — minimize | [docs/components/input-group.mdx:255](../../docs/components/input-group.mdx#L255) |
-| components/input-group | Disabled and invalid | tp-stack | 100% | layout/geometry — minimize | [docs/components/input-group.mdx:267](../../docs/components/input-group.mdx#L267) |
-| components/kbd | Input group | tp-input-group | 100% | layout/geometry — minimize | [docs/components/kbd.mdx:92](../../docs/components/kbd.mdx#L92) |
-| components/list | List | tp-list | 100% | layout/geometry — minimize | [docs/components/list.mdx:11](../../docs/components/list.mdx#L11) |
-| components/list | Content and actions | tp-stack | 100% | layout/geometry — minimize | [docs/components/list.mdx:43](../../docs/components/list.mdx#L43) |
-| components/list | Variants and sizes | tp-stack | 100% | layout/geometry — minimize | [docs/components/list.mdx:72](../../docs/components/list.mdx#L72) |
-| components/list | Media | tp-list | 100% | layout/geometry — minimize | [docs/components/list.mdx:90](../../docs/components/list.mdx#L90) |
-| components/list | Divided list | tp-list | 100% | layout/geometry — minimize | [docs/components/list.mdx:120](../../docs/components/list.mdx#L120) |
-| components/list | Header and footer | tp-list-item | 100% | layout/geometry — minimize | [docs/components/list.mdx:145](../../docs/components/list.mdx#L145) |
-| components/list | Card grid | tp-list | 100% | layout/geometry — minimize | [docs/components/list.mdx:158](../../docs/components/list.mdx#L158) |
-| components/list | Card grid | tp-aspect-ratio | 100% | layout/geometry — minimize | [docs/components/list.mdx:160](../../docs/components/list.mdx#L160) |
-| components/list | Card grid | tp-aspect-ratio | 100% | layout/geometry — minimize | [docs/components/list.mdx:164](../../docs/components/list.mdx#L164) |
-| components/list | Card grid | tp-aspect-ratio | 100% | layout/geometry — minimize | [docs/components/list.mdx:168](../../docs/components/list.mdx#L168) |
-| components/list | Link rows | tp-list | 100% | layout/geometry — minimize | [docs/components/list.mdx:190](../../docs/components/list.mdx#L190) |
-| components/list | Recordings | tp-list | 100% | layout/geometry — minimize | [docs/components/list.mdx:228](../../docs/components/list.mdx#L228) |
-| components/markdown | Streaming | tp-stack | 100% | layout/geometry — minimize | [docs/components/markdown.mdx:129](../../docs/components/markdown.mdx#L129) |
-| components/markdown | Streaming | tp-markdown | 100% | layout/geometry — minimize | [docs/components/markdown.mdx:133](../../docs/components/markdown.mdx#L133) |
-| components/marker | Marker | tp-stack | 100% | layout/geometry — minimize | [docs/components/marker.mdx:10](../../docs/components/marker.mdx#L10) |
-| components/marker | Variants | tp-stack | 100% | layout/geometry — minimize | [docs/components/marker.mdx:28](../../docs/components/marker.mdx#L28) |
-| components/marker | Tones | tp-stack | 100% | layout/geometry — minimize | [docs/components/marker.mdx:42](../../docs/components/marker.mdx#L42) |
-| components/marker | With icons | tp-stack | 100% | layout/geometry — minimize | [docs/components/marker.mdx:59](../../docs/components/marker.mdx#L59) |
-| components/marker | Shimmer | tp-stack | 100% | layout/geometry — minimize | [docs/components/marker.mdx:90](../../docs/components/marker.mdx#L90) |
-| components/marker | With an action | tp-stack | 100% | layout/geometry — minimize | [docs/components/marker.mdx:103](../../docs/components/marker.mdx#L103) |
-| components/marker | Native hosts and layout | tp-stack | 100% | layout/geometry — minimize | [docs/components/marker.mdx:120](../../docs/components/marker.mdx#L120) |
-| components/marker | Native hosts and layout | tp-icon | var(--tp-icon-size-sm) | layout/geometry — minimize | [docs/components/marker.mdx:124](../../docs/components/marker.mdx#L124) |
-| components/marker | Accordion label and drawer | tp-stack | 100% | layout/geometry — minimize | [docs/components/marker.mdx:189](../../docs/components/marker.mdx#L189) |
-| components/media-player | Audio layout | tp-media-player | 100% | layout/geometry — minimize | [docs/components/media-player.mdx:42](../../docs/components/media-player.mdx#L42) |
-| components/media-player | Audio | tp-media-player | 100% | layout/geometry — minimize | [docs/components/media-player.mdx:58](../../docs/components/media-player.mdx#L58) |
+| components/input-group | Button group composition | tp-button-group | 100% | layout/geometry — minimize | [docs/components/input-group.mdx:157](../../docs/components/input-group.mdx#L157) |
+| components/input-group | Native textarea | textarea | 100% | layout/geometry — minimize | [docs/components/input-group.mdx:252](../../docs/components/input-group.mdx#L252) |
+| components/list | Card grid | tp-list | 100% | layout/geometry — minimize | [docs/components/list.mdx:161](../../docs/components/list.mdx#L161) |
+| components/list | Card grid | tp-aspect-ratio | 100% | layout/geometry — minimize | [docs/components/list.mdx:163](../../docs/components/list.mdx#L163) |
+| components/list | Card grid | tp-aspect-ratio | 100% | layout/geometry — minimize | [docs/components/list.mdx:167](../../docs/components/list.mdx#L167) |
+| components/list | Card grid | tp-aspect-ratio | 100% | layout/geometry — minimize | [docs/components/list.mdx:171](../../docs/components/list.mdx#L171) |
+| components/markdown | Streaming | tp-markdown | 100% | layout/geometry — minimize | [docs/components/markdown.mdx:137](../../docs/components/markdown.mdx#L137) |
+| components/marker | Native hosts and layout | tp-icon | var(--tp-icon-size-sm) | layout/geometry — minimize | [docs/components/marker.mdx:126](../../docs/components/marker.mdx#L126) |
 | components/menu | Context invocation | div | 28rem | layout/geometry — minimize | [docs/components/menu.mdx:147](../../docs/components/menu.mdx#L147) |
 | components/message-scroller | Streaming | tp-stack | 100% | layout/geometry — minimize | [docs/components/message-scroller.mdx:71](../../docs/components/message-scroller.mdx#L71) |
 | components/message-scroller | Join marker as anchor | tp-stack | 100% | layout/geometry — minimize | [docs/components/message-scroller.mdx:167](../../docs/components/message-scroller.mdx#L167) |
@@ -826,30 +563,12 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/message-scroller | Outline and edges | div | 100% | layout/geometry — minimize | [docs/components/message-scroller.mdx:316](../../docs/components/message-scroller.mdx#L316) |
 | components/message-scroller | Prepend history | tp-stack | 100% | layout/geometry — minimize | [docs/components/message-scroller.mdx:423](../../docs/components/message-scroller.mdx#L423) |
 | components/message-scroller | Animated send | tp-stack | 100% | layout/geometry — minimize | [docs/components/message-scroller.mdx:502](../../docs/components/message-scroller.mdx#L502) |
-| components/message | Footer actions | div | 100% | layout/geometry — minimize | [docs/components/message.mdx:126](../../docs/components/message.mdx#L126) |
-| components/message | Retry a failed message | div | 100% | layout/geometry — minimize | [docs/components/message.mdx:187](../../docs/components/message.mdx#L187) |
-| components/native-select | Sizes | tp-stack | 14rem | layout/geometry — minimize | [docs/components/native-select.mdx:55](../../docs/components/native-select.mdx#L55) |
-| components/one-time-code-field | One-time code field | tp-card | 100% | layout/geometry — minimize | [docs/components/one-time-code-field.mdx:9](../../docs/components/one-time-code-field.mdx#L9) |
 | components/overflow-list | Row limit | tp-resizable-panel-group | 100% | layout/geometry — minimize | [docs/components/overflow-list.mdx:50](../../docs/components/overflow-list.mdx#L50) |
 | components/overflow-list | In a table | div | 100% | layout/geometry — minimize | [docs/components/overflow-list.mdx:86](../../docs/components/overflow-list.mdx#L86) |
 | components/overflow-list | Custom count | div | 100% | layout/geometry — minimize | [docs/components/overflow-list.mdx:140](../../docs/components/overflow-list.mdx#L140) |
-| components/pagination | Rows per page | tp-stack | 100% | layout/geometry — minimize | [docs/components/pagination.mdx:107](../../docs/components/pagination.mdx#L107) |
-| components/progress | Import | tp-progress | 100% | layout/geometry — minimize | [docs/components/progress.mdx:69](../../docs/components/progress.mdx#L69) |
-| components/qr-code | Live value | tp-stack | 18rem | layout/geometry — minimize | [docs/components/qr-code.mdx:67](../../docs/components/qr-code.mdx#L67) |
-| components/qr-code | Live value | tp-field | 100% | layout/geometry — minimize | [docs/components/qr-code.mdx:71](../../docs/components/qr-code.mdx#L71) |
-| components/questionnaire | Questionnaire | div | 28rem | layout/geometry — minimize | [docs/components/questionnaire.mdx:9](../../docs/components/questionnaire.mdx#L9) |
-| components/questionnaire | Choices and free text | div | 28rem | layout/geometry — minimize | [docs/components/questionnaire.mdx:68](../../docs/components/questionnaire.mdx#L68) |
-| components/questionnaire | Skip and validate | div | 28rem | layout/geometry — minimize | [docs/components/questionnaire.mdx:104](../../docs/components/questionnaire.mdx#L104) |
-| components/questionnaire | Resume a draft | tp-stack | 28rem | layout/geometry — minimize | [docs/components/questionnaire.mdx:136](../../docs/components/questionnaire.mdx#L136) |
-| components/questionnaire | Resume a draft | tp-questionnaire | 100% | layout/geometry — minimize | [docs/components/questionnaire.mdx:141](../../docs/components/questionnaire.mdx#L141) |
-| components/questionnaire | Follow-up question | div | 28rem | layout/geometry — minimize | [docs/components/questionnaire.mdx:186](../../docs/components/questionnaire.mdx#L186) |
-| components/questionnaire | Number shortcuts | div | 28rem | layout/geometry — minimize | [docs/components/questionnaire.mdx:246](../../docs/components/questionnaire.mdx#L246) |
-| components/questionnaire | Submit | tp-stack | 28rem | layout/geometry — minimize | [docs/components/questionnaire.mdx:275](../../docs/components/questionnaire.mdx#L275) |
-| components/questionnaire | Checkpoint and cross-answer validation | tp-stack | 28rem | layout/geometry — minimize | [docs/components/questionnaire.mdx:310](../../docs/components/questionnaire.mdx#L310) |
-| components/questionnaire | Disabled until answered | div | 28rem | layout/geometry — minimize | [docs/components/questionnaire.mdx:376](../../docs/components/questionnaire.mdx#L376) |
-| components/questionnaire | Progress bar | div | 28rem | layout/geometry — minimize | [docs/components/questionnaire.mdx:427](../../docs/components/questionnaire.mdx#L427) |
-| components/questionnaire | Animated questions | div | 28rem | layout/geometry — minimize | [docs/components/questionnaire.mdx:480](../../docs/components/questionnaire.mdx#L480) |
-| components/questionnaire | Inside a Card | div | 28rem | layout/geometry — minimize | [docs/components/questionnaire.mdx:541](../../docs/components/questionnaire.mdx#L541) |
+| components/progress | Import | tp-progress | 100% | layout/geometry — minimize | [docs/components/progress.mdx:74](../../docs/components/progress.mdx#L74) |
+| components/qr-code | Live value | tp-field | 100% | layout/geometry — minimize | [docs/components/qr-code.mdx:73](../../docs/components/qr-code.mdx#L73) |
+| components/questionnaire | Resume a draft | tp-questionnaire | 100% | layout/geometry — minimize | [docs/components/questionnaire.mdx:143](../../docs/components/questionnaire.mdx#L143) |
 | components/resizable-panel-group | Collapsible sidebar | tp-resizable-panel-group | 100% | layout/geometry — minimize | [docs/components/resizable-panel-group.mdx:97](../../docs/components/resizable-panel-group.mdx#L97) |
 | components/scroll-area | Scroll Area | tp-scroll-area | 16rem | layout/geometry — minimize | [docs/components/scroll-area.mdx:9](../../docs/components/scroll-area.mdx#L9) |
 | components/scroll-area | Horizontal | tp-stack | max-content | layout/geometry — minimize | [docs/components/scroll-area.mdx:59](../../docs/components/scroll-area.mdx#L59) |
@@ -861,80 +580,56 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/scroll-area | Visibility | tp-scroll-area | 12rem | layout/geometry — minimize | [docs/components/scroll-area.mdx:120](../../docs/components/scroll-area.mdx#L120) |
 | components/scroll-area | Visibility | tp-scroll-area | 12rem | layout/geometry — minimize | [docs/components/scroll-area.mdx:139](../../docs/components/scroll-area.mdx#L139) |
 | components/scroll-area | Edge fade | tp-scroll-area | 18rem | layout/geometry — minimize | [docs/components/scroll-area.mdx:169](../../docs/components/scroll-area.mdx#L169) |
-| components/scroll-trigger | Scroll Trigger | tp-scroll-trigger | 100% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:10](../../docs/components/scroll-trigger.mdx#L10) |
-| components/scroll-trigger | From the center | tp-scroll-trigger | 100% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:42](../../docs/components/scroll-trigger.mdx#L42) |
-| components/scroll-trigger | Replay on entry | div | 100% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:58](../../docs/components/scroll-trigger.mdx#L58) |
-| components/scroll-trigger | Scrubbed band | div | 100% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:76](../../docs/components/scroll-trigger.mdx#L76) |
-| components/scroll-trigger | Scrubbed band | tp-skeleton | 45% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:90](../../docs/components/scroll-trigger.mdx#L90) |
-| components/scroll-trigger | Scrubbed band | tp-skeleton | 90% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:91](../../docs/components/scroll-trigger.mdx#L91) |
-| components/scroll-trigger | Scrubbed band | tp-skeleton | 80% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:114](../../docs/components/scroll-trigger.mdx#L114) |
-| components/scroll-trigger | Scrubbed band | tp-skeleton | 60% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:116](../../docs/components/scroll-trigger.mdx#L116) |
-| components/scroll-trigger | Custom scroll range | div | 100% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:129](../../docs/components/scroll-trigger.mdx#L129) |
-| components/scroll-trigger | Custom scroll range | tp-skeleton | 45% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:143](../../docs/components/scroll-trigger.mdx#L143) |
-| components/scroll-trigger | Custom scroll range | tp-skeleton | 90% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:144](../../docs/components/scroll-trigger.mdx#L144) |
-| components/scroll-trigger | Custom scroll range | tp-skeleton | 80% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:189](../../docs/components/scroll-trigger.mdx#L189) |
-| components/scroll-trigger | Custom scroll range | tp-skeleton | 60% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:191](../../docs/components/scroll-trigger.mdx#L191) |
-| components/scroll-trigger | Pinned scene | div | 100% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:203](../../docs/components/scroll-trigger.mdx#L203) |
-| components/scroll-trigger | Pinned scene | tp-skeleton | 40% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:205](../../docs/components/scroll-trigger.mdx#L205) |
-| components/scroll-trigger | Pinned scene | tp-skeleton | 90% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:206](../../docs/components/scroll-trigger.mdx#L206) |
-| components/scroll-trigger | Pinned scene | tp-skeleton | 85% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:220](../../docs/components/scroll-trigger.mdx#L220) |
-| components/scroll-trigger | Pinned scene | tp-skeleton | 60% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:222](../../docs/components/scroll-trigger.mdx#L222) |
-| components/scroll-trigger | Reveal events | tp-stack | 100% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:236](../../docs/components/scroll-trigger.mdx#L236) |
+| components/scroll-trigger | Replay on entry | div | 100% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:60](../../docs/components/scroll-trigger.mdx#L60) |
+| components/scroll-trigger | Scrubbed band | div | 100% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:78](../../docs/components/scroll-trigger.mdx#L78) |
+| components/scroll-trigger | Scrubbed band | tp-skeleton | 45% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:92](../../docs/components/scroll-trigger.mdx#L92) |
+| components/scroll-trigger | Scrubbed band | tp-skeleton | 90% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:93](../../docs/components/scroll-trigger.mdx#L93) |
+| components/scroll-trigger | Scrubbed band | tp-skeleton | 80% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:116](../../docs/components/scroll-trigger.mdx#L116) |
+| components/scroll-trigger | Scrubbed band | tp-skeleton | 60% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:118](../../docs/components/scroll-trigger.mdx#L118) |
+| components/scroll-trigger | Custom scroll range | div | 100% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:131](../../docs/components/scroll-trigger.mdx#L131) |
+| components/scroll-trigger | Custom scroll range | tp-skeleton | 45% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:145](../../docs/components/scroll-trigger.mdx#L145) |
+| components/scroll-trigger | Custom scroll range | tp-skeleton | 90% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:146](../../docs/components/scroll-trigger.mdx#L146) |
+| components/scroll-trigger | Custom scroll range | tp-skeleton | 80% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:191](../../docs/components/scroll-trigger.mdx#L191) |
+| components/scroll-trigger | Custom scroll range | tp-skeleton | 60% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:193](../../docs/components/scroll-trigger.mdx#L193) |
+| components/scroll-trigger | Pinned scene | div | 100% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:205](../../docs/components/scroll-trigger.mdx#L205) |
+| components/scroll-trigger | Pinned scene | tp-skeleton | 40% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:207](../../docs/components/scroll-trigger.mdx#L207) |
+| components/scroll-trigger | Pinned scene | tp-skeleton | 90% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:208](../../docs/components/scroll-trigger.mdx#L208) |
+| components/scroll-trigger | Pinned scene | tp-skeleton | 85% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:222](../../docs/components/scroll-trigger.mdx#L222) |
+| components/scroll-trigger | Pinned scene | tp-skeleton | 60% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:224](../../docs/components/scroll-trigger.mdx#L224) |
 | components/skeleton | Skeleton | tp-skeleton | var(--tp-space-10) | layout/geometry — minimize | [docs/components/skeleton.mdx:11](../../docs/components/skeleton.mdx#L11) |
 | components/skeleton | Skeleton | tp-skeleton | calc(var(--tp-spacing) * 38) | layout/geometry — minimize | [docs/components/skeleton.mdx:20](../../docs/components/skeleton.mdx#L20) |
 | components/skeleton | Skeleton | tp-skeleton | calc(var(--tp-spacing) * 25) | layout/geometry — minimize | [docs/components/skeleton.mdx:23](../../docs/components/skeleton.mdx#L23) |
-| components/skeleton | Card | tp-card | 20rem | layout/geometry — minimize | [docs/components/skeleton.mdx:51](../../docs/components/skeleton.mdx#L51) |
-| components/skeleton | Card | tp-skeleton | 66% | layout/geometry — minimize | [docs/components/skeleton.mdx:53](../../docs/components/skeleton.mdx#L53) |
-| components/skeleton | Card | tp-skeleton | 50% | layout/geometry — minimize | [docs/components/skeleton.mdx:54](../../docs/components/skeleton.mdx#L54) |
-| components/skeleton | Card | tp-skeleton | 100% | layout/geometry — minimize | [docs/components/skeleton.mdx:57](../../docs/components/skeleton.mdx#L57) |
-| components/skeleton | Video and description | tp-stack | 100% | layout/geometry — minimize | [docs/components/skeleton.mdx:74](../../docs/components/skeleton.mdx#L74) |
-| components/skeleton | Video and description | tp-skeleton | 60% | layout/geometry — minimize | [docs/components/skeleton.mdx:80](../../docs/components/skeleton.mdx#L80) |
-| components/skeleton | Video and description | tp-skeleton | 75% | layout/geometry — minimize | [docs/components/skeleton.mdx:84](../../docs/components/skeleton.mdx#L84) |
-| components/skeleton | Settings form | tp-stack | 100% | layout/geometry — minimize | [docs/components/skeleton.mdx:99](../../docs/components/skeleton.mdx#L99) |
+| components/skeleton | Card | tp-skeleton | 66% | layout/geometry — minimize | [docs/components/skeleton.mdx:56](../../docs/components/skeleton.mdx#L56) |
+| components/skeleton | Card | tp-skeleton | 50% | layout/geometry — minimize | [docs/components/skeleton.mdx:57](../../docs/components/skeleton.mdx#L57) |
+| components/skeleton | Card | tp-skeleton | 100% | layout/geometry — minimize | [docs/components/skeleton.mdx:60](../../docs/components/skeleton.mdx#L60) |
+| components/skeleton | Video and description | tp-skeleton | 60% | layout/geometry — minimize | [docs/components/skeleton.mdx:81](../../docs/components/skeleton.mdx#L81) |
+| components/skeleton | Video and description | tp-skeleton | 75% | layout/geometry — minimize | [docs/components/skeleton.mdx:85](../../docs/components/skeleton.mdx#L85) |
 | components/skeleton | Settings form | tp-skeleton | calc(var(--tp-spacing) * 20) | layout/geometry — minimize | [docs/components/skeleton.mdx:104](../../docs/components/skeleton.mdx#L104) |
-| components/skeleton | Settings form | tp-skeleton | calc(var(--tp-spacing) * 28) | layout/geometry — minimize | [docs/components/skeleton.mdx:110](../../docs/components/skeleton.mdx#L110) |
-| components/skeleton | Settings form | tp-skeleton | calc(var(--tp-spacing) * 24) | layout/geometry — minimize | [docs/components/skeleton.mdx:115](../../docs/components/skeleton.mdx#L115) |
-| components/skeleton | Table rows | tp-skeleton | calc(var(--tp-spacing) * 20) | layout/geometry — minimize | [docs/components/skeleton.mdx:134](../../docs/components/skeleton.mdx#L134) |
-| components/skeleton | Table rows | tp-skeleton | calc(var(--tp-spacing) * 16) | layout/geometry — minimize | [docs/components/skeleton.mdx:137](../../docs/components/skeleton.mdx#L137) |
-| components/skeleton | Table rows | tp-skeleton | calc(var(--tp-spacing) * 20) | layout/geometry — minimize | [docs/components/skeleton.mdx:143](../../docs/components/skeleton.mdx#L143) |
+| components/skeleton | Settings form | tp-skeleton | calc(var(--tp-spacing) * 28) | layout/geometry — minimize | [docs/components/skeleton.mdx:109](../../docs/components/skeleton.mdx#L109) |
+| components/skeleton | Settings form | tp-skeleton | calc(var(--tp-spacing) * 24) | layout/geometry — minimize | [docs/components/skeleton.mdx:113](../../docs/components/skeleton.mdx#L113) |
+| components/skeleton | Table rows | tp-skeleton | calc(var(--tp-spacing) * 20) | layout/geometry — minimize | [docs/components/skeleton.mdx:130](../../docs/components/skeleton.mdx#L130) |
+| components/skeleton | Table rows | tp-skeleton | calc(var(--tp-spacing) * 16) | layout/geometry — minimize | [docs/components/skeleton.mdx:132](../../docs/components/skeleton.mdx#L132) |
+| components/skeleton | Table rows | tp-skeleton | calc(var(--tp-spacing) * 20) | layout/geometry — minimize | [docs/components/skeleton.mdx:137](../../docs/components/skeleton.mdx#L137) |
+| components/skeleton | Table rows | tp-skeleton | calc(var(--tp-spacing) * 16) | layout/geometry — minimize | [docs/components/skeleton.mdx:139](../../docs/components/skeleton.mdx#L139) |
+| components/skeleton | Table rows | tp-skeleton | calc(var(--tp-spacing) * 20) | layout/geometry — minimize | [docs/components/skeleton.mdx:144](../../docs/components/skeleton.mdx#L144) |
 | components/skeleton | Table rows | tp-skeleton | calc(var(--tp-spacing) * 16) | layout/geometry — minimize | [docs/components/skeleton.mdx:146](../../docs/components/skeleton.mdx#L146) |
-| components/skeleton | Table rows | tp-skeleton | calc(var(--tp-spacing) * 20) | layout/geometry — minimize | [docs/components/skeleton.mdx:152](../../docs/components/skeleton.mdx#L152) |
-| components/skeleton | Table rows | tp-skeleton | calc(var(--tp-spacing) * 16) | layout/geometry — minimize | [docs/components/skeleton.mdx:155](../../docs/components/skeleton.mdx#L155) |
 | components/slider | Controlled range | tp-slider | 100% | layout/geometry — minimize | [docs/components/slider.mdx:136](../../docs/components/slider.mdx#L136) |
-| components/slider | Fixed start and added thumbs | tp-slider | 100% | layout/geometry — minimize | [docs/components/slider.mdx:268](../../docs/components/slider.mdx#L268) |
-| components/status-dot | Service status | tp-list | 100% | layout/geometry — minimize | [docs/components/status-dot.mdx:44](../../docs/components/status-dot.mdx#L44) |
-| components/status-dot | Compact column | div | 100% | layout/geometry — minimize | [docs/components/status-dot.mdx:76](../../docs/components/status-dot.mdx#L76) |
+| components/slider | Fixed start and added thumbs | tp-slider | 100% | layout/geometry — minimize | [docs/components/slider.mdx:270](../../docs/components/slider.mdx#L270) |
 | components/table-of-contents | Nested items | div | 14rem | layout/geometry — minimize | [docs/components/table-of-contents.mdx:66](../../docs/components/table-of-contents.mdx#L66) |
 | components/table | Inputs | tp-table-head | 8rem | layout/geometry — minimize | [docs/components/table.mdx:126](../../docs/components/table.mdx#L126) |
 | components/table | Selects | tp-table-cell | 12rem | layout/geometry — minimize | [docs/components/table.mdx:166](../../docs/components/table.mdx#L166) |
 | components/table | Selects | tp-table-cell | 12rem | layout/geometry — minimize | [docs/components/table.mdx:177](../../docs/components/table.mdx#L177) |
 | components/table | Selects | tp-table-cell | 12rem | layout/geometry — minimize | [docs/components/table.mdx:188](../../docs/components/table.mdx#L188) |
 | components/table | Prose column | tp-table-head | 6rem | layout/geometry — minimize | [docs/components/table.mdx:286](../../docs/components/table.mdx#L286) |
-| components/text-transform | Text transform | dl | 100% | layout/geometry — minimize | [docs/components/text-transform.mdx:10](../../docs/components/text-transform.mdx#L10) |
-| components/text-transform | Plans | tp-table | 100% | layout/geometry — minimize | [docs/components/text-transform.mdx:53](../../docs/components/text-transform.mdx#L53) |
-| components/text-transform | Uploads | tp-list | 100% | layout/geometry — minimize | [docs/components/text-transform.mdx:91](../../docs/components/text-transform.mdx#L91) |
-| components/theme-switcher | Theme switcher | tp-card | 22rem | layout/geometry — minimize | [docs/components/theme-switcher.mdx:9](../../docs/components/theme-switcher.mdx#L9) |
-| components/theme-switcher | Variants | tp-card | 24rem | layout/geometry — minimize | [docs/components/theme-switcher.mdx:33](../../docs/components/theme-switcher.mdx#L33) |
-| components/theme-switcher | Small, defaulting to dark | tp-card | 18rem | layout/geometry — minimize | [docs/components/theme-switcher.mdx:84](../../docs/components/theme-switcher.mdx#L84) |
-| components/theme-switcher | Explicit choices only | tp-card | 22rem | layout/geometry — minimize | [docs/components/theme-switcher.mdx:106](../../docs/components/theme-switcher.mdx#L106) |
-| components/theme-switcher | Color scheme store | tp-card | 22rem | layout/geometry — minimize | [docs/components/theme-switcher.mdx:141](../../docs/components/theme-switcher.mdx#L141) |
-| components/time | Due dates | tp-list | 100% | layout/geometry — minimize | [docs/components/time.mdx:134](../../docs/components/time.mdx#L134) |
 | components/toggle-group | Font weight | tp-field | auto | layout/geometry — minimize | [docs/components/toggle-group.mdx:103](../../docs/components/toggle-group.mdx#L103) |
 | components/tooltip | Cursor tracking | div | 28rem | layout/geometry — minimize | [docs/components/tooltip.mdx:69](../../docs/components/tooltip.mdx#L69) |
-| components/tree-view | Tree view | tp-tree-view | 16rem | layout/geometry — minimize | [docs/components/tree-view.mdx:10](../../docs/components/tree-view.mdx#L10) |
-| components/tree-view | Permissions | tp-tree-view | 18rem | layout/geometry — minimize | [docs/components/tree-view.mdx:56](../../docs/components/tree-view.mdx#L56) |
-| components/tree-view | Opening items | tp-tree-view | 16rem | layout/geometry — minimize | [docs/components/tree-view.mdx:84](../../docs/components/tree-view.mdx#L84) |
-| components/tree-view | Chevron only | tp-tree-view | 16rem | layout/geometry — minimize | [docs/components/tree-view.mdx:113](../../docs/components/tree-view.mdx#L113) |
-| components/tree-view | Expand, collapse and reveal | tp-tree-view | 16rem | layout/geometry — minimize | [docs/components/tree-view.mdx:374](../../docs/components/tree-view.mdx#L374) |
-| components/tree-view | Small, no guides | tp-tree-view | 14rem | layout/geometry — minimize | [docs/components/tree-view.mdx:402](../../docs/components/tree-view.mdx#L402) |
-| components/visually-hidden | Filter results | tp-stack | 100% | layout/geometry — minimize | [docs/components/visually-hidden.mdx:58](../../docs/components/visually-hidden.mdx#L58) |
-| components/visually-hidden | Repeated actions | tp-table | 100% | layout/geometry — minimize | [docs/components/visually-hidden.mdx:94](../../docs/components/visually-hidden.mdx#L94) |
+| components/tree-view | Opening items | tp-tree-view | 16rem | layout/geometry — minimize | [docs/components/tree-view.mdx:88](../../docs/components/tree-view.mdx#L88) |
+| components/tree-view | Expand, collapse and reveal | tp-tree-view | 16rem | layout/geometry — minimize | [docs/components/tree-view.mdx:380](../../docs/components/tree-view.mdx#L380) |
 | motion/surface/glow-border | Glow border | tp-mo-glow-border | min(100%, 26rem) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:9](../../docs/motion/surface/glow-border.mdx#L9) |
-| motion/surface/glow-border | Controls and fields | tp-card | min(100%, 22rem) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:30](../../docs/motion/surface/glow-border.mdx#L30) |
-| motion/surface/glow-border | Hover | tp-mo-glow-border | min(100%, 22rem) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:107](../../docs/motion/surface/glow-border.mdx#L107) |
-| motion/surface/glow-border | Lingering light | tp-mo-glow-border | min(100%, 24rem) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:122](../../docs/motion/surface/glow-border.mdx#L122) |
-| motion/surface/glow-border | Custom colors | tp-button | 100% | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:144](../../docs/motion/surface/glow-border.mdx#L144) |
-| motion/surface/glow-border | Lit by an element | div | min(100%, 24rem) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:162](../../docs/motion/surface/glow-border.mdx#L162) |
+| motion/surface/glow-border | Hover | tp-mo-glow-border | min(100%, 22rem) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:109](../../docs/motion/surface/glow-border.mdx#L109) |
+| motion/surface/glow-border | Lingering light | tp-mo-glow-border | min(100%, 24rem) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:124](../../docs/motion/surface/glow-border.mdx#L124) |
+| motion/surface/glow-border | Custom colors | tp-button | 100% | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:146](../../docs/motion/surface/glow-border.mdx#L146) |
+| motion/surface/glow-border | Lit by an element | div | min(100%, 24rem) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:164](../../docs/motion/surface/glow-border.mdx#L164) |
 | motion/surface/segment-border | Focus | tp-field | min(100%, 20rem) | layout/geometry — minimize | [docs/motion/surface/segment-border.mdx:155](../../docs/motion/surface/segment-border.mdx#L155) |
 | motion/surface/segment-border | Scanner | tp-mo-segment-border | min(100%, 22rem) | layout/geometry — minimize | [docs/motion/surface/segment-border.mdx:169](../../docs/motion/surface/segment-border.mdx#L169) |
 | motion/text/text-mirror | Text mirror | p | 32rem | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:9](../../docs/motion/text/text-mirror.mdx#L9) |
@@ -990,7 +685,6 @@ Each row retains the target element, use-case label, exact value and source loca
 | widgets/easing-editor | Commit and veto | tp-easing-editor | 24rem | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:140](../../docs/widgets/easing-editor.mdx#L140) |
 | widgets/easing-editor | Controlled owner | tp-easing-editor | 24rem | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:164](../../docs/widgets/easing-editor.mdx#L164) |
 | widgets/easing-editor | Field, small size | tp-easing-editor | 20rem | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:197](../../docs/widgets/easing-editor.mdx#L197) |
-| widgets/emoji-picker | Insert into a message | tp-stack | 100% | layout/geometry — minimize | [docs/widgets/emoji-picker.mdx:47](../../docs/widgets/emoji-picker.mdx#L47) |
 | widgets/flow | Voice chain | tp-flow | 100% | layout/geometry — minimize | [docs/widgets/flow.mdx:14](../../docs/widgets/flow.mdx#L14) |
 | widgets/flow | Kinds and animation | tp-flow | 100% | layout/geometry — minimize | [docs/widgets/flow.mdx:111](../../docs/widgets/flow.mdx#L111) |
 | widgets/flow | Authored nodes | tp-flow | 100% | layout/geometry — minimize | [docs/widgets/flow.mdx:146](../../docs/widgets/flow.mdx#L146) |
@@ -1008,17 +702,9 @@ Each row retains the target element, use-case label, exact value and source loca
 | widgets/flow | In a form | tp-flow | 100% | layout/geometry — minimize | [docs/widgets/flow.mdx:701](../../docs/widgets/flow.mdx#L701) |
 | widgets/plot | Live signal | tp-plot | 100% | layout/geometry — minimize | [docs/widgets/plot.mdx:10](../../docs/widgets/plot.mdx#L10) |
 | widgets/plot | Distribution | tp-plot | 100% | layout/geometry — minimize | [docs/widgets/plot.mdx:44](../../docs/widgets/plot.mdx#L44) |
-| widgets/text-editor | Text editor | tp-stack | 100% | layout/geometry — minimize | [docs/widgets/text-editor.mdx:10](../../docs/widgets/text-editor.mdx#L10) |
-| widgets/text-editor | Classic editor | div | 100% | layout/geometry — minimize | [docs/widgets/text-editor.mdx:180](../../docs/widgets/text-editor.mdx#L180) |
-| widgets/text-editor | Node editor | div | 100% | layout/geometry — minimize | [docs/widgets/text-editor.mdx:260](../../docs/widgets/text-editor.mdx#L260) |
-| widgets/text-editor | Custom nodes | div | 100% | layout/geometry — minimize | [docs/widgets/text-editor.mdx:326](../../docs/widgets/text-editor.mdx#L326) |
-| widgets/text-editor | Markdown in and out | tp-stack | 100% | layout/geometry — minimize | [docs/widgets/text-editor.mdx:514](../../docs/widgets/text-editor.mdx#L514) |
-| widgets/text-editor | In a form | form | 100% | layout/geometry — minimize | [docs/widgets/text-editor.mdx:564](../../docs/widgets/text-editor.mdx#L564) |
-| widgets/text-editor | Read-only and disabled | tp-stack | 100% | layout/geometry — minimize | [docs/widgets/text-editor.mdx:624](../../docs/widgets/text-editor.mdx#L624) |
 | motion/surface/glow-border | Motion/Surface/Glow border | tp-mo-glow-border | min(100%, 26rem) | layout/geometry — minimize | [src/stories/glow-border.stories.ts:56](../../src/stories/glow-border.stories.ts#L56) |
 | compositions/media-player.examples | headlessExample | tp-media-volume-slider | 6rem | layout/geometry — minimize | [src/stories/media-player.examples.ts:73](../../src/stories/media-player.examples.ts#L73) |
-| compositions/presentation-primitives.examples | bubbleDefaults | tp-bubble-group | 100% | layout/geometry — minimize | [src/stories/presentation-primitives.examples.ts:19](../../src/stories/presentation-primitives.examples.ts#L19) |
-| compositions/presentation-primitives.examples | aspectRatioDefaults | div | 100% | layout/geometry — minimize | [src/stories/presentation-primitives.examples.ts:60](../../src/stories/presentation-primitives.examples.ts#L60) |
+| compositions/presentation-primitives.examples | aspectRatioDefaults | div | 100% | layout/geometry — minimize | [src/stories/presentation-primitives.examples.ts:58](../../src/stories/presentation-primitives.examples.ts#L58) |
 | components/scroll-area | Components/Scroll area | tp-scroll-area | calc(var(--tp-spacing) * 60) | layout/geometry — minimize | [src/stories/scroll-area.stories.ts:46](../../src/stories/scroll-area.stories.ts#L46) |
 | compositions/skeleton.examples | (file/setup/shared helper) | tp-skeleton | var(--tp-space-10) | layout/geometry — minimize | [src/stories/skeleton.examples.ts:21](../../src/stories/skeleton.examples.ts#L21) |
 | compositions/skeleton.examples | (file/setup/shared helper) | tp-skeleton | calc(var(--tp-spacing) * 38) | layout/geometry — minimize | [src/stories/skeleton.examples.ts:28](../../src/stories/skeleton.examples.ts#L28) |
@@ -1034,582 +720,12 @@ Each row retains the target element, use-case label, exact value and source loca
 
 <a id="property-3"></a>
 
-### 3. margin-inline — 267 occurrences
+### 3. margin — 217 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
-| auto | 267 |
-
-| Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
-| --- | --- | --- | --- | --- | --- |
-| components/aspect-ratio | Aspect ratio | tp-aspect-ratio | auto | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:10](../../docs/components/aspect-ratio.mdx#L10) |
-| components/aspect-ratio | Cover and contain | div | auto | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:123](../../docs/components/aspect-ratio.mdx#L123) |
-| components/attachment | Attachment | tp-stack | auto | layout/geometry — minimize | [docs/components/attachment.mdx:11](../../docs/components/attachment.mdx#L11) |
-| components/attachment | Statuses | tp-stack | auto | layout/geometry — minimize | [docs/components/attachment.mdx:52](../../docs/components/attachment.mdx#L52) |
-| components/attachment | Image cards | tp-attachment-group | auto | layout/geometry — minimize | [docs/components/attachment.mdx:92](../../docs/components/attachment.mdx#L92) |
-| components/attachment | Scrollable groups | tp-stack | auto | layout/geometry — minimize | [docs/components/attachment.mdx:115](../../docs/components/attachment.mdx#L115) |
-| components/attachment | Title and description only | tp-stack | auto | layout/geometry — minimize | [docs/components/attachment.mdx:281](../../docs/components/attachment.mdx#L281) |
-| components/attachment | Preview trigger, download and retry | tp-stack | auto | layout/geometry — minimize | [docs/components/attachment.mdx:308](../../docs/components/attachment.mdx#L308) |
-| components/attachment | Sizes | tp-stack | auto | layout/geometry — minimize | [docs/components/attachment.mdx:391](../../docs/components/attachment.mdx#L391) |
-| components/attachment | Remove event | tp-stack | auto | layout/geometry — minimize | [docs/components/attachment.mdx:419](../../docs/components/attachment.mdx#L419) |
-| components/autocomplete | Autocomplete | tp-field | auto | layout/geometry — minimize | [docs/components/autocomplete.mdx:10](../../docs/components/autocomplete.mdx#L10) |
-| components/autocomplete | Prefix matching | tp-field | auto | layout/geometry — minimize | [docs/components/autocomplete.mdx:36](../../docs/components/autocomplete.mdx#L36) |
-| components/autocomplete | Grouped suggestions | tp-field | auto | layout/geometry — minimize | [docs/components/autocomplete.mdx:57](../../docs/components/autocomplete.mdx#L57) |
-| components/autocomplete | Inline completion | tp-field | auto | layout/geometry — minimize | [docs/components/autocomplete.mdx:80](../../docs/components/autocomplete.mdx#L80) |
-| components/autocomplete | Searching hidden fields | tp-field | auto | layout/geometry — minimize | [docs/components/autocomplete.mdx:98](../../docs/components/autocomplete.mdx#L98) |
-| components/autocomplete | Ranking over several fields | tp-field | auto | layout/geometry — minimize | [docs/components/autocomplete.mdx:120](../../docs/components/autocomplete.mdx#L120) |
-| components/autocomplete | Search source | tp-field | auto | layout/geometry — minimize | [docs/components/autocomplete.mdx:149](../../docs/components/autocomplete.mdx#L149) |
-| components/autocomplete | In a form | form | auto | layout/geometry — minimize | [docs/components/autocomplete.mdx:214](../../docs/components/autocomplete.mdx#L214) |
-| components/badge | Status in a list | tp-stack | auto | layout/geometry — minimize | [docs/components/badge.mdx:64](../../docs/components/badge.mdx#L64) |
-| components/breadcrumb | Long trail | div | auto | layout/geometry — minimize | [docs/components/breadcrumb.mdx:177](../../docs/components/breadcrumb.mdx#L177) |
-| components/bubble | Conversation | tp-stack | auto | layout/geometry — minimize | [docs/components/bubble.mdx:11](../../docs/components/bubble.mdx#L11) |
-| components/bubble | Variants | tp-stack | auto | layout/geometry — minimize | [docs/components/bubble.mdx:39](../../docs/components/bubble.mdx#L39) |
-| components/bubble | Alignment | tp-stack | auto | layout/geometry — minimize | [docs/components/bubble.mdx:59](../../docs/components/bubble.mdx#L59) |
-| components/bubble | Reactions | tp-stack | auto | layout/geometry — minimize | [docs/components/bubble.mdx:80](../../docs/components/bubble.mdx#L80) |
-| components/bubble | Rich content | tp-stack | auto | layout/geometry — minimize | [docs/components/bubble.mdx:107](../../docs/components/bubble.mdx#L107) |
-| components/bubble | Expandable message | tp-stack | auto | layout/geometry — minimize | [docs/components/bubble.mdx:120](../../docs/components/bubble.mdx#L120) |
-| components/bubble | Quick replies | tp-stack | auto | layout/geometry — minimize | [docs/components/bubble.mdx:148](../../docs/components/bubble.mdx#L148) |
-| components/button-group | Mixed controls | tp-stack | auto | layout/geometry — minimize | [docs/components/button-group.mdx:89](../../docs/components/button-group.mdx#L89) |
-| components/button-group | Steppers, labels and counts | tp-stack | auto | layout/geometry — minimize | [docs/components/button-group.mdx:106](../../docs/components/button-group.mdx#L106) |
-| components/button-group | Select and native select | tp-stack | auto | layout/geometry — minimize | [docs/components/button-group.mdx:242](../../docs/components/button-group.mdx#L242) |
-| components/button-group | Input groups and nesting | tp-stack | auto | layout/geometry — minimize | [docs/components/button-group.mdx:285](../../docs/components/button-group.mdx#L285) |
-| components/carousel | Carousel | tp-carousel | auto | layout/geometry — minimize | [docs/components/carousel.mdx:10](../../docs/components/carousel.mdx#L10) |
-| components/carousel | Items per view | tp-carousel | auto | layout/geometry — minimize | [docs/components/carousel.mdx:83](../../docs/components/carousel.mdx#L83) |
-| components/carousel | Bullets inside | tp-carousel | auto | layout/geometry — minimize | [docs/components/carousel.mdx:104](../../docs/components/carousel.mdx#L104) |
-| components/carousel | Autoplay | tp-carousel | auto | layout/geometry — minimize | [docs/components/carousel.mdx:132](../../docs/components/carousel.mdx#L132) |
-| components/carousel | Vertical | tp-carousel | auto | layout/geometry — minimize | [docs/components/carousel.mdx:157](../../docs/components/carousel.mdx#L157) |
-| components/carousel | Crossfade | tp-carousel | auto | layout/geometry — minimize | [docs/components/carousel.mdx:184](../../docs/components/carousel.mdx#L184) |
-| components/carousel | Layered 3D | tp-carousel | auto | layout/geometry — minimize | [docs/components/carousel.mdx:250](../../docs/components/carousel.mdx#L250) |
-| components/carousel | Parallax | tp-carousel | auto | layout/geometry — minimize | [docs/components/carousel.mdx:383](../../docs/components/carousel.mdx#L383) |
-| components/carousel | Focus | tp-carousel | auto | layout/geometry — minimize | [docs/components/carousel.mdx:413](../../docs/components/carousel.mdx#L413) |
-| components/carousel | Shader transition | tp-stack | auto | layout/geometry — minimize | [docs/components/carousel.mdx:451](../../docs/components/carousel.mdx#L451) |
-| components/carousel | Virtual archive with controlled selection | div | auto | layout/geometry — minimize | [docs/components/carousel.mdx:613](../../docs/components/carousel.mdx#L613) |
-| components/carousel | Commit | tp-stack | auto | layout/geometry — minimize | [docs/components/carousel.mdx:650](../../docs/components/carousel.mdx#L650) |
-| components/checkbox | Field | tp-field | auto | layout/geometry — minimize | [docs/components/checkbox.mdx:23](../../docs/components/checkbox.mdx#L23) |
-| components/checkbox | Form values | form | auto | layout/geometry — minimize | [docs/components/checkbox.mdx:35](../../docs/components/checkbox.mdx#L35) |
-| components/checkbox | Inline | tp-stack | auto | layout/geometry — minimize | [docs/components/checkbox.mdx:177](../../docs/components/checkbox.mdx#L177) |
-| components/citation | Numbered references | article | auto | layout/geometry — minimize | [docs/components/citation.mdx:67](../../docs/components/citation.mdx#L67) |
-| components/citation | Horizontal list | tp-citation-list | auto | layout/geometry — minimize | [docs/components/citation.mdx:110](../../docs/components/citation.mdx#L110) |
-| components/code-block | Code block | tp-code-block | auto | layout/geometry — minimize | [docs/components/code-block.mdx:10](../../docs/components/code-block.mdx#L10) |
-| components/code-block | Title slot | tp-code-block | auto | layout/geometry — minimize | [docs/components/code-block.mdx:32](../../docs/components/code-block.mdx#L32) |
-| components/code-block | Highlighted lines | tp-code-block | auto | layout/geometry — minimize | [docs/components/code-block.mdx:50](../../docs/components/code-block.mdx#L50) |
-| components/code-block | Diff | tp-code-block | auto | layout/geometry — minimize | [docs/components/code-block.mdx:67](../../docs/components/code-block.mdx#L67) |
-| components/code-block | Collapsible | tp-code-block | auto | layout/geometry — minimize | [docs/components/code-block.mdx:84](../../docs/components/code-block.mdx#L84) |
-| components/code-block | Shell | tp-code-block | auto | layout/geometry — minimize | [docs/components/code-block.mdx:113](../../docs/components/code-block.mdx#L113) |
-| components/code-block | CSS | tp-code-block | auto | layout/geometry — minimize | [docs/components/code-block.mdx:126](../../docs/components/code-block.mdx#L126) |
-| components/code-block | Token theme | tp-stack | auto | layout/geometry — minimize | [docs/components/code-block.mdx:142](../../docs/components/code-block.mdx#L142) |
-| components/collapsible | Collapsible | tp-collapsible | auto | layout/geometry — minimize | [docs/components/collapsible.mdx:10](../../docs/components/collapsible.mdx#L10) |
-| components/collapsible | Leading indicator | tp-collapsible | auto | layout/geometry — minimize | [docs/components/collapsible.mdx:30](../../docs/components/collapsible.mdx#L30) |
-| components/collapsible | Positional slots | tp-stack | auto | layout/geometry — minimize | [docs/components/collapsible.mdx:45](../../docs/components/collapsible.mdx#L45) |
-| components/collapsible | As a heading | tp-collapsible | auto | layout/geometry — minimize | [docs/components/collapsible.mdx:79](../../docs/components/collapsible.mdx#L79) |
-| components/collapsible | Searchable | tp-collapsible | auto | layout/geometry — minimize | [docs/components/collapsible.mdx:92](../../docs/components/collapsible.mdx#L92) |
-| components/collapsible | Open change | tp-stack | auto | layout/geometry — minimize | [docs/components/collapsible.mdx:113](../../docs/components/collapsible.mdx#L113) |
-| components/collapsible | Disabled | tp-collapsible | auto | layout/geometry — minimize | [docs/components/collapsible.mdx:136](../../docs/components/collapsible.mdx#L136) |
-| components/collapsible | Line-by-line reveal | tp-collapsible | auto | layout/geometry — minimize | [docs/components/collapsible.mdx:149](../../docs/components/collapsible.mdx#L149) |
-| components/color-input | Inline | tp-stack | auto | layout/geometry — minimize | [docs/components/color-input.mdx:27](../../docs/components/color-input.mdx#L27) |
-| components/color-input | Chip or text | tp-stack | auto | layout/geometry — minimize | [docs/components/color-input.mdx:41](../../docs/components/color-input.mdx#L41) |
-| components/color-input | Formats and alpha | tp-stack | auto | layout/geometry — minimize | [docs/components/color-input.mdx:64](../../docs/components/color-input.mdx#L64) |
-| components/color-input | Sizes | tp-stack | auto | layout/geometry — minimize | [docs/components/color-input.mdx:88](../../docs/components/color-input.mdx#L88) |
-| components/color-input | In a form | form | auto | layout/geometry — minimize | [docs/components/color-input.mdx:106](../../docs/components/color-input.mdx#L106) |
-| components/color-input | Disabled and read-only | tp-stack | auto | layout/geometry — minimize | [docs/components/color-input.mdx:123](../../docs/components/color-input.mdx#L123) |
-| components/color-input | Right-to-left | div | auto | layout/geometry — minimize | [docs/components/color-input.mdx:150](../../docs/components/color-input.mdx#L150) |
-| components/command-palette | Command palette | tp-stack | auto | layout/geometry — minimize | [docs/components/command-palette.mdx:10](../../docs/components/command-palette.mdx#L10) |
-| components/command-palette | Custom empty state | tp-command-palette | auto | layout/geometry — minimize | [docs/components/command-palette.mdx:94](../../docs/components/command-palette.mdx#L94) |
-| components/command-palette | Server-filtered list | tp-command-palette | auto | layout/geometry — minimize | [docs/components/command-palette.mdx:111](../../docs/components/command-palette.mdx#L111) |
-| components/copy-button | Copy button | tp-field | auto | layout/geometry — minimize | [docs/components/copy-button.mdx:10](../../docs/components/copy-button.mdx#L10) |
-| components/copy-button | In an input group and a field group | tp-stack | auto | layout/geometry — minimize | [docs/components/copy-button.mdx:65](../../docs/components/copy-button.mdx#L65) |
-| components/data-visualization | Data visualization | tp-data-visualization | auto | layout/geometry — minimize | [docs/components/data-visualization.mdx:10](../../docs/components/data-visualization.mdx#L10) |
-| components/data-visualization | Line chart | tp-data-visualization | auto | layout/geometry — minimize | [docs/components/data-visualization.mdx:112](../../docs/components/data-visualization.mdx#L112) |
-| components/data-visualization | Description and table | tp-data-visualization | auto | layout/geometry — minimize | [docs/components/data-visualization.mdx:177](../../docs/components/data-visualization.mdx#L177) |
-| components/description-list | Summary row | tp-description-list | auto | layout/geometry — minimize | [docs/components/description-list.mdx:92](../../docs/components/description-list.mdx#L92) |
-| components/dialog | Container modality | section | auto | layout/geometry — minimize | [docs/components/dialog.mdx:82](../../docs/components/dialog.mdx#L82) |
-| components/drag-drop-list | Drag drop list | tp-drag-drop-list | auto | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:10](../../docs/components/drag-drop-list.mdx#L10) |
-| components/drag-drop-list | Commit events | tp-stack | auto | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:34](../../docs/components/drag-drop-list.mdx#L34) |
-| components/drag-drop-list | Variants and sizes | div | auto | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:67](../../docs/components/drag-drop-list.mdx#L67) |
-| components/drag-drop-list | Whole-row drag with swap | tp-drag-drop-list | auto | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:91](../../docs/components/drag-drop-list.mdx#L91) |
-| components/drag-drop-list | Custom rows and overlay | tp-stack | auto | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:111](../../docs/components/drag-drop-list.mdx#L111) |
-| components/drag-drop-list | Horizontal | tp-drag-drop-list | auto | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:148](../../docs/components/drag-drop-list.mdx#L148) |
-| components/drag-drop-list | Read-only | tp-drag-drop-list | auto | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:164](../../docs/components/drag-drop-list.mdx#L164) |
-| components/drag-drop-list | Board lanes | section | auto | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:181](../../docs/components/drag-drop-list.mdx#L181) |
-| components/drag-drop-list | Controlled lanes | section | auto | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:241](../../docs/components/drag-drop-list.mdx#L241) |
-| components/drag-drop-list | Approve before committing | section | auto | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:308](../../docs/components/drag-drop-list.mdx#L308) |
-| components/drag-drop-list | Vertical axis only | div | auto | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:370](../../docs/components/drag-drop-list.mdx#L370) |
-| components/empty-state | In a card | tp-card | auto | layout/geometry — minimize | [docs/components/empty-state.mdx:88](../../docs/components/empty-state.mdx#L88) |
-| components/field-group | Inline | tp-stack | auto | layout/geometry — minimize | [docs/components/field-group.mdx:129](../../docs/components/field-group.mdx#L129) |
-| components/field-group | Expanded | tp-stack | auto | layout/geometry — minimize | [docs/components/field-group.mdx:177](../../docs/components/field-group.mdx#L177) |
-| components/field-group | Constraints | tp-field-group | auto | layout/geometry — minimize | [docs/components/field-group.mdx:220](../../docs/components/field-group.mdx#L220) |
-| components/file-upload | File upload | tp-file-upload | auto | layout/geometry — minimize | [docs/components/file-upload.mdx:10](../../docs/components/file-upload.mdx#L10) |
-| components/file-upload | Custom text and compact size | tp-stack | auto | layout/geometry — minimize | [docs/components/file-upload.mdx:26](../../docs/components/file-upload.mdx#L26) |
-| components/file-upload | Rejected files | tp-file-upload | auto | layout/geometry — minimize | [docs/components/file-upload.mdx:50](../../docs/components/file-upload.mdx#L50) |
-| components/file-upload | Custom validator | tp-file-upload | auto | layout/geometry — minimize | [docs/components/file-upload.mdx:70](../../docs/components/file-upload.mdx#L70) |
-| components/file-upload | Chips | tp-file-upload | auto | layout/geometry — minimize | [docs/components/file-upload.mdx:111](../../docs/components/file-upload.mdx#L111) |
-| components/file-upload | Rows | tp-file-upload | auto | layout/geometry — minimize | [docs/components/file-upload.mdx:124](../../docs/components/file-upload.mdx#L124) |
-| components/file-upload | Image grid | tp-file-upload | auto | layout/geometry — minimize | [docs/components/file-upload.mdx:140](../../docs/components/file-upload.mdx#L140) |
-| components/file-upload | Upload adapter | tp-file-upload | auto | layout/geometry — minimize | [docs/components/file-upload.mdx:168](../../docs/components/file-upload.mdx#L168) |
-| components/file-upload | Field and form | tp-form | auto | layout/geometry — minimize | [docs/components/file-upload.mdx:222](../../docs/components/file-upload.mdx#L222) |
-| components/file-upload | Server rejection | tp-file-upload | auto | layout/geometry — minimize | [docs/components/file-upload.mdx:245](../../docs/components/file-upload.mdx#L245) |
-| components/image | Image | tp-image | auto | layout/geometry — minimize | [docs/components/image.mdx:14](../../docs/components/image.mdx#L14) |
-| components/image | Ratio and fit | div | auto | layout/geometry — minimize | [docs/components/image.mdx:36](../../docs/components/image.mdx#L36) |
-| components/image | Fallbacks | div | auto | layout/geometry — minimize | [docs/components/image.mdx:56](../../docs/components/image.mdx#L56) |
-| components/image | Loading placeholders | div | auto | layout/geometry — minimize | [docs/components/image.mdx:69](../../docs/components/image.mdx#L69) |
-| components/image | Hover zoom | div | auto | layout/geometry — minimize | [docs/components/image.mdx:86](../../docs/components/image.mdx#L86) |
-| components/image | Card hover | tp-card | auto | layout/geometry — minimize | [docs/components/image.mdx:97](../../docs/components/image.mdx#L97) |
-| components/image | Staggered group | tp-image-group | auto | layout/geometry — minimize | [docs/components/image.mdx:119](../../docs/components/image.mdx#L119) |
-| components/image | Reveal timing and repeat | div | auto | layout/geometry — minimize | [docs/components/image.mdx:132](../../docs/components/image.mdx#L132) |
-| components/image | Headline, group and caption | tp-scroll-trigger | auto | layout/geometry — minimize | [docs/components/image.mdx:154](../../docs/components/image.mdx#L154) |
-| components/image | Parallax in a scroller | div | auto | layout/geometry — minimize | [docs/components/image.mdx:178](../../docs/components/image.mdx#L178) |
-| components/image | Horizontal strip | div | auto | layout/geometry — minimize | [docs/components/image.mdx:251](../../docs/components/image.mdx#L251) |
-| components/image | Smoothing | div | auto | layout/geometry — minimize | [docs/components/image.mdx:264](../../docs/components/image.mdx#L264) |
-| components/input-group | Input group | tp-field | auto | layout/geometry — minimize | [docs/components/input-group.mdx:10](../../docs/components/input-group.mdx#L10) |
-| components/input-group | Text addons | tp-stack | auto | layout/geometry — minimize | [docs/components/input-group.mdx:41](../../docs/components/input-group.mdx#L41) |
-| components/input-group | Status addons | tp-stack | auto | layout/geometry — minimize | [docs/components/input-group.mdx:66](../../docs/components/input-group.mdx#L66) |
-| components/input-group | Actions | tp-stack | auto | layout/geometry — minimize | [docs/components/input-group.mdx:105](../../docs/components/input-group.mdx#L105) |
-| components/input-group | Button group composition | tp-stack | auto | layout/geometry — minimize | [docs/components/input-group.mdx:144](../../docs/components/input-group.mdx#L144) |
-| components/input-group | Interactive addons | tp-stack | auto | layout/geometry — minimize | [docs/components/input-group.mdx:180](../../docs/components/input-group.mdx#L180) |
-| components/input-group | Composer | tp-field | auto | layout/geometry — minimize | [docs/components/input-group.mdx:232](../../docs/components/input-group.mdx#L232) |
-| components/input-group | Native textarea | tp-input-group | auto | layout/geometry — minimize | [docs/components/input-group.mdx:254](../../docs/components/input-group.mdx#L254) |
-| components/input-group | Disabled and invalid | tp-stack | auto | layout/geometry — minimize | [docs/components/input-group.mdx:267](../../docs/components/input-group.mdx#L267) |
-| components/input | Inline | tp-stack | auto | layout/geometry — minimize | [docs/components/input.mdx:116](../../docs/components/input.mdx#L116) |
-| components/input | Number steps | tp-stack | auto | layout/geometry — minimize | [docs/components/input.mdx:147](../../docs/components/input.mdx#L147) |
-| components/input | Units and icons | tp-stack | auto | layout/geometry — minimize | [docs/components/input.mdx:177](../../docs/components/input.mdx#L177) |
-| components/kbd | Input group | tp-input-group | auto | layout/geometry — minimize | [docs/components/kbd.mdx:92](../../docs/components/kbd.mdx#L92) |
-| components/list | List | tp-list | auto | layout/geometry — minimize | [docs/components/list.mdx:11](../../docs/components/list.mdx#L11) |
-| components/list | Content and actions | tp-stack | auto | layout/geometry — minimize | [docs/components/list.mdx:43](../../docs/components/list.mdx#L43) |
-| components/list | Variants and sizes | tp-stack | auto | layout/geometry — minimize | [docs/components/list.mdx:72](../../docs/components/list.mdx#L72) |
-| components/list | Media | tp-list | auto | layout/geometry — minimize | [docs/components/list.mdx:90](../../docs/components/list.mdx#L90) |
-| components/list | Divided list | tp-list | auto | layout/geometry — minimize | [docs/components/list.mdx:120](../../docs/components/list.mdx#L120) |
-| components/list | Header and footer | tp-list-item | auto | layout/geometry — minimize | [docs/components/list.mdx:145](../../docs/components/list.mdx#L145) |
-| components/list | Card grid | tp-list | auto | layout/geometry — minimize | [docs/components/list.mdx:158](../../docs/components/list.mdx#L158) |
-| components/list | Link rows | tp-list | auto | layout/geometry — minimize | [docs/components/list.mdx:190](../../docs/components/list.mdx#L190) |
-| components/list | Recordings | tp-list | auto | layout/geometry — minimize | [docs/components/list.mdx:228](../../docs/components/list.mdx#L228) |
-| components/markdown | Markdown | tp-markdown | auto | layout/geometry — minimize | [docs/components/markdown.mdx:10](../../docs/components/markdown.mdx#L10) |
-| components/markdown | Script child | tp-markdown | auto | layout/geometry — minimize | [docs/components/markdown.mdx:39](../../docs/components/markdown.mdx#L39) |
-| components/markdown | Heading offset | tp-markdown | auto | layout/geometry — minimize | [docs/components/markdown.mdx:60](../../docs/components/markdown.mdx#L60) |
-| components/markdown | Code and alerts | tp-markdown | auto | layout/geometry — minimize | [docs/components/markdown.mdx:83](../../docs/components/markdown.mdx#L83) |
-| components/markdown | Small | tp-markdown | auto | layout/geometry — minimize | [docs/components/markdown.mdx:104](../../docs/components/markdown.mdx#L104) |
-| components/markdown | Streaming | tp-stack | auto | layout/geometry — minimize | [docs/components/markdown.mdx:129](../../docs/components/markdown.mdx#L129) |
-| components/markdown | Element policy | tp-markdown | auto | layout/geometry — minimize | [docs/components/markdown.mdx:165](../../docs/components/markdown.mdx#L165) |
-| components/markdown | Custom node rendering | tp-markdown | auto | layout/geometry — minimize | [docs/components/markdown.mdx:197](../../docs/components/markdown.mdx#L197) |
-| components/marker | Marker | tp-stack | auto | layout/geometry — minimize | [docs/components/marker.mdx:10](../../docs/components/marker.mdx#L10) |
-| components/marker | Variants | tp-stack | auto | layout/geometry — minimize | [docs/components/marker.mdx:28](../../docs/components/marker.mdx#L28) |
-| components/marker | Tones | tp-stack | auto | layout/geometry — minimize | [docs/components/marker.mdx:42](../../docs/components/marker.mdx#L42) |
-| components/marker | With icons | tp-stack | auto | layout/geometry — minimize | [docs/components/marker.mdx:59](../../docs/components/marker.mdx#L59) |
-| components/marker | Shimmer | tp-stack | auto | layout/geometry — minimize | [docs/components/marker.mdx:90](../../docs/components/marker.mdx#L90) |
-| components/marker | With an action | tp-stack | auto | layout/geometry — minimize | [docs/components/marker.mdx:103](../../docs/components/marker.mdx#L103) |
-| components/marker | Native hosts and layout | tp-stack | auto | layout/geometry — minimize | [docs/components/marker.mdx:120](../../docs/components/marker.mdx#L120) |
-| components/marker | Accordion label and drawer | tp-stack | auto | layout/geometry — minimize | [docs/components/marker.mdx:189](../../docs/components/marker.mdx#L189) |
-| components/media-player | Media Player | tp-media-player | auto | layout/geometry — minimize | [docs/components/media-player.mdx:14](../../docs/components/media-player.mdx#L14) |
-| components/media-player | Audio layout | tp-media-player | auto | layout/geometry — minimize | [docs/components/media-player.mdx:42](../../docs/components/media-player.mdx#L42) |
-| components/media-player | Audio | tp-media-player | auto | layout/geometry — minimize | [docs/components/media-player.mdx:58](../../docs/components/media-player.mdx#L58) |
-| components/media-player | Trimmed layout | tp-media-player | auto | layout/geometry — minimize | [docs/components/media-player.mdx:84](../../docs/components/media-player.mdx#L84) |
-| components/media-player | Custom top region | tp-media-player | auto | layout/geometry — minimize | [docs/components/media-player.mdx:110](../../docs/components/media-player.mdx#L110) |
-| components/media-player | Text tracks | tp-media-player | auto | layout/geometry — minimize | [docs/components/media-player.mdx:144](../../docs/components/media-player.mdx#L144) |
-| components/media-player | Custom bar | tp-media-player | auto | layout/geometry — minimize | [docs/components/media-player.mdx:173](../../docs/components/media-player.mdx#L173) |
-| components/media-player | Live with DVR (simulated) | tp-media-player | auto | layout/geometry — minimize | [docs/components/media-player.mdx:207](../../docs/components/media-player.mdx#L207) |
-| components/media-player | Tracks adapter (mock) | tp-media-player | auto | layout/geometry — minimize | [docs/components/media-player.mdx:240](../../docs/components/media-player.mdx#L240) |
-| components/media-player | French controls | tp-media-player | auto | layout/geometry — minimize | [docs/components/media-player.mdx:304](../../docs/components/media-player.mdx#L304) |
-| components/message-scroller | Message Scroller | tp-message-scroller | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:11](../../docs/components/message-scroller.mdx#L11) |
-| components/message-scroller | Streaming | tp-stack | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:71](../../docs/components/message-scroller.mdx#L71) |
-| components/message-scroller | Join marker as anchor | tp-stack | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:167](../../docs/components/message-scroller.mdx#L167) |
-| components/message-scroller | Commands | tp-stack | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:243](../../docs/components/message-scroller.mdx#L243) |
-| components/message-scroller | Outline and edges | div | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:316](../../docs/components/message-scroller.mdx#L316) |
-| components/message-scroller | Prepend history | tp-stack | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:423](../../docs/components/message-scroller.mdx#L423) |
-| components/message-scroller | Animated send | tp-stack | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:502](../../docs/components/message-scroller.mdx#L502) |
-| components/message-scroller | Open at the start | tp-message-scroller | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:560](../../docs/components/message-scroller.mdx#L560) |
-| components/message | Message | tp-stack | auto | layout/geometry — minimize | [docs/components/message.mdx:11](../../docs/components/message.mdx#L11) |
-| components/message | Sender sides | tp-stack | auto | layout/geometry — minimize | [docs/components/message.mdx:49](../../docs/components/message.mdx#L49) |
-| components/message | Header and footer | tp-stack | auto | layout/geometry — minimize | [docs/components/message.mdx:72](../../docs/components/message.mdx#L72) |
-| components/message | Sending and failed | tp-stack | auto | layout/geometry — minimize | [docs/components/message.mdx:90](../../docs/components/message.mdx#L90) |
-| components/message | Message group | tp-message-group | auto | layout/geometry — minimize | [docs/components/message.mdx:107](../../docs/components/message.mdx#L107) |
-| components/message | Footer actions | div | auto | layout/geometry — minimize | [docs/components/message.mdx:126](../../docs/components/message.mdx#L126) |
-| components/message | Attachment | tp-stack | auto | layout/geometry — minimize | [docs/components/message.mdx:152](../../docs/components/message.mdx#L152) |
-| components/message | Retry a failed message | div | auto | layout/geometry — minimize | [docs/components/message.mdx:187](../../docs/components/message.mdx#L187) |
-| components/overflow-list | Row limit | tp-resizable-panel-group | auto | layout/geometry — minimize | [docs/components/overflow-list.mdx:50](../../docs/components/overflow-list.mdx#L50) |
-| components/overflow-list | In a table | div | auto | layout/geometry — minimize | [docs/components/overflow-list.mdx:86](../../docs/components/overflow-list.mdx#L86) |
-| components/overflow-list | Custom count | div | auto | layout/geometry — minimize | [docs/components/overflow-list.mdx:140](../../docs/components/overflow-list.mdx#L140) |
-| components/pagination | Rows per page | tp-stack | auto | layout/geometry — minimize | [docs/components/pagination.mdx:107](../../docs/components/pagination.mdx#L107) |
-| components/scroll-trigger | Scroll Trigger | tp-scroll-trigger | auto | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:10](../../docs/components/scroll-trigger.mdx#L10) |
-| components/select | Inline | tp-stack | auto | layout/geometry — minimize | [docs/components/select.mdx:387](../../docs/components/select.mdx#L387) |
-| components/separator | Separator | tp-stack | auto | layout/geometry — minimize | [docs/components/separator.mdx:10](../../docs/components/separator.mdx#L10) |
-| components/separator | Between sections | tp-stack | auto | layout/geometry — minimize | [docs/components/separator.mdx:52](../../docs/components/separator.mdx#L52) |
-| components/skeleton | Pulse, sweep and none | tp-stack | auto | layout/geometry — minimize | [docs/components/skeleton.mdx:38](../../docs/components/skeleton.mdx#L38) |
-| components/skeleton | Video and description | tp-stack | auto | layout/geometry — minimize | [docs/components/skeleton.mdx:74](../../docs/components/skeleton.mdx#L74) |
-| components/skeleton | Settings form | tp-stack | auto | layout/geometry — minimize | [docs/components/skeleton.mdx:99](../../docs/components/skeleton.mdx#L99) |
-| components/skeleton | Table rows | tp-stack | auto | layout/geometry — minimize | [docs/components/skeleton.mdx:128](../../docs/components/skeleton.mdx#L128) |
-| components/slider | Slider | tp-slider | auto | layout/geometry — minimize | [docs/components/slider.mdx:15](../../docs/components/slider.mdx#L15) |
-| components/slider | Price range | tp-slider | auto | layout/geometry — minimize | [docs/components/slider.mdx:32](../../docs/components/slider.mdx#L32) |
-| components/slider | Push, swap and none | tp-stack | auto | layout/geometry — minimize | [docs/components/slider.mdx:49](../../docs/components/slider.mdx#L49) |
-| components/slider | Currency and percent | tp-stack | auto | layout/geometry — minimize | [docs/components/slider.mdx:89](../../docs/components/slider.mdx#L89) |
-| components/slider | Controlled range | tp-stack | auto | layout/geometry — minimize | [docs/components/slider.mdx:127](../../docs/components/slider.mdx#L127) |
-| components/slider | Step and large step | tp-stack | auto | layout/geometry — minimize | [docs/components/slider.mdx:151](../../docs/components/slider.mdx#L151) |
-| components/slider | Compact readout | div | auto | layout/geometry — minimize | [docs/components/slider.mdx:203](../../docs/components/slider.mdx#L203) |
-| components/slider | Media timeline | tp-slider | auto | layout/geometry — minimize | [docs/components/slider.mdx:223](../../docs/components/slider.mdx#L223) |
-| components/slider | Authored thumbs | tp-slider | auto | layout/geometry — minimize | [docs/components/slider.mdx:233](../../docs/components/slider.mdx#L233) |
-| components/slider | Fixed start and added thumbs | tp-stack | auto | layout/geometry — minimize | [docs/components/slider.mdx:261](../../docs/components/slider.mdx#L261) |
-| components/slider | Thumb alignment and right to left | tp-stack | auto | layout/geometry — minimize | [docs/components/slider.mdx:287](../../docs/components/slider.mdx#L287) |
-| components/slider | Field and form | tp-form | auto | layout/geometry — minimize | [docs/components/slider.mdx:300](../../docs/components/slider.mdx#L300) |
-| components/slider | Disabled and read-only | tp-stack | auto | layout/geometry — minimize | [docs/components/slider.mdx:318](../../docs/components/slider.mdx#L318) |
-| components/slider | Change and commit | tp-stack | auto | layout/geometry — minimize | [docs/components/slider.mdx:336](../../docs/components/slider.mdx#L336) |
-| components/slider | Rejecting values | tp-stack | auto | layout/geometry — minimize | [docs/components/slider.mdx:365](../../docs/components/slider.mdx#L365) |
-| components/slider | Inline | tp-stack | auto | layout/geometry — minimize | [docs/components/slider.mdx:418](../../docs/components/slider.mdx#L418) |
-| components/slider | Inline in a field | tp-field | auto | layout/geometry — minimize | [docs/components/slider.mdx:454](../../docs/components/slider.mdx#L454) |
-| components/slider | Editable value | tp-stack | auto | layout/geometry — minimize | [docs/components/slider.mdx:464](../../docs/components/slider.mdx#L464) |
-| components/slider | Ticks | tp-stack | auto | layout/geometry — minimize | [docs/components/slider.mdx:491](../../docs/components/slider.mdx#L491) |
-| components/status-dot | Service status | tp-list | auto | layout/geometry — minimize | [docs/components/status-dot.mdx:44](../../docs/components/status-dot.mdx#L44) |
-| components/status-dot | Compact column | div | auto | layout/geometry — minimize | [docs/components/status-dot.mdx:76](../../docs/components/status-dot.mdx#L76) |
-| components/switch | Settings | tp-stack | auto | layout/geometry — minimize | [docs/components/switch.mdx:23](../../docs/components/switch.mdx#L23) |
-| components/switch | Form value | tp-form | auto | layout/geometry — minimize | [docs/components/switch.mdx:65](../../docs/components/switch.mdx#L65) |
-| components/switch | Disabled and read-only | tp-stack | auto | layout/geometry — minimize | [docs/components/switch.mdx:91](../../docs/components/switch.mdx#L91) |
-| components/switch | Controlled | tp-stack | auto | layout/geometry — minimize | [docs/components/switch.mdx:137](../../docs/components/switch.mdx#L137) |
-| components/switch | Inline | tp-stack | auto | layout/geometry — minimize | [docs/components/switch.mdx:198](../../docs/components/switch.mdx#L198) |
-| components/tabs | Tabs | tp-tabs | auto | layout/geometry — minimize | [docs/components/tabs.mdx:10](../../docs/components/tabs.mdx#L10) |
-| components/tabs | Underline | tp-tabs | auto | layout/geometry — minimize | [docs/components/tabs.mdx:49](../../docs/components/tabs.mdx#L49) |
-| components/tabs | Vertical | tp-tabs | auto | layout/geometry — minimize | [docs/components/tabs.mdx:66](../../docs/components/tabs.mdx#L66) |
-| components/tabs | Automatic activation | tp-tabs | auto | layout/geometry — minimize | [docs/components/tabs.mdx:83](../../docs/components/tabs.mdx#L83) |
-| components/tabs | Change event and setValue | tp-stack | auto | layout/geometry — minimize | [docs/components/tabs.mdx:111](../../docs/components/tabs.mdx#L111) |
-| components/tabs | Controlled with a veto | tp-tabs | auto | layout/geometry — minimize | [docs/components/tabs.mdx:169](../../docs/components/tabs.mdx#L169) |
-| components/tabs | Disabled | tp-tabs | auto | layout/geometry — minimize | [docs/components/tabs.mdx:198](../../docs/components/tabs.mdx#L198) |
-| components/text-area | Text area | tp-field | auto | layout/geometry — minimize | [docs/components/text-area.mdx:10](../../docs/components/text-area.mdx#L10) |
-| components/text-area | Content and fixed sizing | tp-stack | auto | layout/geometry — minimize | [docs/components/text-area.mdx:26](../../docs/components/text-area.mdx#L26) |
-| components/text-area | Error | tp-field | auto | layout/geometry — minimize | [docs/components/text-area.mdx:64](../../docs/components/text-area.mdx#L64) |
-| components/text-area | Character count | tp-stack | auto | layout/geometry — minimize | [docs/components/text-area.mdx:79](../../docs/components/text-area.mdx#L79) |
-| components/text-area | Form | tp-form | auto | layout/geometry — minimize | [docs/components/text-area.mdx:103](../../docs/components/text-area.mdx#L103) |
-| components/text-area | Disabled and read-only | tp-stack | auto | layout/geometry — minimize | [docs/components/text-area.mdx:121](../../docs/components/text-area.mdx#L121) |
-| components/text-transform | Plans | tp-table | auto | layout/geometry — minimize | [docs/components/text-transform.mdx:53](../../docs/components/text-transform.mdx#L53) |
-| components/text-transform | Uploads | tp-list | auto | layout/geometry — minimize | [docs/components/text-transform.mdx:91](../../docs/components/text-transform.mdx#L91) |
-| components/time | Due dates | tp-list | auto | layout/geometry — minimize | [docs/components/time.mdx:134](../../docs/components/time.mdx#L134) |
-| components/timeline | Timeline | tp-timeline | auto | layout/geometry — minimize | [docs/components/timeline.mdx:11](../../docs/components/timeline.mdx#L11) |
-| components/timeline | Step tracker | tp-timeline | auto | layout/geometry — minimize | [docs/components/timeline.mdx:46](../../docs/components/timeline.mdx#L46) |
-| components/timeline | Roadmap | tp-scroll-area | auto | layout/geometry — minimize | [docs/components/timeline.mdx:59](../../docs/components/timeline.mdx#L59) |
-| components/timeline | Numbered steps | tp-timeline | auto | layout/geometry — minimize | [docs/components/timeline.mdx:102](../../docs/components/timeline.mdx#L102) |
-| components/timeline | Expandable phases | tp-timeline | auto | layout/geometry — minimize | [docs/components/timeline.mdx:128](../../docs/components/timeline.mdx#L128) |
-| components/timeline | Conversation | tp-timeline | auto | layout/geometry — minimize | [docs/components/timeline.mdx:176](../../docs/components/timeline.mdx#L176) |
-| components/timeline | Changelog | tp-timeline | auto | layout/geometry — minimize | [docs/components/timeline.mdx:201](../../docs/components/timeline.mdx#L201) |
-| components/timeline | Explicit status | tp-timeline | auto | layout/geometry — minimize | [docs/components/timeline.mdx:238](../../docs/components/timeline.mdx#L238) |
-| components/visually-hidden | Filter results | tp-stack | auto | layout/geometry — minimize | [docs/components/visually-hidden.mdx:58](../../docs/components/visually-hidden.mdx#L58) |
-| components/visually-hidden | Repeated actions | tp-table | auto | layout/geometry — minimize | [docs/components/visually-hidden.mdx:94](../../docs/components/visually-hidden.mdx#L94) |
-| widgets/color-picker | Color input trigger | tp-color-picker | auto | layout/geometry — minimize | [docs/widgets/color-picker.mdx:36](../../docs/widgets/color-picker.mdx#L36) |
-| widgets/color-picker | Popup in a form | form | auto | layout/geometry — minimize | [docs/widgets/color-picker.mdx:48](../../docs/widgets/color-picker.mdx#L48) |
-| widgets/emoji-picker | Insert into a message | tp-stack | auto | layout/geometry — minimize | [docs/widgets/emoji-picker.mdx:47](../../docs/widgets/emoji-picker.mdx#L47) |
-| widgets/emoji-picker | Popup in a form | form | auto | layout/geometry — minimize | [docs/widgets/emoji-picker.mdx:202](../../docs/widgets/emoji-picker.mdx#L202) |
-| widgets/gradient-picker | Gradient picker | tp-gradient-picker | auto | layout/geometry — minimize | [docs/widgets/gradient-picker.mdx:10](../../docs/widgets/gradient-picker.mdx#L10) |
-| widgets/gradient-picker | Stop controls | tp-stack | auto | layout/geometry — minimize | [docs/widgets/gradient-picker.mdx:33](../../docs/widgets/gradient-picker.mdx#L33) |
-| widgets/gradient-picker | Midpoints | tp-gradient-picker | auto | layout/geometry — minimize | [docs/widgets/gradient-picker.mdx:80](../../docs/widgets/gradient-picker.mdx#L80) |
-| widgets/gradient-picker | Small and read-only | tp-stack | auto | layout/geometry — minimize | [docs/widgets/gradient-picker.mdx:112](../../docs/widgets/gradient-picker.mdx#L112) |
-| widgets/gradient-picker | Field | tp-gradient-picker | auto | layout/geometry — minimize | [docs/widgets/gradient-picker.mdx:130](../../docs/widgets/gradient-picker.mdx#L130) |
-| widgets/gradient-picker | Field settings | tp-stack | auto | layout/geometry — minimize | [docs/widgets/gradient-picker.mdx:144](../../docs/widgets/gradient-picker.mdx#L144) |
-| widgets/text-editor | Text editor | tp-stack | auto | layout/geometry — minimize | [docs/widgets/text-editor.mdx:10](../../docs/widgets/text-editor.mdx#L10) |
-| widgets/text-editor | Classic editor | div | auto | layout/geometry — minimize | [docs/widgets/text-editor.mdx:180](../../docs/widgets/text-editor.mdx#L180) |
-| widgets/text-editor | Node editor | div | auto | layout/geometry — minimize | [docs/widgets/text-editor.mdx:260](../../docs/widgets/text-editor.mdx#L260) |
-| widgets/text-editor | Custom nodes | div | auto | layout/geometry — minimize | [docs/widgets/text-editor.mdx:326](../../docs/widgets/text-editor.mdx#L326) |
-| widgets/text-editor | Markdown in and out | tp-stack | auto | layout/geometry — minimize | [docs/widgets/text-editor.mdx:514](../../docs/widgets/text-editor.mdx#L514) |
-| widgets/text-editor | In a form | form | auto | layout/geometry — minimize | [docs/widgets/text-editor.mdx:564](../../docs/widgets/text-editor.mdx#L564) |
-| widgets/text-editor | Read-only and disabled | tp-stack | auto | layout/geometry — minimize | [docs/widgets/text-editor.mdx:624](../../docs/widgets/text-editor.mdx#L624) |
-| components/data-visualization | Components/Data visualization | div | auto | layout/geometry — minimize | [src/stories/data-visualization.stories.ts:34](../../src/stories/data-visualization.stories.ts#L34) |
-| compositions/presentation-primitives.examples | bubbleDefaults | tp-bubble-group | auto | layout/geometry — minimize | [src/stories/presentation-primitives.examples.ts:19](../../src/stories/presentation-primitives.examples.ts#L19) |
-| compositions/questionnaire.examples | questionnaireExamples | div | auto | layout/geometry — minimize | [src/stories/questionnaire.examples.ts:88](../../src/stories/questionnaire.examples.ts#L88) |
-| components/questionnaire | Components/Questionnaire | div | auto | layout/geometry — minimize | [src/stories/questionnaire.stories.ts:42](../../src/stories/questionnaire.stories.ts#L42) |
-
-<a id="property-4"></a>
-
-### 4. color — 266 occurrences
-
-| Value | Occurrences |
-| --- | ---: |
-| var(--tp-muted-foreground) | 214 |
-| transparent | 21 |
-| white | 12 |
-| inherit | 3 |
-| var(--tp-destructive) | 3 |
-| var(--tp-background) | 2 |
-| var(--tp-primary) | 2 |
-| var(--tp-success) | 2 |
-| #fafafa | 1 |
-| black | 1 |
-| var(--tp-chart-1) | 1 |
-| var(--tp-chart-2) | 1 |
-| var(--tp-chart-3) | 1 |
-| var(--tp-foreground) | 1 |
-| var(--tp-warning) | 1 |
-
-| Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
-| --- | --- | --- | --- | --- | --- |
-| components/aspect-ratio | Aspect ratio | img | transparent | content appearance — review required | [docs/components/aspect-ratio.mdx:11](../../docs/components/aspect-ratio.mdx#L11) |
-| components/aspect-ratio | Common ratios | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/aspect-ratio.mdx:28](../../docs/components/aspect-ratio.mdx#L28) |
-| components/aspect-ratio | Common ratios | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/aspect-ratio.mdx:31](../../docs/components/aspect-ratio.mdx#L31) |
-| components/aspect-ratio | Common ratios | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/aspect-ratio.mdx:34](../../docs/components/aspect-ratio.mdx#L34) |
-| components/aspect-ratio | One ratio, three widths | img | transparent | content appearance — review required | [docs/components/aspect-ratio.mdx:54](../../docs/components/aspect-ratio.mdx#L54) |
-| components/aspect-ratio | One ratio, three widths | figcaption | var(--tp-muted-foreground) | content appearance — review required | [docs/components/aspect-ratio.mdx:60](../../docs/components/aspect-ratio.mdx#L60) |
-| components/aspect-ratio | One ratio, three widths | img | transparent | content appearance — review required | [docs/components/aspect-ratio.mdx:76](../../docs/components/aspect-ratio.mdx#L76) |
-| components/aspect-ratio | One ratio, three widths | figcaption | var(--tp-muted-foreground) | content appearance — review required | [docs/components/aspect-ratio.mdx:82](../../docs/components/aspect-ratio.mdx#L82) |
-| components/aspect-ratio | One ratio, three widths | img | transparent | content appearance — review required | [docs/components/aspect-ratio.mdx:98](../../docs/components/aspect-ratio.mdx#L98) |
-| components/aspect-ratio | One ratio, three widths | figcaption | var(--tp-muted-foreground) | content appearance — review required | [docs/components/aspect-ratio.mdx:104](../../docs/components/aspect-ratio.mdx#L104) |
-| components/aspect-ratio | Cover and contain | img | transparent | content appearance — review required | [docs/components/aspect-ratio.mdx:125](../../docs/components/aspect-ratio.mdx#L125) |
-| components/aspect-ratio | Cover and contain | img | transparent | content appearance — review required | [docs/components/aspect-ratio.mdx:128](../../docs/components/aspect-ratio.mdx#L128) |
-| components/autocomplete | In a form | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/autocomplete.mdx:233](../../docs/components/autocomplete.mdx#L233) |
-| components/avatar | Decorative avatar | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/avatar.mdx:162](../../docs/components/avatar.mdx#L162) |
-| components/bubble | Rich content | a | inherit | content appearance — review required | [docs/components/bubble.mdx:110](../../docs/components/bubble.mdx#L110) |
-| components/button-group | Select and native select | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/button-group.mdx:259](../../docs/components/button-group.mdx#L259) |
-| components/calendar | Week numbers | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/calendar.mdx:162](../../docs/components/calendar.mdx#L162) |
-| components/calendar | Value change | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/calendar.mdx:361](../../docs/components/calendar.mdx#L361) |
-| components/card | Header action | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/card.mdx:35](../../docs/components/card.mdx#L35) |
-| components/card | Small | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/card.mdx:98](../../docs/components/card.mdx#L98) |
-| components/carousel | Carousel | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:22](../../docs/components/carousel.mdx#L22) |
-| components/carousel | Carousel | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:37](../../docs/components/carousel.mdx#L37) |
-| components/carousel | Carousel | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:52](../../docs/components/carousel.mdx#L52) |
-| components/carousel | Carousel | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:65](../../docs/components/carousel.mdx#L65) |
-| components/carousel | Bullets inside | footer | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:107](../../docs/components/carousel.mdx#L107) |
-| components/carousel | Bullets inside | footer | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:111](../../docs/components/carousel.mdx#L111) |
-| components/carousel | Bullets inside | footer | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:115](../../docs/components/carousel.mdx#L115) |
-| components/carousel | Autoplay | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:135](../../docs/components/carousel.mdx#L135) |
-| components/carousel | Autoplay | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:139](../../docs/components/carousel.mdx#L139) |
-| components/carousel | Autoplay | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:143](../../docs/components/carousel.mdx#L143) |
-| components/carousel | Crossfade | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:198](../../docs/components/carousel.mdx#L198) |
-| components/carousel | Crossfade | tp-stack | var(--tp-background) | component presentation override — review required | [docs/components/carousel.mdx:203](../../docs/components/carousel.mdx#L203) |
-| components/carousel | Crossfade | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:231](../../docs/components/carousel.mdx#L231) |
-| components/carousel | Layered 3D | img | transparent | content appearance — review required | [docs/components/carousel.mdx:266](../../docs/components/carousel.mdx#L266) |
-| components/carousel | Layered 3D | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:275](../../docs/components/carousel.mdx#L275) |
-| components/carousel | Layered 3D | img | transparent | content appearance — review required | [docs/components/carousel.mdx:305](../../docs/components/carousel.mdx#L305) |
-| components/carousel | Layered 3D | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:314](../../docs/components/carousel.mdx#L314) |
-| components/carousel | Layered 3D | img | transparent | content appearance — review required | [docs/components/carousel.mdx:344](../../docs/components/carousel.mdx#L344) |
-| components/carousel | Layered 3D | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:353](../../docs/components/carousel.mdx#L353) |
-| components/carousel | Parallax | img | transparent | content appearance — review required | [docs/components/carousel.mdx:385](../../docs/components/carousel.mdx#L385) |
-| components/carousel | Parallax | img | transparent | content appearance — review required | [docs/components/carousel.mdx:388](../../docs/components/carousel.mdx#L388) |
-| components/carousel | Parallax | img | transparent | content appearance — review required | [docs/components/carousel.mdx:391](../../docs/components/carousel.mdx#L391) |
-| components/carousel | Parallax | img | transparent | content appearance — review required | [docs/components/carousel.mdx:394](../../docs/components/carousel.mdx#L394) |
-| components/carousel | Focus | img | transparent | content appearance — review required | [docs/components/carousel.mdx:415](../../docs/components/carousel.mdx#L415) |
-| components/carousel | Focus | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:416](../../docs/components/carousel.mdx#L416) |
-| components/carousel | Focus | img | transparent | content appearance — review required | [docs/components/carousel.mdx:419](../../docs/components/carousel.mdx#L419) |
-| components/carousel | Focus | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:420](../../docs/components/carousel.mdx#L420) |
-| components/carousel | Focus | img | transparent | content appearance — review required | [docs/components/carousel.mdx:423](../../docs/components/carousel.mdx#L423) |
-| components/carousel | Focus | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:424](../../docs/components/carousel.mdx#L424) |
-| components/carousel | Focus | img | transparent | content appearance — review required | [docs/components/carousel.mdx:427](../../docs/components/carousel.mdx#L427) |
-| components/carousel | Focus | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:428](../../docs/components/carousel.mdx#L428) |
-| components/carousel | Focus | img | transparent | content appearance — review required | [docs/components/carousel.mdx:431](../../docs/components/carousel.mdx#L431) |
-| components/carousel | Focus | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:432](../../docs/components/carousel.mdx#L432) |
-| components/carousel | Shader transition | img | transparent | content appearance — review required | [docs/components/carousel.mdx:489](../../docs/components/carousel.mdx#L489) |
-| components/carousel | Shader transition | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:499](../../docs/components/carousel.mdx#L499) |
-| components/carousel | Shader transition | img | transparent | content appearance — review required | [docs/components/carousel.mdx:527](../../docs/components/carousel.mdx#L527) |
-| components/carousel | Shader transition | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:537](../../docs/components/carousel.mdx#L537) |
-| components/carousel | Shader transition | img | transparent | content appearance — review required | [docs/components/carousel.mdx:565](../../docs/components/carousel.mdx#L565) |
-| components/carousel | Shader transition | figcaption | white | content appearance — review required | [docs/components/carousel.mdx:575](../../docs/components/carousel.mdx#L575) |
-| components/carousel | Virtual archive with controlled selection | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:615](../../docs/components/carousel.mdx#L615) |
-| components/carousel | Commit | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/carousel.mdx:688](../../docs/components/carousel.mdx#L688) |
-| components/checkbox | Form values | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/checkbox.mdx:46](../../docs/components/checkbox.mdx#L46) |
-| components/checkbox | CheckboxGroupController | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/checkbox.mdx:129](../../docs/components/checkbox.mdx#L129) |
-| components/collapsible | Positional slots | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/collapsible.mdx:50](../../docs/components/collapsible.mdx#L50) |
-| components/collapsible | Positional slots | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/collapsible.mdx:60](../../docs/components/collapsible.mdx#L60) |
-| components/collapsible | Positional slots | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/collapsible.mdx:64](../../docs/components/collapsible.mdx#L64) |
-| components/collapsible | Open change | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/collapsible.mdx:120](../../docs/components/collapsible.mdx#L120) |
-| components/command-palette | Command palette | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/command-palette.mdx:19](../../docs/components/command-palette.mdx#L19) |
-| components/copy-button | Beside a value | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/copy-button.mdx:51](../../docs/components/copy-button.mdx#L51) |
-| components/copy-button | Beside a value | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/copy-button.mdx:54](../../docs/components/copy-button.mdx#L54) |
-| components/copy-button | Copy events | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/copy-button.mdx:119](../../docs/components/copy-button.mdx#L119) |
-| components/cursor | Cursor | span | var(--tp-background) | content appearance — review required | [docs/components/cursor.mdx:14](../../docs/components/cursor.mdx#L14) |
-| components/cursor | Spring | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/cursor.mdx:47](../../docs/components/cursor.mdx#L47) |
-| components/cursor | Spring | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/cursor.mdx:51](../../docs/components/cursor.mdx#L51) |
-| components/cursor | Zones | span | black | content appearance — review required | [docs/components/cursor.mdx:72](../../docs/components/cursor.mdx#L72) |
-| components/cursor | Zones | div | #fafafa | content appearance — review required | [docs/components/cursor.mdx:73](../../docs/components/cursor.mdx#L73) |
-| components/cursor | Zones | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/cursor.mdx:82](../../docs/components/cursor.mdx#L82) |
-| components/dialog | Container modality | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/dialog.mdx:92](../../docs/components/dialog.mdx#L92) |
-| components/drag-drop-list | Commit events | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/drag-drop-list.mdx:43](../../docs/components/drag-drop-list.mdx#L43) |
-| components/drag-drop-list | Custom rows and overlay | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/drag-drop-list.mdx:116](../../docs/components/drag-drop-list.mdx#L116) |
-| components/drag-drop-list | Board lanes | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/drag-drop-list.mdx:198](../../docs/components/drag-drop-list.mdx#L198) |
-| components/drag-drop-list | Controlled lanes | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/drag-drop-list.mdx:255](../../docs/components/drag-drop-list.mdx#L255) |
-| components/drag-drop-list | Approve before committing | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/drag-drop-list.mdx:328](../../docs/components/drag-drop-list.mdx#L328) |
-| components/empty-state | Bordered and filled | a | inherit | content appearance — review required | [docs/components/empty-state.mdx:110](../../docs/components/empty-state.mdx#L110) |
-| components/field | Slots | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/field.mdx:87](../../docs/components/field.mdx#L87) |
-| components/field | Slots | a | inherit | content appearance — review required | [docs/components/field.mdx:89](../../docs/components/field.mdx#L89) |
-| components/file-upload | Field and form | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/file-upload.mdx:230](../../docs/components/file-upload.mdx#L230) |
-| components/form | Form | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/form.mdx:28](../../docs/components/form.mdx#L28) |
-| components/form | Notification settings | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/form.mdx:77](../../docs/components/form.mdx#L77) |
-| components/form | Matching passwords | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/form.mdx:142](../../docs/components/form.mdx#L142) |
-| components/form | Wait for async checks | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/form.mdx:164](../../docs/components/form.mdx#L164) |
-| components/form | Repeated emails | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/form.mdx:206](../../docs/components/form.mdx#L206) |
-| components/icon | Icon | tp-stack | var(--tp-muted-foreground) | component presentation override — review required | [docs/components/icon.mdx:9](../../docs/components/icon.mdx#L9) |
-| components/icon | Decorative and labelled | tp-icon | var(--tp-success) | component presentation override — review required | [docs/components/icon.mdx:54](../../docs/components/icon.mdx#L54) |
-| components/icon | Size and color | tp-icon | var(--tp-muted-foreground) | component presentation override — review required | [docs/components/icon.mdx:76](../../docs/components/icon.mdx#L76) |
-| components/icon | Size and color | tp-icon | var(--tp-primary) | component presentation override — review required | [docs/components/icon.mdx:77](../../docs/components/icon.mdx#L77) |
-| components/icon | Custom definition | tp-icon | var(--tp-warning) | component presentation override — review required | [docs/components/icon.mdx:95](../../docs/components/icon.mdx#L95) |
-| components/image | Fallbacks | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/image.mdx:59](../../docs/components/image.mdx#L59) |
-| components/image | Reveal timing and repeat | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/image.mdx:138](../../docs/components/image.mdx#L138) |
-| components/image | Headline, group and caption | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/image.mdx:161](../../docs/components/image.mdx#L161) |
-| components/input-group | Status addons | tp-icon | var(--tp-success) | component presentation override — review required | [docs/components/input-group.mdx:79](../../docs/components/input-group.mdx#L79) |
-| components/list | Header and footer | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/list.mdx:146](../../docs/components/list.mdx#L146) |
-| components/list | Header and footer | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/list.mdx:149](../../docs/components/list.mdx#L149) |
-| components/list | Recordings | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/list.mdx:231](../../docs/components/list.mdx#L231) |
-| components/list | Recordings | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/list.mdx:235](../../docs/components/list.mdx#L235) |
-| components/list | Recordings | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/list.mdx:239](../../docs/components/list.mdx#L239) |
-| components/list | Recordings | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/list.mdx:249](../../docs/components/list.mdx#L249) |
-| components/list | People and invitations | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/list.mdx:347](../../docs/components/list.mdx#L347) |
-| components/map | Map | tp-map-pin | var(--tp-chart-1) | component presentation override — review required | [docs/components/map.mdx:20](../../docs/components/map.mdx#L20) |
-| components/map | Map | tp-map-pin | var(--tp-chart-2) | component presentation override — review required | [docs/components/map.mdx:30](../../docs/components/map.mdx#L30) |
-| components/map | Map | tp-map-pin | var(--tp-chart-3) | component presentation override — review required | [docs/components/map.mdx:40](../../docs/components/map.mdx#L40) |
-| components/map | Selected pin | tp-map-pin | var(--tp-primary) | component presentation override — review required | [docs/components/map.mdx:256](../../docs/components/map.mdx#L256) |
-| components/map | Status slot | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/map.mdx:364](../../docs/components/map.mdx#L364) |
-| components/marker | Native hosts and layout | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/marker.mdx:129](../../docs/components/marker.mdx#L129) |
-| components/media-player | Custom top region | tp-stack | white | component presentation override — review required | [docs/components/media-player.mdx:122](../../docs/components/media-player.mdx#L122) |
-| components/menu | Handling commands | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/menu.mdx:59](../../docs/components/menu.mdx#L59) |
-| components/menu | Context invocation | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/menu.mdx:147](../../docs/components/menu.mdx#L147) |
-| components/menubar | Active menu | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/menubar.mdx:111](../../docs/components/menubar.mdx#L111) |
-| components/message | Retry a failed message | span | var(--tp-destructive) | content appearance — review required | [docs/components/message.mdx:190](../../docs/components/message.mdx#L190) |
-| components/native-select | Form value | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/native-select.mdx:103](../../docs/components/native-select.mdx#L103) |
-| components/native-select | Controlled value | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/native-select.mdx:134](../../docs/components/native-select.mdx#L134) |
-| components/navigation-menu | Navigation menu | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-menu.mdx:24](../../docs/components/navigation-menu.mdx#L24) |
-| components/navigation-menu | Navigation menu | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-menu.mdx:32](../../docs/components/navigation-menu.mdx#L32) |
-| components/navigation-menu | Navigation menu | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-menu.mdx:40](../../docs/components/navigation-menu.mdx#L40) |
-| components/navigation-menu | Navigation menu | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-menu.mdx:48](../../docs/components/navigation-menu.mdx#L48) |
-| components/navigation-panel | Navigation panel | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-panel.mdx:64](../../docs/components/navigation-panel.mdx#L64) |
-| components/navigation-panel | Off-canvas | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-panel.mdx:117](../../docs/components/navigation-panel.mdx#L117) |
-| components/navigation-panel | Collapsible groups | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-panel.mdx:165](../../docs/components/navigation-panel.mdx#L165) |
-| components/navigation-panel | Drawer mode | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-panel.mdx:202](../../docs/components/navigation-panel.mdx#L202) |
-| components/navigation-panel | Floating | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-panel.mdx:232](../../docs/components/navigation-panel.mdx#L232) |
-| components/navigation-panel | Team switcher and row actions | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/navigation-panel.mdx:308](../../docs/components/navigation-panel.mdx#L308) |
-| components/one-time-code-field | Verify on completion | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/one-time-code-field.mdx:93](../../docs/components/one-time-code-field.mdx#L93) |
-| components/one-time-code-field | Controlled value | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/one-time-code-field.mdx:127](../../docs/components/one-time-code-field.mdx#L127) |
-| components/pagination | Router handling | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/pagination.mdx:33](../../docs/components/pagination.mdx#L33) |
-| components/pagination | Rows per page | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/pagination.mdx:122](../../docs/components/pagination.mdx#L122) |
-| components/popover | Separate anchor | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/popover.mdx:131](../../docs/components/popover.mdx#L131) |
-| components/popover | Open change | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/popover.mdx:159](../../docs/components/popover.mdx#L159) |
-| components/preview-card | Preview Card | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/preview-card.mdx:17](../../docs/components/preview-card.mdx#L17) |
-| components/preview-card | Preview Card | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/preview-card.mdx:18](../../docs/components/preview-card.mdx#L18) |
-| components/preview-card | Delays | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/preview-card.mdx:49](../../docs/components/preview-card.mdx#L49) |
-| components/preview-card | Placement and arrow | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/preview-card.mdx:66](../../docs/components/preview-card.mdx#L66) |
-| components/preview-card | Placement and arrow | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/preview-card.mdx:69](../../docs/components/preview-card.mdx#L69) |
-| components/preview-card | Not hoverable | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/preview-card.mdx:86](../../docs/components/preview-card.mdx#L86) |
-| components/questionnaire | Submit | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/questionnaire.mdx:279](../../docs/components/questionnaire.mdx#L279) |
-| components/questionnaire | Checkpoint and cross-answer validation | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/questionnaire.mdx:311](../../docs/components/questionnaire.mdx#L311) |
-| components/questionnaire | Clarification dialog | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/questionnaire.mdx:607](../../docs/components/questionnaire.mdx#L607) |
-| components/radio-group | Value change | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/radio-group.mdx:164](../../docs/components/radio-group.mdx#L164) |
-| components/resizable-panel-group | Resizable Panel Group | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:15](../../docs/components/resizable-panel-group.mdx#L15) |
-| components/resizable-panel-group | Resizable Panel Group | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:16](../../docs/components/resizable-panel-group.mdx#L16) |
-| components/resizable-panel-group | Resizable Panel Group | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:17](../../docs/components/resizable-panel-group.mdx#L17) |
-| components/resizable-panel-group | Resizable Panel Group | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:26](../../docs/components/resizable-panel-group.mdx#L26) |
-| components/resizable-panel-group | Resizable Panel Group | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:32](../../docs/components/resizable-panel-group.mdx#L32) |
-| components/resizable-panel-group | Bounds | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:58](../../docs/components/resizable-panel-group.mdx#L58) |
-| components/resizable-panel-group | Bounds | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:62](../../docs/components/resizable-panel-group.mdx#L62) |
-| components/resizable-panel-group | Vertical | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:80](../../docs/components/resizable-panel-group.mdx#L80) |
-| components/resizable-panel-group | Layout events | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:149](../../docs/components/resizable-panel-group.mdx#L149) |
-| components/resizable-panel-group | Persisted sizes | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:238](../../docs/components/resizable-panel-group.mdx#L238) |
-| components/resizable-panel-group | Disabled | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/resizable-panel-group.mdx:276](../../docs/components/resizable-panel-group.mdx#L276) |
-| components/scroll-area | Both axes | tr | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-area.mdx:89](../../docs/components/scroll-area.mdx#L89) |
-| components/scroll-trigger | Scroll Trigger | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:21](../../docs/components/scroll-trigger.mdx#L21) |
-| components/scroll-trigger | Replay on entry | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:59](../../docs/components/scroll-trigger.mdx#L59) |
-| components/scroll-trigger | Replay on entry | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:62](../../docs/components/scroll-trigger.mdx#L62) |
-| components/scroll-trigger | Pinned scene | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:208](../../docs/components/scroll-trigger.mdx#L208) |
-| components/scroll-trigger | Pinned scene | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:215](../../docs/components/scroll-trigger.mdx#L215) |
-| components/scroll-trigger | Pinned scene | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:216](../../docs/components/scroll-trigger.mdx#L216) |
-| components/scroll-trigger | Reveal events | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:239](../../docs/components/scroll-trigger.mdx#L239) |
-| components/scroll-trigger | Reveal events | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/scroll-trigger.mdx:243](../../docs/components/scroll-trigger.mdx#L243) |
-| components/select | Value change | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/select.mdx:302](../../docs/components/select.mdx#L302) |
-| components/separator | Separator | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/separator.mdx:13](../../docs/components/separator.mdx#L13) |
-| components/slider | Change and commit | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/slider.mdx:338](../../docs/components/slider.mdx#L338) |
-| components/slider | Rejecting values | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/slider.mdx:376](../../docs/components/slider.mdx#L376) |
-| components/spinner | Spinner | tp-stack | var(--tp-muted-foreground) | component presentation override — review required | [docs/components/spinner.mdx:9](../../docs/components/spinner.mdx#L9) |
-| components/switch | Thumb icon | tp-icon | var(--tp-foreground) | component presentation override — review required | [docs/components/switch.mdx:171](../../docs/components/switch.mdx#L171) |
-| components/tabs | Change event and setValue | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/tabs.mdx:124](../../docs/components/tabs.mdx#L124) |
-| components/tabs | Controlled with a veto | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/tabs.mdx:179](../../docs/components/tabs.mdx#L179) |
-| components/text-area | Character count | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-area.mdx:90](../../docs/components/text-area.mdx#L90) |
-| components/text-transform | Text transform | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:11](../../docs/components/text-transform.mdx#L11) |
-| components/text-transform | Text transform | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:13](../../docs/components/text-transform.mdx#L13) |
-| components/text-transform | Text transform | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:15](../../docs/components/text-transform.mdx#L15) |
-| components/text-transform | Text transform | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:17](../../docs/components/text-transform.mdx#L17) |
-| components/text-transform | Text transform | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:19](../../docs/components/text-transform.mdx#L19) |
-| components/text-transform | Case and identifiers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:35](../../docs/components/text-transform.mdx#L35) |
-| components/text-transform | Case and identifiers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:36](../../docs/components/text-transform.mdx#L36) |
-| components/text-transform | Case and identifiers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:37](../../docs/components/text-transform.mdx#L37) |
-| components/text-transform | Case and identifiers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:38](../../docs/components/text-transform.mdx#L38) |
-| components/text-transform | Case and identifiers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:39](../../docs/components/text-transform.mdx#L39) |
-| components/text-transform | Case and identifiers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:40](../../docs/components/text-transform.mdx#L40) |
-| components/text-transform | Uploads | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:94](../../docs/components/text-transform.mdx#L94) |
-| components/text-transform | Uploads | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/text-transform.mdx:98](../../docs/components/text-transform.mdx#L98) |
-| components/theme-switcher | Explicit choices only | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/theme-switcher.mdx:115](../../docs/components/theme-switcher.mdx#L115) |
-| components/time | Time | tp-time | var(--tp-muted-foreground) | component presentation override — review required | [docs/components/time.mdx:25](../../docs/components/time.mdx#L25) |
-| components/time | Time | tp-time | var(--tp-muted-foreground) | component presentation override — review required | [docs/components/time.mdx:31](../../docs/components/time.mdx#L31) |
-| components/time | Time | tp-time | var(--tp-muted-foreground) | component presentation override — review required | [docs/components/time.mdx:37](../../docs/components/time.mdx#L37) |
-| components/time | Modes | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:64](../../docs/components/time.mdx#L64) |
-| components/time | Modes | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:65](../../docs/components/time.mdx#L65) |
-| components/time | Modes | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:66](../../docs/components/time.mdx#L66) |
-| components/time | Modes | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:67](../../docs/components/time.mdx#L67) |
-| components/time | Due dates | span | var(--tp-destructive) | content appearance — review required | [docs/components/time.mdx:139](../../docs/components/time.mdx#L139) |
-| components/time | Calendar | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:155](../../docs/components/time.mdx#L155) |
-| components/time | Calendar | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:156](../../docs/components/time.mdx#L156) |
-| components/time | Calendar | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:157](../../docs/components/time.mdx#L157) |
-| components/time | Calendar | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:158](../../docs/components/time.mdx#L158) |
-| components/time | Precisions | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:195](../../docs/components/time.mdx#L195) |
-| components/time | Precisions | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:196](../../docs/components/time.mdx#L196) |
-| components/time | Precisions | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:197](../../docs/components/time.mdx#L197) |
-| components/time | Precisions | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:198](../../docs/components/time.mdx#L198) |
-| components/time | Precisions | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:199](../../docs/components/time.mdx#L199) |
-| components/time | Timers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:210](../../docs/components/time.mdx#L210) |
-| components/time | Timers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:211](../../docs/components/time.mdx#L211) |
-| components/time | Timers | dt | var(--tp-muted-foreground) | content appearance — review required | [docs/components/time.mdx:212](../../docs/components/time.mdx#L212) |
-| components/timeline | Timeline | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:14](../../docs/components/timeline.mdx#L14) |
-| components/timeline | Timeline | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:18](../../docs/components/timeline.mdx#L18) |
-| components/timeline | Timeline | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:22](../../docs/components/timeline.mdx#L22) |
-| components/timeline | Timeline | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:26](../../docs/components/timeline.mdx#L26) |
-| components/timeline | Step tracker | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:47](../../docs/components/timeline.mdx#L47) |
-| components/timeline | Step tracker | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:48](../../docs/components/timeline.mdx#L48) |
-| components/timeline | Step tracker | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:49](../../docs/components/timeline.mdx#L49) |
-| components/timeline | Step tracker | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:50](../../docs/components/timeline.mdx#L50) |
-| components/timeline | Roadmap | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:62](../../docs/components/timeline.mdx#L62) |
-| components/timeline | Roadmap | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:64](../../docs/components/timeline.mdx#L64) |
-| components/timeline | Roadmap | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:67](../../docs/components/timeline.mdx#L67) |
-| components/timeline | Roadmap | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:69](../../docs/components/timeline.mdx#L69) |
-| components/timeline | Roadmap | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:72](../../docs/components/timeline.mdx#L72) |
-| components/timeline | Roadmap | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:74](../../docs/components/timeline.mdx#L74) |
-| components/timeline | Roadmap | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:77](../../docs/components/timeline.mdx#L77) |
-| components/timeline | Roadmap | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:79](../../docs/components/timeline.mdx#L79) |
-| components/timeline | Roadmap | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:82](../../docs/components/timeline.mdx#L82) |
-| components/timeline | Roadmap | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:84](../../docs/components/timeline.mdx#L84) |
-| components/timeline | Roadmap | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:87](../../docs/components/timeline.mdx#L87) |
-| components/timeline | Roadmap | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:89](../../docs/components/timeline.mdx#L89) |
-| components/timeline | Numbered steps | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:106](../../docs/components/timeline.mdx#L106) |
-| components/timeline | Numbered steps | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:111](../../docs/components/timeline.mdx#L111) |
-| components/timeline | Numbered steps | p | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:116](../../docs/components/timeline.mdx#L116) |
-| components/timeline | Expandable phases | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:132](../../docs/components/timeline.mdx#L132) |
-| components/timeline | Expandable phases | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:139](../../docs/components/timeline.mdx#L139) |
-| components/timeline | Expandable phases | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:145](../../docs/components/timeline.mdx#L145) |
-| components/timeline | Expandable phases | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:152](../../docs/components/timeline.mdx#L152) |
-| components/timeline | Expandable phases | span | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:158](../../docs/components/timeline.mdx#L158) |
-| components/timeline | Changelog | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:206](../../docs/components/timeline.mdx#L206) |
-| components/timeline | Changelog | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:217](../../docs/components/timeline.mdx#L217) |
-| components/timeline | Changelog | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:224](../../docs/components/timeline.mdx#L224) |
-| components/timeline | Explicit status | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:239](../../docs/components/timeline.mdx#L239) |
-| components/timeline | Explicit status | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:240](../../docs/components/timeline.mdx#L240) |
-| components/timeline | Explicit status | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:241](../../docs/components/timeline.mdx#L241) |
-| components/timeline | Explicit status | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/timeline.mdx:242](../../docs/components/timeline.mdx#L242) |
-| components/toggle-group | Required choice | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/toggle-group.mdx:151](../../docs/components/toggle-group.mdx#L151) |
-| components/toggle | Change events | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/toggle.mdx:137](../../docs/components/toggle.mdx#L137) |
-| components/tooltip | Cursor tracking | div | var(--tp-muted-foreground) | content appearance — review required | [docs/components/tooltip.mdx:69](../../docs/components/tooltip.mdx#L69) |
-| components/tree-view | Opening items | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/tree-view.mdx:95](../../docs/components/tree-view.mdx#L95) |
-| components/tree-view | Rendered rows | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/tree-view.mdx:176](../../docs/components/tree-view.mdx#L176) |
-| components/tree-view | Controlled lanes | output | var(--tp-muted-foreground) | content appearance — review required | [docs/components/tree-view.mdx:265](../../docs/components/tree-view.mdx#L265) |
-| motion/surface/glow-border | Custom colors | span | var(--tp-muted-foreground) | content appearance — review required | [docs/motion/surface/glow-border.mdx:143](../../docs/motion/surface/glow-border.mdx#L143) |
-| widgets/color-picker | Popup in a form | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/color-picker.mdx:65](../../docs/widgets/color-picker.mdx#L65) |
-| widgets/color-picker | Commit events | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/color-picker.mdx:208](../../docs/widgets/color-picker.mdx#L208) |
-| widgets/easing-editor | Commit and veto | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/easing-editor.mdx:141](../../docs/widgets/easing-editor.mdx#L141) |
-| widgets/easing-editor | Controlled owner | code | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/easing-editor.mdx:165](../../docs/widgets/easing-editor.mdx#L165) |
-| widgets/emoji-picker | Picks | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/emoji-picker.mdx:28](../../docs/widgets/emoji-picker.mdx#L28) |
-| widgets/emoji-picker | Remembered tone | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/emoji-picker.mdx:89](../../docs/widgets/emoji-picker.mdx#L89) |
-| widgets/emoji-picker | Popup in a form | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/emoji-picker.mdx:215](../../docs/widgets/emoji-picker.mdx#L215) |
-| widgets/flow | Automatic layout | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/flow.mdx:333](../../docs/widgets/flow.mdx#L333) |
-| widgets/flow | Commit and selection | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/flow.mdx:409](../../docs/widgets/flow.mdx#L409) |
-| widgets/flow | Controlled owner | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/flow.mdx:453](../../docs/widgets/flow.mdx#L453) |
-| widgets/flow | In a form | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/flow.mdx:712](../../docs/widgets/flow.mdx#L712) |
-| widgets/text-editor | In a form | output | var(--tp-muted-foreground) | content appearance — review required | [docs/widgets/text-editor.mdx:579](../../docs/widgets/text-editor.mdx#L579) |
-| compositions/message.examples | Actions | span | var(--tp-destructive) | content appearance — review required | [src/stories/message.examples.ts:137](../../src/stories/message.examples.ts#L137) |
-| components/scroll-trigger | (file/setup/shared helper) | p | var(--tp-muted-foreground) | content appearance — review required | [src/stories/scroll-trigger.stories.ts:30](../../src/stories/scroll-trigger.stories.ts#L30) |
-
-<a id="property-5"></a>
-
-### 5. margin — 217 occurrences
-
-| Value | Occurrences |
-| --- | ---: |
-| 0 | 191 |
+| 0 | 198 |
 | var(--tp-space-1) 0 0 | 10 |
-| 0 auto | 7 |
 | 0 0 var(--tp-space-3) | 3 |
 | 0 0 var(--tp-space-4) | 2 |
 | var(--tp-space-3) 0 0 | 2 |
@@ -1621,73 +737,73 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/aspect-ratio | One ratio, three widths | figure | 0 | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:47](../../docs/components/aspect-ratio.mdx#L47) |
 | components/aspect-ratio | One ratio, three widths | figure | 0 | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:69](../../docs/components/aspect-ratio.mdx#L69) |
 | components/aspect-ratio | One ratio, three widths | figure | 0 | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:91](../../docs/components/aspect-ratio.mdx#L91) |
-| components/attachment | Preview trigger, download and retry | p | 0 | layout/geometry — minimize | [docs/components/attachment.mdx:360](../../docs/components/attachment.mdx#L360) |
-| components/bubble | Rich content | p | 0 | layout/geometry — minimize | [docs/components/bubble.mdx:109](../../docs/components/bubble.mdx#L109) |
-| components/bubble | Rich content | p | 0 | layout/geometry — minimize | [docs/components/bubble.mdx:110](../../docs/components/bubble.mdx#L110) |
-| components/bubble | Expandable message | p | 0 | layout/geometry — minimize | [docs/components/bubble.mdx:122](../../docs/components/bubble.mdx#L122) |
+| components/attachment | Preview trigger, download and retry | p | 0 | layout/geometry — minimize | [docs/components/attachment.mdx:347](../../docs/components/attachment.mdx#L347) |
+| components/bubble | Rich content | p | 0 | layout/geometry — minimize | [docs/components/bubble.mdx:111](../../docs/components/bubble.mdx#L111) |
+| components/bubble | Rich content | p | 0 | layout/geometry — minimize | [docs/components/bubble.mdx:112](../../docs/components/bubble.mdx#L112) |
 | components/bubble | Expandable message | p | 0 | layout/geometry — minimize | [docs/components/bubble.mdx:125](../../docs/components/bubble.mdx#L125) |
+| components/bubble | Expandable message | p | 0 | layout/geometry — minimize | [docs/components/bubble.mdx:128](../../docs/components/bubble.mdx#L128) |
 | components/calendar | Week numbers | p | 0 | layout/geometry — minimize | [docs/components/calendar.mdx:162](../../docs/components/calendar.mdx#L162) |
-| components/card | Card | h3 | 0 | layout/geometry — minimize | [docs/components/card.mdx:10](../../docs/components/card.mdx#L10) |
-| components/card | Card | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:11](../../docs/components/card.mdx#L11) |
-| components/card | Header action | h3 | 0 | layout/geometry — minimize | [docs/components/card.mdx:31](../../docs/components/card.mdx#L31) |
-| components/card | Header action | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:32](../../docs/components/card.mdx#L32) |
-| components/card | Header action | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:34](../../docs/components/card.mdx#L34) |
-| components/card | Content only | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:44](../../docs/components/card.mdx#L44) |
-| components/card | Surface options | h3 | 0 | layout/geometry — minimize | [docs/components/card.mdx:57](../../docs/components/card.mdx#L57) |
-| components/card | Surface options | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:58](../../docs/components/card.mdx#L58) |
-| components/card | Surface options | h3 | 0 | layout/geometry — minimize | [docs/components/card.mdx:62](../../docs/components/card.mdx#L62) |
-| components/card | Surface options | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:63](../../docs/components/card.mdx#L63) |
-| components/card | Surface options | h3 | 0 | layout/geometry — minimize | [docs/components/card.mdx:67](../../docs/components/card.mdx#L67) |
-| components/card | Surface options | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:68](../../docs/components/card.mdx#L68) |
-| components/card | Elevated | h3 | 0 | layout/geometry — minimize | [docs/components/card.mdx:81](../../docs/components/card.mdx#L81) |
-| components/card | Elevated | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:82](../../docs/components/card.mdx#L82) |
-| components/card | Elevated | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:83](../../docs/components/card.mdx#L83) |
-| components/card | Small | h3 | 0 | layout/geometry — minimize | [docs/components/card.mdx:96](../../docs/components/card.mdx#L96) |
-| components/card | Small | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:97](../../docs/components/card.mdx#L97) |
+| components/card | Card | h3 | 0 | layout/geometry — minimize | [docs/components/card.mdx:12](../../docs/components/card.mdx#L12) |
+| components/card | Card | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:13](../../docs/components/card.mdx#L13) |
+| components/card | Header action | h3 | 0 | layout/geometry — minimize | [docs/components/card.mdx:35](../../docs/components/card.mdx#L35) |
+| components/card | Header action | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:36](../../docs/components/card.mdx#L36) |
+| components/card | Header action | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:38](../../docs/components/card.mdx#L38) |
+| components/card | Content only | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:50](../../docs/components/card.mdx#L50) |
+| components/card | Surface options | h3 | 0 | layout/geometry — minimize | [docs/components/card.mdx:63](../../docs/components/card.mdx#L63) |
+| components/card | Surface options | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:64](../../docs/components/card.mdx#L64) |
+| components/card | Surface options | h3 | 0 | layout/geometry — minimize | [docs/components/card.mdx:68](../../docs/components/card.mdx#L68) |
+| components/card | Surface options | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:69](../../docs/components/card.mdx#L69) |
+| components/card | Surface options | h3 | 0 | layout/geometry — minimize | [docs/components/card.mdx:73](../../docs/components/card.mdx#L73) |
+| components/card | Surface options | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:74](../../docs/components/card.mdx#L74) |
+| components/card | Elevated | h3 | 0 | layout/geometry — minimize | [docs/components/card.mdx:89](../../docs/components/card.mdx#L89) |
+| components/card | Elevated | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:90](../../docs/components/card.mdx#L90) |
+| components/card | Elevated | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:91](../../docs/components/card.mdx#L91) |
+| components/card | Small | h3 | 0 | layout/geometry — minimize | [docs/components/card.mdx:106](../../docs/components/card.mdx#L106) |
+| components/card | Small | p | 0 | layout/geometry — minimize | [docs/components/card.mdx:107](../../docs/components/card.mdx#L107) |
+| components/carousel | Bullets inside | blockquote | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:101](../../docs/components/carousel.mdx#L101) |
+| components/carousel | Bullets inside | p | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:102](../../docs/components/carousel.mdx#L102) |
 | components/carousel | Bullets inside | blockquote | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:105](../../docs/components/carousel.mdx#L105) |
 | components/carousel | Bullets inside | p | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:106](../../docs/components/carousel.mdx#L106) |
 | components/carousel | Bullets inside | blockquote | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:109](../../docs/components/carousel.mdx#L109) |
 | components/carousel | Bullets inside | p | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:110](../../docs/components/carousel.mdx#L110) |
-| components/carousel | Bullets inside | blockquote | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:113](../../docs/components/carousel.mdx#L113) |
-| components/carousel | Bullets inside | p | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:114](../../docs/components/carousel.mdx#L114) |
-| components/carousel | Layered 3D | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:253](../../docs/components/carousel.mdx#L253) |
-| components/carousel | Layered 3D | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:292](../../docs/components/carousel.mdx#L292) |
-| components/carousel | Layered 3D | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:331](../../docs/components/carousel.mdx#L331) |
-| components/carousel | Parallax | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:384](../../docs/components/carousel.mdx#L384) |
-| components/carousel | Parallax | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:387](../../docs/components/carousel.mdx#L387) |
-| components/carousel | Parallax | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:390](../../docs/components/carousel.mdx#L390) |
-| components/carousel | Parallax | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:393](../../docs/components/carousel.mdx#L393) |
-| components/carousel | Focus | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:414](../../docs/components/carousel.mdx#L414) |
-| components/carousel | Focus | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:418](../../docs/components/carousel.mdx#L418) |
-| components/carousel | Focus | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:422](../../docs/components/carousel.mdx#L422) |
-| components/carousel | Focus | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:426](../../docs/components/carousel.mdx#L426) |
-| components/carousel | Focus | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:430](../../docs/components/carousel.mdx#L430) |
-| components/carousel | Shader transition | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:475](../../docs/components/carousel.mdx#L475) |
-| components/carousel | Shader transition | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:513](../../docs/components/carousel.mdx#L513) |
-| components/carousel | Shader transition | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:551](../../docs/components/carousel.mdx#L551) |
-| components/checkbox | Select all | fieldset | 0 auto | layout/geometry — minimize | [docs/components/checkbox.mdx:66](../../docs/components/checkbox.mdx#L66) |
-| components/checkbox | CheckboxGroupController | fieldset | 0 auto | layout/geometry — minimize | [docs/components/checkbox.mdx:115](../../docs/components/checkbox.mdx#L115) |
-| components/citation | Citation | p | 0 auto | layout/geometry — minimize | [docs/components/citation.mdx:11](../../docs/components/citation.mdx#L11) |
-| components/citation | Source preview | p | 0 auto | layout/geometry — minimize | [docs/components/citation.mdx:47](../../docs/components/citation.mdx#L47) |
-| components/citation | Numbered references | p | 0 | layout/geometry — minimize | [docs/components/citation.mdx:69](../../docs/components/citation.mdx#L69) |
-| components/collapsible | Collapsible | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:12](../../docs/components/collapsible.mdx#L12) |
+| components/carousel | Layered 3D | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:243](../../docs/components/carousel.mdx#L243) |
+| components/carousel | Layered 3D | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:279](../../docs/components/carousel.mdx#L279) |
+| components/carousel | Layered 3D | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:315](../../docs/components/carousel.mdx#L315) |
+| components/carousel | Parallax | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:365](../../docs/components/carousel.mdx#L365) |
+| components/carousel | Parallax | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:368](../../docs/components/carousel.mdx#L368) |
+| components/carousel | Parallax | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:371](../../docs/components/carousel.mdx#L371) |
+| components/carousel | Parallax | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:374](../../docs/components/carousel.mdx#L374) |
+| components/carousel | Focus | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:396](../../docs/components/carousel.mdx#L396) |
+| components/carousel | Focus | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:400](../../docs/components/carousel.mdx#L400) |
+| components/carousel | Focus | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:404](../../docs/components/carousel.mdx#L404) |
+| components/carousel | Focus | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:408](../../docs/components/carousel.mdx#L408) |
+| components/carousel | Focus | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:412](../../docs/components/carousel.mdx#L412) |
+| components/carousel | Shader transition | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:458](../../docs/components/carousel.mdx#L458) |
+| components/carousel | Shader transition | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:494](../../docs/components/carousel.mdx#L494) |
+| components/carousel | Shader transition | figure | 0 | layout/geometry — minimize | [docs/components/carousel.mdx:530](../../docs/components/carousel.mdx#L530) |
+| components/checkbox | Select all | fieldset | 0 | layout/geometry — minimize | [docs/components/checkbox.mdx:68](../../docs/components/checkbox.mdx#L68) |
+| components/checkbox | CheckboxGroupController | fieldset | 0 | layout/geometry — minimize | [docs/components/checkbox.mdx:117](../../docs/components/checkbox.mdx#L117) |
+| components/citation | Citation | p | 0 | layout/geometry — minimize | [docs/components/citation.mdx:12](../../docs/components/citation.mdx#L12) |
+| components/citation | Source preview | p | 0 | layout/geometry — minimize | [docs/components/citation.mdx:49](../../docs/components/citation.mdx#L49) |
+| components/citation | Numbered references | p | 0 | layout/geometry — minimize | [docs/components/citation.mdx:71](../../docs/components/citation.mdx#L71) |
 | components/collapsible | Collapsible | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:13](../../docs/components/collapsible.mdx#L13) |
-| components/collapsible | Leading indicator | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:32](../../docs/components/collapsible.mdx#L32) |
-| components/collapsible | Positional slots | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:54](../../docs/components/collapsible.mdx#L54) |
+| components/collapsible | Collapsible | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:14](../../docs/components/collapsible.mdx#L14) |
+| components/collapsible | Leading indicator | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:34](../../docs/components/collapsible.mdx#L34) |
+| components/collapsible | Positional slots | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:56](../../docs/components/collapsible.mdx#L56) |
 | components/collapsible | Positional slots | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:67](../../docs/components/collapsible.mdx#L67) |
-| components/collapsible | As a heading | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:81](../../docs/components/collapsible.mdx#L81) |
-| components/collapsible | Searchable | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:94](../../docs/components/collapsible.mdx#L94) |
-| components/collapsible | Open change | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:116](../../docs/components/collapsible.mdx#L116) |
-| components/collapsible | Disabled | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:138](../../docs/components/collapsible.mdx#L138) |
-| components/collapsible | Line-by-line reveal | ul | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:151](../../docs/components/collapsible.mdx#L151) |
-| components/copy-button | Beside a value | dl | 0 auto | layout/geometry — minimize | [docs/components/copy-button.mdx:50](../../docs/components/copy-button.mdx#L50) |
-| components/copy-button | Beside a value | dd | 0 | layout/geometry — minimize | [docs/components/copy-button.mdx:52](../../docs/components/copy-button.mdx#L52) |
-| components/copy-button | Beside a value | dd | 0 | layout/geometry — minimize | [docs/components/copy-button.mdx:55](../../docs/components/copy-button.mdx#L55) |
+| components/collapsible | As a heading | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:82](../../docs/components/collapsible.mdx#L82) |
+| components/collapsible | Searchable | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:96](../../docs/components/collapsible.mdx#L96) |
+| components/collapsible | Open change | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:119](../../docs/components/collapsible.mdx#L119) |
+| components/collapsible | Disabled | p | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:141](../../docs/components/collapsible.mdx#L141) |
+| components/collapsible | Line-by-line reveal | ul | 0 | layout/geometry — minimize | [docs/components/collapsible.mdx:155](../../docs/components/collapsible.mdx#L155) |
+| components/copy-button | Beside a value | dl | 0 | layout/geometry — minimize | [docs/components/copy-button.mdx:52](../../docs/components/copy-button.mdx#L52) |
+| components/copy-button | Beside a value | dd | 0 | layout/geometry — minimize | [docs/components/copy-button.mdx:54](../../docs/components/copy-button.mdx#L54) |
+| components/copy-button | Beside a value | dd | 0 | layout/geometry — minimize | [docs/components/copy-button.mdx:57](../../docs/components/copy-button.mdx#L57) |
 | components/cursor | Cursor | figure | 0 | layout/geometry — minimize | [docs/components/cursor.mdx:16](../../docs/components/cursor.mdx#L16) |
 | components/cursor | Cursor | figure | 0 | layout/geometry — minimize | [docs/components/cursor.mdx:20](../../docs/components/cursor.mdx#L20) |
 | components/cursor | Cursor | figure | 0 | layout/geometry — minimize | [docs/components/cursor.mdx:24](../../docs/components/cursor.mdx#L24) |
-| components/description-list | Record details | h3 | 0 | layout/geometry — minimize | [docs/components/description-list.mdx:31](../../docs/components/description-list.mdx#L31) |
-| components/description-list | Record details | p | 0 | layout/geometry — minimize | [docs/components/description-list.mdx:32](../../docs/components/description-list.mdx#L32) |
+| components/description-list | Record details | h3 | 0 | layout/geometry — minimize | [docs/components/description-list.mdx:35](../../docs/components/description-list.mdx#L35) |
+| components/description-list | Record details | p | 0 | layout/geometry — minimize | [docs/components/description-list.mdx:36](../../docs/components/description-list.mdx#L36) |
 | components/dialog | Non-modal | dl | 0 | layout/geometry — minimize | [docs/components/dialog.mdx:55](../../docs/components/dialog.mdx#L55) |
 | components/dialog | Non-modal | dd | 0 | layout/geometry — minimize | [docs/components/dialog.mdx:56](../../docs/components/dialog.mdx#L56) |
 | components/dialog | Non-modal | dd | 0 | layout/geometry — minimize | [docs/components/dialog.mdx:57](../../docs/components/dialog.mdx#L57) |
@@ -1696,15 +812,15 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/drawer | Snap points | p | 0 | layout/geometry — minimize | [docs/components/drawer.mdx:96](../../docs/components/drawer.mdx#L96) |
 | components/drawer | Nested | p | 0 | layout/geometry — minimize | [docs/components/drawer.mdx:114](../../docs/components/drawer.mdx#L114) |
 | components/drawer | Non-dismissible | p | 0 | layout/geometry — minimize | [docs/components/drawer.mdx:134](../../docs/components/drawer.mdx#L134) |
-| components/empty-state | In a card | h3 | 0 | layout/geometry — minimize | [docs/components/empty-state.mdx:89](../../docs/components/empty-state.mdx#L89) |
-| components/image | Card hover | h3 | 0 | layout/geometry — minimize | [docs/components/image.mdx:98](../../docs/components/image.mdx#L98) |
-| components/image | Card hover | p | 0 | layout/geometry — minimize | [docs/components/image.mdx:99](../../docs/components/image.mdx#L99) |
-| components/image | Reveal timing and repeat | p | 0 | layout/geometry — minimize | [docs/components/image.mdx:138](../../docs/components/image.mdx#L138) |
-| components/image | Headline, group and caption | h3 | 0 | layout/geometry — minimize | [docs/components/image.mdx:155](../../docs/components/image.mdx#L155) |
-| components/image | Headline, group and caption | p | 0 | layout/geometry — minimize | [docs/components/image.mdx:161](../../docs/components/image.mdx#L161) |
+| components/empty-state | In a card | h3 | 0 | layout/geometry — minimize | [docs/components/empty-state.mdx:90](../../docs/components/empty-state.mdx#L90) |
+| components/image | Card hover | h3 | 0 | layout/geometry — minimize | [docs/components/image.mdx:102](../../docs/components/image.mdx#L102) |
+| components/image | Card hover | p | 0 | layout/geometry — minimize | [docs/components/image.mdx:103](../../docs/components/image.mdx#L103) |
+| components/image | Reveal timing and repeat | p | 0 | layout/geometry — minimize | [docs/components/image.mdx:143](../../docs/components/image.mdx#L143) |
+| components/image | Headline, group and caption | h3 | 0 | layout/geometry — minimize | [docs/components/image.mdx:162](../../docs/components/image.mdx#L162) |
+| components/image | Headline, group and caption | p | 0 | layout/geometry — minimize | [docs/components/image.mdx:168](../../docs/components/image.mdx#L168) |
 | components/kbd | Kbd | p | 0 | layout/geometry — minimize | [docs/components/kbd.mdx:10](../../docs/components/kbd.mdx#L10) |
-| components/kbd | Icon keys | p | 0 | layout/geometry — minimize | [docs/components/kbd.mdx:109](../../docs/components/kbd.mdx#L109) |
-| components/kbd | Localized and right-to-left | p | 0 | layout/geometry — minimize | [docs/components/kbd.mdx:135](../../docs/components/kbd.mdx#L135) |
+| components/kbd | Icon keys | p | 0 | layout/geometry — minimize | [docs/components/kbd.mdx:110](../../docs/components/kbd.mdx#L110) |
+| components/kbd | Localized and right-to-left | p | 0 | layout/geometry — minimize | [docs/components/kbd.mdx:136](../../docs/components/kbd.mdx#L136) |
 | components/map | Status slot | p | 0 | layout/geometry — minimize | [docs/components/map.mdx:364](../../docs/components/map.mdx#L364) |
 | components/navigation-panel | Navigation panel | h2 | 0 | layout/geometry — minimize | [docs/components/navigation-panel.mdx:63](../../docs/components/navigation-panel.mdx#L63) |
 | components/navigation-panel | Off-canvas | h2 | 0 | layout/geometry — minimize | [docs/components/navigation-panel.mdx:116](../../docs/components/navigation-panel.mdx#L116) |
@@ -1712,100 +828,100 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/navigation-panel | Drawer mode | h2 | 0 | layout/geometry — minimize | [docs/components/navigation-panel.mdx:201](../../docs/components/navigation-panel.mdx#L201) |
 | components/navigation-panel | Floating | h2 | 0 | layout/geometry — minimize | [docs/components/navigation-panel.mdx:231](../../docs/components/navigation-panel.mdx#L231) |
 | components/navigation-panel | Team switcher and row actions | h2 | 0 | layout/geometry — minimize | [docs/components/navigation-panel.mdx:307](../../docs/components/navigation-panel.mdx#L307) |
-| components/one-time-code-field | One-time code field | h3 | 0 | layout/geometry — minimize | [docs/components/one-time-code-field.mdx:10](../../docs/components/one-time-code-field.mdx#L10) |
-| components/one-time-code-field | One-time code field | p | 0 | layout/geometry — minimize | [docs/components/one-time-code-field.mdx:11](../../docs/components/one-time-code-field.mdx#L11) |
+| components/one-time-code-field | One-time code field | h3 | 0 | layout/geometry — minimize | [docs/components/one-time-code-field.mdx:12](../../docs/components/one-time-code-field.mdx#L12) |
+| components/one-time-code-field | One-time code field | p | 0 | layout/geometry — minimize | [docs/components/one-time-code-field.mdx:13](../../docs/components/one-time-code-field.mdx#L13) |
 | components/overflow-list | Custom count | ul | 0 | layout/geometry — minimize | [docs/components/overflow-list.mdx:152](../../docs/components/overflow-list.mdx#L152) |
 | components/scroll-area | Scroll Area | h4 | 0 0 var(--tp-space-4) | layout/geometry — minimize | [docs/components/scroll-area.mdx:11](../../docs/components/scroll-area.mdx#L11) |
 | components/scroll-area | Edge fade | p | 0 | layout/geometry — minimize | [docs/components/scroll-area.mdx:172](../../docs/components/scroll-area.mdx#L172) |
 | components/scroll-area | Edge fade | p | 0 | layout/geometry — minimize | [docs/components/scroll-area.mdx:173](../../docs/components/scroll-area.mdx#L173) |
 | components/scroll-area | Edge fade | p | 0 | layout/geometry — minimize | [docs/components/scroll-area.mdx:174](../../docs/components/scroll-area.mdx#L174) |
 | components/scroll-area | Edge fade | p | 0 | layout/geometry — minimize | [docs/components/scroll-area.mdx:175](../../docs/components/scroll-area.mdx#L175) |
-| components/scroll-trigger | Scroll Trigger | h3 | 0 0 var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:11](../../docs/components/scroll-trigger.mdx#L11) |
-| components/scroll-trigger | Scroll Trigger | p | var(--tp-space-3) 0 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:21](../../docs/components/scroll-trigger.mdx#L21) |
-| components/scroll-trigger | From the center | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:43](../../docs/components/scroll-trigger.mdx#L43) |
-| components/scroll-trigger | From the center | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:44](../../docs/components/scroll-trigger.mdx#L44) |
+| components/scroll-trigger | Scroll Trigger | h3 | 0 0 var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:12](../../docs/components/scroll-trigger.mdx#L12) |
+| components/scroll-trigger | Scroll Trigger | p | var(--tp-space-3) 0 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:22](../../docs/components/scroll-trigger.mdx#L22) |
 | components/scroll-trigger | From the center | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:45](../../docs/components/scroll-trigger.mdx#L45) |
 | components/scroll-trigger | From the center | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:46](../../docs/components/scroll-trigger.mdx#L46) |
 | components/scroll-trigger | From the center | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:47](../../docs/components/scroll-trigger.mdx#L47) |
-| components/scroll-trigger | Replay on entry | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:59](../../docs/components/scroll-trigger.mdx#L59) |
+| components/scroll-trigger | From the center | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:48](../../docs/components/scroll-trigger.mdx#L48) |
+| components/scroll-trigger | From the center | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:49](../../docs/components/scroll-trigger.mdx#L49) |
 | components/scroll-trigger | Replay on entry | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:61](../../docs/components/scroll-trigger.mdx#L61) |
-| components/scroll-trigger | Replay on entry | p | var(--tp-space-2) 0 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:62](../../docs/components/scroll-trigger.mdx#L62) |
-| components/scroll-trigger | Scrubbed band | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:101](../../docs/components/scroll-trigger.mdx#L101) |
-| components/scroll-trigger | Scrubbed band | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:102](../../docs/components/scroll-trigger.mdx#L102) |
+| components/scroll-trigger | Replay on entry | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:63](../../docs/components/scroll-trigger.mdx#L63) |
+| components/scroll-trigger | Replay on entry | p | var(--tp-space-2) 0 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:64](../../docs/components/scroll-trigger.mdx#L64) |
 | components/scroll-trigger | Scrubbed band | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:103](../../docs/components/scroll-trigger.mdx#L103) |
-| components/scroll-trigger | Custom scroll range | h3 | 0 0 var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:149](../../docs/components/scroll-trigger.mdx#L149) |
-| components/scroll-trigger | Pinned scene | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:208](../../docs/components/scroll-trigger.mdx#L208) |
-| components/scroll-trigger | Pinned scene | h3 | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:212](../../docs/components/scroll-trigger.mdx#L212) |
-| components/scroll-trigger | Pinned scene | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:215](../../docs/components/scroll-trigger.mdx#L215) |
-| components/scroll-trigger | Pinned scene | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:216](../../docs/components/scroll-trigger.mdx#L216) |
-| components/scroll-trigger | Reveal events | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:238](../../docs/components/scroll-trigger.mdx#L238) |
-| components/scroll-trigger | Reveal events | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:239](../../docs/components/scroll-trigger.mdx#L239) |
-| components/tabs | Controlled with a veto | p | 0 | layout/geometry — minimize | [docs/components/tabs.mdx:179](../../docs/components/tabs.mdx#L179) |
-| components/text-transform | Text transform | dl | 0 auto | layout/geometry — minimize | [docs/components/text-transform.mdx:10](../../docs/components/text-transform.mdx#L10) |
-| components/text-transform | Text transform | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:12](../../docs/components/text-transform.mdx#L12) |
-| components/text-transform | Text transform | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:14](../../docs/components/text-transform.mdx#L14) |
-| components/text-transform | Text transform | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:16](../../docs/components/text-transform.mdx#L16) |
-| components/text-transform | Text transform | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:18](../../docs/components/text-transform.mdx#L18) |
-| components/text-transform | Text transform | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:20](../../docs/components/text-transform.mdx#L20) |
-| components/text-transform | Case and identifiers | dl | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:34](../../docs/components/text-transform.mdx#L34) |
-| components/text-transform | Case and identifiers | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:35](../../docs/components/text-transform.mdx#L35) |
+| components/scroll-trigger | Scrubbed band | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:104](../../docs/components/scroll-trigger.mdx#L104) |
+| components/scroll-trigger | Scrubbed band | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:105](../../docs/components/scroll-trigger.mdx#L105) |
+| components/scroll-trigger | Custom scroll range | h3 | 0 0 var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:151](../../docs/components/scroll-trigger.mdx#L151) |
+| components/scroll-trigger | Pinned scene | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:210](../../docs/components/scroll-trigger.mdx#L210) |
+| components/scroll-trigger | Pinned scene | h3 | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:214](../../docs/components/scroll-trigger.mdx#L214) |
+| components/scroll-trigger | Pinned scene | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:217](../../docs/components/scroll-trigger.mdx#L217) |
+| components/scroll-trigger | Pinned scene | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:218](../../docs/components/scroll-trigger.mdx#L218) |
+| components/scroll-trigger | Reveal events | p | 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:241](../../docs/components/scroll-trigger.mdx#L241) |
+| components/scroll-trigger | Reveal events | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:242](../../docs/components/scroll-trigger.mdx#L242) |
+| components/tabs | Controlled with a veto | p | 0 | layout/geometry — minimize | [docs/components/tabs.mdx:183](../../docs/components/tabs.mdx#L183) |
+| components/text-transform | Text transform | dl | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:11](../../docs/components/text-transform.mdx#L11) |
+| components/text-transform | Text transform | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:13](../../docs/components/text-transform.mdx#L13) |
+| components/text-transform | Text transform | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:15](../../docs/components/text-transform.mdx#L15) |
+| components/text-transform | Text transform | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:17](../../docs/components/text-transform.mdx#L17) |
+| components/text-transform | Text transform | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:19](../../docs/components/text-transform.mdx#L19) |
+| components/text-transform | Text transform | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:21](../../docs/components/text-transform.mdx#L21) |
+| components/text-transform | Case and identifiers | dl | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:35](../../docs/components/text-transform.mdx#L35) |
 | components/text-transform | Case and identifiers | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:36](../../docs/components/text-transform.mdx#L36) |
 | components/text-transform | Case and identifiers | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:37](../../docs/components/text-transform.mdx#L37) |
 | components/text-transform | Case and identifiers | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:38](../../docs/components/text-transform.mdx#L38) |
 | components/text-transform | Case and identifiers | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:39](../../docs/components/text-transform.mdx#L39) |
 | components/text-transform | Case and identifiers | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:40](../../docs/components/text-transform.mdx#L40) |
-| components/text-transform | Unreadable input | p | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:221](../../docs/components/text-transform.mdx#L221) |
-| components/time | Time | ul | 0 auto | layout/geometry — minimize | [docs/components/time.mdx:12](../../docs/components/time.mdx#L12) |
-| components/time | Modes | dl | 0 | layout/geometry — minimize | [docs/components/time.mdx:63](../../docs/components/time.mdx#L63) |
-| components/time | Modes | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:64](../../docs/components/time.mdx#L64) |
-| components/time | Modes | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:65](../../docs/components/time.mdx#L65) |
-| components/time | Modes | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:66](../../docs/components/time.mdx#L66) |
-| components/time | Modes | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:67](../../docs/components/time.mdx#L67) |
-| components/time | Calendar | dl | 0 | layout/geometry — minimize | [docs/components/time.mdx:154](../../docs/components/time.mdx#L154) |
-| components/time | Calendar | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:155](../../docs/components/time.mdx#L155) |
-| components/time | Calendar | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:156](../../docs/components/time.mdx#L156) |
-| components/time | Calendar | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:157](../../docs/components/time.mdx#L157) |
-| components/time | Calendar | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:158](../../docs/components/time.mdx#L158) |
-| components/time | Precisions | dl | 0 | layout/geometry — minimize | [docs/components/time.mdx:194](../../docs/components/time.mdx#L194) |
-| components/time | Precisions | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:195](../../docs/components/time.mdx#L195) |
-| components/time | Precisions | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:196](../../docs/components/time.mdx#L196) |
-| components/time | Precisions | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:197](../../docs/components/time.mdx#L197) |
-| components/time | Precisions | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:198](../../docs/components/time.mdx#L198) |
-| components/time | Precisions | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:199](../../docs/components/time.mdx#L199) |
-| components/time | Timers | dl | 0 | layout/geometry — minimize | [docs/components/time.mdx:209](../../docs/components/time.mdx#L209) |
-| components/time | Timers | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:210](../../docs/components/time.mdx#L210) |
-| components/time | Timers | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:211](../../docs/components/time.mdx#L211) |
-| components/time | Timers | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:212](../../docs/components/time.mdx#L212) |
-| components/timeline | Roadmap | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:64](../../docs/components/timeline.mdx#L64) |
-| components/timeline | Roadmap | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:69](../../docs/components/timeline.mdx#L69) |
-| components/timeline | Roadmap | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:74](../../docs/components/timeline.mdx#L74) |
-| components/timeline | Roadmap | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:79](../../docs/components/timeline.mdx#L79) |
-| components/timeline | Roadmap | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:84](../../docs/components/timeline.mdx#L84) |
-| components/timeline | Roadmap | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:89](../../docs/components/timeline.mdx#L89) |
-| components/timeline | Numbered steps | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:106](../../docs/components/timeline.mdx#L106) |
-| components/timeline | Numbered steps | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:111](../../docs/components/timeline.mdx#L111) |
-| components/timeline | Numbered steps | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:116](../../docs/components/timeline.mdx#L116) |
-| components/timeline | Expandable phases | p | 0 | layout/geometry — minimize | [docs/components/timeline.mdx:133](../../docs/components/timeline.mdx#L133) |
-| components/timeline | Expandable phases | p | 0 | layout/geometry — minimize | [docs/components/timeline.mdx:140](../../docs/components/timeline.mdx#L140) |
-| components/timeline | Expandable phases | p | 0 0 var(--tp-space-2) | layout/geometry — minimize | [docs/components/timeline.mdx:146](../../docs/components/timeline.mdx#L146) |
-| components/timeline | Expandable phases | p | 0 | layout/geometry — minimize | [docs/components/timeline.mdx:153](../../docs/components/timeline.mdx#L153) |
-| components/timeline | Expandable phases | p | 0 | layout/geometry — minimize | [docs/components/timeline.mdx:159](../../docs/components/timeline.mdx#L159) |
+| components/text-transform | Case and identifiers | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:41](../../docs/components/text-transform.mdx#L41) |
+| components/text-transform | Unreadable input | p | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:224](../../docs/components/text-transform.mdx#L224) |
+| components/time | Time | ul | 0 | layout/geometry — minimize | [docs/components/time.mdx:13](../../docs/components/time.mdx#L13) |
+| components/time | Modes | dl | 0 | layout/geometry — minimize | [docs/components/time.mdx:55](../../docs/components/time.mdx#L55) |
+| components/time | Modes | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:56](../../docs/components/time.mdx#L56) |
+| components/time | Modes | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:57](../../docs/components/time.mdx#L57) |
+| components/time | Modes | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:58](../../docs/components/time.mdx#L58) |
+| components/time | Modes | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:59](../../docs/components/time.mdx#L59) |
+| components/time | Calendar | dl | 0 | layout/geometry — minimize | [docs/components/time.mdx:147](../../docs/components/time.mdx#L147) |
+| components/time | Calendar | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:148](../../docs/components/time.mdx#L148) |
+| components/time | Calendar | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:149](../../docs/components/time.mdx#L149) |
+| components/time | Calendar | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:150](../../docs/components/time.mdx#L150) |
+| components/time | Calendar | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:151](../../docs/components/time.mdx#L151) |
+| components/time | Precisions | dl | 0 | layout/geometry — minimize | [docs/components/time.mdx:187](../../docs/components/time.mdx#L187) |
+| components/time | Precisions | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:188](../../docs/components/time.mdx#L188) |
+| components/time | Precisions | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:189](../../docs/components/time.mdx#L189) |
+| components/time | Precisions | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:190](../../docs/components/time.mdx#L190) |
+| components/time | Precisions | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:191](../../docs/components/time.mdx#L191) |
+| components/time | Precisions | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:192](../../docs/components/time.mdx#L192) |
+| components/time | Timers | dl | 0 | layout/geometry — minimize | [docs/components/time.mdx:202](../../docs/components/time.mdx#L202) |
+| components/time | Timers | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:203](../../docs/components/time.mdx#L203) |
+| components/time | Timers | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:204](../../docs/components/time.mdx#L204) |
+| components/time | Timers | dd | 0 | layout/geometry — minimize | [docs/components/time.mdx:205](../../docs/components/time.mdx#L205) |
+| components/timeline | Roadmap | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:66](../../docs/components/timeline.mdx#L66) |
+| components/timeline | Roadmap | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:71](../../docs/components/timeline.mdx#L71) |
+| components/timeline | Roadmap | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:76](../../docs/components/timeline.mdx#L76) |
+| components/timeline | Roadmap | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:81](../../docs/components/timeline.mdx#L81) |
+| components/timeline | Roadmap | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:86](../../docs/components/timeline.mdx#L86) |
+| components/timeline | Roadmap | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:91](../../docs/components/timeline.mdx#L91) |
+| components/timeline | Numbered steps | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:109](../../docs/components/timeline.mdx#L109) |
+| components/timeline | Numbered steps | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:114](../../docs/components/timeline.mdx#L114) |
+| components/timeline | Numbered steps | p | var(--tp-space-1) 0 0 | layout/geometry — minimize | [docs/components/timeline.mdx:119](../../docs/components/timeline.mdx#L119) |
+| components/timeline | Expandable phases | p | 0 | layout/geometry — minimize | [docs/components/timeline.mdx:137](../../docs/components/timeline.mdx#L137) |
+| components/timeline | Expandable phases | p | 0 | layout/geometry — minimize | [docs/components/timeline.mdx:144](../../docs/components/timeline.mdx#L144) |
+| components/timeline | Expandable phases | p | 0 0 var(--tp-space-2) | layout/geometry — minimize | [docs/components/timeline.mdx:150](../../docs/components/timeline.mdx#L150) |
+| components/timeline | Expandable phases | p | 0 | layout/geometry — minimize | [docs/components/timeline.mdx:157](../../docs/components/timeline.mdx#L157) |
+| components/timeline | Expandable phases | p | 0 | layout/geometry — minimize | [docs/components/timeline.mdx:163](../../docs/components/timeline.mdx#L163) |
 | motion/surface/glow-border | Glow border | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:13](../../docs/motion/surface/glow-border.mdx#L13) |
-| motion/surface/glow-border | Controls and fields | h3 | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:31](../../docs/motion/surface/glow-border.mdx#L31) |
-| motion/surface/glow-border | Controls and fields | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:32](../../docs/motion/surface/glow-border.mdx#L32) |
-| motion/surface/glow-border | Comets | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:60](../../docs/motion/surface/glow-border.mdx#L60) |
-| motion/surface/glow-border | Comets | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:66](../../docs/motion/surface/glow-border.mdx#L66) |
-| motion/surface/glow-border | Sweep, pulse and glint | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:83](../../docs/motion/surface/glow-border.mdx#L83) |
-| motion/surface/glow-border | Sweep, pulse and glint | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:89](../../docs/motion/surface/glow-border.mdx#L89) |
-| motion/surface/glow-border | Sweep, pulse and glint | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:95](../../docs/motion/surface/glow-border.mdx#L95) |
-| motion/surface/glow-border | Hover | h3 | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:109](../../docs/motion/surface/glow-border.mdx#L109) |
-| motion/surface/glow-border | Hover | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:110](../../docs/motion/surface/glow-border.mdx#L110) |
-| motion/surface/glow-border | Hover | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:111](../../docs/motion/surface/glow-border.mdx#L111) |
-| motion/surface/glow-border | Lingering light | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:125](../../docs/motion/surface/glow-border.mdx#L125) |
-| motion/surface/glow-border | Custom colors | h3 | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:140](../../docs/motion/surface/glow-border.mdx#L140) |
-| motion/surface/glow-border | Custom colors | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:141](../../docs/motion/surface/glow-border.mdx#L141) |
+| motion/surface/glow-border | Controls and fields | h3 | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:33](../../docs/motion/surface/glow-border.mdx#L33) |
+| motion/surface/glow-border | Controls and fields | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:34](../../docs/motion/surface/glow-border.mdx#L34) |
+| motion/surface/glow-border | Comets | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:62](../../docs/motion/surface/glow-border.mdx#L62) |
+| motion/surface/glow-border | Comets | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:68](../../docs/motion/surface/glow-border.mdx#L68) |
+| motion/surface/glow-border | Sweep, pulse and glint | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:85](../../docs/motion/surface/glow-border.mdx#L85) |
+| motion/surface/glow-border | Sweep, pulse and glint | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:91](../../docs/motion/surface/glow-border.mdx#L91) |
+| motion/surface/glow-border | Sweep, pulse and glint | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:97](../../docs/motion/surface/glow-border.mdx#L97) |
+| motion/surface/glow-border | Hover | h3 | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:111](../../docs/motion/surface/glow-border.mdx#L111) |
+| motion/surface/glow-border | Hover | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:112](../../docs/motion/surface/glow-border.mdx#L112) |
+| motion/surface/glow-border | Hover | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:113](../../docs/motion/surface/glow-border.mdx#L113) |
+| motion/surface/glow-border | Lingering light | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:127](../../docs/motion/surface/glow-border.mdx#L127) |
+| motion/surface/glow-border | Custom colors | h3 | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:142](../../docs/motion/surface/glow-border.mdx#L142) |
 | motion/surface/glow-border | Custom colors | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:143](../../docs/motion/surface/glow-border.mdx#L143) |
-| motion/surface/glow-border | Lit by an element | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:167](../../docs/motion/surface/glow-border.mdx#L167) |
+| motion/surface/glow-border | Custom colors | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:145](../../docs/motion/surface/glow-border.mdx#L145) |
+| motion/surface/glow-border | Lit by an element | p | 0 | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:169](../../docs/motion/surface/glow-border.mdx#L169) |
 | motion/surface/segment-border | Traced in | p | 0 | layout/geometry — minimize | [docs/motion/surface/segment-border.mdx:125](../../docs/motion/surface/segment-border.mdx#L125) |
 | motion/surface/segment-border | Traced in | p | 0 | layout/geometry — minimize | [docs/motion/surface/segment-border.mdx:133](../../docs/motion/surface/segment-border.mdx#L133) |
 | motion/surface/segment-border | Traced in | p | 0 | layout/geometry — minimize | [docs/motion/surface/segment-border.mdx:141](../../docs/motion/surface/segment-border.mdx#L141) |
@@ -1836,9 +952,9 @@ Each row retains the target element, use-case label, exact value and source loca
 | motion/text/text-split | Motion/Text/Text split | h2 | 0 | layout/geometry — minimize | [src/stories/text-split.stories.ts:75](../../src/stories/text-split.stories.ts#L75) |
 | motion/text/text-stroke | Motion/Text/Text stroke | p | 0 | layout/geometry — minimize | [src/stories/text-stroke.stories.ts:55](../../src/stories/text-stroke.stories.ts#L55) |
 
-<a id="property-6"></a>
+<a id="property-4"></a>
 
-### 6. font-size — 211 occurrences
+### 4. font-size — 211 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -1866,44 +982,44 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/aspect-ratio | One ratio, three widths | figcaption | var(--tp-text-xs) | content appearance — review required | [docs/components/aspect-ratio.mdx:60](../../docs/components/aspect-ratio.mdx#L60) |
 | components/aspect-ratio | One ratio, three widths | figcaption | var(--tp-text-xs) | content appearance — review required | [docs/components/aspect-ratio.mdx:82](../../docs/components/aspect-ratio.mdx#L82) |
 | components/aspect-ratio | One ratio, three widths | figcaption | var(--tp-text-xs) | content appearance — review required | [docs/components/aspect-ratio.mdx:104](../../docs/components/aspect-ratio.mdx#L104) |
-| components/autocomplete | In a form | output | var(--tp-text-sm) | content appearance — review required | [docs/components/autocomplete.mdx:233](../../docs/components/autocomplete.mdx#L233) |
+| components/autocomplete | In a form | output | var(--tp-text-sm) | content appearance — review required | [docs/components/autocomplete.mdx:240](../../docs/components/autocomplete.mdx#L240) |
 | components/avatar | Decorative avatar | div | var(--tp-text-sm) | content appearance — review required | [docs/components/avatar.mdx:162](../../docs/components/avatar.mdx#L162) |
-| components/badge | Status in a list | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/badge.mdx:64](../../docs/components/badge.mdx#L64) |
-| components/button-group | Select and native select | output | var(--tp-text-sm) | content appearance — review required | [docs/components/button-group.mdx:259](../../docs/components/button-group.mdx#L259) |
+| components/badge | Status in a list | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/badge.mdx:65](../../docs/components/badge.mdx#L65) |
+| components/button-group | Select and native select | output | var(--tp-text-sm) | content appearance — review required | [docs/components/button-group.mdx:258](../../docs/components/button-group.mdx#L258) |
 | components/calendar | Nightly prices and booked dates | small | var(--tp-text-xs) | content appearance — review required | [docs/components/calendar.mdx:109](../../docs/components/calendar.mdx#L109) |
 | components/calendar | Week numbers | p | var(--tp-text-sm) | content appearance — review required | [docs/components/calendar.mdx:162](../../docs/components/calendar.mdx#L162) |
-| components/calendar | Value change | output | var(--tp-text-sm) | content appearance — review required | [docs/components/calendar.mdx:361](../../docs/components/calendar.mdx#L361) |
-| components/card | Header action | span | var(--tp-text-sm) | content appearance — review required | [docs/components/card.mdx:35](../../docs/components/card.mdx#L35) |
-| components/card | Small | p | var(--tp-text-2xl) | content appearance — review required | [docs/components/card.mdx:97](../../docs/components/card.mdx#L97) |
-| components/card | Small | span | var(--tp-text-sm) | content appearance — review required | [docs/components/card.mdx:98](../../docs/components/card.mdx#L98) |
+| components/calendar | Value change | output | var(--tp-text-sm) | content appearance — review required | [docs/components/calendar.mdx:363](../../docs/components/calendar.mdx#L363) |
+| components/card | Header action | span | var(--tp-text-sm) | content appearance — review required | [docs/components/card.mdx:39](../../docs/components/card.mdx#L39) |
+| components/card | Small | p | var(--tp-text-2xl) | content appearance — review required | [docs/components/card.mdx:107](../../docs/components/card.mdx#L107) |
+| components/card | Small | span | var(--tp-text-sm) | content appearance — review required | [docs/components/card.mdx:108](../../docs/components/card.mdx#L108) |
 | components/carousel | Carousel | strong | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:21](../../docs/components/carousel.mdx#L21) |
-| components/carousel | Carousel | strong | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:36](../../docs/components/carousel.mdx#L36) |
-| components/carousel | Carousel | strong | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:51](../../docs/components/carousel.mdx#L51) |
-| components/carousel | Carousel | strong | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:64](../../docs/components/carousel.mdx#L64) |
+| components/carousel | Carousel | strong | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:34](../../docs/components/carousel.mdx#L34) |
+| components/carousel | Carousel | strong | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:47](../../docs/components/carousel.mdx#L47) |
+| components/carousel | Carousel | strong | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:59](../../docs/components/carousel.mdx#L59) |
+| components/carousel | Bullets inside | p | var(--tp-text-lg) | content appearance — review required | [docs/components/carousel.mdx:102](../../docs/components/carousel.mdx#L102) |
 | components/carousel | Bullets inside | p | var(--tp-text-lg) | content appearance — review required | [docs/components/carousel.mdx:106](../../docs/components/carousel.mdx#L106) |
 | components/carousel | Bullets inside | p | var(--tp-text-lg) | content appearance — review required | [docs/components/carousel.mdx:110](../../docs/components/carousel.mdx#L110) |
-| components/carousel | Bullets inside | p | var(--tp-text-lg) | content appearance — review required | [docs/components/carousel.mdx:114](../../docs/components/carousel.mdx#L114) |
-| components/carousel | Crossfade | strong | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:197](../../docs/components/carousel.mdx#L197) |
-| components/carousel | Crossfade | strong | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:214](../../docs/components/carousel.mdx#L214) |
-| components/carousel | Crossfade | strong | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:230](../../docs/components/carousel.mdx#L230) |
-| components/carousel | Layered 3D | strong | var(--tp-text-2xl) | content appearance — review required | [docs/components/carousel.mdx:284](../../docs/components/carousel.mdx#L284) |
-| components/carousel | Layered 3D | span | var(--tp-text-sm) | content appearance — review required | [docs/components/carousel.mdx:285](../../docs/components/carousel.mdx#L285) |
-| components/carousel | Layered 3D | strong | var(--tp-text-2xl) | content appearance — review required | [docs/components/carousel.mdx:323](../../docs/components/carousel.mdx#L323) |
-| components/carousel | Layered 3D | span | var(--tp-text-sm) | content appearance — review required | [docs/components/carousel.mdx:324](../../docs/components/carousel.mdx#L324) |
-| components/carousel | Layered 3D | strong | var(--tp-text-2xl) | content appearance — review required | [docs/components/carousel.mdx:362](../../docs/components/carousel.mdx#L362) |
-| components/carousel | Layered 3D | span | var(--tp-text-sm) | content appearance — review required | [docs/components/carousel.mdx:365](../../docs/components/carousel.mdx#L365) |
-| components/carousel | Shader transition | figcaption | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:499](../../docs/components/carousel.mdx#L499) |
-| components/carousel | Shader transition | figcaption | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:537](../../docs/components/carousel.mdx#L537) |
-| components/carousel | Shader transition | figcaption | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:575](../../docs/components/carousel.mdx#L575) |
-| components/carousel | Virtual archive with controlled selection | output | var(--tp-text-sm) | content appearance — review required | [docs/components/carousel.mdx:615](../../docs/components/carousel.mdx#L615) |
-| components/carousel | Commit | output | var(--tp-text-sm) | content appearance — review required | [docs/components/carousel.mdx:688](../../docs/components/carousel.mdx#L688) |
-| components/checkbox | Form values | output | var(--tp-text-sm) | content appearance — review required | [docs/components/checkbox.mdx:46](../../docs/components/checkbox.mdx#L46) |
-| components/checkbox | CheckboxGroupController | output | var(--tp-text-sm) | content appearance — review required | [docs/components/checkbox.mdx:129](../../docs/components/checkbox.mdx#L129) |
-| components/collapsible | Positional slots | span | var(--tp-text-sm) | content appearance — review required | [docs/components/collapsible.mdx:64](../../docs/components/collapsible.mdx#L64) |
-| components/collapsible | Open change | output | var(--tp-text-sm) | content appearance — review required | [docs/components/collapsible.mdx:120](../../docs/components/collapsible.mdx#L120) |
+| components/carousel | Crossfade | strong | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:193](../../docs/components/carousel.mdx#L193) |
+| components/carousel | Crossfade | strong | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:208](../../docs/components/carousel.mdx#L208) |
+| components/carousel | Crossfade | strong | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:222](../../docs/components/carousel.mdx#L222) |
+| components/carousel | Layered 3D | strong | var(--tp-text-2xl) | content appearance — review required | [docs/components/carousel.mdx:272](../../docs/components/carousel.mdx#L272) |
+| components/carousel | Layered 3D | span | var(--tp-text-sm) | content appearance — review required | [docs/components/carousel.mdx:273](../../docs/components/carousel.mdx#L273) |
+| components/carousel | Layered 3D | strong | var(--tp-text-2xl) | content appearance — review required | [docs/components/carousel.mdx:308](../../docs/components/carousel.mdx#L308) |
+| components/carousel | Layered 3D | span | var(--tp-text-sm) | content appearance — review required | [docs/components/carousel.mdx:309](../../docs/components/carousel.mdx#L309) |
+| components/carousel | Layered 3D | strong | var(--tp-text-2xl) | content appearance — review required | [docs/components/carousel.mdx:344](../../docs/components/carousel.mdx#L344) |
+| components/carousel | Layered 3D | span | var(--tp-text-sm) | content appearance — review required | [docs/components/carousel.mdx:346](../../docs/components/carousel.mdx#L346) |
+| components/carousel | Shader transition | figcaption | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:481](../../docs/components/carousel.mdx#L481) |
+| components/carousel | Shader transition | figcaption | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:517](../../docs/components/carousel.mdx#L517) |
+| components/carousel | Shader transition | figcaption | var(--tp-text-xl) | content appearance — review required | [docs/components/carousel.mdx:553](../../docs/components/carousel.mdx#L553) |
+| components/carousel | Virtual archive with controlled selection | output | var(--tp-text-sm) | content appearance — review required | [docs/components/carousel.mdx:593](../../docs/components/carousel.mdx#L593) |
+| components/carousel | Commit | output | var(--tp-text-sm) | content appearance — review required | [docs/components/carousel.mdx:664](../../docs/components/carousel.mdx#L664) |
+| components/checkbox | Form values | output | var(--tp-text-sm) | content appearance — review required | [docs/components/checkbox.mdx:48](../../docs/components/checkbox.mdx#L48) |
+| components/checkbox | CheckboxGroupController | output | var(--tp-text-sm) | content appearance — review required | [docs/components/checkbox.mdx:130](../../docs/components/checkbox.mdx#L130) |
+| components/collapsible | Positional slots | span | var(--tp-text-sm) | content appearance — review required | [docs/components/collapsible.mdx:65](../../docs/components/collapsible.mdx#L65) |
+| components/collapsible | Open change | output | var(--tp-text-sm) | content appearance — review required | [docs/components/collapsible.mdx:123](../../docs/components/collapsible.mdx#L123) |
 | components/command-palette | Command palette | output | var(--tp-text-sm) | content appearance — review required | [docs/components/command-palette.mdx:19](../../docs/components/command-palette.mdx#L19) |
-| components/copy-button | Beside a value | dl | var(--tp-text-sm) | content appearance — review required | [docs/components/copy-button.mdx:50](../../docs/components/copy-button.mdx#L50) |
-| components/copy-button | Copy events | output | var(--tp-text-sm) | content appearance — review required | [docs/components/copy-button.mdx:119](../../docs/components/copy-button.mdx#L119) |
+| components/copy-button | Beside a value | dl | var(--tp-text-sm) | content appearance — review required | [docs/components/copy-button.mdx:52](../../docs/components/copy-button.mdx#L52) |
+| components/copy-button | Copy events | output | var(--tp-text-sm) | content appearance — review required | [docs/components/copy-button.mdx:120](../../docs/components/copy-button.mdx#L120) |
 | components/cursor | Cursor | span | var(--tp-text-xs) | content appearance — review required | [docs/components/cursor.mdx:14](../../docs/components/cursor.mdx#L14) |
 | components/cursor | Cursor | figcaption | var(--tp-text-sm) | content appearance — review required | [docs/components/cursor.mdx:18](../../docs/components/cursor.mdx#L18) |
 | components/cursor | Cursor | figcaption | var(--tp-text-sm) | content appearance — review required | [docs/components/cursor.mdx:22](../../docs/components/cursor.mdx#L22) |
@@ -1914,41 +1030,41 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/cursor | Zones | span | var(--tp-text-sm) | content appearance — review required | [docs/components/cursor.mdx:75](../../docs/components/cursor.mdx#L75) |
 | components/cursor | Zones | span | var(--tp-text-sm) | content appearance — review required | [docs/components/cursor.mdx:82](../../docs/components/cursor.mdx#L82) |
 | components/dialog | Container modality | p | var(--tp-text-sm) | content appearance — review required | [docs/components/dialog.mdx:92](../../docs/components/dialog.mdx#L92) |
-| components/drag-drop-list | Commit events | output | var(--tp-text-sm) | content appearance — review required | [docs/components/drag-drop-list.mdx:43](../../docs/components/drag-drop-list.mdx#L43) |
-| components/drag-drop-list | Custom rows and overlay | output | var(--tp-text-sm) | content appearance — review required | [docs/components/drag-drop-list.mdx:116](../../docs/components/drag-drop-list.mdx#L116) |
-| components/drag-drop-list | Board lanes | output | var(--tp-text-sm) | content appearance — review required | [docs/components/drag-drop-list.mdx:198](../../docs/components/drag-drop-list.mdx#L198) |
-| components/drag-drop-list | Controlled lanes | output | var(--tp-text-sm) | content appearance — review required | [docs/components/drag-drop-list.mdx:255](../../docs/components/drag-drop-list.mdx#L255) |
-| components/drag-drop-list | Approve before committing | output | var(--tp-text-sm) | content appearance — review required | [docs/components/drag-drop-list.mdx:328](../../docs/components/drag-drop-list.mdx#L328) |
-| components/file-upload | Field and form | output | var(--tp-text-sm) | content appearance — review required | [docs/components/file-upload.mdx:230](../../docs/components/file-upload.mdx#L230) |
-| components/form | Form | output | var(--tp-text-sm) | content appearance — review required | [docs/components/form.mdx:28](../../docs/components/form.mdx#L28) |
-| components/form | Notification settings | output | var(--tp-text-sm) | content appearance — review required | [docs/components/form.mdx:77](../../docs/components/form.mdx#L77) |
-| components/form | Wait for async checks | output | var(--tp-text-sm) | content appearance — review required | [docs/components/form.mdx:164](../../docs/components/form.mdx#L164) |
-| components/form | Repeated emails | output | var(--tp-text-sm) | content appearance — review required | [docs/components/form.mdx:206](../../docs/components/form.mdx#L206) |
-| components/image | Fallbacks | span | var(--tp-text-sm) | content appearance — review required | [docs/components/image.mdx:59](../../docs/components/image.mdx#L59) |
-| components/list | Header and footer | span | var(--tp-text-xs) | content appearance — review required | [docs/components/list.mdx:146](../../docs/components/list.mdx#L146) |
+| components/drag-drop-list | Commit events | output | var(--tp-text-sm) | content appearance — review required | [docs/components/drag-drop-list.mdx:44](../../docs/components/drag-drop-list.mdx#L44) |
+| components/drag-drop-list | Custom rows and overlay | output | var(--tp-text-sm) | content appearance — review required | [docs/components/drag-drop-list.mdx:117](../../docs/components/drag-drop-list.mdx#L117) |
+| components/drag-drop-list | Board lanes | output | var(--tp-text-sm) | content appearance — review required | [docs/components/drag-drop-list.mdx:197](../../docs/components/drag-drop-list.mdx#L197) |
+| components/drag-drop-list | Controlled lanes | output | var(--tp-text-sm) | content appearance — review required | [docs/components/drag-drop-list.mdx:251](../../docs/components/drag-drop-list.mdx#L251) |
+| components/drag-drop-list | Approve before committing | output | var(--tp-text-sm) | content appearance — review required | [docs/components/drag-drop-list.mdx:321](../../docs/components/drag-drop-list.mdx#L321) |
+| components/file-upload | Field and form | output | var(--tp-text-sm) | content appearance — review required | [docs/components/file-upload.mdx:238](../../docs/components/file-upload.mdx#L238) |
+| components/form | Form | output | var(--tp-text-sm) | content appearance — review required | [docs/components/form.mdx:29](../../docs/components/form.mdx#L29) |
+| components/form | Notification settings | output | var(--tp-text-sm) | content appearance — review required | [docs/components/form.mdx:79](../../docs/components/form.mdx#L79) |
+| components/form | Wait for async checks | output | var(--tp-text-sm) | content appearance — review required | [docs/components/form.mdx:170](../../docs/components/form.mdx#L170) |
+| components/form | Repeated emails | output | var(--tp-text-sm) | content appearance — review required | [docs/components/form.mdx:211](../../docs/components/form.mdx#L211) |
+| components/image | Fallbacks | span | var(--tp-text-sm) | content appearance — review required | [docs/components/image.mdx:60](../../docs/components/image.mdx#L60) |
 | components/list | Header and footer | span | var(--tp-text-xs) | content appearance — review required | [docs/components/list.mdx:149](../../docs/components/list.mdx#L149) |
-| components/marker | Native hosts and layout | output | var(--tp-text-sm) | content appearance — review required | [docs/components/marker.mdx:129](../../docs/components/marker.mdx#L129) |
+| components/list | Header and footer | span | var(--tp-text-xs) | content appearance — review required | [docs/components/list.mdx:152](../../docs/components/list.mdx#L152) |
+| components/marker | Native hosts and layout | output | var(--tp-text-sm) | content appearance — review required | [docs/components/marker.mdx:131](../../docs/components/marker.mdx#L131) |
 | components/menu | Handling commands | output | var(--tp-text-sm) | content appearance — review required | [docs/components/menu.mdx:59](../../docs/components/menu.mdx#L59) |
 | components/menu | Context invocation | div | var(--tp-text-sm) | content appearance — review required | [docs/components/menu.mdx:147](../../docs/components/menu.mdx#L147) |
 | components/menubar | Active menu | output | var(--tp-text-sm) | content appearance — review required | [docs/components/menubar.mdx:111](../../docs/components/menubar.mdx#L111) |
-| components/native-select | Form value | output | var(--tp-text-sm) | content appearance — review required | [docs/components/native-select.mdx:103](../../docs/components/native-select.mdx#L103) |
-| components/native-select | Controlled value | output | var(--tp-text-sm) | content appearance — review required | [docs/components/native-select.mdx:134](../../docs/components/native-select.mdx#L134) |
+| components/native-select | Form value | output | var(--tp-text-sm) | content appearance — review required | [docs/components/native-select.mdx:109](../../docs/components/native-select.mdx#L109) |
+| components/native-select | Controlled value | output | var(--tp-text-sm) | content appearance — review required | [docs/components/native-select.mdx:140](../../docs/components/native-select.mdx#L140) |
 | components/navigation-menu | Navigation menu | span | var(--tp-text-sm) | content appearance — review required | [docs/components/navigation-menu.mdx:24](../../docs/components/navigation-menu.mdx#L24) |
 | components/navigation-menu | Navigation menu | span | var(--tp-text-sm) | content appearance — review required | [docs/components/navigation-menu.mdx:32](../../docs/components/navigation-menu.mdx#L32) |
 | components/navigation-menu | Navigation menu | span | var(--tp-text-sm) | content appearance — review required | [docs/components/navigation-menu.mdx:40](../../docs/components/navigation-menu.mdx#L40) |
 | components/navigation-menu | Navigation menu | span | var(--tp-text-sm) | content appearance — review required | [docs/components/navigation-menu.mdx:48](../../docs/components/navigation-menu.mdx#L48) |
-| components/one-time-code-field | Verify on completion | output | var(--tp-text-sm) | content appearance — review required | [docs/components/one-time-code-field.mdx:93](../../docs/components/one-time-code-field.mdx#L93) |
-| components/one-time-code-field | Controlled value | output | var(--tp-text-sm) | content appearance — review required | [docs/components/one-time-code-field.mdx:127](../../docs/components/one-time-code-field.mdx#L127) |
+| components/one-time-code-field | Verify on completion | output | var(--tp-text-sm) | content appearance — review required | [docs/components/one-time-code-field.mdx:95](../../docs/components/one-time-code-field.mdx#L95) |
+| components/one-time-code-field | Controlled value | output | var(--tp-text-sm) | content appearance — review required | [docs/components/one-time-code-field.mdx:129](../../docs/components/one-time-code-field.mdx#L129) |
 | components/pagination | Router handling | output | var(--tp-text-sm) | content appearance — review required | [docs/components/pagination.mdx:33](../../docs/components/pagination.mdx#L33) |
-| components/pagination | Rows per page | output | var(--tp-text-sm) | content appearance — review required | [docs/components/pagination.mdx:122](../../docs/components/pagination.mdx#L122) |
+| components/pagination | Rows per page | output | var(--tp-text-sm) | content appearance — review required | [docs/components/pagination.mdx:121](../../docs/components/pagination.mdx#L121) |
 | components/popover | Separate anchor | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/popover.mdx:120](../../docs/components/popover.mdx#L120) |
 | components/popover | Open change | output | var(--tp-text-sm) | content appearance — review required | [docs/components/popover.mdx:159](../../docs/components/popover.mdx#L159) |
 | components/preview-card | Preview Card | div | var(--tp-text-sm) | content appearance — review required | [docs/components/preview-card.mdx:9](../../docs/components/preview-card.mdx#L9) |
 | components/preview-card | Preview Card | span | var(--tp-text-xs) | content appearance — review required | [docs/components/preview-card.mdx:18](../../docs/components/preview-card.mdx#L18) |
 | components/preview-card | Placement and arrow | span | var(--tp-text-xs) | content appearance — review required | [docs/components/preview-card.mdx:69](../../docs/components/preview-card.mdx#L69) |
-| components/questionnaire | Submit | output | var(--tp-text-sm) | content appearance — review required | [docs/components/questionnaire.mdx:279](../../docs/components/questionnaire.mdx#L279) |
-| components/questionnaire | Checkpoint and cross-answer validation | output | var(--tp-text-sm) | content appearance — review required | [docs/components/questionnaire.mdx:311](../../docs/components/questionnaire.mdx#L311) |
-| components/questionnaire | Clarification dialog | output | var(--tp-text-sm) | content appearance — review required | [docs/components/questionnaire.mdx:607](../../docs/components/questionnaire.mdx#L607) |
+| components/questionnaire | Submit | output | var(--tp-text-sm) | content appearance — review required | [docs/components/questionnaire.mdx:282](../../docs/components/questionnaire.mdx#L282) |
+| components/questionnaire | Checkpoint and cross-answer validation | output | var(--tp-text-sm) | content appearance — review required | [docs/components/questionnaire.mdx:315](../../docs/components/questionnaire.mdx#L315) |
+| components/questionnaire | Clarification dialog | output | var(--tp-text-sm) | content appearance — review required | [docs/components/questionnaire.mdx:611](../../docs/components/questionnaire.mdx#L611) |
 | components/radio-group | Value change | output | var(--tp-text-sm) | content appearance — review required | [docs/components/radio-group.mdx:164](../../docs/components/radio-group.mdx#L164) |
 | components/resizable-panel-group | Resizable Panel Group | div | var(--tp-text-sm) | content appearance — review required | [docs/components/resizable-panel-group.mdx:13](../../docs/components/resizable-panel-group.mdx#L13) |
 | components/resizable-panel-group | Resizable Panel Group | div | var(--tp-text-sm) | content appearance — review required | [docs/components/resizable-panel-group.mdx:24](../../docs/components/resizable-panel-group.mdx#L24) |
@@ -1979,58 +1095,58 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/scroll-area | Visibility | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/scroll-area.mdx:128](../../docs/components/scroll-area.mdx#L128) |
 | components/scroll-area | Visibility | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/scroll-area.mdx:147](../../docs/components/scroll-area.mdx#L147) |
 | components/scroll-area | Edge fade | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/scroll-area.mdx:171](../../docs/components/scroll-area.mdx#L171) |
-| components/scroll-trigger | Scroll Trigger | h3 | var(--tp-text-2xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:11](../../docs/components/scroll-trigger.mdx#L11) |
-| components/scroll-trigger | From the center | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:43](../../docs/components/scroll-trigger.mdx#L43) |
-| components/scroll-trigger | From the center | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:44](../../docs/components/scroll-trigger.mdx#L44) |
+| components/scroll-trigger | Scroll Trigger | h3 | var(--tp-text-2xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:12](../../docs/components/scroll-trigger.mdx#L12) |
 | components/scroll-trigger | From the center | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:45](../../docs/components/scroll-trigger.mdx#L45) |
 | components/scroll-trigger | From the center | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:46](../../docs/components/scroll-trigger.mdx#L46) |
 | components/scroll-trigger | From the center | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:47](../../docs/components/scroll-trigger.mdx#L47) |
-| components/scroll-trigger | Replay on entry | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:61](../../docs/components/scroll-trigger.mdx#L61) |
-| components/scroll-trigger | Scrubbed band | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:101](../../docs/components/scroll-trigger.mdx#L101) |
-| components/scroll-trigger | Scrubbed band | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:102](../../docs/components/scroll-trigger.mdx#L102) |
+| components/scroll-trigger | From the center | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:48](../../docs/components/scroll-trigger.mdx#L48) |
+| components/scroll-trigger | From the center | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:49](../../docs/components/scroll-trigger.mdx#L49) |
+| components/scroll-trigger | Replay on entry | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:63](../../docs/components/scroll-trigger.mdx#L63) |
 | components/scroll-trigger | Scrubbed band | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:103](../../docs/components/scroll-trigger.mdx#L103) |
-| components/scroll-trigger | Custom scroll range | h3 | var(--tp-text-2xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:149](../../docs/components/scroll-trigger.mdx#L149) |
-| components/scroll-trigger | Pinned scene | p | var(--tp-text-sm) | content appearance — review required | [docs/components/scroll-trigger.mdx:208](../../docs/components/scroll-trigger.mdx#L208) |
-| components/scroll-trigger | Pinned scene | h3 | var(--tp-text-2xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:212](../../docs/components/scroll-trigger.mdx#L212) |
-| components/scroll-trigger | Reveal events | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:238](../../docs/components/scroll-trigger.mdx#L238) |
-| components/scroll-trigger | Reveal events | output | var(--tp-text-sm) | content appearance — review required | [docs/components/scroll-trigger.mdx:243](../../docs/components/scroll-trigger.mdx#L243) |
-| components/select | Value change | output | var(--tp-text-sm) | content appearance — review required | [docs/components/select.mdx:302](../../docs/components/select.mdx#L302) |
-| components/slider | Compact readout | span | var(--tp-text-sm) | content appearance — review required | [docs/components/slider.mdx:204](../../docs/components/slider.mdx#L204) |
-| components/slider | Compact readout | span | var(--tp-text-sm) | content appearance — review required | [docs/components/slider.mdx:206](../../docs/components/slider.mdx#L206) |
-| components/tabs | Change event and setValue | output | var(--tp-text-sm) | content appearance — review required | [docs/components/tabs.mdx:124](../../docs/components/tabs.mdx#L124) |
-| components/tabs | Controlled with a veto | p | var(--tp-text-sm) | content appearance — review required | [docs/components/tabs.mdx:179](../../docs/components/tabs.mdx#L179) |
-| components/text-area | Character count | output | var(--tp-text-sm) | content appearance — review required | [docs/components/text-area.mdx:90](../../docs/components/text-area.mdx#L90) |
-| components/text-transform | Text transform | dl | var(--tp-text-sm) | content appearance — review required | [docs/components/text-transform.mdx:10](../../docs/components/text-transform.mdx#L10) |
-| components/text-transform | Case and identifiers | dl | var(--tp-text-sm) | content appearance — review required | [docs/components/text-transform.mdx:34](../../docs/components/text-transform.mdx#L34) |
-| components/text-transform | Uploads | span | var(--tp-text-sm) | content appearance — review required | [docs/components/text-transform.mdx:94](../../docs/components/text-transform.mdx#L94) |
-| components/text-transform | Uploads | span | var(--tp-text-sm) | content appearance — review required | [docs/components/text-transform.mdx:98](../../docs/components/text-transform.mdx#L98) |
-| components/text-transform | Locales | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/text-transform.mdx:109](../../docs/components/text-transform.mdx#L109) |
-| components/text-transform | Truncation | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/text-transform.mdx:132](../../docs/components/text-transform.mdx#L132) |
-| components/text-transform | Length limits | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/text-transform.mdx:160](../../docs/components/text-transform.mdx#L160) |
-| components/text-transform | Formatter | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/text-transform.mdx:181](../../docs/components/text-transform.mdx#L181) |
-| components/text-transform | Named presets | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/text-transform.mdx:203](../../docs/components/text-transform.mdx#L203) |
-| components/text-transform | Unreadable input | p | var(--tp-text-sm) | content appearance — review required | [docs/components/text-transform.mdx:221](../../docs/components/text-transform.mdx#L221) |
-| components/theme-switcher | Theme switcher | span | var(--tp-text-sm) | content appearance — review required | [docs/components/theme-switcher.mdx:13](../../docs/components/theme-switcher.mdx#L13) |
-| components/theme-switcher | Small, defaulting to dark | span | var(--tp-text-sm) | content appearance — review required | [docs/components/theme-switcher.mdx:86](../../docs/components/theme-switcher.mdx#L86) |
-| components/theme-switcher | Explicit choices only | output | var(--tp-text-sm) | content appearance — review required | [docs/components/theme-switcher.mdx:115](../../docs/components/theme-switcher.mdx#L115) |
-| components/time | Time | ul | var(--tp-text-sm) | content appearance — review required | [docs/components/time.mdx:12](../../docs/components/time.mdx#L12) |
-| components/time | Modes | dl | var(--tp-text-sm) | content appearance — review required | [docs/components/time.mdx:63](../../docs/components/time.mdx#L63) |
-| components/time | Absolute formats | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/time.mdx:96](../../docs/components/time.mdx#L96) |
-| components/time | Dates and zones | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/time.mdx:123](../../docs/components/time.mdx#L123) |
-| components/time | Calendar | dl | var(--tp-text-sm) | content appearance — review required | [docs/components/time.mdx:154](../../docs/components/time.mdx#L154) |
-| components/time | Short and narrow | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/time.mdx:177](../../docs/components/time.mdx#L177) |
-| components/time | Precisions | dl | var(--tp-text-sm) | content appearance — review required | [docs/components/time.mdx:194](../../docs/components/time.mdx#L194) |
-| components/time | Timers | dl | var(--tp-text-sm) | content appearance — review required | [docs/components/time.mdx:209](../../docs/components/time.mdx#L209) |
-| components/time | Description | span | var(--tp-text-sm) | content appearance — review required | [docs/components/time.mdx:229](../../docs/components/time.mdx#L229) |
-| components/time | Fallback | span | var(--tp-text-sm) | content appearance — review required | [docs/components/time.mdx:249](../../docs/components/time.mdx#L249) |
+| components/scroll-trigger | Scrubbed band | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:104](../../docs/components/scroll-trigger.mdx#L104) |
+| components/scroll-trigger | Scrubbed band | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:105](../../docs/components/scroll-trigger.mdx#L105) |
+| components/scroll-trigger | Custom scroll range | h3 | var(--tp-text-2xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:151](../../docs/components/scroll-trigger.mdx#L151) |
+| components/scroll-trigger | Pinned scene | p | var(--tp-text-sm) | content appearance — review required | [docs/components/scroll-trigger.mdx:210](../../docs/components/scroll-trigger.mdx#L210) |
+| components/scroll-trigger | Pinned scene | h3 | var(--tp-text-2xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:214](../../docs/components/scroll-trigger.mdx#L214) |
+| components/scroll-trigger | Reveal events | p | var(--tp-text-xl) | content appearance — review required | [docs/components/scroll-trigger.mdx:241](../../docs/components/scroll-trigger.mdx#L241) |
+| components/scroll-trigger | Reveal events | output | var(--tp-text-sm) | content appearance — review required | [docs/components/scroll-trigger.mdx:246](../../docs/components/scroll-trigger.mdx#L246) |
+| components/select | Value change | output | var(--tp-text-sm) | content appearance — review required | [docs/components/select.mdx:313](../../docs/components/select.mdx#L313) |
+| components/slider | Compact readout | span | var(--tp-text-sm) | content appearance — review required | [docs/components/slider.mdx:203](../../docs/components/slider.mdx#L203) |
+| components/slider | Compact readout | span | var(--tp-text-sm) | content appearance — review required | [docs/components/slider.mdx:205](../../docs/components/slider.mdx#L205) |
+| components/tabs | Change event and setValue | output | var(--tp-text-sm) | content appearance — review required | [docs/components/tabs.mdx:129](../../docs/components/tabs.mdx#L129) |
+| components/tabs | Controlled with a veto | p | var(--tp-text-sm) | content appearance — review required | [docs/components/tabs.mdx:183](../../docs/components/tabs.mdx#L183) |
+| components/text-area | Character count | output | var(--tp-text-sm) | content appearance — review required | [docs/components/text-area.mdx:93](../../docs/components/text-area.mdx#L93) |
+| components/text-transform | Text transform | dl | var(--tp-text-sm) | content appearance — review required | [docs/components/text-transform.mdx:11](../../docs/components/text-transform.mdx#L11) |
+| components/text-transform | Case and identifiers | dl | var(--tp-text-sm) | content appearance — review required | [docs/components/text-transform.mdx:35](../../docs/components/text-transform.mdx#L35) |
+| components/text-transform | Uploads | span | var(--tp-text-sm) | content appearance — review required | [docs/components/text-transform.mdx:97](../../docs/components/text-transform.mdx#L97) |
+| components/text-transform | Uploads | span | var(--tp-text-sm) | content appearance — review required | [docs/components/text-transform.mdx:101](../../docs/components/text-transform.mdx#L101) |
+| components/text-transform | Locales | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/text-transform.mdx:112](../../docs/components/text-transform.mdx#L112) |
+| components/text-transform | Truncation | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/text-transform.mdx:135](../../docs/components/text-transform.mdx#L135) |
+| components/text-transform | Length limits | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/text-transform.mdx:163](../../docs/components/text-transform.mdx#L163) |
+| components/text-transform | Formatter | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/text-transform.mdx:184](../../docs/components/text-transform.mdx#L184) |
+| components/text-transform | Named presets | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/text-transform.mdx:206](../../docs/components/text-transform.mdx#L206) |
+| components/text-transform | Unreadable input | p | var(--tp-text-sm) | content appearance — review required | [docs/components/text-transform.mdx:224](../../docs/components/text-transform.mdx#L224) |
+| components/theme-switcher | Theme switcher | span | var(--tp-text-sm) | content appearance — review required | [docs/components/theme-switcher.mdx:15](../../docs/components/theme-switcher.mdx#L15) |
+| components/theme-switcher | Small, defaulting to dark | span | var(--tp-text-sm) | content appearance — review required | [docs/components/theme-switcher.mdx:90](../../docs/components/theme-switcher.mdx#L90) |
+| components/theme-switcher | Explicit choices only | output | var(--tp-text-sm) | content appearance — review required | [docs/components/theme-switcher.mdx:119](../../docs/components/theme-switcher.mdx#L119) |
+| components/time | Time | ul | var(--tp-text-sm) | content appearance — review required | [docs/components/time.mdx:13](../../docs/components/time.mdx#L13) |
+| components/time | Modes | dl | var(--tp-text-sm) | content appearance — review required | [docs/components/time.mdx:55](../../docs/components/time.mdx#L55) |
+| components/time | Absolute formats | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/time.mdx:88](../../docs/components/time.mdx#L88) |
+| components/time | Dates and zones | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/time.mdx:115](../../docs/components/time.mdx#L115) |
+| components/time | Calendar | dl | var(--tp-text-sm) | content appearance — review required | [docs/components/time.mdx:147](../../docs/components/time.mdx#L147) |
+| components/time | Short and narrow | tp-stack | var(--tp-text-sm) | component presentation override — review required | [docs/components/time.mdx:170](../../docs/components/time.mdx#L170) |
+| components/time | Precisions | dl | var(--tp-text-sm) | content appearance — review required | [docs/components/time.mdx:187](../../docs/components/time.mdx#L187) |
+| components/time | Timers | dl | var(--tp-text-sm) | content appearance — review required | [docs/components/time.mdx:202](../../docs/components/time.mdx#L202) |
+| components/time | Description | span | var(--tp-text-sm) | content appearance — review required | [docs/components/time.mdx:222](../../docs/components/time.mdx#L222) |
+| components/time | Fallback | span | var(--tp-text-sm) | content appearance — review required | [docs/components/time.mdx:242](../../docs/components/time.mdx#L242) |
 | components/toggle-group | Required choice | output | var(--tp-text-sm) | content appearance — review required | [docs/components/toggle-group.mdx:151](../../docs/components/toggle-group.mdx#L151) |
 | components/toggle | Change events | output | var(--tp-text-sm) | content appearance — review required | [docs/components/toggle.mdx:137](../../docs/components/toggle.mdx#L137) |
 | components/tooltip | Cursor tracking | div | var(--tp-text-sm) | content appearance — review required | [docs/components/tooltip.mdx:69](../../docs/components/tooltip.mdx#L69) |
-| components/tree-view | Opening items | output | var(--tp-text-sm) | content appearance — review required | [docs/components/tree-view.mdx:95](../../docs/components/tree-view.mdx#L95) |
-| components/tree-view | Rendered rows | output | var(--tp-text-sm) | content appearance — review required | [docs/components/tree-view.mdx:176](../../docs/components/tree-view.mdx#L176) |
-| components/tree-view | Controlled lanes | output | var(--tp-text-sm) | content appearance — review required | [docs/components/tree-view.mdx:265](../../docs/components/tree-view.mdx#L265) |
-| motion/surface/glow-border | Custom colors | p | var(--tp-text-2xl) | content appearance — review required | [docs/motion/surface/glow-border.mdx:143](../../docs/motion/surface/glow-border.mdx#L143) |
-| motion/surface/glow-border | Custom colors | span | var(--tp-text-sm) | content appearance — review required | [docs/motion/surface/glow-border.mdx:143](../../docs/motion/surface/glow-border.mdx#L143) |
+| components/tree-view | Opening items | output | var(--tp-text-sm) | content appearance — review required | [docs/components/tree-view.mdx:99](../../docs/components/tree-view.mdx#L99) |
+| components/tree-view | Rendered rows | output | var(--tp-text-sm) | content appearance — review required | [docs/components/tree-view.mdx:182](../../docs/components/tree-view.mdx#L182) |
+| components/tree-view | Controlled lanes | output | var(--tp-text-sm) | content appearance — review required | [docs/components/tree-view.mdx:271](../../docs/components/tree-view.mdx#L271) |
+| motion/surface/glow-border | Custom colors | p | var(--tp-text-2xl) | content appearance — review required | [docs/motion/surface/glow-border.mdx:145](../../docs/motion/surface/glow-border.mdx#L145) |
+| motion/surface/glow-border | Custom colors | span | var(--tp-text-sm) | content appearance — review required | [docs/motion/surface/glow-border.mdx:145](../../docs/motion/surface/glow-border.mdx#L145) |
 | motion/surface/segment-border | Traced in | p | var(--tp-text-2xl) | content appearance — review required | [docs/motion/surface/segment-border.mdx:125](../../docs/motion/surface/segment-border.mdx#L125) |
 | motion/surface/segment-border | Traced in | p | var(--tp-text-2xl) | content appearance — review required | [docs/motion/surface/segment-border.mdx:133](../../docs/motion/surface/segment-border.mdx#L133) |
 | motion/surface/segment-border | Traced in | p | var(--tp-text-2xl) | content appearance — review required | [docs/motion/surface/segment-border.mdx:141](../../docs/motion/surface/segment-border.mdx#L141) |
@@ -2052,19 +1168,19 @@ Each row retains the target element, use-case label, exact value and source loca
 | motion/text/text-stroke | Heavier outline | p | 4rem | content appearance — review required | [docs/motion/text/text-stroke.mdx:39](../../docs/motion/text/text-stroke.mdx#L39) |
 | motion/text/text-stroke | Hide and reveal | p | 3rem | content appearance — review required | [docs/motion/text/text-stroke.mdx:58](../../docs/motion/text/text-stroke.mdx#L58) |
 | motion/text/text-stroke | Scrubbed by the scroll | p | 3rem | content appearance — review required | [docs/motion/text/text-stroke.mdx:102](../../docs/motion/text/text-stroke.mdx#L102) |
-| widgets/color-picker | Popup in a form | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/color-picker.mdx:65](../../docs/widgets/color-picker.mdx#L65) |
+| widgets/color-picker | Popup in a form | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/color-picker.mdx:66](../../docs/widgets/color-picker.mdx#L66) |
 | widgets/color-picker | Commit events | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/color-picker.mdx:208](../../docs/widgets/color-picker.mdx#L208) |
 | widgets/easing-editor | Commit and veto | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/easing-editor.mdx:141](../../docs/widgets/easing-editor.mdx#L141) |
 | widgets/easing-editor | Controlled owner | code | var(--tp-text-xs) | content appearance — review required | [docs/widgets/easing-editor.mdx:165](../../docs/widgets/easing-editor.mdx#L165) |
 | widgets/emoji-picker | Picks | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/emoji-picker.mdx:28](../../docs/widgets/emoji-picker.mdx#L28) |
-| widgets/emoji-picker | Remembered tone | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/emoji-picker.mdx:89](../../docs/widgets/emoji-picker.mdx#L89) |
-| widgets/emoji-picker | Popup in a form | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/emoji-picker.mdx:215](../../docs/widgets/emoji-picker.mdx#L215) |
+| widgets/emoji-picker | Remembered tone | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/emoji-picker.mdx:87](../../docs/widgets/emoji-picker.mdx#L87) |
+| widgets/emoji-picker | Popup in a form | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/emoji-picker.mdx:214](../../docs/widgets/emoji-picker.mdx#L214) |
 | widgets/flow | Automatic layout | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/flow.mdx:333](../../docs/widgets/flow.mdx#L333) |
 | widgets/flow | Commit and selection | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/flow.mdx:409](../../docs/widgets/flow.mdx#L409) |
 | widgets/flow | Controlled owner | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/flow.mdx:453](../../docs/widgets/flow.mdx#L453) |
 | widgets/flow | Run requests | strong | var(--tp-text-sm) | content appearance — review required | [docs/widgets/flow.mdx:569](../../docs/widgets/flow.mdx#L569) |
 | widgets/flow | In a form | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/flow.mdx:712](../../docs/widgets/flow.mdx#L712) |
-| widgets/text-editor | In a form | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/text-editor.mdx:579](../../docs/widgets/text-editor.mdx#L579) |
+| widgets/text-editor | In a form | output | var(--tp-text-sm) | content appearance — review required | [docs/widgets/text-editor.mdx:576](../../docs/widgets/text-editor.mdx#L576) |
 | components/scroll-area | Components/Scroll area | h3 | var(--tp-text-sm) | content appearance — review required | [src/stories/scroll-area.stories.ts:48](../../src/stories/scroll-area.stories.ts#L48) |
 | components/scroll-area | Components/Scroll area | div | var(--tp-text-sm) | content appearance — review required | [src/stories/scroll-area.stories.ts:52](../../src/stories/scroll-area.stories.ts#L52) |
 | components/scroll-trigger | (file/setup/shared helper) | h3 | 2rem | content appearance — review required | [src/stories/scroll-trigger.stories.ts:17](../../src/stories/scroll-trigger.stories.ts#L17) |
@@ -2072,9 +1188,9 @@ Each row retains the target element, use-case label, exact value and source loca
 | motion/text/text-split | Motion/Text/Text split | h2 | 2.5rem | content appearance — review required | [src/stories/text-split.stories.ts:75](../../src/stories/text-split.stories.ts#L75) |
 | motion/text/text-stroke | Motion/Text/Text stroke | p | 3.5rem | content appearance — review required | [src/stories/text-stroke.stories.ts:55](../../src/stories/text-stroke.stories.ts#L55) |
 
-<a id="property-7"></a>
+<a id="property-5"></a>
 
-### 7. block-size — 179 occurrences
+### 5. block-size — 179 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -2116,43 +1232,43 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/aspect-ratio | Common ratios | div | 100% | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:28](../../docs/components/aspect-ratio.mdx#L28) |
 | components/aspect-ratio | Common ratios | div | 100% | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:31](../../docs/components/aspect-ratio.mdx#L31) |
 | components/aspect-ratio | Common ratios | div | 100% | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:34](../../docs/components/aspect-ratio.mdx#L34) |
-| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:94](../../docs/components/attachment.mdx#L94) |
-| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:97](../../docs/components/attachment.mdx#L97) |
-| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:100](../../docs/components/attachment.mdx#L100) |
-| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:103](../../docs/components/attachment.mdx#L103) |
-| components/attachment | Scrollable groups | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:197](../../docs/components/attachment.mdx#L197) |
-| components/attachment | Scrollable groups | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:261](../../docs/components/attachment.mdx#L261) |
-| components/carousel | Vertical | tp-carousel | 17rem | layout/geometry — minimize | [docs/components/carousel.mdx:157](../../docs/components/carousel.mdx#L157) |
-| components/carousel | Layered 3D | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:266](../../docs/components/carousel.mdx#L266) |
-| components/carousel | Layered 3D | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:305](../../docs/components/carousel.mdx#L305) |
-| components/carousel | Layered 3D | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:344](../../docs/components/carousel.mdx#L344) |
-| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:385](../../docs/components/carousel.mdx#L385) |
-| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:388](../../docs/components/carousel.mdx#L388) |
-| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:391](../../docs/components/carousel.mdx#L391) |
-| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:394](../../docs/components/carousel.mdx#L394) |
-| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:415](../../docs/components/carousel.mdx#L415) |
-| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:419](../../docs/components/carousel.mdx#L419) |
-| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:423](../../docs/components/carousel.mdx#L423) |
-| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:427](../../docs/components/carousel.mdx#L427) |
-| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:431](../../docs/components/carousel.mdx#L431) |
-| components/carousel | Shader transition | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:489](../../docs/components/carousel.mdx#L489) |
-| components/carousel | Shader transition | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:527](../../docs/components/carousel.mdx#L527) |
-| components/carousel | Shader transition | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:565](../../docs/components/carousel.mdx#L565) |
+| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:89](../../docs/components/attachment.mdx#L89) |
+| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:92](../../docs/components/attachment.mdx#L92) |
+| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:95](../../docs/components/attachment.mdx#L95) |
+| components/attachment | Image cards | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:98](../../docs/components/attachment.mdx#L98) |
+| components/attachment | Scrollable groups | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:192](../../docs/components/attachment.mdx#L192) |
+| components/attachment | Scrollable groups | div | 100% | layout/geometry — minimize | [docs/components/attachment.mdx:256](../../docs/components/attachment.mdx#L256) |
+| components/carousel | Vertical | tp-carousel | 17rem | layout/geometry — minimize | [docs/components/carousel.mdx:155](../../docs/components/carousel.mdx#L155) |
+| components/carousel | Layered 3D | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:255](../../docs/components/carousel.mdx#L255) |
+| components/carousel | Layered 3D | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:291](../../docs/components/carousel.mdx#L291) |
+| components/carousel | Layered 3D | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:327](../../docs/components/carousel.mdx#L327) |
+| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:366](../../docs/components/carousel.mdx#L366) |
+| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:369](../../docs/components/carousel.mdx#L369) |
+| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:372](../../docs/components/carousel.mdx#L372) |
+| components/carousel | Parallax | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:375](../../docs/components/carousel.mdx#L375) |
+| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:397](../../docs/components/carousel.mdx#L397) |
+| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:401](../../docs/components/carousel.mdx#L401) |
+| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:405](../../docs/components/carousel.mdx#L405) |
+| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:409](../../docs/components/carousel.mdx#L409) |
+| components/carousel | Focus | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:413](../../docs/components/carousel.mdx#L413) |
+| components/carousel | Shader transition | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:471](../../docs/components/carousel.mdx#L471) |
+| components/carousel | Shader transition | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:507](../../docs/components/carousel.mdx#L507) |
+| components/carousel | Shader transition | img | 100% | layout/geometry — minimize | [docs/components/carousel.mdx:543](../../docs/components/carousel.mdx#L543) |
 | components/cursor | Cursor | span | 4.5rem | layout/geometry — minimize | [docs/components/cursor.mdx:14](../../docs/components/cursor.mdx#L14) |
 | components/cursor | Zones | span | 4rem | layout/geometry — minimize | [docs/components/cursor.mdx:72](../../docs/components/cursor.mdx#L72) |
 | components/cursor | Dot and ring | span | var(--tp-space-2) | layout/geometry — minimize | [docs/components/cursor.mdx:136](../../docs/components/cursor.mdx#L136) |
-| components/image | Fallbacks | span | 100% | layout/geometry — minimize | [docs/components/image.mdx:59](../../docs/components/image.mdx#L59) |
-| components/image | Loading placeholders | img | 100% | layout/geometry — minimize | [docs/components/image.mdx:72](../../docs/components/image.mdx#L72) |
-| components/image | Reveal timing and repeat | div | 20rem | layout/geometry — minimize | [docs/components/image.mdx:132](../../docs/components/image.mdx#L132) |
-| components/image | Reveal timing and repeat | p | 22rem | layout/geometry — minimize | [docs/components/image.mdx:138](../../docs/components/image.mdx#L138) |
-| components/image | Parallax in a scroller | div | 20rem | layout/geometry — minimize | [docs/components/image.mdx:178](../../docs/components/image.mdx#L178) |
-| components/image | Scroll zoom in a vertical scroller | div | 24rem | layout/geometry — minimize | [docs/components/image.mdx:190](../../docs/components/image.mdx#L190) |
-| components/image | Smoothing | div | 20rem | layout/geometry — minimize | [docs/components/image.mdx:264](../../docs/components/image.mdx#L264) |
+| components/image | Fallbacks | span | 100% | layout/geometry — minimize | [docs/components/image.mdx:60](../../docs/components/image.mdx#L60) |
+| components/image | Loading placeholders | img | 100% | layout/geometry — minimize | [docs/components/image.mdx:74](../../docs/components/image.mdx#L74) |
+| components/image | Reveal timing and repeat | div | 20rem | layout/geometry — minimize | [docs/components/image.mdx:137](../../docs/components/image.mdx#L137) |
+| components/image | Reveal timing and repeat | p | 22rem | layout/geometry — minimize | [docs/components/image.mdx:143](../../docs/components/image.mdx#L143) |
+| components/image | Parallax in a scroller | div | 20rem | layout/geometry — minimize | [docs/components/image.mdx:186](../../docs/components/image.mdx#L186) |
+| components/image | Scroll zoom in a vertical scroller | div | 24rem | layout/geometry — minimize | [docs/components/image.mdx:198](../../docs/components/image.mdx#L198) |
+| components/image | Smoothing | div | 20rem | layout/geometry — minimize | [docs/components/image.mdx:272](../../docs/components/image.mdx#L272) |
 | components/map | Selected pin | tp-map | calc(var(--tp-space-16) * 5) | layout/geometry — minimize | [docs/components/map.mdx:254](../../docs/components/map.mdx#L254) |
 | components/map | External controls | tp-map | calc(var(--tp-space-16) * 4) | layout/geometry — minimize | [docs/components/map.mdx:349](../../docs/components/map.mdx#L349) |
 | components/map | Status slot | tp-map | calc(var(--tp-space-16) * 3) | layout/geometry — minimize | [docs/components/map.mdx:363](../../docs/components/map.mdx#L363) |
-| components/markdown | With a table of contents | tp-scroll-area | 22rem | layout/geometry — minimize | [docs/components/markdown.mdx:233](../../docs/components/markdown.mdx#L233) |
-| components/marker | Native hosts and layout | tp-icon | var(--tp-icon-size-sm) | layout/geometry — minimize | [docs/components/marker.mdx:124](../../docs/components/marker.mdx#L124) |
+| components/markdown | With a table of contents | tp-scroll-area | 22rem | layout/geometry — minimize | [docs/components/markdown.mdx:239](../../docs/components/markdown.mdx#L239) |
+| components/marker | Native hosts and layout | tp-icon | var(--tp-icon-size-sm) | layout/geometry — minimize | [docs/components/marker.mdx:126](../../docs/components/marker.mdx#L126) |
 | components/navigation-panel | Navigation panel | div | 34rem | layout/geometry — minimize | [docs/components/navigation-panel.mdx:11](../../docs/components/navigation-panel.mdx#L11) |
 | components/navigation-panel | Off-canvas | div | 22rem | layout/geometry — minimize | [docs/components/navigation-panel.mdx:102](../../docs/components/navigation-panel.mdx#L102) |
 | components/navigation-panel | Collapsible groups | div | 26rem | layout/geometry — minimize | [docs/components/navigation-panel.mdx:133](../../docs/components/navigation-panel.mdx#L133) |
@@ -2173,65 +1289,65 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/scroll-area | Visibility | tp-scroll-area | 9rem | layout/geometry — minimize | [docs/components/scroll-area.mdx:120](../../docs/components/scroll-area.mdx#L120) |
 | components/scroll-area | Visibility | tp-scroll-area | 9rem | layout/geometry — minimize | [docs/components/scroll-area.mdx:139](../../docs/components/scroll-area.mdx#L139) |
 | components/scroll-area | Edge fade | tp-scroll-area | 10rem | layout/geometry — minimize | [docs/components/scroll-area.mdx:169](../../docs/components/scroll-area.mdx#L169) |
-| components/scroll-trigger | Replay on entry | div | 14rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:58](../../docs/components/scroll-trigger.mdx#L58) |
-| components/scroll-trigger | Replay on entry | p | 16rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:59](../../docs/components/scroll-trigger.mdx#L59) |
-| components/scroll-trigger | Replay on entry | div | 16rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:64](../../docs/components/scroll-trigger.mdx#L64) |
-| components/scroll-trigger | Scrubbed band | div | 20rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:76](../../docs/components/scroll-trigger.mdx#L76) |
-| components/scroll-trigger | Scrubbed band | tp-stack | 20rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:86](../../docs/components/scroll-trigger.mdx#L86) |
-| components/scroll-trigger | Scrubbed band | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:90](../../docs/components/scroll-trigger.mdx#L90) |
-| components/scroll-trigger | Scrubbed band | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:91](../../docs/components/scroll-trigger.mdx#L91) |
-| components/scroll-trigger | Scrubbed band | tp-skeleton | 6rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:92](../../docs/components/scroll-trigger.mdx#L92) |
-| components/scroll-trigger | Scrubbed band | div | 20rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:106](../../docs/components/scroll-trigger.mdx#L106) |
-| components/scroll-trigger | Scrubbed band | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:114](../../docs/components/scroll-trigger.mdx#L114) |
-| components/scroll-trigger | Scrubbed band | tp-skeleton | 6rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:115](../../docs/components/scroll-trigger.mdx#L115) |
+| components/scroll-trigger | Replay on entry | div | 14rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:60](../../docs/components/scroll-trigger.mdx#L60) |
+| components/scroll-trigger | Replay on entry | p | 16rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:61](../../docs/components/scroll-trigger.mdx#L61) |
+| components/scroll-trigger | Replay on entry | div | 16rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:66](../../docs/components/scroll-trigger.mdx#L66) |
+| components/scroll-trigger | Scrubbed band | div | 20rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:78](../../docs/components/scroll-trigger.mdx#L78) |
+| components/scroll-trigger | Scrubbed band | tp-stack | 20rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:88](../../docs/components/scroll-trigger.mdx#L88) |
+| components/scroll-trigger | Scrubbed band | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:92](../../docs/components/scroll-trigger.mdx#L92) |
+| components/scroll-trigger | Scrubbed band | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:93](../../docs/components/scroll-trigger.mdx#L93) |
+| components/scroll-trigger | Scrubbed band | tp-skeleton | 6rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:94](../../docs/components/scroll-trigger.mdx#L94) |
+| components/scroll-trigger | Scrubbed band | div | 20rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:108](../../docs/components/scroll-trigger.mdx#L108) |
 | components/scroll-trigger | Scrubbed band | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:116](../../docs/components/scroll-trigger.mdx#L116) |
-| components/scroll-trigger | Custom scroll range | div | 22rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:129](../../docs/components/scroll-trigger.mdx#L129) |
-| components/scroll-trigger | Custom scroll range | tp-stack | 22rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:139](../../docs/components/scroll-trigger.mdx#L139) |
-| components/scroll-trigger | Custom scroll range | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:143](../../docs/components/scroll-trigger.mdx#L143) |
-| components/scroll-trigger | Custom scroll range | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:144](../../docs/components/scroll-trigger.mdx#L144) |
-| components/scroll-trigger | Custom scroll range | tp-skeleton | 6rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:145](../../docs/components/scroll-trigger.mdx#L145) |
-| components/scroll-trigger | Custom scroll range | div | 22rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:181](../../docs/components/scroll-trigger.mdx#L181) |
-| components/scroll-trigger | Custom scroll range | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:189](../../docs/components/scroll-trigger.mdx#L189) |
-| components/scroll-trigger | Custom scroll range | tp-skeleton | 6rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:190](../../docs/components/scroll-trigger.mdx#L190) |
+| components/scroll-trigger | Scrubbed band | tp-skeleton | 6rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:117](../../docs/components/scroll-trigger.mdx#L117) |
+| components/scroll-trigger | Scrubbed band | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:118](../../docs/components/scroll-trigger.mdx#L118) |
+| components/scroll-trigger | Custom scroll range | div | 22rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:131](../../docs/components/scroll-trigger.mdx#L131) |
+| components/scroll-trigger | Custom scroll range | tp-stack | 22rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:141](../../docs/components/scroll-trigger.mdx#L141) |
+| components/scroll-trigger | Custom scroll range | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:145](../../docs/components/scroll-trigger.mdx#L145) |
+| components/scroll-trigger | Custom scroll range | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:146](../../docs/components/scroll-trigger.mdx#L146) |
+| components/scroll-trigger | Custom scroll range | tp-skeleton | 6rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:147](../../docs/components/scroll-trigger.mdx#L147) |
+| components/scroll-trigger | Custom scroll range | div | 22rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:183](../../docs/components/scroll-trigger.mdx#L183) |
 | components/scroll-trigger | Custom scroll range | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:191](../../docs/components/scroll-trigger.mdx#L191) |
-| components/scroll-trigger | Pinned scene | div | 24rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:203](../../docs/components/scroll-trigger.mdx#L203) |
-| components/scroll-trigger | Pinned scene | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:205](../../docs/components/scroll-trigger.mdx#L205) |
-| components/scroll-trigger | Pinned scene | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:206](../../docs/components/scroll-trigger.mdx#L206) |
-| components/scroll-trigger | Pinned scene | tp-skeleton | 6rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:207](../../docs/components/scroll-trigger.mdx#L207) |
-| components/scroll-trigger | Pinned scene | div | 100% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:211](../../docs/components/scroll-trigger.mdx#L211) |
-| components/scroll-trigger | Pinned scene | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:220](../../docs/components/scroll-trigger.mdx#L220) |
-| components/scroll-trigger | Pinned scene | tp-skeleton | 6rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:221](../../docs/components/scroll-trigger.mdx#L221) |
+| components/scroll-trigger | Custom scroll range | tp-skeleton | 6rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:192](../../docs/components/scroll-trigger.mdx#L192) |
+| components/scroll-trigger | Custom scroll range | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:193](../../docs/components/scroll-trigger.mdx#L193) |
+| components/scroll-trigger | Pinned scene | div | 24rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:205](../../docs/components/scroll-trigger.mdx#L205) |
+| components/scroll-trigger | Pinned scene | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:207](../../docs/components/scroll-trigger.mdx#L207) |
+| components/scroll-trigger | Pinned scene | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:208](../../docs/components/scroll-trigger.mdx#L208) |
+| components/scroll-trigger | Pinned scene | tp-skeleton | 6rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:209](../../docs/components/scroll-trigger.mdx#L209) |
+| components/scroll-trigger | Pinned scene | div | 100% | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:213](../../docs/components/scroll-trigger.mdx#L213) |
 | components/scroll-trigger | Pinned scene | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:222](../../docs/components/scroll-trigger.mdx#L222) |
+| components/scroll-trigger | Pinned scene | tp-skeleton | 6rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:223](../../docs/components/scroll-trigger.mdx#L223) |
+| components/scroll-trigger | Pinned scene | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:224](../../docs/components/scroll-trigger.mdx#L224) |
 | components/separator | Separator | tp-stack | var(--tp-space-5) | layout/geometry — minimize | [docs/components/separator.mdx:18](../../docs/components/separator.mdx#L18) |
 | components/separator | Vertical | tp-stack | var(--tp-space-6) | layout/geometry — minimize | [docs/components/separator.mdx:36](../../docs/components/separator.mdx#L36) |
 | components/skeleton | Skeleton | tp-skeleton | var(--tp-space-10) | layout/geometry — minimize | [docs/components/skeleton.mdx:11](../../docs/components/skeleton.mdx#L11) |
 | components/skeleton | Skeleton | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:20](../../docs/components/skeleton.mdx#L20) |
 | components/skeleton | Skeleton | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:23](../../docs/components/skeleton.mdx#L23) |
-| components/skeleton | Pulse, sweep and none | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:39](../../docs/components/skeleton.mdx#L39) |
 | components/skeleton | Pulse, sweep and none | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:40](../../docs/components/skeleton.mdx#L40) |
 | components/skeleton | Pulse, sweep and none | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:41](../../docs/components/skeleton.mdx#L41) |
-| components/skeleton | Card | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:53](../../docs/components/skeleton.mdx#L53) |
-| components/skeleton | Card | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:54](../../docs/components/skeleton.mdx#L54) |
-| components/skeleton | Video and description | tp-skeleton | var(--tp-space-5) | layout/geometry — minimize | [docs/components/skeleton.mdx:80](../../docs/components/skeleton.mdx#L80) |
-| components/skeleton | Video and description | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:82](../../docs/components/skeleton.mdx#L82) |
+| components/skeleton | Pulse, sweep and none | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:42](../../docs/components/skeleton.mdx#L42) |
+| components/skeleton | Card | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:56](../../docs/components/skeleton.mdx#L56) |
+| components/skeleton | Card | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:57](../../docs/components/skeleton.mdx#L57) |
+| components/skeleton | Video and description | tp-skeleton | var(--tp-space-5) | layout/geometry — minimize | [docs/components/skeleton.mdx:81](../../docs/components/skeleton.mdx#L81) |
 | components/skeleton | Video and description | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:83](../../docs/components/skeleton.mdx#L83) |
 | components/skeleton | Video and description | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:84](../../docs/components/skeleton.mdx#L84) |
+| components/skeleton | Video and description | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:85](../../docs/components/skeleton.mdx#L85) |
 | components/skeleton | Settings form | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:104](../../docs/components/skeleton.mdx#L104) |
-| components/skeleton | Settings form | tp-skeleton | var(--tp-control-height-md) | layout/geometry — minimize | [docs/components/skeleton.mdx:106](../../docs/components/skeleton.mdx#L106) |
-| components/skeleton | Settings form | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:110](../../docs/components/skeleton.mdx#L110) |
-| components/skeleton | Settings form | tp-skeleton | var(--tp-control-height-md) | layout/geometry — minimize | [docs/components/skeleton.mdx:112](../../docs/components/skeleton.mdx#L112) |
-| components/skeleton | Settings form | tp-skeleton | var(--tp-control-height-md) | layout/geometry — minimize | [docs/components/skeleton.mdx:115](../../docs/components/skeleton.mdx#L115) |
+| components/skeleton | Settings form | tp-skeleton | var(--tp-control-height-md) | layout/geometry — minimize | [docs/components/skeleton.mdx:105](../../docs/components/skeleton.mdx#L105) |
+| components/skeleton | Settings form | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:109](../../docs/components/skeleton.mdx#L109) |
+| components/skeleton | Settings form | tp-skeleton | var(--tp-control-height-md) | layout/geometry — minimize | [docs/components/skeleton.mdx:110](../../docs/components/skeleton.mdx#L110) |
+| components/skeleton | Settings form | tp-skeleton | var(--tp-control-height-md) | layout/geometry — minimize | [docs/components/skeleton.mdx:113](../../docs/components/skeleton.mdx#L113) |
+| components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:128](../../docs/components/skeleton.mdx#L128) |
+| components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:130](../../docs/components/skeleton.mdx#L130) |
 | components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:132](../../docs/components/skeleton.mdx#L132) |
-| components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:134](../../docs/components/skeleton.mdx#L134) |
+| components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:135](../../docs/components/skeleton.mdx#L135) |
 | components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:137](../../docs/components/skeleton.mdx#L137) |
-| components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:141](../../docs/components/skeleton.mdx#L141) |
-| components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:143](../../docs/components/skeleton.mdx#L143) |
+| components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:139](../../docs/components/skeleton.mdx#L139) |
+| components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:142](../../docs/components/skeleton.mdx#L142) |
+| components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:144](../../docs/components/skeleton.mdx#L144) |
 | components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:146](../../docs/components/skeleton.mdx#L146) |
-| components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:150](../../docs/components/skeleton.mdx#L150) |
-| components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:152](../../docs/components/skeleton.mdx#L152) |
-| components/skeleton | Table rows | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [docs/components/skeleton.mdx:155](../../docs/components/skeleton.mdx#L155) |
-| components/slider | Vertical | tp-stack | 12rem | layout/geometry — minimize | [docs/components/slider.mdx:170](../../docs/components/slider.mdx#L170) |
-| components/slider | Vertical range | div | 14rem | layout/geometry — minimize | [docs/components/slider.mdx:186](../../docs/components/slider.mdx#L186) |
+| components/slider | Vertical | tp-stack | 12rem | layout/geometry — minimize | [docs/components/slider.mdx:168](../../docs/components/slider.mdx#L168) |
+| components/slider | Vertical range | div | 14rem | layout/geometry — minimize | [docs/components/slider.mdx:184](../../docs/components/slider.mdx#L184) |
 | components/table-of-contents | Table of contents | tp-scroll-area | 24rem | layout/geometry — minimize | [docs/components/table-of-contents.mdx:11](../../docs/components/table-of-contents.mdx#L11) |
 | components/table-of-contents | Table of contents | div | 12rem | layout/geometry — minimize | [docs/components/table-of-contents.mdx:29](../../docs/components/table-of-contents.mdx#L29) |
 | components/table-of-contents | Nested sections | tp-scroll-area | 22rem | layout/geometry — minimize | [docs/components/table-of-contents.mdx:86](../../docs/components/table-of-contents.mdx#L86) |
@@ -2240,7 +1356,7 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/table-of-contents | Collected targets | div | 12rem | layout/geometry — minimize | [docs/components/table-of-contents.mdx:195](../../docs/components/table-of-contents.mdx#L195) |
 | components/table-of-contents | Compact | tp-scroll-area | 18rem | layout/geometry — minimize | [docs/components/table-of-contents.mdx:237](../../docs/components/table-of-contents.mdx#L237) |
 | components/table-of-contents | Compact | div | 10rem | layout/geometry — minimize | [docs/components/table-of-contents.mdx:248](../../docs/components/table-of-contents.mdx#L248) |
-| components/text-transform | Truncation | tp-resizable-panel-group | 11rem | layout/geometry — minimize | [docs/components/text-transform.mdx:125](../../docs/components/text-transform.mdx#L125) |
+| components/text-transform | Truncation | tp-resizable-panel-group | 11rem | layout/geometry — minimize | [docs/components/text-transform.mdx:128](../../docs/components/text-transform.mdx#L128) |
 | motion/text/text-mirror | Scrubbed by the scroll | div | 20rem | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:74](../../docs/motion/text/text-mirror.mdx#L74) |
 | motion/text/text-mirror | Scrubbed by the scroll | tp-stack | 20rem | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:84](../../docs/motion/text/text-mirror.mdx#L84) |
 | motion/text/text-mirror | Scrubbed by the scroll | tp-skeleton | 0.75rem | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:88](../../docs/motion/text/text-mirror.mdx#L88) |
@@ -2279,7 +1395,7 @@ Each row retains the target element, use-case label, exact value and source loca
 | widgets/flow | Run requests | tp-flow | 26rem | layout/geometry — minimize | [docs/widgets/flow.mdx:568](../../docs/widgets/flow.mdx#L568) |
 | widgets/flow | Read-only dependency viewer | tp-flow | 26rem | layout/geometry — minimize | [docs/widgets/flow.mdx:652](../../docs/widgets/flow.mdx#L652) |
 | widgets/flow | In a form | tp-flow | 22.5rem | layout/geometry — minimize | [docs/widgets/flow.mdx:701](../../docs/widgets/flow.mdx#L701) |
-| compositions/presentation-primitives.examples | aspectRatioDefaults | div | 100% | layout/geometry — minimize | [src/stories/presentation-primitives.examples.ts:60](../../src/stories/presentation-primitives.examples.ts#L60) |
+| compositions/presentation-primitives.examples | aspectRatioDefaults | div | 100% | layout/geometry — minimize | [src/stories/presentation-primitives.examples.ts:58](../../src/stories/presentation-primitives.examples.ts#L58) |
 | components/scroll-area | Components/Scroll area | tp-scroll-area | calc(var(--tp-spacing) * 90) | layout/geometry — minimize | [src/stories/scroll-area.stories.ts:46](../../src/stories/scroll-area.stories.ts#L46) |
 | compositions/skeleton.examples | (file/setup/shared helper) | tp-skeleton | var(--tp-space-10) | layout/geometry — minimize | [src/stories/skeleton.examples.ts:21](../../src/stories/skeleton.examples.ts#L21) |
 | compositions/skeleton.examples | (file/setup/shared helper) | tp-skeleton | var(--tp-space-4) | layout/geometry — minimize | [src/stories/skeleton.examples.ts:28](../../src/stories/skeleton.examples.ts#L28) |
@@ -2293,9 +1409,9 @@ Each row retains the target element, use-case label, exact value and source loca
 | compositions/table-of-contents.examples | Release notes | tp-scroll-area | 34rem | layout/geometry — minimize | [src/stories/table-of-contents.examples.ts:96](../../src/stories/table-of-contents.examples.ts#L96) |
 | compositions/table-of-contents.examples | Changelog | tp-scroll-area | 34rem | layout/geometry — minimize | [src/stories/table-of-contents.examples.ts:140](../../src/stories/table-of-contents.examples.ts#L140) |
 
-<a id="property-8"></a>
+<a id="property-6"></a>
 
-### 8. border-radius — 163 occurrences
+### 6. border-radius — 163 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -2315,41 +1431,41 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/aspect-ratio | One ratio, three widths | tp-aspect-ratio | var(--tp-radius-md) | component presentation override — review required | [docs/components/aspect-ratio.mdx:51](../../docs/components/aspect-ratio.mdx#L51) |
 | components/aspect-ratio | One ratio, three widths | tp-aspect-ratio | var(--tp-radius-md) | component presentation override — review required | [docs/components/aspect-ratio.mdx:73](../../docs/components/aspect-ratio.mdx#L73) |
 | components/aspect-ratio | One ratio, three widths | tp-aspect-ratio | var(--tp-radius-md) | component presentation override — review required | [docs/components/aspect-ratio.mdx:95](../../docs/components/aspect-ratio.mdx#L95) |
-| components/aspect-ratio | Cover and contain | tp-aspect-ratio | var(--tp-radius-lg) | component presentation override — review required | [docs/components/aspect-ratio.mdx:124](../../docs/components/aspect-ratio.mdx#L124) |
-| components/aspect-ratio | Cover and contain | tp-aspect-ratio | var(--tp-radius-lg) | component presentation override — review required | [docs/components/aspect-ratio.mdx:127](../../docs/components/aspect-ratio.mdx#L127) |
+| components/aspect-ratio | Cover and contain | tp-aspect-ratio | var(--tp-radius-lg) | component presentation override — review required | [docs/components/aspect-ratio.mdx:125](../../docs/components/aspect-ratio.mdx#L125) |
+| components/aspect-ratio | Cover and contain | tp-aspect-ratio | var(--tp-radius-lg) | component presentation override — review required | [docs/components/aspect-ratio.mdx:128](../../docs/components/aspect-ratio.mdx#L128) |
 | components/avatar | Custom shape and grayscale | tp-avatar | var(--tp-radius-lg) | component presentation override — review required | [docs/components/avatar.mdx:116](../../docs/components/avatar.mdx#L116) |
 | components/avatar | Custom shape and grayscale | tp-avatar | var(--tp-radius-lg) | component presentation override — review required | [docs/components/avatar.mdx:122](../../docs/components/avatar.mdx#L122) |
-| components/carousel | Carousel | tp-stack | var(--tp-radius-lg) | component presentation override — review required | [docs/components/carousel.mdx:12](../../docs/components/carousel.mdx#L12) |
-| components/carousel | Carousel | tp-stack | var(--tp-radius-lg) | component presentation override — review required | [docs/components/carousel.mdx:27](../../docs/components/carousel.mdx#L27) |
-| components/carousel | Carousel | tp-stack | var(--tp-radius-lg) | component presentation override — review required | [docs/components/carousel.mdx:42](../../docs/components/carousel.mdx#L42) |
-| components/carousel | Carousel | tp-stack | var(--tp-radius-lg) | component presentation override — review required | [docs/components/carousel.mdx:55](../../docs/components/carousel.mdx#L55) |
+| components/carousel | Carousel | tp-stack | var(--tp-radius-lg) | component presentation override — review required | [docs/components/carousel.mdx:13](../../docs/components/carousel.mdx#L13) |
+| components/carousel | Carousel | tp-stack | var(--tp-radius-lg) | component presentation override — review required | [docs/components/carousel.mdx:26](../../docs/components/carousel.mdx#L26) |
+| components/carousel | Carousel | tp-stack | var(--tp-radius-lg) | component presentation override — review required | [docs/components/carousel.mdx:39](../../docs/components/carousel.mdx#L39) |
+| components/carousel | Carousel | tp-stack | var(--tp-radius-lg) | component presentation override — review required | [docs/components/carousel.mdx:51](../../docs/components/carousel.mdx#L51) |
+| components/carousel | Bullets inside | blockquote | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:101](../../docs/components/carousel.mdx#L101) |
 | components/carousel | Bullets inside | blockquote | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:105](../../docs/components/carousel.mdx#L105) |
 | components/carousel | Bullets inside | blockquote | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:109](../../docs/components/carousel.mdx#L109) |
-| components/carousel | Bullets inside | blockquote | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:113](../../docs/components/carousel.mdx#L113) |
-| components/carousel | Autoplay | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:133](../../docs/components/carousel.mdx#L133) |
-| components/carousel | Autoplay | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:137](../../docs/components/carousel.mdx#L137) |
-| components/carousel | Autoplay | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:141](../../docs/components/carousel.mdx#L141) |
-| components/carousel | Crossfade | tp-stack | var(--tp-radius-lg) | component presentation override — review required | [docs/components/carousel.mdx:187](../../docs/components/carousel.mdx#L187) |
-| components/carousel | Crossfade | tp-stack | var(--tp-radius-lg) | component presentation override — review required | [docs/components/carousel.mdx:203](../../docs/components/carousel.mdx#L203) |
-| components/carousel | Crossfade | tp-stack | var(--tp-radius-lg) | component presentation override — review required | [docs/components/carousel.mdx:220](../../docs/components/carousel.mdx#L220) |
-| components/carousel | Layered 3D | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:253](../../docs/components/carousel.mdx#L253) |
-| components/carousel | Layered 3D | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:292](../../docs/components/carousel.mdx#L292) |
-| components/carousel | Layered 3D | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:331](../../docs/components/carousel.mdx#L331) |
-| components/carousel | Parallax | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:384](../../docs/components/carousel.mdx#L384) |
-| components/carousel | Parallax | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:387](../../docs/components/carousel.mdx#L387) |
-| components/carousel | Parallax | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:390](../../docs/components/carousel.mdx#L390) |
-| components/carousel | Parallax | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:393](../../docs/components/carousel.mdx#L393) |
-| components/carousel | Focus | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:414](../../docs/components/carousel.mdx#L414) |
-| components/carousel | Focus | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:418](../../docs/components/carousel.mdx#L418) |
-| components/carousel | Focus | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:422](../../docs/components/carousel.mdx#L422) |
-| components/carousel | Focus | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:426](../../docs/components/carousel.mdx#L426) |
-| components/carousel | Focus | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:430](../../docs/components/carousel.mdx#L430) |
-| components/carousel | Shader transition | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:475](../../docs/components/carousel.mdx#L475) |
-| components/carousel | Shader transition | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:513](../../docs/components/carousel.mdx#L513) |
-| components/carousel | Shader transition | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:551](../../docs/components/carousel.mdx#L551) |
-| components/carousel | Commit | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:653](../../docs/components/carousel.mdx#L653) |
-| components/carousel | Commit | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:664](../../docs/components/carousel.mdx#L664) |
-| components/carousel | Commit | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:675](../../docs/components/carousel.mdx#L675) |
+| components/carousel | Autoplay | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:130](../../docs/components/carousel.mdx#L130) |
+| components/carousel | Autoplay | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:134](../../docs/components/carousel.mdx#L134) |
+| components/carousel | Autoplay | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:138](../../docs/components/carousel.mdx#L138) |
+| components/carousel | Crossfade | tp-stack | var(--tp-radius-lg) | component presentation override — review required | [docs/components/carousel.mdx:184](../../docs/components/carousel.mdx#L184) |
+| components/carousel | Crossfade | tp-stack | var(--tp-radius-lg) | component presentation override — review required | [docs/components/carousel.mdx:198](../../docs/components/carousel.mdx#L198) |
+| components/carousel | Crossfade | tp-stack | var(--tp-radius-lg) | component presentation override — review required | [docs/components/carousel.mdx:213](../../docs/components/carousel.mdx#L213) |
+| components/carousel | Layered 3D | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:243](../../docs/components/carousel.mdx#L243) |
+| components/carousel | Layered 3D | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:279](../../docs/components/carousel.mdx#L279) |
+| components/carousel | Layered 3D | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:315](../../docs/components/carousel.mdx#L315) |
+| components/carousel | Parallax | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:365](../../docs/components/carousel.mdx#L365) |
+| components/carousel | Parallax | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:368](../../docs/components/carousel.mdx#L368) |
+| components/carousel | Parallax | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:371](../../docs/components/carousel.mdx#L371) |
+| components/carousel | Parallax | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:374](../../docs/components/carousel.mdx#L374) |
+| components/carousel | Focus | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:396](../../docs/components/carousel.mdx#L396) |
+| components/carousel | Focus | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:400](../../docs/components/carousel.mdx#L400) |
+| components/carousel | Focus | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:404](../../docs/components/carousel.mdx#L404) |
+| components/carousel | Focus | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:408](../../docs/components/carousel.mdx#L408) |
+| components/carousel | Focus | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:412](../../docs/components/carousel.mdx#L412) |
+| components/carousel | Shader transition | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:458](../../docs/components/carousel.mdx#L458) |
+| components/carousel | Shader transition | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:494](../../docs/components/carousel.mdx#L494) |
+| components/carousel | Shader transition | figure | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:530](../../docs/components/carousel.mdx#L530) |
+| components/carousel | Commit | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:632](../../docs/components/carousel.mdx#L632) |
+| components/carousel | Commit | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:642](../../docs/components/carousel.mdx#L642) |
+| components/carousel | Commit | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/carousel.mdx:652](../../docs/components/carousel.mdx#L652) |
 | components/cursor | Cursor | div | var(--tp-radius-xl) | content appearance — review required | [docs/components/cursor.mdx:11](../../docs/components/cursor.mdx#L11) |
 | components/cursor | Cursor | span | var(--tp-radius-full) | content appearance — review required | [docs/components/cursor.mdx:14](../../docs/components/cursor.mdx#L14) |
 | components/cursor | Cursor | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/cursor.mdx:17](../../docs/components/cursor.mdx#L17) |
@@ -2368,55 +1484,55 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/cursor | Programmatic state | tp-stack | var(--tp-radius-xl) | component presentation override — review required | [docs/components/cursor.mdx:174](../../docs/components/cursor.mdx#L174) |
 | components/cursor | Reduced motion | div | var(--tp-radius-xl) | content appearance — review required | [docs/components/cursor.mdx:208](../../docs/components/cursor.mdx#L208) |
 | components/dialog | Container modality | section | var(--tp-radius-xl) | content appearance — review required | [docs/components/dialog.mdx:82](../../docs/components/dialog.mdx#L82) |
-| components/image | Image | tp-image | var(--tp-radius-xl) | component presentation override — review required | [docs/components/image.mdx:14](../../docs/components/image.mdx#L14) |
+| components/image | Image | tp-image | var(--tp-radius-xl) | component presentation override — review required | [docs/components/image.mdx:15](../../docs/components/image.mdx#L15) |
 | components/image | Ratio and fit | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:37](../../docs/components/image.mdx#L37) |
 | components/image | Ratio and fit | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:38](../../docs/components/image.mdx#L38) |
 | components/image | Ratio and fit | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:39](../../docs/components/image.mdx#L39) |
-| components/image | Fallbacks | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:57](../../docs/components/image.mdx#L57) |
 | components/image | Fallbacks | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:58](../../docs/components/image.mdx#L58) |
-| components/image | Loading placeholders | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:70](../../docs/components/image.mdx#L70) |
-| components/image | Loading placeholders | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:71](../../docs/components/image.mdx#L71) |
-| components/image | Hover zoom | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:87](../../docs/components/image.mdx#L87) |
-| components/image | Hover zoom | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:88](../../docs/components/image.mdx#L88) |
-| components/image | Card hover | tp-image | var(--tp-radius-md) | component presentation override — review required | [docs/components/image.mdx:100](../../docs/components/image.mdx#L100) |
-| components/image | Staggered group | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:120](../../docs/components/image.mdx#L120) |
-| components/image | Staggered group | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:121](../../docs/components/image.mdx#L121) |
-| components/image | Staggered group | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:122](../../docs/components/image.mdx#L122) |
-| components/image | Staggered group | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:123](../../docs/components/image.mdx#L123) |
-| components/image | Reveal timing and repeat | div | var(--tp-radius-xl) | content appearance — review required | [docs/components/image.mdx:132](../../docs/components/image.mdx#L132) |
-| components/image | Reveal timing and repeat | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:134](../../docs/components/image.mdx#L134) |
-| components/image | Reveal timing and repeat | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:135](../../docs/components/image.mdx#L135) |
-| components/image | Reveal timing and repeat | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:136](../../docs/components/image.mdx#L136) |
+| components/image | Fallbacks | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:59](../../docs/components/image.mdx#L59) |
+| components/image | Loading placeholders | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:72](../../docs/components/image.mdx#L72) |
+| components/image | Loading placeholders | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:73](../../docs/components/image.mdx#L73) |
+| components/image | Hover zoom | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:90](../../docs/components/image.mdx#L90) |
+| components/image | Hover zoom | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:91](../../docs/components/image.mdx#L91) |
+| components/image | Card hover | tp-image | var(--tp-radius-md) | component presentation override — review required | [docs/components/image.mdx:104](../../docs/components/image.mdx#L104) |
+| components/image | Staggered group | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:125](../../docs/components/image.mdx#L125) |
+| components/image | Staggered group | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:126](../../docs/components/image.mdx#L126) |
+| components/image | Staggered group | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:127](../../docs/components/image.mdx#L127) |
+| components/image | Staggered group | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:128](../../docs/components/image.mdx#L128) |
+| components/image | Reveal timing and repeat | div | var(--tp-radius-xl) | content appearance — review required | [docs/components/image.mdx:137](../../docs/components/image.mdx#L137) |
+| components/image | Reveal timing and repeat | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:139](../../docs/components/image.mdx#L139) |
 | components/image | Reveal timing and repeat | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:140](../../docs/components/image.mdx#L140) |
 | components/image | Reveal timing and repeat | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:141](../../docs/components/image.mdx#L141) |
-| components/image | Reveal timing and repeat | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:142](../../docs/components/image.mdx#L142) |
-| components/image | Headline, group and caption | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:157](../../docs/components/image.mdx#L157) |
-| components/image | Headline, group and caption | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:158](../../docs/components/image.mdx#L158) |
-| components/image | Headline, group and caption | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:159](../../docs/components/image.mdx#L159) |
-| components/image | Parallax in a scroller | div | var(--tp-radius-xl) | content appearance — review required | [docs/components/image.mdx:178](../../docs/components/image.mdx#L178) |
-| components/image | Parallax in a scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:179](../../docs/components/image.mdx#L179) |
-| components/image | Parallax in a scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:180](../../docs/components/image.mdx#L180) |
-| components/image | Parallax in a scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:181](../../docs/components/image.mdx#L181) |
-| components/image | Scroll zoom in a vertical scroller | div | var(--tp-radius-xl) | content appearance — review required | [docs/components/image.mdx:190](../../docs/components/image.mdx#L190) |
-| components/image | Scroll zoom in a vertical scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:196](../../docs/components/image.mdx#L196) |
-| components/image | Scroll zoom in a vertical scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:206](../../docs/components/image.mdx#L206) |
-| components/image | Scroll zoom in a vertical scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:216](../../docs/components/image.mdx#L216) |
-| components/image | Scroll zoom in a vertical scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:226](../../docs/components/image.mdx#L226) |
-| components/image | Scroll zoom in a vertical scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:236](../../docs/components/image.mdx#L236) |
-| components/image | Horizontal strip | div | var(--tp-radius-xl) | content appearance — review required | [docs/components/image.mdx:251](../../docs/components/image.mdx#L251) |
-| components/image | Horizontal strip | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:252](../../docs/components/image.mdx#L252) |
-| components/image | Horizontal strip | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:253](../../docs/components/image.mdx#L253) |
-| components/image | Horizontal strip | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:254](../../docs/components/image.mdx#L254) |
-| components/image | Horizontal strip | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:255](../../docs/components/image.mdx#L255) |
-| components/image | Smoothing | div | var(--tp-radius-xl) | content appearance — review required | [docs/components/image.mdx:264](../../docs/components/image.mdx#L264) |
-| components/image | Smoothing | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:265](../../docs/components/image.mdx#L265) |
-| components/image | Smoothing | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:266](../../docs/components/image.mdx#L266) |
-| components/image | Smoothing | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:267](../../docs/components/image.mdx#L267) |
-| components/image | Smoothing | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:268](../../docs/components/image.mdx#L268) |
-| components/image | Hero with a narrow-screen crop | tp-image | var(--tp-radius-xl) | component presentation override — review required | [docs/components/image.mdx:291](../../docs/components/image.mdx#L291) |
-| components/list | Card grid | tp-aspect-ratio | var(--tp-radius-sm) | component presentation override — review required | [docs/components/list.mdx:160](../../docs/components/list.mdx#L160) |
-| components/list | Card grid | tp-aspect-ratio | var(--tp-radius-sm) | component presentation override — review required | [docs/components/list.mdx:164](../../docs/components/list.mdx#L164) |
-| components/list | Card grid | tp-aspect-ratio | var(--tp-radius-sm) | component presentation override — review required | [docs/components/list.mdx:168](../../docs/components/list.mdx#L168) |
+| components/image | Reveal timing and repeat | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:145](../../docs/components/image.mdx#L145) |
+| components/image | Reveal timing and repeat | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:146](../../docs/components/image.mdx#L146) |
+| components/image | Reveal timing and repeat | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:147](../../docs/components/image.mdx#L147) |
+| components/image | Headline, group and caption | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:164](../../docs/components/image.mdx#L164) |
+| components/image | Headline, group and caption | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:165](../../docs/components/image.mdx#L165) |
+| components/image | Headline, group and caption | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:166](../../docs/components/image.mdx#L166) |
+| components/image | Parallax in a scroller | div | var(--tp-radius-xl) | content appearance — review required | [docs/components/image.mdx:186](../../docs/components/image.mdx#L186) |
+| components/image | Parallax in a scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:187](../../docs/components/image.mdx#L187) |
+| components/image | Parallax in a scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:188](../../docs/components/image.mdx#L188) |
+| components/image | Parallax in a scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:189](../../docs/components/image.mdx#L189) |
+| components/image | Scroll zoom in a vertical scroller | div | var(--tp-radius-xl) | content appearance — review required | [docs/components/image.mdx:198](../../docs/components/image.mdx#L198) |
+| components/image | Scroll zoom in a vertical scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:204](../../docs/components/image.mdx#L204) |
+| components/image | Scroll zoom in a vertical scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:214](../../docs/components/image.mdx#L214) |
+| components/image | Scroll zoom in a vertical scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:224](../../docs/components/image.mdx#L224) |
+| components/image | Scroll zoom in a vertical scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:234](../../docs/components/image.mdx#L234) |
+| components/image | Scroll zoom in a vertical scroller | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:244](../../docs/components/image.mdx#L244) |
+| components/image | Horizontal strip | div | var(--tp-radius-xl) | content appearance — review required | [docs/components/image.mdx:259](../../docs/components/image.mdx#L259) |
+| components/image | Horizontal strip | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:260](../../docs/components/image.mdx#L260) |
+| components/image | Horizontal strip | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:261](../../docs/components/image.mdx#L261) |
+| components/image | Horizontal strip | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:262](../../docs/components/image.mdx#L262) |
+| components/image | Horizontal strip | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:263](../../docs/components/image.mdx#L263) |
+| components/image | Smoothing | div | var(--tp-radius-xl) | content appearance — review required | [docs/components/image.mdx:272](../../docs/components/image.mdx#L272) |
+| components/image | Smoothing | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:273](../../docs/components/image.mdx#L273) |
+| components/image | Smoothing | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:274](../../docs/components/image.mdx#L274) |
+| components/image | Smoothing | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:275](../../docs/components/image.mdx#L275) |
+| components/image | Smoothing | tp-image | var(--tp-radius-lg) | component presentation override — review required | [docs/components/image.mdx:276](../../docs/components/image.mdx#L276) |
+| components/image | Hero with a narrow-screen crop | tp-image | var(--tp-radius-xl) | component presentation override — review required | [docs/components/image.mdx:299](../../docs/components/image.mdx#L299) |
+| components/list | Card grid | tp-aspect-ratio | var(--tp-radius-sm) | component presentation override — review required | [docs/components/list.mdx:163](../../docs/components/list.mdx#L163) |
+| components/list | Card grid | tp-aspect-ratio | var(--tp-radius-sm) | component presentation override — review required | [docs/components/list.mdx:167](../../docs/components/list.mdx#L167) |
+| components/list | Card grid | tp-aspect-ratio | var(--tp-radius-sm) | component presentation override — review required | [docs/components/list.mdx:171](../../docs/components/list.mdx#L171) |
 | components/menu | Context invocation | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/menu.mdx:147](../../docs/components/menu.mdx#L147) |
 | components/message-scroller | Message Scroller | tp-message-scroller | var(--tp-radius-xl) | component presentation override — review required | [docs/components/message-scroller.mdx:11](../../docs/components/message-scroller.mdx#L11) |
 | components/message-scroller | Streaming | tp-message-scroller | var(--tp-radius-xl) | component presentation override — review required | [docs/components/message-scroller.mdx:75](../../docs/components/message-scroller.mdx#L75) |
@@ -2446,21 +1562,21 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/scroll-area | Both axes | tp-scroll-area | var(--tp-radius-lg) | component presentation override — review required | [docs/components/scroll-area.mdx:86](../../docs/components/scroll-area.mdx#L86) |
 | components/scroll-area | Visibility | tp-scroll-area | var(--tp-radius-lg) | component presentation override — review required | [docs/components/scroll-area.mdx:120](../../docs/components/scroll-area.mdx#L120) |
 | components/scroll-area | Visibility | tp-scroll-area | var(--tp-radius-lg) | component presentation override — review required | [docs/components/scroll-area.mdx:139](../../docs/components/scroll-area.mdx#L139) |
-| components/scroll-trigger | Scroll Trigger | tp-image | var(--tp-radius-md) | component presentation override — review required | [docs/components/scroll-trigger.mdx:16](../../docs/components/scroll-trigger.mdx#L16) |
 | components/scroll-trigger | Scroll Trigger | tp-image | var(--tp-radius-md) | component presentation override — review required | [docs/components/scroll-trigger.mdx:17](../../docs/components/scroll-trigger.mdx#L17) |
 | components/scroll-trigger | Scroll Trigger | tp-image | var(--tp-radius-md) | component presentation override — review required | [docs/components/scroll-trigger.mdx:18](../../docs/components/scroll-trigger.mdx#L18) |
-| components/scroll-trigger | Replay on entry | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/scroll-trigger.mdx:58](../../docs/components/scroll-trigger.mdx#L58) |
-| components/scroll-trigger | Scrubbed band | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/scroll-trigger.mdx:76](../../docs/components/scroll-trigger.mdx#L76) |
-| components/scroll-trigger | Custom scroll range | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/scroll-trigger.mdx:129](../../docs/components/scroll-trigger.mdx#L129) |
-| components/scroll-trigger | Custom scroll range | tp-image | var(--tp-radius-md) | component presentation override — review required | [docs/components/scroll-trigger.mdx:163](../../docs/components/scroll-trigger.mdx#L163) |
-| components/scroll-trigger | Custom scroll range | tp-image | var(--tp-radius-md) | component presentation override — review required | [docs/components/scroll-trigger.mdx:169](../../docs/components/scroll-trigger.mdx#L169) |
-| components/scroll-trigger | Custom scroll range | tp-image | var(--tp-radius-md) | component presentation override — review required | [docs/components/scroll-trigger.mdx:175](../../docs/components/scroll-trigger.mdx#L175) |
-| components/scroll-trigger | Pinned scene | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/scroll-trigger.mdx:203](../../docs/components/scroll-trigger.mdx#L203) |
+| components/scroll-trigger | Scroll Trigger | tp-image | var(--tp-radius-md) | component presentation override — review required | [docs/components/scroll-trigger.mdx:19](../../docs/components/scroll-trigger.mdx#L19) |
+| components/scroll-trigger | Replay on entry | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/scroll-trigger.mdx:60](../../docs/components/scroll-trigger.mdx#L60) |
+| components/scroll-trigger | Scrubbed band | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/scroll-trigger.mdx:78](../../docs/components/scroll-trigger.mdx#L78) |
+| components/scroll-trigger | Custom scroll range | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/scroll-trigger.mdx:131](../../docs/components/scroll-trigger.mdx#L131) |
+| components/scroll-trigger | Custom scroll range | tp-image | var(--tp-radius-md) | component presentation override — review required | [docs/components/scroll-trigger.mdx:165](../../docs/components/scroll-trigger.mdx#L165) |
+| components/scroll-trigger | Custom scroll range | tp-image | var(--tp-radius-md) | component presentation override — review required | [docs/components/scroll-trigger.mdx:171](../../docs/components/scroll-trigger.mdx#L171) |
+| components/scroll-trigger | Custom scroll range | tp-image | var(--tp-radius-md) | component presentation override — review required | [docs/components/scroll-trigger.mdx:177](../../docs/components/scroll-trigger.mdx#L177) |
+| components/scroll-trigger | Pinned scene | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/scroll-trigger.mdx:205](../../docs/components/scroll-trigger.mdx#L205) |
 | components/skeleton | Skeleton | tp-skeleton | var(--tp-radius-full) | component presentation override — review required | [docs/components/skeleton.mdx:11](../../docs/components/skeleton.mdx#L11) |
-| components/skeleton | Card | tp-skeleton | var(--tp-radius-lg) | component presentation override — review required | [docs/components/skeleton.mdx:57](../../docs/components/skeleton.mdx#L57) |
-| components/skeleton | Video and description | tp-aspect-ratio | var(--tp-radius-xl) | component presentation override — review required | [docs/components/skeleton.mdx:77](../../docs/components/skeleton.mdx#L77) |
-| components/skeleton | Video and description | tp-skeleton | inherit | component presentation override — review required | [docs/components/skeleton.mdx:78](../../docs/components/skeleton.mdx#L78) |
-| components/text-transform | Truncation | tp-resizable-panel-group | var(--tp-radius-lg) | component presentation override — review required | [docs/components/text-transform.mdx:125](../../docs/components/text-transform.mdx#L125) |
+| components/skeleton | Card | tp-skeleton | var(--tp-radius-lg) | component presentation override — review required | [docs/components/skeleton.mdx:60](../../docs/components/skeleton.mdx#L60) |
+| components/skeleton | Video and description | tp-aspect-ratio | var(--tp-radius-xl) | component presentation override — review required | [docs/components/skeleton.mdx:78](../../docs/components/skeleton.mdx#L78) |
+| components/skeleton | Video and description | tp-skeleton | inherit | component presentation override — review required | [docs/components/skeleton.mdx:79](../../docs/components/skeleton.mdx#L79) |
+| components/text-transform | Truncation | tp-resizable-panel-group | var(--tp-radius-lg) | component presentation override — review required | [docs/components/text-transform.mdx:128](../../docs/components/text-transform.mdx#L128) |
 | components/tooltip | Cursor tracking | div | var(--tp-radius-lg) | content appearance — review required | [docs/components/tooltip.mdx:69](../../docs/components/tooltip.mdx#L69) |
 | motion/text/text-mirror | Scrubbed by the scroll | div | var(--tp-radius-lg) | content appearance — review required | [docs/motion/text/text-mirror.mdx:74](../../docs/motion/text/text-mirror.mdx#L74) |
 | motion/text/text-split | Scrubbed by the scroll | div | var(--tp-radius-lg) | content appearance — review required | [docs/motion/text/text-split.mdx:142](../../docs/motion/text/text-split.mdx#L142) |
@@ -2472,9 +1588,9 @@ Each row retains the target element, use-case label, exact value and source loca
 | compositions/skeleton.examples | skeletonExamples | tp-aspect-ratio | var(--tp-radius-xl) | component presentation override — review required | [src/stories/skeleton.examples.ts:61](../../src/stories/skeleton.examples.ts#L61) |
 | compositions/skeleton.examples | skeletonExamples | tp-skeleton | inherit | component presentation override — review required | [src/stories/skeleton.examples.ts:62](../../src/stories/skeleton.examples.ts#L62) |
 
-<a id="property-9"></a>
+<a id="property-7"></a>
 
-### 9. text-align — 157 occurrences
+### 7. text-align — 157 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -2484,11 +1600,11 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/carousel | Autoplay | div | center | manual review | [docs/components/carousel.mdx:133](../../docs/components/carousel.mdx#L133) |
-| components/carousel | Autoplay | div | center | manual review | [docs/components/carousel.mdx:137](../../docs/components/carousel.mdx#L137) |
-| components/carousel | Autoplay | div | center | manual review | [docs/components/carousel.mdx:141](../../docs/components/carousel.mdx#L141) |
-| components/carousel | Virtual archive with controlled selection | output | center | manual review | [docs/components/carousel.mdx:615](../../docs/components/carousel.mdx#L615) |
-| components/carousel | Commit | output | center | manual review | [docs/components/carousel.mdx:688](../../docs/components/carousel.mdx#L688) |
+| components/carousel | Autoplay | div | center | manual review | [docs/components/carousel.mdx:130](../../docs/components/carousel.mdx#L130) |
+| components/carousel | Autoplay | div | center | manual review | [docs/components/carousel.mdx:134](../../docs/components/carousel.mdx#L134) |
+| components/carousel | Autoplay | div | center | manual review | [docs/components/carousel.mdx:138](../../docs/components/carousel.mdx#L138) |
+| components/carousel | Virtual archive with controlled selection | output | center | manual review | [docs/components/carousel.mdx:593](../../docs/components/carousel.mdx#L593) |
+| components/carousel | Commit | output | center | manual review | [docs/components/carousel.mdx:664](../../docs/components/carousel.mdx#L664) |
 | components/dialog | Container modality | p | center | manual review | [docs/components/dialog.mdx:92](../../docs/components/dialog.mdx#L92) |
 | components/marker | Accordion label and drawer | tp-drawer | start | manual review | [docs/components/marker.mdx:203](../../docs/components/marker.mdx#L203) |
 | components/preview-card | Delays | tp-stack | start | manual review | [docs/components/preview-card.mdx:44](../../docs/components/preview-card.mdx#L44) |
@@ -2506,8 +1622,8 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/scroll-area | Both axes | td | end | manual review | [docs/components/scroll-area.mdx:102](../../docs/components/scroll-area.mdx#L102) |
 | components/scroll-area | Both axes | td | end | manual review | [docs/components/scroll-area.mdx:103](../../docs/components/scroll-area.mdx#L103) |
 | components/scroll-area | Both axes | td | end | manual review | [docs/components/scroll-area.mdx:104](../../docs/components/scroll-area.mdx#L104) |
-| components/scroll-trigger | From the center | tp-scroll-trigger | center | manual review | [docs/components/scroll-trigger.mdx:42](../../docs/components/scroll-trigger.mdx#L42) |
-| components/scroll-trigger | Reveal events | tp-stack | center | manual review | [docs/components/scroll-trigger.mdx:236](../../docs/components/scroll-trigger.mdx#L236) |
+| components/scroll-trigger | From the center | tp-scroll-trigger | center | manual review | [docs/components/scroll-trigger.mdx:44](../../docs/components/scroll-trigger.mdx#L44) |
+| components/scroll-trigger | Reveal events | tp-stack | center | manual review | [docs/components/scroll-trigger.mdx:239](../../docs/components/scroll-trigger.mdx#L239) |
 | components/table | Table | tp-table-head | end | manual review | [docs/components/table.mdx:18](../../docs/components/table.mdx#L18) |
 | components/table | Table | tp-table-cell | end | manual review | [docs/components/table.mdx:26](../../docs/components/table.mdx#L26) |
 | components/table | Table | tp-table-cell | end | manual review | [docs/components/table.mdx:32](../../docs/components/table.mdx#L32) |
@@ -2598,23 +1714,23 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/table | Sticky edges | tp-table-cell | end | manual review | [docs/components/table.mdx:266](../../docs/components/table.mdx#L266) |
 | components/table | Sticky edges | tp-table-cell | end | manual review | [docs/components/table.mdx:266](../../docs/components/table.mdx#L266) |
 | components/table | Sticky edges | tp-table-cell | end | manual review | [docs/components/table.mdx:266](../../docs/components/table.mdx#L266) |
-| components/text-transform | Text transform | dd | end | manual review | [docs/components/text-transform.mdx:12](../../docs/components/text-transform.mdx#L12) |
-| components/text-transform | Text transform | dd | end | manual review | [docs/components/text-transform.mdx:14](../../docs/components/text-transform.mdx#L14) |
-| components/text-transform | Text transform | dd | end | manual review | [docs/components/text-transform.mdx:16](../../docs/components/text-transform.mdx#L16) |
-| components/text-transform | Text transform | dd | end | manual review | [docs/components/text-transform.mdx:18](../../docs/components/text-transform.mdx#L18) |
-| components/text-transform | Text transform | dd | end | manual review | [docs/components/text-transform.mdx:20](../../docs/components/text-transform.mdx#L20) |
-| components/text-transform | Plans | tp-table-head | end | manual review | [docs/components/text-transform.mdx:57](../../docs/components/text-transform.mdx#L57) |
-| components/text-transform | Plans | tp-table-head | end | manual review | [docs/components/text-transform.mdx:58](../../docs/components/text-transform.mdx#L58) |
+| components/text-transform | Text transform | dd | end | manual review | [docs/components/text-transform.mdx:13](../../docs/components/text-transform.mdx#L13) |
+| components/text-transform | Text transform | dd | end | manual review | [docs/components/text-transform.mdx:15](../../docs/components/text-transform.mdx#L15) |
+| components/text-transform | Text transform | dd | end | manual review | [docs/components/text-transform.mdx:17](../../docs/components/text-transform.mdx#L17) |
+| components/text-transform | Text transform | dd | end | manual review | [docs/components/text-transform.mdx:19](../../docs/components/text-transform.mdx#L19) |
+| components/text-transform | Text transform | dd | end | manual review | [docs/components/text-transform.mdx:21](../../docs/components/text-transform.mdx#L21) |
 | components/text-transform | Plans | tp-table-head | end | manual review | [docs/components/text-transform.mdx:59](../../docs/components/text-transform.mdx#L59) |
 | components/text-transform | Plans | tp-table-head | end | manual review | [docs/components/text-transform.mdx:60](../../docs/components/text-transform.mdx#L60) |
-| components/text-transform | Plans | tp-table-cell | end | manual review | [docs/components/text-transform.mdx:66](../../docs/components/text-transform.mdx#L66) |
-| components/text-transform | Plans | tp-table-cell | end | manual review | [docs/components/text-transform.mdx:67](../../docs/components/text-transform.mdx#L67) |
+| components/text-transform | Plans | tp-table-head | end | manual review | [docs/components/text-transform.mdx:61](../../docs/components/text-transform.mdx#L61) |
+| components/text-transform | Plans | tp-table-head | end | manual review | [docs/components/text-transform.mdx:62](../../docs/components/text-transform.mdx#L62) |
 | components/text-transform | Plans | tp-table-cell | end | manual review | [docs/components/text-transform.mdx:68](../../docs/components/text-transform.mdx#L68) |
 | components/text-transform | Plans | tp-table-cell | end | manual review | [docs/components/text-transform.mdx:69](../../docs/components/text-transform.mdx#L69) |
-| components/text-transform | Plans | tp-table-cell | end | manual review | [docs/components/text-transform.mdx:73](../../docs/components/text-transform.mdx#L73) |
-| components/text-transform | Plans | tp-table-cell | end | manual review | [docs/components/text-transform.mdx:74](../../docs/components/text-transform.mdx#L74) |
+| components/text-transform | Plans | tp-table-cell | end | manual review | [docs/components/text-transform.mdx:70](../../docs/components/text-transform.mdx#L70) |
+| components/text-transform | Plans | tp-table-cell | end | manual review | [docs/components/text-transform.mdx:71](../../docs/components/text-transform.mdx#L71) |
 | components/text-transform | Plans | tp-table-cell | end | manual review | [docs/components/text-transform.mdx:75](../../docs/components/text-transform.mdx#L75) |
 | components/text-transform | Plans | tp-table-cell | end | manual review | [docs/components/text-transform.mdx:76](../../docs/components/text-transform.mdx#L76) |
+| components/text-transform | Plans | tp-table-cell | end | manual review | [docs/components/text-transform.mdx:77](../../docs/components/text-transform.mdx#L77) |
+| components/text-transform | Plans | tp-table-cell | end | manual review | [docs/components/text-transform.mdx:78](../../docs/components/text-transform.mdx#L78) |
 | components/visually-hidden | Repeated actions | tp-table-cell | end | manual review | [docs/components/visually-hidden.mdx:106](../../docs/components/visually-hidden.mdx#L106) |
 | components/visually-hidden | Repeated actions | tp-table-cell | end | manual review | [docs/components/visually-hidden.mdx:111](../../docs/components/visually-hidden.mdx#L111) |
 | components/visually-hidden | Repeated actions | tp-table-cell | end | manual review | [docs/components/visually-hidden.mdx:116](../../docs/components/visually-hidden.mdx#L116) |
@@ -2634,64 +1750,64 @@ Each row retains the target element, use-case label, exact value and source loca
 | motion/text/text-stroke | Heavier outline | p | center | manual review | [docs/motion/text/text-stroke.mdx:39](../../docs/motion/text/text-stroke.mdx#L39) |
 | motion/text/text-stroke | Hide and reveal | p | center | manual review | [docs/motion/text/text-stroke.mdx:58](../../docs/motion/text/text-stroke.mdx#L58) |
 | motion/text/text-stroke | Scrubbed by the scroll | p | center | manual review | [docs/motion/text/text-stroke.mdx:102](../../docs/motion/text/text-stroke.mdx#L102) |
-| widgets/color-picker | Popup in a form | output | center | manual review | [docs/widgets/color-picker.mdx:65](../../docs/widgets/color-picker.mdx#L65) |
-| widgets/emoji-picker | Popup in a form | output | center | manual review | [docs/widgets/emoji-picker.mdx:215](../../docs/widgets/emoji-picker.mdx#L215) |
+| widgets/color-picker | Popup in a form | output | center | manual review | [docs/widgets/color-picker.mdx:66](../../docs/widgets/color-picker.mdx#L66) |
+| widgets/emoji-picker | Popup in a form | output | center | manual review | [docs/widgets/emoji-picker.mdx:214](../../docs/widgets/emoji-picker.mdx#L214) |
 | compositions/table.examples | tableDefaults | tp-table-head | end | manual review | [src/stories/table.examples.ts:161](../../src/stories/table.examples.ts#L161) |
 | compositions/table.examples | tableDefaults | tp-table-cell | end | manual review | [src/stories/table.examples.ts:172](../../src/stories/table.examples.ts#L172) |
 | compositions/table.examples | tableDefaults | tp-table-cell | end | manual review | [src/stories/table.examples.ts:199](../../src/stories/table.examples.ts#L199) |
 | motion/text/text-mirror | Motion/Text/Text mirror | p | center | manual review | [src/stories/text-mirror.stories.ts:55](../../src/stories/text-mirror.stories.ts#L55) |
 | motion/text/text-stroke | Motion/Text/Text stroke | p | center | manual review | [src/stories/text-stroke.stories.ts:55](../../src/stories/text-stroke.stories.ts#L55) |
 
-<a id="property-10"></a>
+<a id="property-8"></a>
 
-### 10. display — 138 occurrences
+### 8. display — 137 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
-| grid | 109 |
+| grid | 108 |
 | block | 22 |
 | flex | 4 |
 | inline-flex | 3 |
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/accordion | Variants | div | grid | layout/geometry — minimize | [docs/components/accordion.mdx:36](../../docs/components/accordion.mdx#L36) |
+| components/accordion | Variants | div | grid | layout/geometry — minimize | [docs/components/accordion.mdx:37](../../docs/components/accordion.mdx#L37) |
 | components/aspect-ratio | Common ratios | div | grid | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:26](../../docs/components/aspect-ratio.mdx#L26) |
 | components/aspect-ratio | Common ratios | div | grid | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:28](../../docs/components/aspect-ratio.mdx#L28) |
 | components/aspect-ratio | Common ratios | div | grid | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:31](../../docs/components/aspect-ratio.mdx#L31) |
 | components/aspect-ratio | Common ratios | div | grid | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:34](../../docs/components/aspect-ratio.mdx#L34) |
-| components/aspect-ratio | Cover and contain | div | grid | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:123](../../docs/components/aspect-ratio.mdx#L123) |
+| components/aspect-ratio | Cover and contain | div | grid | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:124](../../docs/components/aspect-ratio.mdx#L124) |
 | components/calendar | Date with start and end times | div | grid | layout/geometry — minimize | [docs/components/calendar.mdx:225](../../docs/components/calendar.mdx#L225) |
-| components/calendar | In a popover | tp-button | block | component structure/visibility — review required | [docs/components/calendar.mdx:308](../../docs/components/calendar.mdx#L308) |
-| components/card | Surface options | div | grid | layout/geometry — minimize | [docs/components/card.mdx:55](../../docs/components/card.mdx#L55) |
+| components/calendar | In a popover | tp-button | block | component structure/visibility — review required | [docs/components/calendar.mdx:310](../../docs/components/calendar.mdx#L310) |
+| components/card | Surface options | div | grid | layout/geometry — minimize | [docs/components/card.mdx:61](../../docs/components/card.mdx#L61) |
+| components/carousel | Bullets inside | blockquote | grid | layout/geometry — minimize | [docs/components/carousel.mdx:101](../../docs/components/carousel.mdx#L101) |
 | components/carousel | Bullets inside | blockquote | grid | layout/geometry — minimize | [docs/components/carousel.mdx:105](../../docs/components/carousel.mdx#L105) |
 | components/carousel | Bullets inside | blockquote | grid | layout/geometry — minimize | [docs/components/carousel.mdx:109](../../docs/components/carousel.mdx#L109) |
-| components/carousel | Bullets inside | blockquote | grid | layout/geometry — minimize | [docs/components/carousel.mdx:113](../../docs/components/carousel.mdx#L113) |
-| components/carousel | Autoplay | div | grid | layout/geometry — minimize | [docs/components/carousel.mdx:133](../../docs/components/carousel.mdx#L133) |
-| components/carousel | Autoplay | div | grid | layout/geometry — minimize | [docs/components/carousel.mdx:137](../../docs/components/carousel.mdx#L137) |
-| components/carousel | Autoplay | div | grid | layout/geometry — minimize | [docs/components/carousel.mdx:141](../../docs/components/carousel.mdx#L141) |
-| components/carousel | Layered 3D | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:266](../../docs/components/carousel.mdx#L266) |
-| components/carousel | Layered 3D | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:305](../../docs/components/carousel.mdx#L305) |
-| components/carousel | Layered 3D | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:344](../../docs/components/carousel.mdx#L344) |
-| components/carousel | Parallax | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:385](../../docs/components/carousel.mdx#L385) |
-| components/carousel | Parallax | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:388](../../docs/components/carousel.mdx#L388) |
-| components/carousel | Parallax | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:391](../../docs/components/carousel.mdx#L391) |
-| components/carousel | Parallax | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:394](../../docs/components/carousel.mdx#L394) |
-| components/carousel | Focus | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:415](../../docs/components/carousel.mdx#L415) |
-| components/carousel | Focus | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:419](../../docs/components/carousel.mdx#L419) |
-| components/carousel | Focus | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:423](../../docs/components/carousel.mdx#L423) |
-| components/carousel | Focus | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:427](../../docs/components/carousel.mdx#L427) |
-| components/carousel | Focus | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:431](../../docs/components/carousel.mdx#L431) |
-| components/carousel | Shader transition | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:489](../../docs/components/carousel.mdx#L489) |
-| components/carousel | Shader transition | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:527](../../docs/components/carousel.mdx#L527) |
-| components/carousel | Shader transition | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:565](../../docs/components/carousel.mdx#L565) |
-| components/carousel | Virtual archive with controlled selection | div | grid | layout/geometry — minimize | [docs/components/carousel.mdx:613](../../docs/components/carousel.mdx#L613) |
-| components/carousel | Commit | div | grid | layout/geometry — minimize | [docs/components/carousel.mdx:653](../../docs/components/carousel.mdx#L653) |
-| components/carousel | Commit | div | grid | layout/geometry — minimize | [docs/components/carousel.mdx:664](../../docs/components/carousel.mdx#L664) |
-| components/carousel | Commit | div | grid | layout/geometry — minimize | [docs/components/carousel.mdx:675](../../docs/components/carousel.mdx#L675) |
-| components/code-block | Title slot | span | inline-flex | layout/geometry — minimize | [docs/components/code-block.mdx:33](../../docs/components/code-block.mdx#L33) |
-| components/collapsible | Line-by-line reveal | ul | grid | layout/geometry — minimize | [docs/components/collapsible.mdx:151](../../docs/components/collapsible.mdx#L151) |
-| components/copy-button | Beside a value | dl | grid | layout/geometry — minimize | [docs/components/copy-button.mdx:50](../../docs/components/copy-button.mdx#L50) |
+| components/carousel | Autoplay | div | grid | layout/geometry — minimize | [docs/components/carousel.mdx:130](../../docs/components/carousel.mdx#L130) |
+| components/carousel | Autoplay | div | grid | layout/geometry — minimize | [docs/components/carousel.mdx:134](../../docs/components/carousel.mdx#L134) |
+| components/carousel | Autoplay | div | grid | layout/geometry — minimize | [docs/components/carousel.mdx:138](../../docs/components/carousel.mdx#L138) |
+| components/carousel | Layered 3D | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:255](../../docs/components/carousel.mdx#L255) |
+| components/carousel | Layered 3D | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:291](../../docs/components/carousel.mdx#L291) |
+| components/carousel | Layered 3D | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:327](../../docs/components/carousel.mdx#L327) |
+| components/carousel | Parallax | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:366](../../docs/components/carousel.mdx#L366) |
+| components/carousel | Parallax | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:369](../../docs/components/carousel.mdx#L369) |
+| components/carousel | Parallax | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:372](../../docs/components/carousel.mdx#L372) |
+| components/carousel | Parallax | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:375](../../docs/components/carousel.mdx#L375) |
+| components/carousel | Focus | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:397](../../docs/components/carousel.mdx#L397) |
+| components/carousel | Focus | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:401](../../docs/components/carousel.mdx#L401) |
+| components/carousel | Focus | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:405](../../docs/components/carousel.mdx#L405) |
+| components/carousel | Focus | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:409](../../docs/components/carousel.mdx#L409) |
+| components/carousel | Focus | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:413](../../docs/components/carousel.mdx#L413) |
+| components/carousel | Shader transition | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:471](../../docs/components/carousel.mdx#L471) |
+| components/carousel | Shader transition | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:507](../../docs/components/carousel.mdx#L507) |
+| components/carousel | Shader transition | img | block | layout/geometry — minimize | [docs/components/carousel.mdx:543](../../docs/components/carousel.mdx#L543) |
+| components/carousel | Virtual archive with controlled selection | div | grid | layout/geometry — minimize | [docs/components/carousel.mdx:591](../../docs/components/carousel.mdx#L591) |
+| components/carousel | Commit | div | grid | layout/geometry — minimize | [docs/components/carousel.mdx:632](../../docs/components/carousel.mdx#L632) |
+| components/carousel | Commit | div | grid | layout/geometry — minimize | [docs/components/carousel.mdx:642](../../docs/components/carousel.mdx#L642) |
+| components/carousel | Commit | div | grid | layout/geometry — minimize | [docs/components/carousel.mdx:652](../../docs/components/carousel.mdx#L652) |
+| components/code-block | Title slot | span | inline-flex | layout/geometry — minimize | [docs/components/code-block.mdx:35](../../docs/components/code-block.mdx#L35) |
+| components/collapsible | Line-by-line reveal | ul | grid | layout/geometry — minimize | [docs/components/collapsible.mdx:155](../../docs/components/collapsible.mdx#L155) |
+| components/copy-button | Beside a value | dl | grid | layout/geometry — minimize | [docs/components/copy-button.mdx:52](../../docs/components/copy-button.mdx#L52) |
 | components/cursor | Cursor | div | grid | layout/geometry — minimize | [docs/components/cursor.mdx:11](../../docs/components/cursor.mdx#L11) |
 | components/cursor | Cursor | span | grid | layout/geometry — minimize | [docs/components/cursor.mdx:14](../../docs/components/cursor.mdx#L14) |
 | components/cursor | Cursor | div | grid | layout/geometry — minimize | [docs/components/cursor.mdx:15](../../docs/components/cursor.mdx#L15) |
@@ -2709,36 +1825,35 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/cursor | Dot and ring | span | block | layout/geometry — minimize | [docs/components/cursor.mdx:136](../../docs/components/cursor.mdx#L136) |
 | components/cursor | Native passthrough | div | grid | layout/geometry — minimize | [docs/components/cursor.mdx:154](../../docs/components/cursor.mdx#L154) |
 | components/cursor | Reduced motion | div | grid | layout/geometry — minimize | [docs/components/cursor.mdx:208](../../docs/components/cursor.mdx#L208) |
-| components/description-list | Record details | span | inline-flex | layout/geometry — minimize | [docs/components/description-list.mdx:35](../../docs/components/description-list.mdx#L35) |
+| components/description-list | Record details | span | inline-flex | layout/geometry — minimize | [docs/components/description-list.mdx:39](../../docs/components/description-list.mdx#L39) |
 | components/dialog | Non-modal | dl | grid | layout/geometry — minimize | [docs/components/dialog.mdx:55](../../docs/components/dialog.mdx#L55) |
 | components/dialog | Container modality | section | grid | layout/geometry — minimize | [docs/components/dialog.mdx:82](../../docs/components/dialog.mdx#L82) |
-| components/drag-drop-list | Variants and sizes | div | grid | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:67](../../docs/components/drag-drop-list.mdx#L67) |
-| components/drag-drop-list | Board lanes | div | grid | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:186](../../docs/components/drag-drop-list.mdx#L186) |
-| components/drag-drop-list | Controlled lanes | div | grid | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:246](../../docs/components/drag-drop-list.mdx#L246) |
-| components/drag-drop-list | Approve before committing | div | grid | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:313](../../docs/components/drag-drop-list.mdx#L313) |
+| components/drag-drop-list | Variants and sizes | div | grid | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:68](../../docs/components/drag-drop-list.mdx#L68) |
+| components/drag-drop-list | Board lanes | div | grid | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:187](../../docs/components/drag-drop-list.mdx#L187) |
+| components/drag-drop-list | Controlled lanes | div | grid | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:243](../../docs/components/drag-drop-list.mdx#L243) |
+| components/drag-drop-list | Approve before committing | div | grid | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:307](../../docs/components/drag-drop-list.mdx#L307) |
 | components/empty-state | Media treatments | div | grid | layout/geometry — minimize | [docs/components/empty-state.mdx:45](../../docs/components/empty-state.mdx#L45) |
-| components/empty-state | Bordered and filled | div | grid | layout/geometry — minimize | [docs/components/empty-state.mdx:107](../../docs/components/empty-state.mdx#L107) |
+| components/empty-state | Bordered and filled | div | grid | layout/geometry — minimize | [docs/components/empty-state.mdx:108](../../docs/components/empty-state.mdx#L108) |
 | components/icon | Decorative and labelled | span | inline-flex | layout/geometry — minimize | [docs/components/icon.mdx:51](../../docs/components/icon.mdx#L51) |
 | components/image | Ratio and fit | div | grid | layout/geometry — minimize | [docs/components/image.mdx:36](../../docs/components/image.mdx#L36) |
-| components/image | Fallbacks | div | grid | layout/geometry — minimize | [docs/components/image.mdx:56](../../docs/components/image.mdx#L56) |
-| components/image | Fallbacks | span | grid | layout/geometry — minimize | [docs/components/image.mdx:59](../../docs/components/image.mdx#L59) |
-| components/image | Loading placeholders | div | grid | layout/geometry — minimize | [docs/components/image.mdx:69](../../docs/components/image.mdx#L69) |
-| components/image | Hover zoom | div | grid | layout/geometry — minimize | [docs/components/image.mdx:86](../../docs/components/image.mdx#L86) |
-| components/image | Staggered group | tp-image-group | grid | component structure/visibility — review required | [docs/components/image.mdx:119](../../docs/components/image.mdx#L119) |
-| components/image | Reveal timing and repeat | div | grid | layout/geometry — minimize | [docs/components/image.mdx:133](../../docs/components/image.mdx#L133) |
-| components/image | Reveal timing and repeat | p | grid | layout/geometry — minimize | [docs/components/image.mdx:138](../../docs/components/image.mdx#L138) |
-| components/image | Reveal timing and repeat | div | grid | layout/geometry — minimize | [docs/components/image.mdx:139](../../docs/components/image.mdx#L139) |
-| components/image | Headline, group and caption | tp-scroll-trigger | grid | component structure/visibility — review required | [docs/components/image.mdx:154](../../docs/components/image.mdx#L154) |
-| components/image | Headline, group and caption | tp-image-group | grid | component structure/visibility — review required | [docs/components/image.mdx:156](../../docs/components/image.mdx#L156) |
-| components/image | Parallax in a scroller | div | grid | layout/geometry — minimize | [docs/components/image.mdx:178](../../docs/components/image.mdx#L178) |
-| components/image | Scroll zoom in a vertical scroller | div | grid | layout/geometry — minimize | [docs/components/image.mdx:190](../../docs/components/image.mdx#L190) |
-| components/image | Horizontal strip | div | flex | layout/geometry — minimize | [docs/components/image.mdx:251](../../docs/components/image.mdx#L251) |
-| components/image | Smoothing | div | grid | layout/geometry — minimize | [docs/components/image.mdx:264](../../docs/components/image.mdx#L264) |
-| components/list | Recordings | span | grid | layout/geometry — minimize | [docs/components/list.mdx:247](../../docs/components/list.mdx#L247) |
-| components/list | Recordings | span | flex | layout/geometry — minimize | [docs/components/list.mdx:248](../../docs/components/list.mdx#L248) |
-| components/list | People and invitations | span | grid | layout/geometry — minimize | [docs/components/list.mdx:343](../../docs/components/list.mdx#L343) |
-| components/list | People and invitations | span | flex | layout/geometry — minimize | [docs/components/list.mdx:344](../../docs/components/list.mdx#L344) |
-| components/markdown | With a table of contents | div | grid | layout/geometry — minimize | [docs/components/markdown.mdx:234](../../docs/components/markdown.mdx#L234) |
+| components/image | Fallbacks | div | grid | layout/geometry — minimize | [docs/components/image.mdx:57](../../docs/components/image.mdx#L57) |
+| components/image | Fallbacks | span | grid | layout/geometry — minimize | [docs/components/image.mdx:60](../../docs/components/image.mdx#L60) |
+| components/image | Loading placeholders | div | grid | layout/geometry — minimize | [docs/components/image.mdx:71](../../docs/components/image.mdx#L71) |
+| components/image | Hover zoom | div | grid | layout/geometry — minimize | [docs/components/image.mdx:89](../../docs/components/image.mdx#L89) |
+| components/image | Staggered group | tp-image-group | grid | component structure/visibility — review required | [docs/components/image.mdx:124](../../docs/components/image.mdx#L124) |
+| components/image | Reveal timing and repeat | div | grid | layout/geometry — minimize | [docs/components/image.mdx:138](../../docs/components/image.mdx#L138) |
+| components/image | Reveal timing and repeat | p | grid | layout/geometry — minimize | [docs/components/image.mdx:143](../../docs/components/image.mdx#L143) |
+| components/image | Reveal timing and repeat | div | grid | layout/geometry — minimize | [docs/components/image.mdx:144](../../docs/components/image.mdx#L144) |
+| components/image | Headline, group and caption | tp-image-group | grid | component structure/visibility — review required | [docs/components/image.mdx:163](../../docs/components/image.mdx#L163) |
+| components/image | Parallax in a scroller | div | grid | layout/geometry — minimize | [docs/components/image.mdx:186](../../docs/components/image.mdx#L186) |
+| components/image | Scroll zoom in a vertical scroller | div | grid | layout/geometry — minimize | [docs/components/image.mdx:198](../../docs/components/image.mdx#L198) |
+| components/image | Horizontal strip | div | flex | layout/geometry — minimize | [docs/components/image.mdx:259](../../docs/components/image.mdx#L259) |
+| components/image | Smoothing | div | grid | layout/geometry — minimize | [docs/components/image.mdx:272](../../docs/components/image.mdx#L272) |
+| components/list | Recordings | span | grid | layout/geometry — minimize | [docs/components/list.mdx:252](../../docs/components/list.mdx#L252) |
+| components/list | Recordings | span | flex | layout/geometry — minimize | [docs/components/list.mdx:253](../../docs/components/list.mdx#L253) |
+| components/list | People and invitations | span | grid | layout/geometry — minimize | [docs/components/list.mdx:346](../../docs/components/list.mdx#L346) |
+| components/list | People and invitations | span | flex | layout/geometry — minimize | [docs/components/list.mdx:347](../../docs/components/list.mdx#L347) |
+| components/markdown | With a table of contents | div | grid | layout/geometry — minimize | [docs/components/markdown.mdx:240](../../docs/components/markdown.mdx#L240) |
 | components/menu | Context invocation | div | grid | layout/geometry — minimize | [docs/components/menu.mdx:147](../../docs/components/menu.mdx#L147) |
 | components/message-scroller | Outline and edges | div | grid | layout/geometry — minimize | [docs/components/message-scroller.mdx:316](../../docs/components/message-scroller.mdx#L316) |
 | components/navigation-menu | Navigation menu | div | grid | layout/geometry — minimize | [docs/components/navigation-menu.mdx:15](../../docs/components/navigation-menu.mdx#L15) |
@@ -2747,43 +1862,43 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/preview-card | Preview Card | div | grid | layout/geometry — minimize | [docs/components/preview-card.mdx:13](../../docs/components/preview-card.mdx#L13) |
 | components/resizable-panel-group | Resizable Panel Group | div | grid | layout/geometry — minimize | [docs/components/resizable-panel-group.mdx:13](../../docs/components/resizable-panel-group.mdx#L13) |
 | components/resizable-panel-group | Resizable Panel Group | div | grid | layout/geometry — minimize | [docs/components/resizable-panel-group.mdx:24](../../docs/components/resizable-panel-group.mdx#L24) |
-| components/scroll-trigger | Scroll Trigger | div | grid | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:15](../../docs/components/scroll-trigger.mdx#L15) |
-| components/scroll-trigger | From the center | tp-scroll-trigger | grid | component structure/visibility — review required | [docs/components/scroll-trigger.mdx:42](../../docs/components/scroll-trigger.mdx#L42) |
-| components/scroll-trigger | Scrubbed band | div | grid | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:106](../../docs/components/scroll-trigger.mdx#L106) |
-| components/scroll-trigger | Custom scroll range | div | grid | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:158](../../docs/components/scroll-trigger.mdx#L158) |
-| components/scroll-trigger | Custom scroll range | div | grid | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:181](../../docs/components/scroll-trigger.mdx#L181) |
-| components/scroll-trigger | Pinned scene | div | grid | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:204](../../docs/components/scroll-trigger.mdx#L204) |
-| components/scroll-trigger | Pinned scene | div | grid | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:211](../../docs/components/scroll-trigger.mdx#L211) |
-| components/scroll-trigger | Pinned scene | div | grid | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:219](../../docs/components/scroll-trigger.mdx#L219) |
-| components/slider | Compact readout | div | grid | layout/geometry — minimize | [docs/components/slider.mdx:203](../../docs/components/slider.mdx#L203) |
+| components/scroll-trigger | Scroll Trigger | div | grid | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:16](../../docs/components/scroll-trigger.mdx#L16) |
+| components/scroll-trigger | From the center | tp-scroll-trigger | grid | component structure/visibility — review required | [docs/components/scroll-trigger.mdx:44](../../docs/components/scroll-trigger.mdx#L44) |
+| components/scroll-trigger | Scrubbed band | div | grid | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:108](../../docs/components/scroll-trigger.mdx#L108) |
+| components/scroll-trigger | Custom scroll range | div | grid | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:160](../../docs/components/scroll-trigger.mdx#L160) |
+| components/scroll-trigger | Custom scroll range | div | grid | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:183](../../docs/components/scroll-trigger.mdx#L183) |
+| components/scroll-trigger | Pinned scene | div | grid | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:206](../../docs/components/scroll-trigger.mdx#L206) |
+| components/scroll-trigger | Pinned scene | div | grid | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:213](../../docs/components/scroll-trigger.mdx#L213) |
+| components/scroll-trigger | Pinned scene | div | grid | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:221](../../docs/components/scroll-trigger.mdx#L221) |
+| components/slider | Compact readout | div | grid | layout/geometry — minimize | [docs/components/slider.mdx:202](../../docs/components/slider.mdx#L202) |
 | components/table-of-contents | Table of contents | div | grid | layout/geometry — minimize | [docs/components/table-of-contents.mdx:12](../../docs/components/table-of-contents.mdx#L12) |
 | components/table-of-contents | Nested sections | div | grid | layout/geometry — minimize | [docs/components/table-of-contents.mdx:87](../../docs/components/table-of-contents.mdx#L87) |
 | components/table-of-contents | Collected targets | div | grid | layout/geometry — minimize | [docs/components/table-of-contents.mdx:174](../../docs/components/table-of-contents.mdx#L174) |
 | components/table-of-contents | Compact | div | grid | layout/geometry — minimize | [docs/components/table-of-contents.mdx:238](../../docs/components/table-of-contents.mdx#L238) |
-| components/text-transform | Text transform | dl | grid | layout/geometry — minimize | [docs/components/text-transform.mdx:10](../../docs/components/text-transform.mdx#L10) |
-| components/text-transform | Case and identifiers | dl | grid | layout/geometry — minimize | [docs/components/text-transform.mdx:34](../../docs/components/text-transform.mdx#L34) |
-| components/time | Time | ul | grid | layout/geometry — minimize | [docs/components/time.mdx:12](../../docs/components/time.mdx#L12) |
-| components/time | Modes | dl | grid | layout/geometry — minimize | [docs/components/time.mdx:63](../../docs/components/time.mdx#L63) |
-| components/time | Calendar | dl | grid | layout/geometry — minimize | [docs/components/time.mdx:154](../../docs/components/time.mdx#L154) |
-| components/time | Precisions | dl | grid | layout/geometry — minimize | [docs/components/time.mdx:194](../../docs/components/time.mdx#L194) |
-| components/time | Timers | dl | grid | layout/geometry — minimize | [docs/components/time.mdx:209](../../docs/components/time.mdx#L209) |
+| components/text-transform | Text transform | dl | grid | layout/geometry — minimize | [docs/components/text-transform.mdx:11](../../docs/components/text-transform.mdx#L11) |
+| components/text-transform | Case and identifiers | dl | grid | layout/geometry — minimize | [docs/components/text-transform.mdx:35](../../docs/components/text-transform.mdx#L35) |
+| components/time | Time | ul | grid | layout/geometry — minimize | [docs/components/time.mdx:13](../../docs/components/time.mdx#L13) |
+| components/time | Modes | dl | grid | layout/geometry — minimize | [docs/components/time.mdx:55](../../docs/components/time.mdx#L55) |
+| components/time | Calendar | dl | grid | layout/geometry — minimize | [docs/components/time.mdx:147](../../docs/components/time.mdx#L147) |
+| components/time | Precisions | dl | grid | layout/geometry — minimize | [docs/components/time.mdx:187](../../docs/components/time.mdx#L187) |
+| components/time | Timers | dl | grid | layout/geometry — minimize | [docs/components/time.mdx:202](../../docs/components/time.mdx#L202) |
 | components/tooltip | Cursor tracking | div | grid | layout/geometry — minimize | [docs/components/tooltip.mdx:69](../../docs/components/tooltip.mdx#L69) |
-| motion/surface/glow-border | Comets | div | grid | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:56](../../docs/motion/surface/glow-border.mdx#L56) |
-| motion/surface/glow-border | Sweep, pulse and glint | div | grid | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:79](../../docs/motion/surface/glow-border.mdx#L79) |
-| motion/surface/glow-border | Custom colors | div | grid | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:137](../../docs/motion/surface/glow-border.mdx#L137) |
-| motion/surface/glow-border | Lit by an element | div | grid | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:162](../../docs/motion/surface/glow-border.mdx#L162) |
+| motion/surface/glow-border | Comets | div | grid | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:58](../../docs/motion/surface/glow-border.mdx#L58) |
+| motion/surface/glow-border | Sweep, pulse and glint | div | grid | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:81](../../docs/motion/surface/glow-border.mdx#L81) |
+| motion/surface/glow-border | Custom colors | div | grid | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:139](../../docs/motion/surface/glow-border.mdx#L139) |
+| motion/surface/glow-border | Lit by an element | div | grid | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:164](../../docs/motion/surface/glow-border.mdx#L164) |
 | motion/surface/segment-border | Traced in | div | grid | layout/geometry — minimize | [docs/motion/surface/segment-border.mdx:121](../../docs/motion/surface/segment-border.mdx#L121) |
 | motion/text/text-mirror | Hide and reveal | div | grid | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:58](../../docs/motion/text/text-mirror.mdx#L58) |
 | motion/text/text-mirror | Scrubbed by the scroll | div | grid | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:96](../../docs/motion/text/text-mirror.mdx#L96) |
 | motion/text/text-split | Reveal on demand | div | grid | layout/geometry — minimize | [docs/motion/text/text-split.mdx:75](../../docs/motion/text/text-split.mdx#L75) |
 | motion/text/text-split | Scrubbed by the scroll | div | grid | layout/geometry — minimize | [docs/motion/text/text-split.mdx:164](../../docs/motion/text/text-split.mdx#L164) |
 | motion/text/text-stroke | Scrubbed by the scroll | div | grid | layout/geometry — minimize | [docs/motion/text/text-stroke.mdx:113](../../docs/motion/text/text-stroke.mdx#L113) |
-| widgets/color-picker | Color input trigger | tp-color-picker | block | component structure/visibility — review required | [docs/widgets/color-picker.mdx:36](../../docs/widgets/color-picker.mdx#L36) |
-| widgets/color-picker | Popup in a form | output | block | layout/geometry — minimize | [docs/widgets/color-picker.mdx:65](../../docs/widgets/color-picker.mdx#L65) |
+| widgets/color-picker | Color input trigger | tp-color-picker | block | component structure/visibility — review required | [docs/widgets/color-picker.mdx:37](../../docs/widgets/color-picker.mdx#L37) |
+| widgets/color-picker | Popup in a form | output | block | layout/geometry — minimize | [docs/widgets/color-picker.mdx:66](../../docs/widgets/color-picker.mdx#L66) |
 | widgets/easing-editor | Spring and custom points | div | flex | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:22](../../docs/widgets/easing-editor.mdx#L22) |
 | widgets/easing-editor | Commit and veto | div | grid | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:139](../../docs/widgets/easing-editor.mdx#L139) |
 | widgets/easing-editor | Controlled owner | div | grid | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:163](../../docs/widgets/easing-editor.mdx#L163) |
-| widgets/emoji-picker | Popup in a form | output | block | layout/geometry — minimize | [docs/widgets/emoji-picker.mdx:215](../../docs/widgets/emoji-picker.mdx#L215) |
+| widgets/emoji-picker | Popup in a form | output | block | layout/geometry — minimize | [docs/widgets/emoji-picker.mdx:214](../../docs/widgets/emoji-picker.mdx#L214) |
 | widgets/flow | In a form | output | block | layout/geometry — minimize | [docs/widgets/flow.mdx:712](../../docs/widgets/flow.mdx#L712) |
 | components/cursor | Components/Cursor | div | grid | layout/geometry — minimize | [src/stories/cursor.stories.ts:92](../../src/stories/cursor.stories.ts#L92) |
 | compositions/map.examples | pinSvg | section | grid | layout/geometry — minimize | [src/stories/map.examples.ts:110](../../src/stories/map.examples.ts#L110) |
@@ -2794,9 +1909,9 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/table-of-contents | DocumentScroll | div | grid | layout/geometry — minimize | [src/stories/table-of-contents.stories.ts:144](../../src/stories/table-of-contents.stories.ts#L144) |
 | compositions/workspace/workspace | (file/setup/shared helper) | tp-button | block | component structure/visibility — review required | [src/stories/workspace/workspace.ts:500](../../src/stories/workspace/workspace.ts#L500) |
 
-<a id="property-11"></a>
+<a id="property-9"></a>
 
-### 11. padding — 124 occurrences
+### 9. padding — 124 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -2815,23 +1930,23 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/carousel | Carousel | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/carousel.mdx:12](../../docs/components/carousel.mdx#L12) |
-| components/carousel | Carousel | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/carousel.mdx:27](../../docs/components/carousel.mdx#L27) |
-| components/carousel | Carousel | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/carousel.mdx:42](../../docs/components/carousel.mdx#L42) |
-| components/carousel | Carousel | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/carousel.mdx:55](../../docs/components/carousel.mdx#L55) |
+| components/carousel | Carousel | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/carousel.mdx:13](../../docs/components/carousel.mdx#L13) |
+| components/carousel | Carousel | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/carousel.mdx:26](../../docs/components/carousel.mdx#L26) |
+| components/carousel | Carousel | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/carousel.mdx:39](../../docs/components/carousel.mdx#L39) |
+| components/carousel | Carousel | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/carousel.mdx:51](../../docs/components/carousel.mdx#L51) |
+| components/carousel | Bullets inside | blockquote | var(--tp-space-8) var(--tp-space-12) | layout spacing — minimize | [docs/components/carousel.mdx:101](../../docs/components/carousel.mdx#L101) |
 | components/carousel | Bullets inside | blockquote | var(--tp-space-8) var(--tp-space-12) | layout spacing — minimize | [docs/components/carousel.mdx:105](../../docs/components/carousel.mdx#L105) |
 | components/carousel | Bullets inside | blockquote | var(--tp-space-8) var(--tp-space-12) | layout spacing — minimize | [docs/components/carousel.mdx:109](../../docs/components/carousel.mdx#L109) |
-| components/carousel | Bullets inside | blockquote | var(--tp-space-8) var(--tp-space-12) | layout spacing — minimize | [docs/components/carousel.mdx:113](../../docs/components/carousel.mdx#L113) |
-| components/carousel | Autoplay | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/carousel.mdx:133](../../docs/components/carousel.mdx#L133) |
-| components/carousel | Autoplay | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/carousel.mdx:137](../../docs/components/carousel.mdx#L137) |
-| components/carousel | Autoplay | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/carousel.mdx:141](../../docs/components/carousel.mdx#L141) |
-| components/carousel | Crossfade | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/carousel.mdx:187](../../docs/components/carousel.mdx#L187) |
-| components/carousel | Crossfade | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/carousel.mdx:203](../../docs/components/carousel.mdx#L203) |
-| components/carousel | Crossfade | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/carousel.mdx:220](../../docs/components/carousel.mdx#L220) |
-| components/checkbox | Select all | fieldset | 0 | layout spacing — minimize | [docs/components/checkbox.mdx:66](../../docs/components/checkbox.mdx#L66) |
-| components/checkbox | Select all | legend | 0 | layout spacing — minimize | [docs/components/checkbox.mdx:68](../../docs/components/checkbox.mdx#L68) |
-| components/checkbox | CheckboxGroupController | fieldset | 0 | layout spacing — minimize | [docs/components/checkbox.mdx:115](../../docs/components/checkbox.mdx#L115) |
-| components/checkbox | CheckboxGroupController | legend | 0 | layout spacing — minimize | [docs/components/checkbox.mdx:117](../../docs/components/checkbox.mdx#L117) |
+| components/carousel | Autoplay | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/carousel.mdx:130](../../docs/components/carousel.mdx#L130) |
+| components/carousel | Autoplay | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/carousel.mdx:134](../../docs/components/carousel.mdx#L134) |
+| components/carousel | Autoplay | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/carousel.mdx:138](../../docs/components/carousel.mdx#L138) |
+| components/carousel | Crossfade | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/carousel.mdx:184](../../docs/components/carousel.mdx#L184) |
+| components/carousel | Crossfade | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/carousel.mdx:198](../../docs/components/carousel.mdx#L198) |
+| components/carousel | Crossfade | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/carousel.mdx:213](../../docs/components/carousel.mdx#L213) |
+| components/checkbox | Select all | fieldset | 0 | layout spacing — minimize | [docs/components/checkbox.mdx:68](../../docs/components/checkbox.mdx#L68) |
+| components/checkbox | Select all | legend | 0 | layout spacing — minimize | [docs/components/checkbox.mdx:70](../../docs/components/checkbox.mdx#L70) |
+| components/checkbox | CheckboxGroupController | fieldset | 0 | layout spacing — minimize | [docs/components/checkbox.mdx:117](../../docs/components/checkbox.mdx#L117) |
+| components/checkbox | CheckboxGroupController | legend | 0 | layout spacing — minimize | [docs/components/checkbox.mdx:119](../../docs/components/checkbox.mdx#L119) |
 | components/cursor | Cursor | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/cursor.mdx:11](../../docs/components/cursor.mdx#L11) |
 | components/cursor | Zones | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/cursor.mdx:69](../../docs/components/cursor.mdx#L69) |
 | components/cursor | Zones | div | var(--tp-space-4) | layout spacing — minimize | [docs/components/cursor.mdx:73](../../docs/components/cursor.mdx#L73) |
@@ -2842,14 +1957,14 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/cursor | Programmatic state | tp-stack | var(--tp-space-8) var(--tp-space-6) | component spacing — review required | [docs/components/cursor.mdx:174](../../docs/components/cursor.mdx#L174) |
 | components/cursor | Reduced motion | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/cursor.mdx:208](../../docs/components/cursor.mdx#L208) |
 | components/dialog | Container modality | section | var(--tp-space-5) | layout spacing — minimize | [docs/components/dialog.mdx:82](../../docs/components/dialog.mdx#L82) |
-| components/image | Reveal timing and repeat | div | var(--tp-space-4) | layout spacing — minimize | [docs/components/image.mdx:132](../../docs/components/image.mdx#L132) |
-| components/image | Parallax in a scroller | div | var(--tp-space-4) | layout spacing — minimize | [docs/components/image.mdx:178](../../docs/components/image.mdx#L178) |
-| components/image | Scroll zoom in a vertical scroller | div | var(--tp-space-4) | layout spacing — minimize | [docs/components/image.mdx:190](../../docs/components/image.mdx#L190) |
-| components/image | Horizontal strip | div | var(--tp-space-4) | layout spacing — minimize | [docs/components/image.mdx:251](../../docs/components/image.mdx#L251) |
-| components/image | Smoothing | div | var(--tp-space-4) | layout spacing — minimize | [docs/components/image.mdx:264](../../docs/components/image.mdx#L264) |
-| components/input-group | Native textarea | textarea | var(--tp-space-2) | layout spacing — minimize | [docs/components/input-group.mdx:255](../../docs/components/input-group.mdx#L255) |
-| components/markdown | With a table of contents | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/markdown.mdx:234](../../docs/components/markdown.mdx#L234) |
-| components/media-player | Custom top region | tp-stack | var(--tp-space-4) | component spacing — review required | [docs/components/media-player.mdx:122](../../docs/components/media-player.mdx#L122) |
+| components/image | Reveal timing and repeat | div | var(--tp-space-4) | layout spacing — minimize | [docs/components/image.mdx:137](../../docs/components/image.mdx#L137) |
+| components/image | Parallax in a scroller | div | var(--tp-space-4) | layout spacing — minimize | [docs/components/image.mdx:186](../../docs/components/image.mdx#L186) |
+| components/image | Scroll zoom in a vertical scroller | div | var(--tp-space-4) | layout spacing — minimize | [docs/components/image.mdx:198](../../docs/components/image.mdx#L198) |
+| components/image | Horizontal strip | div | var(--tp-space-4) | layout spacing — minimize | [docs/components/image.mdx:259](../../docs/components/image.mdx#L259) |
+| components/image | Smoothing | div | var(--tp-space-4) | layout spacing — minimize | [docs/components/image.mdx:272](../../docs/components/image.mdx#L272) |
+| components/input-group | Native textarea | textarea | var(--tp-space-2) | layout spacing — minimize | [docs/components/input-group.mdx:252](../../docs/components/input-group.mdx#L252) |
+| components/markdown | With a table of contents | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/markdown.mdx:240](../../docs/components/markdown.mdx#L240) |
+| components/media-player | Custom top region | tp-stack | var(--tp-space-4) | component spacing — review required | [docs/components/media-player.mdx:118](../../docs/components/media-player.mdx#L118) |
 | components/overflow-list | Row limit | div | var(--tp-space-3) | layout spacing — minimize | [docs/components/overflow-list.mdx:52](../../docs/components/overflow-list.mdx#L52) |
 | components/popover | Separate anchor | tp-stack | var(--tp-space-3) var(--tp-space-4) | component spacing — review required | [docs/components/popover.mdx:120](../../docs/components/popover.mdx#L120) |
 | components/resizable-panel-group | Resizable Panel Group | div | var(--tp-space-4) | layout spacing — minimize | [docs/components/resizable-panel-group.mdx:13](../../docs/components/resizable-panel-group.mdx#L13) |
@@ -2924,8 +2039,8 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/table-of-contents | Nested sections | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/table-of-contents.mdx:87](../../docs/components/table-of-contents.mdx#L87) |
 | components/table-of-contents | Collected targets | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/table-of-contents.mdx:174](../../docs/components/table-of-contents.mdx#L174) |
 | components/table-of-contents | Compact | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/table-of-contents.mdx:238](../../docs/components/table-of-contents.mdx#L238) |
-| components/text-transform | Truncation | tp-stack | var(--tp-space-4) | component spacing — review required | [docs/components/text-transform.mdx:132](../../docs/components/text-transform.mdx#L132) |
-| components/time | Time | ul | 0 | layout spacing — minimize | [docs/components/time.mdx:12](../../docs/components/time.mdx#L12) |
+| components/text-transform | Truncation | tp-stack | var(--tp-space-4) | component spacing — review required | [docs/components/text-transform.mdx:135](../../docs/components/text-transform.mdx#L135) |
+| components/time | Time | ul | 0 | layout spacing — minimize | [docs/components/time.mdx:13](../../docs/components/time.mdx#L13) |
 | compositions/map.examples | Token theme | div | var(--tp-space-4) | layout spacing — minimize | [src/stories/map.examples.ts:246](../../src/stories/map.examples.ts#L246) |
 | components/resizable-panel-group | Components/Resizable panel group | div | var(--tp-space-6) | layout spacing — minimize | [src/stories/resizable-panel-group.stories.ts:42](../../src/stories/resizable-panel-group.stories.ts#L42) |
 | components/resizable-panel-group | Components/Resizable panel group | div | var(--tp-space-6) | layout spacing — minimize | [src/stories/resizable-panel-group.stories.ts:48](../../src/stories/resizable-panel-group.stories.ts#L48) |
@@ -2940,14 +2055,14 @@ Each row retains the target element, use-case label, exact value and source loca
 | compositions/table-of-contents.examples | Changelog | div | 1.5rem | layout spacing — minimize | [src/stories/table-of-contents.examples.ts:141](../../src/stories/table-of-contents.examples.ts#L141) |
 | components/table-of-contents | DocumentScroll | div | 2rem | layout spacing — minimize | [src/stories/table-of-contents.stories.ts:144](../../src/stories/table-of-contents.stories.ts#L144) |
 
-<a id="property-12"></a>
+<a id="property-10"></a>
 
-### 12. gap — 97 occurrences
+### 10. gap — 96 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
 | var(--tp-space-3) | 31 |
-| var(--tp-space-4) | 24 |
+| var(--tp-space-4) | 23 |
 | var(--tp-space-2) | 8 |
 | var(--tp-space-6) | 8 |
 | var(--tp-space-2) var(--tp-space-6) | 6 |
@@ -2964,20 +2079,20 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/accordion | Variants | div | var(--tp-space-6) | layout/geometry — minimize | [docs/components/accordion.mdx:36](../../docs/components/accordion.mdx#L36) |
+| components/accordion | Variants | div | var(--tp-space-6) | layout/geometry — minimize | [docs/components/accordion.mdx:37](../../docs/components/accordion.mdx#L37) |
 | components/aspect-ratio | Common ratios | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:26](../../docs/components/aspect-ratio.mdx#L26) |
-| components/aspect-ratio | Cover and contain | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:123](../../docs/components/aspect-ratio.mdx#L123) |
+| components/aspect-ratio | Cover and contain | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:124](../../docs/components/aspect-ratio.mdx#L124) |
 | components/calendar | Date with start and end times | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/calendar.mdx:225](../../docs/components/calendar.mdx#L225) |
-| components/card | Surface options | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/card.mdx:55](../../docs/components/card.mdx#L55) |
+| components/card | Surface options | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/card.mdx:61](../../docs/components/card.mdx#L61) |
+| components/carousel | Bullets inside | blockquote | var(--tp-space-3) | layout/geometry — minimize | [docs/components/carousel.mdx:101](../../docs/components/carousel.mdx#L101) |
 | components/carousel | Bullets inside | blockquote | var(--tp-space-3) | layout/geometry — minimize | [docs/components/carousel.mdx:105](../../docs/components/carousel.mdx#L105) |
 | components/carousel | Bullets inside | blockquote | var(--tp-space-3) | layout/geometry — minimize | [docs/components/carousel.mdx:109](../../docs/components/carousel.mdx#L109) |
-| components/carousel | Bullets inside | blockquote | var(--tp-space-3) | layout/geometry — minimize | [docs/components/carousel.mdx:113](../../docs/components/carousel.mdx#L113) |
-| components/carousel | Autoplay | div | var(--tp-space-1) | layout/geometry — minimize | [docs/components/carousel.mdx:133](../../docs/components/carousel.mdx#L133) |
-| components/carousel | Autoplay | div | var(--tp-space-1) | layout/geometry — minimize | [docs/components/carousel.mdx:137](../../docs/components/carousel.mdx#L137) |
-| components/carousel | Autoplay | div | var(--tp-space-1) | layout/geometry — minimize | [docs/components/carousel.mdx:141](../../docs/components/carousel.mdx#L141) |
-| components/carousel | Virtual archive with controlled selection | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/carousel.mdx:613](../../docs/components/carousel.mdx#L613) |
-| components/code-block | Title slot | span | var(--tp-space-2) | layout/geometry — minimize | [docs/components/code-block.mdx:33](../../docs/components/code-block.mdx#L33) |
-| components/collapsible | Line-by-line reveal | ul | var(--tp-space-2) | layout/geometry — minimize | [docs/components/collapsible.mdx:151](../../docs/components/collapsible.mdx#L151) |
+| components/carousel | Autoplay | div | var(--tp-space-1) | layout/geometry — minimize | [docs/components/carousel.mdx:130](../../docs/components/carousel.mdx#L130) |
+| components/carousel | Autoplay | div | var(--tp-space-1) | layout/geometry — minimize | [docs/components/carousel.mdx:134](../../docs/components/carousel.mdx#L134) |
+| components/carousel | Autoplay | div | var(--tp-space-1) | layout/geometry — minimize | [docs/components/carousel.mdx:138](../../docs/components/carousel.mdx#L138) |
+| components/carousel | Virtual archive with controlled selection | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/carousel.mdx:591](../../docs/components/carousel.mdx#L591) |
+| components/code-block | Title slot | span | var(--tp-space-2) | layout/geometry — minimize | [docs/components/code-block.mdx:35](../../docs/components/code-block.mdx#L35) |
+| components/collapsible | Line-by-line reveal | ul | var(--tp-space-2) | layout/geometry — minimize | [docs/components/collapsible.mdx:155](../../docs/components/collapsible.mdx#L155) |
 | components/cursor | Cursor | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/cursor.mdx:11](../../docs/components/cursor.mdx#L11) |
 | components/cursor | Cursor | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/cursor.mdx:15](../../docs/components/cursor.mdx#L15) |
 | components/cursor | Cursor | figure | var(--tp-space-2) | layout/geometry — minimize | [docs/components/cursor.mdx:16](../../docs/components/cursor.mdx#L16) |
@@ -2987,33 +2102,32 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/cursor | Zones | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/cursor.mdx:69](../../docs/components/cursor.mdx#L69) |
 | components/cursor | Dot and ring | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/cursor.mdx:134](../../docs/components/cursor.mdx#L134) |
 | components/cursor | Native passthrough | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/cursor.mdx:154](../../docs/components/cursor.mdx#L154) |
-| components/description-list | Record details | span | var(--tp-space-1) | layout/geometry — minimize | [docs/components/description-list.mdx:35](../../docs/components/description-list.mdx#L35) |
+| components/description-list | Record details | span | var(--tp-space-1) | layout/geometry — minimize | [docs/components/description-list.mdx:39](../../docs/components/description-list.mdx#L39) |
 | components/dialog | Non-modal | dl | var(--tp-space-2) var(--tp-space-6) | layout/geometry — minimize | [docs/components/dialog.mdx:55](../../docs/components/dialog.mdx#L55) |
 | components/dialog | Container modality | section | var(--tp-space-3) | layout/geometry — minimize | [docs/components/dialog.mdx:82](../../docs/components/dialog.mdx#L82) |
-| components/drag-drop-list | Variants and sizes | div | var(--tp-space-6) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:67](../../docs/components/drag-drop-list.mdx#L67) |
-| components/drag-drop-list | Board lanes | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:186](../../docs/components/drag-drop-list.mdx#L186) |
-| components/drag-drop-list | Controlled lanes | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:246](../../docs/components/drag-drop-list.mdx#L246) |
-| components/drag-drop-list | Approve before committing | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:313](../../docs/components/drag-drop-list.mdx#L313) |
+| components/drag-drop-list | Variants and sizes | div | var(--tp-space-6) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:68](../../docs/components/drag-drop-list.mdx#L68) |
+| components/drag-drop-list | Board lanes | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:187](../../docs/components/drag-drop-list.mdx#L187) |
+| components/drag-drop-list | Controlled lanes | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:243](../../docs/components/drag-drop-list.mdx#L243) |
+| components/drag-drop-list | Approve before committing | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:307](../../docs/components/drag-drop-list.mdx#L307) |
 | components/empty-state | Media treatments | div | var(--tp-space-6) | layout/geometry — minimize | [docs/components/empty-state.mdx:45](../../docs/components/empty-state.mdx#L45) |
-| components/empty-state | Bordered and filled | div | var(--tp-space-6) | layout/geometry — minimize | [docs/components/empty-state.mdx:107](../../docs/components/empty-state.mdx#L107) |
+| components/empty-state | Bordered and filled | div | var(--tp-space-6) | layout/geometry — minimize | [docs/components/empty-state.mdx:108](../../docs/components/empty-state.mdx#L108) |
 | components/icon | Decorative and labelled | span | var(--tp-space-2) | layout/geometry — minimize | [docs/components/icon.mdx:51](../../docs/components/icon.mdx#L51) |
 | components/image | Ratio and fit | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:36](../../docs/components/image.mdx#L36) |
-| components/image | Fallbacks | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:56](../../docs/components/image.mdx#L56) |
-| components/image | Loading placeholders | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:69](../../docs/components/image.mdx#L69) |
-| components/image | Hover zoom | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:86](../../docs/components/image.mdx#L86) |
-| components/image | Staggered group | tp-image-group | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:119](../../docs/components/image.mdx#L119) |
-| components/image | Reveal timing and repeat | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:133](../../docs/components/image.mdx#L133) |
-| components/image | Reveal timing and repeat | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:139](../../docs/components/image.mdx#L139) |
-| components/image | Headline, group and caption | tp-scroll-trigger | var(--tp-space-4) | layout/geometry — minimize | [docs/components/image.mdx:154](../../docs/components/image.mdx#L154) |
-| components/image | Headline, group and caption | tp-image-group | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:156](../../docs/components/image.mdx#L156) |
-| components/image | Parallax in a scroller | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/image.mdx:178](../../docs/components/image.mdx#L178) |
-| components/image | Scroll zoom in a vertical scroller | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/image.mdx:190](../../docs/components/image.mdx#L190) |
-| components/image | Horizontal strip | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/image.mdx:251](../../docs/components/image.mdx#L251) |
-| components/image | Smoothing | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/image.mdx:264](../../docs/components/image.mdx#L264) |
-| components/label | By id and by nesting | tp-label | var(--tp-space-3) | layout/geometry — minimize | [docs/components/label.mdx:32](../../docs/components/label.mdx#L32) |
-| components/list | Recordings | span | inherit | layout/geometry — minimize | [docs/components/list.mdx:248](../../docs/components/list.mdx#L248) |
-| components/list | People and invitations | span | inherit | layout/geometry — minimize | [docs/components/list.mdx:344](../../docs/components/list.mdx#L344) |
-| components/markdown | With a table of contents | div | var(--tp-space-8) | layout/geometry — minimize | [docs/components/markdown.mdx:234](../../docs/components/markdown.mdx#L234) |
+| components/image | Fallbacks | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:57](../../docs/components/image.mdx#L57) |
+| components/image | Loading placeholders | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:71](../../docs/components/image.mdx#L71) |
+| components/image | Hover zoom | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:89](../../docs/components/image.mdx#L89) |
+| components/image | Staggered group | tp-image-group | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:124](../../docs/components/image.mdx#L124) |
+| components/image | Reveal timing and repeat | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:138](../../docs/components/image.mdx#L138) |
+| components/image | Reveal timing and repeat | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:144](../../docs/components/image.mdx#L144) |
+| components/image | Headline, group and caption | tp-image-group | var(--tp-space-3) | layout/geometry — minimize | [docs/components/image.mdx:163](../../docs/components/image.mdx#L163) |
+| components/image | Parallax in a scroller | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/image.mdx:186](../../docs/components/image.mdx#L186) |
+| components/image | Scroll zoom in a vertical scroller | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/image.mdx:198](../../docs/components/image.mdx#L198) |
+| components/image | Horizontal strip | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/image.mdx:259](../../docs/components/image.mdx#L259) |
+| components/image | Smoothing | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/image.mdx:272](../../docs/components/image.mdx#L272) |
+| components/label | By id and by nesting | tp-label | var(--tp-space-3) | layout/geometry — minimize | [docs/components/label.mdx:34](../../docs/components/label.mdx#L34) |
+| components/list | Recordings | span | inherit | layout/geometry — minimize | [docs/components/list.mdx:253](../../docs/components/list.mdx#L253) |
+| components/list | People and invitations | span | inherit | layout/geometry — minimize | [docs/components/list.mdx:347](../../docs/components/list.mdx#L347) |
+| components/markdown | With a table of contents | div | var(--tp-space-8) | layout/geometry — minimize | [docs/components/markdown.mdx:240](../../docs/components/markdown.mdx#L240) |
 | components/message-scroller | Outline and edges | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/message-scroller.mdx:316](../../docs/components/message-scroller.mdx#L316) |
 | components/navigation-menu | Navigation menu | div | var(--tp-space-1) | layout/geometry — minimize | [docs/components/navigation-menu.mdx:15](../../docs/components/navigation-menu.mdx#L15) |
 | components/popover | Popover | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/popover.mdx:13](../../docs/components/popover.mdx#L13) |
@@ -3021,30 +2135,30 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/preview-card | Preview Card | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/preview-card.mdx:13](../../docs/components/preview-card.mdx#L13) |
 | components/resizable-panel-group | Resizable Panel Group | div | var(--tp-space-2) | layout/geometry — minimize | [docs/components/resizable-panel-group.mdx:13](../../docs/components/resizable-panel-group.mdx#L13) |
 | components/resizable-panel-group | Resizable Panel Group | div | var(--tp-space-2) | layout/geometry — minimize | [docs/components/resizable-panel-group.mdx:24](../../docs/components/resizable-panel-group.mdx#L24) |
-| components/scroll-trigger | Scroll Trigger | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:15](../../docs/components/scroll-trigger.mdx#L15) |
-| components/scroll-trigger | From the center | tp-scroll-trigger | var(--tp-space-4) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:42](../../docs/components/scroll-trigger.mdx#L42) |
-| components/scroll-trigger | Scrubbed band | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:106](../../docs/components/scroll-trigger.mdx#L106) |
-| components/scroll-trigger | Custom scroll range | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:158](../../docs/components/scroll-trigger.mdx#L158) |
-| components/scroll-trigger | Custom scroll range | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:181](../../docs/components/scroll-trigger.mdx#L181) |
-| components/scroll-trigger | Pinned scene | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:204](../../docs/components/scroll-trigger.mdx#L204) |
-| components/scroll-trigger | Pinned scene | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:211](../../docs/components/scroll-trigger.mdx#L211) |
-| components/scroll-trigger | Pinned scene | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:219](../../docs/components/scroll-trigger.mdx#L219) |
-| components/slider | Compact readout | div | var(--tp-space-3) var(--tp-space-4) | layout/geometry — minimize | [docs/components/slider.mdx:203](../../docs/components/slider.mdx#L203) |
+| components/scroll-trigger | Scroll Trigger | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:16](../../docs/components/scroll-trigger.mdx#L16) |
+| components/scroll-trigger | From the center | tp-scroll-trigger | var(--tp-space-4) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:44](../../docs/components/scroll-trigger.mdx#L44) |
+| components/scroll-trigger | Scrubbed band | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:108](../../docs/components/scroll-trigger.mdx#L108) |
+| components/scroll-trigger | Custom scroll range | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:160](../../docs/components/scroll-trigger.mdx#L160) |
+| components/scroll-trigger | Custom scroll range | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:183](../../docs/components/scroll-trigger.mdx#L183) |
+| components/scroll-trigger | Pinned scene | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:206](../../docs/components/scroll-trigger.mdx#L206) |
+| components/scroll-trigger | Pinned scene | div | var(--tp-space-4) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:213](../../docs/components/scroll-trigger.mdx#L213) |
+| components/scroll-trigger | Pinned scene | div | var(--tp-space-3) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:221](../../docs/components/scroll-trigger.mdx#L221) |
+| components/slider | Compact readout | div | var(--tp-space-3) var(--tp-space-4) | layout/geometry — minimize | [docs/components/slider.mdx:202](../../docs/components/slider.mdx#L202) |
 | components/table-of-contents | Table of contents | div | var(--tp-space-8) | layout/geometry — minimize | [docs/components/table-of-contents.mdx:12](../../docs/components/table-of-contents.mdx#L12) |
 | components/table-of-contents | Nested sections | div | var(--tp-space-8) | layout/geometry — minimize | [docs/components/table-of-contents.mdx:87](../../docs/components/table-of-contents.mdx#L87) |
 | components/table-of-contents | Collected targets | div | var(--tp-space-8) | layout/geometry — minimize | [docs/components/table-of-contents.mdx:174](../../docs/components/table-of-contents.mdx#L174) |
 | components/table-of-contents | Compact | div | var(--tp-space-6) | layout/geometry — minimize | [docs/components/table-of-contents.mdx:238](../../docs/components/table-of-contents.mdx#L238) |
-| components/text-transform | Text transform | dl | var(--tp-space-3) var(--tp-space-6) | layout/geometry — minimize | [docs/components/text-transform.mdx:10](../../docs/components/text-transform.mdx#L10) |
-| components/text-transform | Case and identifiers | dl | var(--tp-space-2) var(--tp-space-6) | layout/geometry — minimize | [docs/components/text-transform.mdx:34](../../docs/components/text-transform.mdx#L34) |
-| components/time | Time | ul | var(--tp-space-3) | layout/geometry — minimize | [docs/components/time.mdx:12](../../docs/components/time.mdx#L12) |
-| components/time | Modes | dl | var(--tp-space-2) var(--tp-space-6) | layout/geometry — minimize | [docs/components/time.mdx:63](../../docs/components/time.mdx#L63) |
-| components/time | Calendar | dl | var(--tp-space-2) var(--tp-space-6) | layout/geometry — minimize | [docs/components/time.mdx:154](../../docs/components/time.mdx#L154) |
-| components/time | Precisions | dl | var(--tp-space-2) var(--tp-space-6) | layout/geometry — minimize | [docs/components/time.mdx:194](../../docs/components/time.mdx#L194) |
-| components/time | Timers | dl | var(--tp-space-2) var(--tp-space-6) | layout/geometry — minimize | [docs/components/time.mdx:209](../../docs/components/time.mdx#L209) |
-| motion/surface/glow-border | Comets | div | var(--tp-space-6) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:56](../../docs/motion/surface/glow-border.mdx#L56) |
-| motion/surface/glow-border | Sweep, pulse and glint | div | var(--tp-space-6) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:79](../../docs/motion/surface/glow-border.mdx#L79) |
-| motion/surface/glow-border | Custom colors | div | var(--tp-space-6) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:137](../../docs/motion/surface/glow-border.mdx#L137) |
-| motion/surface/glow-border | Lit by an element | div | var(--tp-space-4) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:162](../../docs/motion/surface/glow-border.mdx#L162) |
+| components/text-transform | Text transform | dl | var(--tp-space-3) var(--tp-space-6) | layout/geometry — minimize | [docs/components/text-transform.mdx:11](../../docs/components/text-transform.mdx#L11) |
+| components/text-transform | Case and identifiers | dl | var(--tp-space-2) var(--tp-space-6) | layout/geometry — minimize | [docs/components/text-transform.mdx:35](../../docs/components/text-transform.mdx#L35) |
+| components/time | Time | ul | var(--tp-space-3) | layout/geometry — minimize | [docs/components/time.mdx:13](../../docs/components/time.mdx#L13) |
+| components/time | Modes | dl | var(--tp-space-2) var(--tp-space-6) | layout/geometry — minimize | [docs/components/time.mdx:55](../../docs/components/time.mdx#L55) |
+| components/time | Calendar | dl | var(--tp-space-2) var(--tp-space-6) | layout/geometry — minimize | [docs/components/time.mdx:147](../../docs/components/time.mdx#L147) |
+| components/time | Precisions | dl | var(--tp-space-2) var(--tp-space-6) | layout/geometry — minimize | [docs/components/time.mdx:187](../../docs/components/time.mdx#L187) |
+| components/time | Timers | dl | var(--tp-space-2) var(--tp-space-6) | layout/geometry — minimize | [docs/components/time.mdx:202](../../docs/components/time.mdx#L202) |
+| motion/surface/glow-border | Comets | div | var(--tp-space-6) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:58](../../docs/motion/surface/glow-border.mdx#L58) |
+| motion/surface/glow-border | Sweep, pulse and glint | div | var(--tp-space-6) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:81](../../docs/motion/surface/glow-border.mdx#L81) |
+| motion/surface/glow-border | Custom colors | div | var(--tp-space-6) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:139](../../docs/motion/surface/glow-border.mdx#L139) |
+| motion/surface/glow-border | Lit by an element | div | var(--tp-space-4) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:164](../../docs/motion/surface/glow-border.mdx#L164) |
 | motion/surface/segment-border | Traced in | div | var(--tp-space-4) | layout/geometry — minimize | [docs/motion/surface/segment-border.mdx:121](../../docs/motion/surface/segment-border.mdx#L121) |
 | motion/text/text-mirror | Hide and reveal | div | var(--tp-space-5) | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:58](../../docs/motion/text/text-mirror.mdx#L58) |
 | motion/text/text-mirror | Scrubbed by the scroll | div | var(--tp-space-3) | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:96](../../docs/motion/text/text-mirror.mdx#L96) |
@@ -3062,9 +2176,9 @@ Each row retains the target element, use-case label, exact value and source loca
 | compositions/table-of-contents.examples | Changelog | aside | 0.75rem | layout/geometry — minimize | [src/stories/table-of-contents.examples.ts:148](../../src/stories/table-of-contents.examples.ts#L148) |
 | components/table-of-contents | DocumentScroll | div | 3rem | layout/geometry — minimize | [src/stories/table-of-contents.stories.ts:144](../../src/stories/table-of-contents.stories.ts#L144) |
 
-<a id="property-13"></a>
+<a id="property-11"></a>
 
-### 13. background — 58 occurrences
+### 11. background — 58 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -3093,45 +2207,45 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/aspect-ratio | One ratio, three widths | tp-aspect-ratio | var(--tp-muted) | component presentation override — review required | [docs/components/aspect-ratio.mdx:51](../../docs/components/aspect-ratio.mdx#L51) |
 | components/aspect-ratio | One ratio, three widths | tp-aspect-ratio | var(--tp-muted) | component presentation override — review required | [docs/components/aspect-ratio.mdx:73](../../docs/components/aspect-ratio.mdx#L73) |
 | components/aspect-ratio | One ratio, three widths | tp-aspect-ratio | var(--tp-muted) | component presentation override — review required | [docs/components/aspect-ratio.mdx:95](../../docs/components/aspect-ratio.mdx#L95) |
-| components/aspect-ratio | Cover and contain | tp-aspect-ratio | var(--tp-muted) | component presentation override — review required | [docs/components/aspect-ratio.mdx:124](../../docs/components/aspect-ratio.mdx#L124) |
-| components/aspect-ratio | Cover and contain | tp-aspect-ratio | var(--tp-muted) | component presentation override — review required | [docs/components/aspect-ratio.mdx:127](../../docs/components/aspect-ratio.mdx#L127) |
-| components/attachment | Image cards | div | var(--tp-muted) url(https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80) center/cover | content appearance — review required | [docs/components/attachment.mdx:94](../../docs/components/attachment.mdx#L94) |
-| components/attachment | Image cards | div | var(--tp-muted) url(https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&q=80) center/cover | content appearance — review required | [docs/components/attachment.mdx:97](../../docs/components/attachment.mdx#L97) |
-| components/attachment | Image cards | div | var(--tp-muted) url(https://images.unsplash.com/photo-1497215842964-222b430dc094?w=400&q=80) center/cover | content appearance — review required | [docs/components/attachment.mdx:100](../../docs/components/attachment.mdx#L100) |
-| components/attachment | Image cards | div | var(--tp-muted) url(https://images.unsplash.com/photo-1556911220-bff31c812dba?w=400&q=80) center/cover | content appearance — review required | [docs/components/attachment.mdx:103](../../docs/components/attachment.mdx#L103) |
-| components/attachment | Scrollable groups | div | var(--tp-muted)<br>            url(https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80)<br>            center/cover | content appearance — review required | [docs/components/attachment.mdx:197](../../docs/components/attachment.mdx#L197) |
-| components/attachment | Scrollable groups | div | var(--tp-muted)<br>            url(https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&q=80)<br>            center/cover | content appearance — review required | [docs/components/attachment.mdx:261](../../docs/components/attachment.mdx#L261) |
-| components/carousel | Carousel | tp-stack | var(--tp-muted) | component presentation override — review required | [docs/components/carousel.mdx:12](../../docs/components/carousel.mdx#L12) |
-| components/carousel | Carousel | tp-stack | var(--tp-muted) | component presentation override — review required | [docs/components/carousel.mdx:27](../../docs/components/carousel.mdx#L27) |
-| components/carousel | Carousel | tp-stack | var(--tp-muted) | component presentation override — review required | [docs/components/carousel.mdx:42](../../docs/components/carousel.mdx#L42) |
-| components/carousel | Carousel | tp-stack | var(--tp-muted) | component presentation override — review required | [docs/components/carousel.mdx:55](../../docs/components/carousel.mdx#L55) |
+| components/aspect-ratio | Cover and contain | tp-aspect-ratio | var(--tp-muted) | component presentation override — review required | [docs/components/aspect-ratio.mdx:125](../../docs/components/aspect-ratio.mdx#L125) |
+| components/aspect-ratio | Cover and contain | tp-aspect-ratio | var(--tp-muted) | component presentation override — review required | [docs/components/aspect-ratio.mdx:128](../../docs/components/aspect-ratio.mdx#L128) |
+| components/attachment | Image cards | div | var(--tp-muted) url(https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80) center/cover | content appearance — review required | [docs/components/attachment.mdx:89](../../docs/components/attachment.mdx#L89) |
+| components/attachment | Image cards | div | var(--tp-muted) url(https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&q=80) center/cover | content appearance — review required | [docs/components/attachment.mdx:92](../../docs/components/attachment.mdx#L92) |
+| components/attachment | Image cards | div | var(--tp-muted) url(https://images.unsplash.com/photo-1497215842964-222b430dc094?w=400&q=80) center/cover | content appearance — review required | [docs/components/attachment.mdx:95](../../docs/components/attachment.mdx#L95) |
+| components/attachment | Image cards | div | var(--tp-muted) url(https://images.unsplash.com/photo-1556911220-bff31c812dba?w=400&q=80) center/cover | content appearance — review required | [docs/components/attachment.mdx:98](../../docs/components/attachment.mdx#L98) |
+| components/attachment | Scrollable groups | div | var(--tp-muted)<br>            url(https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80)<br>            center/cover | content appearance — review required | [docs/components/attachment.mdx:192](../../docs/components/attachment.mdx#L192) |
+| components/attachment | Scrollable groups | div | var(--tp-muted)<br>            url(https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&q=80)<br>            center/cover | content appearance — review required | [docs/components/attachment.mdx:256](../../docs/components/attachment.mdx#L256) |
+| components/carousel | Carousel | tp-stack | var(--tp-muted) | component presentation override — review required | [docs/components/carousel.mdx:13](../../docs/components/carousel.mdx#L13) |
+| components/carousel | Carousel | tp-stack | var(--tp-muted) | component presentation override — review required | [docs/components/carousel.mdx:26](../../docs/components/carousel.mdx#L26) |
+| components/carousel | Carousel | tp-stack | var(--tp-muted) | component presentation override — review required | [docs/components/carousel.mdx:39](../../docs/components/carousel.mdx#L39) |
+| components/carousel | Carousel | tp-stack | var(--tp-muted) | component presentation override — review required | [docs/components/carousel.mdx:51](../../docs/components/carousel.mdx#L51) |
+| components/carousel | Bullets inside | blockquote | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:101](../../docs/components/carousel.mdx#L101) |
 | components/carousel | Bullets inside | blockquote | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:105](../../docs/components/carousel.mdx#L105) |
 | components/carousel | Bullets inside | blockquote | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:109](../../docs/components/carousel.mdx#L109) |
-| components/carousel | Bullets inside | blockquote | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:113](../../docs/components/carousel.mdx#L113) |
-| components/carousel | Autoplay | div | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:133](../../docs/components/carousel.mdx#L133) |
-| components/carousel | Autoplay | div | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:137](../../docs/components/carousel.mdx#L137) |
-| components/carousel | Autoplay | div | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:141](../../docs/components/carousel.mdx#L141) |
-| components/carousel | Crossfade | tp-stack | var(--tp-muted) | component presentation override — review required | [docs/components/carousel.mdx:187](../../docs/components/carousel.mdx#L187) |
-| components/carousel | Crossfade | tp-stack | var(--tp-foreground) | component presentation override — review required | [docs/components/carousel.mdx:203](../../docs/components/carousel.mdx#L203) |
-| components/carousel | Crossfade | tp-stack | var(--tp-muted) | component presentation override — review required | [docs/components/carousel.mdx:220](../../docs/components/carousel.mdx#L220) |
-| components/carousel | Layered 3D | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:253](../../docs/components/carousel.mdx#L253) |
-| components/carousel | Layered 3D | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:292](../../docs/components/carousel.mdx#L292) |
-| components/carousel | Layered 3D | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:331](../../docs/components/carousel.mdx#L331) |
-| components/carousel | Parallax | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:384](../../docs/components/carousel.mdx#L384) |
-| components/carousel | Parallax | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:387](../../docs/components/carousel.mdx#L387) |
-| components/carousel | Parallax | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:390](../../docs/components/carousel.mdx#L390) |
-| components/carousel | Parallax | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:393](../../docs/components/carousel.mdx#L393) |
-| components/carousel | Focus | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:414](../../docs/components/carousel.mdx#L414) |
-| components/carousel | Focus | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:418](../../docs/components/carousel.mdx#L418) |
-| components/carousel | Focus | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:422](../../docs/components/carousel.mdx#L422) |
-| components/carousel | Focus | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:426](../../docs/components/carousel.mdx#L426) |
-| components/carousel | Focus | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:430](../../docs/components/carousel.mdx#L430) |
-| components/carousel | Shader transition | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:475](../../docs/components/carousel.mdx#L475) |
-| components/carousel | Shader transition | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:513](../../docs/components/carousel.mdx#L513) |
-| components/carousel | Shader transition | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:551](../../docs/components/carousel.mdx#L551) |
-| components/carousel | Commit | div | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:653](../../docs/components/carousel.mdx#L653) |
-| components/carousel | Commit | div | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:664](../../docs/components/carousel.mdx#L664) |
-| components/carousel | Commit | div | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:675](../../docs/components/carousel.mdx#L675) |
+| components/carousel | Autoplay | div | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:130](../../docs/components/carousel.mdx#L130) |
+| components/carousel | Autoplay | div | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:134](../../docs/components/carousel.mdx#L134) |
+| components/carousel | Autoplay | div | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:138](../../docs/components/carousel.mdx#L138) |
+| components/carousel | Crossfade | tp-stack | var(--tp-muted) | component presentation override — review required | [docs/components/carousel.mdx:184](../../docs/components/carousel.mdx#L184) |
+| components/carousel | Crossfade | tp-stack | var(--tp-foreground) | component presentation override — review required | [docs/components/carousel.mdx:198](../../docs/components/carousel.mdx#L198) |
+| components/carousel | Crossfade | tp-stack | var(--tp-muted) | component presentation override — review required | [docs/components/carousel.mdx:213](../../docs/components/carousel.mdx#L213) |
+| components/carousel | Layered 3D | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:243](../../docs/components/carousel.mdx#L243) |
+| components/carousel | Layered 3D | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:279](../../docs/components/carousel.mdx#L279) |
+| components/carousel | Layered 3D | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:315](../../docs/components/carousel.mdx#L315) |
+| components/carousel | Parallax | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:365](../../docs/components/carousel.mdx#L365) |
+| components/carousel | Parallax | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:368](../../docs/components/carousel.mdx#L368) |
+| components/carousel | Parallax | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:371](../../docs/components/carousel.mdx#L371) |
+| components/carousel | Parallax | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:374](../../docs/components/carousel.mdx#L374) |
+| components/carousel | Focus | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:396](../../docs/components/carousel.mdx#L396) |
+| components/carousel | Focus | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:400](../../docs/components/carousel.mdx#L400) |
+| components/carousel | Focus | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:404](../../docs/components/carousel.mdx#L404) |
+| components/carousel | Focus | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:408](../../docs/components/carousel.mdx#L408) |
+| components/carousel | Focus | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:412](../../docs/components/carousel.mdx#L412) |
+| components/carousel | Shader transition | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:458](../../docs/components/carousel.mdx#L458) |
+| components/carousel | Shader transition | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:494](../../docs/components/carousel.mdx#L494) |
+| components/carousel | Shader transition | figure | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:530](../../docs/components/carousel.mdx#L530) |
+| components/carousel | Commit | div | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:632](../../docs/components/carousel.mdx#L632) |
+| components/carousel | Commit | div | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:642](../../docs/components/carousel.mdx#L642) |
+| components/carousel | Commit | div | var(--tp-muted) | content appearance — review required | [docs/components/carousel.mdx:652](../../docs/components/carousel.mdx#L652) |
 | components/cursor | Cursor | span | var(--tp-foreground) | content appearance — review required | [docs/components/cursor.mdx:14](../../docs/components/cursor.mdx#L14) |
 | components/cursor | Cursor | div | linear-gradient(135deg,#e7e5e4,#a8a29e) | content appearance — review required | [docs/components/cursor.mdx:17](../../docs/components/cursor.mdx#L17) |
 | components/cursor | Cursor | div | linear-gradient(135deg,#d4d4d8,#52525b) | content appearance — review required | [docs/components/cursor.mdx:21](../../docs/components/cursor.mdx#L21) |
@@ -3141,13 +2255,13 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/cursor | Zones | div | var(--tp-muted) | content appearance — review required | [docs/components/cursor.mdx:80](../../docs/components/cursor.mdx#L80) |
 | components/cursor | Dot and ring | span | currentcolor | content appearance — review required | [docs/components/cursor.mdx:136](../../docs/components/cursor.mdx#L136) |
 | components/image | Ratio and fit | tp-image | var(--tp-muted) | component presentation override — review required | [docs/components/image.mdx:39](../../docs/components/image.mdx#L39) |
-| components/image | Fallbacks | span | var(--tp-muted) | content appearance — review required | [docs/components/image.mdx:59](../../docs/components/image.mdx#L59) |
+| components/image | Fallbacks | span | var(--tp-muted) | content appearance — review required | [docs/components/image.mdx:60](../../docs/components/image.mdx#L60) |
 | compositions/map.examples | Token theme | div | var(--tp-background) | content appearance — review required | [src/stories/map.examples.ts:246](../../src/stories/map.examples.ts#L246) |
-| compositions/presentation-primitives.examples | aspectRatioDefaults | div | var(--tp-muted) | content appearance — review required | [src/stories/presentation-primitives.examples.ts:60](../../src/stories/presentation-primitives.examples.ts#L60) |
+| compositions/presentation-primitives.examples | aspectRatioDefaults | div | var(--tp-muted) | content appearance — review required | [src/stories/presentation-primitives.examples.ts:58](../../src/stories/presentation-primitives.examples.ts#L58) |
 
-<a id="property-14"></a>
+<a id="property-12"></a>
 
-### 14. border — 58 occurrences
+### 12. border — 58 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -3159,8 +2273,8 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/checkbox | Select all | fieldset | 0 | content appearance — review required | [docs/components/checkbox.mdx:66](../../docs/components/checkbox.mdx#L66) |
-| components/checkbox | CheckboxGroupController | fieldset | 0 | content appearance — review required | [docs/components/checkbox.mdx:115](../../docs/components/checkbox.mdx#L115) |
+| components/checkbox | Select all | fieldset | 0 | content appearance — review required | [docs/components/checkbox.mdx:68](../../docs/components/checkbox.mdx#L68) |
+| components/checkbox | CheckboxGroupController | fieldset | 0 | content appearance — review required | [docs/components/checkbox.mdx:117](../../docs/components/checkbox.mdx#L117) |
 | components/cursor | Cursor | div | var(--tp-border-width) dashed var(--tp-border) | content appearance — review required | [docs/components/cursor.mdx:11](../../docs/components/cursor.mdx#L11) |
 | components/cursor | Spring | div | var(--tp-border-width) dashed var(--tp-border) | content appearance — review required | [docs/components/cursor.mdx:47](../../docs/components/cursor.mdx#L47) |
 | components/cursor | Spring | div | var(--tp-border-width) dashed var(--tp-border) | content appearance — review required | [docs/components/cursor.mdx:51](../../docs/components/cursor.mdx#L51) |
@@ -3171,11 +2285,11 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/cursor | Programmatic state | tp-stack | var(--tp-border-width) dashed var(--tp-border) | component presentation override — review required | [docs/components/cursor.mdx:174](../../docs/components/cursor.mdx#L174) |
 | components/cursor | Reduced motion | div | var(--tp-border-width) dashed var(--tp-border) | content appearance — review required | [docs/components/cursor.mdx:208](../../docs/components/cursor.mdx#L208) |
 | components/dialog | Container modality | section | var(--tp-border-width) solid var(--tp-border) | content appearance — review required | [docs/components/dialog.mdx:82](../../docs/components/dialog.mdx#L82) |
-| components/image | Reveal timing and repeat | div | 1px solid var(--tp-border) | content appearance — review required | [docs/components/image.mdx:132](../../docs/components/image.mdx#L132) |
-| components/image | Parallax in a scroller | div | 1px solid var(--tp-border) | content appearance — review required | [docs/components/image.mdx:178](../../docs/components/image.mdx#L178) |
-| components/image | Scroll zoom in a vertical scroller | div | 1px solid var(--tp-border) | content appearance — review required | [docs/components/image.mdx:190](../../docs/components/image.mdx#L190) |
-| components/image | Horizontal strip | div | 1px solid var(--tp-border) | content appearance — review required | [docs/components/image.mdx:251](../../docs/components/image.mdx#L251) |
-| components/image | Smoothing | div | 1px solid var(--tp-border) | content appearance — review required | [docs/components/image.mdx:264](../../docs/components/image.mdx#L264) |
+| components/image | Reveal timing and repeat | div | 1px solid var(--tp-border) | content appearance — review required | [docs/components/image.mdx:137](../../docs/components/image.mdx#L137) |
+| components/image | Parallax in a scroller | div | 1px solid var(--tp-border) | content appearance — review required | [docs/components/image.mdx:186](../../docs/components/image.mdx#L186) |
+| components/image | Scroll zoom in a vertical scroller | div | 1px solid var(--tp-border) | content appearance — review required | [docs/components/image.mdx:198](../../docs/components/image.mdx#L198) |
+| components/image | Horizontal strip | div | 1px solid var(--tp-border) | content appearance — review required | [docs/components/image.mdx:259](../../docs/components/image.mdx#L259) |
+| components/image | Smoothing | div | 1px solid var(--tp-border) | content appearance — review required | [docs/components/image.mdx:272](../../docs/components/image.mdx#L272) |
 | components/menu | Context invocation | div | 1px dashed var(--tp-border) | content appearance — review required | [docs/components/menu.mdx:147](../../docs/components/menu.mdx#L147) |
 | components/message-scroller | Message Scroller | tp-message-scroller | var(--tp-border-width) solid var(--tp-border) | component presentation override — review required | [docs/components/message-scroller.mdx:11](../../docs/components/message-scroller.mdx#L11) |
 | components/message-scroller | Streaming | tp-message-scroller | var(--tp-border-width) solid var(--tp-border) | component presentation override — review required | [docs/components/message-scroller.mdx:75](../../docs/components/message-scroller.mdx#L75) |
@@ -3205,11 +2319,11 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/scroll-area | Both axes | tp-scroll-area | var(--tp-border-width) solid var(--tp-border) | component presentation override — review required | [docs/components/scroll-area.mdx:86](../../docs/components/scroll-area.mdx#L86) |
 | components/scroll-area | Visibility | tp-scroll-area | var(--tp-border-width) solid var(--tp-border) | component presentation override — review required | [docs/components/scroll-area.mdx:120](../../docs/components/scroll-area.mdx#L120) |
 | components/scroll-area | Visibility | tp-scroll-area | var(--tp-border-width) solid var(--tp-border) | component presentation override — review required | [docs/components/scroll-area.mdx:139](../../docs/components/scroll-area.mdx#L139) |
-| components/scroll-trigger | Replay on entry | div | var(--tp-border-width) solid var(--tp-border) | content appearance — review required | [docs/components/scroll-trigger.mdx:58](../../docs/components/scroll-trigger.mdx#L58) |
-| components/scroll-trigger | Scrubbed band | div | var(--tp-border-width) solid var(--tp-border) | content appearance — review required | [docs/components/scroll-trigger.mdx:76](../../docs/components/scroll-trigger.mdx#L76) |
-| components/scroll-trigger | Custom scroll range | div | var(--tp-border-width) solid var(--tp-border) | content appearance — review required | [docs/components/scroll-trigger.mdx:129](../../docs/components/scroll-trigger.mdx#L129) |
-| components/scroll-trigger | Pinned scene | div | var(--tp-border-width) solid var(--tp-border) | content appearance — review required | [docs/components/scroll-trigger.mdx:203](../../docs/components/scroll-trigger.mdx#L203) |
-| components/text-transform | Truncation | tp-resizable-panel-group | var(--tp-border-width) solid var(--tp-border) | component presentation override — review required | [docs/components/text-transform.mdx:125](../../docs/components/text-transform.mdx#L125) |
+| components/scroll-trigger | Replay on entry | div | var(--tp-border-width) solid var(--tp-border) | content appearance — review required | [docs/components/scroll-trigger.mdx:60](../../docs/components/scroll-trigger.mdx#L60) |
+| components/scroll-trigger | Scrubbed band | div | var(--tp-border-width) solid var(--tp-border) | content appearance — review required | [docs/components/scroll-trigger.mdx:78](../../docs/components/scroll-trigger.mdx#L78) |
+| components/scroll-trigger | Custom scroll range | div | var(--tp-border-width) solid var(--tp-border) | content appearance — review required | [docs/components/scroll-trigger.mdx:131](../../docs/components/scroll-trigger.mdx#L131) |
+| components/scroll-trigger | Pinned scene | div | var(--tp-border-width) solid var(--tp-border) | content appearance — review required | [docs/components/scroll-trigger.mdx:205](../../docs/components/scroll-trigger.mdx#L205) |
+| components/text-transform | Truncation | tp-resizable-panel-group | var(--tp-border-width) solid var(--tp-border) | component presentation override — review required | [docs/components/text-transform.mdx:128](../../docs/components/text-transform.mdx#L128) |
 | components/tooltip | Cursor tracking | div | 1px dashed var(--tp-border) | content appearance — review required | [docs/components/tooltip.mdx:69](../../docs/components/tooltip.mdx#L69) |
 | motion/text/text-mirror | Scrubbed by the scroll | div | var(--tp-border-width) solid var(--tp-border) | content appearance — review required | [docs/motion/text/text-mirror.mdx:74](../../docs/motion/text/text-mirror.mdx#L74) |
 | motion/text/text-split | Scrubbed by the scroll | div | var(--tp-border-width) solid var(--tp-border) | content appearance — review required | [docs/motion/text/text-split.mdx:142](../../docs/motion/text/text-split.mdx#L142) |
@@ -3218,9 +2332,9 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/resizable-panel-group | Controlled | readonly | var(--tp-border-width) solid var(--tp-border) | content appearance — review required | [src/stories/resizable-panel-group.stories.ts:84](../../src/stories/resizable-panel-group.stories.ts#L84) |
 | components/resizable-panel-group | CollapsibleSidebar | tp-resizable-panel-group | var(--tp-border-width) solid var(--tp-border) | component presentation override — review required | [src/stories/resizable-panel-group.stories.ts:108](../../src/stories/resizable-panel-group.stories.ts#L108) |
 
-<a id="property-15"></a>
+<a id="property-13"></a>
 
-### 15. margin-block — 57 occurrences
+### 13. margin-block — 57 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -3233,8 +2347,8 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/bubble | Expandable message | p | var(--tp-space-2) 0 | layout/geometry — minimize | [docs/components/bubble.mdx:126](../../docs/components/bubble.mdx#L126) |
-| components/markdown | Custom node rendering | tp-stack | var(--tp-space-3) | layout/geometry — minimize | [docs/components/markdown.mdx:204](../../docs/components/markdown.mdx#L204) |
+| components/bubble | Expandable message | p | var(--tp-space-2) 0 | layout/geometry — minimize | [docs/components/bubble.mdx:129](../../docs/components/bubble.mdx#L129) |
+| components/markdown | Custom node rendering | tp-stack | var(--tp-space-3) | layout/geometry — minimize | [docs/components/markdown.mdx:210](../../docs/components/markdown.mdx#L210) |
 | components/scroll-area | Scroll Area | tp-separator | var(--tp-space-2) | layout/geometry — minimize | [docs/components/scroll-area.mdx:13](../../docs/components/scroll-area.mdx#L13) |
 | components/scroll-area | Scroll Area | tp-separator | var(--tp-space-2) | layout/geometry — minimize | [docs/components/scroll-area.mdx:15](../../docs/components/scroll-area.mdx#L15) |
 | components/scroll-area | Scroll Area | tp-separator | var(--tp-space-2) | layout/geometry — minimize | [docs/components/scroll-area.mdx:17](../../docs/components/scroll-area.mdx#L17) |
@@ -3291,9 +2405,91 @@ Each row retains the target element, use-case label, exact value and source loca
 | compositions/table-of-contents.examples | Release notes | (attribute fragment; resolve call sites) | 0 0.75rem | layout/geometry — minimize | [src/stories/table-of-contents.examples.ts:24](../../src/stories/table-of-contents.examples.ts#L24) |
 | compositions/table-of-contents.examples | Release notes | h | 0 0.75rem | layout/geometry — minimize | [src/stories/table-of-contents.examples.ts:48](../../src/stories/table-of-contents.examples.ts#L48) |
 
-<a id="property-16"></a>
+<a id="property-14"></a>
 
-### 16. font-weight — 55 occurrences
+### 14. max-inline-size — 57 occurrences
+
+| Value | Occurrences |
+| --- | ---: |
+| 100% | 20 |
+| 28rem | 9 |
+| 36rem | 8 |
+| 20rem | 3 |
+| 32rem | 3 |
+| 40rem | 3 |
+| 18rem | 2 |
+| 22rem | 2 |
+| 12rem | 1 |
+| 16rem | 1 |
+| 24rem | 1 |
+| 30rem | 1 |
+| 34rem | 1 |
+| 44rem | 1 |
+| calc(var(--tp-spacing) * 160) | 1 |
+
+| Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
+| --- | --- | --- | --- | --- | --- |
+| components/aspect-ratio | Aspect ratio | tp-aspect-ratio | 36rem | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:10](../../docs/components/aspect-ratio.mdx#L10) |
+| components/aspect-ratio | One ratio, three widths | figure | 100% | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:47](../../docs/components/aspect-ratio.mdx#L47) |
+| components/aspect-ratio | One ratio, three widths | figure | 100% | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:69](../../docs/components/aspect-ratio.mdx#L69) |
+| components/aspect-ratio | One ratio, three widths | figure | 100% | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:91](../../docs/components/aspect-ratio.mdx#L91) |
+| components/attachment | Scrollable groups | tp-stack | 30rem | layout/geometry — minimize | [docs/components/attachment.mdx:110](../../docs/components/attachment.mdx#L110) |
+| components/breadcrumb | Long trail | div | 20rem | layout/geometry — minimize | [docs/components/breadcrumb.mdx:177](../../docs/components/breadcrumb.mdx#L177) |
+| components/calendar | Quick picks | tp-card | 20rem | layout/geometry — minimize | [docs/components/calendar.mdx:175](../../docs/components/calendar.mdx#L175) |
+| components/dialog | Container modality | section | 32rem | layout/geometry — minimize | [docs/components/dialog.mdx:82](../../docs/components/dialog.mdx#L82) |
+| components/empty-state | No results | tp-input-group | 22rem | layout/geometry — minimize | [docs/components/empty-state.mdx:71](../../docs/components/empty-state.mdx#L71) |
+| components/field-group | Constraints | tp-field-group | 20rem | layout/geometry — minimize | [docs/components/field-group.mdx:213](../../docs/components/field-group.mdx#L213) |
+| components/image | Ratio and fit | div | 40rem | layout/geometry — minimize | [docs/components/image.mdx:36](../../docs/components/image.mdx#L36) |
+| components/image | Reveal timing and repeat | div | 36rem | layout/geometry — minimize | [docs/components/image.mdx:137](../../docs/components/image.mdx#L137) |
+| components/image | Parallax in a scroller | div | 36rem | layout/geometry — minimize | [docs/components/image.mdx:186](../../docs/components/image.mdx#L186) |
+| components/image | Horizontal strip | div | 40rem | layout/geometry — minimize | [docs/components/image.mdx:259](../../docs/components/image.mdx#L259) |
+| components/image | Smoothing | div | 36rem | layout/geometry — minimize | [docs/components/image.mdx:272](../../docs/components/image.mdx#L272) |
+| components/list | Card grid | tp-list | 40rem | layout/geometry — minimize | [docs/components/list.mdx:161](../../docs/components/list.mdx#L161) |
+| components/menu | Context invocation | div | 100% | layout/geometry — minimize | [docs/components/menu.mdx:147](../../docs/components/menu.mdx#L147) |
+| components/message-scroller | Message Scroller | tp-message-scroller | 28rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:11](../../docs/components/message-scroller.mdx#L11) |
+| components/message-scroller | Streaming | tp-stack | 28rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:71](../../docs/components/message-scroller.mdx#L71) |
+| components/message-scroller | Join marker as anchor | tp-stack | 28rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:167](../../docs/components/message-scroller.mdx#L167) |
+| components/message-scroller | Commands | tp-stack | 28rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:243](../../docs/components/message-scroller.mdx#L243) |
+| components/message-scroller | Outline and edges | div | 36rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:316](../../docs/components/message-scroller.mdx#L316) |
+| components/message-scroller | Prepend history | tp-stack | 28rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:423](../../docs/components/message-scroller.mdx#L423) |
+| components/message-scroller | Animated send | tp-stack | 28rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:502](../../docs/components/message-scroller.mdx#L502) |
+| components/message-scroller | Open at the start | tp-message-scroller | 28rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:560](../../docs/components/message-scroller.mdx#L560) |
+| components/overflow-list | Row limit | tp-resizable-panel-group | 36rem | layout/geometry — minimize | [docs/components/overflow-list.mdx:50](../../docs/components/overflow-list.mdx#L50) |
+| components/overflow-list | In a table | div | 34rem | layout/geometry — minimize | [docs/components/overflow-list.mdx:86](../../docs/components/overflow-list.mdx#L86) |
+| components/overflow-list | Custom count | div | 22rem | layout/geometry — minimize | [docs/components/overflow-list.mdx:140](../../docs/components/overflow-list.mdx#L140) |
+| components/preview-card | Preview Card | div | 18rem | layout/geometry — minimize | [docs/components/preview-card.mdx:13](../../docs/components/preview-card.mdx#L13) |
+| components/preview-card | Delays | tp-stack | 18rem | layout/geometry — minimize | [docs/components/preview-card.mdx:44](../../docs/components/preview-card.mdx#L44) |
+| components/preview-card | Placement and arrow | tp-stack | 16rem | layout/geometry — minimize | [docs/components/preview-card.mdx:64](../../docs/components/preview-card.mdx#L64) |
+| components/scroll-area | Scroll Area | tp-scroll-area | 100% | layout/geometry — minimize | [docs/components/scroll-area.mdx:9](../../docs/components/scroll-area.mdx#L9) |
+| components/scroll-area | Horizontal | tp-scroll-area | 32rem | layout/geometry — minimize | [docs/components/scroll-area.mdx:53](../../docs/components/scroll-area.mdx#L53) |
+| components/scroll-area | Both axes | tp-scroll-area | 28rem | layout/geometry — minimize | [docs/components/scroll-area.mdx:86](../../docs/components/scroll-area.mdx#L86) |
+| components/scroll-area | Edge fade | tp-scroll-area | 100% | layout/geometry — minimize | [docs/components/scroll-area.mdx:169](../../docs/components/scroll-area.mdx#L169) |
+| components/select | Chips | tp-field | 24rem | layout/geometry — minimize | [docs/components/select.mdx:143](../../docs/components/select.mdx#L143) |
+| components/text-transform | Text transform | dd | 12rem | layout/geometry — minimize | [docs/components/text-transform.mdx:21](../../docs/components/text-transform.mdx#L21) |
+| components/timeline | Roadmap | tp-scroll-area | 44rem | layout/geometry — minimize | [docs/components/timeline.mdx:61](../../docs/components/timeline.mdx#L61) |
+| components/tooltip | Cursor tracking | div | 100% | layout/geometry — minimize | [docs/components/tooltip.mdx:69](../../docs/components/tooltip.mdx#L69) |
+| motion/text/text-mirror | Text mirror | p | 100% | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:9](../../docs/motion/text/text-mirror.mdx#L9) |
+| motion/text/text-mirror | From the center line | p | 28rem | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:28](../../docs/motion/text/text-mirror.mdx#L28) |
+| motion/text/text-mirror | Vertical seam | p | 32rem | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:41](../../docs/motion/text/text-mirror.mdx#L41) |
+| motion/text/text-mirror | Hide and reveal | p | 36rem | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:59](../../docs/motion/text/text-mirror.mdx#L59) |
+| motion/text/text-split | Text split | p | 100% | layout/geometry — minimize | [docs/motion/text/text-split.mdx:9](../../docs/motion/text/text-split.mdx#L9) |
+| motion/text/text-split | Inline formatting | p | 100% | layout/geometry — minimize | [docs/motion/text/text-split.mdx:127](../../docs/motion/text/text-split.mdx#L127) |
+| widgets/easing-editor | Easing editor | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:9](../../docs/widgets/easing-editor.mdx#L9) |
+| widgets/easing-editor | Spring and custom points | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:23](../../docs/widgets/easing-editor.mdx#L23) |
+| widgets/easing-editor | Spring and custom points | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:24](../../docs/widgets/easing-editor.mdx#L24) |
+| widgets/easing-editor | Rotation preview | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:71](../../docs/widgets/easing-editor.mdx#L71) |
+| widgets/easing-editor | Design system presets | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:84](../../docs/widgets/easing-editor.mdx#L84) |
+| widgets/easing-editor | Export for code | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:114](../../docs/widgets/easing-editor.mdx#L114) |
+| widgets/easing-editor | Commit and veto | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:140](../../docs/widgets/easing-editor.mdx#L140) |
+| widgets/easing-editor | Controlled owner | tp-easing-editor | 100% | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:164](../../docs/widgets/easing-editor.mdx#L164) |
+| components/scroll-area | Components/Scroll area | tp-scroll-area | 100% | layout/geometry — minimize | [src/stories/scroll-area.stories.ts:46](../../src/stories/scroll-area.stories.ts#L46) |
+| compositions/table.examples | tableDefaults | tp-table | calc(var(--tp-spacing) * 160) | layout/geometry — minimize | [src/stories/table.examples.ts:226](../../src/stories/table.examples.ts#L226) |
+| motion/text/text-mirror | Motion/Text/Text mirror | p | 100% | layout/geometry — minimize | [src/stories/text-mirror.stories.ts:55](../../src/stories/text-mirror.stories.ts#L55) |
+| motion/text/text-split | Motion/Text/Text split | h2 | 36rem | layout/geometry — minimize | [src/stories/text-split.stories.ts:75](../../src/stories/text-split.stories.ts#L75) |
+
+<a id="property-15"></a>
+
+### 15. font-weight — 55 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -3309,22 +2505,22 @@ Each row retains the target element, use-case label, exact value and source loca
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
 | components/avatar | Decorative avatar | div | var(--tp-font-medium) | content appearance — review required | [docs/components/avatar.mdx:161](../../docs/components/avatar.mdx#L161) |
-| components/card | Small | p | var(--tp-font-semibold) | content appearance — review required | [docs/components/card.mdx:97](../../docs/components/card.mdx#L97) |
-| components/carousel | Focus | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:416](../../docs/components/carousel.mdx#L416) |
-| components/carousel | Focus | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:420](../../docs/components/carousel.mdx#L420) |
-| components/carousel | Focus | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:424](../../docs/components/carousel.mdx#L424) |
-| components/carousel | Focus | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:428](../../docs/components/carousel.mdx#L428) |
-| components/carousel | Focus | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:432](../../docs/components/carousel.mdx#L432) |
-| components/carousel | Shader transition | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:499](../../docs/components/carousel.mdx#L499) |
-| components/carousel | Shader transition | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:537](../../docs/components/carousel.mdx#L537) |
-| components/carousel | Shader transition | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:575](../../docs/components/carousel.mdx#L575) |
-| components/checkbox | Select all | legend | var(--tp-font-medium) | content appearance — review required | [docs/components/checkbox.mdx:68](../../docs/components/checkbox.mdx#L68) |
-| components/checkbox | CheckboxGroupController | legend | var(--tp-font-medium) | content appearance — review required | [docs/components/checkbox.mdx:117](../../docs/components/checkbox.mdx#L117) |
+| components/card | Small | p | var(--tp-font-semibold) | content appearance — review required | [docs/components/card.mdx:107](../../docs/components/card.mdx#L107) |
+| components/carousel | Focus | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:398](../../docs/components/carousel.mdx#L398) |
+| components/carousel | Focus | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:402](../../docs/components/carousel.mdx#L402) |
+| components/carousel | Focus | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:406](../../docs/components/carousel.mdx#L406) |
+| components/carousel | Focus | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:410](../../docs/components/carousel.mdx#L410) |
+| components/carousel | Focus | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:414](../../docs/components/carousel.mdx#L414) |
+| components/carousel | Shader transition | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:481](../../docs/components/carousel.mdx#L481) |
+| components/carousel | Shader transition | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:517](../../docs/components/carousel.mdx#L517) |
+| components/carousel | Shader transition | figcaption | var(--tp-font-semibold) | content appearance — review required | [docs/components/carousel.mdx:553](../../docs/components/carousel.mdx#L553) |
+| components/checkbox | Select all | legend | var(--tp-font-medium) | content appearance — review required | [docs/components/checkbox.mdx:70](../../docs/components/checkbox.mdx#L70) |
+| components/checkbox | CheckboxGroupController | legend | var(--tp-font-medium) | content appearance — review required | [docs/components/checkbox.mdx:119](../../docs/components/checkbox.mdx#L119) |
 | components/cursor | Cursor | span | 500 | content appearance — review required | [docs/components/cursor.mdx:14](../../docs/components/cursor.mdx#L14) |
 | components/cursor | Zones | span | 500 | content appearance — review required | [docs/components/cursor.mdx:72](../../docs/components/cursor.mdx#L72) |
-| components/field | Slots | span | normal | content appearance — review required | [docs/components/field.mdx:87](../../docs/components/field.mdx#L87) |
-| components/list | People and invitations | span | var(--tp-font-normal) | content appearance — review required | [docs/components/list.mdx:347](../../docs/components/list.mdx#L347) |
-| components/media-player | Custom top region | span | 500 | content appearance — review required | [docs/components/media-player.mdx:128](../../docs/components/media-player.mdx#L128) |
+| components/field | Slots | span | normal | content appearance — review required | [docs/components/field.mdx:90](../../docs/components/field.mdx#L90) |
+| components/list | People and invitations | span | var(--tp-font-normal) | content appearance — review required | [docs/components/list.mdx:350](../../docs/components/list.mdx#L350) |
+| components/media-player | Custom top region | span | 500 | content appearance — review required | [docs/components/media-player.mdx:123](../../docs/components/media-player.mdx#L123) |
 | components/scroll-area | Scroll Area | h4 | var(--tp-font-medium) | content appearance — review required | [docs/components/scroll-area.mdx:11](../../docs/components/scroll-area.mdx#L11) |
 | components/scroll-area | Both axes | th | var(--tp-font-medium) | content appearance — review required | [docs/components/scroll-area.mdx:90](../../docs/components/scroll-area.mdx#L90) |
 | components/scroll-area | Both axes | th | var(--tp-font-medium) | content appearance — review required | [docs/components/scroll-area.mdx:91](../../docs/components/scroll-area.mdx#L91) |
@@ -3332,15 +2528,15 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/scroll-area | Both axes | th | var(--tp-font-medium) | content appearance — review required | [docs/components/scroll-area.mdx:93](../../docs/components/scroll-area.mdx#L93) |
 | components/scroll-area | Both axes | th | var(--tp-font-medium) | content appearance — review required | [docs/components/scroll-area.mdx:94](../../docs/components/scroll-area.mdx#L94) |
 | components/scroll-area | Both axes | th | var(--tp-font-medium) | content appearance — review required | [docs/components/scroll-area.mdx:95](../../docs/components/scroll-area.mdx#L95) |
-| components/scroll-trigger | From the center | p | var(--tp-font-semibold) | content appearance — review required | [docs/components/scroll-trigger.mdx:43](../../docs/components/scroll-trigger.mdx#L43) |
-| components/scroll-trigger | From the center | p | var(--tp-font-semibold) | content appearance — review required | [docs/components/scroll-trigger.mdx:44](../../docs/components/scroll-trigger.mdx#L44) |
 | components/scroll-trigger | From the center | p | var(--tp-font-semibold) | content appearance — review required | [docs/components/scroll-trigger.mdx:45](../../docs/components/scroll-trigger.mdx#L45) |
 | components/scroll-trigger | From the center | p | var(--tp-font-semibold) | content appearance — review required | [docs/components/scroll-trigger.mdx:46](../../docs/components/scroll-trigger.mdx#L46) |
 | components/scroll-trigger | From the center | p | var(--tp-font-semibold) | content appearance — review required | [docs/components/scroll-trigger.mdx:47](../../docs/components/scroll-trigger.mdx#L47) |
-| components/scroll-trigger | Replay on entry | p | var(--tp-font-semibold) | content appearance — review required | [docs/components/scroll-trigger.mdx:61](../../docs/components/scroll-trigger.mdx#L61) |
-| components/scroll-trigger | Reveal events | p | var(--tp-font-semibold) | content appearance — review required | [docs/components/scroll-trigger.mdx:238](../../docs/components/scroll-trigger.mdx#L238) |
-| motion/surface/glow-border | Custom colors | p | var(--tp-font-semibold) | content appearance — review required | [docs/motion/surface/glow-border.mdx:143](../../docs/motion/surface/glow-border.mdx#L143) |
-| motion/surface/glow-border | Custom colors | span | var(--tp-font-normal) | content appearance — review required | [docs/motion/surface/glow-border.mdx:143](../../docs/motion/surface/glow-border.mdx#L143) |
+| components/scroll-trigger | From the center | p | var(--tp-font-semibold) | content appearance — review required | [docs/components/scroll-trigger.mdx:48](../../docs/components/scroll-trigger.mdx#L48) |
+| components/scroll-trigger | From the center | p | var(--tp-font-semibold) | content appearance — review required | [docs/components/scroll-trigger.mdx:49](../../docs/components/scroll-trigger.mdx#L49) |
+| components/scroll-trigger | Replay on entry | p | var(--tp-font-semibold) | content appearance — review required | [docs/components/scroll-trigger.mdx:63](../../docs/components/scroll-trigger.mdx#L63) |
+| components/scroll-trigger | Reveal events | p | var(--tp-font-semibold) | content appearance — review required | [docs/components/scroll-trigger.mdx:241](../../docs/components/scroll-trigger.mdx#L241) |
+| motion/surface/glow-border | Custom colors | p | var(--tp-font-semibold) | content appearance — review required | [docs/motion/surface/glow-border.mdx:145](../../docs/motion/surface/glow-border.mdx#L145) |
+| motion/surface/glow-border | Custom colors | span | var(--tp-font-normal) | content appearance — review required | [docs/motion/surface/glow-border.mdx:145](../../docs/motion/surface/glow-border.mdx#L145) |
 | motion/surface/segment-border | Traced in | p | var(--tp-font-semibold) | content appearance — review required | [docs/motion/surface/segment-border.mdx:125](../../docs/motion/surface/segment-border.mdx#L125) |
 | motion/surface/segment-border | Traced in | p | var(--tp-font-semibold) | content appearance — review required | [docs/motion/surface/segment-border.mdx:133](../../docs/motion/surface/segment-border.mdx#L133) |
 | motion/surface/segment-border | Traced in | p | var(--tp-font-semibold) | content appearance — review required | [docs/motion/surface/segment-border.mdx:141](../../docs/motion/surface/segment-border.mdx#L141) |
@@ -3364,9 +2560,9 @@ Each row retains the target element, use-case label, exact value and source loca
 | motion/text/text-mirror | Motion/Text/Text mirror | p | 600 | content appearance — review required | [src/stories/text-mirror.stories.ts:55](../../src/stories/text-mirror.stories.ts#L55) |
 | motion/text/text-stroke | Motion/Text/Text stroke | p | 600 | content appearance — review required | [src/stories/text-stroke.stories.ts:55](../../src/stories/text-stroke.stories.ts#L55) |
 
-<a id="property-17"></a>
+<a id="property-16"></a>
 
-### 17. grid-template-columns — 54 occurrences
+### 16. grid-template-columns — 54 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -3404,64 +2600,64 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/accordion | Variants | div | repeat(auto-fit,minmax(16rem,1fr)) | layout/geometry — minimize | [docs/components/accordion.mdx:36](../../docs/components/accordion.mdx#L36) |
+| components/accordion | Variants | div | repeat(auto-fit,minmax(16rem,1fr)) | layout/geometry — minimize | [docs/components/accordion.mdx:37](../../docs/components/accordion.mdx#L37) |
 | components/aspect-ratio | Common ratios | div | 2fr 1fr 0.75fr | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:26](../../docs/components/aspect-ratio.mdx#L26) |
-| components/aspect-ratio | Cover and contain | div | 1fr 1fr | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:123](../../docs/components/aspect-ratio.mdx#L123) |
+| components/aspect-ratio | Cover and contain | div | 1fr 1fr | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:124](../../docs/components/aspect-ratio.mdx#L124) |
 | components/calendar | Date with start and end times | div | 1fr 1fr | layout/geometry — minimize | [docs/components/calendar.mdx:225](../../docs/components/calendar.mdx#L225) |
-| components/card | Surface options | div | repeat(auto-fit,minmax(12rem,1fr)) | layout/geometry — minimize | [docs/components/card.mdx:55](../../docs/components/card.mdx#L55) |
-| components/copy-button | Beside a value | dl | auto 1fr auto | layout/geometry — minimize | [docs/components/copy-button.mdx:50](../../docs/components/copy-button.mdx#L50) |
+| components/card | Surface options | div | repeat(auto-fit,minmax(12rem,1fr)) | layout/geometry — minimize | [docs/components/card.mdx:61](../../docs/components/card.mdx#L61) |
+| components/copy-button | Beside a value | dl | auto 1fr auto | layout/geometry — minimize | [docs/components/copy-button.mdx:52](../../docs/components/copy-button.mdx#L52) |
 | components/cursor | Cursor | div | repeat(3,minmax(0,1fr)) | layout/geometry — minimize | [docs/components/cursor.mdx:15](../../docs/components/cursor.mdx#L15) |
 | components/cursor | Spring | div | repeat(2,minmax(0,1fr)) | layout/geometry — minimize | [docs/components/cursor.mdx:46](../../docs/components/cursor.mdx#L46) |
 | components/cursor | Zones | div | repeat(2,minmax(0,1fr)) | layout/geometry — minimize | [docs/components/cursor.mdx:69](../../docs/components/cursor.mdx#L69) |
 | components/dialog | Non-modal | dl | 1fr auto | layout/geometry — minimize | [docs/components/dialog.mdx:55](../../docs/components/dialog.mdx#L55) |
-| components/drag-drop-list | Variants and sizes | div | repeat(auto-fit,minmax(14rem,1fr)) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:67](../../docs/components/drag-drop-list.mdx#L67) |
-| components/drag-drop-list | Board lanes | div | repeat(auto-fit, minmax(min(100%, 16rem), 1fr)) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:186](../../docs/components/drag-drop-list.mdx#L186) |
-| components/drag-drop-list | Controlled lanes | div | repeat(auto-fit, minmax(min(100%, 16rem), 1fr)) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:246](../../docs/components/drag-drop-list.mdx#L246) |
-| components/drag-drop-list | Approve before committing | div | repeat(auto-fit, minmax(min(100%, 16rem), 1fr)) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:313](../../docs/components/drag-drop-list.mdx#L313) |
+| components/drag-drop-list | Variants and sizes | div | repeat(auto-fit,minmax(14rem,1fr)) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:68](../../docs/components/drag-drop-list.mdx#L68) |
+| components/drag-drop-list | Board lanes | div | repeat(auto-fit, minmax(min(100%, 16rem), 1fr)) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:187](../../docs/components/drag-drop-list.mdx#L187) |
+| components/drag-drop-list | Controlled lanes | div | repeat(auto-fit, minmax(min(100%, 16rem), 1fr)) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:243](../../docs/components/drag-drop-list.mdx#L243) |
+| components/drag-drop-list | Approve before committing | div | repeat(auto-fit, minmax(min(100%, 16rem), 1fr)) | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:307](../../docs/components/drag-drop-list.mdx#L307) |
 | components/empty-state | Media treatments | div | repeat(auto-fit,minmax(16rem,1fr)) | layout/geometry — minimize | [docs/components/empty-state.mdx:45](../../docs/components/empty-state.mdx#L45) |
-| components/empty-state | Bordered and filled | div | repeat(auto-fit,minmax(16rem,1fr)) | layout/geometry — minimize | [docs/components/empty-state.mdx:107](../../docs/components/empty-state.mdx#L107) |
+| components/empty-state | Bordered and filled | div | repeat(auto-fit,minmax(16rem,1fr)) | layout/geometry — minimize | [docs/components/empty-state.mdx:108](../../docs/components/empty-state.mdx#L108) |
 | components/image | Ratio and fit | div | repeat(3,1fr) | layout/geometry — minimize | [docs/components/image.mdx:36](../../docs/components/image.mdx#L36) |
-| components/image | Fallbacks | div | repeat(2,1fr) | layout/geometry — minimize | [docs/components/image.mdx:56](../../docs/components/image.mdx#L56) |
-| components/image | Loading placeholders | div | repeat(2,1fr) | layout/geometry — minimize | [docs/components/image.mdx:69](../../docs/components/image.mdx#L69) |
-| components/image | Hover zoom | div | repeat(2,1fr) | layout/geometry — minimize | [docs/components/image.mdx:86](../../docs/components/image.mdx#L86) |
-| components/image | Staggered group | tp-image-group | repeat(4,1fr) | layout/geometry — minimize | [docs/components/image.mdx:119](../../docs/components/image.mdx#L119) |
-| components/image | Reveal timing and repeat | div | repeat(3,1fr) | layout/geometry — minimize | [docs/components/image.mdx:133](../../docs/components/image.mdx#L133) |
-| components/image | Reveal timing and repeat | div | repeat(3,1fr) | layout/geometry — minimize | [docs/components/image.mdx:139](../../docs/components/image.mdx#L139) |
-| components/image | Headline, group and caption | tp-image-group | repeat(3,1fr) | layout/geometry — minimize | [docs/components/image.mdx:156](../../docs/components/image.mdx#L156) |
-| components/list | Recordings | span | minmax(0,1fr) auto | layout/geometry — minimize | [docs/components/list.mdx:247](../../docs/components/list.mdx#L247) |
-| components/list | People and invitations | span | minmax(0,1fr) auto | layout/geometry — minimize | [docs/components/list.mdx:343](../../docs/components/list.mdx#L343) |
-| components/markdown | With a table of contents | div | minmax(0,1fr) 10rem | layout/geometry — minimize | [docs/components/markdown.mdx:234](../../docs/components/markdown.mdx#L234) |
+| components/image | Fallbacks | div | repeat(2,1fr) | layout/geometry — minimize | [docs/components/image.mdx:57](../../docs/components/image.mdx#L57) |
+| components/image | Loading placeholders | div | repeat(2,1fr) | layout/geometry — minimize | [docs/components/image.mdx:71](../../docs/components/image.mdx#L71) |
+| components/image | Hover zoom | div | repeat(2,1fr) | layout/geometry — minimize | [docs/components/image.mdx:89](../../docs/components/image.mdx#L89) |
+| components/image | Staggered group | tp-image-group | repeat(4,1fr) | layout/geometry — minimize | [docs/components/image.mdx:124](../../docs/components/image.mdx#L124) |
+| components/image | Reveal timing and repeat | div | repeat(3,1fr) | layout/geometry — minimize | [docs/components/image.mdx:138](../../docs/components/image.mdx#L138) |
+| components/image | Reveal timing and repeat | div | repeat(3,1fr) | layout/geometry — minimize | [docs/components/image.mdx:144](../../docs/components/image.mdx#L144) |
+| components/image | Headline, group and caption | tp-image-group | repeat(3,1fr) | layout/geometry — minimize | [docs/components/image.mdx:163](../../docs/components/image.mdx#L163) |
+| components/list | Recordings | span | minmax(0,1fr) auto | layout/geometry — minimize | [docs/components/list.mdx:252](../../docs/components/list.mdx#L252) |
+| components/list | People and invitations | span | minmax(0,1fr) auto | layout/geometry — minimize | [docs/components/list.mdx:346](../../docs/components/list.mdx#L346) |
+| components/markdown | With a table of contents | div | minmax(0,1fr) 10rem | layout/geometry — minimize | [docs/components/markdown.mdx:240](../../docs/components/markdown.mdx#L240) |
 | components/message-scroller | Outline and edges | div | minmax(0, 1fr) 10rem | layout/geometry — minimize | [docs/components/message-scroller.mdx:316](../../docs/components/message-scroller.mdx#L316) |
 | components/navigation-menu | Navigation menu | div | repeat(2, minmax(0, 13rem)) | layout/geometry — minimize | [docs/components/navigation-menu.mdx:15](../../docs/components/navigation-menu.mdx#L15) |
 | components/popover | Popover | div | 1fr 1fr | layout/geometry — minimize | [docs/components/popover.mdx:13](../../docs/components/popover.mdx#L13) |
 | components/preview-card | Preview Card | div | auto 1fr | layout/geometry — minimize | [docs/components/preview-card.mdx:13](../../docs/components/preview-card.mdx#L13) |
-| components/scroll-trigger | Scroll Trigger | div | repeat(3,1fr) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:15](../../docs/components/scroll-trigger.mdx#L15) |
-| components/scroll-trigger | From the center | tp-scroll-trigger | repeat(auto-fit,minmax(7rem,1fr)) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:42](../../docs/components/scroll-trigger.mdx#L42) |
-| components/scroll-trigger | Custom scroll range | div | repeat(3, 1fr) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:158](../../docs/components/scroll-trigger.mdx#L158) |
-| components/slider | Compact readout | div | auto 1fr | layout/geometry — minimize | [docs/components/slider.mdx:203](../../docs/components/slider.mdx#L203) |
+| components/scroll-trigger | Scroll Trigger | div | repeat(3,1fr) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:16](../../docs/components/scroll-trigger.mdx#L16) |
+| components/scroll-trigger | From the center | tp-scroll-trigger | repeat(auto-fit,minmax(7rem,1fr)) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:44](../../docs/components/scroll-trigger.mdx#L44) |
+| components/scroll-trigger | Custom scroll range | div | repeat(3, 1fr) | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:160](../../docs/components/scroll-trigger.mdx#L160) |
+| components/slider | Compact readout | div | auto 1fr | layout/geometry — minimize | [docs/components/slider.mdx:202](../../docs/components/slider.mdx#L202) |
 | components/table-of-contents | Table of contents | div | minmax(0,1fr) 11rem | layout/geometry — minimize | [docs/components/table-of-contents.mdx:12](../../docs/components/table-of-contents.mdx#L12) |
 | components/table-of-contents | Nested sections | div | 11rem minmax(0,1fr) | layout/geometry — minimize | [docs/components/table-of-contents.mdx:87](../../docs/components/table-of-contents.mdx#L87) |
 | components/table-of-contents | Collected targets | div | minmax(0, 1fr) 11rem | layout/geometry — minimize | [docs/components/table-of-contents.mdx:174](../../docs/components/table-of-contents.mdx#L174) |
 | components/table-of-contents | Compact | div | minmax(0,1fr) 2rem | layout/geometry — minimize | [docs/components/table-of-contents.mdx:238](../../docs/components/table-of-contents.mdx#L238) |
-| components/text-transform | Text transform | dl | minmax(0,1fr) auto | layout/geometry — minimize | [docs/components/text-transform.mdx:10](../../docs/components/text-transform.mdx#L10) |
-| components/text-transform | Case and identifiers | dl | auto auto | layout/geometry — minimize | [docs/components/text-transform.mdx:34](../../docs/components/text-transform.mdx#L34) |
-| components/time | Modes | dl | auto auto | layout/geometry — minimize | [docs/components/time.mdx:63](../../docs/components/time.mdx#L63) |
-| components/time | Calendar | dl | auto auto | layout/geometry — minimize | [docs/components/time.mdx:154](../../docs/components/time.mdx#L154) |
-| components/time | Precisions | dl | auto auto | layout/geometry — minimize | [docs/components/time.mdx:194](../../docs/components/time.mdx#L194) |
-| components/time | Timers | dl | auto auto | layout/geometry — minimize | [docs/components/time.mdx:209](../../docs/components/time.mdx#L209) |
-| motion/surface/glow-border | Comets | div | repeat(auto-fit, minmax(14rem, 1fr)) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:56](../../docs/motion/surface/glow-border.mdx#L56) |
-| motion/surface/glow-border | Sweep, pulse and glint | div | repeat(auto-fit, minmax(14rem, 1fr)) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:79](../../docs/motion/surface/glow-border.mdx#L79) |
-| motion/surface/glow-border | Custom colors | div | repeat(auto-fit, minmax(15rem, 1fr)) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:137](../../docs/motion/surface/glow-border.mdx#L137) |
-| motion/surface/glow-border | Lit by an element | div | auto 1fr | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:162](../../docs/motion/surface/glow-border.mdx#L162) |
+| components/text-transform | Text transform | dl | minmax(0,1fr) auto | layout/geometry — minimize | [docs/components/text-transform.mdx:11](../../docs/components/text-transform.mdx#L11) |
+| components/text-transform | Case and identifiers | dl | auto auto | layout/geometry — minimize | [docs/components/text-transform.mdx:35](../../docs/components/text-transform.mdx#L35) |
+| components/time | Modes | dl | auto auto | layout/geometry — minimize | [docs/components/time.mdx:55](../../docs/components/time.mdx#L55) |
+| components/time | Calendar | dl | auto auto | layout/geometry — minimize | [docs/components/time.mdx:147](../../docs/components/time.mdx#L147) |
+| components/time | Precisions | dl | auto auto | layout/geometry — minimize | [docs/components/time.mdx:187](../../docs/components/time.mdx#L187) |
+| components/time | Timers | dl | auto auto | layout/geometry — minimize | [docs/components/time.mdx:202](../../docs/components/time.mdx#L202) |
+| motion/surface/glow-border | Comets | div | repeat(auto-fit, minmax(14rem, 1fr)) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:58](../../docs/motion/surface/glow-border.mdx#L58) |
+| motion/surface/glow-border | Sweep, pulse and glint | div | repeat(auto-fit, minmax(14rem, 1fr)) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:81](../../docs/motion/surface/glow-border.mdx#L81) |
+| motion/surface/glow-border | Custom colors | div | repeat(auto-fit, minmax(15rem, 1fr)) | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:139](../../docs/motion/surface/glow-border.mdx#L139) |
+| motion/surface/glow-border | Lit by an element | div | auto 1fr | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:164](../../docs/motion/surface/glow-border.mdx#L164) |
 | motion/surface/segment-border | Traced in | div | repeat(auto-fit, minmax(9rem, 1fr)) | layout/geometry — minimize | [docs/motion/surface/segment-border.mdx:121](../../docs/motion/surface/segment-border.mdx#L121) |
 | compositions/map.examples | pinSvg | section | repeat(auto-fit, minmax(16rem, 1fr)) | layout/geometry — minimize | [src/stories/map.examples.ts:110](../../src/stories/map.examples.ts#L110) |
 | components/scroll-trigger | (file/setup/shared helper) | div | repeat(3, 1fr) | layout/geometry — minimize | [src/stories/scroll-trigger.stories.ts:21](../../src/stories/scroll-trigger.stories.ts#L21) |
 | compositions/table-of-contents.examples | Changelog | div | minmax(0, 1fr) 13rem | layout/geometry — minimize | [src/stories/table-of-contents.examples.ts:141](../../src/stories/table-of-contents.examples.ts#L141) |
 | components/table-of-contents | DocumentScroll | div | minmax(0, 1fr) 14rem | layout/geometry — minimize | [src/stories/table-of-contents.stories.ts:144](../../src/stories/table-of-contents.stories.ts#L144) |
 
-<a id="property-18"></a>
+<a id="property-17"></a>
 
-### 18. overflow — 38 occurrences
+### 17. overflow — 38 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -3478,23 +2674,23 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/aspect-ratio | One ratio, three widths | tp-aspect-ratio | hidden | component structure/visibility — review required | [docs/components/aspect-ratio.mdx:51](../../docs/components/aspect-ratio.mdx#L51) |
 | components/aspect-ratio | One ratio, three widths | tp-aspect-ratio | hidden | component structure/visibility — review required | [docs/components/aspect-ratio.mdx:73](../../docs/components/aspect-ratio.mdx#L73) |
 | components/aspect-ratio | One ratio, three widths | tp-aspect-ratio | hidden | component structure/visibility — review required | [docs/components/aspect-ratio.mdx:95](../../docs/components/aspect-ratio.mdx#L95) |
-| components/aspect-ratio | Cover and contain | tp-aspect-ratio | hidden | component structure/visibility — review required | [docs/components/aspect-ratio.mdx:124](../../docs/components/aspect-ratio.mdx#L124) |
-| components/aspect-ratio | Cover and contain | tp-aspect-ratio | hidden | component structure/visibility — review required | [docs/components/aspect-ratio.mdx:127](../../docs/components/aspect-ratio.mdx#L127) |
-| components/carousel | Layered 3D | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:253](../../docs/components/carousel.mdx#L253) |
-| components/carousel | Layered 3D | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:292](../../docs/components/carousel.mdx#L292) |
-| components/carousel | Layered 3D | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:331](../../docs/components/carousel.mdx#L331) |
-| components/carousel | Parallax | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:384](../../docs/components/carousel.mdx#L384) |
-| components/carousel | Parallax | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:387](../../docs/components/carousel.mdx#L387) |
-| components/carousel | Parallax | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:390](../../docs/components/carousel.mdx#L390) |
-| components/carousel | Parallax | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:393](../../docs/components/carousel.mdx#L393) |
-| components/carousel | Focus | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:414](../../docs/components/carousel.mdx#L414) |
-| components/carousel | Focus | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:418](../../docs/components/carousel.mdx#L418) |
-| components/carousel | Focus | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:422](../../docs/components/carousel.mdx#L422) |
-| components/carousel | Focus | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:426](../../docs/components/carousel.mdx#L426) |
-| components/carousel | Focus | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:430](../../docs/components/carousel.mdx#L430) |
-| components/carousel | Shader transition | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:475](../../docs/components/carousel.mdx#L475) |
-| components/carousel | Shader transition | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:513](../../docs/components/carousel.mdx#L513) |
-| components/carousel | Shader transition | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:551](../../docs/components/carousel.mdx#L551) |
+| components/aspect-ratio | Cover and contain | tp-aspect-ratio | hidden | component structure/visibility — review required | [docs/components/aspect-ratio.mdx:125](../../docs/components/aspect-ratio.mdx#L125) |
+| components/aspect-ratio | Cover and contain | tp-aspect-ratio | hidden | component structure/visibility — review required | [docs/components/aspect-ratio.mdx:128](../../docs/components/aspect-ratio.mdx#L128) |
+| components/carousel | Layered 3D | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:243](../../docs/components/carousel.mdx#L243) |
+| components/carousel | Layered 3D | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:279](../../docs/components/carousel.mdx#L279) |
+| components/carousel | Layered 3D | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:315](../../docs/components/carousel.mdx#L315) |
+| components/carousel | Parallax | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:365](../../docs/components/carousel.mdx#L365) |
+| components/carousel | Parallax | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:368](../../docs/components/carousel.mdx#L368) |
+| components/carousel | Parallax | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:371](../../docs/components/carousel.mdx#L371) |
+| components/carousel | Parallax | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:374](../../docs/components/carousel.mdx#L374) |
+| components/carousel | Focus | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:396](../../docs/components/carousel.mdx#L396) |
+| components/carousel | Focus | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:400](../../docs/components/carousel.mdx#L400) |
+| components/carousel | Focus | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:404](../../docs/components/carousel.mdx#L404) |
+| components/carousel | Focus | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:408](../../docs/components/carousel.mdx#L408) |
+| components/carousel | Focus | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:412](../../docs/components/carousel.mdx#L412) |
+| components/carousel | Shader transition | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:458](../../docs/components/carousel.mdx#L458) |
+| components/carousel | Shader transition | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:494](../../docs/components/carousel.mdx#L494) |
+| components/carousel | Shader transition | figure | hidden | layout/geometry — minimize | [docs/components/carousel.mdx:530](../../docs/components/carousel.mdx#L530) |
 | components/dialog | Container modality | section | clip | layout/geometry — minimize | [docs/components/dialog.mdx:82](../../docs/components/dialog.mdx#L82) |
 | components/navigation-panel | Navigation panel | div | hidden | layout/geometry — minimize | [docs/components/navigation-panel.mdx:11](../../docs/components/navigation-panel.mdx#L11) |
 | components/navigation-panel | Off-canvas | div | hidden | layout/geometry — minimize | [docs/components/navigation-panel.mdx:102](../../docs/components/navigation-panel.mdx#L102) |
@@ -3502,17 +2698,17 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/navigation-panel | Drawer mode | div | hidden | layout/geometry — minimize | [docs/components/navigation-panel.mdx:187](../../docs/components/navigation-panel.mdx#L187) |
 | components/navigation-panel | Floating | div | hidden | layout/geometry — minimize | [docs/components/navigation-panel.mdx:217](../../docs/components/navigation-panel.mdx#L217) |
 | components/navigation-panel | Team switcher and row actions | div | hidden | layout/geometry — minimize | [docs/components/navigation-panel.mdx:250](../../docs/components/navigation-panel.mdx#L250) |
-| components/scroll-trigger | Replay on entry | div | auto | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:58](../../docs/components/scroll-trigger.mdx#L58) |
-| components/scroll-trigger | Scrubbed band | div | auto | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:76](../../docs/components/scroll-trigger.mdx#L76) |
-| components/scroll-trigger | Custom scroll range | div | auto | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:129](../../docs/components/scroll-trigger.mdx#L129) |
-| components/scroll-trigger | Pinned scene | div | auto | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:203](../../docs/components/scroll-trigger.mdx#L203) |
+| components/scroll-trigger | Replay on entry | div | auto | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:60](../../docs/components/scroll-trigger.mdx#L60) |
+| components/scroll-trigger | Scrubbed band | div | auto | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:78](../../docs/components/scroll-trigger.mdx#L78) |
+| components/scroll-trigger | Custom scroll range | div | auto | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:131](../../docs/components/scroll-trigger.mdx#L131) |
+| components/scroll-trigger | Pinned scene | div | auto | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:205](../../docs/components/scroll-trigger.mdx#L205) |
 | motion/text/text-mirror | Scrubbed by the scroll | div | auto | layout/geometry — minimize | [docs/motion/text/text-mirror.mdx:74](../../docs/motion/text/text-mirror.mdx#L74) |
 | motion/text/text-split | Scrubbed by the scroll | div | auto | layout/geometry — minimize | [docs/motion/text/text-split.mdx:142](../../docs/motion/text/text-split.mdx#L142) |
 | motion/text/text-stroke | Scrubbed by the scroll | div | auto | layout/geometry — minimize | [docs/motion/text/text-stroke.mdx:82](../../docs/motion/text/text-stroke.mdx#L82) |
 
-<a id="property-19"></a>
+<a id="property-18"></a>
 
-### 19. position — 30 occurrences
+### 18. position — 30 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -3522,30 +2718,30 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/carousel | Layered 3D | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:253](../../docs/components/carousel.mdx#L253) |
-| components/carousel | Layered 3D | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:275](../../docs/components/carousel.mdx#L275) |
-| components/carousel | Layered 3D | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:292](../../docs/components/carousel.mdx#L292) |
-| components/carousel | Layered 3D | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:314](../../docs/components/carousel.mdx#L314) |
-| components/carousel | Layered 3D | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:331](../../docs/components/carousel.mdx#L331) |
-| components/carousel | Layered 3D | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:353](../../docs/components/carousel.mdx#L353) |
-| components/carousel | Focus | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:414](../../docs/components/carousel.mdx#L414) |
-| components/carousel | Focus | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:416](../../docs/components/carousel.mdx#L416) |
-| components/carousel | Focus | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:418](../../docs/components/carousel.mdx#L418) |
-| components/carousel | Focus | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:420](../../docs/components/carousel.mdx#L420) |
-| components/carousel | Focus | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:422](../../docs/components/carousel.mdx#L422) |
-| components/carousel | Focus | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:424](../../docs/components/carousel.mdx#L424) |
-| components/carousel | Focus | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:426](../../docs/components/carousel.mdx#L426) |
-| components/carousel | Focus | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:428](../../docs/components/carousel.mdx#L428) |
-| components/carousel | Focus | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:430](../../docs/components/carousel.mdx#L430) |
-| components/carousel | Focus | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:432](../../docs/components/carousel.mdx#L432) |
-| components/carousel | Shader transition | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:475](../../docs/components/carousel.mdx#L475) |
-| components/carousel | Shader transition | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:499](../../docs/components/carousel.mdx#L499) |
-| components/carousel | Shader transition | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:513](../../docs/components/carousel.mdx#L513) |
-| components/carousel | Shader transition | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:537](../../docs/components/carousel.mdx#L537) |
-| components/carousel | Shader transition | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:551](../../docs/components/carousel.mdx#L551) |
-| components/carousel | Shader transition | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:575](../../docs/components/carousel.mdx#L575) |
+| components/carousel | Layered 3D | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:243](../../docs/components/carousel.mdx#L243) |
+| components/carousel | Layered 3D | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:264](../../docs/components/carousel.mdx#L264) |
+| components/carousel | Layered 3D | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:279](../../docs/components/carousel.mdx#L279) |
+| components/carousel | Layered 3D | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:300](../../docs/components/carousel.mdx#L300) |
+| components/carousel | Layered 3D | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:315](../../docs/components/carousel.mdx#L315) |
+| components/carousel | Layered 3D | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:336](../../docs/components/carousel.mdx#L336) |
+| components/carousel | Focus | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:396](../../docs/components/carousel.mdx#L396) |
+| components/carousel | Focus | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:398](../../docs/components/carousel.mdx#L398) |
+| components/carousel | Focus | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:400](../../docs/components/carousel.mdx#L400) |
+| components/carousel | Focus | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:402](../../docs/components/carousel.mdx#L402) |
+| components/carousel | Focus | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:404](../../docs/components/carousel.mdx#L404) |
+| components/carousel | Focus | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:406](../../docs/components/carousel.mdx#L406) |
+| components/carousel | Focus | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:408](../../docs/components/carousel.mdx#L408) |
+| components/carousel | Focus | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:410](../../docs/components/carousel.mdx#L410) |
+| components/carousel | Focus | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:412](../../docs/components/carousel.mdx#L412) |
+| components/carousel | Focus | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:414](../../docs/components/carousel.mdx#L414) |
+| components/carousel | Shader transition | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:458](../../docs/components/carousel.mdx#L458) |
+| components/carousel | Shader transition | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:481](../../docs/components/carousel.mdx#L481) |
+| components/carousel | Shader transition | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:494](../../docs/components/carousel.mdx#L494) |
+| components/carousel | Shader transition | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:517](../../docs/components/carousel.mdx#L517) |
+| components/carousel | Shader transition | figure | relative | layout/geometry — minimize | [docs/components/carousel.mdx:530](../../docs/components/carousel.mdx#L530) |
+| components/carousel | Shader transition | figcaption | absolute | layout/geometry — minimize | [docs/components/carousel.mdx:553](../../docs/components/carousel.mdx#L553) |
 | components/dialog | Container modality | section | relative | layout/geometry — minimize | [docs/components/dialog.mdx:82](../../docs/components/dialog.mdx#L82) |
-| components/markdown | With a table of contents | aside | sticky | layout/geometry — minimize | [docs/components/markdown.mdx:260](../../docs/components/markdown.mdx#L260) |
+| components/markdown | With a table of contents | aside | sticky | layout/geometry — minimize | [docs/components/markdown.mdx:266](../../docs/components/markdown.mdx#L266) |
 | components/table-of-contents | Table of contents | aside | sticky | layout/geometry — minimize | [docs/components/table-of-contents.mdx:31](../../docs/components/table-of-contents.mdx#L31) |
 | components/table-of-contents | Nested sections | aside | sticky | layout/geometry — minimize | [docs/components/table-of-contents.mdx:88](../../docs/components/table-of-contents.mdx#L88) |
 | components/table-of-contents | Collected targets | aside | sticky | layout/geometry — minimize | [docs/components/table-of-contents.mdx:197](../../docs/components/table-of-contents.mdx#L197) |
@@ -3553,9 +2749,9 @@ Each row retains the target element, use-case label, exact value and source loca
 | compositions/table-of-contents.examples | Changelog | aside | sticky | layout/geometry — minimize | [src/stories/table-of-contents.examples.ts:148](../../src/stories/table-of-contents.examples.ts#L148) |
 | components/table-of-contents | DocumentScroll | aside | sticky | layout/geometry — minimize | [src/stories/table-of-contents.stories.ts:158](../../src/stories/table-of-contents.stories.ts#L158) |
 
-<a id="property-20"></a>
+<a id="property-19"></a>
 
-### 20. aspect-ratio — 29 occurrences
+### 19. aspect-ratio — 29 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -3567,39 +2763,39 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/carousel | Carousel | tp-stack | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:12](../../docs/components/carousel.mdx#L12) |
-| components/carousel | Carousel | tp-stack | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:27](../../docs/components/carousel.mdx#L27) |
-| components/carousel | Carousel | tp-stack | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:42](../../docs/components/carousel.mdx#L42) |
-| components/carousel | Carousel | tp-stack | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:55](../../docs/components/carousel.mdx#L55) |
-| components/carousel | Crossfade | tp-stack | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:187](../../docs/components/carousel.mdx#L187) |
-| components/carousel | Crossfade | tp-stack | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:203](../../docs/components/carousel.mdx#L203) |
-| components/carousel | Crossfade | tp-stack | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:220](../../docs/components/carousel.mdx#L220) |
-| components/carousel | Layered 3D | figure | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:253](../../docs/components/carousel.mdx#L253) |
-| components/carousel | Layered 3D | figure | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:292](../../docs/components/carousel.mdx#L292) |
-| components/carousel | Layered 3D | figure | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:331](../../docs/components/carousel.mdx#L331) |
-| components/carousel | Parallax | figure | 4/3 | layout/geometry — minimize | [docs/components/carousel.mdx:384](../../docs/components/carousel.mdx#L384) |
-| components/carousel | Parallax | figure | 4/3 | layout/geometry — minimize | [docs/components/carousel.mdx:387](../../docs/components/carousel.mdx#L387) |
-| components/carousel | Parallax | figure | 4/3 | layout/geometry — minimize | [docs/components/carousel.mdx:390](../../docs/components/carousel.mdx#L390) |
-| components/carousel | Parallax | figure | 4/3 | layout/geometry — minimize | [docs/components/carousel.mdx:393](../../docs/components/carousel.mdx#L393) |
-| components/carousel | Focus | figure | 4/5 | layout/geometry — minimize | [docs/components/carousel.mdx:414](../../docs/components/carousel.mdx#L414) |
-| components/carousel | Focus | figure | 4/5 | layout/geometry — minimize | [docs/components/carousel.mdx:418](../../docs/components/carousel.mdx#L418) |
-| components/carousel | Focus | figure | 4/5 | layout/geometry — minimize | [docs/components/carousel.mdx:422](../../docs/components/carousel.mdx#L422) |
-| components/carousel | Focus | figure | 4/5 | layout/geometry — minimize | [docs/components/carousel.mdx:426](../../docs/components/carousel.mdx#L426) |
-| components/carousel | Focus | figure | 4/5 | layout/geometry — minimize | [docs/components/carousel.mdx:430](../../docs/components/carousel.mdx#L430) |
-| components/carousel | Shader transition | figure | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:475](../../docs/components/carousel.mdx#L475) |
-| components/carousel | Shader transition | figure | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:513](../../docs/components/carousel.mdx#L513) |
-| components/carousel | Shader transition | figure | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:551](../../docs/components/carousel.mdx#L551) |
+| components/carousel | Carousel | tp-stack | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:13](../../docs/components/carousel.mdx#L13) |
+| components/carousel | Carousel | tp-stack | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:26](../../docs/components/carousel.mdx#L26) |
+| components/carousel | Carousel | tp-stack | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:39](../../docs/components/carousel.mdx#L39) |
+| components/carousel | Carousel | tp-stack | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:51](../../docs/components/carousel.mdx#L51) |
+| components/carousel | Crossfade | tp-stack | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:184](../../docs/components/carousel.mdx#L184) |
+| components/carousel | Crossfade | tp-stack | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:198](../../docs/components/carousel.mdx#L198) |
+| components/carousel | Crossfade | tp-stack | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:213](../../docs/components/carousel.mdx#L213) |
+| components/carousel | Layered 3D | figure | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:243](../../docs/components/carousel.mdx#L243) |
+| components/carousel | Layered 3D | figure | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:279](../../docs/components/carousel.mdx#L279) |
+| components/carousel | Layered 3D | figure | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:315](../../docs/components/carousel.mdx#L315) |
+| components/carousel | Parallax | figure | 4/3 | layout/geometry — minimize | [docs/components/carousel.mdx:365](../../docs/components/carousel.mdx#L365) |
+| components/carousel | Parallax | figure | 4/3 | layout/geometry — minimize | [docs/components/carousel.mdx:368](../../docs/components/carousel.mdx#L368) |
+| components/carousel | Parallax | figure | 4/3 | layout/geometry — minimize | [docs/components/carousel.mdx:371](../../docs/components/carousel.mdx#L371) |
+| components/carousel | Parallax | figure | 4/3 | layout/geometry — minimize | [docs/components/carousel.mdx:374](../../docs/components/carousel.mdx#L374) |
+| components/carousel | Focus | figure | 4/5 | layout/geometry — minimize | [docs/components/carousel.mdx:396](../../docs/components/carousel.mdx#L396) |
+| components/carousel | Focus | figure | 4/5 | layout/geometry — minimize | [docs/components/carousel.mdx:400](../../docs/components/carousel.mdx#L400) |
+| components/carousel | Focus | figure | 4/5 | layout/geometry — minimize | [docs/components/carousel.mdx:404](../../docs/components/carousel.mdx#L404) |
+| components/carousel | Focus | figure | 4/5 | layout/geometry — minimize | [docs/components/carousel.mdx:408](../../docs/components/carousel.mdx#L408) |
+| components/carousel | Focus | figure | 4/5 | layout/geometry — minimize | [docs/components/carousel.mdx:412](../../docs/components/carousel.mdx#L412) |
+| components/carousel | Shader transition | figure | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:458](../../docs/components/carousel.mdx#L458) |
+| components/carousel | Shader transition | figure | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:494](../../docs/components/carousel.mdx#L494) |
+| components/carousel | Shader transition | figure | 16/9 | layout/geometry — minimize | [docs/components/carousel.mdx:530](../../docs/components/carousel.mdx#L530) |
 | components/cursor | Cursor | div | 4/3 | layout/geometry — minimize | [docs/components/cursor.mdx:17](../../docs/components/cursor.mdx#L17) |
 | components/cursor | Cursor | div | 4/3 | layout/geometry — minimize | [docs/components/cursor.mdx:21](../../docs/components/cursor.mdx#L21) |
 | components/cursor | Cursor | div | 4/3 | layout/geometry — minimize | [docs/components/cursor.mdx:25](../../docs/components/cursor.mdx#L25) |
-| components/skeleton | Card | tp-skeleton | 16 / 9 | layout/geometry — minimize | [docs/components/skeleton.mdx:57](../../docs/components/skeleton.mdx#L57) |
+| components/skeleton | Card | tp-skeleton | 16 / 9 | layout/geometry — minimize | [docs/components/skeleton.mdx:60](../../docs/components/skeleton.mdx#L60) |
 | widgets/plot | Distribution | tp-plot | 16/9 | layout/geometry — minimize | [docs/widgets/plot.mdx:44](../../docs/widgets/plot.mdx#L44) |
 | compositions/skeleton.examples | skeletonExamples | tp-skeleton | 1 | layout/geometry — minimize | [src/stories/skeleton.examples.ts:78](../../src/stories/skeleton.examples.ts#L78) |
 | widgets/plot | Histogram | tp-plot | 16/9 | layout/geometry — minimize | [src/stories/widgets/plot.stories.ts:137](../../src/stories/widgets/plot.stories.ts#L137) |
 
-<a id="property-21"></a>
+<a id="property-20"></a>
 
-### 21. line-height — 28 occurrences
+### 20. line-height — 28 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -3618,13 +2814,13 @@ Each row retains the target element, use-case label, exact value and source loca
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
 | components/calendar | Nightly prices and booked dates | tp-stack | 1.1 | component presentation override — review required | [docs/components/calendar.mdx:109](../../docs/components/calendar.mdx#L109) |
-| components/citation | Citation | p | 1.75 | content appearance — review required | [docs/components/citation.mdx:11](../../docs/components/citation.mdx#L11) |
-| components/citation | Source preview | p | 1.75 | content appearance — review required | [docs/components/citation.mdx:47](../../docs/components/citation.mdx#L47) |
-| components/citation | Numbered references | p | 1.75 | content appearance — review required | [docs/components/citation.mdx:69](../../docs/components/citation.mdx#L69) |
+| components/citation | Citation | p | 1.75 | content appearance — review required | [docs/components/citation.mdx:12](../../docs/components/citation.mdx#L12) |
+| components/citation | Source preview | p | 1.75 | content appearance — review required | [docs/components/citation.mdx:49](../../docs/components/citation.mdx#L49) |
+| components/citation | Numbered references | p | 1.75 | content appearance — review required | [docs/components/citation.mdx:71](../../docs/components/citation.mdx#L71) |
 | components/scroll-area | Edge fade | tp-stack | var(--tp-leading-relaxed) | component presentation override — review required | [docs/components/scroll-area.mdx:171](../../docs/components/scroll-area.mdx#L171) |
-| components/scroll-trigger | Scroll Trigger | h3 | var(--tp-leading-tight) | content appearance — review required | [docs/components/scroll-trigger.mdx:11](../../docs/components/scroll-trigger.mdx#L11) |
-| components/scroll-trigger | Custom scroll range | h3 | var(--tp-leading-tight) | content appearance — review required | [docs/components/scroll-trigger.mdx:149](../../docs/components/scroll-trigger.mdx#L149) |
-| components/scroll-trigger | Pinned scene | h3 | var(--tp-leading-tight) | content appearance — review required | [docs/components/scroll-trigger.mdx:212](../../docs/components/scroll-trigger.mdx#L212) |
+| components/scroll-trigger | Scroll Trigger | h3 | var(--tp-leading-tight) | content appearance — review required | [docs/components/scroll-trigger.mdx:12](../../docs/components/scroll-trigger.mdx#L12) |
+| components/scroll-trigger | Custom scroll range | h3 | var(--tp-leading-tight) | content appearance — review required | [docs/components/scroll-trigger.mdx:151](../../docs/components/scroll-trigger.mdx#L151) |
+| components/scroll-trigger | Pinned scene | h3 | var(--tp-leading-tight) | content appearance — review required | [docs/components/scroll-trigger.mdx:214](../../docs/components/scroll-trigger.mdx#L214) |
 | motion/text/text-mirror | Text mirror | p | 1.05 | content appearance — review required | [docs/motion/text/text-mirror.mdx:9](../../docs/motion/text/text-mirror.mdx#L9) |
 | motion/text/text-mirror | From the center line | p | 1.5 | content appearance — review required | [docs/motion/text/text-mirror.mdx:28](../../docs/motion/text/text-mirror.mdx#L28) |
 | motion/text/text-mirror | Vertical seam | p | 1.15 | content appearance — review required | [docs/motion/text/text-mirror.mdx:41](../../docs/motion/text/text-mirror.mdx#L41) |
@@ -3646,9 +2842,9 @@ Each row retains the target element, use-case label, exact value and source loca
 | motion/text/text-split | Motion/Text/Text split | h2 | 1.1 | content appearance — review required | [src/stories/text-split.stories.ts:75](../../src/stories/text-split.stories.ts#L75) |
 | motion/text/text-stroke | Motion/Text/Text stroke | p | 1.1 | content appearance — review required | [src/stories/text-stroke.stories.ts:55](../../src/stories/text-stroke.stories.ts#L55) |
 
-<a id="property-22"></a>
+<a id="property-21"></a>
 
-### 22. flex — 23 occurrences
+### 21. flex — 23 occurrences
 
 | Value | Occurrences |
 | --- | ---: |
@@ -3667,25 +2863,59 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/calendar | Quick picks | tp-button | 1 0 auto | layout/geometry — minimize | [docs/components/calendar.mdx:186](../../docs/components/calendar.mdx#L186) |
 | components/calendar | Quick picks | tp-button | 1 0 auto | layout/geometry — minimize | [docs/components/calendar.mdx:187](../../docs/components/calendar.mdx#L187) |
 | components/calendar | Quick picks | tp-button | 1 0 auto | layout/geometry — minimize | [docs/components/calendar.mdx:190](../../docs/components/calendar.mdx#L190) |
-| components/field-group | Color channels | tp-field-group | 1 1 0 | layout/geometry — minimize | [docs/components/field-group.mdx:42](../../docs/components/field-group.mdx#L42) |
-| components/field-group | Color channels | tp-input-group | 0 0 6rem | layout/geometry — minimize | [docs/components/field-group.mdx:53](../../docs/components/field-group.mdx#L53) |
-| components/image | Horizontal strip | tp-image | 0 0 min(60%,12rem) | layout/geometry — minimize | [docs/components/image.mdx:252](../../docs/components/image.mdx#L252) |
-| components/image | Horizontal strip | tp-image | 0 0 min(60%,12rem) | layout/geometry — minimize | [docs/components/image.mdx:253](../../docs/components/image.mdx#L253) |
-| components/image | Horizontal strip | tp-image | 0 0 min(60%,12rem) | layout/geometry — minimize | [docs/components/image.mdx:254](../../docs/components/image.mdx#L254) |
-| components/image | Horizontal strip | tp-image | 0 0 min(60%,12rem) | layout/geometry — minimize | [docs/components/image.mdx:255](../../docs/components/image.mdx#L255) |
+| components/field-group | Color channels | tp-field-group | 1 1 0 | layout/geometry — minimize | [docs/components/field-group.mdx:44](../../docs/components/field-group.mdx#L44) |
+| components/field-group | Color channels | tp-input-group | 0 0 6rem | layout/geometry — minimize | [docs/components/field-group.mdx:52](../../docs/components/field-group.mdx#L52) |
+| components/image | Horizontal strip | tp-image | 0 0 min(60%,12rem) | layout/geometry — minimize | [docs/components/image.mdx:260](../../docs/components/image.mdx#L260) |
+| components/image | Horizontal strip | tp-image | 0 0 min(60%,12rem) | layout/geometry — minimize | [docs/components/image.mdx:261](../../docs/components/image.mdx#L261) |
+| components/image | Horizontal strip | tp-image | 0 0 min(60%,12rem) | layout/geometry — minimize | [docs/components/image.mdx:262](../../docs/components/image.mdx#L262) |
+| components/image | Horizontal strip | tp-image | 0 0 min(60%,12rem) | layout/geometry — minimize | [docs/components/image.mdx:263](../../docs/components/image.mdx#L263) |
 | components/input-group | Button group composition | tp-input-group | 1 | layout/geometry — minimize | [docs/components/input-group.mdx:148](../../docs/components/input-group.mdx#L148) |
-| components/input-group | Button group composition | tp-input-group | 1 | layout/geometry — minimize | [docs/components/input-group.mdx:160](../../docs/components/input-group.mdx#L160) |
+| components/input-group | Button group composition | tp-input-group | 1 | layout/geometry — minimize | [docs/components/input-group.mdx:159](../../docs/components/input-group.mdx#L159) |
 | components/map | Map with a list | tp-map | 2 1 24rem | layout/geometry — minimize | [docs/components/map.mdx:283](../../docs/components/map.mdx#L283) |
 | components/map | Map with a list | tp-list | 1 1 14rem | layout/geometry — minimize | [docs/components/map.mdx:304](../../docs/components/map.mdx#L304) |
-| components/marker | Native hosts and layout | tp-icon | none | layout/geometry — minimize | [docs/components/marker.mdx:124](../../docs/components/marker.mdx#L124) |
+| components/marker | Native hosts and layout | tp-icon | none | layout/geometry — minimize | [docs/components/marker.mdx:126](../../docs/components/marker.mdx#L126) |
 | components/skeleton | Skeleton | tp-skeleton | none | layout/geometry — minimize | [docs/components/skeleton.mdx:11](../../docs/components/skeleton.mdx#L11) |
-| components/skeleton | Table rows | tp-skeleton | 1 | layout/geometry — minimize | [docs/components/skeleton.mdx:132](../../docs/components/skeleton.mdx#L132) |
-| components/skeleton | Table rows | tp-skeleton | 1 | layout/geometry — minimize | [docs/components/skeleton.mdx:141](../../docs/components/skeleton.mdx#L141) |
-| components/skeleton | Table rows | tp-skeleton | 1 | layout/geometry — minimize | [docs/components/skeleton.mdx:150](../../docs/components/skeleton.mdx#L150) |
-| widgets/emoji-picker | Insert into a message | tp-field | 1 | layout/geometry — minimize | [docs/widgets/emoji-picker.mdx:52](../../docs/widgets/emoji-picker.mdx#L52) |
+| components/skeleton | Table rows | tp-skeleton | 1 | layout/geometry — minimize | [docs/components/skeleton.mdx:128](../../docs/components/skeleton.mdx#L128) |
+| components/skeleton | Table rows | tp-skeleton | 1 | layout/geometry — minimize | [docs/components/skeleton.mdx:135](../../docs/components/skeleton.mdx#L135) |
+| components/skeleton | Table rows | tp-skeleton | 1 | layout/geometry — minimize | [docs/components/skeleton.mdx:142](../../docs/components/skeleton.mdx#L142) |
+| widgets/emoji-picker | Insert into a message | tp-field | 1 | layout/geometry — minimize | [docs/widgets/emoji-picker.mdx:51](../../docs/widgets/emoji-picker.mdx#L51) |
 | compositions/skeleton.examples | (file/setup/shared helper) | tp-skeleton | none | layout/geometry — minimize | [src/stories/skeleton.examples.ts:21](../../src/stories/skeleton.examples.ts#L21) |
 | compositions/skeleton.examples | skeletonSource | tp-skeleton | none | layout/geometry — minimize | [src/stories/skeleton.examples.ts:40](../../src/stories/skeleton.examples.ts#L40) |
 | compositions/skeleton.examples | skeletonSource | tp-skeleton | 1 | layout/geometry — minimize | [src/stories/skeleton.examples.ts:53](../../src/stories/skeleton.examples.ts#L53) |
+
+<a id="property-22"></a>
+
+### 22. margin-inline — 23 occurrences
+
+| Value | Occurrences |
+| --- | ---: |
+| auto | 23 |
+
+| Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
+| --- | --- | --- | --- | --- | --- |
+| components/aspect-ratio | Aspect ratio | tp-aspect-ratio | auto | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:10](../../docs/components/aspect-ratio.mdx#L10) |
+| components/attachment | Scrollable groups | tp-stack | auto | layout/geometry — minimize | [docs/components/attachment.mdx:110](../../docs/components/attachment.mdx#L110) |
+| components/breadcrumb | Long trail | div | auto | layout/geometry — minimize | [docs/components/breadcrumb.mdx:177](../../docs/components/breadcrumb.mdx#L177) |
+| components/dialog | Container modality | section | auto | layout/geometry — minimize | [docs/components/dialog.mdx:82](../../docs/components/dialog.mdx#L82) |
+| components/field-group | Constraints | tp-field-group | auto | layout/geometry — minimize | [docs/components/field-group.mdx:213](../../docs/components/field-group.mdx#L213) |
+| components/image | Ratio and fit | div | auto | layout/geometry — minimize | [docs/components/image.mdx:36](../../docs/components/image.mdx#L36) |
+| components/image | Reveal timing and repeat | div | auto | layout/geometry — minimize | [docs/components/image.mdx:137](../../docs/components/image.mdx#L137) |
+| components/image | Parallax in a scroller | div | auto | layout/geometry — minimize | [docs/components/image.mdx:186](../../docs/components/image.mdx#L186) |
+| components/image | Horizontal strip | div | auto | layout/geometry — minimize | [docs/components/image.mdx:259](../../docs/components/image.mdx#L259) |
+| components/image | Smoothing | div | auto | layout/geometry — minimize | [docs/components/image.mdx:272](../../docs/components/image.mdx#L272) |
+| components/list | Card grid | tp-list | auto | layout/geometry — minimize | [docs/components/list.mdx:161](../../docs/components/list.mdx#L161) |
+| components/message-scroller | Message Scroller | tp-message-scroller | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:11](../../docs/components/message-scroller.mdx#L11) |
+| components/message-scroller | Streaming | tp-stack | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:71](../../docs/components/message-scroller.mdx#L71) |
+| components/message-scroller | Join marker as anchor | tp-stack | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:167](../../docs/components/message-scroller.mdx#L167) |
+| components/message-scroller | Commands | tp-stack | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:243](../../docs/components/message-scroller.mdx#L243) |
+| components/message-scroller | Outline and edges | div | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:316](../../docs/components/message-scroller.mdx#L316) |
+| components/message-scroller | Prepend history | tp-stack | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:423](../../docs/components/message-scroller.mdx#L423) |
+| components/message-scroller | Animated send | tp-stack | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:502](../../docs/components/message-scroller.mdx#L502) |
+| components/message-scroller | Open at the start | tp-message-scroller | auto | layout/geometry — minimize | [docs/components/message-scroller.mdx:560](../../docs/components/message-scroller.mdx#L560) |
+| components/overflow-list | Row limit | tp-resizable-panel-group | auto | layout/geometry — minimize | [docs/components/overflow-list.mdx:50](../../docs/components/overflow-list.mdx#L50) |
+| components/overflow-list | In a table | div | auto | layout/geometry — minimize | [docs/components/overflow-list.mdx:86](../../docs/components/overflow-list.mdx#L86) |
+| components/overflow-list | Custom count | div | auto | layout/geometry — minimize | [docs/components/overflow-list.mdx:140](../../docs/components/overflow-list.mdx#L140) |
+| components/timeline | Roadmap | tp-scroll-area | auto | layout/geometry — minimize | [docs/components/timeline.mdx:61](../../docs/components/timeline.mdx#L61) |
 
 <a id="property-23"></a>
 
@@ -3704,15 +2934,15 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
+| components/carousel | Bullets inside | blockquote | 12rem | layout/geometry — minimize | [docs/components/carousel.mdx:101](../../docs/components/carousel.mdx#L101) |
 | components/carousel | Bullets inside | blockquote | 12rem | layout/geometry — minimize | [docs/components/carousel.mdx:105](../../docs/components/carousel.mdx#L105) |
 | components/carousel | Bullets inside | blockquote | 12rem | layout/geometry — minimize | [docs/components/carousel.mdx:109](../../docs/components/carousel.mdx#L109) |
-| components/carousel | Bullets inside | blockquote | 12rem | layout/geometry — minimize | [docs/components/carousel.mdx:113](../../docs/components/carousel.mdx#L113) |
-| components/carousel | Autoplay | div | 9rem | layout/geometry — minimize | [docs/components/carousel.mdx:133](../../docs/components/carousel.mdx#L133) |
-| components/carousel | Autoplay | div | 9rem | layout/geometry — minimize | [docs/components/carousel.mdx:137](../../docs/components/carousel.mdx#L137) |
-| components/carousel | Autoplay | div | 9rem | layout/geometry — minimize | [docs/components/carousel.mdx:141](../../docs/components/carousel.mdx#L141) |
-| components/carousel | Commit | div | 8rem | layout/geometry — minimize | [docs/components/carousel.mdx:653](../../docs/components/carousel.mdx#L653) |
-| components/carousel | Commit | div | 8rem | layout/geometry — minimize | [docs/components/carousel.mdx:664](../../docs/components/carousel.mdx#L664) |
-| components/carousel | Commit | div | 8rem | layout/geometry — minimize | [docs/components/carousel.mdx:675](../../docs/components/carousel.mdx#L675) |
+| components/carousel | Autoplay | div | 9rem | layout/geometry — minimize | [docs/components/carousel.mdx:130](../../docs/components/carousel.mdx#L130) |
+| components/carousel | Autoplay | div | 9rem | layout/geometry — minimize | [docs/components/carousel.mdx:134](../../docs/components/carousel.mdx#L134) |
+| components/carousel | Autoplay | div | 9rem | layout/geometry — minimize | [docs/components/carousel.mdx:138](../../docs/components/carousel.mdx#L138) |
+| components/carousel | Commit | div | 8rem | layout/geometry — minimize | [docs/components/carousel.mdx:632](../../docs/components/carousel.mdx#L632) |
+| components/carousel | Commit | div | 8rem | layout/geometry — minimize | [docs/components/carousel.mdx:642](../../docs/components/carousel.mdx#L642) |
+| components/carousel | Commit | div | 8rem | layout/geometry — minimize | [docs/components/carousel.mdx:652](../../docs/components/carousel.mdx#L652) |
 | components/cursor | Spring | div | 10rem | layout/geometry — minimize | [docs/components/cursor.mdx:47](../../docs/components/cursor.mdx#L47) |
 | components/cursor | Spring | div | 10rem | layout/geometry — minimize | [docs/components/cursor.mdx:51](../../docs/components/cursor.mdx#L51) |
 | components/cursor | Zones | div | 10rem | layout/geometry — minimize | [docs/components/cursor.mdx:73](../../docs/components/cursor.mdx#L73) |
@@ -3720,11 +2950,11 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/cursor | Dot and ring | div | 12rem | layout/geometry — minimize | [docs/components/cursor.mdx:134](../../docs/components/cursor.mdx#L134) |
 | components/cursor | Reduced motion | div | 10rem | layout/geometry — minimize | [docs/components/cursor.mdx:208](../../docs/components/cursor.mdx#L208) |
 | components/dialog | Container modality | section | 16rem | layout/geometry — minimize | [docs/components/dialog.mdx:82](../../docs/components/dialog.mdx#L82) |
-| components/input-group | Native textarea | textarea | calc(var(--tp-control-height-md) * 2) | layout/geometry — minimize | [docs/components/input-group.mdx:255](../../docs/components/input-group.mdx#L255) |
-| components/markdown | Streaming | tp-markdown | 12rem | layout/geometry — minimize | [docs/components/markdown.mdx:133](../../docs/components/markdown.mdx#L133) |
+| components/input-group | Native textarea | textarea | calc(var(--tp-control-height-md) * 2) | layout/geometry — minimize | [docs/components/input-group.mdx:252](../../docs/components/input-group.mdx#L252) |
+| components/markdown | Streaming | tp-markdown | 12rem | layout/geometry — minimize | [docs/components/markdown.mdx:137](../../docs/components/markdown.mdx#L137) |
 | components/menu | Context invocation | div | 9rem | layout/geometry — minimize | [docs/components/menu.mdx:147](../../docs/components/menu.mdx#L147) |
-| components/scroll-trigger | Pinned scene | div | 100cqb | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:204](../../docs/components/scroll-trigger.mdx#L204) |
-| components/scroll-trigger | Pinned scene | div | 100cqb | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:219](../../docs/components/scroll-trigger.mdx#L219) |
+| components/scroll-trigger | Pinned scene | div | 100cqb | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:206](../../docs/components/scroll-trigger.mdx#L206) |
+| components/scroll-trigger | Pinned scene | div | 100cqb | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:221](../../docs/components/scroll-trigger.mdx#L221) |
 | components/tooltip | Cursor tracking | div | 5rem | layout/geometry — minimize | [docs/components/tooltip.mdx:69](../../docs/components/tooltip.mdx#L69) |
 | components/cursor | Components/Cursor | div | 16rem | layout/geometry — minimize | [src/stories/cursor.stories.ts:92](../../src/stories/cursor.stories.ts#L92) |
 
@@ -3740,21 +2970,21 @@ Each row retains the target element, use-case label, exact value and source loca
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
 | components/aspect-ratio | Common ratios | div | start | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:26](../../docs/components/aspect-ratio.mdx#L26) |
-| components/code-block | Title slot | span | center | layout/geometry — minimize | [docs/components/code-block.mdx:33](../../docs/components/code-block.mdx#L33) |
-| components/copy-button | Beside a value | dl | center | layout/geometry — minimize | [docs/components/copy-button.mdx:50](../../docs/components/copy-button.mdx#L50) |
-| components/description-list | Record details | span | center | layout/geometry — minimize | [docs/components/description-list.mdx:35](../../docs/components/description-list.mdx#L35) |
+| components/code-block | Title slot | span | center | layout/geometry — minimize | [docs/components/code-block.mdx:35](../../docs/components/code-block.mdx#L35) |
+| components/copy-button | Beside a value | dl | center | layout/geometry — minimize | [docs/components/copy-button.mdx:52](../../docs/components/copy-button.mdx#L52) |
+| components/description-list | Record details | span | center | layout/geometry — minimize | [docs/components/description-list.mdx:39](../../docs/components/description-list.mdx#L39) |
 | components/icon | Decorative and labelled | span | center | layout/geometry — minimize | [docs/components/icon.mdx:51](../../docs/components/icon.mdx#L51) |
-| components/label | By id and by nesting | tp-label | center | layout/geometry — minimize | [docs/components/label.mdx:32](../../docs/components/label.mdx#L32) |
-| components/list | Recordings | span | center | layout/geometry — minimize | [docs/components/list.mdx:247](../../docs/components/list.mdx#L247) |
-| components/list | People and invitations | span | center | layout/geometry — minimize | [docs/components/list.mdx:343](../../docs/components/list.mdx#L343) |
-| components/markdown | With a table of contents | div | start | layout/geometry — minimize | [docs/components/markdown.mdx:234](../../docs/components/markdown.mdx#L234) |
-| components/slider | Compact readout | div | center | layout/geometry — minimize | [docs/components/slider.mdx:203](../../docs/components/slider.mdx#L203) |
+| components/label | By id and by nesting | tp-label | center | layout/geometry — minimize | [docs/components/label.mdx:34](../../docs/components/label.mdx#L34) |
+| components/list | Recordings | span | center | layout/geometry — minimize | [docs/components/list.mdx:252](../../docs/components/list.mdx#L252) |
+| components/list | People and invitations | span | center | layout/geometry — minimize | [docs/components/list.mdx:346](../../docs/components/list.mdx#L346) |
+| components/markdown | With a table of contents | div | start | layout/geometry — minimize | [docs/components/markdown.mdx:240](../../docs/components/markdown.mdx#L240) |
+| components/slider | Compact readout | div | center | layout/geometry — minimize | [docs/components/slider.mdx:202](../../docs/components/slider.mdx#L202) |
 | components/table-of-contents | Table of contents | div | start | layout/geometry — minimize | [docs/components/table-of-contents.mdx:12](../../docs/components/table-of-contents.mdx#L12) |
 | components/table-of-contents | Nested sections | div | start | layout/geometry — minimize | [docs/components/table-of-contents.mdx:87](../../docs/components/table-of-contents.mdx#L87) |
 | components/table-of-contents | Collected targets | div | start | layout/geometry — minimize | [docs/components/table-of-contents.mdx:174](../../docs/components/table-of-contents.mdx#L174) |
 | components/table-of-contents | Compact | div | start | layout/geometry — minimize | [docs/components/table-of-contents.mdx:238](../../docs/components/table-of-contents.mdx#L238) |
-| motion/surface/glow-border | Custom colors | div | center | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:137](../../docs/motion/surface/glow-border.mdx#L137) |
-| motion/surface/glow-border | Lit by an element | div | center | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:162](../../docs/motion/surface/glow-border.mdx#L162) |
+| motion/surface/glow-border | Custom colors | div | center | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:139](../../docs/motion/surface/glow-border.mdx#L139) |
+| motion/surface/glow-border | Lit by an element | div | center | layout/geometry — minimize | [docs/motion/surface/glow-border.mdx:164](../../docs/motion/surface/glow-border.mdx#L164) |
 | widgets/easing-editor | Spring and custom points | div | start | layout/geometry — minimize | [docs/widgets/easing-editor.mdx:22](../../docs/widgets/easing-editor.mdx#L22) |
 | compositions/map.examples | pinSvg | section | start | layout/geometry — minimize | [src/stories/map.examples.ts:110](../../src/stories/map.examples.ts#L110) |
 | compositions/table-of-contents.examples | Changelog | div | start | layout/geometry — minimize | [src/stories/table-of-contents.examples.ts:141](../../src/stories/table-of-contents.examples.ts#L141) |
@@ -3771,16 +3001,16 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/carousel | Crossfade | tp-stack | content-box | manual review | [docs/components/carousel.mdx:187](../../docs/components/carousel.mdx#L187) |
-| components/carousel | Crossfade | tp-stack | content-box | manual review | [docs/components/carousel.mdx:203](../../docs/components/carousel.mdx#L203) |
-| components/carousel | Crossfade | tp-stack | content-box | manual review | [docs/components/carousel.mdx:220](../../docs/components/carousel.mdx#L220) |
-| components/scroll-trigger | Replay on entry | p | border-box | manual review | [docs/components/scroll-trigger.mdx:59](../../docs/components/scroll-trigger.mdx#L59) |
-| components/scroll-trigger | Scrubbed band | tp-stack | border-box | manual review | [docs/components/scroll-trigger.mdx:86](../../docs/components/scroll-trigger.mdx#L86) |
-| components/scroll-trigger | Scrubbed band | div | border-box | manual review | [docs/components/scroll-trigger.mdx:106](../../docs/components/scroll-trigger.mdx#L106) |
-| components/scroll-trigger | Custom scroll range | tp-stack | border-box | manual review | [docs/components/scroll-trigger.mdx:139](../../docs/components/scroll-trigger.mdx#L139) |
-| components/scroll-trigger | Custom scroll range | div | border-box | manual review | [docs/components/scroll-trigger.mdx:181](../../docs/components/scroll-trigger.mdx#L181) |
-| components/scroll-trigger | Pinned scene | div | border-box | manual review | [docs/components/scroll-trigger.mdx:204](../../docs/components/scroll-trigger.mdx#L204) |
-| components/scroll-trigger | Pinned scene | div | border-box | manual review | [docs/components/scroll-trigger.mdx:219](../../docs/components/scroll-trigger.mdx#L219) |
+| components/carousel | Crossfade | tp-stack | content-box | manual review | [docs/components/carousel.mdx:184](../../docs/components/carousel.mdx#L184) |
+| components/carousel | Crossfade | tp-stack | content-box | manual review | [docs/components/carousel.mdx:198](../../docs/components/carousel.mdx#L198) |
+| components/carousel | Crossfade | tp-stack | content-box | manual review | [docs/components/carousel.mdx:213](../../docs/components/carousel.mdx#L213) |
+| components/scroll-trigger | Replay on entry | p | border-box | manual review | [docs/components/scroll-trigger.mdx:61](../../docs/components/scroll-trigger.mdx#L61) |
+| components/scroll-trigger | Scrubbed band | tp-stack | border-box | manual review | [docs/components/scroll-trigger.mdx:88](../../docs/components/scroll-trigger.mdx#L88) |
+| components/scroll-trigger | Scrubbed band | div | border-box | manual review | [docs/components/scroll-trigger.mdx:108](../../docs/components/scroll-trigger.mdx#L108) |
+| components/scroll-trigger | Custom scroll range | tp-stack | border-box | manual review | [docs/components/scroll-trigger.mdx:141](../../docs/components/scroll-trigger.mdx#L141) |
+| components/scroll-trigger | Custom scroll range | div | border-box | manual review | [docs/components/scroll-trigger.mdx:183](../../docs/components/scroll-trigger.mdx#L183) |
+| components/scroll-trigger | Pinned scene | div | border-box | manual review | [docs/components/scroll-trigger.mdx:206](../../docs/components/scroll-trigger.mdx#L206) |
+| components/scroll-trigger | Pinned scene | div | border-box | manual review | [docs/components/scroll-trigger.mdx:221](../../docs/components/scroll-trigger.mdx#L221) |
 | motion/text/text-mirror | Scrubbed by the scroll | tp-stack | border-box | manual review | [docs/motion/text/text-mirror.mdx:84](../../docs/motion/text/text-mirror.mdx#L84) |
 | motion/text/text-mirror | Scrubbed by the scroll | div | border-box | manual review | [docs/motion/text/text-mirror.mdx:96](../../docs/motion/text/text-mirror.mdx#L96) |
 | motion/text/text-split | Scrubbed by the scroll | tp-stack | border-box | manual review | [docs/motion/text/text-split.mdx:152](../../docs/motion/text/text-split.mdx#L152) |
@@ -3798,22 +3028,22 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/carousel | Layered 3D | img | cover | manual review | [docs/components/carousel.mdx:266](../../docs/components/carousel.mdx#L266) |
-| components/carousel | Layered 3D | img | cover | manual review | [docs/components/carousel.mdx:305](../../docs/components/carousel.mdx#L305) |
-| components/carousel | Layered 3D | img | cover | manual review | [docs/components/carousel.mdx:344](../../docs/components/carousel.mdx#L344) |
-| components/carousel | Parallax | img | cover | manual review | [docs/components/carousel.mdx:385](../../docs/components/carousel.mdx#L385) |
-| components/carousel | Parallax | img | cover | manual review | [docs/components/carousel.mdx:388](../../docs/components/carousel.mdx#L388) |
-| components/carousel | Parallax | img | cover | manual review | [docs/components/carousel.mdx:391](../../docs/components/carousel.mdx#L391) |
-| components/carousel | Parallax | img | cover | manual review | [docs/components/carousel.mdx:394](../../docs/components/carousel.mdx#L394) |
-| components/carousel | Focus | img | cover | manual review | [docs/components/carousel.mdx:415](../../docs/components/carousel.mdx#L415) |
-| components/carousel | Focus | img | cover | manual review | [docs/components/carousel.mdx:419](../../docs/components/carousel.mdx#L419) |
-| components/carousel | Focus | img | cover | manual review | [docs/components/carousel.mdx:423](../../docs/components/carousel.mdx#L423) |
-| components/carousel | Focus | img | cover | manual review | [docs/components/carousel.mdx:427](../../docs/components/carousel.mdx#L427) |
-| components/carousel | Focus | img | cover | manual review | [docs/components/carousel.mdx:431](../../docs/components/carousel.mdx#L431) |
-| components/carousel | Shader transition | img | cover | manual review | [docs/components/carousel.mdx:489](../../docs/components/carousel.mdx#L489) |
-| components/carousel | Shader transition | img | cover | manual review | [docs/components/carousel.mdx:527](../../docs/components/carousel.mdx#L527) |
-| components/carousel | Shader transition | img | cover | manual review | [docs/components/carousel.mdx:565](../../docs/components/carousel.mdx#L565) |
-| components/image | Loading placeholders | img | cover | manual review | [docs/components/image.mdx:72](../../docs/components/image.mdx#L72) |
+| components/carousel | Layered 3D | img | cover | manual review | [docs/components/carousel.mdx:255](../../docs/components/carousel.mdx#L255) |
+| components/carousel | Layered 3D | img | cover | manual review | [docs/components/carousel.mdx:291](../../docs/components/carousel.mdx#L291) |
+| components/carousel | Layered 3D | img | cover | manual review | [docs/components/carousel.mdx:327](../../docs/components/carousel.mdx#L327) |
+| components/carousel | Parallax | img | cover | manual review | [docs/components/carousel.mdx:366](../../docs/components/carousel.mdx#L366) |
+| components/carousel | Parallax | img | cover | manual review | [docs/components/carousel.mdx:369](../../docs/components/carousel.mdx#L369) |
+| components/carousel | Parallax | img | cover | manual review | [docs/components/carousel.mdx:372](../../docs/components/carousel.mdx#L372) |
+| components/carousel | Parallax | img | cover | manual review | [docs/components/carousel.mdx:375](../../docs/components/carousel.mdx#L375) |
+| components/carousel | Focus | img | cover | manual review | [docs/components/carousel.mdx:397](../../docs/components/carousel.mdx#L397) |
+| components/carousel | Focus | img | cover | manual review | [docs/components/carousel.mdx:401](../../docs/components/carousel.mdx#L401) |
+| components/carousel | Focus | img | cover | manual review | [docs/components/carousel.mdx:405](../../docs/components/carousel.mdx#L405) |
+| components/carousel | Focus | img | cover | manual review | [docs/components/carousel.mdx:409](../../docs/components/carousel.mdx#L409) |
+| components/carousel | Focus | img | cover | manual review | [docs/components/carousel.mdx:413](../../docs/components/carousel.mdx#L413) |
+| components/carousel | Shader transition | img | cover | manual review | [docs/components/carousel.mdx:471](../../docs/components/carousel.mdx#L471) |
+| components/carousel | Shader transition | img | cover | manual review | [docs/components/carousel.mdx:507](../../docs/components/carousel.mdx#L507) |
+| components/carousel | Shader transition | img | cover | manual review | [docs/components/carousel.mdx:543](../../docs/components/carousel.mdx#L543) |
+| components/image | Loading placeholders | img | cover | manual review | [docs/components/image.mdx:74](../../docs/components/image.mdx#L74) |
 
 <a id="property-27"></a>
 
@@ -3827,22 +3057,22 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/badge | Interactive badges | tp-stack | var(--tp-space-2) | component spacing — review required | [docs/components/badge.mdx:107](../../docs/components/badge.mdx#L107) |
-| components/bubble | Reactions | tp-stack | var(--tp-space-4) | component spacing — review required | [docs/components/bubble.mdx:80](../../docs/components/bubble.mdx#L80) |
-| components/scroll-trigger | Replay on entry | p | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:59](../../docs/components/scroll-trigger.mdx#L59) |
-| components/scroll-trigger | Scrubbed band | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/scroll-trigger.mdx:86](../../docs/components/scroll-trigger.mdx#L86) |
-| components/scroll-trigger | Scrubbed band | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:106](../../docs/components/scroll-trigger.mdx#L106) |
-| components/scroll-trigger | Custom scroll range | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/scroll-trigger.mdx:139](../../docs/components/scroll-trigger.mdx#L139) |
-| components/scroll-trigger | Custom scroll range | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:181](../../docs/components/scroll-trigger.mdx#L181) |
-| components/scroll-trigger | Pinned scene | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:204](../../docs/components/scroll-trigger.mdx#L204) |
-| components/scroll-trigger | Pinned scene | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:219](../../docs/components/scroll-trigger.mdx#L219) |
+| components/badge | Interactive badges | tp-stack | var(--tp-space-2) | component spacing — review required | [docs/components/badge.mdx:102](../../docs/components/badge.mdx#L102) |
+| components/bubble | Reactions | tp-stack | var(--tp-space-4) | component spacing — review required | [docs/components/bubble.mdx:83](../../docs/components/bubble.mdx#L83) |
+| components/scroll-trigger | Replay on entry | p | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:61](../../docs/components/scroll-trigger.mdx#L61) |
+| components/scroll-trigger | Scrubbed band | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/scroll-trigger.mdx:88](../../docs/components/scroll-trigger.mdx#L88) |
+| components/scroll-trigger | Scrubbed band | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:108](../../docs/components/scroll-trigger.mdx#L108) |
+| components/scroll-trigger | Custom scroll range | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/scroll-trigger.mdx:141](../../docs/components/scroll-trigger.mdx#L141) |
+| components/scroll-trigger | Custom scroll range | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:183](../../docs/components/scroll-trigger.mdx#L183) |
+| components/scroll-trigger | Pinned scene | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:206](../../docs/components/scroll-trigger.mdx#L206) |
+| components/scroll-trigger | Pinned scene | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:221](../../docs/components/scroll-trigger.mdx#L221) |
 | motion/text/text-mirror | Scrubbed by the scroll | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/motion/text/text-mirror.mdx:84](../../docs/motion/text/text-mirror.mdx#L84) |
 | motion/text/text-mirror | Scrubbed by the scroll | div | var(--tp-space-6) | layout spacing — minimize | [docs/motion/text/text-mirror.mdx:96](../../docs/motion/text/text-mirror.mdx#L96) |
 | motion/text/text-split | Scrubbed by the scroll | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/motion/text/text-split.mdx:152](../../docs/motion/text/text-split.mdx#L152) |
 | motion/text/text-split | Scrubbed by the scroll | div | var(--tp-space-6) | layout spacing — minimize | [docs/motion/text/text-split.mdx:164](../../docs/motion/text/text-split.mdx#L164) |
 | motion/text/text-stroke | Scrubbed by the scroll | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/motion/text/text-stroke.mdx:92](../../docs/motion/text/text-stroke.mdx#L92) |
 | motion/text/text-stroke | Scrubbed by the scroll | div | var(--tp-space-6) | layout spacing — minimize | [docs/motion/text/text-stroke.mdx:113](../../docs/motion/text/text-stroke.mdx#L113) |
-| compositions/presentation-primitives.examples | bubbleDefaults | tp-bubble-group | var(--tp-space-6) | component spacing — review required | [src/stories/presentation-primitives.examples.ts:19](../../src/stories/presentation-primitives.examples.ts#L19) |
+| compositions/presentation-primitives.examples | bubbleDefaults | tp-bubble-group | var(--tp-space-6) | component spacing — review required | [src/stories/presentation-primitives.examples.ts:18](../../src/stories/presentation-primitives.examples.ts#L18) |
 
 <a id="property-28"></a>
 
@@ -3887,10 +3117,10 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/field-group | Color channels | tp-field-group | 0 | layout/geometry — minimize | [docs/components/field-group.mdx:42](../../docs/components/field-group.mdx#L42) |
-| components/list | Recordings | span | 0 | layout/geometry — minimize | [docs/components/list.mdx:248](../../docs/components/list.mdx#L248) |
-| components/list | People and invitations | tp-stack | 0 | layout/geometry — minimize | [docs/components/list.mdx:286](../../docs/components/list.mdx#L286) |
-| components/list | People and invitations | span | 0 | layout/geometry — minimize | [docs/components/list.mdx:344](../../docs/components/list.mdx#L344) |
+| components/field-group | Color channels | tp-field-group | 0 | layout/geometry — minimize | [docs/components/field-group.mdx:44](../../docs/components/field-group.mdx#L44) |
+| components/list | Recordings | span | 0 | layout/geometry — minimize | [docs/components/list.mdx:253](../../docs/components/list.mdx#L253) |
+| components/list | People and invitations | tp-stack | 0 | layout/geometry — minimize | [docs/components/list.mdx:292](../../docs/components/list.mdx#L292) |
+| components/list | People and invitations | span | 0 | layout/geometry — minimize | [docs/components/list.mdx:347](../../docs/components/list.mdx#L347) |
 | components/map | Map with a list | tp-map | 0 | layout/geometry — minimize | [docs/components/map.mdx:283](../../docs/components/map.mdx#L283) |
 | components/navigation-menu | Navigation menu | tp-stack | 12rem | layout/geometry — minimize | [docs/components/navigation-menu.mdx:57](../../docs/components/navigation-menu.mdx#L57) |
 | components/navigation-menu | Mixed items | tp-stack | 12rem | layout/geometry — minimize | [docs/components/navigation-menu.mdx:82](../../docs/components/navigation-menu.mdx#L82) |
@@ -3900,7 +3130,7 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/table | Prose column | tp-table-cell | 15rem | layout/geometry — minimize | [docs/components/table.mdx:294](../../docs/components/table.mdx#L294) |
 | components/table | Prose column | tp-table-cell | 15rem | layout/geometry — minimize | [docs/components/table.mdx:299](../../docs/components/table.mdx#L299) |
 | components/table | Prose column | tp-table-cell | 15rem | layout/geometry — minimize | [docs/components/table.mdx:304](../../docs/components/table.mdx#L304) |
-| components/text-transform | Text transform | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:20](../../docs/components/text-transform.mdx#L20) |
+| components/text-transform | Text transform | dd | 0 | layout/geometry — minimize | [docs/components/text-transform.mdx:21](../../docs/components/text-transform.mdx#L21) |
 | compositions/map.examples | pinSvg | tp-stack | 0 | layout/geometry — minimize | [src/stories/map.examples.ts:111](../../src/stories/map.examples.ts#L111) |
 
 <a id="property-30"></a>
@@ -3922,8 +3152,8 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/cursor | Zones | span | center | layout/geometry — minimize | [docs/components/cursor.mdx:72](../../docs/components/cursor.mdx#L72) |
 | components/cursor | Dot and ring | div | center | layout/geometry — minimize | [docs/components/cursor.mdx:134](../../docs/components/cursor.mdx#L134) |
 | components/cursor | Reduced motion | div | center | layout/geometry — minimize | [docs/components/cursor.mdx:208](../../docs/components/cursor.mdx#L208) |
-| components/image | Fallbacks | span | center | layout/geometry — minimize | [docs/components/image.mdx:59](../../docs/components/image.mdx#L59) |
-| components/image | Reveal timing and repeat | p | center | layout/geometry — minimize | [docs/components/image.mdx:138](../../docs/components/image.mdx#L138) |
+| components/image | Fallbacks | span | center | layout/geometry — minimize | [docs/components/image.mdx:60](../../docs/components/image.mdx#L60) |
+| components/image | Reveal timing and repeat | p | center | layout/geometry — minimize | [docs/components/image.mdx:143](../../docs/components/image.mdx#L143) |
 | components/menu | Context invocation | div | center | layout/geometry — minimize | [docs/components/menu.mdx:147](../../docs/components/menu.mdx#L147) |
 | components/tooltip | Cursor tracking | div | center | layout/geometry — minimize | [docs/components/tooltip.mdx:69](../../docs/components/tooltip.mdx#L69) |
 
@@ -3940,17 +3170,17 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/autocomplete | In a form | tp-button | flex-start | layout/geometry — minimize | [docs/components/autocomplete.mdx:230](../../docs/components/autocomplete.mdx#L230) |
+| components/autocomplete | In a form | tp-button | flex-start | layout/geometry — minimize | [docs/components/autocomplete.mdx:237](../../docs/components/autocomplete.mdx#L237) |
 | components/color-input | In a form | tp-button | flex-start | layout/geometry — minimize | [docs/components/color-input.mdx:111](../../docs/components/color-input.mdx#L111) |
 | components/drag-drop-list | Board lanes | tp-button | flex-start | layout/geometry — minimize | [docs/components/drag-drop-list.mdx:192](../../docs/components/drag-drop-list.mdx#L192) |
 | components/message-scroller | Join marker as anchor | tp-button | flex-start | layout/geometry — minimize | [docs/components/message-scroller.mdx:201](../../docs/components/message-scroller.mdx#L201) |
 | components/message-scroller | Commands | tp-button-group | flex-start | layout/geometry — minimize | [docs/components/message-scroller.mdx:244](../../docs/components/message-scroller.mdx#L244) |
 | components/message-scroller | Prepend history | tp-button | flex-start | layout/geometry — minimize | [docs/components/message-scroller.mdx:428](../../docs/components/message-scroller.mdx#L428) |
 | components/message-scroller | Animated send | tp-button | flex-start | layout/geometry — minimize | [docs/components/message-scroller.mdx:520](../../docs/components/message-scroller.mdx#L520) |
-| components/text-area | Character count | output | flex-end | layout/geometry — minimize | [docs/components/text-area.mdx:90](../../docs/components/text-area.mdx#L90) |
+| components/text-area | Character count | output | flex-end | layout/geometry — minimize | [docs/components/text-area.mdx:93](../../docs/components/text-area.mdx#L93) |
 | motion/text/text-stroke | Hide and reveal | p | stretch | layout/geometry — minimize | [docs/motion/text/text-stroke.mdx:58](../../docs/motion/text/text-stroke.mdx#L58) |
 | widgets/flow | Automatic layout | tp-toggle-group | center | layout/geometry — minimize | [docs/widgets/flow.mdx:314](../../docs/widgets/flow.mdx#L314) |
-| widgets/text-editor | Text editor | tp-toggle-group | flex-start | layout/geometry — minimize | [docs/widgets/text-editor.mdx:18](../../docs/widgets/text-editor.mdx#L18) |
+| widgets/text-editor | Text editor | tp-toggle-group | flex-start | layout/geometry — minimize | [docs/widgets/text-editor.mdx:19](../../docs/widgets/text-editor.mdx#L19) |
 
 <a id="property-32"></a>
 
@@ -3963,17 +3193,17 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/carousel | Layered 3D | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:275](../../docs/components/carousel.mdx#L275) |
-| components/carousel | Layered 3D | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:314](../../docs/components/carousel.mdx#L314) |
-| components/carousel | Layered 3D | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:353](../../docs/components/carousel.mdx#L353) |
-| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:416](../../docs/components/carousel.mdx#L416) |
-| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:420](../../docs/components/carousel.mdx#L420) |
-| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:424](../../docs/components/carousel.mdx#L424) |
-| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:428](../../docs/components/carousel.mdx#L428) |
-| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:432](../../docs/components/carousel.mdx#L432) |
-| components/carousel | Shader transition | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:499](../../docs/components/carousel.mdx#L499) |
-| components/carousel | Shader transition | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:537](../../docs/components/carousel.mdx#L537) |
-| components/carousel | Shader transition | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:575](../../docs/components/carousel.mdx#L575) |
+| components/carousel | Layered 3D | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:264](../../docs/components/carousel.mdx#L264) |
+| components/carousel | Layered 3D | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:300](../../docs/components/carousel.mdx#L300) |
+| components/carousel | Layered 3D | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:336](../../docs/components/carousel.mdx#L336) |
+| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:398](../../docs/components/carousel.mdx#L398) |
+| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:402](../../docs/components/carousel.mdx#L402) |
+| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:406](../../docs/components/carousel.mdx#L406) |
+| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:410](../../docs/components/carousel.mdx#L410) |
+| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:414](../../docs/components/carousel.mdx#L414) |
+| components/carousel | Shader transition | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:481](../../docs/components/carousel.mdx#L481) |
+| components/carousel | Shader transition | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:517](../../docs/components/carousel.mdx#L517) |
+| components/carousel | Shader transition | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:553](../../docs/components/carousel.mdx#L553) |
 
 <a id="property-33"></a>
 
@@ -3986,17 +3216,17 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/carousel | Layered 3D | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:275](../../docs/components/carousel.mdx#L275) |
-| components/carousel | Layered 3D | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:314](../../docs/components/carousel.mdx#L314) |
-| components/carousel | Layered 3D | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:353](../../docs/components/carousel.mdx#L353) |
-| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:416](../../docs/components/carousel.mdx#L416) |
-| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:420](../../docs/components/carousel.mdx#L420) |
-| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:424](../../docs/components/carousel.mdx#L424) |
-| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:428](../../docs/components/carousel.mdx#L428) |
-| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:432](../../docs/components/carousel.mdx#L432) |
-| components/carousel | Shader transition | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:499](../../docs/components/carousel.mdx#L499) |
-| components/carousel | Shader transition | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:537](../../docs/components/carousel.mdx#L537) |
-| components/carousel | Shader transition | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:575](../../docs/components/carousel.mdx#L575) |
+| components/carousel | Layered 3D | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:264](../../docs/components/carousel.mdx#L264) |
+| components/carousel | Layered 3D | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:300](../../docs/components/carousel.mdx#L300) |
+| components/carousel | Layered 3D | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:336](../../docs/components/carousel.mdx#L336) |
+| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:398](../../docs/components/carousel.mdx#L398) |
+| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:402](../../docs/components/carousel.mdx#L402) |
+| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:406](../../docs/components/carousel.mdx#L406) |
+| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:410](../../docs/components/carousel.mdx#L410) |
+| components/carousel | Focus | figcaption | var(--tp-space-4) | layout/geometry — minimize | [docs/components/carousel.mdx:414](../../docs/components/carousel.mdx#L414) |
+| components/carousel | Shader transition | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:481](../../docs/components/carousel.mdx#L481) |
+| components/carousel | Shader transition | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:517](../../docs/components/carousel.mdx#L517) |
+| components/carousel | Shader transition | figcaption | var(--tp-space-6) | layout/geometry — minimize | [docs/components/carousel.mdx:553](../../docs/components/carousel.mdx#L553) |
 
 <a id="property-34"></a>
 
@@ -4008,17 +3238,17 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/carousel | Layered 3D | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:275](../../docs/components/carousel.mdx#L275) |
-| components/carousel | Layered 3D | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:314](../../docs/components/carousel.mdx#L314) |
-| components/carousel | Layered 3D | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:353](../../docs/components/carousel.mdx#L353) |
-| components/carousel | Focus | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:416](../../docs/components/carousel.mdx#L416) |
-| components/carousel | Focus | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:420](../../docs/components/carousel.mdx#L420) |
-| components/carousel | Focus | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:424](../../docs/components/carousel.mdx#L424) |
-| components/carousel | Focus | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:428](../../docs/components/carousel.mdx#L428) |
-| components/carousel | Focus | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:432](../../docs/components/carousel.mdx#L432) |
-| components/carousel | Shader transition | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:499](../../docs/components/carousel.mdx#L499) |
-| components/carousel | Shader transition | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:537](../../docs/components/carousel.mdx#L537) |
-| components/carousel | Shader transition | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:575](../../docs/components/carousel.mdx#L575) |
+| components/carousel | Layered 3D | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:264](../../docs/components/carousel.mdx#L264) |
+| components/carousel | Layered 3D | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:300](../../docs/components/carousel.mdx#L300) |
+| components/carousel | Layered 3D | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:336](../../docs/components/carousel.mdx#L336) |
+| components/carousel | Focus | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:398](../../docs/components/carousel.mdx#L398) |
+| components/carousel | Focus | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:402](../../docs/components/carousel.mdx#L402) |
+| components/carousel | Focus | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:406](../../docs/components/carousel.mdx#L406) |
+| components/carousel | Focus | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:410](../../docs/components/carousel.mdx#L410) |
+| components/carousel | Focus | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:414](../../docs/components/carousel.mdx#L414) |
+| components/carousel | Shader transition | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:481](../../docs/components/carousel.mdx#L481) |
+| components/carousel | Shader transition | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:517](../../docs/components/carousel.mdx#L517) |
+| components/carousel | Shader transition | figcaption | 0 1px 12px rgb(0 0 0 / 55%) | content appearance — review required | [docs/components/carousel.mdx:553](../../docs/components/carousel.mdx#L553) |
 
 <a id="property-35"></a>
 
@@ -4030,16 +3260,16 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/collapsible | Open change | p | var(--tp-font-mono) | content appearance — review required | [docs/components/collapsible.mdx:116](../../docs/components/collapsible.mdx#L116) |
-| components/copy-button | Beside a value | dd | var(--tp-font-mono) | content appearance — review required | [docs/components/copy-button.mdx:52](../../docs/components/copy-button.mdx#L52) |
-| components/copy-button | Beside a value | dd | var(--tp-font-mono) | content appearance — review required | [docs/components/copy-button.mdx:55](../../docs/components/copy-button.mdx#L55) |
-| components/drag-drop-list | Controlled lanes | output | var(--tp-font-mono) | content appearance — review required | [docs/components/drag-drop-list.mdx:255](../../docs/components/drag-drop-list.mdx#L255) |
-| components/form | Form | output | var(--tp-font-mono) | content appearance — review required | [docs/components/form.mdx:28](../../docs/components/form.mdx#L28) |
-| components/form | Notification settings | output | var(--tp-font-mono) | content appearance — review required | [docs/components/form.mdx:77](../../docs/components/form.mdx#L77) |
-| components/form | Repeated emails | output | var(--tp-font-mono) | content appearance — review required | [docs/components/form.mdx:206](../../docs/components/form.mdx#L206) |
+| components/collapsible | Open change | p | var(--tp-font-mono) | content appearance — review required | [docs/components/collapsible.mdx:119](../../docs/components/collapsible.mdx#L119) |
+| components/copy-button | Beside a value | dd | var(--tp-font-mono) | content appearance — review required | [docs/components/copy-button.mdx:54](../../docs/components/copy-button.mdx#L54) |
+| components/copy-button | Beside a value | dd | var(--tp-font-mono) | content appearance — review required | [docs/components/copy-button.mdx:57](../../docs/components/copy-button.mdx#L57) |
+| components/drag-drop-list | Controlled lanes | output | var(--tp-font-mono) | content appearance — review required | [docs/components/drag-drop-list.mdx:251](../../docs/components/drag-drop-list.mdx#L251) |
+| components/form | Form | output | var(--tp-font-mono) | content appearance — review required | [docs/components/form.mdx:29](../../docs/components/form.mdx#L29) |
+| components/form | Notification settings | output | var(--tp-font-mono) | content appearance — review required | [docs/components/form.mdx:79](../../docs/components/form.mdx#L79) |
+| components/form | Repeated emails | output | var(--tp-font-mono) | content appearance — review required | [docs/components/form.mdx:211](../../docs/components/form.mdx#L211) |
 | components/resizable-panel-group | Vertical | div | var(--tp-font-mono) | content appearance — review required | [docs/components/resizable-panel-group.mdx:76](../../docs/components/resizable-panel-group.mdx#L76) |
 | components/resizable-panel-group | Layout events | output | var(--tp-font-mono) | content appearance — review required | [docs/components/resizable-panel-group.mdx:149](../../docs/components/resizable-panel-group.mdx#L149) |
-| components/scroll-trigger | Reveal events | output | var(--tp-font-mono) | content appearance — review required | [docs/components/scroll-trigger.mdx:243](../../docs/components/scroll-trigger.mdx#L243) |
+| components/scroll-trigger | Reveal events | output | var(--tp-font-mono) | content appearance — review required | [docs/components/scroll-trigger.mdx:246](../../docs/components/scroll-trigger.mdx#L246) |
 
 <a id="property-36"></a>
 
@@ -4095,13 +3325,13 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
+| components/carousel | Bullets inside | blockquote | center | layout/geometry — minimize | [docs/components/carousel.mdx:101](../../docs/components/carousel.mdx#L101) |
 | components/carousel | Bullets inside | blockquote | center | layout/geometry — minimize | [docs/components/carousel.mdx:105](../../docs/components/carousel.mdx#L105) |
 | components/carousel | Bullets inside | blockquote | center | layout/geometry — minimize | [docs/components/carousel.mdx:109](../../docs/components/carousel.mdx#L109) |
-| components/carousel | Bullets inside | blockquote | center | layout/geometry — minimize | [docs/components/carousel.mdx:113](../../docs/components/carousel.mdx#L113) |
 | components/cursor | Zones | div | end | layout/geometry — minimize | [docs/components/cursor.mdx:73](../../docs/components/cursor.mdx#L73) |
 | components/cursor | Zones | div | end | layout/geometry — minimize | [docs/components/cursor.mdx:80](../../docs/components/cursor.mdx#L80) |
-| components/scroll-trigger | Pinned scene | div | start | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:204](../../docs/components/scroll-trigger.mdx#L204) |
-| components/scroll-trigger | Pinned scene | div | center | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:211](../../docs/components/scroll-trigger.mdx#L211) |
+| components/scroll-trigger | Pinned scene | div | start | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:206](../../docs/components/scroll-trigger.mdx#L206) |
+| components/scroll-trigger | Pinned scene | div | center | layout/geometry — minimize | [docs/components/scroll-trigger.mdx:213](../../docs/components/scroll-trigger.mdx#L213) |
 
 <a id="property-39"></a>
 
@@ -4136,9 +3366,9 @@ Each row retains the target element, use-case label, exact value and source loca
 | components/aspect-ratio | One ratio, three widths | figcaption | var(--tp-space-2) | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:60](../../docs/components/aspect-ratio.mdx#L60) |
 | components/aspect-ratio | One ratio, three widths | figcaption | var(--tp-space-2) | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:82](../../docs/components/aspect-ratio.mdx#L82) |
 | components/aspect-ratio | One ratio, three widths | figcaption | var(--tp-space-2) | layout/geometry — minimize | [docs/components/aspect-ratio.mdx:104](../../docs/components/aspect-ratio.mdx#L104) |
-| components/timeline | Changelog | tp-stack | var(--tp-space-2) | layout/geometry — minimize | [docs/components/timeline.mdx:209](../../docs/components/timeline.mdx#L209) |
-| widgets/color-picker | Popup in a form | output | var(--tp-space-3) | layout/geometry — minimize | [docs/widgets/color-picker.mdx:65](../../docs/widgets/color-picker.mdx#L65) |
-| widgets/emoji-picker | Popup in a form | output | var(--tp-space-3) | layout/geometry — minimize | [docs/widgets/emoji-picker.mdx:215](../../docs/widgets/emoji-picker.mdx#L215) |
+| components/timeline | Changelog | tp-stack | var(--tp-space-2) | layout/geometry — minimize | [docs/components/timeline.mdx:214](../../docs/components/timeline.mdx#L214) |
+| widgets/color-picker | Popup in a form | output | var(--tp-space-3) | layout/geometry — minimize | [docs/widgets/color-picker.mdx:66](../../docs/widgets/color-picker.mdx#L66) |
+| widgets/emoji-picker | Popup in a form | output | var(--tp-space-3) | layout/geometry — minimize | [docs/widgets/emoji-picker.mdx:214](../../docs/widgets/emoji-picker.mdx#L214) |
 | widgets/flow | In a form | output | var(--tp-space-3) | layout/geometry — minimize | [docs/widgets/flow.mdx:712](../../docs/widgets/flow.mdx#L712) |
 
 <a id="property-41"></a>
@@ -4151,10 +3381,10 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/scroll-trigger | Replay on entry | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:58](../../docs/components/scroll-trigger.mdx#L58) |
-| components/scroll-trigger | Scrubbed band | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:76](../../docs/components/scroll-trigger.mdx#L76) |
-| components/scroll-trigger | Custom scroll range | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:129](../../docs/components/scroll-trigger.mdx#L129) |
-| components/scroll-trigger | Pinned scene | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:203](../../docs/components/scroll-trigger.mdx#L203) |
+| components/scroll-trigger | Replay on entry | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:60](../../docs/components/scroll-trigger.mdx#L60) |
+| components/scroll-trigger | Scrubbed band | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:78](../../docs/components/scroll-trigger.mdx#L78) |
+| components/scroll-trigger | Custom scroll range | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:131](../../docs/components/scroll-trigger.mdx#L131) |
+| components/scroll-trigger | Pinned scene | div | var(--tp-space-6) | layout spacing — minimize | [docs/components/scroll-trigger.mdx:205](../../docs/components/scroll-trigger.mdx#L205) |
 | motion/text/text-mirror | Scrubbed by the scroll | div | var(--tp-space-6) | layout spacing — minimize | [docs/motion/text/text-mirror.mdx:74](../../docs/motion/text/text-mirror.mdx#L74) |
 | motion/text/text-split | Scrubbed by the scroll | div | var(--tp-space-6) | layout spacing — minimize | [docs/motion/text/text-split.mdx:142](../../docs/motion/text/text-split.mdx#L142) |
 | motion/text/text-stroke | Scrubbed by the scroll | div | var(--tp-space-6) | layout spacing — minimize | [docs/motion/text/text-stroke.mdx:82](../../docs/motion/text/text-stroke.mdx#L82) |
@@ -4171,7 +3401,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/markdown | With a table of contents | aside | 0 | layout/geometry — minimize | [docs/components/markdown.mdx:260](../../docs/components/markdown.mdx#L260) |
+| components/markdown | With a table of contents | aside | 0 | layout/geometry — minimize | [docs/components/markdown.mdx:266](../../docs/components/markdown.mdx#L266) |
 | components/table-of-contents | Table of contents | aside | 0 | layout/geometry — minimize | [docs/components/table-of-contents.mdx:31](../../docs/components/table-of-contents.mdx#L31) |
 | components/table-of-contents | Nested sections | aside | 0 | layout/geometry — minimize | [docs/components/table-of-contents.mdx:88](../../docs/components/table-of-contents.mdx#L88) |
 | components/table-of-contents | Collected targets | aside | 0 | layout/geometry — minimize | [docs/components/table-of-contents.mdx:197](../../docs/components/table-of-contents.mdx#L197) |
@@ -4189,12 +3419,12 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/carousel | Autoplay | div | center | layout/geometry — minimize | [docs/components/carousel.mdx:133](../../docs/components/carousel.mdx#L133) |
-| components/carousel | Autoplay | div | center | layout/geometry — minimize | [docs/components/carousel.mdx:137](../../docs/components/carousel.mdx#L137) |
-| components/carousel | Autoplay | div | center | layout/geometry — minimize | [docs/components/carousel.mdx:141](../../docs/components/carousel.mdx#L141) |
-| components/carousel | Commit | div | center | layout/geometry — minimize | [docs/components/carousel.mdx:653](../../docs/components/carousel.mdx#L653) |
-| components/carousel | Commit | div | center | layout/geometry — minimize | [docs/components/carousel.mdx:664](../../docs/components/carousel.mdx#L664) |
-| components/carousel | Commit | div | center | layout/geometry — minimize | [docs/components/carousel.mdx:675](../../docs/components/carousel.mdx#L675) |
+| components/carousel | Autoplay | div | center | layout/geometry — minimize | [docs/components/carousel.mdx:130](../../docs/components/carousel.mdx#L130) |
+| components/carousel | Autoplay | div | center | layout/geometry — minimize | [docs/components/carousel.mdx:134](../../docs/components/carousel.mdx#L134) |
+| components/carousel | Autoplay | div | center | layout/geometry — minimize | [docs/components/carousel.mdx:138](../../docs/components/carousel.mdx#L138) |
+| components/carousel | Commit | div | center | layout/geometry — minimize | [docs/components/carousel.mdx:632](../../docs/components/carousel.mdx#L632) |
+| components/carousel | Commit | div | center | layout/geometry — minimize | [docs/components/carousel.mdx:642](../../docs/components/carousel.mdx#L642) |
+| components/carousel | Commit | div | center | layout/geometry — minimize | [docs/components/carousel.mdx:652](../../docs/components/carousel.mdx#L652) |
 
 <a id="property-44"></a>
 
@@ -4243,7 +3473,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/input-group | Native textarea | textarea | inherit | content appearance — review required | [docs/components/input-group.mdx:255](../../docs/components/input-group.mdx#L255) |
+| components/input-group | Native textarea | textarea | inherit | content appearance — review required | [docs/components/input-group.mdx:252](../../docs/components/input-group.mdx#L252) |
 | components/button | FormActions | output | var(--tp-text-sm) var(--tp-font-mono) | content appearance — review required | [src/stories/button.stories.ts:199](../../src/stories/button.stories.ts#L199) |
 | components/questionnaire | Components/Questionnaire | output | var(--tp-text-sm) var(--tp-font-mono) | content appearance — review required | [src/stories/questionnaire.stories.ts:62](../../src/stories/questionnaire.stories.ts#L62) |
 | compositions/slider.examples | Field and form submission | output | var(--tp-text-sm) var(--tp-font-mono) | content appearance — review required | [src/stories/slider.examples.ts:110](../../src/stories/slider.examples.ts#L110) |
@@ -4263,8 +3493,8 @@ Each row retains the target element, use-case label, exact value and source loca
 | --- | --- | --- | --- | --- | --- |
 | components/cursor | Native passthrough | tp-button | start | layout/geometry — minimize | [docs/components/cursor.mdx:161](../../docs/components/cursor.mdx#L161) |
 | components/dialog | Container modality | tp-button | start | layout/geometry — minimize | [docs/components/dialog.mdx:88](../../docs/components/dialog.mdx#L88) |
-| components/form | Repeated emails | tp-button | start | layout/geometry — minimize | [docs/components/form.mdx:200](../../docs/components/form.mdx#L200) |
-| components/qr-code | Connect a device | tp-qr-code | center | layout/geometry — minimize | [docs/components/qr-code.mdx:25](../../docs/components/qr-code.mdx#L25) |
+| components/form | Repeated emails | tp-button | start | layout/geometry — minimize | [docs/components/form.mdx:206](../../docs/components/form.mdx#L206) |
+| components/qr-code | Connect a device | tp-qr-code | center | layout/geometry — minimize | [docs/components/qr-code.mdx:27](../../docs/components/qr-code.mdx#L27) |
 | motion/text/text-split | Reveal on demand | p | stretch | layout/geometry — minimize | [docs/motion/text/text-split.mdx:76](../../docs/motion/text/text-split.mdx#L76) |
 
 <a id="property-48"></a>
@@ -4278,8 +3508,8 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/checkbox | Select all | legend | var(--tp-space-3) | layout/geometry — minimize | [docs/components/checkbox.mdx:68](../../docs/components/checkbox.mdx#L68) |
-| components/checkbox | CheckboxGroupController | legend | var(--tp-space-3) | layout/geometry — minimize | [docs/components/checkbox.mdx:117](../../docs/components/checkbox.mdx#L117) |
+| components/checkbox | Select all | legend | var(--tp-space-3) | layout/geometry — minimize | [docs/components/checkbox.mdx:70](../../docs/components/checkbox.mdx#L70) |
+| components/checkbox | CheckboxGroupController | legend | var(--tp-space-3) | layout/geometry — minimize | [docs/components/checkbox.mdx:119](../../docs/components/checkbox.mdx#L119) |
 | components/table-of-contents | Collected targets | div | var(--tp-space-5) | layout/geometry — minimize | [docs/components/table-of-contents.mdx:183](../../docs/components/table-of-contents.mdx#L183) |
 | components/table-of-contents | Collected targets | div | var(--tp-space-5) | layout/geometry — minimize | [docs/components/table-of-contents.mdx:187](../../docs/components/table-of-contents.mdx#L187) |
 | components/table-of-contents | Collected targets | div | var(--tp-space-5) | layout/geometry — minimize | [docs/components/table-of-contents.mdx:191](../../docs/components/table-of-contents.mdx#L191) |
@@ -4295,10 +3525,10 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/image | Reveal timing and repeat | tp-image | 100ms | token override — presentation/configuration review | [docs/components/image.mdx:135](../../docs/components/image.mdx#L135) |
-| components/image | Reveal timing and repeat | tp-image | 200ms | token override — presentation/configuration review | [docs/components/image.mdx:136](../../docs/components/image.mdx#L136) |
-| components/image | Reveal timing and repeat | tp-image | 100ms | token override — presentation/configuration review | [docs/components/image.mdx:141](../../docs/components/image.mdx#L141) |
-| components/image | Reveal timing and repeat | tp-image | 200ms | token override — presentation/configuration review | [docs/components/image.mdx:142](../../docs/components/image.mdx#L142) |
+| components/image | Reveal timing and repeat | tp-image | 100ms | token override — presentation/configuration review | [docs/components/image.mdx:140](../../docs/components/image.mdx#L140) |
+| components/image | Reveal timing and repeat | tp-image | 200ms | token override — presentation/configuration review | [docs/components/image.mdx:141](../../docs/components/image.mdx#L141) |
+| components/image | Reveal timing and repeat | tp-image | 100ms | token override — presentation/configuration review | [docs/components/image.mdx:146](../../docs/components/image.mdx#L146) |
+| components/image | Reveal timing and repeat | tp-image | 200ms | token override — presentation/configuration review | [docs/components/image.mdx:147](../../docs/components/image.mdx#L147) |
 
 <a id="property-50"></a>
 
@@ -4326,10 +3556,10 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/image | Reveal timing and repeat | div | auto | layout/geometry — minimize | [docs/components/image.mdx:132](../../docs/components/image.mdx#L132) |
-| components/image | Parallax in a scroller | div | auto | layout/geometry — minimize | [docs/components/image.mdx:178](../../docs/components/image.mdx#L178) |
-| components/image | Scroll zoom in a vertical scroller | div | auto | layout/geometry — minimize | [docs/components/image.mdx:190](../../docs/components/image.mdx#L190) |
-| components/image | Smoothing | div | auto | layout/geometry — minimize | [docs/components/image.mdx:264](../../docs/components/image.mdx#L264) |
+| components/image | Reveal timing and repeat | div | auto | layout/geometry — minimize | [docs/components/image.mdx:137](../../docs/components/image.mdx#L137) |
+| components/image | Parallax in a scroller | div | auto | layout/geometry — minimize | [docs/components/image.mdx:186](../../docs/components/image.mdx#L186) |
+| components/image | Scroll zoom in a vertical scroller | div | auto | layout/geometry — minimize | [docs/components/image.mdx:198](../../docs/components/image.mdx#L198) |
+| components/image | Smoothing | div | auto | layout/geometry — minimize | [docs/components/image.mdx:272](../../docs/components/image.mdx#L272) |
 
 <a id="property-52"></a>
 
@@ -4343,9 +3573,9 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/checkbox | Select all | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/checkbox.mdx:74](../../docs/components/checkbox.mdx#L74) |
-| components/checkbox | CheckboxGroupController | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/checkbox.mdx:123](../../docs/components/checkbox.mdx#L123) |
-| components/collapsible | Line-by-line reveal | ul | var(--tp-space-5) | layout spacing — minimize | [docs/components/collapsible.mdx:151](../../docs/components/collapsible.mdx#L151) |
+| components/checkbox | Select all | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/checkbox.mdx:75](../../docs/components/checkbox.mdx#L75) |
+| components/checkbox | CheckboxGroupController | tp-stack | var(--tp-space-6) | component spacing — review required | [docs/components/checkbox.mdx:124](../../docs/components/checkbox.mdx#L124) |
+| components/collapsible | Line-by-line reveal | ul | var(--tp-space-5) | layout spacing — minimize | [docs/components/collapsible.mdx:155](../../docs/components/collapsible.mdx#L155) |
 | components/overflow-list | Custom count | ul | var(--tp-space-4) | layout spacing — minimize | [docs/components/overflow-list.mdx:152](../../docs/components/overflow-list.mdx#L152) |
 
 <a id="property-53"></a>
@@ -4360,9 +3590,9 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/timeline | Expandable phases | tp-timeline | 0 | token override — presentation/configuration review | [docs/components/timeline.mdx:128](../../docs/components/timeline.mdx#L128) |
-| components/timeline | Conversation | tp-timeline | var(--tp-space-4) | token override — presentation/configuration review | [docs/components/timeline.mdx:176](../../docs/components/timeline.mdx#L176) |
-| components/timeline | Changelog | tp-timeline | var(--tp-space-8) | token override — presentation/configuration review | [docs/components/timeline.mdx:201](../../docs/components/timeline.mdx#L201) |
+| components/timeline | Expandable phases | tp-timeline | 0 | token override — presentation/configuration review | [docs/components/timeline.mdx:132](../../docs/components/timeline.mdx#L132) |
+| components/timeline | Conversation | tp-timeline | var(--tp-space-4) | token override — presentation/configuration review | [docs/components/timeline.mdx:181](../../docs/components/timeline.mdx#L181) |
+| components/timeline | Changelog | tp-timeline | var(--tp-space-8) | token override — presentation/configuration review | [docs/components/timeline.mdx:207](../../docs/components/timeline.mdx#L207) |
 
 <a id="property-54"></a>
 
@@ -4375,9 +3605,9 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/copy-button | Beside a value | dl | var(--tp-space-4) | layout/geometry — minimize | [docs/components/copy-button.mdx:50](../../docs/components/copy-button.mdx#L50) |
-| components/list | Recordings | span | var(--tp-space-3) | layout/geometry — minimize | [docs/components/list.mdx:247](../../docs/components/list.mdx#L247) |
-| components/list | People and invitations | span | var(--tp-space-3) | layout/geometry — minimize | [docs/components/list.mdx:343](../../docs/components/list.mdx#L343) |
+| components/copy-button | Beside a value | dl | var(--tp-space-4) | layout/geometry — minimize | [docs/components/copy-button.mdx:52](../../docs/components/copy-button.mdx#L52) |
+| components/list | Recordings | span | var(--tp-space-3) | layout/geometry — minimize | [docs/components/list.mdx:252](../../docs/components/list.mdx#L252) |
+| components/list | People and invitations | span | var(--tp-space-3) | layout/geometry — minimize | [docs/components/list.mdx:346](../../docs/components/list.mdx#L346) |
 
 <a id="property-55"></a>
 
@@ -4389,9 +3619,9 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/collapsible | Positional slots | span | tabular-nums | content appearance — review required | [docs/components/collapsible.mdx:50](../../docs/components/collapsible.mdx#L50) |
-| components/collapsible | Positional slots | span | tabular-nums | content appearance — review required | [docs/components/collapsible.mdx:60](../../docs/components/collapsible.mdx#L60) |
-| components/list | Recordings | span | tabular-nums | content appearance — review required | [docs/components/list.mdx:249](../../docs/components/list.mdx#L249) |
+| components/collapsible | Positional slots | span | tabular-nums | content appearance — review required | [docs/components/collapsible.mdx:53](../../docs/components/collapsible.mdx#L53) |
+| components/collapsible | Positional slots | span | tabular-nums | content appearance — review required | [docs/components/collapsible.mdx:62](../../docs/components/collapsible.mdx#L62) |
+| components/list | Recordings | span | tabular-nums | content appearance — review required | [docs/components/list.mdx:254](../../docs/components/list.mdx#L254) |
 
 <a id="property-56"></a>
 
@@ -4404,7 +3634,7 @@ Each row retains the target element, use-case label, exact value and source loca
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
 | components/calendar | Nightly prices and booked dates | small | 0.7 | content appearance — review required | [docs/components/calendar.mdx:109](../../docs/components/calendar.mdx#L109) |
-| components/carousel | Crossfade | span | 0.7 | content appearance — review required | [docs/components/carousel.mdx:215](../../docs/components/carousel.mdx#L215) |
+| components/carousel | Crossfade | span | 0.7 | content appearance — review required | [docs/components/carousel.mdx:209](../../docs/components/carousel.mdx#L209) |
 | components/cursor | Zones | span | 0.7 | content appearance — review required | [docs/components/cursor.mdx:75](../../docs/components/cursor.mdx#L75) |
 
 <a id="property-57"></a>
@@ -4421,7 +3651,7 @@ Each row retains the target element, use-case label, exact value and source loca
 | --- | --- | --- | --- | --- | --- |
 | components/scroll-area | Both axes | table | nowrap | manual review | [docs/components/scroll-area.mdx:87](../../docs/components/scroll-area.mdx#L87) |
 | components/table | Prose column | tp-table | normal | manual review | [docs/components/table.mdx:282](../../docs/components/table.mdx#L282) |
-| widgets/text-editor | In a form | output | pre-line | manual review | [docs/widgets/text-editor.mdx:579](../../docs/widgets/text-editor.mdx#L579) |
+| widgets/text-editor | In a form | output | pre-line | manual review | [docs/widgets/text-editor.mdx:576](../../docs/widgets/text-editor.mdx#L576) |
 
 <a id="property-58"></a>
 
@@ -4434,8 +3664,8 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| motion/surface/glow-border | Custom colors | tp-mo-glow-border | var(--tp-chart-4), var(--tp-chart-5), var(--tp-chart-1) | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:138](../../docs/motion/surface/glow-border.mdx#L138) |
-| motion/surface/glow-border | Custom colors | tp-mo-glow-border | var(--tp-ring) | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:147](../../docs/motion/surface/glow-border.mdx#L147) |
+| motion/surface/glow-border | Custom colors | tp-mo-glow-border | var(--tp-chart-4), var(--tp-chart-5), var(--tp-chart-1) | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:140](../../docs/motion/surface/glow-border.mdx#L140) |
+| motion/surface/glow-border | Custom colors | tp-mo-glow-border | var(--tp-ring) | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:149](../../docs/motion/surface/glow-border.mdx#L149) |
 
 <a id="property-59"></a>
 
@@ -4448,8 +3678,8 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| motion/surface/glow-border | Lingering light | tp-mo-glow-border | 0.12 | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:122](../../docs/motion/surface/glow-border.mdx#L122) |
-| motion/surface/glow-border | Custom colors | tp-mo-glow-border | 0.08 | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:138](../../docs/motion/surface/glow-border.mdx#L138) |
+| motion/surface/glow-border | Lingering light | tp-mo-glow-border | 0.12 | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:124](../../docs/motion/surface/glow-border.mdx#L124) |
+| motion/surface/glow-border | Custom colors | tp-mo-glow-border | 0.08 | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:140](../../docs/motion/surface/glow-border.mdx#L140) |
 
 <a id="property-60"></a>
 
@@ -4462,8 +3692,8 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| motion/surface/glow-border | Comets | tp-mo-glow-border | 0.8s | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:63](../../docs/motion/surface/glow-border.mdx#L63) |
-| motion/surface/glow-border | Sweep, pulse and glint | tp-mo-glow-border | 1.5s | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:92](../../docs/motion/surface/glow-border.mdx#L92) |
+| motion/surface/glow-border | Comets | tp-mo-glow-border | 0.8s | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:65](../../docs/motion/surface/glow-border.mdx#L65) |
+| motion/surface/glow-border | Sweep, pulse and glint | tp-mo-glow-border | 1.5s | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:94](../../docs/motion/surface/glow-border.mdx#L94) |
 
 <a id="property-61"></a>
 
@@ -4475,8 +3705,8 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/list | Recordings | span | column | layout/geometry — minimize | [docs/components/list.mdx:248](../../docs/components/list.mdx#L248) |
-| components/list | People and invitations | span | column | layout/geometry — minimize | [docs/components/list.mdx:344](../../docs/components/list.mdx#L344) |
+| components/list | Recordings | span | column | layout/geometry — minimize | [docs/components/list.mdx:253](../../docs/components/list.mdx#L253) |
+| components/list | People and invitations | span | column | layout/geometry — minimize | [docs/components/list.mdx:347](../../docs/components/list.mdx#L347) |
 
 <a id="property-62"></a>
 
@@ -4550,7 +3780,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/image | Reveal timing and repeat | div | 900ms | token override — presentation/configuration review | [docs/components/image.mdx:132](../../docs/components/image.mdx#L132) |
+| components/image | Reveal timing and repeat | div | 900ms | token override — presentation/configuration review | [docs/components/image.mdx:137](../../docs/components/image.mdx#L137) |
 
 <a id="property-68"></a>
 
@@ -4562,7 +3792,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/image | Reveal timing and repeat | div | cubic-bezier(0.16, 1, 0.3, 1) | token override — presentation/configuration review | [docs/components/image.mdx:132](../../docs/components/image.mdx#L132) |
+| components/image | Reveal timing and repeat | div | cubic-bezier(0.16, 1, 0.3, 1) | token override — presentation/configuration review | [docs/components/image.mdx:137](../../docs/components/image.mdx#L137) |
 
 <a id="property-69"></a>
 
@@ -4586,7 +3816,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| motion/surface/glow-border | Lingering light | tp-mo-glow-border | 700ms | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:122](../../docs/motion/surface/glow-border.mdx#L122) |
+| motion/surface/glow-border | Lingering light | tp-mo-glow-border | 700ms | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:124](../../docs/motion/surface/glow-border.mdx#L124) |
 
 <a id="property-71"></a>
 
@@ -4598,7 +3828,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| motion/surface/glow-border | Lingering light | tp-mo-glow-border | ease-out | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:122](../../docs/motion/surface/glow-border.mdx#L122) |
+| motion/surface/glow-border | Lingering light | tp-mo-glow-border | ease-out | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:124](../../docs/motion/surface/glow-border.mdx#L124) |
 
 <a id="property-72"></a>
 
@@ -4610,7 +3840,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| motion/surface/glow-border | Lingering light | tp-mo-glow-border | 600ms | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:122](../../docs/motion/surface/glow-border.mdx#L122) |
+| motion/surface/glow-border | Lingering light | tp-mo-glow-border | 600ms | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:124](../../docs/motion/surface/glow-border.mdx#L124) |
 
 <a id="property-73"></a>
 
@@ -4622,7 +3852,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| motion/surface/glow-border | Comets | tp-mo-glow-border | ease-in-out | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:63](../../docs/motion/surface/glow-border.mdx#L63) |
+| motion/surface/glow-border | Comets | tp-mo-glow-border | ease-in-out | token override — presentation/configuration review | [docs/motion/surface/glow-border.mdx:65](../../docs/motion/surface/glow-border.mdx#L65) |
 
 <a id="property-74"></a>
 
@@ -4694,7 +3924,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/qr-code | Sizes and colors | tp-qr-code | #eff6ff | token override — presentation/configuration review | [docs/components/qr-code.mdx:157](../../docs/components/qr-code.mdx#L157) |
+| components/qr-code | Sizes and colors | tp-qr-code | #eff6ff | token override — presentation/configuration review | [docs/components/qr-code.mdx:159](../../docs/components/qr-code.mdx#L159) |
 
 <a id="property-80"></a>
 
@@ -4706,7 +3936,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/qr-code | Sizes and colors | tp-qr-code | #1e3a8a | token override — presentation/configuration review | [docs/components/qr-code.mdx:157](../../docs/components/qr-code.mdx#L157) |
+| components/qr-code | Sizes and colors | tp-qr-code | #1e3a8a | token override — presentation/configuration review | [docs/components/qr-code.mdx:159](../../docs/components/qr-code.mdx#L159) |
 
 <a id="property-81"></a>
 
@@ -4718,7 +3948,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/qr-code | Sizes and colors | tp-qr-code | 12rem | token override — presentation/configuration review | [docs/components/qr-code.mdx:157](../../docs/components/qr-code.mdx#L157) |
+| components/qr-code | Sizes and colors | tp-qr-code | 12rem | token override — presentation/configuration review | [docs/components/qr-code.mdx:159](../../docs/components/qr-code.mdx#L159) |
 
 <a id="property-82"></a>
 
@@ -4730,7 +3960,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/scroll-trigger | Pinned scene | tp-scroll-trigger | 150cqb | token override — presentation/configuration review | [docs/components/scroll-trigger.mdx:210](../../docs/components/scroll-trigger.mdx#L210) |
+| components/scroll-trigger | Pinned scene | tp-scroll-trigger | 150cqb | token override — presentation/configuration review | [docs/components/scroll-trigger.mdx:212](../../docs/components/scroll-trigger.mdx#L212) |
 
 <a id="property-83"></a>
 
@@ -4742,7 +3972,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/marker | Completion reveal | tp-marker | 1 | token override — presentation/configuration review | [docs/components/marker.mdx:168](../../docs/components/marker.mdx#L168) |
+| components/marker | Completion reveal | tp-marker | 1 | token override — presentation/configuration review | [docs/components/marker.mdx:169](../../docs/components/marker.mdx#L169) |
 
 <a id="property-84"></a>
 
@@ -4754,7 +3984,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/code-block | Token theme | tp-stack | var(--tp-muted-foreground) | token override — presentation/configuration review | [docs/components/code-block.mdx:142](../../docs/components/code-block.mdx#L142) |
+| components/code-block | Token theme | tp-stack | var(--tp-muted-foreground) | token override — presentation/configuration review | [docs/components/code-block.mdx:150](../../docs/components/code-block.mdx#L150) |
 
 <a id="property-85"></a>
 
@@ -4766,7 +3996,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/code-block | Token theme | tp-stack | light-dark(#1d4ed8, #93c5fd) | token override — presentation/configuration review | [docs/components/code-block.mdx:142](../../docs/components/code-block.mdx#L142) |
+| components/code-block | Token theme | tp-stack | light-dark(#1d4ed8, #93c5fd) | token override — presentation/configuration review | [docs/components/code-block.mdx:150](../../docs/components/code-block.mdx#L150) |
 
 <a id="property-86"></a>
 
@@ -4778,7 +4008,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/code-block | Token theme | tp-stack | light-dark(#6d28d9, #c4b5fd) | token override — presentation/configuration review | [docs/components/code-block.mdx:142](../../docs/components/code-block.mdx#L142) |
+| components/code-block | Token theme | tp-stack | light-dark(#6d28d9, #c4b5fd) | token override — presentation/configuration review | [docs/components/code-block.mdx:150](../../docs/components/code-block.mdx#L150) |
 
 <a id="property-87"></a>
 
@@ -4790,7 +4020,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/code-block | Token theme | tp-stack | light-dark(#047857, #6ee7b7) | token override — presentation/configuration review | [docs/components/code-block.mdx:142](../../docs/components/code-block.mdx#L142) |
+| components/code-block | Token theme | tp-stack | light-dark(#047857, #6ee7b7) | token override — presentation/configuration review | [docs/components/code-block.mdx:150](../../docs/components/code-block.mdx#L150) |
 
 <a id="property-88"></a>
 
@@ -4802,7 +4032,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/timeline | Roadmap | tp-timeline | 12rem | token override — presentation/configuration review | [docs/components/timeline.mdx:60](../../docs/components/timeline.mdx#L60) |
+| components/timeline | Roadmap | tp-timeline | 12rem | token override — presentation/configuration review | [docs/components/timeline.mdx:62](../../docs/components/timeline.mdx#L62) |
 
 <a id="property-89"></a>
 
@@ -4814,7 +4044,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/timeline | Expandable phases | tp-timeline | var(--tp-space-2-5) | token override — presentation/configuration review | [docs/components/timeline.mdx:128](../../docs/components/timeline.mdx#L128) |
+| components/timeline | Expandable phases | tp-timeline | var(--tp-space-2-5) | token override — presentation/configuration review | [docs/components/timeline.mdx:132](../../docs/components/timeline.mdx#L132) |
 
 <a id="property-90"></a>
 
@@ -4850,7 +4080,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/scroll-trigger | Pinned scene | div | size | manual review | [docs/components/scroll-trigger.mdx:203](../../docs/components/scroll-trigger.mdx#L203) |
+| components/scroll-trigger | Pinned scene | div | size | manual review | [docs/components/scroll-trigger.mdx:205](../../docs/components/scroll-trigger.mdx#L205) |
 
 <a id="property-93"></a>
 
@@ -4862,7 +4092,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/input-group | Native textarea | textarea | content | manual review | [docs/components/input-group.mdx:255](../../docs/components/input-group.mdx#L255) |
+| components/input-group | Native textarea | textarea | content | manual review | [docs/components/input-group.mdx:252](../../docs/components/input-group.mdx#L252) |
 
 <a id="property-94"></a>
 
@@ -4874,7 +4104,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/image | Loading placeholders | img | blur(12px) | content appearance — review required | [docs/components/image.mdx:72](../../docs/components/image.mdx#L72) |
+| components/image | Loading placeholders | img | blur(12px) | content appearance — review required | [docs/components/image.mdx:74](../../docs/components/image.mdx#L74) |
 
 <a id="property-95"></a>
 
@@ -4934,7 +4164,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/time | Time | ul | none | manual review | [docs/components/time.mdx:12](../../docs/components/time.mdx#L12) |
+| components/time | Time | ul | none | manual review | [docs/components/time.mdx:13](../../docs/components/time.mdx#L13) |
 
 <a id="property-100"></a>
 
@@ -4946,7 +4176,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/input-group | Composer | span | auto | layout/geometry — minimize | [docs/components/input-group.mdx:236](../../docs/components/input-group.mdx#L236) |
+| components/input-group | Composer | span | auto | layout/geometry — minimize | [docs/components/input-group.mdx:232](../../docs/components/input-group.mdx#L232) |
 
 <a id="property-101"></a>
 
@@ -4970,7 +4200,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/image | Horizontal strip | div | auto | layout/geometry — minimize | [docs/components/image.mdx:251](../../docs/components/image.mdx#L251) |
+| components/image | Horizontal strip | div | auto | layout/geometry — minimize | [docs/components/image.mdx:259](../../docs/components/image.mdx#L259) |
 
 <a id="property-103"></a>
 
@@ -4982,7 +4212,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/timeline | Roadmap | tp-timeline | var(--tp-space-4) | component spacing — review required | [docs/components/timeline.mdx:60](../../docs/components/timeline.mdx#L60) |
+| components/timeline | Roadmap | tp-timeline | var(--tp-space-4) | component spacing — review required | [docs/components/timeline.mdx:62](../../docs/components/timeline.mdx#L62) |
 
 <a id="property-104"></a>
 
@@ -4994,7 +4224,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/input-group | Native textarea | textarea | vertical | layout/geometry — minimize | [docs/components/input-group.mdx:255](../../docs/components/input-group.mdx#L255) |
+| components/input-group | Native textarea | textarea | vertical | layout/geometry — minimize | [docs/components/input-group.mdx:252](../../docs/components/input-group.mdx#L252) |
 
 <a id="property-105"></a>
 
@@ -5006,7 +4236,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/copy-button | Beside a value | dl | var(--tp-space-2) | layout/geometry — minimize | [docs/components/copy-button.mdx:50](../../docs/components/copy-button.mdx#L50) |
+| components/copy-button | Beside a value | dl | var(--tp-space-2) | layout/geometry — minimize | [docs/components/copy-button.mdx:52](../../docs/components/copy-button.mdx#L52) |
 
 <a id="property-106"></a>
 
@@ -5018,7 +4248,7 @@ Each row retains the target element, use-case label, exact value and source loca
 
 | Component/page or composition owner | Use case | Target | Exact value | Triage | Source |
 | --- | --- | --- | --- | --- | --- |
-| components/empty-state | Bordered and filled | a | var(--tp-space-1) | manual review | [docs/components/empty-state.mdx:110](../../docs/components/empty-state.mdx#L110) |
+| components/empty-state | Bordered and filled | a | var(--tp-space-1) | manual review | [docs/components/empty-state.mdx:111](../../docs/components/empty-state.mdx#L111) |
 
 <a id="property-107"></a>
 
@@ -5135,7 +4365,7 @@ styleHook: { filter: 'grayscale(1)' }
 
 ### components/badge / Interactive badges
 
-**presentation hook** · target: resolve from expression · [docs/components/badge.mdx:133](../../docs/components/badge.mdx#L133)
+**presentation hook** · target: resolve from expression · [docs/components/badge.mdx:128](../../docs/components/badge.mdx#L128)
 
 ~~~~~text
 partContracts = badge.hasAttribute('data-link') ? asLink : asButton;
@@ -5143,7 +4373,7 @@ partContracts = badge.hasAttribute('data-link') ? asLink : asButton;
 
 ### components/bubble / Expandable message
 
-**presentation hook** · target: resolve from expression · [docs/components/bubble.mdx:132](../../docs/components/bubble.mdx#L132)
+**presentation hook** · target: resolve from expression · [docs/components/bubble.mdx:135](../../docs/components/bubble.mdx#L135)
 
 ~~~~~text
 partContracts = {
@@ -5153,7 +4383,7 @@ partContracts = {
 
 ### components/bubble / Expandable message
 
-**presentation hook** · target: resolve from expression · [docs/components/bubble.mdx:135](../../docs/components/bubble.mdx#L135)
+**presentation hook** · target: resolve from expression · [docs/components/bubble.mdx:138](../../docs/components/bubble.mdx#L138)
 
 ~~~~~text
 partPresentation = {
@@ -5164,7 +4394,7 @@ partPresentation = {
 
 ### components/bubble / Expandable message
 
-**presentation hook** · target: resolve from expression · [docs/components/bubble.mdx:136](../../docs/components/bubble.mdx#L136)
+**presentation hook** · target: resolve from expression · [docs/components/bubble.mdx:139](../../docs/components/bubble.mdx#L139)
 
 ~~~~~text
 styleHook: { 'padding-inline': '0', 'inline-size': 'fit-content' }
@@ -5172,7 +4402,7 @@ styleHook: { 'padding-inline': '0', 'inline-size': 'fit-content' }
 
 ### components/bubble / Expandable message
 
-**presentation hook** · target: resolve from expression · [docs/components/bubble.mdx:137](../../docs/components/bubble.mdx#L137)
+**presentation hook** · target: resolve from expression · [docs/components/bubble.mdx:140](../../docs/components/bubble.mdx#L140)
 
 ~~~~~text
 styleHook: { 'padding-inline': '0' }
@@ -5180,7 +4410,7 @@ styleHook: { 'padding-inline': '0' }
 
 ### components/bubble / Quick replies
 
-**presentation hook** · target: resolve from expression · [docs/components/bubble.mdx:163](../../docs/components/bubble.mdx#L163)
+**presentation hook** · target: resolve from expression · [docs/components/bubble.mdx:166](../../docs/components/bubble.mdx#L166)
 
 ~~~~~text
 partContracts = {
@@ -5212,7 +4442,7 @@ A whole bubble can be a link or a button. `partContracts` renders the `bubble-co
 
 ### components/bubble / Quick replies
 
-**presentation hook** · target: resolve from expression · [docs/components/bubble.mdx:169](../../docs/components/bubble.mdx#L169)
+**presentation hook** · target: resolve from expression · [docs/components/bubble.mdx:172](../../docs/components/bubble.mdx#L172)
 
 ~~~~~text
 partContracts = {
@@ -5238,7 +4468,7 @@ A whole bubble can be a link or a button. `partContracts` renders the `bubble-co
 
 ### components/button-group / Grouped pagination
 
-**presentation hook** · target: resolve from expression · [docs/components/button-group.mdx:466](../../docs/components/button-group.mdx#L466)
+**presentation hook** · target: resolve from expression · [docs/components/button-group.mdx:463](../../docs/components/button-group.mdx#L463)
 
 ~~~~~text
 partContracts = {
@@ -5275,7 +4505,7 @@ hostProperties: { title: 'Save changes' }
 
 ### components/calendar / In a popover
 
-**presentation hook** · target: resolve from expression · [docs/components/calendar.mdx:320](../../docs/components/calendar.mdx#L320)
+**presentation hook** · target: resolve from expression · [docs/components/calendar.mdx:322](../../docs/components/calendar.mdx#L322)
 
 ~~~~~text
 partContracts = {
@@ -5291,7 +4521,7 @@ partContracts = {
 
 ### components/calendar / In a popover
 
-**presentation hook** · target: resolve from expression · [docs/components/calendar.mdx:322](../../docs/components/calendar.mdx#L322)
+**presentation hook** · target: resolve from expression · [docs/components/calendar.mdx:324](../../docs/components/calendar.mdx#L324)
 
 ~~~~~text
 styleHook: {
@@ -5314,7 +4544,7 @@ styleHook: {
 
 ### components/data-visualization / Data visualization
 
-**JS style write** · target: resolve from expression · [docs/components/data-visualization.mdx:55](../../docs/components/data-visualization.mdx#L55)
+**JS style write** · target: resolve from expression · [docs/components/data-visualization.mdx:56](../../docs/components/data-visualization.mdx#L56)
 
 ~~~~~text
 group.style.outline = 'none';
@@ -5322,7 +4552,7 @@ group.style.outline = 'none';
 
 ### components/data-visualization / Line chart
 
-**JS style write** · target: resolve from expression · [docs/components/data-visualization.mdx:141](../../docs/components/data-visualization.mdx#L141)
+**JS style write** · target: resolve from expression · [docs/components/data-visualization.mdx:143](../../docs/components/data-visualization.mdx#L143)
 
 ~~~~~text
 dot.style.outline = 'none';
@@ -5330,7 +4560,7 @@ dot.style.outline = 'none';
 
 ### components/data-visualization / Description and table
 
-**embedded stylesheet** · target: resolve from expression · [docs/components/data-visualization.mdx:174](../../docs/components/data-visualization.mdx#L174)
+**embedded stylesheet** · target: resolve from expression · [docs/components/data-visualization.mdx:177](../../docs/components/data-visualization.mdx#L177)
 
 ~~~~~text
 <style>
@@ -5340,7 +4570,7 @@ dot.style.outline = 'none';
 
 ### components/empty-state / Bordered and filled
 
-**embedded stylesheet** · target: resolve from expression · [docs/components/empty-state.mdx:103](../../docs/components/empty-state.mdx#L103)
+**embedded stylesheet** · target: resolve from expression · [docs/components/empty-state.mdx:104](../../docs/components/empty-state.mdx#L104)
 
 ~~~~~text
 <style>
@@ -5351,7 +4581,7 @@ dot.style.outline = 'none';
 
 ### components/list / Card grid
 
-**presentation hook** · target: resolve from expression · [docs/components/list.mdx:172](../../docs/components/list.mdx#L172)
+**presentation hook** · target: resolve from expression · [docs/components/list.mdx:175](../../docs/components/list.mdx#L175)
 
 ~~~~~text
 partPresentation = {
@@ -5367,7 +4597,7 @@ partPresentation = {
 
 ### components/list / Card grid
 
-**presentation hook** · target: resolve from expression · [docs/components/list.mdx:174](../../docs/components/list.mdx#L174)
+**presentation hook** · target: resolve from expression · [docs/components/list.mdx:177](../../docs/components/list.mdx#L177)
 
 ~~~~~text
 styleHook: {
@@ -5379,7 +4609,7 @@ styleHook: {
 
 ### components/list / Link rows
 
-**presentation hook** · target: resolve from expression · [docs/components/list.mdx:212](../../docs/components/list.mdx#L212)
+**presentation hook** · target: resolve from expression · [docs/components/list.mdx:216](../../docs/components/list.mdx#L216)
 
 ~~~~~text
 partContracts = {
@@ -5396,9 +4626,10 @@ for (const icon of document.querySelectorAll('#list-links tp-icon')) icon.icon =
 Each part's `renderDelegate` can also wrap its content, for example to add a trailing duration column to the `list-item-content` part. With `media-treatment="image"`, an `img` in `media` gets a square thumbnail.
 
 <Preview
+  width="5"
   title="Recordings"
   align="stretch"
-  code={`<tp-list id="list-recordings" aria-label="Workshop recordings" style="max-inline-size:30rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-list id="list-recordings" aria-label="Workshop recordings">
   <tp-list-item variant="outline" media-treatment="image" description="Maya Chen" data-duration="42:10">
     <img slot="media" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=96&h=96&q=75&auto=format&fit=crop" alt="">
     <span slot="title">Designing for density <span style="color:var(--tp-muted-foreground)">· Day 1</span></span>
@@ -5452,22 +4683,20 @@ For a rich command, put a List item directly inside a Menu item. The Menu item k
 ### People and invitations
 
 <Preview
+  width="7"
   title="People and invitations"
   align="stretch"
   code={`<tp-stack
   id="list-people-example"
-  style="max-inline-size: calc(var(--tp-spacing) * 150); min-inline-size: 0"
-  gap="4"
-  ><tp-list-item variant="outline"><tp-avatar slot="media" size="sm" src="avatars/ravi-castellano.svg" fallback="RC" alt="Ravi Castellano" ></tp-avatar>Ravi Castellano<span slot="description">Last seen <tp-time mode="relative" datetime="2026-05-31T21:38:55.759Z"></tp-time></span><tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ravi Castellano" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
-  <tp-list-item variant="outline" description="Invite your team to collaborate on this project."
-    ><tp-avatar-group slot="media" size="sm"><tp-avatar slot="" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor" ></tp-avatar></tp-avatar-group>Project team<tp-button slot="actions" variant="outline" size="sm" data-feedback>Invite</tp-button></tp-list-item
+  style="min-inline-size:0"
+  gap="4"><tp-list-item variant="outline"><tp-avatar slot="media" size="sm" src="avatars/ravi-castellano.svg" fallback="RC" alt="Ravi Castellano"></tp-avatar>Ravi Castellano<span slot="description">Last seen <tp-time mode="relative" datetime="2026-05-31T21:38:55.759Z"></tp-time></span><tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ravi Castellano" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
+  <tp-list-item variant="outline" description="Invite your team to collaborate on this project."><tp-avatar-group slot="media" size="sm"><tp-avatar slot="" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor"></tp-avatar></tp-avatar-group>Project team<tp-button slot="actions" variant="outline" size="sm" data-feedback>Invite</tp-button></tp-list-item
   >
-  <tp-list aria-label="People"
-    ><tp-list-item description="maravoss@example.com"><tp-avatar slot="media" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss" ></tp-avatar>Mara Voss<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Mara Voss" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
+  <tp-list aria-label="People"><tp-list-item description="maravoss@example.com"><tp-avatar slot="media" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss"></tp-avatar>Mara Voss<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Mara Voss" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
     <tp-list-separator></tp-list-separator>
-    <tp-list-item description="theolind@example.com"><tp-avatar slot="media" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist" ></tp-avatar>Theo Lindqvist<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Theo Lindqvist" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
+    <tp-list-item description="theolind@example.com"><tp-avatar slot="media" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist"></tp-avatar>Theo Lindqvist<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Theo Lindqvist" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
     <tp-list-separator></tp-list-separator>
-    <tp-list-item description="inesokafor@example.com"><tp-avatar slot="media" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor" ></tp-avatar>Ines Okafor<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ines Okafor" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item></tp-list
+    <tp-list-item description="inesokafor@example.com"><tp-avatar slot="media" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor"></tp-avatar>Ines Okafor<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ines Okafor" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item></tp-list
   ><tp-toast></tp-toast
 ></tp-stack>`}
   script={`import { html } from 'lit';
@@ -5579,7 +4808,7 @@ setupListExample(document.getElementById('list-people-example'));`}
 
 ### components/list / Recordings
 
-**presentation hook** · target: resolve from expression · [docs/components/list.mdx:245](../../docs/components/list.mdx#L245)
+**presentation hook** · target: resolve from expression · [docs/components/list.mdx:250](../../docs/components/list.mdx#L250)
 
 ~~~~~text
 partContracts = {
@@ -5619,22 +4848,20 @@ For a rich command, put a List item directly inside a Menu item. The Menu item k
 ### People and invitations
 
 <Preview
+  width="7"
   title="People and invitations"
   align="stretch"
   code={`<tp-stack
   id="list-people-example"
-  style="max-inline-size: calc(var(--tp-spacing) * 150); min-inline-size: 0"
-  gap="4"
-  ><tp-list-item variant="outline"><tp-avatar slot="media" size="sm" src="avatars/ravi-castellano.svg" fallback="RC" alt="Ravi Castellano" ></tp-avatar>Ravi Castellano<span slot="description">Last seen <tp-time mode="relative" datetime="2026-05-31T21:38:55.759Z"></tp-time></span><tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ravi Castellano" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
-  <tp-list-item variant="outline" description="Invite your team to collaborate on this project."
-    ><tp-avatar-group slot="media" size="sm"><tp-avatar slot="" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor" ></tp-avatar></tp-avatar-group>Project team<tp-button slot="actions" variant="outline" size="sm" data-feedback>Invite</tp-button></tp-list-item
+  style="min-inline-size:0"
+  gap="4"><tp-list-item variant="outline"><tp-avatar slot="media" size="sm" src="avatars/ravi-castellano.svg" fallback="RC" alt="Ravi Castellano"></tp-avatar>Ravi Castellano<span slot="description">Last seen <tp-time mode="relative" datetime="2026-05-31T21:38:55.759Z"></tp-time></span><tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ravi Castellano" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
+  <tp-list-item variant="outline" description="Invite your team to collaborate on this project."><tp-avatar-group slot="media" size="sm"><tp-avatar slot="" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor"></tp-avatar></tp-avatar-group>Project team<tp-button slot="actions" variant="outline" size="sm" data-feedback>Invite</tp-button></tp-list-item
   >
-  <tp-list aria-label="People"
-    ><tp-list-item description="maravoss@example.com"><tp-avatar slot="media" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss" ></tp-avatar>Mara Voss<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Mara Voss" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
+  <tp-list aria-label="People"><tp-list-item description="maravoss@example.com"><tp-avatar slot="media" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss"></tp-avatar>Mara Voss<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Mara Voss" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
     <tp-list-separator></tp-list-separator>
-    <tp-list-item description="theolind@example.com"><tp-avatar slot="media" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist" ></tp-avatar>Theo Lindqvist<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Theo Lindqvist" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
+    <tp-list-item description="theolind@example.com"><tp-avatar slot="media" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist"></tp-avatar>Theo Lindqvist<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Theo Lindqvist" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
     <tp-list-separator></tp-list-separator>
-    <tp-list-item description="inesokafor@example.com"><tp-avatar slot="media" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor" ></tp-avatar>Ines Okafor<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ines Okafor" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item></tp-list
+    <tp-list-item description="inesokafor@example.com"><tp-avatar slot="media" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor"></tp-avatar>Ines Okafor<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ines Okafor" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item></tp-list
   ><tp-toast></tp-toast
 ></tp-stack>`}
   script={`import { html } from 'lit';
@@ -5746,7 +4973,7 @@ setupListExample(document.getElementById('list-people-example'));`}
 
 ### components/list / People and invitations
 
-**presentation hook** · target: resolve from expression · [docs/components/list.mdx:323](../../docs/components/list.mdx#L323)
+**presentation hook** · target: resolve from expression · [docs/components/list.mdx:326](../../docs/components/list.mdx#L326)
 
 ~~~~~text
 partContracts = {
@@ -5835,7 +5062,7 @@ setupListExample(document.getElementById('list-people-example'));`}
 
 ### components/list / People and invitations
 
-**presentation hook** · target: resolve from expression · [docs/components/list.mdx:337](../../docs/components/list.mdx#L337)
+**presentation hook** · target: resolve from expression · [docs/components/list.mdx:340](../../docs/components/list.mdx#L340)
 
 ~~~~~text
 partContracts = {
@@ -5910,7 +5137,7 @@ setupListExample(document.getElementById('list-people-example'));`}
 
 ### components/list / People and invitations
 
-**presentation hook** · target: resolve from expression · [docs/components/list.mdx:354](../../docs/components/list.mdx#L354)
+**presentation hook** · target: resolve from expression · [docs/components/list.mdx:357](../../docs/components/list.mdx#L357)
 
 ~~~~~text
 partPresentation = {
@@ -5927,7 +5154,7 @@ partPresentation = {
 
 ### components/list / People and invitations
 
-**presentation hook** · target: resolve from expression · [docs/components/list.mdx:356](../../docs/components/list.mdx#L356)
+**presentation hook** · target: resolve from expression · [docs/components/list.mdx:359](../../docs/components/list.mdx#L359)
 
 ~~~~~text
 styleHook: {
@@ -5940,7 +5167,7 @@ styleHook: {
 
 ### components/list / People and invitations
 
-**presentation hook** · target: resolve from expression · [docs/components/list.mdx:365](../../docs/components/list.mdx#L365)
+**presentation hook** · target: resolve from expression · [docs/components/list.mdx:368](../../docs/components/list.mdx#L368)
 
 ~~~~~text
 partPresentation = {
@@ -5950,7 +5177,7 @@ partPresentation = {
 
 ### components/list / People and invitations
 
-**presentation hook** · target: resolve from expression · [docs/components/list.mdx:366](../../docs/components/list.mdx#L366)
+**presentation hook** · target: resolve from expression · [docs/components/list.mdx:369](../../docs/components/list.mdx#L369)
 
 ~~~~~text
 styleHook: { 'border-radius': 'var(--tp-radius-full)' }
@@ -6086,7 +5313,7 @@ import maplibreCss from 'maplibre-gl/dist/maplibre-gl.css?raw';
 
 ### components/marker / Native hosts and layout
 
-**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:144](../../docs/components/marker.mdx#L144)
+**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:145](../../docs/components/marker.mdx#L145)
 
 ~~~~~text
 partContracts = {
@@ -6130,13 +5357,12 @@ document.querySelector('#marker-sweep-replay').addEventListener('click', () => {
 A Marker can label an Accordion item, so a step summary expands into its details, or sit around a Drawer trigger that opens the full record.
 
 <Preview
+  width="5"
   title="Accordion label and drawer"
   align="stretch"
   code={`<tp-stack
   id="marker-compositions"
-  style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%"
-  gap="6"
->
+  gap="6">
   <tp-accordion collapsible>
     <tp-accordion-item value="steps">
       <tp-marker slot="label"><tp-icon slot="icon" data-icon="clock"></tp-icon>Worked for 1m 12s</tp-marker>
@@ -6148,8 +5374,7 @@ A Marker can label an Accordion item, so a step summary expands into its details
       label="Files read"
       description="Opened while preparing this reply."
       edge="inline-end"
-      style="text-align: start"
-    >
+      style="text-align: start">
       <tp-button slot="trigger" variant="outline" size="sm"><tp-icon slot="icon-start" data-icon="search"></tp-icon>Explored 3 files</tp-button>
       <tp-list aria-label="Files read">
         <tp-list-item variant="outline" size="sm">billing/proration.ts</tp-list-item>
@@ -6171,7 +5396,7 @@ for (const icon of document.querySelectorAll('#marker-compositions tp-icon')) ic
 
 ### components/marker / Native hosts and layout
 
-**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:148](../../docs/components/marker.mdx#L148)
+**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:149](../../docs/components/marker.mdx#L149)
 
 ~~~~~text
 partContracts = {
@@ -6211,13 +5436,12 @@ document.querySelector('#marker-sweep-replay').addEventListener('click', () => {
 A Marker can label an Accordion item, so a step summary expands into its details, or sit around a Drawer trigger that opens the full record.
 
 <Preview
+  width="5"
   title="Accordion label and drawer"
   align="stretch"
   code={`<tp-stack
   id="marker-compositions"
-  style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%"
-  gap="6"
->
+  gap="6">
   <tp-accordion collapsible>
     <tp-accordion-item value="steps">
       <tp-marker slot="label"><tp-icon slot="icon" data-icon="clock"></tp-icon>Worked for 1m 12s</tp-marker>
@@ -6229,8 +5453,7 @@ A Marker can label an Accordion item, so a step summary expands into its details
       label="Files read"
       description="Opened while preparing this reply."
       edge="inline-end"
-      style="text-align: start"
-    >
+      style="text-align: start">
       <tp-button slot="trigger" variant="outline" size="sm"><tp-icon slot="icon-start" data-icon="search"></tp-icon>Explored 3 files</tp-button>
       <tp-list aria-label="Files read">
         <tp-list-item variant="outline" size="sm">billing/proration.ts</tp-list-item>
@@ -6252,7 +5475,7 @@ for (const icon of document.querySelectorAll('#marker-compositions tp-icon')) ic
 
 ### components/marker / Native hosts and layout
 
-**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:154](../../docs/components/marker.mdx#L154)
+**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:155](../../docs/components/marker.mdx#L155)
 
 ~~~~~text
 partPresentation = {
@@ -6262,7 +5485,7 @@ partPresentation = {
 
 ### components/marker / Native hosts and layout
 
-**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:155](../../docs/components/marker.mdx#L155)
+**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:156](../../docs/components/marker.mdx#L156)
 
 ~~~~~text
 styleHook: { display: 'flex', flex: '1', 'align-items': 'center', 'justify-content': 'space-between', gap: 'var(--tp-space-2)' }
@@ -6270,7 +5493,7 @@ styleHook: { display: 'flex', flex: '1', 'align-items': 'center', 'justify-conte
 
 ### components/marker / Native hosts and layout
 
-**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:157](../../docs/components/marker.mdx#L157)
+**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:158](../../docs/components/marker.mdx#L158)
 
 ~~~~~text
 partPresentation = { marker: { styleHook: { 'justify-content': 'center' } } }
@@ -6278,7 +5501,7 @@ partPresentation = { marker: { styleHook: { 'justify-content': 'center' } } }
 
 ### components/marker / Native hosts and layout
 
-**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:157](../../docs/components/marker.mdx#L157)
+**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:158](../../docs/components/marker.mdx#L158)
 
 ~~~~~text
 styleHook: { 'justify-content': 'center' }
@@ -6286,7 +5509,7 @@ styleHook: { 'justify-content': 'center' }
 
 ### components/marker / Native hosts and layout
 
-**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:158](../../docs/components/marker.mdx#L158)
+**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:159](../../docs/components/marker.mdx#L159)
 
 ~~~~~text
 partPresentation = { marker: { styleHook: { 'flex-direction': 'column' } } }
@@ -6294,7 +5517,7 @@ partPresentation = { marker: { styleHook: { 'flex-direction': 'column' } } }
 
 ### components/marker / Native hosts and layout
 
-**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:158](../../docs/components/marker.mdx#L158)
+**presentation hook** · target: resolve from expression · [docs/components/marker.mdx:159](../../docs/components/marker.mdx#L159)
 
 ~~~~~text
 styleHook: { 'flex-direction': 'column' }
@@ -6302,7 +5525,7 @@ styleHook: { 'flex-direction': 'column' }
 
 ### components/media-player / Audio layout
 
-**presentation hook** · target: resolve from expression · [docs/components/media-player.mdx:48](../../docs/components/media-player.mdx#L48)
+**presentation hook** · target: resolve from expression · [docs/components/media-player.mdx:47](../../docs/components/media-player.mdx#L47)
 
 ~~~~~text
 partPresentation = {
@@ -6312,7 +5535,7 @@ partPresentation = {
 
 ### components/media-player / Audio layout
 
-**presentation hook** · target: resolve from expression · [docs/components/media-player.mdx:49](../../docs/components/media-player.mdx#L49)
+**presentation hook** · target: resolve from expression · [docs/components/media-player.mdx:48](../../docs/components/media-player.mdx#L48)
 
 ~~~~~text
 styleHook: { 'color-scheme': 'inherit' }
@@ -6340,7 +5563,7 @@ hostProperties: { role: 'list', 'aria-live': 'off', 'aria-busy': 'false' }
 
 ### components/message / Retry a failed message
 
-**JS style write** · target: resolve from expression · [docs/components/message.mdx:204](../../docs/components/message.mdx#L204)
+**JS style write** · target: resolve from expression · [docs/components/message.mdx:208](../../docs/components/message.mdx#L208)
 
 ~~~~~text
 status.style.removeProperty('color');
@@ -6430,7 +5653,7 @@ styleHook: { blockSize: '30rem' }
 
 ### components/progress / Formatted value
 
-**presentation hook** · target: resolve from expression · [docs/components/progress.mdx:111](../../docs/components/progress.mdx#L111)
+**presentation hook** · target: resolve from expression · [docs/components/progress.mdx:117](../../docs/components/progress.mdx#L117)
 
 ~~~~~text
 partContracts = {
@@ -6440,7 +5663,7 @@ partContracts = {
 
 ### components/progress / Formatted value
 
-**style option** · target: resolve from expression · [docs/components/progress.mdx:109](../../docs/components/progress.mdx#L109)
+**style option** · target: resolve from expression · [docs/components/progress.mdx:115](../../docs/components/progress.mdx#L115)
 
 ~~~~~text
 style: 'unit', unit: 'gigabyte', maximumFractionDigits: 1 };
@@ -6448,7 +5671,7 @@ style: 'unit', unit: 'gigabyte', maximumFractionDigits: 1 };
 
 ### components/questionnaire / Disabled until answered
 
-**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:419](../../docs/components/questionnaire.mdx#L419)
+**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:423](../../docs/components/questionnaire.mdx#L423)
 
 ~~~~~text
 partContracts = {
@@ -6458,10 +5681,10 @@ partContracts = {
 };`} language="js" />
 
 <Preview
+  width="4"
+  align="stretch"
   title="Progress bar"
-  code={`<div style="inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-progress" label="Bug report"></tp-questionnaire>
-</div>`}
+  code={`<tp-questionnaire id="questionnaire-progress" label="Bug report"></tp-questionnaire>`}
   script={`import { html } from 'lit';
 const questionnaire = document.querySelector('#questionnaire-progress');
 questionnaire.partContracts = {
@@ -6511,10 +5734,10 @@ The `questionnaire-question` part's `elementReference` runs each time a new ques
 Do not animate each answer update or delay focus until the animation finishes.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Animated questions"
-  code={`<div style="inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-animated" label="Event RSVP"></tp-questionnaire>
-</div>`}
+  code={`<tp-questionnaire id="questionnaire-animated" label="Event RSVP"></tp-questionnaire>`}
   script={`const questionnaire = document.querySelector('#questionnaire-animated');
 let current;
 let animation;
@@ -6572,10 +5795,10 @@ Delegates can rearrange the parts Questionnaire has already rendered. Each part'
 `choices` already includes `input`; render `input` separately only when replacing the default Choices composition. Keep native inputs in the form's DOM tree; don't move them into a new shadow root or a second form.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Inside a Card"
-  code={`<div style="inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-card" label="Plan upgrade" shortcut-mode="numbers"></tp-questionnaire>
-</div>`}
+  code={`<tp-questionnaire id="questionnaire-card" label="Plan upgrade" shortcut-mode="numbers"></tp-questionnaire>`}
   script={`import { html } from 'lit';
 const questionnaire = document.querySelector('#questionnaire-card');
 questionnaire.partContracts = {
@@ -6678,7 +5901,7 @@ questionnaire.addEventListener('tp-submit', (event) => {
 
 ### components/questionnaire / Progress bar
 
-**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:432](../../docs/components/questionnaire.mdx#L432)
+**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:436](../../docs/components/questionnaire.mdx#L436)
 
 ~~~~~text
 partContracts = {
@@ -6728,10 +5951,10 @@ The `questionnaire-question` part's `elementReference` runs each time a new ques
 Do not animate each answer update or delay focus until the animation finishes.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Animated questions"
-  code={`<div style="inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-animated" label="Event RSVP"></tp-questionnaire>
-</div>`}
+  code={`<tp-questionnaire id="questionnaire-animated" label="Event RSVP"></tp-questionnaire>`}
   script={`const questionnaire = document.querySelector('#questionnaire-animated');
 let current;
 let animation;
@@ -6789,10 +6012,10 @@ Delegates can rearrange the parts Questionnaire has already rendered. Each part'
 `choices` already includes `input`; render `input` separately only when replacing the default Choices composition. Keep native inputs in the form's DOM tree; don't move them into a new shadow root or a second form.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Inside a Card"
-  code={`<div style="inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-card" label="Plan upgrade" shortcut-mode="numbers"></tp-questionnaire>
-</div>`}
+  code={`<tp-questionnaire id="questionnaire-card" label="Plan upgrade" shortcut-mode="numbers"></tp-questionnaire>`}
   script={`import { html } from 'lit';
 const questionnaire = document.querySelector('#questionnaire-card');
 questionnaire.partContracts = {
@@ -6895,7 +6118,7 @@ questionnaire.addEventListener('tp-submit', (event) => {
 
 ### components/questionnaire / Animated questions
 
-**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:486](../../docs/components/questionnaire.mdx#L486)
+**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:490](../../docs/components/questionnaire.mdx#L490)
 
 ~~~~~text
 partContracts = {
@@ -6923,7 +6146,7 @@ partContracts = {
 
 ### components/questionnaire / Inside a Card
 
-**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:546](../../docs/components/questionnaire.mdx#L546)
+**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:550](../../docs/components/questionnaire.mdx#L550)
 
 ~~~~~text
 partContracts = {
@@ -7026,7 +6249,7 @@ questionnaire.addEventListener('tp-submit', (event) => {
 
 ### components/questionnaire / Inside a Card
 
-**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:559](../../docs/components/questionnaire.mdx#L559)
+**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:563](../../docs/components/questionnaire.mdx#L563)
 
 ~~~~~text
 hostProperties: { slot: 'header' }
@@ -7034,7 +6257,7 @@ hostProperties: { slot: 'header' }
 
 ### components/questionnaire / Inside a Card
 
-**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:562](../../docs/components/questionnaire.mdx#L562)
+**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:566](../../docs/components/questionnaire.mdx#L566)
 
 ~~~~~text
 hostProperties: { slot: 'description' }
@@ -7042,7 +6265,7 @@ hostProperties: { slot: 'description' }
 
 ### components/questionnaire / Inside a Card
 
-**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:564](../../docs/components/questionnaire.mdx#L564)
+**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:568](../../docs/components/questionnaire.mdx#L568)
 
 ~~~~~text
 hostProperties: { slot: 'action' }
@@ -7050,7 +6273,7 @@ hostProperties: { slot: 'action' }
 
 ### components/questionnaire / Inside a Card
 
-**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:567](../../docs/components/questionnaire.mdx#L567)
+**presentation hook** · target: resolve from expression · [docs/components/questionnaire.mdx:571](../../docs/components/questionnaire.mdx#L571)
 
 ~~~~~text
 hostProperties: { slot: 'footer' }
@@ -7058,7 +6281,7 @@ hostProperties: { slot: 'footer' }
 
 ### components/scroll-trigger / Pinned scene
 
-**tagged stylesheet** · target: resolve from expression · [docs/components/scroll-trigger.mdx:227](../../docs/components/scroll-trigger.mdx#L227)
+**tagged stylesheet** · target: resolve from expression · [docs/components/scroll-trigger.mdx:229](../../docs/components/scroll-trigger.mdx#L229)
 
 ~~~~~text
 css`), so pinning never moves the content that follows. Pinning also works without `
@@ -7066,7 +6289,7 @@ css`), so pinning never moves the content that follows. Pinning also works witho
 
 ### components/slider / Slider
 
-**presentation hook** · target: resolve from expression · [docs/components/slider.mdx:12](../../docs/components/slider.mdx#L12)
+**presentation hook** · target: resolve from expression · [docs/components/slider.mdx:13](../../docs/components/slider.mdx#L13)
 
 ~~~~~text
 partContracts = {
@@ -7076,7 +6299,7 @@ partContracts = {
 
 ### components/slider / Price range
 
-**presentation hook** · target: resolve from expression · [docs/components/slider.mdx:29](../../docs/components/slider.mdx#L29)
+**presentation hook** · target: resolve from expression · [docs/components/slider.mdx:31](../../docs/components/slider.mdx#L31)
 
 ~~~~~text
 partContracts = {
@@ -7086,7 +6309,7 @@ partContracts = {
 
 ### components/slider / Push, swap and none
 
-**presentation hook** · target: resolve from expression · [docs/components/slider.mdx:45](../../docs/components/slider.mdx#L45)
+**presentation hook** · target: resolve from expression · [docs/components/slider.mdx:48](../../docs/components/slider.mdx#L48)
 
 ~~~~~text
 partContracts = {
@@ -7096,7 +6319,7 @@ partContracts = {
 
 ### components/slider / Currency and percent
 
-**presentation hook** · target: resolve from expression · [docs/components/slider.mdx:85](../../docs/components/slider.mdx#L85)
+**presentation hook** · target: resolve from expression · [docs/components/slider.mdx:86](../../docs/components/slider.mdx#L86)
 
 ~~~~~text
 partContracts = {
@@ -7116,7 +6339,7 @@ partContracts = {
 
 ### components/slider / Vertical range
 
-**presentation hook** · target: resolve from expression · [docs/components/slider.mdx:183](../../docs/components/slider.mdx#L183)
+**presentation hook** · target: resolve from expression · [docs/components/slider.mdx:181](../../docs/components/slider.mdx#L181)
 
 ~~~~~text
 partContracts = {
@@ -7126,7 +6349,7 @@ partContracts = {
 
 ### components/slider / Compact readout
 
-**presentation hook** · target: resolve from expression · [docs/components/slider.mdx:199](../../docs/components/slider.mdx#L199)
+**presentation hook** · target: resolve from expression · [docs/components/slider.mdx:198](../../docs/components/slider.mdx#L198)
 
 ~~~~~text
 partContracts = {
@@ -7146,7 +6369,7 @@ partContracts = {
 
 ### components/slider / Rejecting values
 
-**presentation hook** · target: resolve from expression · [docs/components/slider.mdx:353](../../docs/components/slider.mdx#L353)
+**presentation hook** · target: resolve from expression · [docs/components/slider.mdx:358](../../docs/components/slider.mdx#L358)
 
 ~~~~~text
 partContracts = {
@@ -7156,7 +6379,7 @@ partContracts = {
 
 ### components/slider / Price range
 
-**style option** · target: resolve from expression · [docs/components/slider.mdx:28](../../docs/components/slider.mdx#L28)
+**style option** · target: resolve from expression · [docs/components/slider.mdx:30](../../docs/components/slider.mdx#L30)
 
 ~~~~~text
 style: 'currency', currency: 'USD', maximumFractionDigits: 0 };
@@ -7172,7 +6395,7 @@ style: 'percent'` shows a 0–1 value as a percentage without changing the value
 
 ### components/slider / Currency and percent
 
-**style option** · target: resolve from expression · [docs/components/slider.mdx:82](../../docs/components/slider.mdx#L82)
+**style option** · target: resolve from expression · [docs/components/slider.mdx:83](../../docs/components/slider.mdx#L83)
 
 ~~~~~text
 style: 'currency', currency: 'EUR', maximumFractionDigits: 0 };
@@ -7180,7 +6403,7 @@ style: 'currency', currency: 'EUR', maximumFractionDigits: 0 };
 
 ### components/slider / Currency and percent
 
-**style option** · target: resolve from expression · [docs/components/slider.mdx:83](../../docs/components/slider.mdx#L83)
+**style option** · target: resolve from expression · [docs/components/slider.mdx:84](../../docs/components/slider.mdx#L84)
 
 ~~~~~text
 style: 'percent', maximumFractionDigits: 0 };
@@ -7188,7 +6411,7 @@ style: 'percent', maximumFractionDigits: 0 };
 
 ### components/slider / Vertical range
 
-**style option** · target: resolve from expression · [docs/components/slider.mdx:182](../../docs/components/slider.mdx#L182)
+**style option** · target: resolve from expression · [docs/components/slider.mdx:180](../../docs/components/slider.mdx#L180)
 
 ~~~~~text
 style: 'unit', unit: 'celsius', maximumFractionDigits: 1 };
@@ -7196,7 +6419,7 @@ style: 'unit', unit: 'celsius', maximumFractionDigits: 1 };
 
 ### components/slider / Inline
 
-**style option** · target: resolve from expression · [docs/components/slider.mdx:416](../../docs/components/slider.mdx#L416)
+**style option** · target: resolve from expression · [docs/components/slider.mdx:420](../../docs/components/slider.mdx#L420)
 
 ~~~~~text
 style: 'currency', currency: 'EUR', maximumFractionDigits: 0 };
@@ -7204,7 +6427,7 @@ style: 'currency', currency: 'EUR', maximumFractionDigits: 0 };
 
 ### components/slider / Inline
 
-**style option** · target: resolve from expression · [docs/components/slider.mdx:417](../../docs/components/slider.mdx#L417)
+**style option** · target: resolve from expression · [docs/components/slider.mdx:421](../../docs/components/slider.mdx#L421)
 
 ~~~~~text
 style: 'unit', unit: 'minute' };
@@ -7220,7 +6443,7 @@ step.style.marginBlockEnd = 'var(--tp-space-5)';
 
 ### components/text-area / Content and fixed sizing
 
-**presentation hook** · target: resolve from expression · [docs/components/text-area.mdx:25](../../docs/components/text-area.mdx#L25)
+**presentation hook** · target: resolve from expression · [docs/components/text-area.mdx:27](../../docs/components/text-area.mdx#L27)
 
 ~~~~~text
 hostProperties = { style: { fieldSizing: 'fixed' } }
@@ -7228,7 +6451,7 @@ hostProperties = { style: { fieldSizing: 'fixed' } }
 
 ### components/text-area / Content and fixed sizing
 
-**style option** · target: resolve from expression · [docs/components/text-area.mdx:25](../../docs/components/text-area.mdx#L25)
+**style option** · target: resolve from expression · [docs/components/text-area.mdx:27](../../docs/components/text-area.mdx#L27)
 
 ~~~~~text
 style: { fieldSizing: 'fixed' }
@@ -7236,7 +6459,7 @@ style: { fieldSizing: 'fixed' }
 
 ### components/theme-switcher / Page theme
 
-**JS style write** · target: resolve from expression · [docs/components/theme-switcher.mdx:70](../../docs/components/theme-switcher.mdx#L70)
+**JS style write** · target: resolve from expression · [docs/components/theme-switcher.mdx:72](../../docs/components/theme-switcher.mdx#L72)
 
 ~~~~~text
 document.documentElement.style.colorScheme = value;
@@ -7353,7 +6576,7 @@ A Toggle group inside a toolbar registers its own Toggles; do not register them 
 
 ### components/tree-view / From records, reorderable
 
-**JS style write** · target: resolve from expression · [docs/components/tree-view.mdx:142](../../docs/components/tree-view.mdx#L142)
+**JS style write** · target: resolve from expression · [docs/components/tree-view.mdx:148](../../docs/components/tree-view.mdx#L148)
 
 ~~~~~text
 tree.style.cssText = 'inline-size:18rem';
@@ -7361,7 +6584,7 @@ tree.style.cssText = 'inline-size:18rem';
 
 ### components/tree-view / Rendered rows
 
-**JS style write** · target: resolve from expression · [docs/components/tree-view.mdx:190](../../docs/components/tree-view.mdx#L190)
+**JS style write** · target: resolve from expression · [docs/components/tree-view.mdx:196](../../docs/components/tree-view.mdx#L196)
 
 ~~~~~text
 tree.style.inlineSize = '18rem';
@@ -7369,7 +6592,7 @@ tree.style.inlineSize = '18rem';
 
 ### components/tree-view / Virtualized
 
-**JS style write** · target: resolve from expression · [docs/components/tree-view.mdx:228](../../docs/components/tree-view.mdx#L228)
+**JS style write** · target: resolve from expression · [docs/components/tree-view.mdx:234](../../docs/components/tree-view.mdx#L234)
 
 ~~~~~text
 tree.style.cssText = 'inline-size:18rem;
@@ -7377,7 +6600,7 @@ tree.style.cssText = 'inline-size:18rem;
 
 ### components/tree-view / Controlled lanes
 
-**JS style write** · target: resolve from expression · [docs/components/tree-view.mdx:278](../../docs/components/tree-view.mdx#L278)
+**JS style write** · target: resolve from expression · [docs/components/tree-view.mdx:284](../../docs/components/tree-view.mdx#L284)
 
 ~~~~~text
 tree.style.cssText = 'inline-size:18rem';
@@ -7385,7 +6608,7 @@ tree.style.cssText = 'inline-size:18rem';
 
 ### components/tree-view / Lazy folders
 
-**JS style write** · target: resolve from expression · [docs/components/tree-view.mdx:329](../../docs/components/tree-view.mdx#L329)
+**JS style write** · target: resolve from expression · [docs/components/tree-view.mdx:335](../../docs/components/tree-view.mdx#L335)
 
 ~~~~~text
 tree.style.cssText = 'inline-size:18rem;
@@ -7560,7 +6783,7 @@ styleHook: { display: 'none' }
 
 ### widgets/text-editor / Read-only and disabled
 
-**presentation hook** · target: resolve from expression · [docs/widgets/text-editor.mdx:810](../../docs/widgets/text-editor.mdx#L810)
+**presentation hook** · target: resolve from expression · [docs/widgets/text-editor.mdx:805](../../docs/widgets/text-editor.mdx#L805)
 
 ~~~~~text
 partPresentation = {
@@ -7571,7 +6794,7 @@ partPresentation = {
 
 ### widgets/text-editor / Read-only and disabled
 
-**presentation hook** · target: resolve from expression · [docs/widgets/text-editor.mdx:811](../../docs/widgets/text-editor.mdx#L811)
+**presentation hook** · target: resolve from expression · [docs/widgets/text-editor.mdx:806](../../docs/widgets/text-editor.mdx#L806)
 
 ~~~~~text
 styleHook: { background: 'var(--tp-muted)' }
@@ -7579,7 +6802,7 @@ styleHook: { background: 'var(--tp-muted)' }
 
 ### widgets/text-editor / Read-only and disabled
 
-**presentation hook** · target: resolve from expression · [docs/widgets/text-editor.mdx:812](../../docs/widgets/text-editor.mdx#L812)
+**presentation hook** · target: resolve from expression · [docs/widgets/text-editor.mdx:807](../../docs/widgets/text-editor.mdx#L807)
 
 ~~~~~text
 styleHook: { 'border-radius': 'var(--tp-radius-sm)' }
@@ -7587,7 +6810,7 @@ styleHook: { 'border-radius': 'var(--tp-radius-sm)' }
 
 ### widgets/text-editor / Custom nodes
 
-**tagged stylesheet** · target: resolve from expression · [docs/widgets/text-editor.mdx:397](../../docs/widgets/text-editor.mdx#L397)
+**tagged stylesheet** · target: resolve from expression · [docs/widgets/text-editor.mdx:394](../../docs/widgets/text-editor.mdx#L394)
 
 ~~~~~text
 css` string of a definition styles its nodes. The editor adopts it into its shadow root, nested under the content part, so its selectors are relative to the content part and reach the document only. Rules that a style rule cannot hold, such as `
@@ -7595,7 +6818,7 @@ css` string of a definition styles its nodes. The editor adopts it into its shad
 
 ### widgets/text-editor / Custom nodes
 
-**tagged stylesheet** · target: resolve from expression · [docs/widgets/text-editor.mdx:397](../../docs/widgets/text-editor.mdx#L397)
+**tagged stylesheet** · target: resolve from expression · [docs/widgets/text-editor.mdx:394](../../docs/widgets/text-editor.mdx#L394)
 
 ~~~~~text
 css` that leaves a brace, comment or string open is rejected with a `
@@ -7603,7 +6826,7 @@ css` that leaves a brace, comment or string open is rejected with a `
 
 ### widgets/text-editor / Read-only and disabled
 
-**tagged stylesheet** · target: resolve from expression · [docs/widgets/text-editor.mdx:815](../../docs/widgets/text-editor.mdx#L815)
+**tagged stylesheet** · target: resolve from expression · [docs/widgets/text-editor.mdx:810](../../docs/widgets/text-editor.mdx#L810)
 
 ~~~~~text
 css` of their definitions.
@@ -10358,12 +9581,12 @@ Source: docs/components/accordion.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Accordion | 8 | 1 |
-| Variants | 33 | 1 |
-| Multiple open items | 64 | 1 |
-| Positional content | 87 | 1 |
-| Disabled item | 114 | 1 |
-| Line-by-line reveal | 134 | 1 |
+| Accordion | 8 | 0 |
+| Variants | 34 | 1 |
+| Multiple open items | 65 | 0 |
+| Positional content | 89 | 0 |
+| Disabled item | 117 | 0 |
+| Line-by-line reveal | 138 | 0 |
 
 ### components/alert-dialog
 
@@ -10382,10 +9605,10 @@ Source: docs/components/alert.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Alert | 7 | 1 |
-| Severity | 23 | 1 |
-| Title slot and actions | 48 | 1 |
-| Live update | 63 | 1 |
+| Alert | 7 | 0 |
+| Severity | 24 | 0 |
+| Title slot and actions | 46 | 0 |
+| Live update | 62 | 0 |
 
 ### components/aspect-ratio
 
@@ -10404,14 +9627,14 @@ Source: docs/components/attachment.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Attachment | 8 | 1 |
-| Statuses | 49 | 1 |
-| Image cards | 89 | 5 |
-| Scrollable groups | 112 | 3 |
-| Title and description only | 278 | 1 |
-| Preview trigger, download and retry | 303 | 2 |
-| Sizes | 388 | 1 |
-| Remove event | 414 | 1 |
+| Attachment | 8 | 0 |
+| Statuses | 47 | 0 |
+| Image cards | 83 | 4 |
+| Scrollable groups | 107 | 3 |
+| Title and description only | 273 | 0 |
+| Preview trigger, download and retry | 297 | 1 |
+| Sizes | 375 | 0 |
+| Remove event | 399 | 0 |
 
 ### components/autocomplete
 
@@ -10419,14 +9642,14 @@ Source: docs/components/autocomplete.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Autocomplete | 7 | 2 |
-| Prefix matching | 33 | 2 |
-| Grouped suggestions | 54 | 2 |
-| Inline completion | 77 | 2 |
-| Searching hidden fields | 95 | 2 |
-| Ranking over several fields | 117 | 2 |
-| Search source | 146 | 2 |
-| In a form | 211 | 4 |
+| Autocomplete | 7 | 1 |
+| Prefix matching | 34 | 1 |
+| Grouped suggestions | 56 | 1 |
+| Inline completion | 80 | 1 |
+| Searching hidden fields | 99 | 1 |
+| Ranking over several fields | 122 | 1 |
+| Search source | 152 | 1 |
+| In a form | 218 | 3 |
 
 ### components/avatar
 
@@ -10454,8 +9677,8 @@ Source: docs/components/badge.mdx
 | Variants | 20 | 0 |
 | With marks | 36 | 0 |
 | Status in a list | 60 | 1 |
-| Counts in buttons | 93 | 0 |
-| Interactive badges | 103 | 2 |
+| Counts in buttons | 88 | 0 |
+| Interactive badges | 98 | 2 |
 
 ### components/breadcrumb
 
@@ -10477,13 +9700,13 @@ Source: docs/components/bubble.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Conversation | 8 | 1 |
-| Variants | 36 | 1 |
-| Alignment | 56 | 1 |
-| Reactions | 76 | 1 |
-| Rich content | 104 | 4 |
-| Expandable message | 117 | 8 |
-| Quick replies | 145 | 3 |
+| Conversation | 8 | 0 |
+| Variants | 36 | 0 |
+| Alignment | 57 | 0 |
+| Reactions | 78 | 1 |
+| Rich content | 105 | 3 |
+| Expandable message | 119 | 7 |
+| Quick replies | 148 | 2 |
 
 ### components/button-group
 
@@ -10495,16 +9718,16 @@ Source: docs/components/button-group.mdx
 | Sizes | 27 | 0 |
 | Vertical | 52 | 0 |
 | Nested vertical groups | 67 | 0 |
-| Mixed controls | 86 | 1 |
-| Steppers, labels and counts | 103 | 2 |
-| Split action | 146 | 0 |
-| Split button with a menu | 157 | 0 |
-| Menu and popover | 177 | 0 |
-| Select and native select | 239 | 2 |
-| Input groups and nesting | 282 | 1 |
-| Navigation and toolbar | 365 | 0 |
-| Grouped pagination | 426 | 1 |
-| Unjoined | 482 | 0 |
+| Mixed controls | 86 | 0 |
+| Steppers, labels and counts | 104 | 1 |
+| Split action | 145 | 0 |
+| Split button with a menu | 156 | 0 |
+| Menu and popover | 176 | 0 |
+| Select and native select | 238 | 1 |
+| Input groups and nesting | 281 | 0 |
+| Navigation and toolbar | 362 | 0 |
+| Grouped pagination | 423 | 1 |
+| Unjoined | 479 | 0 |
 
 ### components/button
 
@@ -10540,8 +9763,8 @@ Source: docs/components/calendar.mdx
 | Date with start and end times | 221 | 2 |
 | French and Brazilian Portuguese | 242 | 2 |
 | Arabic, right to left | 286 | 1 |
-| In a popover | 304 | 4 |
-| Value change | 346 | 2 |
+| In a popover | 304 | 3 |
+| Value change | 348 | 2 |
 
 ### components/card
 
@@ -10549,12 +9772,12 @@ Source: docs/components/card.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Card | 7 | 3 |
-| Header action | 28 | 5 |
-| Content only | 41 | 2 |
-| Surface options | 52 | 7 |
-| Elevated | 78 | 4 |
-| Small | 93 | 4 |
+| Card | 7 | 2 |
+| Header action | 30 | 4 |
+| Content only | 45 | 1 |
+| Surface options | 58 | 7 |
+| Elevated | 84 | 3 |
+| Small | 101 | 3 |
 
 ### components/carousel
 
@@ -10562,18 +9785,18 @@ Source: docs/components/carousel.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Carousel | 7 | 13 |
-| Items per view | 80 | 1 |
-| Bullets inside | 101 | 10 |
-| Autoplay | 129 | 7 |
-| Vertical | 154 | 1 |
-| Crossfade | 177 | 10 |
-| Layered 3D | 244 | 16 |
-| Parallax | 380 | 9 |
-| Focus | 410 | 16 |
-| Shader transition | 448 | 10 |
-| Virtual archive with controlled selection | 610 | 2 |
-| Commit | 647 | 5 |
+| Carousel | 7 | 12 |
+| Items per view | 74 | 0 |
+| Bullets inside | 96 | 9 |
+| Autoplay | 125 | 6 |
+| Vertical | 151 | 1 |
+| Crossfade | 175 | 9 |
+| Layered 3D | 235 | 15 |
+| Parallax | 360 | 8 |
+| Focus | 391 | 15 |
+| Shader transition | 430 | 9 |
+| Virtual archive with controlled selection | 587 | 2 |
+| Commit | 625 | 4 |
 
 ### components/checkbox
 
@@ -10582,12 +9805,12 @@ Source: docs/components/checkbox.mdx
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
 | Checkbox | 7 | 0 |
-| Field | 20 | 1 |
-| Form values | 32 | 2 |
-| Select all | 63 | 3 |
-| CheckboxGroupController | 112 | 4 |
+| Field | 20 | 0 |
+| Form values | 33 | 1 |
+| Select all | 64 | 3 |
+| CheckboxGroupController | 113 | 4 |
 | Disabled and read-only | 152 | 0 |
-| Inline | 174 | 1 |
+| Inline | 174 | 0 |
 
 ### components/citation
 
@@ -10596,10 +9819,10 @@ Source: docs/components/citation.mdx
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
 | Citation | 8 | 1 |
-| Labels and icons | 27 | 0 |
-| Source preview | 44 | 1 |
-| Numbered references | 64 | 2 |
-| Horizontal list | 107 | 1 |
+| Labels and icons | 28 | 0 |
+| Source preview | 45 | 1 |
+| Numbered references | 65 | 1 |
+| Horizontal list | 106 | 0 |
 | Variants | 121 | 0 |
 
 ### components/code-block
@@ -10608,14 +9831,14 @@ Source: docs/components/code-block.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Code block | 7 | 1 |
-| Title slot | 29 | 2 |
-| Highlighted lines | 47 | 1 |
-| Diff | 64 | 1 |
-| Collapsible | 81 | 1 |
-| Shell | 110 | 1 |
-| CSS | 123 | 1 |
-| Token theme | 138 | 1 |
+| Code block | 7 | 0 |
+| Title slot | 30 | 1 |
+| Highlighted lines | 49 | 0 |
+| Diff | 67 | 0 |
+| Collapsible | 85 | 0 |
+| Shell | 115 | 0 |
+| CSS | 129 | 0 |
+| Token theme | 145 | 1 |
 
 ### components/collapsible
 
@@ -10623,14 +9846,14 @@ Source: docs/components/collapsible.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Collapsible | 7 | 3 |
-| Leading indicator | 27 | 2 |
-| Positional slots | 42 | 6 |
-| As a heading | 76 | 2 |
-| Searchable | 89 | 2 |
-| Open change | 110 | 3 |
-| Disabled | 133 | 2 |
-| Line-by-line reveal | 146 | 2 |
+| Collapsible | 7 | 2 |
+| Leading indicator | 28 | 1 |
+| Positional slots | 44 | 5 |
+| As a heading | 76 | 1 |
+| Searchable | 90 | 1 |
+| Open change | 112 | 2 |
+| Disabled | 135 | 1 |
+| Line-by-line reveal | 149 | 1 |
 
 ### components/color-input
 
@@ -10639,13 +9862,13 @@ Source: docs/components/color-input.mdx
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
 | Color input | 7 | 0 |
-| Inline | 24 | 1 |
-| Chip or text | 38 | 1 |
-| Formats and alpha | 61 | 1 |
-| Sizes | 85 | 1 |
-| In a form | 103 | 2 |
-| Disabled and read-only | 120 | 1 |
-| Right-to-left | 147 | 1 |
+| Inline | 24 | 0 |
+| Chip or text | 39 | 0 |
+| Formats and alpha | 61 | 0 |
+| Sizes | 84 | 0 |
+| In a form | 102 | 1 |
+| Disabled and read-only | 120 | 0 |
+| Right-to-left | 146 | 0 |
 
 ### components/command-palette
 
@@ -10653,10 +9876,10 @@ Source: docs/components/command-palette.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Command palette | 7 | 2 |
-| Modal palette | 58 | 0 |
-| Custom empty state | 91 | 1 |
-| Server-filtered list | 108 | 1 |
+| Command palette | 7 | 1 |
+| Modal palette | 57 | 0 |
+| Custom empty state | 90 | 0 |
+| Server-filtered list | 108 | 0 |
 
 ### components/copy-button
 
@@ -10664,13 +9887,13 @@ Source: docs/components/copy-button.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Copy button | 7 | 1 |
-| Visible label | 26 | 0 |
-| Variants and sizes | 35 | 0 |
-| Beside a value | 47 | 5 |
-| In an input group and a field group | 62 | 1 |
-| In a Code block | 97 | 0 |
-| Copy events | 106 | 1 |
+| Copy button | 7 | 0 |
+| Visible label | 27 | 0 |
+| Variants and sizes | 36 | 0 |
+| Beside a value | 48 | 5 |
+| In an input group and a field group | 64 | 0 |
+| In a Code block | 98 | 0 |
+| Copy events | 107 | 1 |
 
 ### components/cursor
 
@@ -10693,9 +9916,9 @@ Source: docs/components/data-visualization.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Data visualization | 7 | 2 |
-| Line chart | 109 | 2 |
-| Description and table | 171 | 2 |
+| Data visualization | 7 | 1 |
+| Line chart | 110 | 1 |
+| Description and table | 173 | 1 |
 
 ### components/description-list
 
@@ -10703,11 +9926,11 @@ Source: docs/components/description-list.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Description list | 8 | 1 |
-| Record details | 28 | 4 |
-| Show more | 61 | 1 |
-| Summary row | 89 | 1 |
-| Alignment and stacking | 104 | 2 |
+| Description list | 8 | 0 |
+| Record details | 30 | 3 |
+| Show more | 65 | 0 |
+| Summary row | 95 | 0 |
+| Alignment and stacking | 111 | 2 |
 
 ### components/dialog
 
@@ -10729,17 +9952,17 @@ Source: docs/components/drag-drop-list.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Drag drop list | 7 | 1 |
-| Commit events | 31 | 2 |
+| Drag drop list | 7 | 0 |
+| Commit events | 32 | 1 |
 | Variants and sizes | 64 | 1 |
-| Whole-row drag with swap | 88 | 1 |
-| Custom rows and overlay | 106 | 2 |
-| Horizontal | 145 | 1 |
-| Read-only | 161 | 1 |
-| Board lanes | 176 | 4 |
-| Controlled lanes | 236 | 3 |
-| Approve before committing | 303 | 3 |
-| Vertical axis only | 367 | 1 |
+| Whole-row drag with swap | 89 | 0 |
+| Custom rows and overlay | 108 | 1 |
+| Horizontal | 145 | 0 |
+| Read-only | 162 | 0 |
+| Board lanes | 178 | 3 |
+| Controlled lanes | 234 | 2 |
+| Approve before committing | 298 | 2 |
+| Vertical axis only | 359 | 0 |
 
 ### components/drawer
 
@@ -10763,8 +9986,8 @@ Source: docs/components/empty-state.mdx
 | Empty state | 7 | 0 |
 | Media treatments | 42 | 1 |
 | No results | 64 | 1 |
-| In a card | 85 | 2 |
-| Bordered and filled | 100 | 3 |
+| In a card | 85 | 1 |
+| Bordered and filled | 101 | 3 |
 
 ### components/field-group
 
@@ -10772,15 +9995,15 @@ Source: docs/components/field-group.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Field group | 7 | 1 |
-| Color channels | 38 | 3 |
-| Separator | 68 | 1 |
-| Read-only and disabled | 84 | 1 |
-| Vertical | 98 | 1 |
-| Unjoined | 112 | 1 |
-| Inline | 126 | 1 |
-| Expanded | 174 | 1 |
-| Constraints | 217 | 1 |
+| Field group | 7 | 0 |
+| Color channels | 39 | 2 |
+| Separator | 67 | 0 |
+| Read-only and disabled | 84 | 0 |
+| Vertical | 99 | 0 |
+| Unjoined | 114 | 0 |
+| Inline | 129 | 0 |
+| Expanded | 171 | 0 |
+| Constraints | 210 | 1 |
 
 ### components/field
 
@@ -10788,13 +10011,13 @@ Source: docs/components/field.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Field | 7 | 1 |
-| Validate on blur | 23 | 1 |
-| Custom validator | 37 | 1 |
-| Horizontal | 56 | 1 |
-| Slots | 83 | 3 |
-| Legend and group | 97 | 1 |
-| Disabled | 123 | 1 |
+| Field | 7 | 0 |
+| Validate on blur | 24 | 0 |
+| Custom validator | 39 | 0 |
+| Horizontal | 59 | 0 |
+| Slots | 85 | 2 |
+| Legend and group | 100 | 0 |
+| Disabled | 126 | 0 |
 
 ### components/file-upload
 
@@ -10802,16 +10025,16 @@ Source: docs/components/file-upload.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| File upload | 7 | 1 |
-| Custom text and compact size | 23 | 1 |
-| Rejected files | 47 | 1 |
-| Custom validator | 67 | 1 |
-| Chips | 108 | 1 |
-| Rows | 121 | 1 |
-| Image grid | 137 | 1 |
-| Upload adapter | 165 | 1 |
-| Field and form | 219 | 2 |
-| Server rejection | 242 | 1 |
+| File upload | 7 | 0 |
+| Custom text and compact size | 24 | 0 |
+| Rejected files | 48 | 0 |
+| Custom validator | 69 | 0 |
+| Chips | 111 | 0 |
+| Rows | 125 | 0 |
+| Image grid | 142 | 0 |
+| Upload adapter | 171 | 0 |
+| Field and form | 226 | 1 |
+| Server rejection | 250 | 0 |
 
 ### components/form
 
@@ -10819,14 +10042,14 @@ Source: docs/components/form.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Form | 7 | 2 |
-| Notification settings | 50 | 2 |
-| Validate on blur | 89 | 1 |
-| External errors | 110 | 1 |
-| Matching passwords | 131 | 2 |
-| Wait for async checks | 156 | 2 |
-| Repeated emails | 186 | 3 |
-| Disable while invalid | 248 | 1 |
+| Form | 7 | 1 |
+| Notification settings | 51 | 1 |
+| Validate on blur | 91 | 0 |
+| External errors | 113 | 0 |
+| Matching passwords | 135 | 1 |
+| Wait for async checks | 161 | 1 |
+| Repeated emails | 192 | 2 |
+| Disable while invalid | 252 | 0 |
 
 ### components/icon
 
@@ -10848,17 +10071,17 @@ Source: docs/components/image.mdx
 | Image | 8 | 1 |
 | Ratio and fit | 33 | 4 |
 | Fallbacks | 53 | 4 |
-| Loading placeholders | 66 | 4 |
-| Hover zoom | 83 | 3 |
-| Card hover | 94 | 4 |
-| Staggered group | 116 | 5 |
-| Reveal timing and repeat | 129 | 10 |
-| Headline, group and caption | 151 | 7 |
-| Parallax in a scroller | 175 | 4 |
-| Scroll zoom in a vertical scroller | 187 | 6 |
-| Horizontal strip | 248 | 5 |
-| Smoothing | 261 | 5 |
-| Hero with a narrow-screen crop | 282 | 1 |
+| Loading placeholders | 67 | 4 |
+| Hover zoom | 85 | 3 |
+| Card hover | 97 | 3 |
+| Staggered group | 120 | 5 |
+| Reveal timing and repeat | 134 | 10 |
+| Headline, group and caption | 156 | 6 |
+| Parallax in a scroller | 183 | 4 |
+| Scroll zoom in a vertical scroller | 195 | 6 |
+| Horizontal strip | 256 | 5 |
+| Smoothing | 269 | 5 |
+| Hero with a narrow-screen crop | 290 | 1 |
 
 ### components/input-group
 
@@ -10866,15 +10089,15 @@ Source: docs/components/input-group.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Input group | 7 | 1 |
-| Text addons | 38 | 1 |
-| Status addons | 61 | 2 |
-| Actions | 102 | 1 |
-| Button group composition | 139 | 5 |
-| Interactive addons | 175 | 1 |
-| Composer | 229 | 2 |
-| Native textarea | 251 | 2 |
-| Disabled and invalid | 264 | 1 |
+| Input group | 7 | 0 |
+| Text addons | 39 | 0 |
+| Status addons | 63 | 1 |
+| Actions | 103 | 0 |
+| Button group composition | 140 | 4 |
+| Interactive addons | 174 | 0 |
+| Composer | 224 | 1 |
+| Native textarea | 247 | 1 |
+| Disabled and invalid | 261 | 0 |
 
 ### components/input
 
@@ -10882,15 +10105,15 @@ Source: docs/components/input.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Input | 7 | 1 |
-| Types | 23 | 1 |
-| Mono | 43 | 1 |
-| Owner-shaped value | 60 | 1 |
-| Error | 78 | 1 |
-| Disabled and read-only | 88 | 1 |
-| Inline | 113 | 1 |
-| Number steps | 144 | 1 |
-| Units and icons | 174 | 1 |
+| Input | 7 | 0 |
+| Types | 24 | 0 |
+| Mono | 45 | 0 |
+| Owner-shaped value | 63 | 0 |
+| Error | 82 | 0 |
+| Disabled and read-only | 93 | 0 |
+| Inline | 119 | 0 |
+| Number steps | 149 | 0 |
+| Units and icons | 178 | 0 |
 
 ### components/kbd
 
@@ -10902,9 +10125,9 @@ Source: docs/components/kbd.mdx
 | Modifiers | 28 | 0 |
 | Sequence | 51 | 0 |
 | Button and tooltip | 71 | 0 |
-| Input group | 89 | 1 |
-| Icon keys | 107 | 1 |
-| Localized and right-to-left | 132 | 1 |
+| Input group | 89 | 0 |
+| Icon keys | 108 | 1 |
+| Localized and right-to-left | 133 | 1 |
 
 ### components/label
 
@@ -10912,9 +10135,9 @@ Source: docs/components/label.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Label | 7 | 1 |
-| By id and by nesting | 24 | 2 |
-| Optional | 43 | 1 |
+| Label | 7 | 0 |
+| By id and by nesting | 25 | 1 |
+| Optional | 45 | 0 |
 
 ### components/list
 
@@ -10922,17 +10145,17 @@ Source: docs/components/list.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| List | 8 | 1 |
-| Content and actions | 40 | 1 |
-| Variants and sizes | 69 | 1 |
-| Media | 87 | 1 |
-| Divided list | 117 | 1 |
-| Header and footer | 142 | 3 |
-| Card grid | 155 | 6 |
-| Link rows | 187 | 2 |
-| Recordings | 225 | 8 |
-| People picker | 260 | 0 |
-| People and invitations | 281 | 10 |
+| List | 8 | 0 |
+| Content and actions | 41 | 0 |
+| Variants and sizes | 69 | 0 |
+| Media | 87 | 0 |
+| Divided list | 118 | 0 |
+| Header and footer | 144 | 2 |
+| Card grid | 158 | 6 |
+| Link rows | 190 | 1 |
+| Recordings | 229 | 7 |
+| People picker | 265 | 0 |
+| People and invitations | 286 | 10 |
 
 ### components/map
 
@@ -10952,15 +10175,15 @@ Source: docs/components/markdown.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Markdown | 7 | 1 |
-| Script child | 36 | 1 |
-| Heading offset | 57 | 1 |
-| Code and alerts | 80 | 1 |
-| Small | 101 | 1 |
-| Streaming | 125 | 2 |
-| Element policy | 162 | 1 |
-| Custom node rendering | 194 | 2 |
-| With a table of contents | 230 | 3 |
+| Markdown | 7 | 0 |
+| Script child | 37 | 0 |
+| Heading offset | 59 | 0 |
+| Code and alerts | 83 | 0 |
+| Small | 105 | 0 |
+| Streaming | 130 | 1 |
+| Element policy | 166 | 0 |
+| Custom node rendering | 199 | 1 |
+| With a table of contents | 236 | 3 |
 
 ### components/marker
 
@@ -10968,15 +10191,15 @@ Source: docs/components/marker.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Marker | 7 | 1 |
-| Variants | 25 | 1 |
-| Tones | 39 | 1 |
-| With icons | 54 | 1 |
-| Shimmer | 87 | 1 |
-| With an action | 100 | 1 |
-| Native hosts and layout | 115 | 11 |
-| Completion reveal | 165 | 1 |
-| Accordion label and drawer | 184 | 2 |
+| Marker | 7 | 0 |
+| Variants | 26 | 0 |
+| Tones | 41 | 0 |
+| With icons | 57 | 0 |
+| Shimmer | 89 | 0 |
+| With an action | 103 | 0 |
+| Native hosts and layout | 118 | 10 |
+| Completion reveal | 166 | 1 |
+| Accordion label and drawer | 185 | 1 |
 
 ### components/media-player
 
@@ -10984,16 +10207,16 @@ Source: docs/components/media-player.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Media Player | 8 | 1 |
-| Audio layout | 39 | 3 |
-| Audio | 55 | 1 |
-| Trimmed layout | 77 | 1 |
-| Custom top region | 103 | 3 |
-| Text tracks | 138 | 1 |
-| Custom bar | 167 | 1 |
-| Live with DVR (simulated) | 204 | 1 |
-| Tracks adapter (mock) | 233 | 1 |
-| French controls | 297 | 1 |
+| Media Player | 8 | 0 |
+| Audio layout | 37 | 2 |
+| Audio | 54 | 0 |
+| Trimmed layout | 77 | 0 |
+| Custom top region | 101 | 2 |
+| Text tracks | 133 | 0 |
+| Custom bar | 160 | 0 |
+| Live with DVR (simulated) | 195 | 0 |
+| Tracks adapter (mock) | 225 | 0 |
+| French controls | 287 | 0 |
 
 ### components/menu
 
@@ -11041,14 +10264,14 @@ Source: docs/components/message.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Message | 8 | 1 |
-| Sender sides | 46 | 1 |
-| Header and footer | 69 | 1 |
-| Sending and failed | 87 | 1 |
-| Message group | 104 | 1 |
-| Footer actions | 123 | 1 |
-| Attachment | 149 | 1 |
-| Retry a failed message | 184 | 3 |
+| Message | 8 | 0 |
+| Sender sides | 46 | 0 |
+| Header and footer | 69 | 0 |
+| Sending and failed | 88 | 0 |
+| Message group | 106 | 0 |
+| Footer actions | 126 | 0 |
+| Attachment | 153 | 0 |
+| Retry a failed message | 187 | 2 |
 
 ### components/native-select
 
@@ -11056,13 +10279,13 @@ Source: docs/components/native-select.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Native select | 7 | 1 |
-| Placeholder | 36 | 1 |
-| Sizes | 53 | 1 |
-| Multiple | 73 | 1 |
-| Form value | 90 | 2 |
-| Controlled value | 121 | 2 |
-| Disabled, read-only and invalid | 155 | 1 |
+| Native select | 7 | 0 |
+| Placeholder | 37 | 0 |
+| Sizes | 55 | 0 |
+| Multiple | 77 | 0 |
+| Form value | 95 | 1 |
+| Controlled value | 126 | 1 |
+| Disabled, read-only and invalid | 160 | 0 |
 
 ### components/navigation-menu
 
@@ -11094,13 +10317,13 @@ Source: docs/components/one-time-code-field.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| One-time code field | 7 | 3 |
-| Numeric | 30 | 0 |
-| Grouped | 41 | 0 |
-| Masked PIN | 66 | 0 |
-| Verify on completion | 79 | 1 |
-| Controlled value | 112 | 1 |
-| Disabled and invalid | 149 | 0 |
+| One-time code field | 7 | 2 |
+| Numeric | 32 | 0 |
+| Grouped | 43 | 0 |
+| Masked PIN | 68 | 0 |
+| Verify on completion | 81 | 1 |
+| Controlled value | 114 | 1 |
+| Disabled and invalid | 151 | 0 |
 
 ### components/overflow-list
 
@@ -11126,9 +10349,9 @@ Source: docs/components/pagination.mdx
 | Text page links | 54 | 0 |
 | Directions only | 70 | 0 |
 | Page links only | 85 | 0 |
-| Rows per page | 102 | 2 |
-| Localized | 159 | 0 |
-| Disabled | 171 | 0 |
+| Rows per page | 102 | 1 |
+| Localized | 157 | 0 |
+| Disabled | 169 | 0 |
 
 ### components/popover
 
@@ -11161,12 +10384,12 @@ Source: docs/components/progress.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Progress | 7 | 1 |
-| Bare and captioned | 24 | 1 |
-| Indeterminate | 40 | 1 |
-| Steps | 52 | 1 |
-| Import | 65 | 2 |
-| Formatted value | 95 | 3 |
+| Progress | 7 | 0 |
+| Bare and captioned | 25 | 0 |
+| Indeterminate | 42 | 0 |
+| Steps | 55 | 0 |
+| Import | 69 | 1 |
+| Formatted value | 100 | 2 |
 
 ### components/qr-code
 
@@ -11175,11 +10398,11 @@ Source: docs/components/qr-code.mdx
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
 | QR code | 7 | 0 |
-| Connect a device | 20 | 2 |
-| Copy and download | 34 | 0 |
-| Live value | 63 | 2 |
-| Error correction | 95 | 0 |
-| Sizes and colors | 148 | 1 |
+| Connect a device | 20 | 1 |
+| Copy and download | 36 | 0 |
+| Live value | 65 | 1 |
+| Error correction | 97 | 0 |
+| Sizes and colors | 150 | 1 |
 
 ### components/questionnaire
 
@@ -11187,19 +10410,19 @@ Source: docs/components/questionnaire.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Questionnaire | 7 | 1 |
-| Choices and free text | 66 | 1 |
-| Skip and validate | 102 | 1 |
-| Resume a draft | 134 | 2 |
-| Follow-up question | 184 | 1 |
-| Number shortcuts | 244 | 1 |
-| Submit | 273 | 2 |
-| Checkpoint and cross-answer validation | 308 | 2 |
-| Disabled until answered | 374 | 2 |
-| Progress bar | 425 | 2 |
-| Animated questions | 478 | 2 |
-| Inside a Card | 539 | 6 |
-| Clarification dialog | 599 | 1 |
+| Questionnaire | 7 | 0 |
+| Choices and free text | 66 | 0 |
+| Skip and validate | 102 | 0 |
+| Resume a draft | 134 | 1 |
+| Follow-up question | 185 | 0 |
+| Number shortcuts | 245 | 0 |
+| Submit | 274 | 1 |
+| Checkpoint and cross-answer validation | 310 | 1 |
+| Disabled until answered | 378 | 1 |
+| Progress bar | 429 | 1 |
+| Animated questions | 482 | 1 |
+| Inside a Card | 543 | 5 |
+| Clarification dialog | 603 | 1 |
 
 ### components/radio-group
 
@@ -11249,13 +10472,13 @@ Source: docs/components/scroll-trigger.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Scroll Trigger | 7 | 7 |
-| From the center | 39 | 6 |
-| Replay on entry | 55 | 5 |
-| Scrubbed band | 72 | 12 |
-| Custom scroll range | 125 | 14 |
-| Pinned scene | 200 | 16 |
-| Reveal events | 233 | 4 |
+| Scroll Trigger | 7 | 6 |
+| From the center | 40 | 6 |
+| Replay on entry | 57 | 5 |
+| Scrubbed band | 74 | 12 |
+| Custom scroll range | 127 | 14 |
+| Pinned scene | 202 | 16 |
+| Reveal events | 235 | 4 |
 
 ### components/select
 
@@ -11263,21 +10486,21 @@ Source: docs/components/select.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Select | 8 | 1 |
-| Groups and disabled options | 44 | 1 |
-| tp-select-option | 64 | 1 |
-| Multiple | 81 | 1 |
-| Searchable | 101 | 1 |
-| Chips | 135 | 1 |
-| Columns | 156 | 1 |
-| Items property | 179 | 1 |
-| Rich labels | 201 | 1 |
-| Virtualized time zones | 234 | 1 |
-| Search source | 253 | 1 |
-| Value change | 289 | 2 |
-| Disabled, read-only and error | 329 | 1 |
-| Select in a dialog | 358 | 0 |
-| Inline | 384 | 1 |
+| Select | 8 | 0 |
+| Groups and disabled options | 45 | 0 |
+| tp-select-option | 66 | 0 |
+| Multiple | 84 | 0 |
+| Searchable | 105 | 0 |
+| Chips | 140 | 1 |
+| Columns | 161 | 0 |
+| Items property | 185 | 0 |
+| Rich labels | 208 | 0 |
+| Virtualized time zones | 242 | 0 |
+| Search source | 262 | 0 |
+| Value change | 299 | 1 |
+| Disabled, read-only and error | 339 | 0 |
+| Select in a dialog | 369 | 0 |
+| Inline | 395 | 0 |
 
 ### components/separator
 
@@ -11285,9 +10508,9 @@ Source: docs/components/separator.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Separator | 7 | 3 |
+| Separator | 7 | 2 |
 | Vertical | 34 | 1 |
-| Between sections | 49 | 1 |
+| Between sections | 49 | 0 |
 
 ### components/skeleton
 
@@ -11296,11 +10519,11 @@ Source: docs/components/skeleton.mdx
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
 | Skeleton | 7 | 3 |
-| Pulse, sweep and none | 35 | 4 |
-| Card | 49 | 4 |
-| Video and description | 68 | 7 |
-| Settings form | 93 | 6 |
-| Table rows | 122 | 10 |
+| Pulse, sweep and none | 35 | 3 |
+| Card | 50 | 3 |
+| Video and description | 70 | 6 |
+| Settings form | 94 | 5 |
+| Table rows | 119 | 9 |
 
 ### components/slider
 
@@ -11308,27 +10531,27 @@ Source: docs/components/slider.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Slider | 8 | 2 |
-| Price range | 24 | 3 |
-| Push, swap and none | 41 | 3 |
-| Currency and percent | 77 | 4 |
-| Controlled range | 114 | 3 |
-| Step and large step | 148 | 1 |
-| Vertical | 168 | 1 |
-| Vertical range | 179 | 3 |
-| Compact readout | 195 | 4 |
-| Media timeline | 213 | 2 |
-| Authored thumbs | 230 | 1 |
-| Fixed start and added thumbs | 243 | 2 |
-| Thumb alignment and right to left | 284 | 1 |
-| Field and form | 297 | 1 |
-| Disabled and read-only | 315 | 1 |
-| Change and commit | 328 | 2 |
-| Rejecting values | 348 | 3 |
-| Inline | 413 | 3 |
-| Inline in a field | 451 | 1 |
-| Editable value | 461 | 1 |
-| Ticks | 488 | 1 |
+| Slider | 8 | 1 |
+| Price range | 25 | 2 |
+| Push, swap and none | 43 | 2 |
+| Currency and percent | 77 | 3 |
+| Controlled range | 113 | 2 |
+| Step and large step | 146 | 0 |
+| Vertical | 166 | 1 |
+| Vertical range | 177 | 3 |
+| Compact readout | 193 | 4 |
+| Media timeline | 212 | 1 |
+| Authored thumbs | 230 | 0 |
+| Fixed start and added thumbs | 244 | 1 |
+| Thumb alignment and right to left | 285 | 0 |
+| Field and form | 299 | 0 |
+| Disabled and read-only | 318 | 0 |
+| Change and commit | 332 | 1 |
+| Rejecting values | 352 | 2 |
+| Inline | 416 | 2 |
+| Inline in a field | 452 | 0 |
+| Editable value | 463 | 0 |
+| Ticks | 489 | 0 |
 
 ### components/spinner
 
@@ -11365,8 +10588,8 @@ Source: docs/components/status-dot.mdx
 | --- | ---: | ---: |
 | Status dot | 7 | 0 |
 | Variants | 24 | 0 |
-| Service status | 41 | 1 |
-| Compact column | 73 | 1 |
+| Service status | 41 | 0 |
+| Compact column | 74 | 0 |
 | Pulse and ping | 110 | 0 |
 
 ### components/switch
@@ -11376,14 +10599,14 @@ Source: docs/components/switch.mdx
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
 | Switch | 7 | 0 |
-| Settings | 20 | 1 |
-| Sizes | 50 | 0 |
-| Form value | 62 | 1 |
-| Disabled and read-only | 88 | 1 |
-| Controlled | 115 | 1 |
-| Thumb icon | 155 | 1 |
-| Change event | 178 | 0 |
-| Inline | 195 | 1 |
+| Settings | 20 | 0 |
+| Sizes | 48 | 0 |
+| Form value | 60 | 0 |
+| Disabled and read-only | 85 | 0 |
+| Controlled | 111 | 0 |
+| Thumb icon | 151 | 1 |
+| Change event | 174 | 0 |
+| Inline | 191 | 0 |
 
 ### components/table-of-contents
 
@@ -11417,13 +10640,13 @@ Source: docs/components/tabs.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Tabs | 7 | 1 |
-| Underline | 46 | 1 |
-| Vertical | 63 | 1 |
-| Automatic activation | 80 | 1 |
-| Change event and setValue | 99 | 2 |
-| Controlled with a veto | 140 | 2 |
-| Disabled | 195 | 1 |
+| Tabs | 7 | 0 |
+| Underline | 47 | 0 |
+| Vertical | 65 | 0 |
+| Automatic activation | 83 | 0 |
+| Change event and setValue | 103 | 1 |
+| Controlled with a veto | 143 | 1 |
+| Disabled | 199 | 0 |
 
 ### components/text-area
 
@@ -11431,13 +10654,13 @@ Source: docs/components/text-area.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Text area | 7 | 1 |
-| Content and fixed sizing | 21 | 3 |
-| Mono | 46 | 1 |
-| Error | 61 | 1 |
-| Character count | 71 | 2 |
-| Form | 100 | 1 |
-| Disabled and read-only | 118 | 1 |
+| Text area | 7 | 0 |
+| Content and fixed sizing | 22 | 2 |
+| Mono | 47 | 0 |
+| Error | 63 | 0 |
+| Character count | 74 | 1 |
+| Form | 102 | 0 |
+| Disabled and read-only | 121 | 0 |
 
 ### components/text-transform
 
@@ -11446,15 +10669,15 @@ Source: docs/components/text-transform.mdx
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
 | Text transform | 7 | 11 |
-| Case and identifiers | 32 | 13 |
-| Plans | 50 | 13 |
-| Uploads | 88 | 3 |
-| Locales | 107 | 1 |
-| Truncation | 121 | 2 |
-| Length limits | 158 | 1 |
-| Formatter | 179 | 1 |
-| Named presets | 201 | 1 |
-| Unreadable input | 219 | 1 |
+| Case and identifiers | 33 | 13 |
+| Plans | 51 | 12 |
+| Uploads | 90 | 2 |
+| Locales | 110 | 1 |
+| Truncation | 124 | 2 |
+| Length limits | 161 | 1 |
+| Formatter | 182 | 1 |
+| Named presets | 204 | 1 |
+| Unreadable input | 222 | 1 |
 
 ### components/theme-switcher
 
@@ -11462,12 +10685,12 @@ Source: docs/components/theme-switcher.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Theme switcher | 7 | 2 |
-| Variants | 31 | 1 |
-| Page theme | 57 | 1 |
-| Small, defaulting to dark | 82 | 2 |
-| Explicit choices only | 104 | 2 |
-| Color scheme store | 139 | 1 |
+| Theme switcher | 7 | 1 |
+| Variants | 33 | 0 |
+| Page theme | 59 | 1 |
+| Small, defaulting to dark | 84 | 1 |
+| Explicit choices only | 107 | 1 |
+| Color scheme store | 142 | 0 |
 
 ### components/time
 
@@ -11476,17 +10699,17 @@ Source: docs/components/time.mdx
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
 | Time | 7 | 4 |
-| Modes | 61 | 9 |
-| Absolute formats | 94 | 1 |
-| Dates and zones | 121 | 1 |
-| Due dates | 131 | 2 |
-| Calendar | 152 | 9 |
-| Short and narrow | 175 | 1 |
-| Precisions | 192 | 11 |
-| Timers | 207 | 7 |
-| Description | 227 | 1 |
-| Fallback | 247 | 1 |
-| Message timestamp | 256 | 0 |
+| Modes | 53 | 9 |
+| Absolute formats | 86 | 1 |
+| Dates and zones | 113 | 1 |
+| Due dates | 123 | 1 |
+| Calendar | 145 | 9 |
+| Short and narrow | 168 | 1 |
+| Precisions | 185 | 11 |
+| Timers | 200 | 7 |
+| Description | 220 | 1 |
+| Fallback | 240 | 1 |
+| Message timestamp | 249 | 0 |
 
 ### components/timeline
 
@@ -11494,14 +10717,14 @@ Source: docs/components/timeline.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Timeline | 8 | 5 |
-| Step tracker | 43 | 5 |
-| Roadmap | 56 | 14 |
-| Numbered steps | 99 | 4 |
-| Expandable phases | 125 | 11 |
-| Conversation | 173 | 1 |
-| Changelog | 196 | 5 |
-| Explicit status | 235 | 5 |
+| Timeline | 8 | 4 |
+| Step tracker | 44 | 4 |
+| Roadmap | 58 | 14 |
+| Numbered steps | 101 | 3 |
+| Expandable phases | 128 | 11 |
+| Conversation | 177 | 1 |
+| Changelog | 201 | 5 |
+| Explicit status | 239 | 4 |
 
 ### components/toast
 
@@ -11569,17 +10792,17 @@ Source: docs/components/tree-view.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Tree view | 8 | 1 |
-| Permissions | 54 | 1 |
-| Opening items | 77 | 2 |
-| Chevron only | 111 | 1 |
-| From records, reorderable | 133 | 1 |
-| Rendered rows | 171 | 2 |
-| Virtualized | 219 | 1 |
-| Controlled lanes | 258 | 2 |
-| Lazy folders | 321 | 1 |
-| Expand, collapse and reveal | 364 | 1 |
-| Small, no guides | 400 | 1 |
+| Tree view | 8 | 0 |
+| Permissions | 56 | 0 |
+| Opening items | 81 | 2 |
+| Chevron only | 115 | 0 |
+| From records, reorderable | 139 | 1 |
+| Rendered rows | 177 | 2 |
+| Virtualized | 225 | 1 |
+| Controlled lanes | 264 | 2 |
+| Lazy folders | 327 | 1 |
+| Expand, collapse and reveal | 370 | 1 |
+| Small, no guides | 406 | 0 |
 
 ### components/visually-hidden
 
@@ -11589,8 +10812,8 @@ Source: docs/components/visually-hidden.mdx
 | --- | ---: | ---: |
 | Visually hidden | 7 | 0 |
 | Icon-only toggles | 31 | 0 |
-| Filter results | 53 | 1 |
-| Repeated actions | 91 | 4 |
+| Filter results | 53 | 0 |
+| Repeated actions | 90 | 3 |
 
 ### motion/surface/glow-border
 
@@ -11599,13 +10822,13 @@ Source: docs/motion/surface/glow-border.mdx
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
 | Glow border | 7 | 2 |
-| Controls and fields | 28 | 3 |
-| Comets | 53 | 4 |
-| Sweep, pulse and glint | 76 | 5 |
-| Hover | 105 | 4 |
-| Lingering light | 120 | 2 |
-| Custom colors | 134 | 8 |
-| Lit by an element | 160 | 2 |
+| Controls and fields | 28 | 2 |
+| Comets | 55 | 4 |
+| Sweep, pulse and glint | 78 | 5 |
+| Hover | 107 | 4 |
+| Lingering light | 122 | 2 |
+| Custom colors | 136 | 8 |
+| Lit by an element | 162 | 2 |
 
 ### motion/surface/segment-border
 
@@ -11668,7 +10891,7 @@ Source: docs/widgets/color-picker.mdx
 | Color picker | 7 | 1 |
 | Popup in a field | 22 | 0 |
 | Color input trigger | 33 | 1 |
-| Popup in a form | 45 | 2 |
+| Popup in a form | 46 | 1 |
 | Limited formats, no alpha | 95 | 1 |
 | Channel sliders | 112 | 1 |
 | Harmony wheel and triangle | 117 | 2 |
@@ -11704,14 +10927,14 @@ Source: docs/widgets/emoji-picker.mdx
 | --- | ---: | ---: |
 | Emoji picker | 7 | 0 |
 | Picks | 18 | 1 |
-| Insert into a message | 43 | 2 |
-| Remembered tone | 78 | 1 |
-| Recent picks | 106 | 0 |
-| Workspace emoji | 122 | 0 |
-| Curated reactions | 149 | 0 |
-| Full Unicode set | 185 | 0 |
-| Popup in a form | 199 | 2 |
-| Small and read-only | 234 | 0 |
+| Insert into a message | 43 | 1 |
+| Remembered tone | 76 | 1 |
+| Recent picks | 104 | 0 |
+| Workspace emoji | 120 | 0 |
+| Curated reactions | 147 | 0 |
+| Full Unicode set | 183 | 0 |
+| Popup in a form | 197 | 1 |
+| Small and read-only | 232 | 0 |
 
 ### widgets/flow
 
@@ -11738,12 +10961,12 @@ Source: docs/widgets/gradient-picker.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Gradient picker | 7 | 1 |
-| Stop controls | 30 | 1 |
-| Midpoints | 77 | 1 |
-| Small and read-only | 109 | 1 |
-| Field | 127 | 1 |
-| Field settings | 141 | 1 |
+| Gradient picker | 7 | 0 |
+| Stop controls | 31 | 0 |
+| Midpoints | 78 | 0 |
+| Small and read-only | 111 | 0 |
+| Field | 130 | 0 |
+| Field settings | 145 | 0 |
 
 ### widgets/plot
 
@@ -11765,16 +10988,16 @@ Source: docs/widgets/text-editor.mdx
 
 | Use case | Source line | Styling sites |
 | --- | ---: | ---: |
-| Text editor | 7 | 2 |
-| Classic editor | 177 | 1 |
-| Node editor | 257 | 1 |
-| Custom nodes | 323 | 3 |
-| Custom blocks | 403 | 0 |
-| Markdown in and out | 511 | 1 |
-| In a form | 561 | 2 |
-| Read-only and disabled | 619 | 5 |
-| Image upload | 835 | 0 |
-| Core editor | 891 | 0 |
+| Text editor | 7 | 1 |
+| Classic editor | 177 | 0 |
+| Node editor | 256 | 0 |
+| Custom nodes | 321 | 2 |
+| Custom blocks | 400 | 0 |
+| Markdown in and out | 508 | 0 |
+| In a form | 558 | 1 |
+| Read-only and disabled | 615 | 4 |
+| Image upload | 830 | 0 |
+| Core editor | 886 | 0 |
 
 
 ## Complete source coverage
@@ -11784,98 +11007,98 @@ Shared helpers and imported styling are listed at their source; names in story/h
 | Source | Styling sites |
 | --- | ---: |
 | docs/anchored-surfaces.md | 0 |
-| docs/components/accordion.mdx | 6 |
+| docs/components/accordion.mdx | 1 |
 | docs/components/alert-dialog.mdx | 0 |
-| docs/components/alert.mdx | 4 |
+| docs/components/alert.mdx | 0 |
 | docs/components/aspect-ratio.mdx | 26 |
-| docs/components/attachment.mdx | 15 |
-| docs/components/autocomplete.mdx | 18 |
+| docs/components/attachment.mdx | 8 |
+| docs/components/autocomplete.mdx | 10 |
 | docs/components/avatar.mdx | 7 |
 | docs/components/badge.mdx | 3 |
 | docs/components/breadcrumb.mdx | 1 |
-| docs/components/bubble.mdx | 19 |
-| docs/components/button-group.mdx | 7 |
+| docs/components/bubble.mdx | 13 |
+| docs/components/button-group.mdx | 3 |
 | docs/components/button.mdx | 2 |
-| docs/components/calendar.mdx | 27 |
-| docs/components/card.mdx | 25 |
-| docs/components/carousel.mdx | 100 |
-| docs/components/checkbox.mdx | 11 |
-| docs/components/citation.mdx | 5 |
-| docs/components/code-block.mdx | 9 |
-| docs/components/collapsible.mdx | 22 |
-| docs/components/color-input.mdx | 8 |
-| docs/components/command-palette.mdx | 4 |
-| docs/components/copy-button.mdx | 8 |
+| docs/components/calendar.mdx | 26 |
+| docs/components/card.mdx | 20 |
+| docs/components/carousel.mdx | 90 |
+| docs/components/checkbox.mdx | 8 |
+| docs/components/citation.mdx | 3 |
+| docs/components/code-block.mdx | 2 |
+| docs/components/collapsible.mdx | 14 |
+| docs/components/color-input.mdx | 1 |
+| docs/components/command-palette.mdx | 1 |
+| docs/components/copy-button.mdx | 6 |
 | docs/components/cursor.mdx | 35 |
-| docs/components/data-visualization.mdx | 6 |
-| docs/components/description-list.mdx | 9 |
+| docs/components/data-visualization.mdx | 3 |
+| docs/components/description-list.mdx | 5 |
 | docs/components/dialog.mdx | 7 |
-| docs/components/drag-drop-list.mdx | 20 |
+| docs/components/drag-drop-list.mdx | 10 |
 | docs/components/drawer.mdx | 4 |
-| docs/components/empty-state.mdx | 7 |
-| docs/components/field-group.mdx | 11 |
-| docs/components/field.mdx | 9 |
-| docs/components/file-upload.mdx | 11 |
-| docs/components/form.mdx | 14 |
+| docs/components/empty-state.mdx | 6 |
+| docs/components/field-group.mdx | 3 |
+| docs/components/field.mdx | 2 |
+| docs/components/file-upload.mdx | 1 |
+| docs/components/form.mdx | 6 |
 | docs/components/icon.mdx | 6 |
-| docs/components/image.mdx | 63 |
-| docs/components/input-group.mdx | 16 |
-| docs/components/input.mdx | 9 |
-| docs/components/kbd.mdx | 4 |
-| docs/components/label.mdx | 4 |
-| docs/components/list.mdx | 34 |
+| docs/components/image.mdx | 61 |
+| docs/components/input-group.mdx | 7 |
+| docs/components/input.mdx | 0 |
+| docs/components/kbd.mdx | 3 |
+| docs/components/label.mdx | 1 |
+| docs/components/list.mdx | 26 |
 | docs/components/map.mdx | 26 |
-| docs/components/markdown.mdx | 13 |
-| docs/components/marker.mdx | 20 |
-| docs/components/media-player.mdx | 14 |
+| docs/components/markdown.mdx | 5 |
+| docs/components/marker.mdx | 12 |
+| docs/components/media-player.mdx | 4 |
 | docs/components/menu.mdx | 2 |
 | docs/components/menubar.mdx | 1 |
 | docs/components/message-scroller.mdx | 20 |
-| docs/components/message.mdx | 10 |
-| docs/components/native-select.mdx | 9 |
+| docs/components/message.mdx | 2 |
+| docs/components/native-select.mdx | 2 |
 | docs/components/navigation-menu.mdx | 10 |
 | docs/components/navigation-panel.mdx | 28 |
-| docs/components/one-time-code-field.mdx | 5 |
+| docs/components/one-time-code-field.mdx | 4 |
 | docs/components/overflow-list.mdx | 5 |
-| docs/components/pagination.mdx | 3 |
+| docs/components/pagination.mdx | 2 |
 | docs/components/popover.mdx | 5 |
 | docs/components/preview-card.mdx | 10 |
-| docs/components/progress.mdx | 9 |
-| docs/components/qr-code.mdx | 5 |
-| docs/components/questionnaire.mdx | 24 |
+| docs/components/progress.mdx | 3 |
+| docs/components/qr-code.mdx | 3 |
+| docs/components/questionnaire.mdx | 12 |
 | docs/components/radio-group.mdx | 1 |
 | docs/components/resizable-panel-group.mdx | 33 |
 | docs/components/scroll-area.mdx | 76 |
-| docs/components/scroll-trigger.mdx | 64 |
-| docs/components/select.mdx | 15 |
-| docs/components/separator.mdx | 5 |
-| docs/components/skeleton.mdx | 34 |
-| docs/components/slider.mdx | 43 |
+| docs/components/scroll-trigger.mdx | 63 |
+| docs/components/select.mdx | 2 |
+| docs/components/separator.mdx | 3 |
+| docs/components/skeleton.mdx | 29 |
+| docs/components/slider.mdx | 25 |
 | docs/components/spinner.mdx | 1 |
 | docs/components/stack.mdx | 0 |
-| docs/components/status-dot.mdx | 2 |
-| docs/components/switch.mdx | 6 |
+| docs/components/status-dot.mdx | 0 |
+| docs/components/switch.mdx | 1 |
 | docs/components/table-of-contents.mdx | 62 |
 | docs/components/table.mdx | 100 |
-| docs/components/tabs.mdx | 9 |
-| docs/components/text-area.mdx | 10 |
-| docs/components/text-transform.mdx | 47 |
-| docs/components/theme-switcher.mdx | 9 |
-| docs/components/time.mdx | 47 |
-| docs/components/timeline.mdx | 50 |
+| docs/components/tabs.mdx | 2 |
+| docs/components/text-area.mdx | 3 |
+| docs/components/text-transform.mdx | 45 |
+| docs/components/theme-switcher.mdx | 4 |
+| docs/components/time.mdx | 46 |
+| docs/components/timeline.mdx | 46 |
 | docs/components/toast.mdx | 0 |
 | docs/components/toggle-group.mdx | 5 |
 | docs/components/toggle.mdx | 2 |
 | docs/components/tooltip.mdx | 1 |
-| docs/components/tree-view.mdx | 14 |
-| docs/components/visually-hidden.mdx | 5 |
+| docs/components/tree-view.mdx | 10 |
+| docs/components/visually-hidden.mdx | 3 |
 | docs/content-security.md | 1 |
 | docs/conventions.md | 0 |
 | docs/drag-drop.md | 0 |
 | docs/frameworks.md | 1 |
 | docs/meter.md | 0 |
 | docs/motion.md | 1 |
-| docs/motion/surface/glow-border.mdx | 30 |
+| docs/motion/surface/glow-border.mdx | 29 |
 | docs/motion/surface/segment-border.mdx | 10 |
 | docs/motion/text/text-mirror.mdx | 15 |
 | docs/motion/text/text-split.mdx | 18 |
@@ -11885,20 +11108,20 @@ Shared helpers and imported styling are listed at their source; names in story/h
 | docs/styling.md | 5 |
 | docs/toolbar.md | 0 |
 | docs/widgets/README.md | 1 |
-| docs/widgets/color-picker.mdx | 22 |
+| docs/widgets/color-picker.mdx | 21 |
 | docs/widgets/easing-editor.mdx | 14 |
-| docs/widgets/emoji-picker.mdx | 6 |
+| docs/widgets/emoji-picker.mdx | 4 |
 | docs/widgets/flow.mdx | 22 |
-| docs/widgets/gradient-picker.mdx | 6 |
+| docs/widgets/gradient-picker.mdx | 0 |
 | docs/widgets/plot.mdx | 11 |
-| docs/widgets/text-editor.mdx | 15 |
+| docs/widgets/text-editor.mdx | 8 |
 | src/stories/accordion.stories.ts | 0 |
 | src/stories/alert-dialog.stories.ts | 0 |
 | src/stories/alert.stories.ts | 0 |
 | src/stories/aspect-ratio.stories.ts | 0 |
 | src/stories/assets/media/README.md | 0 |
 | src/stories/attachment.stories.ts | 0 |
-| src/stories/autocomplete.stories.ts | 1 |
+| src/stories/autocomplete.stories.ts | 0 |
 | src/stories/avatar.stories.ts | 0 |
 | src/stories/badge.stories.ts | 1 |
 | src/stories/breadcrumb.stories.ts | 0 |
@@ -11917,7 +11140,7 @@ Shared helpers and imported styling are listed at their source; names in story/h
 | src/stories/checkbox.stories.ts | 0 |
 | src/stories/citation-example.d.ts | 0 |
 | src/stories/citation-example.js | 0 |
-| src/stories/citation.examples.ts | 4 |
+| src/stories/citation.examples.ts | 1 |
 | src/stories/citation.stories.ts | 0 |
 | src/stories/code-block.stories.ts | 0 |
 | src/stories/collapsible.stories.ts | 0 |
@@ -11926,10 +11149,10 @@ Shared helpers and imported styling are listed at their source; names in story/h
 | src/stories/copy-button.stories.ts | 0 |
 | src/stories/cursor.stories.ts | 1 |
 | src/stories/data-visualization.examples.ts | 0 |
-| src/stories/data-visualization.stories.ts | 1 |
+| src/stories/data-visualization.stories.ts | 0 |
 | src/stories/date-picker-trigger.d.ts | 0 |
 | src/stories/date-picker-trigger.js | 3 |
-| src/stories/description-list.stories.ts | 1 |
+| src/stories/description-list.stories.ts | 0 |
 | src/stories/design-tokens.stories.ts | 0 |
 | src/stories/design-tokens/design-tokens.css | 1 |
 | src/stories/design-tokens/design-tokens.ts | 12 |
@@ -11939,14 +11162,14 @@ Shared helpers and imported styling are listed at their source; names in story/h
 | src/stories/drawer.stories.ts | 0 |
 | src/stories/empty-state.stories.ts | 0 |
 | src/stories/examples.ts | 0 |
-| src/stories/field-group.stories.ts | 1 |
+| src/stories/field-group.stories.ts | 0 |
 | src/stories/field.stories.ts | 0 |
 | src/stories/file-upload.stories.ts | 0 |
 | src/stories/form.examples.ts | 0 |
 | src/stories/form.stories.ts | 0 |
 | src/stories/glow-border.stories.ts | 2 |
 | src/stories/icon.stories.ts | 0 |
-| src/stories/image.stories.ts | 1 |
+| src/stories/image.stories.ts | 0 |
 | src/stories/input-group.stories.ts | 0 |
 | src/stories/input.stories.ts | 0 |
 | src/stories/kbd-example.d.ts | 0 |
@@ -11967,7 +11190,7 @@ Shared helpers and imported styling are listed at their source; names in story/h
 | src/stories/media-player-example.d.ts | 0 |
 | src/stories/media-player-example.js | 0 |
 | src/stories/media-player.examples.ts | 2 |
-| src/stories/media-player.stories.ts | 2 |
+| src/stories/media-player.stories.ts | 0 |
 | src/stories/media.ts | 0 |
 | src/stories/menu-family-controls.ts | 2 |
 | src/stories/menu.stories.ts | 0 |
@@ -11996,12 +11219,12 @@ Shared helpers and imported styling are listed at their source; names in story/h
 | src/stories/questionnaire-data.js | 0 |
 | src/stories/questionnaire-example.d.ts | 0 |
 | src/stories/questionnaire-example.js | 9 |
-| src/stories/questionnaire.examples.ts | 1 |
-| src/stories/questionnaire.stories.ts | 2 |
+| src/stories/questionnaire.examples.ts | 0 |
+| src/stories/questionnaire.stories.ts | 1 |
 | src/stories/radio-group.stories.ts | 0 |
 | src/stories/resizable-panel-group.stories.ts | 13 |
 | src/stories/scroll-area.stories.ts | 5 |
-| src/stories/scroll-trigger.stories.ts | 4 |
+| src/stories/scroll-trigger.stories.ts | 3 |
 | src/stories/segment-border.stories.ts | 0 |
 | src/stories/select.stories.ts | 0 |
 | src/stories/separator.stories.ts | 0 |
@@ -12009,7 +11232,7 @@ Shared helpers and imported styling are listed at their source; names in story/h
 | src/stories/size-report/size-chart.ts | 3 |
 | src/stories/size-report/size-report.css | 1 |
 | src/stories/size-report/size-report.ts | 3 |
-| src/stories/skeleton.examples.ts | 18 |
+| src/stories/skeleton.examples.ts | 14 |
 | src/stories/skeleton.stories.ts | 0 |
 | src/stories/slider-example.d.ts | 0 |
 | src/stories/slider-example.js | 3 |
@@ -12035,12 +11258,12 @@ Shared helpers and imported styling are listed at their source; names in story/h
 | src/stories/text-transform.stories.ts | 1 |
 | src/stories/theme-switcher.stories.ts | 0 |
 | src/stories/time.stories.ts | 0 |
-| src/stories/timeline.stories.ts | 6 |
+| src/stories/timeline.stories.ts | 5 |
 | src/stories/toast.stories.ts | 0 |
 | src/stories/toggle-group.stories.ts | 11 |
 | src/stories/toggle.stories.ts | 5 |
 | src/stories/tooltip.stories.ts | 0 |
-| src/stories/tree-view.stories.ts | 1 |
+| src/stories/tree-view.stories.ts | 0 |
 | src/stories/visually-hidden.stories.ts | 0 |
 | src/stories/widgets/color-picker.stories.ts | 1 |
 | src/stories/widgets/easing-editor.stories.ts | 0 |
@@ -12049,7 +11272,7 @@ Shared helpers and imported styling are listed at their source; names in story/h
 | src/stories/widgets/flow-example.d.ts | 0 |
 | src/stories/widgets/flow-example.js | 3 |
 | src/stories/widgets/flow.stories.ts | 0 |
-| src/stories/widgets/gradient-picker.stories.ts | 1 |
+| src/stories/widgets/gradient-picker.stories.ts | 0 |
 | src/stories/widgets/overview.mdx | 0 |
 | src/stories/widgets/plot.stories.ts | 8 |
 | src/stories/widgets/text-editor-blocks-example.d.ts | 0 |

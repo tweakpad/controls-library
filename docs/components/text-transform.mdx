@@ -5,9 +5,10 @@ tag: tp-text-transform
 ---
 
 <Preview
+  width="3"
   title="Text transform"
   align="stretch"
-  code={`<dl style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--tp-space-3) var(--tp-space-6);inline-size:100%;max-inline-size:24rem;margin:0 auto;font-size:var(--tp-text-sm)">
+  code={`<dl style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--tp-space-3) var(--tp-space-6);margin:0;font-size:var(--tp-text-sm)">
   <dt style="color:var(--tp-muted-foreground)">Monthly revenue</dt>
   <dd style="margin:0;text-align:end"><tp-text-transform preset="currency" currency="EUR" value="48250"></tp-text-transform></dd>
   <dt style="color:var(--tp-muted-foreground)">Conversion</dt>
@@ -48,9 +49,10 @@ Case presets change how words are capitalized and follow the locale of the close
 Numeric presets format through `Intl.NumberFormat` with tabular figures. `currency` takes an ISO 4217 code for the `currency` preset, `unit` a unit identifier such as `kilometer` or `megabyte-per-second`, and `decimals` fixes the fraction digits. `percent` reads a ratio, so `0.82` is 82%. Dates and times belong to Time.
 
 <Preview
+  width="7"
   title="Plans"
   align="stretch"
-  code={`<tp-table label="Plan usage" style="max-inline-size:40rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-table label="Plan usage">
   <tp-table-header>
     <tp-table-row>
       <tp-table-head>Plan</tp-table-head>
@@ -86,9 +88,10 @@ Abbreviated forms are spelled out for assistive technology: "1.2M" is read as "1
 `bytes` formats a byte count with binary units (1 KB = 1024 B). `duration` reads seconds and shows them as a clock, read aloud as "1 hour, 2 minutes, 5 seconds". Both reject negative values.
 
 <Preview
+  width="5"
   title="Uploads"
   align="stretch"
-  code={`<tp-list aria-label="Uploads" style="max-inline-size:30rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-list aria-label="Uploads">
   <tp-list-item variant="outline">
     Onboarding walkthrough.mp4
     <span slot="actions" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)"><tp-text-transform preset="duration" value="3725"></tp-text-transform> · <tp-text-transform preset="bytes" value="734003200"></tp-text-transform></span>

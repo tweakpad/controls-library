@@ -25,3 +25,14 @@
 | preview | Value change | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Disabled, read-only and error | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Inline | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Select | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Groups and disabled options | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | tp-select-option | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Multiple | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Searchable | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Columns | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Items property | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Rich labels | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Virtualized time zones | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Search source | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

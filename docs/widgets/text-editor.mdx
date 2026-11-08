@@ -5,9 +5,10 @@ tag: tp-text-editor
 ---
 
 <Preview
+  width="7"
   title="Text editor"
   align="stretch"
-  code={`<tp-stack style="inline-size: 100%; max-inline-size: 44rem; margin-inline: auto" gap="3">
+  code={`<tp-stack  gap="3">
   <tp-toggle-group
     id="text-editor-engine"
     label="Engine"
@@ -15,8 +16,7 @@ tag: tp-text-editor
     spacing="0"
     size="sm"
     default-value='["tiptap"]'
-    style="align-self: flex-start"
-  >
+    style="align-self: flex-start">
     <tp-toggle value="tiptap">Tiptap</tp-toggle>
     <tp-toggle value="lexical">Lexical</tp-toggle>
   </tp-toggle-group>
@@ -175,11 +175,10 @@ Each adapter is its own entry, `createTiptapEngine` in `@tweakpad/ui/text-editor
 A classic editor keeps its tools in one toolbar above the document. Turn off the node surfaces in `layout` and list the toolbar groups you want; `tools` adds your own, such as this date stamp. The image tool stays disabled until `imageUpload` uploads the file and resolves its address.
 
 <Preview
+  width="6"
   title="Classic editor"
   align="stretch"
-  code={`<div style="inline-size:100%;max-inline-size:36rem;margin-inline:auto">
-  <tp-text-editor id="text-editor-classic" label="Shift log"></tp-text-editor>
-</div>`}
+  code={`<tp-text-editor id="text-editor-classic" label="Shift log"></tp-text-editor>`}
   script={`import * as core from '@tiptap/core';
 import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';
@@ -255,11 +254,10 @@ editor.layout = { toolbar: [...editor.layout.toolbar, ['insert-date']] };`} lang
 A node editor has no fixed toolbar: every block is a node. Point at a block for its gutter, whose grip drags the block or opens its menu; type `/` for the slash menu; select text for the selection toolbar. Set `layout.toolbar` to an empty list to get this style.
 
 <Preview
+  width="7"
   title="Node editor"
   align="stretch"
-  code={`<div style="inline-size:100%;max-inline-size:44rem;margin-inline:auto">
-  <tp-text-editor id="text-editor-nodes" label="Field notes" placeholder="Write what you observed"></tp-text-editor>
-</div>`}
+  code={`<tp-text-editor id="text-editor-nodes" label="Field notes" placeholder="Write what you observed"></tp-text-editor>`}
   script={`import * as core from '@tiptap/core';
 import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';
@@ -321,11 +319,10 @@ Typing `/` opens the slash menu with the tools of `layout.slash`: block kinds, l
 `nodes` adds blocks from `defineTextEditorBlock()` and inline nodes from `defineTextEditorInline()`, and every custom block gets the gutter, the block menu, drag and a slash menu entry. This callout takes the editor's callout paint through `presents: 'callout'`, and typing `@` opens the mention list once `layout.suggestions` names it.
 
 <Preview
+  width="7"
   title="Custom nodes"
   align="stretch"
-  code={`<div style="inline-size:100%;max-inline-size:44rem;margin-inline:auto">
-  <tp-text-editor id="text-editor-custom-nodes" label="Mooring notes"></tp-text-editor>
-</div>`}
+  code={`<tp-text-editor id="text-editor-custom-nodes" label="Mooring notes"></tp-text-editor>`}
   script={`import * as core from '@tiptap/core';
 import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';
@@ -509,12 +506,12 @@ setupCustomBlocks(document.querySelector('#text-editor-custom-blocks tp-text-edi
 `format` sets the format of `default-value` and of the submitted value: `html` (the default), `markdown`, `text` or the engine's own `json`. The editor has no controlled value; `getContent(format)` serializes the document when you ask, as this Markdown does after every change.
 
 <Preview
+  width="7"
   title="Markdown in and out"
   align="stretch"
-  code={`<tp-stack style="inline-size: 100%; max-inline-size: 44rem; margin-inline: auto" gap="3">
+  code={`<tp-stack  gap="3">
   <tp-text-editor id="text-editor-markdown" label="Visit log" format="markdown"></tp-text-editor>
-  <tp-code-block id="text-editor-markdown-output" language="markdown" wrap
-    ></tp-code-block
+  <tp-code-block id="text-editor-markdown-output" language="markdown" wrap></tp-code-block
   >
 </tp-stack>`}
   script={`import * as core from '@tiptap/core';
@@ -559,16 +556,16 @@ editor.engine = createTiptapEngine({ core, state, history, starterKit, list, tab
 With `name`, the editor submits its document in `format`, and form reset restores `default-value`. It performs no validation. Inside a Field, the Field's label names it.
 
 <Preview
+  width="6"
   title="In a form"
   align="stretch"
-  code={`<form id="text-editor-form" style="inline-size: 100%; max-inline-size: 36rem; margin-inline: auto">
+  code={`<form id="text-editor-form">
   <tp-stack gap="4">
     <tp-field label="Release notes" description="Submitted as Markdown.">
       <tp-text-editor
         name="notes"
         format="markdown"
-        placeholder="What changed in this release?"
-      ></tp-text-editor>
+        placeholder="What changed in this release?"></tp-text-editor>
     </tp-field>
     <tp-stack direction="row" gap="2">
       <tp-button type="submit">Save notes</tp-button>
@@ -576,8 +573,7 @@ With `name`, the editor submits its document in `format`, and form reset restore
     </tp-stack>
     <output
       id="text-editor-form-output"
-      style="white-space: pre-line; color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
-      >Edit the notes, then save.</output
+      style="white-space: pre-line; color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)">Edit the notes, then save.</output
     >
   </tp-stack>
 </form>`}
@@ -617,13 +613,12 @@ Inside a `tp-field`, the Field's label names the editing root, its description a
 `readonly` keeps the content focusable, selectable and copyable but rejects edits. `disabled`, also from a disabled fieldset or Field, leaves nothing focusable and submits no value.
 
 <Preview
+  width="6"
   title="Read-only and disabled"
   align="stretch"
   code={`<tp-stack
   id="text-editor-states"
-  style="inline-size: 100%; max-inline-size: 36rem; margin-inline: auto"
-  gap="4"
->
+  gap="4">
   <tp-text-editor label="Published notes" readonly></tp-text-editor>
   <tp-text-editor label="Archived notes" disabled></tp-text-editor>
 </tp-stack>`}

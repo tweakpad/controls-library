@@ -21,3 +21,7 @@
 | preview | Inline | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Number steps | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Units and icons | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Input | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Owner-shaped value | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Error | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

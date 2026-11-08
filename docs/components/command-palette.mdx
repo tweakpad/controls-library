@@ -5,19 +5,18 @@ tag: tp-command-palette
 ---
 
 <Preview
+  width="4"
   title="Command palette"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 28rem; margin-inline: auto" gap="3">
+  code={`<tp-stack  gap="3">
   <tp-command-palette
     id="command-palette-demo"
     inline
     label="Commands"
-    placeholder="Search commands…"
-  ></tp-command-palette>
+    placeholder="Search commands…"></tp-command-palette>
   <output
     id="command-palette-demo-output"
-    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
-  ></output>
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"></output>
 </tp-stack>`}
   script={`const outline = (...paths) => ({ viewBox: '0 0 24 24', paths: paths.map((d) => ({ d, strokeWidth: 1.75 })) });
 const icons = {
@@ -89,9 +88,10 @@ Here the page owns the shortcut: a `keydown` listener opens the palette with `se
 When nothing matches, the palette shows “No results found.” Replace it with the `empty` slot to point people somewhere useful.
 
 <Preview
+  width="4"
   title="Custom empty state"
   align="stretch"
-  code={`<tp-command-palette inline label="Teammates" default-query="priya" placeholder="Search teammates…" style="max-inline-size:28rem;margin-inline:auto">
+  code={`<tp-command-palette inline label="Teammates" default-query="priya" placeholder="Search teammates…">
   <option value="maya">Maya Patel</option>
   <option value="jordan">Jordan Lee</option>
   <option value="ana">Ana Ruiz</option>
@@ -106,9 +106,10 @@ When nothing matches, the palette shows “No results found.” Replace it with 
 When a server does the searching, set the `shouldFilter` property to `false` so the palette shows `items` exactly as supplied, then replace `items` whenever the query changes. `tp-query-change` reports each proposed query in `detail.value`.
 
 <Preview
+  width="4"
   title="Server-filtered list"
   align="stretch"
-  code={`<tp-command-palette id="command-palette-server" inline label="Search docs" placeholder="Search the documentation…" style="max-inline-size:28rem;margin-inline:auto"></tp-command-palette>`}
+  code={`<tp-command-palette id="command-palette-server" inline label="Search docs" placeholder="Search the documentation…"></tp-command-palette>`}
   script={`const pages = [
   'Installing the CLI', 'Inviting teammates', 'Managing billing', 'Exporting data as CSV',
   'Connecting GitHub', 'Setting up single sign-on', 'Rotating API keys', 'Webhooks reference',

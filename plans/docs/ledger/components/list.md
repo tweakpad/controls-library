@@ -32,3 +32,10 @@
 | preview | Content and actions | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Variants and sizes | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | People and invitations | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | List | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Media | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Divided list | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Header and footer | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Link rows | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Recordings | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

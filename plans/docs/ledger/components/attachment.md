@@ -30,3 +30,5 @@
 | preview | Preview trigger, download and retry | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Sizes | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Remove event | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Image cards | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

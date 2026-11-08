@@ -25,3 +25,5 @@
 | preview | Modifiers | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Icon keys | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Localized and right-to-left | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Input group | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

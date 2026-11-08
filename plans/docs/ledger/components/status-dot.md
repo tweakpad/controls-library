@@ -24,3 +24,6 @@
 | preview | Status dot | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Variants | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Pulse and ping | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Service status | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Compact column | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

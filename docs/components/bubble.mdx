@@ -6,16 +6,16 @@ parts: [tp-bubble-group]
 ---
 
 <Preview
+  width="5"
   title="Conversation"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto" gap="6">
+  code={`<tp-stack  gap="6">
   <tp-bubble-group>
     <tp-bubble>Hi Maya, the March invoice shows two seats we removed last week.</tp-bubble>
     <tp-bubble>Can you check whether the credit was applied?</tp-bubble>
   </tp-bubble-group>
   <tp-bubble-group>
-    <tp-bubble align="end" variant="tinted"
-      >Good catch. The credit posts on the next billing date, April 1.</tp-bubble
+    <tp-bubble align="end" variant="tinted">Good catch. The credit posts on the next billing date, April 1.</tp-bubble
     >
     <tp-bubble align="end" variant="tinted">
       I've added a note to your account so it shows on the receipt.
@@ -34,9 +34,10 @@ Grouping adds no conversation state or announcements.
 ### Treatments
 
 <Preview
+  width="5"
   title="Variants"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto" gap="3">
+  code={`<tp-stack  gap="3">
   <tp-bubble variant="default">Default</tp-bubble>
   <tp-bubble>Secondary</tp-bubble>
   <tp-bubble variant="subdued">Subdued</tp-bubble>
@@ -54,9 +55,10 @@ Grouping adds no conversation state or announcements.
 `align` is logical: `end` sits on the inline end and follows writing direction. Group consecutive messages so spacing reflects who is speaking, not each message.
 
 <Preview
+  width="5"
   title="Alignment"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto" gap="6">
+  code={`<tp-stack  gap="6">
   <tp-bubble-group>
     <tp-bubble variant="subdued">Deploy finished for web-prod.</tp-bubble>
     <tp-bubble variant="subdued">Error rate is back under 0.1%.</tp-bubble>
@@ -74,18 +76,17 @@ The `reactions` slot accepts plain counts or real controls. `reaction-side` pick
 Empty reactions have no visible surface.
 
 <Preview
+  width="5"
   title="Reactions"
   align="stretch"
   code={`<tp-stack
-  style="max-inline-size: 32rem; margin-inline: auto; padding-block: var(--tp-space-4)"
-  gap="10"
->
+  style="padding-block:var(--tp-space-4)"
+  gap="10">
   <tp-bubble variant="default">
     The new onboarding flow is live for 10% of signups.
     <span slot="reactions" role="img" aria-label="Reactions: party popper and fire">🎉 🔥</span>
   </tp-bubble>
-  <tp-bubble align="end" variant="tinted" reaction-side="block-start" reactions-align="start"
-    >
+  <tp-bubble align="end" variant="tinted" reaction-side="block-start" reactions-align="start">
     Nice. Let's review conversion on Friday.
     <span slot="reactions" role="img" aria-label="Reaction: eyes">👀</span>
   </tp-bubble
@@ -102,9 +103,10 @@ Empty reactions have no visible surface.
 The default slot takes any content: paragraphs and links keep their own semantics. The message container is a named group (`label`, default "Message"); `label=""` removes the role.
 
 <Preview
+  width="5"
   title="Rich content"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto" gap="3">
+  code={`<tp-stack  gap="3">
   <tp-bubble variant="default" label="Message from Jordan">
     <p style="margin: 0">Release notes for 2.4 are drafted.</p>
     <p style="margin: 0">Highlights: SSO for all plans, faster exports, and the new audit log. <a href="#rich-content" style="color:inherit">Read the draft</a></p>
@@ -115,9 +117,10 @@ The default slot takes any content: paragraphs and links keep their own semantic
 ### Long messages
 
 <Preview
+  width="5"
   title="Expandable message"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto" gap="3">
+  code={`<tp-stack  gap="3">
   <tp-bubble variant="subdued" label="Message from Priya">
     <p style="margin: 0">Here's the summary from this morning's incident review.</p>
     <tp-collapsible id="bubble-expand">
@@ -143,11 +146,11 @@ Put a Collapsible inside the bubble to keep long replies short in the thread. Th
 ### Buttons and links
 
 <Preview
+  width="5"
   title="Quick replies"
   align="stretch"
-  code={`<tp-stack id="bubble-replies" style="max-inline-size: 32rem; margin-inline: auto" gap="3">
-  <tp-bubble variant="default"
-    >Hi Sam, your order #10482 is out for delivery. Anything I can help with?</tp-bubble
+  code={`<tp-stack id="bubble-replies"  gap="3">
+  <tp-bubble variant="default">Hi Sam, your order #10482 is out for delivery. Anything I can help with?</tp-bubble
   >
   <tp-bubble variant="outline" data-link>Track your package</tp-bubble>
   <tp-bubble-group data-suggestions>

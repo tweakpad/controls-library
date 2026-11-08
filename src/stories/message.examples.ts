@@ -13,9 +13,8 @@ const bubble = (text: string, align = 'start', extra = '') =>
 const row = (name: string, content: string, align = 'start', media = '', extra = '') =>
   `<tp-message align="${align}" aria-label="${name}">${media}${content}${extra}</tp-message>`;
 const icon = (name: string) => `<tp-icon data-icon="${name}"></tp-icon>`;
-// Conversation width and distance between independent turns belong to the application.
-const layout =
-  'display:flex;flex-direction:column;gap:var(--tp-space-6);inline-size:100%;max-inline-size:24rem;margin-inline:auto';
+// Space separates independent conversation turns.
+const layout = 'display:flex;flex-direction:column;gap:var(--tp-space-6)';
 function example(title: string, id: string, content: string, description: string) {
   return moduleExample({
     title,

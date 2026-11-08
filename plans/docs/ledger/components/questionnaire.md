@@ -36,3 +36,12 @@
 | preview | Checkpoint and cross-answer validation | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Progress bar | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Clarification dialog | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Questionnaire | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Choices and free text | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Skip and validate | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Follow-up question | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Number shortcuts | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Disabled until answered | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Animated questions | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Inside a Card | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

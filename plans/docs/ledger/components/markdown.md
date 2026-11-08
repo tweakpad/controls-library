@@ -30,3 +30,10 @@
 
 | preview | Streaming | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Custom node rendering | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Markdown | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Script child | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Heading offset | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Code and alerts | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Small | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Element policy | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

@@ -31,7 +31,7 @@ const meta = {
     legendPlacement: { control: 'select', options: ['top', 'bottom'] },
   },
   render: (args) =>
-    html`<div style="max-inline-size:calc(var(--tp-spacing) * 200);margin-inline:auto">
+    html`<div>
       ${dataVisualizationExample(args.interaction, { indicator: args.indicator, hideLabel: args.hideLabel, hideIndicator: args.hideIndicator }, { hideIcon: args.hideIcon, placement: args.legendPlacement })}
     </div>`,
 } satisfies Meta<Args>;

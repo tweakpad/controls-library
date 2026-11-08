@@ -51,13 +51,12 @@ An icon-only Button needs no Visually hidden element: in an icon size its label 
 Give the element `role="status"` and change its text when something happens that sighted users notice from the layout, such as a list shrinking as they type. Keep the element in the page from the start and change only its content; a region that appears together with its message is often not announced.
 
 <Preview
+  width="3"
   title="Filter results"
   align="stretch"
   code={`<tp-stack
   id="visually-hidden-filter"
-  style="max-inline-size: 24rem; margin-inline: auto; inline-size: 100%"
-  gap="3"
->
+  gap="3">
   <tp-field label="Filter members">
     <tp-input type="search" placeholder="Name or role"></tp-input>
   </tp-field>
@@ -89,9 +88,10 @@ input.addEventListener('tp-value-change', (event) => {
 Hidden text completes labels that are clear on screen but not when read alone. Each Renew button below is announced with its item, such as "Renew Figma", and the actions column gets a header without printing one.
 
 <Preview
+  width="5"
   title="Repeated actions"
   align="stretch"
-  code={`<tp-table label="Subscriptions" style="max-inline-size:32rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-table label="Subscriptions">
   <tp-table-header>
     <tp-table-row>
       <tp-table-head>Tool</tp-table-head>

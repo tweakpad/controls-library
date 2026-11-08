@@ -31,9 +31,10 @@ The default composition is the saturation/brightness area with hue and alpha Sli
 A Color input in the `trigger` slot opens the popup instead of the browser's picker and always shows the picker's color. An inline one shows the color as a row with its text: a color typed there becomes the picker's value.
 
 <Preview
+  width="2"
   title="Color input trigger"
   align="stretch"
-  code={`<tp-color-picker picker="popup" name="card-fill" default-value="#0f766e" style="display:block;max-inline-size:20rem;margin-inline:auto">
+  code={`<tp-color-picker picker="popup" name="card-fill" default-value="#0f766e" style="display:block">
   <tp-color-input slot="trigger" variant="inline" label="Card fill"></tp-color-input>
 </tp-color-picker>`}
 />
@@ -43,16 +44,16 @@ A Color input in the `trigger` slot opens the popup instead of the browser's pic
 With a `name`, the picker submits its string through the surrounding form and takes part in reset. Recent colors are application state: record each commit and hand the last few back through `recent`, and they appear in the popup's swatch strip.
 
 <Preview
+  width="3"
   title="Popup in a form"
   align="stretch"
-  code={`<form id="color-picker-form" style="max-inline-size: 24rem; margin-inline: auto">
+  code={`<form id="color-picker-form">
   <tp-stack gap="4">
     <tp-field label="Workspace color" description="Shown in the sidebar and on invitations.">
       <tp-color-picker
         picker="popup"
         name="workspace-color"
-        default-value="#6d5dfc"
-      ></tp-color-picker>
+        default-value="#6d5dfc"></tp-color-picker>
     </tp-field>
     <tp-stack direction="row" gap="2">
       <tp-button type="submit">Save</tp-button>
@@ -68,8 +69,7 @@ With a `name`, the picker submits its string through the surrounding form and ta
     text-align: center;
     color: var(--tp-muted-foreground);
     font-size: var(--tp-text-sm);
-  "
-  >Pick a color, then save.</output
+  ">Pick a color, then save.</output
 >`}
   script={`const form = document.querySelector('#color-picker-form');
 const picker = form.querySelector('tp-color-picker');

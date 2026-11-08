@@ -6,14 +6,16 @@ parts: [tp-description-list-item]
 ---
 
 <Preview
+  width="3"
+  align="stretch"
   title="Description list"
-  code={`<tp-description-list limit="4" style="inline-size:100%;max-inline-size:24rem">
+  code={`<tp-description-list limit="4">
   <tp-description-list-item label="Order">#48213</tp-description-list-item>
   <tp-description-list-item label="Customer">Maya Chen</tp-description-list-item>
   <tp-description-list-item label="Status"><tp-badge variant="success">Paid</tp-badge></tp-description-list-item>
   <tp-description-list-item label="Placed"><tp-time datetime="2026-10-12T14:20:00Z" mode="absolute"></tp-time></tp-description-list-item>
   <tp-description-list-item label="Shipping">Express, 2 business days</tp-description-list-item>
-  <tp-description-list-item label="Total">$248.00</tp-description-list-item>
+  <tp-description-list-item label="Total">\$248.00</tp-description-list-item>
 </tp-description-list>`}
 />
 
@@ -26,8 +28,10 @@ A Description list renders one native `dl`. Each `tp-description-list-item` name
 A value can be any content: text, a link, or components such as a Badge, a Time or a Copy button. Set `layout="stacked"` on one item to run a long value under its label.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Record details"
-  code={`<tp-card style="inline-size:100%;max-inline-size:26rem">
+  code={`<tp-card>
   <h3 slot="header" style="margin:0">Production API key</h3>
   <p slot="description" style="margin:0">Used by the checkout service.</p>
   <tp-description-list>
@@ -59,8 +63,10 @@ In a vertical list hidden items keep their place in the layout below the visible
 The button proposes each change through a cancelable `tp-open-change` event; call `preventDefault()` to keep the current state, or update `open` from `onOpenChange`. `tp-open-change-complete` follows once the items finish expanding or collapsing. `disabled` keeps the button from changing the state.
 
 <Preview
+  width="3"
+  align="stretch"
   title="Show more"
-  code={`<tp-description-list id="description-list-more" limit="3" style="inline-size:100%;max-inline-size:24rem">
+  code={`<tp-description-list id="description-list-more" limit="3">
   <tp-description-list-item label="Plan">Team, billed yearly</tp-description-list-item>
   <tp-description-list-item label="Seats">18 of 25 used</tp-description-list-item>
   <tp-description-list-item label="Renews"><tp-time datetime="2027-02-01" mode="absolute"></tp-time></tp-description-list-item>
@@ -87,9 +93,10 @@ The Show more button is a native button named by its text, with an expanded stat
 `orientation="horizontal"` places the pairs side by side and wraps them when space runs out. Combined with `layout="stacked"`, which puts each label above its value, it suits a summary strip above a record.
 
 <Preview
+  width="6"
   title="Summary row"
   align="stretch"
-  code={`<tp-description-list orientation="horizontal" layout="stacked" style="max-inline-size:34rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-description-list orientation="horizontal" layout="stacked">
   <tp-description-list-item label="Status"><tp-badge variant="warning">Degraded</tp-badge></tp-description-list-item>
   <tp-description-list-item label="Region">eu-central-1</tp-description-list-item>
   <tp-description-list-item label="Uptime (30d)">99.94%</tp-description-list-item>

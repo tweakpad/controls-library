@@ -118,7 +118,7 @@ const meta = {
         '<tp-scroll-trigger',
         `<tp-scroll-trigger${args.revealRepeat ? ' reveal-repeat' : ''}${args.revealHold ? ' reveal-hold' : ''}${args.scrub ? ` scrub scrub-range="${args.scrubRange}" scrub-smoothing="${args.scrubSmoothing}"${args.scrubOnce ? ' scrub-once' : ''}` : ''}${args.pin ? ' pin' : ''}`,
       );
-    return html`<div style="max-inline-size: 48rem">${unsafeHTML(markup)}</div>`;
+    return html`<div>${unsafeHTML(markup)}</div>`;
   },
 } satisfies Meta<Args>;
 export default meta;

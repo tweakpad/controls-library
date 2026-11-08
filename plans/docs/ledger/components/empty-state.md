@@ -24,3 +24,5 @@
 
 | preview | Empty state | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | No results | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | In a card | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

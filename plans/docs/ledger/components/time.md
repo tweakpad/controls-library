@@ -30,3 +30,5 @@
 | preview | Absolute formats | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Dates and zones | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Short and narrow | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Due dates | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

@@ -6,9 +6,10 @@ parts: [tp-select-option]
 ---
 
 <Preview
+  width="2"
   title="Select"
   align="stretch"
-  code={`<tp-field label="Time zone" description="Used for due dates and reminders." style="max-inline-size:20rem">
+  code={`<tp-field label="Time zone" description="Used for due dates and reminders.">
   <tp-select name="timezone" placeholder="Choose a time zone" default-value="europe-berlin">
     <optgroup label="Americas">
       <option value="america-new-york">New York (GMT−4)</option>
@@ -42,13 +43,14 @@ Item alignment attempts to place the selected/highlighted option against the Tri
 Each `option` contributes a `value` and its text. `disabled` keeps an option visible but unselectable, `optgroup` labels a group and `hr` draws a separator. `placeholder` shows while nothing is selected.
 
 <Preview
+  width="2"
   title="Groups and disabled options"
   align="stretch"
-  code={`<tp-field label="Plan" style="max-inline-size:20rem">
+  code={`<tp-field label="Plan">
   <tp-select name="plan" placeholder="Choose a plan">
     <option value="free">Free</option>
-    <option value="team">Team · $12 per seat</option>
-    <option value="business">Business · $24 per seat</option>
+    <option value="team">Team · \$12 per seat</option>
+    <option value="business">Business · \$24 per seat</option>
     <hr>
     <option value="enterprise" disabled>Enterprise · Contact sales</option>
   </tp-select>
@@ -62,9 +64,10 @@ Native `option`, `optgroup` and `hr` sources are supported, including inherited 
 `tp-select-option` is the library's own option element. It declares the same choice as a native `option`, accepts a non-string `value` when set as a property, and uses its text content as the label.
 
 <Preview
+  width="2"
   title="tp-select-option"
   align="stretch"
-  code={`<tp-field label="Priority" style="max-inline-size:20rem">
+  code={`<tp-field label="Priority">
   <tp-select name="priority" default-value="medium">
     <tp-select-option value="urgent">Urgent</tp-select-option>
     <tp-select-option value="high">High</tp-select-option>
@@ -79,9 +82,10 @@ Native `option`, `optgroup` and `hr` sources are supported, including inherited 
 `multiple` keeps the popup open while options toggle, and submits one form entry per selected value in selection order.
 
 <Preview
+  width="2"
   title="Multiple"
   align="stretch"
-  code={`<tp-field label="Notify on" style="max-inline-size:20rem">
+  code={`<tp-field label="Notify on">
   <tp-select name="events" multiple placeholder="Choose events">
     <option value="comment">New comment</option>
     <option value="mention">Mention</option>
@@ -99,9 +103,10 @@ Values stay unique and retain selection order.
 `searchable` swaps the trigger for an editable query that filters the list as people type. `matching` chooses `contains` (the default), `prefix`, `exact` or typo-tolerant `fuzzy`; `highlight-matches` marks the matched text. The query is never submitted, only the selection.
 
 <Preview
+  width="2"
   title="Searchable"
   align="stretch"
-  code={`<tp-field label="Country" style="max-inline-size:20rem">
+  code={`<tp-field label="Country">
   <tp-select name="country" searchable highlight-matches placeholder="Search countries">
     <option value="AR">Argentina</option>
     <option value="AU">Australia</option>
@@ -154,9 +159,10 @@ Contextual Clear clears a nonempty query, otherwise selection. The Clear action 
 In a searchable Select with `grid`, `columns` lays each group's options out in rows of that many, and the arrow keys move in two dimensions. Filtering reflows the rows. It suits short, scannable options such as sizes, flags or symbols.
 
 <Preview
+  width="2"
   title="Columns"
   align="stretch"
-  code={`<tp-field label="Size" style="max-inline-size:20rem">
+  code={`<tp-field label="Size">
   <tp-select name="size" searchable grid columns="4" placeholder="Pick a size">
     <option value="XS">XS</option>
     <option value="S">S</option>
@@ -177,9 +183,10 @@ Grid records can specify `row`; actual Row containers match those logical rows. 
 Assign `items` when choices come from your data. Records take a `value` and `label`, groups take `type: 'group'` with nested `items`, and `type: 'separator'` divides them.
 
 <Preview
+  width="2"
   title="Items property"
   align="stretch"
-  code={`<tp-field label="Assignee" style="max-inline-size:20rem">
+  code={`<tp-field label="Assignee">
   <tp-select id="select-items" name="assignee" placeholder="Unassigned"></tp-select>
 </tp-field>`}
   script={`const select = document.querySelector('#select-items');
@@ -199,9 +206,10 @@ select.items = [
 A record's `label` can be a Lit template for rich rows, such as an avatar or a badge. Give those records a plain `text` too; it drives typeahead and what the closed trigger reads.
 
 <Preview
+  width="2"
   title="Rich labels"
   align="stretch"
-  code={`<tp-field label="Reviewer" style="max-inline-size:20rem">
+  code={`<tp-field label="Reviewer">
   <tp-select id="select-rich" name="reviewer" placeholder="Choose a reviewer"></tp-select>
 </tp-field>`}
   script={`import { html } from 'lit';
@@ -232,9 +240,10 @@ Object-valued choices use `{value: record, label: 'Display text'}`; use the fact
 `virtualized` mounts only the rows near the visible part of the list while keeping its full scroll height, so hundreds or thousands of `items` open instantly. Keyboard navigation and typeahead still cover every option.
 
 <Preview
+  width="2"
   title="Virtualized time zones"
   align="stretch"
-  code={`<tp-field label="Time zone" style="max-inline-size:20rem">
+  code={`<tp-field label="Time zone">
   <tp-select id="select-virtualized" name="time-zone" searchable virtualized placeholder="Search time zones"></tp-select>
 </tp-field>`}
   script={`const select = document.querySelector('#select-virtualized');
@@ -251,9 +260,10 @@ Virtualized mode requires the full ordered source. With `mountedItems`, you own 
 A `source` supplies the options for each query, such as a server endpoint. A query waits `search-delay` milliseconds after the last keystroke, a newer query aborts the previous one through `signal`, and the list shows a loading row meanwhile.
 
 <Preview
+  width="2"
   title="Search source"
   align="stretch"
-  code={`<tp-field label="Customer" style="max-inline-size:20rem">
+  code={`<tp-field label="Customer">
   <tp-select id="select-source" name="customer" searchable search-delay="250" placeholder="Search customers"></tp-select>
 </tp-field>`}
   script={`const customers = [
@@ -287,9 +297,10 @@ With `source`, the source's results are the options: a query waits `searchDelay`
 `tp-value-change` reports each proposed selection with its `reason`, and is cancelable. Read the committed value from `value`.
 
 <Preview
+  width="2"
   title="Value change"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 20rem" gap="3">
+  code={`<tp-stack  gap="3">
   <tp-field label="Sort by">
     <tp-select id="select-sort" default-value="updated">
       <option value="updated">Last updated</option>
@@ -299,8 +310,7 @@ With `source`, the source's results are the options: a query waits `searchDelay`
   </tp-field>
   <output
     id="select-sort-output"
-    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
-    >Sorted by updated</output
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)">Sorted by updated</output
   >
 </tp-stack>`}
   script={`const select = document.querySelector('#select-sort');
@@ -327,9 +337,10 @@ An accepted single selection closes on the item press, even when a controlled ow
 A Field's `disabled`, `invalid` and `error` reach the Select. Read-only Selects still open and navigate, and keep their value in form data, but cannot change it.
 
 <Preview
+  width="2"
   title="Disabled, read-only and error"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 20rem" gap="4">
+  code={`<tp-stack  gap="4">
   <tp-field label="Workspace region" disabled>
     <tp-select default-value="eu">
       <option value="us">United States</option>
@@ -382,9 +393,10 @@ Use actual `tp-field` for labels/descriptions/errors, `tp-icon` for rich choice 
 ### Inline
 
 <Preview
+  width="3"
   title="Inline"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="2">
+  code={`<tp-stack  gap="2">
   <tp-select variant="inline" label="Channel" name="channel" default-value="push">
     <option value="email">Email</option>
     <option value="push">Push</option>

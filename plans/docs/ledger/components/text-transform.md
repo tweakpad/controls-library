@@ -34,3 +34,7 @@
 | preview | Length limits | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Formatter | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Named presets | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Text transform | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Plans | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Uploads | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

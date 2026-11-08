@@ -83,9 +83,10 @@ Default content sits between the description and the actions. Use it for recover
 Empty states inherit their container's background, so they sit naturally inside a Card or a table body. Omit actions when the state is terminal and nothing can change it.
 
 <Preview
+  width="4"
   title="In a card"
   align="stretch"
-  code={`<tp-card style="max-inline-size:28rem;margin-inline:auto">
+  code={`<tp-card>
   <h3 slot="header" style="margin:0">Archived invoices</h3>
   <tp-empty-state title="Nothing archived" description="Invoices move here 90 days after they are paid." media-treatment="icon">
     <svg slot="media" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18v4H3z"/><path d="M5 8v12h14V8"/><path d="M10 12h4"/></svg>

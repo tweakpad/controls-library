@@ -87,9 +87,10 @@ Nested keys automatically use the tooltip palette.
 In an Input group, put the shortcut in an addon slot such as `inline-end`; the group lays out the addon and the Kbd group spaces the keys.
 
 <Preview
+  width="3"
   title="Input group"
   align="stretch"
-  code={`<tp-input-group style="max-inline-size:22rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-input-group>
   <tp-input label="Search" type="search" placeholder="Jump to a project"></tp-input>
   <tp-kbd-group slot="inline-end" separator="none">
     <tp-kbd value="mod"></tp-kbd>

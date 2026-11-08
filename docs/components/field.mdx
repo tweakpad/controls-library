@@ -5,9 +5,10 @@ tag: tp-field
 ---
 
 <Preview
+  width="3"
   title="Field"
   align="stretch"
-  code={`<tp-field label="Work email" description="We send invoices and security alerts here." style="max-inline-size:22rem">
+  code={`<tp-field label="Work email" description="We send invoices and security alerts here.">
   <tp-input name="email" type="email" placeholder="maya@acme.com" required></tp-input>
 </tp-field>`}
 />
@@ -21,9 +22,10 @@ A Field owns everything around one value: the visible name, help text, errors an
 Native constraints on the control (`required`, `type`, `minlength`, `pattern`) validate through the Field. `validation-mode` decides when: `on-submit` (the default without a Form), `on-blur` or `on-change`. Type an invalid address and leave the input to see the error.
 
 <Preview
+  width="3"
   title="Validate on blur"
   align="stretch"
-  code={`<tp-field label="Billing email" validation-mode="on-blur" style="max-inline-size:22rem">
+  code={`<tp-field label="Billing email" validation-mode="on-blur">
   <tp-input name="billing-email" type="email" required default-value="finance@acme"></tp-input>
 </tp-field>`}
 />
@@ -35,9 +37,10 @@ Duplicate names preserve ordered values, including nested list values; unnamed F
 Submission touches fields and prevents synchronous invalid submission. Async validation does not retroactively cancel native submission; cancel the submit event explicitly when awaiting async outcomes is required. Failed on-submit validation revalidates later edits.
 
 <Preview
+  width="3"
   title="Custom validator"
   align="stretch"
-  code={`<tp-field id="field-demo-slug" label="Workspace URL" description="Lowercase letters, numbers and dashes." validation-mode="on-change" style="max-inline-size:22rem">
+  code={`<tp-field id="field-demo-slug" label="Workspace URL" description="Lowercase letters, numbers and dashes." validation-mode="on-change">
   <tp-input name="slug" default-value="Acme Design"></tp-input>
 </tp-field>`}
   script={`await Promise.all(['tp-field', 'tp-input'].map((tag) => customElements.whenDefined(tag)));
@@ -54,21 +57,20 @@ field.validate();`}
 `orientation="horizontal"` puts the label beside the control. Compact binary controls such as Switch and Checkbox move to the end of the row with the label and description stacked beside them, which is the usual settings layout.
 
 <Preview
+  width="4"
   title="Horizontal"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 28rem" gap="6">
+  code={`<tp-stack  gap="6">
   <tp-field
     label="Marketing emails"
     description="Product news and tips, about once a month."
-    orientation="horizontal"
-  >
+    orientation="horizontal">
     <tp-switch name="marketing"></tp-switch>
   </tp-field>
   <tp-field
     label="Two-factor authentication"
     description="Require a code from your authenticator app at sign-in."
-    orientation="horizontal"
-  >
+    orientation="horizontal">
     <tp-switch name="mfa" default-checked></tp-switch>
   </tp-field>
 </tp-stack>`}
@@ -81,9 +83,10 @@ field.validate();`}
 The `label`, `description` and `error` slots take precedence over the attributes of the same name. Use them for a link or emphasis the plain-text attributes can't carry.
 
 <Preview
+  width="3"
   title="Slots"
   align="stretch"
-  code={`<tp-field style="max-inline-size:22rem">
+  code={`<tp-field>
   <span slot="label">API key <span style="color:var(--tp-muted-foreground);font-weight:normal">(optional)</span></span>
   <tp-input name="api-key" placeholder="sk_live_…"></tp-input>
   <span slot="description">Find it in <a href="#rich-content" style="color:inherit">Developer settings</a>.</span>
@@ -95,16 +98,16 @@ The `label`, `description` and `error` slots take precedence over the attributes
 A Field renders a native `fieldset`. Give it a `legend` and put peer Fields in its `group` slot, here inside one wrapper that sets their spacing, to caption a section of a form, such as an address. `legend-scale="field"` sizes the caption like a field label instead of a section heading. To join the editors of one value into a single row, use Field group instead.
 
 <Preview
+  width="3"
   title="Legend and group"
   align="stretch"
-  code={`<tp-field legend="Shipping address" style="max-inline-size: 24rem">
+  code={`<tp-field legend="Shipping address">
   <tp-stack slot="group" gap="4">
     <tp-field label="Street address">
       <tp-input
         name="street"
         autocomplete="street-address"
-        default-value="221 Market Street"
-      ></tp-input>
+        default-value="221 Market Street"></tp-input>
     </tp-field>
     <tp-field label="City">
       <tp-input name="city" autocomplete="address-level2" default-value="San Francisco"></tp-input>
@@ -121,9 +124,10 @@ A Field renders a native `fieldset`. Give it a `legend` and put peer Fields in i
 `disabled` on the Field disables its control and dims the label and description together, so the whole row reads as unavailable.
 
 <Preview
+  width="3"
   title="Disabled"
   align="stretch"
-  code={`<tp-field label="Plan" description="Contact your admin to change plans." disabled style="max-inline-size:22rem">
+  code={`<tp-field label="Plan" description="Contact your admin to change plans." disabled>
   <tp-input name="plan" default-value="Business"></tp-input>
 </tp-field>`}
 />

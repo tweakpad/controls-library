@@ -19,3 +19,5 @@
 | --- | --- | --- |
 
 | preview | Filter results | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Repeated actions | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

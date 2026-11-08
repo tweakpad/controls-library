@@ -39,9 +39,10 @@ For any other color, set `--tp-status-dot-color` on the dot or an ancestor; `--t
 With `show-label`, the label renders as text after the dot. It takes the font and color of its context and wraps when space runs out, with the dot centered on its first line. Here each status is the supporting text of a list row.
 
 <Preview
+  width="4"
   title="Service status"
   align="stretch"
-  code={`<tp-list aria-label="Services" style="max-inline-size:28rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-list aria-label="Services">
   <tp-list-item>
     API
     <tp-status-dot slot="description" variant="success" label="Operational" show-label motion="ping"></tp-status-dot>
@@ -71,10 +72,10 @@ Without `show-label`, the dot stands alone: the label becomes its accessible nam
 When `show-label` is turned on while the dot has focus, the dot keeps focus until it is left, then leaves the tab order.
 
 <Preview
+  width="5"
   title="Compact column"
   align="stretch"
-  code={`<div style="max-inline-size:30rem;margin-inline:auto;inline-size:100%">
-  <tp-table label="Deployments">
+  code={`<tp-table label="Deployments">
     <tp-table-header><tp-table-row>
       <tp-table-head scope="col">Environment</tp-table-head>
       <tp-table-head scope="col">State</tp-table-head>
@@ -97,8 +98,7 @@ When `show-label` is turned on while the dot has focus, the dot keeps focus unti
         <tp-table-cell>9c2d4aa</tp-table-cell>
       </tp-table-row>
     </tp-table-body>
-  </tp-table>
-</div>`}
+  </tp-table>`}
 />
 
 A dot with an empty `label` is decorative: it is hidden from assistive technology and never focusable.

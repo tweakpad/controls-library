@@ -5,9 +5,10 @@ tag: tp-data-visualization
 ---
 
 <Preview
+  width="7"
   title="Data visualization"
   align="stretch"
-  code={`<tp-data-visualization id="data-visualization-demo" label="Monthly revenue" description="Subscriptions grew every month from January to June; services peaked in April." interaction="both" style="max-inline-size:40rem;margin-inline:auto"></tp-data-visualization>`}
+  code={`<tp-data-visualization id="data-visualization-demo" label="Monthly revenue" description="Subscriptions grew every month from January to June; services peaked in April." interaction="both"></tp-data-visualization>`}
   script={`const data = [
   { month: 'Jan', subscriptions: 42, services: 18 },
   { month: 'Feb', subscriptions: 48, services: 22 },
@@ -107,9 +108,10 @@ The Root composes `tp-tooltip`, retaining its positioning, lifecycle, Escape dis
 Formatters replace presentation, not series identity, payload ordering, or active state. Return text, Lit content, or library components; tooltip content must remain noninteractive.
 
 <Preview
+  width="7"
   title="Line chart"
   align="stretch"
-  code={`<tp-data-visualization id="data-visualization-demo-line" label="Weekly active users" description="Active users rose from 1,240 to 2,180 over eight weeks, with a dip in week 5." interaction="both" style="max-inline-size:40rem;margin-inline:auto"></tp-data-visualization>`}
+  code={`<tp-data-visualization id="data-visualization-demo-line" label="Weekly active users" description="Active users rose from 1,240 to 2,180 over eight weeks, with a dip in week 5." interaction="both"></tp-data-visualization>`}
   script={`const data = [1240, 1380, 1460, 1610, 1520, 1790, 1960, 2180].map((users, i) => ({ week: 'Week ' + (i + 1), users }));
 const svgNS = 'http://www.w3.org/2000/svg';
 const node = (name, attributes = {}) => {
@@ -169,12 +171,13 @@ chart.renderer = lineRenderer;`}
 Every chart needs a text equivalent. `description` should state the takeaway, not restate the axes, and the `table` slot takes a `tp-table` with the complete dataset for people who can't read the graphic. Without either, the component reports a `tp-diagnostic`. Give each mark an accessible name too, and don't rely on color alone when series need telling apart.
 
 <Preview
+  width="7"
   title="Description and table"
   align="stretch"
   code={`<style>
   #data-visualization-demo-table::part(data-visualization-plot-region) { aspect-ratio: 3 / 1; }
 </style>
-<tp-data-visualization id="data-visualization-demo-table" label="Storage by team" description="Design and Marketing use most of their storage on media; Engineering stores mostly files." style="max-inline-size:40rem;margin-inline:auto">
+<tp-data-visualization id="data-visualization-demo-table" label="Storage by team" description="Design and Marketing use most of their storage on media; Engineering stores mostly files.">
   <tp-table slot="table" label="Storage by team">
     <table>
       <caption>Storage used by team, in GB</caption>

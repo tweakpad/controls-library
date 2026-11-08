@@ -5,9 +5,10 @@ tag: tp-autocomplete
 ---
 
 <Preview
+  width="3"
   title="Autocomplete"
   align="stretch"
-  code={`<tp-field label="Destination" description="Try a typo: amsterdma, lisbn" style="inline-size:100%;inline-size:100%;max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-field label="Destination" description="Try a typo: amsterdma, lisbn">
   <tp-autocomplete style="inline-size:100%" name="destination" placeholder="Search cities">
     <option>Amsterdam</option>
     <option>Barcelona</option>
@@ -31,9 +32,10 @@ Autocomplete's value is the text itself: picking a suggestion replaces the text,
 ### Matching
 
 <Preview
+  width="3"
   title="Prefix matching"
   align="stretch"
-  code={`<tp-field label="Country" description="Type the start of each word: un st" style="inline-size:100%;inline-size:100%;max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-field label="Country" description="Type the start of each word: un st">
   <tp-autocomplete style="inline-size:100%" matching="prefix" placeholder="Search countries">
     <option>United Kingdom</option>
     <option>United States</option>
@@ -52,9 +54,10 @@ predicate, `filter = null` shows every item, and `filteredItems` supplies the re
 ### Groups
 
 <Preview
+  width="3"
   title="Grouped suggestions"
   align="stretch"
-  code={`<tp-field label="Time zone" style="inline-size:100%;inline-size:100%;max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-field label="Time zone">
   <tp-autocomplete style="inline-size:100%" name="timezone" placeholder="Search time zones" show-trigger open-on-input-click>
     <optgroup label="Europe">
       <option>Europe/Lisbon</option>
@@ -75,9 +78,10 @@ predicate, `filter = null` shows every item, and `filteredItems` supplies the re
 ### Completion
 
 <Preview
+  width="3"
   title="Inline completion"
   align="stretch"
-  code={`<tp-field label="Assign to" style="inline-size:100%;inline-size:100%;max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-field label="Assign to">
   <tp-autocomplete style="inline-size:100%" completion-mode="both" auto-highlight show-clear placeholder="Teammate name">
     <option>Amara Okafor</option>
     <option>Daniel Kim</option>
@@ -93,9 +97,10 @@ predicate, `filter = null` shows every item, and `filteredItems` supplies the re
 ### Keywords
 
 <Preview
+  width="3"
   title="Searching hidden fields"
   align="stretch"
-  code={`<tp-field label="Command" description="Try: invoice, teammate, dark" style="inline-size:100%;inline-size:100%;max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-field label="Command" description="Try: invoice, teammate, dark">
   <tp-autocomplete style="inline-size:100%" id="autocomplete-commands" placeholder="Search commands"></tp-autocomplete>
 </tp-field>`}
   script={`const commands = [
@@ -115,9 +120,10 @@ The `items` property accepts strings, records and groups when the list comes fro
 ### Records
 
 <Preview
+  width="3"
   title="Ranking over several fields"
   align="stretch"
-  code={`<tp-field label="Help center" description="Try: refund, password, seats" style="inline-size:100%;max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-field label="Help center" description="Try: refund, password, seats">
   <tp-autocomplete style="inline-size:100%" id="autocomplete-articles" placeholder="Search articles"></tp-autocomplete>
 </tp-field>`}
   script={`import { createIndexSource } from '@tweakpad/ui';
@@ -144,9 +150,10 @@ autocomplete.source = createIndexSource(articles, {
 ### Server search
 
 <Preview
+  width="3"
   title="Search source"
   align="stretch"
-  code={`<tp-field label="Departure airport" description="Results arrive after a simulated 600 ms request." style="inline-size:100%;max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-field label="Departure airport" description="Results arrive after a simulated 600 ms request.">
   <tp-autocomplete style="inline-size:100%" id="autocomplete-server" search-delay="250" placeholder="City or airport code"></tp-autocomplete>
 </tp-field>`}
   script={`const airports = [
@@ -209,9 +216,10 @@ that returns ranked items and match positions:
 ### Forms
 
 <Preview
+  width="3"
   title="In a form"
   align="stretch"
-  code={`<form id="autocomplete-form" style="inline-size: 100%; max-inline-size: 22rem; margin-inline: auto">
+  code={`<form id="autocomplete-form">
   <tp-stack gap="4">
     <tp-field label="Job title">
       <tp-autocomplete
@@ -219,8 +227,7 @@ that returns ranked items and match positions:
         name="title"
         required
         submit-on-item-click
-        placeholder="e.g. Product designer"
-      >
+        placeholder="e.g. Product designer">
         <option>Product designer</option>
         <option>Product manager</option>
         <option>Frontend engineer</option>
@@ -230,8 +237,7 @@ that returns ranked items and match positions:
     <tp-button type="submit" style="align-self: flex-start">Save profile</tp-button>
     <output
       id="autocomplete-form-result"
-      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
-    ></output>
+      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"></output>
   </tp-stack>
 </form>`}
   script={`const form = document.querySelector('#autocomplete-form');

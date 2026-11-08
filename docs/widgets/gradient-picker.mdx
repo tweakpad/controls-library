@@ -5,9 +5,10 @@ tag: tp-gradient-picker
 ---
 
 <Preview
+  width="4"
   title="Gradient picker"
   align="stretch"
-  code={`<tp-gradient-picker label="Fill" name="fill" default-selected="1" style="max-inline-size:28rem;margin-inline:auto">
+  code={`<tp-gradient-picker label="Fill" name="fill" default-selected="1">
   <tp-gradient-stop position="0" color="#1d4ed8"></tp-gradient-stop>
   <tp-gradient-stop position="0.45" color="#5eead4"></tp-gradient-stop>
   <tp-gradient-stop position="0.75" color="#2563eb"></tp-gradient-stop>
@@ -28,9 +29,10 @@ The picker writes every edit back to its children, moving, adding and removing `
 The element edits the stops only and opens nothing. A stop's color, its location as a number, the gradient's angle and its shape are separate controls you compose around it: read the selected stop from `value[selected]`, and write a change back with `setStop(index, changes)`, which keeps a moved stop selected. `setValue(stops)` and `setSelected(index)` propose whole changes the same way, in either controlled or uncontrolled use.
 
 <Preview
+  width="3"
   title="Stop controls"
   align="stretch"
-  code={`<tp-stack id="gradient-compose" style="max-inline-size: 24rem; margin-inline: auto" gap="2">
+  code={`<tp-stack id="gradient-compose"  gap="2">
   <tp-gradient-picker label="Fill" default-selected="0">
     <tp-gradient-stop position="0" color="#f97316"></tp-gradient-stop>
     <tp-gradient-stop position="0.6" color="#db2777"></tp-gradient-stop>
@@ -45,8 +47,7 @@ The element edits the stops only and opens nothing. A stop's color, its location
     unit="deg"
     min="0"
     max="360"
-    default-value="90"
-  ></tp-input>
+    default-value="90"></tp-input>
 </tp-stack>`}
   script={`const root = document.querySelector('#gradient-compose');
 const gradient = root.querySelector('tp-gradient-picker');
@@ -75,9 +76,10 @@ customElements.whenDefined('tp-gradient-picker').then(() => gradient.updateCompl
 ### Midpoints
 
 <Preview
+  width="4"
   title="Midpoints"
   align="stretch"
-  code={`<tp-gradient-picker label="Shade" style="max-inline-size:28rem;margin-inline:auto">
+  code={`<tp-gradient-picker label="Shade">
   <tp-gradient-stop position="0" color="#0f172a" midpoint="0.2"></tp-gradient-stop>
   <tp-gradient-stop position="1" color="#e2e8f0"></tp-gradient-stop>
 </tp-gradient-picker>`}
@@ -107,9 +109,10 @@ ramp.fillRect(x, 0, 1, canvas.height);
 `size="sm"` fits the editor into a compact panel. `disabled` and `readonly` keep the stops visible and stop every edit; a read-only editor still lets you focus and read each handle.
 
 <Preview
+  width="3"
   title="Small and read-only"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 24rem; margin-inline: auto" gap="4">
+  code={`<tp-stack  gap="4">
   <tp-gradient-picker label="Glow" size="sm">
     <tp-gradient-stop position="0" color="#facc15"></tp-gradient-stop>
     <tp-gradient-stop position="1" color="rgb(250 204 21 / 0)"></tp-gradient-stop>
@@ -125,9 +128,10 @@ ramp.fillRect(x, 0, 1, canvas.height);
 ### Field gradients
 
 <Preview
+  width="4"
   title="Field"
   align="stretch"
-  code={`<tp-gradient-picker variant="field" label="Sky" default-selected="0" style="max-inline-size:28rem;margin-inline:auto">
+  code={`<tp-gradient-picker variant="field" label="Sky" default-selected="0">
   <tp-gradient-stop x="0.2" y="0.3" color="#f97316"></tp-gradient-stop>
   <tp-gradient-stop x="0.55" y="0.65" color="#7c3aed"></tp-gradient-stop>
   <tp-gradient-stop x="0.85" y="0.25" color="#0ea5e9"></tp-gradient-stop>
@@ -139,9 +143,10 @@ ramp.fillRect(x, 0, 1, canvas.height);
 `falloff` sets how an anchor's weight drops with distance: `inverse-distance` (the default) divides by the distance raised to `power`, and `gaussian` is a bell that narrows as `power` grows (0.4 to 6, 2.2 by default). `warp-amplitude` (0 to 0.6) and `warp-frequency` (0.3 to 4) bend the borders between colors into waves. `projection="equirectangular"` (the default) reads `x` as longitude and `y` as latitude, so the field wraps at its left and right edges as an environment map does; `projection="plane"` measures straight across a flat field. Like the stops' colors, these are settings you bind to your own controls.
 
 <Preview
+  width="3"
   title="Field settings"
   align="stretch"
-  code={`<tp-stack id="gradient-field-settings" style="max-inline-size: 24rem; margin-inline: auto" gap="2">
+  code={`<tp-stack id="gradient-field-settings"  gap="2">
   <tp-gradient-picker variant="field" label="Backdrop" projection="plane">
     <tp-gradient-stop x="0.15" y="0.2" color="#fde68a"></tp-gradient-stop>
     <tp-gradient-stop x="0.8" y="0.35" color="#f472b6"></tp-gradient-stop>
@@ -157,16 +162,14 @@ ramp.fillRect(x, 0, 1, canvas.height);
     min="0.4"
     max="6"
     step="0.05"
-    default-value="2.2"
-  ></tp-slider>
+    default-value="2.2"></tp-slider>
   <tp-slider
     variant="inline"
     label="Warp"
     min="0"
     max="0.6"
     step="0.005"
-    default-value="0.12"
-  ></tp-slider>
+    default-value="0.12"></tp-slider>
 </tp-stack>`}
   script={`const root = document.querySelector('#gradient-field-settings');
 const picker = root.querySelector('tp-gradient-picker');

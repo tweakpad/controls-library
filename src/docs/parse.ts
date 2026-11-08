@@ -37,11 +37,16 @@ export interface DocHeading {
   readonly line: number;
 }
 
+/** Width presets for documentation canvases, never component properties. */
+export type DemoWidth = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8';
+
 export interface DocPreview {
   readonly title: string;
   readonly code: string;
   readonly script?: string;
   readonly align?: 'center' | 'start' | 'stretch';
+  /** Demo-only responsive width preset, applied outside the copyable markup. */
+  readonly width?: DemoWidth;
   readonly language?: string;
   /** Block size of a scrolling example's own viewport. */
   readonly viewport?: string;
@@ -94,6 +99,7 @@ const PREVIEW_ATTRIBUTES = new Set([
   'code',
   'script',
   'align',
+  'width',
   'language',
   'viewport',
   'codeOnly',
@@ -378,6 +384,9 @@ export function parseDoc(source: string, id: string): ParsedDoc {
     const align = stringAttribute('align');
     if (align !== undefined && !ALIGNMENTS.has(align))
       throw new DocParseError(id, line, `Preview align must be center, start or stretch`);
+    const width = stringAttribute('width');
+    if (width !== undefined && !/^[1-8]$/.test(width))
+      throw new DocParseError(id, line, 'Preview width must be a preset from 1 to 8');
     const above = headings.filter((heading) => heading.line < line).at(-1);
     const script = stringAttribute('script');
     const language = stringAttribute('language');
@@ -387,6 +396,7 @@ export function parseDoc(source: string, id: string): ParsedDoc {
     } = { title, code, afterHeading: above?.slug ?? null, line };
     if (script !== undefined) preview.script = script;
     if (align !== undefined) preview.align = align as NonNullable<DocPreview['align']>;
+    if (width !== undefined) preview.width = width as DemoWidth;
     if (language !== undefined) preview.language = language;
     if (viewport !== undefined) preview.viewport = viewport;
     if (element.attributes.has('codeOnly')) preview.codeOnly = true;

@@ -5,9 +5,10 @@ tag: tp-marker
 ---
 
 <Preview
+  width="5"
   title="Marker"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%" gap="6">
+  code={`<tp-stack  gap="6">
   <tp-marker><tp-spinner slot="icon" size="sm"></tp-spinner>Reading 4 files</tp-marker>
   <tp-marker variant="separator">Worked for 42s</tp-marker>
   <tp-marker variant="border">Switched to release-2.4</tp-marker>
@@ -23,9 +24,10 @@ A Marker annotates a stream, such as a chat transcript or an activity log, witho
 The default has no boundary. `separator` centres the content between two rules, for breaks in a timeline; `border` sets it above a rule, for a step that closes a section.
 
 <Preview
+  width="5"
   title="Variants"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%" gap="8">
+  code={`<tp-stack  gap="8">
   <tp-marker>Priya joined the project</tp-marker>
   <tp-marker variant="separator">Today</tp-marker>
   <tp-marker variant="border">Deployed to production</tp-marker>
@@ -37,9 +39,10 @@ The default has no boundary. `separator` centres the content between two rules, 
 `tone` colors the text and icon: `neutral` (the default), `accent`, `success` or `danger`. Keep the outcome in the words too, since color alone is not announced.
 
 <Preview
+  width="5"
   title="Tones"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%" gap="6">
+  code={`<tp-stack  gap="6">
   <tp-marker>Build queued</tp-marker>
   <tp-marker tone="accent">Review requested from Priya</tp-marker>
   <tp-marker variant="separator" tone="success">All 128 checks passed</tp-marker>
@@ -52,13 +55,12 @@ The default has no boundary. `separator` centres the content between two rules, 
 The `icon` slot takes an Icon or a decorative Spinner. The icon region is hidden from assistive technology, so the text must carry the meaning on its own.
 
 <Preview
+  width="5"
   title="With icons"
   align="stretch"
   code={`<tp-stack
   id="marker-icons"
-  style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%"
-  gap="6"
->
+  gap="6">
   <tp-marker role="status"><tp-spinner slot="icon" size="sm"></tp-spinner>Compacting conversation</tp-marker>
   <tp-marker variant="separator"><tp-icon slot="icon" data-icon="check"></tp-icon>Conversation compacted</tp-marker>
   <tp-marker variant="border"><tp-icon slot="icon" data-icon="branch"></tp-icon>Opened pull request #482</tp-marker>
@@ -85,9 +87,10 @@ The shimmer paints the text through the content's background, so it suits text a
 Marker declares the ambient `shimmer` motion role on its `marker-content` part, with the `start` and `stop` phases, no context and non-blocking completion. A driver that claims it replaces the sweep; the gradient paint stays on the content for the driver to move through `background-position`.
 
 <Preview
+  width="5"
   title="Shimmer"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%" gap="6">
+  code={`<tp-stack  gap="6">
   <tp-marker role="status" shimmer>Searching 14 files for “retry policy”</tp-marker>
   <tp-marker variant="separator" role="status" shimmer>Thinking</tp-marker>
 </tp-stack>`}
@@ -98,12 +101,12 @@ Marker declares the ambient `shimmer` motion role on its `marker-content` part, 
 A Marker owns no action state, but its content can hold a link or a Button. The control keeps its own focus and semantics.
 
 <Preview
+  width="5"
   title="With an action"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%" gap="6">
+  code={`<tp-stack  gap="6">
   <tp-marker variant="separator">Older messages hidden. <a href="#actions">Show all</a></tp-marker>
-  <tp-marker variant="separator"
-    ><tp-button variant="outline" size="sm">Review 3 changes</tp-button></tp-marker
+  <tp-marker variant="separator"><tp-button variant="outline" size="sm">Review 3 changes</tp-button></tp-marker
   >
 </tp-stack>`}
 />
@@ -113,21 +116,19 @@ To make the whole Marker the control, render its `marker` part as a native link 
 A delegated link or button must preserve `bind` and `content`, supply its native attributes and have an accessible name.
 
 <Preview
+  width="5"
   title="Native hosts and layout"
   align="stretch"
   code={`<tp-stack
   id="marker-hosts"
-  style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%"
-  gap="6"
->
+  gap="6">
   <tp-marker data-host="link"><tp-icon slot="icon" data-icon="branch"></tp-icon>Opened pull request #482</tp-marker>
   <tp-marker data-host="button"><tp-icon slot="icon" data-icon="clock"></tp-icon>Worked for 42s<tp-icon data-icon="chevron" style="flex:none;inline-size:var(--tp-icon-size-sm);block-size:var(--tp-icon-size-sm)"></tp-icon></tp-marker>
   <tp-marker data-layout="center"><strong>Priya</strong>&nbsp;left the conversation</tp-marker>
   <tp-marker data-layout="stack"><tp-icon slot="icon" data-icon="check"></tp-icon>All 128 checks passed</tp-marker>
   <output
     id="marker-hosts-output"
-    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
-  ></output>
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"></output>
 </tp-stack>`}
   script={`import { html } from 'lit';
 
@@ -182,13 +183,12 @@ document.querySelector('#marker-sweep-replay').addEventListener('click', () => {
 A Marker can label an Accordion item, so a step summary expands into its details, or sit around a Drawer trigger that opens the full record.
 
 <Preview
+  width="5"
   title="Accordion label and drawer"
   align="stretch"
   code={`<tp-stack
   id="marker-compositions"
-  style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%"
-  gap="6"
->
+  gap="6">
   <tp-accordion collapsible>
     <tp-accordion-item value="steps">
       <tp-marker slot="label"><tp-icon slot="icon" data-icon="clock"></tp-icon>Worked for 1m 12s</tp-marker>
@@ -200,8 +200,7 @@ A Marker can label an Accordion item, so a step summary expands into its details
       label="Files read"
       description="Opened while preparing this reply."
       edge="inline-end"
-      style="text-align: start"
-    >
+      style="text-align: start">
       <tp-button slot="trigger" variant="outline" size="sm"><tp-icon slot="icon-start" data-icon="search"></tp-icon>Explored 3 files</tp-button>
       <tp-list aria-label="Files read">
         <tp-list-item variant="outline" size="sm">billing/proration.ts</tp-list-item>

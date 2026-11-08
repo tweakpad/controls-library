@@ -5,9 +5,10 @@ tag: tp-drag-drop-list
 ---
 
 <Preview
+  width="4"
   title="Drag drop list"
   align="stretch"
-  code={`<tp-drag-drop-list id="drag-drop-list-hero" label="Launch checklist" variant="outline" style="max-inline-size:26rem;margin-inline:auto;inline-size:100%"></tp-drag-drop-list>`}
+  code={`<tp-drag-drop-list id="drag-drop-list-hero" label="Launch checklist" variant="outline"></tp-drag-drop-list>`}
   script={`document.querySelector('#drag-drop-list-hero').defaultValue = [
   { id: 'brief', label: 'Write the launch brief' },
   { id: 'pricing', label: 'Finalize pricing page' },
@@ -29,19 +30,18 @@ Every row has a named handle Button. Focus it, press Space or Enter to pick the 
 `tp-value-change` fires with each proposed order and can be cancelled; `tp-value-commit` fires once the drop has settled. Read `value` then to save the order. A same-list change emits one change/commit pair; transfer emits one pair per changed lane. Hover, no-op and canceled/rejected drops emit no commit.
 
 <Preview
+  width="4"
   title="Commit events"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto; inline-size: 100%" gap="3">
+  code={`<tp-stack  gap="3">
   <tp-drag-drop-list
     id="drag-drop-list-commit"
     label="Sprint priorities"
     variant="outline"
-    size="sm"
-  ></tp-drag-drop-list>
+    size="sm"></tp-drag-drop-list>
   <output
     id="drag-drop-list-commit-output"
-    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
-    >Drag a row to reprioritize.</output
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)">Drag a row to reprioritize.</output
   >
 </tp-stack>`}
   script={`const list = document.querySelector('#drag-drop-list-commit');
@@ -62,9 +62,10 @@ list.addEventListener('tp-value-commit', (event) => {
 `variant` is `ghost` (the default, rows without a boundary), `outline` or `subdued`. `size` steps the rows down from `default` through `sm` to `xs` for side panels and settings popovers.
 
 <Preview
+  width="7"
   title="Variants and sizes"
   align="stretch"
-  code={`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:var(--tp-space-6);max-inline-size:40rem;margin-inline:auto;inline-size:100%">
+  code={`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:var(--tp-space-6)">
   <tp-drag-drop-list id="drag-drop-list-ghost" label="Table columns"></tp-drag-drop-list>
   <tp-drag-drop-list id="drag-drop-list-xs" label="Layer order" variant="subdued" size="xs"></tp-drag-drop-list>
 </div>`}
@@ -86,9 +87,10 @@ document.querySelector('#drag-drop-list-xs').defaultValue = [
 By default only the handle starts a pointer drag, which keeps text in the row selectable. `activation="item"` lets the whole row start one, after a short delay or movement so clicks still work. `reorder-mode="swap"` exchanges two items instead of shifting the ones between them. The `feedback` property picks the drag feedback; `'clone'`, used here, leaves a copy in the row's layout position while the item moves. Mouse handles activate immediately; touch waits 250 ms with 5 px tolerance. Ordinary item activation uses a 200 ms/10 px delay or distance strictly greater than 5 px. Nested controls retain their own interaction.
 
 <Preview
+  width="4"
   title="Whole-row drag with swap"
   align="stretch"
-  code={`<tp-drag-drop-list id="drag-drop-list-swap" label="Dashboard widgets" variant="subdued" activation="item" reorder-mode="swap" style="max-inline-size:26rem;margin-inline:auto;inline-size:100%"></tp-drag-drop-list>`}
+  code={`<tp-drag-drop-list id="drag-drop-list-swap" label="Dashboard widgets" variant="subdued" activation="item" reorder-mode="swap"></tp-drag-drop-list>`}
   script={`const list = document.querySelector('#drag-drop-list-swap');
 list.feedback = 'clone';
 list.defaultValue = [
@@ -104,17 +106,15 @@ list.defaultValue = [
 `renderItem` returns the content of each row from its item and a context, so rows can carry Badges and their own actions; a control in the `actions` slot stays separately operable. The context's `preview` flag marks the copy shown while dragging. `renderOverlay` draws the row that follows the pointer. Preview content must not create live drag registrations. Use a custom overlay for opaque shadow components.
 
 <Preview
+  width="5"
   title="Custom rows and overlay"
   align="stretch"
   code={`<tp-stack
   id="drag-drop-list-rich"
-  style="max-inline-size: 30rem; margin-inline: auto; inline-size: 100%"
-  gap="3"
->
+  gap="3">
   <output
     id="drag-drop-list-rich-output"
-    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
-    >Drag to reorder, or open a release.</output
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)">Drag to reorder, or open a release.</output
   >
 </tp-stack>`}
   script={`import { html } from 'lit';
@@ -143,9 +143,10 @@ document.querySelector('#drag-drop-list-rich').prepend(list);`}
 `orientation="horizontal"` lays the items out in a row and moves them with the left and right arrow keys, mirrored for right-to-left text.
 
 <Preview
+  width="4"
   title="Horizontal"
   align="stretch"
-  code={`<tp-drag-drop-list id="drag-drop-list-row" label="Board columns" variant="outline" size="sm" orientation="horizontal" style="margin-inline:auto"></tp-drag-drop-list>`}
+  code={`<tp-drag-drop-list id="drag-drop-list-row" label="Board columns" variant="outline" size="sm" orientation="horizontal"></tp-drag-drop-list>`}
   script={`document.querySelector('#drag-drop-list-row').defaultValue = [
   { id: 'todo', label: 'To do' },
   { id: 'doing', label: 'In progress' },
@@ -159,9 +160,10 @@ document.querySelector('#drag-drop-list-rich').prepend(list);`}
 `disabled` and `readonly` stop reordering and cancel a drag in progress, while leaving the rows readable. Use `readonly` when the order is visible but locked, such as while a save is pending.
 
 <Preview
+  width="4"
   title="Read-only"
   align="stretch"
-  code={`<tp-drag-drop-list id="drag-drop-list-locked" label="Approval chain" variant="outline" readonly style="max-inline-size:26rem;margin-inline:auto;inline-size:100%"></tp-drag-drop-list>`}
+  code={`<tp-drag-drop-list id="drag-drop-list-locked" label="Approval chain" variant="outline" readonly></tp-drag-drop-list>`}
   script={`document.querySelector('#drag-drop-list-locked').defaultValue = [
   { id: 'lead', label: 'Team lead' },
   { id: 'finance', label: 'Finance' },
@@ -174,12 +176,11 @@ document.querySelector('#drag-drop-list-rich').prepend(list);`}
 Lists that share one `DragDropManager` from `@tweakpad/ui/drag-drop`, each with a unique `group`, can pass items between them, such as columns on a board. `moveItem()` performs the same atomic move from code, for example from a "Move to Ready" menu action. Configure each list before it first renders; here the script creates them. An empty list stays a drop target, and keyboard users can move an item into it with the arrow keys. A list without `manager` owns its manager. A supplied manager remains application-owned when a list disconnects. Dispose bindings and managers when their owning application is removed.
 
 <Preview
+  width="7"
   title="Board lanes"
   align="stretch"
   code={`<section
-  id="drag-drop-list-board"
-  style="max-inline-size: 40rem; margin-inline: auto; inline-size: 100%"
->
+  id="drag-drop-list-board">
   <tp-stack gap="4">
     <div
       data-lanes
@@ -187,16 +188,13 @@ Lists that share one `DragDropManager` from `@tweakpad/ui/drag-drop`, each with 
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
         gap: var(--tp-space-4);
-      "
-    ></div>
-    <tp-button data-move variant="outline" style="align-self: flex-start"
-      >Move first item to Ready</tp-button
+      "></div>
+    <tp-button data-move variant="outline" style="align-self: flex-start">Move first item to Ready</tp-button
     >
     <output
       data-status
       role="status"
-      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
-      >Drag a card between lanes.</output
+      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)">Drag a card between lanes.</output
     >
   </tp-stack>
 </section>`}
@@ -234,12 +232,11 @@ With `value` instead of `defaultValue`, the lists propose and your code decides.
 Direct Foundation callbacks and `onValueChange` exceptions are observed and cancel the default action. Native DOM listener exceptions follow browser dispatch semantics and cannot reliably become vetoes; use `preventDefault()`, the common event cancellation API or a caught suspension rejection.
 
 <Preview
+  width="7"
   title="Controlled lanes"
   align="stretch"
   code={`<section
-  id="drag-drop-list-owner"
-  style="max-inline-size: 40rem; margin-inline: auto; inline-size: 100%"
->
+  id="drag-drop-list-owner">
   <tp-stack gap="4">
     <div
       data-lanes
@@ -247,8 +244,7 @@ Direct Foundation callbacks and `onValueChange` exceptions are observed and canc
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
         gap: var(--tp-space-4);
-      "
-    ></div>
+      "></div>
     <output
       data-status
       role="status"
@@ -256,8 +252,7 @@ Direct Foundation callbacks and `onValueChange` exceptions are observed and canc
         color: var(--tp-muted-foreground);
         font-size: var(--tp-text-sm);
         font-family: var(--tp-font-mono);
-      "
-    ></output>
+      "></output>
   </tp-stack>
 </section>`}
   script={`import { DragDropManager } from '@tweakpad/ui/drag-drop';
@@ -301,12 +296,11 @@ show();`}
 The manager's `monitor` reports each operation. Call `event.suspend()` inside `dragend` to hold the drop: the feedback stays where it was dropped and no value changes until you call `resume()` or `abort()` on the returned handle, for example after a permission check or a server call. `settled` reports the outcome. Repeated calls return one handle; the first result wins. Explicit cancellation, disconnect or manager destruction aborts the decision; no timer silently accepts it. Use `try/catch` around application work and abort on failure.
 
 <Preview
+  width="7"
   title="Approve before committing"
   align="stretch"
   code={`<section
-  id="drag-drop-list-approve"
-  style="max-inline-size: 40rem; margin-inline: auto; inline-size: 100%"
->
+  id="drag-drop-list-approve">
   <tp-stack gap="4">
     <div
       data-lanes
@@ -314,8 +308,7 @@ The manager's `monitor` reports each operation. Call `event.suspend()` inside `d
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
         gap: var(--tp-space-4);
-      "
-    ></div>
+      "></div>
     <div data-decision hidden>
       <tp-stack direction="row" gap="2" wrap="wrap">
         <tp-button data-approve size="sm">Approve move</tp-button>
@@ -325,8 +318,7 @@ The manager's `monitor` reports each operation. Call `event.suspend()` inside `d
     <output
       data-status
       role="status"
-      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
-      >Moving a teammate between teams needs approval.</output
+      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)">Moving a teammate between teams needs approval.</output
     >
   </tp-stack>
 </section>`}
@@ -365,9 +357,10 @@ root.querySelector('[data-reject]').addEventListener('click', () => decision?.ab
 `modifiers` take factories for the manager's movement modifiers. `RestrictToVerticalAxis` keeps the dragged row on its column, which suits a long single list dragged by the whole row.
 
 <Preview
+  width="4"
   title="Vertical axis only"
   align="stretch"
-  code={`<div id="drag-drop-list-axis" style="max-inline-size:26rem;margin-inline:auto;inline-size:100%"></div>`}
+  code={`<div id="drag-drop-list-axis"></div>`}
   script={`import { RestrictToVerticalAxis } from '@tweakpad/ui/drag-drop';
 
 const list = document.createElement('tp-drag-drop-list');

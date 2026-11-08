@@ -18,3 +18,9 @@
 
 | preview | Horizontal | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Legend and group | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Field | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Validate on blur | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Custom validator | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Slots | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Disabled | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

@@ -6,16 +6,16 @@ parts: [tp-image-group]
 ---
 
 <Preview
+  width="7"
   title="Image"
   align="stretch"
   code={`<tp-image
   ratio="1.7777777778"
   zoom="in"
-  style="max-inline-size:40rem;margin-inline:auto;border-radius:var(--tp-radius-xl)"
+  style="border-radius:var(--tp-radius-xl)"
   src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=75&auto=format&fit=crop"
   srcset="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=640&q=75&auto=format&fit=crop 640w, https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=75&auto=format&fit=crop 1200w"
-  alt="A bright open-plan office with long shared desks"
-></tp-image>`}
+  alt="A bright open-plan office with long shared desks"></tp-image>`}
 />
 
 ## Usage
@@ -51,9 +51,10 @@ The placeholder and the default fallback are hidden from assistive technology an
 Image paints no surface of its own. The placeholder and fallback surfaces are the composed Skeleton, so theme tokens such as `--tp-muted` apply.
 
 <Preview
+  width="5"
   title="Fallbacks"
   align="stretch"
-  code={`<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:var(--tp-space-3);max-inline-size:32rem;margin-inline:auto;inline-size:100%">
+  code={`<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:var(--tp-space-3)">
   <tp-image ratio="1.5" style="border-radius:var(--tp-radius-lg)" alt="Project cover"></tp-image>
   <tp-image ratio="1.5" style="border-radius:var(--tp-radius-lg)" alt="Project cover">
     <span slot="fallback" style="display:grid;place-items:center;inline-size:100%;block-size:100%;background:var(--tp-muted);color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">No cover yet</span>
@@ -64,9 +65,10 @@ Image paints no surface of its own. The placeholder and fallback surfaces are th
 For a gentler load, put a tiny blurred version of the photo in the `placeholder` slot; it shows until the full image is ready.
 
 <Preview
+  width="5"
   title="Loading placeholders"
   align="stretch"
-  code={`<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:var(--tp-space-3);max-inline-size:32rem;margin-inline:auto;inline-size:100%">
+  code={`<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:var(--tp-space-3)">
   <tp-image ratio="1.5" placeholder="spinner" style="border-radius:var(--tp-radius-lg)" src="https://images.unsplash.com/photo-1494337480532-3725c85fd2ab?w=640&q=75&auto=format&fit=crop" alt="A building facade"></tp-image>
   <tp-image ratio="1.5" style="border-radius:var(--tp-radius-lg)" src="https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=640&q=75&auto=format&fit=crop" alt="A rooftop terrace">
     <img slot="placeholder" alt="" src="https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=24&q=50&auto=format&fit=crop" style="inline-size:100%;block-size:100%;object-fit:cover;filter:blur(12px)">
@@ -81,9 +83,10 @@ For a gentler load, put a tiny blurred version of the photo in the `placeholder`
 Hover zoom applies only to devices that can hover, and it never changes layout or the clipping frame. Tune it with `--tp-image-zoom-duration` and `--tp-image-zoom-easing`.
 
 <Preview
+  width="5"
   title="Hover zoom"
   align="stretch"
-  code={`<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:var(--tp-space-3);max-inline-size:32rem;margin-inline:auto;inline-size:100%">
+  code={`<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:var(--tp-space-3)">
   <tp-image ratio="1" zoom="in" style="border-radius:var(--tp-radius-lg)" src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=640&q=75&auto=format&fit=crop" alt="Desks by a window"></tp-image>
   <tp-image ratio="1" zoom="out" style="border-radius:var(--tp-radius-lg)" src="https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?w=640&q=75&auto=format&fit=crop" alt="A bicycle in a wet alley"></tp-image>
 </div>`}
@@ -92,9 +95,10 @@ Hover zoom applies only to devices that can hover, and it never changes layout o
 Here the whole card drives the zoom, so the photo responds wherever the pointer enters the card.
 
 <Preview
+  width="3"
   title="Card hover"
   align="stretch"
-  code={`<tp-card id="image-card-hover" style="max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-card id="image-card-hover">
   <h3 slot="header" style="margin:0">Quiet floor</h3>
   <p slot="description" style="margin:0">12 bookable desks with natural light.</p>
   <tp-image ratio="1.7777777778" zoom="in" style="border-radius:var(--tp-radius-md)" src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=640&q=75&auto=format&fit=crop" alt="Desks by a window"></tp-image>
@@ -114,9 +118,10 @@ The group starts fetching every member once it is within 25% of the viewport, so
 Members' events bubble through the group with the same names, so check `event.target === group` to handle only the group's.
 
 <Preview
+  width="7"
   title="Staggered group"
   align="stretch"
-  code={`<tp-image-group reveal="fade up" stagger="120" style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--tp-space-3);max-inline-size:40rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-image-group reveal="fade up" stagger="120" style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--tp-space-3)">
   <tp-image ratio="1" style="border-radius:var(--tp-radius-lg)" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=400&q=75&auto=format&fit=crop" alt=""></tp-image>
   <tp-image ratio="1" style="border-radius:var(--tp-radius-lg)" src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=400&q=75&auto=format&fit=crop" alt=""></tp-image>
   <tp-image ratio="1" style="border-radius:var(--tp-radius-lg)" src="https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=400&q=75&auto=format&fit=crop" alt=""></tp-image>
@@ -149,16 +154,19 @@ The reveal never starts before the image is ready. An image that enters while st
 To sequence images with surrounding text, wrap them in a [Scroll trigger](../scroll-trigger/). It waits for the group's images to load, then reveals the heading, the images and the caption in order.
 
 <Preview
+  width="7"
   title="Headline, group and caption"
   align="stretch"
-  code={`<tp-scroll-trigger stagger="200" style="display:grid;gap:var(--tp-space-4);max-inline-size:40rem;margin-inline:auto;inline-size:100%">
-  <h3 style="margin:0"><tp-mo-text-split split="words lines" mask="lines" reveal="up">Spaces that work the way you do</tp-mo-text-split></h3>
-  <tp-image-group reveal="fade up" stagger="120" style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--tp-space-3)">
-    <tp-image ratio="1" style="border-radius:var(--tp-radius-lg)" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=400&q=75&auto=format&fit=crop" alt=""></tp-image>
-    <tp-image ratio="1" style="border-radius:var(--tp-radius-lg)" src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=400&q=75&auto=format&fit=crop" alt=""></tp-image>
-    <tp-image ratio="1" style="border-radius:var(--tp-radius-lg)" src="https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=400&q=75&auto=format&fit=crop" alt=""></tp-image>
-  </tp-image-group>
-  <p style="margin:0;color:var(--tp-muted-foreground)"><tp-mo-text-split reveal="fade">Open desks, quiet rooms and a terrace, all bookable from the app.</tp-mo-text-split></p>
+  code={`<tp-scroll-trigger stagger="200">
+  <tp-stack gap="4">
+    <h3 style="margin:0"><tp-mo-text-split split="words lines" mask="lines" reveal="up">Spaces that work the way you do</tp-mo-text-split></h3>
+    <tp-image-group reveal="fade up" stagger="120" style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--tp-space-3)">
+      <tp-image ratio="1" style="border-radius:var(--tp-radius-lg)" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=400&q=75&auto=format&fit=crop" alt=""></tp-image>
+      <tp-image ratio="1" style="border-radius:var(--tp-radius-lg)" src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=400&q=75&auto=format&fit=crop" alt=""></tp-image>
+      <tp-image ratio="1" style="border-radius:var(--tp-radius-lg)" src="https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=400&q=75&auto=format&fit=crop" alt=""></tp-image>
+    </tp-image-group>
+    <p style="margin:0;color:var(--tp-muted-foreground)"><tp-mo-text-split reveal="fade">Open desks, quiet rooms and a terrace, all bookable from the app.</tp-mo-text-split></p>
+  </tp-stack>
 </tp-scroll-trigger>`}
 />
 

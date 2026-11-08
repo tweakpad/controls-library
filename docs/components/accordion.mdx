@@ -6,9 +6,10 @@ parts: [tp-accordion-item]
 ---
 
 <Preview
+  width="6"
   title="Accordion"
   align="stretch"
-  code={`<tp-accordion variant="outline" default-value="plans" style="max-inline-size:34rem">
+  code={`<tp-accordion variant="outline" default-value="plans">
   <tp-accordion-item value="plans">
     <span slot="label">Can I change plans later?</span>
     <p>Yes. Upgrades take effect immediately and are prorated on your next invoice. Downgrades apply at the end of the current billing period.</p>
@@ -62,9 +63,10 @@ Each `tp-accordion-item` renders a heading with a native button trigger and a co
 ### Multiple and collapsible
 
 <Preview
+  width="6"
   title="Multiple open items"
   align="stretch"
-  code={`<tp-accordion selection-mode="multiple" variant="outline" default-value="notifications privacy" style="max-inline-size:34rem">
+  code={`<tp-accordion selection-mode="multiple" variant="outline" default-value="notifications privacy">
   <tp-accordion-item value="notifications">
     <span slot="label">Notifications</span>
     <p>Email me when someone mentions me or assigns me a task.</p>
@@ -85,9 +87,10 @@ Single mode keeps one item open, so the last open item can't close unless you ad
 ### Leading and trailing content
 
 <Preview
+  width="6"
   title="Positional content"
   align="stretch"
-  code={`<tp-accordion variant="separated" content-alignment="label" default-value="profile" style="max-inline-size:34rem">
+  code={`<tp-accordion variant="separated" content-alignment="label" default-value="profile">
   <tp-accordion-item value="profile">
     <span slot="leading" aria-hidden="true">01</span>
     <span slot="label">Complete your profile</span>
@@ -112,9 +115,10 @@ The `leading` and `trailing` slots take numbers, icons, badges or status text, b
 ### Disabled
 
 <Preview
+  width="6"
   title="Disabled item"
   align="stretch"
-  code={`<tp-accordion variant="outline" default-value="team" style="max-inline-size:34rem">
+  code={`<tp-accordion variant="outline" default-value="team">
   <tp-accordion-item value="team">
     <span slot="label">Team settings</span>
     <p>Manage roles, default permissions and project templates.</p>
@@ -132,9 +136,10 @@ The `leading` and `trailing` slots take numbers, icons, badges or status text, b
 ### Content motion
 
 <Preview
+  width="6"
   title="Line-by-line reveal"
   align="stretch"
-  code={`<tp-accordion variant="outline" collapsible style="max-inline-size:34rem">
+  code={`<tp-accordion variant="outline" collapsible>
   <tp-accordion-item value="setup">
     <span slot="label">Set up your workspace</span>
     <tp-scroll-trigger reveal="up" stagger="80" reveal-repeat>

@@ -57,7 +57,7 @@ const row = `<tp-stack direction="row" gap="4">
 export const skeletonExamples = [
   markupExample(
     'Media preview',
-    `<tp-stack aria-busy="true" style="max-inline-size:calc(var(--tp-spacing) * 64)" gap="3">
+    `<tp-stack aria-busy="true"  gap="3">
   <tp-aspect-ratio ratio="2" style="border-radius:var(--tp-radius-xl)">
     <tp-skeleton style="border-radius:inherit"></tp-skeleton>
   </tp-aspect-ratio>
@@ -70,7 +70,7 @@ export const skeletonExamples = [
   ),
   markupExample(
     'Card',
-    `<tp-card aria-busy="true" style="max-inline-size:calc(var(--tp-spacing) * 80)">
+    `<tp-card aria-busy="true" >
   <tp-stack slot="header" gap="2">
     ${line('66%')}
     ${line('50%')}
@@ -80,7 +80,7 @@ export const skeletonExamples = [
   ),
   markupExample(
     'Text',
-    `<tp-stack aria-busy="true" style="max-inline-size:calc(var(--tp-spacing) * 100)" gap="2">
+    `<tp-stack aria-busy="true"  gap="2">
   ${line('100%')}
   ${line('100%')}
   ${line('75%')}
@@ -88,7 +88,7 @@ export const skeletonExamples = [
   ),
   markupExample(
     'Form',
-    `<div aria-busy="true" style="display:grid;gap:calc(var(--tp-spacing) * 7);max-inline-size:calc(var(--tp-spacing) * 100)">
+    `<div aria-busy="true" style="display:grid;gap:calc(var(--tp-spacing) * 7)">
   ${field(20)}
   ${field(24)}
   <tp-skeleton style="inline-size:calc(var(--tp-spacing) * 24);block-size:var(--tp-control-height-md)"></tp-skeleton>
@@ -97,7 +97,7 @@ export const skeletonExamples = [
   ),
   markupExample(
     'Table',
-    `<tp-stack aria-busy="true" style="max-inline-size:calc(var(--tp-spacing) * 120)" gap="2">
+    `<tp-stack aria-busy="true"  gap="2">
   ${[row, row, row].join('\n  ')}
 </tp-stack>`,
     'Reserve repeated row geometry without exposing fake data or focusable controls.',

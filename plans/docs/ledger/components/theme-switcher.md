@@ -17,3 +17,5 @@
 | preview | Variants | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Small, defaulting to dark | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Explicit choices only | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Color scheme store | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

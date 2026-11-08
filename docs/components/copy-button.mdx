@@ -5,9 +5,10 @@ tag: tp-copy-button
 ---
 
 <Preview
+  width="3"
   title="Copy button"
   align="stretch"
-  code={`<tp-field label="API key" description="Use this key from server code only." style="inline-size:100%;max-inline-size:24rem;margin-inline:auto">
+  code={`<tp-field label="API key" description="Use this key from server code only.">
   <tp-input-group>
     <tp-input readonly default-value="tp_live_4f2c9e1b7a"></tp-input>
     <tp-copy-button slot="action" value="tp_live_4f2c9e1b7a" label="Copy API key"></tp-copy-button>
@@ -45,9 +46,10 @@ Icon-only is the default, with `label` as the accessible name; make it specific,
 Next to a short read-only value, an icon-only Copy button keeps the row compact while staying a real, focusable button.
 
 <Preview
+  width="4"
   title="Beside a value"
   align="stretch"
-  code={`<dl style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:var(--tp-space-4);row-gap:var(--tp-space-2);margin:0 auto;inline-size:100%;max-inline-size:26rem;font-size:var(--tp-text-sm)">
+  code={`<dl style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:var(--tp-space-4);row-gap:var(--tp-space-2);margin:0;font-size:var(--tp-text-sm)">
   <dt style="color:var(--tp-muted-foreground)">Project ID</dt>
   <dd style="margin:0;font-family:var(--tp-font-mono)">prj_8f2c41</dd>
   <tp-copy-button value="prj_8f2c41" label="Copy project ID"></tp-copy-button>
@@ -60,17 +62,17 @@ Next to a short read-only value, an icon-only Copy button keeps the row compact 
 Inside an Input group's `action` slot or as a Field group member, the Copy button joins the control's border while the input next to it stays untouched.
 
 <Preview
+  width="4"
   title="In an input group and a field group"
   align="stretch"
-  code={`<tp-stack style="inline-size: 100%; max-inline-size: 26rem; margin-inline: auto" gap="4">
+  code={`<tp-stack  gap="4">
   <tp-field label="Webhook signing secret">
     <tp-input-group>
       <tp-input readonly default-value="whsec_9b1e7c42d0"></tp-input>
       <tp-copy-button
         slot="action"
         value="whsec_9b1e7c42d0"
-        label="Copy signing secret"
-      ></tp-copy-button>
+        label="Copy signing secret"></tp-copy-button>
     </tp-input-group>
   </tp-field>
   <tp-field-group label="Map center">
@@ -86,8 +88,7 @@ Inside an Input group's `action` slot or as a Field group member, the Copy butto
       variant="outline"
       size="default"
       value="38.7223, -9.1393"
-      label="Copy coordinates"
-    ></tp-copy-button>
+      label="Copy coordinates"></tp-copy-button>
   </tp-field-group>
 </tp-stack>`}
 />

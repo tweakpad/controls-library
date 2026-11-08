@@ -39,7 +39,7 @@ const meta = {
     label: { control: 'text' },
   },
   render: (args) =>
-    html`<div style="max-inline-size:28rem;margin-inline:auto">
+    html`<div>
       <tp-questionnaire
         .questions=${questions}
         .actions=${{ submit: { label: 'Save plan' } }}

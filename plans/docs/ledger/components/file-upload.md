@@ -30,3 +30,13 @@
 | --- | --- | --- |
 
 | preview | Custom text and compact size | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | File upload | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Rejected files | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Custom validator | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Chips | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Rows | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Image grid | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Upload adapter | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Field and form | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Server rejection | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

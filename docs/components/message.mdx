@@ -6,13 +6,13 @@ parts: [tp-message-group]
 ---
 
 <Preview
+  width="4"
   title="Message"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="6">
+  code={`<tp-stack  gap="6">
   <tp-message align="end" aria-label="Alex Morgan">
     <tp-avatar slot="avatar" fallback="AM" alt="Alex Morgan"></tp-avatar>
-    <tp-bubble align="end" variant="default"
-      >The onboarding checklist is ready for review.</tp-bubble
+    <tp-bubble align="end" variant="default">The onboarding checklist is ready for review.</tp-bubble
     >
   </tp-message>
   <tp-message aria-label="Sam Rivera">
@@ -44,17 +44,17 @@ A Message lays out one row: avatar column, header, content and footer. It does n
 `align="end"` marks the current sender and `align="start"` everyone else. Avatar and footer follow the logical side, including right-to-left; set the nested Bubble's `align` to match. Header stays start aligned. A team chat uses bubbles on both sides; an assistant transcript can use a `ghost` Bubble for full-width assistant content. An activity history may use start-aligned rows throughout. Choose the composition deliberately.
 
 <Preview
+  width="4"
   title="Sender sides"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="6">
+  code={`<tp-stack  gap="6">
   <tp-message aria-label="Priya Shah">
     <tp-avatar slot="avatar" fallback="PS" alt="Priya Shah"></tp-avatar>
     <tp-bubble>The staging deploy failed on the migration step.</tp-bubble>
   </tp-message>
   <tp-message align="end" aria-label="You">
     <tp-avatar slot="avatar" fallback="JL" alt="Jordan Lee"></tp-avatar>
-    <tp-bubble align="end" variant="default"
-      >Rolling it back now. I'll post the logs in a minute.</tp-bubble
+    <tp-bubble align="end" variant="default">Rolling it back now. I'll post the logs in a minute.</tp-bubble
     >
   </tp-message>
 </tp-stack>`}
@@ -67,9 +67,10 @@ Alignment alone does not identify a sender. Give every row an accessible name th
 `author` and `timestamp` fill the default header; the time is rendered by Time, so it formats for the reader's locale. The `footer` slot carries delivery status, read receipts or reactions, and empty regions take no space.
 
 <Preview
+  width="4"
   title="Header and footer"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="6">
+  code={`<tp-stack  gap="6">
   <tp-message author="Sam Rivera" timestamp="2026-10-09T14:32:00">
     <tp-bubble>The Q3 invoice export is attached to the ticket.</tp-bubble>
   </tp-message>
@@ -85,9 +86,10 @@ Alignment alone does not identify a sender. Give every row an accessible name th
 `pending` shows a Sending status in the footer, and `failed` shows Failed to send, announced as an alert. Your application sets and clears both. The status is the footer's fallback, so it appears only while the `footer` slot is empty.
 
 <Preview
+  width="4"
   title="Sending and failed"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="6">
+  code={`<tp-stack  gap="6">
   <tp-message align="end" aria-label="You" pending>
     <tp-bubble align="end" variant="default">Can we move the design review to 3pm?</tp-bubble>
   </tp-message>
@@ -102,9 +104,10 @@ Alignment alone does not identify a sender. Give every row an accessible name th
 `tp-message-group` stacks consecutive messages from one sender with tighter spacing. An empty avatar slot keeps the column on earlier rows so the bubbles line up under the final avatar. Omitting the slot removes the column entirely. The avatar aligns with Content's lower edge even when the Footer grows or wraps; no fixed footer-height offset is needed.
 
 <Preview
+  width="4"
   title="Message group"
   align="stretch"
-  code={`<tp-message-group style="max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-message-group>
   <tp-message aria-label="Sam Rivera">
     <span slot="avatar" aria-hidden="true"></span>
     <tp-bubble>I checked the release checklist.</tp-bubble>
@@ -121,9 +124,10 @@ Alignment alone does not identify a sender. Give every row an accessible name th
 Actions are ordinary named controls in the footer: a Button for one-off commands, Toggles for feedback that has a pressed state. Each stays its own tab stop.
 
 <Preview
+  width="4"
   title="Footer actions"
   align="stretch"
-  code={`<div id="message-actions" style="max-inline-size:26rem;margin-inline:auto;inline-size:100%">
+  code={`<div id="message-actions">
   <tp-message aria-label="Assistant">
     <tp-bubble variant="ghost">Your workspace uses 18 of 20 seats. Removing the two inactive guests frees room for the new hires without changing your plan.</tp-bubble>
     <tp-button slot="footer" variant="ghost" size="icon-sm" aria-label="Copy message"><tp-icon slot="icon-start" data-icon="copy"></tp-icon></tp-button>
@@ -147,9 +151,10 @@ for (const icon of document.querySelectorAll('#message-actions tp-icon')) {
 Put files and images in `tp-attachment` next to the Bubble; the Message's content area owns the spacing between them. An image takes the vertical orientation with `media-treatment="image"` and stays on the sender's side.
 
 <Preview
+  width="4"
   title="Attachment"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="6">
+  code={`<tp-stack  gap="6">
   <tp-message align="end" aria-label="Alex Morgan">
     <tp-attachment orientation="vertical" media-treatment="image" status="complete">
       <img
@@ -158,16 +163,14 @@ Put files and images in `tp-attachment` next to the Bubble; the Message's conten
         alt="Open-plan office with long shared desks"
       />
     </tp-attachment>
-    <tp-bubble align="end" variant="default"
-      >This is the floor we're looking at for the new team.</tp-bubble
+    <tp-bubble align="end" variant="default">This is the floor we're looking at for the new team.</tp-bubble
     >
   </tp-message>
   <tp-message align="end" aria-label="Alex Morgan">
     <tp-attachment
       filename="q3-board-update.pdf"
       description="PDF · 1.2 MB"
-      status="complete"
-    ></tp-attachment>
+      status="complete"></tp-attachment>
     <tp-bubble align="end" variant="default">Here's the deck for Thursday.</tp-bubble>
   </tp-message>
   <tp-message aria-label="Sam Rivera">
@@ -182,9 +185,10 @@ Put files and images in `tp-attachment` next to the Bubble; the Message's conten
 To offer a retry, put your own status text and a Retry button in the footer instead of setting `failed`; slotted footer content replaces the built-in status. Move focus to the status once the message goes through, so keyboard users aren't left on a button that has disappeared.
 
 <Preview
+  width="4"
   title="Retry a failed message"
   align="stretch"
-  code={`<div id="message-retry" style="max-inline-size:26rem;margin-inline:auto;inline-size:100%">
+  code={`<div id="message-retry">
   <tp-message align="end" aria-label="You">
     <tp-bubble align="end" variant="default">Sharing the venue contract with legal now.</tp-bubble>
     <span slot="footer" data-delivery tabindex="-1" role="status" style="color:var(--tp-destructive)">Failed to send</span>

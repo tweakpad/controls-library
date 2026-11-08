@@ -5,20 +5,12 @@ tag: tp-time
 ---
 
 <Preview
+  width="3"
   title="Time"
   align="stretch"
   code={`<ul
   id="time-hero"
-  style="
-    display: grid;
-    gap: var(--tp-space-3);
-    max-inline-size: 24rem;
-    margin: 0 auto;
-    padding: 0;
-    list-style: none;
-    font-size: var(--tp-text-sm);
-  "
->
+  style="display:grid;gap:var(--tp-space-3);margin:0;padding:0;list-style:none;font-size:var(--tp-text-sm)">
   <li>
     <tp-stack direction="row" gap="4" justify="space-between">
       <span><strong>Maya Chen</strong> merged #482</span>
@@ -129,9 +121,10 @@ A date-only value stays on its calendar day in every time zone and compares by d
 Relative date-only values compare by calendar days too, which suits due dates in a task list.
 
 <Preview
+  width="3"
   title="Due dates"
   align="stretch"
-  code={`<tp-list id="time-due" aria-label="Your tasks" style="max-inline-size:24rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-list id="time-due" aria-label="Your tasks">
   <tp-list-item description="Maya Chen">Design review<span slot="footer">Due <tp-time data-days="0"></tp-time></span></tp-list-item>
   <tp-list-separator></tp-list-separator>
   <tp-list-item description="Jonas Weber">Release notes<span slot="footer">Due <tp-time data-days="3"></tp-time></span></tp-list-item>

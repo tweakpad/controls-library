@@ -43,3 +43,13 @@
 | --- | --- | --- |
 
 | preview | Custom top region | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Media Player | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Audio layout | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Audio | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Trimmed layout | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Text tracks | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Custom bar | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Live with DVR (simulated) | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Tracks adapter (mock) | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | French controls | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

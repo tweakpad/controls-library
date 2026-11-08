@@ -19,3 +19,9 @@
 | preview | Controlled with a veto | Approved shared footer contract: remove local layout wrapper and place Discard before Save using native footer slots. |
 
 | preview | Change event and setValue | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Tabs | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Underline | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Vertical | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Automatic activation | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Disabled | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

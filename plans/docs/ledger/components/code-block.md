@@ -25,3 +25,11 @@
 | --- | --- | --- |
 
 | preview | Token theme | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Code block | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Title slot | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Highlighted lines | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Diff | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Collapsible | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Shell | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | CSS | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

@@ -5,9 +5,10 @@ tag: tp-input
 ---
 
 <Preview
+  width="3"
   title="Input"
   align="stretch"
-  code={`<tp-field label="Email" description="Used for receipts" style="max-inline-size:22rem">
+  code={`<tp-field label="Email" description="Used for receipts">
   <tp-input name="email" type="email" placeholder="you@example.com"></tp-input>
 </tp-field>`}
 />
@@ -21,9 +22,10 @@ Labels, descriptions and errors belong to `tp-field`; the Input owns the native 
 `type` keeps native editing, affordances and validation for every host-supported input type.
 
 <Preview
+  width="3"
   title="Types"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 22rem" gap="4">
+  code={`<tp-stack  gap="4">
   <tp-field label="Password">
     <tp-input type="password" name="password" autocomplete="current-password"></tp-input>
   </tp-field>
@@ -41,9 +43,10 @@ Labels, descriptions and errors belong to `tp-field`; the Input owns the native 
 `mono` shows the value in the mono font and turns off spell checking, autocorrection and autocapitalization. Use it for identifiers, paths, expressions and keys, where a corrected character is a bug.
 
 <Preview
+  width="3"
   title="Mono"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 22rem" gap="4">
+  code={`<tp-stack  gap="4">
   <tp-field label="Webhook secret">
     <tp-input mono name="secret" default-value="whsec_9f2b41c07a"></tp-input>
   </tp-field>
@@ -58,9 +61,10 @@ Labels, descriptions and errors belong to `tp-field`; the Input owns the native 
 `default-value` leaves the text to the Input. Supply `value` instead, before the first render, and every edit becomes a proposal: `onValueChange` receives it, and what you assign back to `value` is what commits. Here the owner rewrites each edit into a URL-safe handle.
 
 <Preview
+  width="3"
   title="Owner-shaped value"
   align="stretch"
-  code={`<tp-field label="Workspace handle" description="Lowercase letters, numbers and dashes." style="max-inline-size:22rem">
+  code={`<tp-field label="Workspace handle" description="Lowercase letters, numbers and dashes.">
   <tp-input id="input-controlled" mono value="northwind-studio"></tp-input>
 </tp-field>`}
   script={`const input = document.querySelector('#input-controlled');
@@ -76,9 +80,10 @@ Without an assignment the proposal is rejected and the committed text stays. Mod
 Native constraints such as `required`, `pattern` and `minlength` validate through the owning Field, which shows the error and wires `aria-describedby`. `error` and `invalid` set an explicit error from your own validation.
 
 <Preview
+  width="3"
   title="Error"
   align="stretch"
-  code={`<tp-field label="Username" error="That username is taken." invalid style="max-inline-size:22rem">
+  code={`<tp-field label="Username" error="That username is taken." invalid>
   <tp-input name="username" default-value="ada"></tp-input>
 </tp-field>`}
 />
@@ -86,9 +91,10 @@ Native constraints such as `required`, `pattern` and `minlength` validate throug
 ### States
 
 <Preview
+  width="3"
   title="Disabled and read-only"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 22rem" gap="4">
+  code={`<tp-stack  gap="4">
   <tp-field label="Workspace" disabled>
     <tp-input default-value="tweakpad"></tp-input>
   </tp-field>
@@ -111,22 +117,21 @@ Native form serialization follows the editable input's current representation, i
 ### Inline
 
 <Preview
+  width="3"
   title="Inline"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="2">
+  code={`<tp-stack  gap="2">
   <tp-input
     variant="inline"
     label="Display name"
     name="display-name"
-    default-value="Rowan"
-  ></tp-input>
+    default-value="Rowan"></tp-input>
   <tp-input
     variant="inline"
     label="Time zone offset"
     name="offset"
     type="number"
-    default-value="2"
-  ></tp-input>
+    default-value="2"></tp-input>
   <tp-select variant="inline" label="Language" name="language" default-value="pt">
     <option value="en">English</option>
     <option value="pt">Português</option>
@@ -142,9 +147,10 @@ While the row is hovered or focused, a Copy button beside the label copies the v
 A number value sits between a decrement and an increment arrow in place of the browser's spin buttons. Hold an arrow to keep stepping; the Arrow keys step the focused value too, ten steps at a time with Shift. `step` sets how far each step moves, and `precision` how many decimals the value keeps and shows, which defaults to the decimals of `step`.
 
 <Preview
+  width="3"
   title="Number steps"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="2">
+  code={`<tp-stack  gap="2">
   <tp-input
     variant="inline"
     label="Line height"
@@ -153,8 +159,7 @@ A number value sits between a decrement and an increment arrow in place of the b
     step="0.1"
     min="1"
     max="3"
-    default-value="1.5"
-  ></tp-input>
+    default-value="1.5"></tp-input>
   <tp-input
     variant="inline"
     label="Opacity"
@@ -164,17 +169,17 @@ A number value sits between a decrement and an increment arrow in place of the b
     precision="2"
     min="0"
     max="1"
-    default-value="0.8"
-  ></tp-input>
+    default-value="0.8"></tp-input>
 </tp-stack>`}
 />
 
 `unit` shows a unit after the value, such as `px`, `rem` or `deg`; it is not part of the value, and the editor announces it as its description. An Icon in the `icon` slot leads the row, outside its boundary.
 
 <Preview
+  width="3"
   title="Units and icons"
   align="stretch"
-  code={`<tp-stack id="input-inline-units" style="max-inline-size: 22rem; margin-inline: auto" gap="2">
+  code={`<tp-stack id="input-inline-units"  gap="2">
   <tp-input
     variant="inline"
     label="Corner radius"
@@ -182,8 +187,7 @@ A number value sits between a decrement and an increment arrow in place of the b
     type="number"
     unit="px"
     min="0"
-    default-value="12"
-  >
+    default-value="12">
     <tp-icon slot="icon" data-icon="radius"></tp-icon>
   </tp-input>
   <tp-input
@@ -193,8 +197,7 @@ A number value sits between a decrement and an increment arrow in place of the b
     type="number"
     unit="em"
     step="0.01"
-    default-value="0.02"
-  >
+    default-value="0.02">
     <tp-icon slot="icon" data-icon="tracking"></tp-icon>
   </tp-input>
   <tp-input
@@ -205,8 +208,7 @@ A number value sits between a decrement and an increment arrow in place of the b
     unit="deg"
     min="-45"
     max="45"
-    default-value="0"
-  ></tp-input>
+    default-value="0"></tp-input>
 </tp-stack>`}
   script={`const icons = {
   radius: { viewBox: '0 0 24 24', paths: [{ d: 'M4 20V11a7 7 0 0 1 7-7h9', strokeWidth: 2 }] },

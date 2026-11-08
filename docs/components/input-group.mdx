@@ -5,9 +5,10 @@ tag: tp-input-group
 ---
 
 <Preview
+  width="3"
   title="Input group"
   align="stretch"
-  code={`<tp-field id="input-group-hero" label="Search" style="max-inline-size:24rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-field id="input-group-hero" label="Search">
   <tp-input-group>
     <tp-icon slot="inline-start" data-icon="search"></tp-icon>
     <tp-input type="search" placeholder="Search docs, issues and people"></tp-input>
@@ -36,9 +37,10 @@ A group label does not replace an editor label. The group has no second value, s
 `prefix` follows `addonPosition`; `suffix` is always at the inline end. Empty regions occupy no space.
 
 <Preview
+  width="3"
   title="Text addons"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 24rem; margin-inline: auto; inline-size: 100%" gap="4">
+  code={`<tp-stack  gap="4">
   <tp-field label="Monthly budget">
     <tp-input-group>
       <span slot="inline-start">\$</span>
@@ -59,13 +61,12 @@ A group label does not replace an editor label. The group has no second value, s
 Addons also report status: a result count, a check for an accepted value, or a Spinner while the value is being verified or saved.
 
 <Preview
+  width="3"
   title="Status addons"
   align="stretch"
   code={`<tp-stack
   id="input-group-status"
-  style="max-inline-size: 24rem; margin-inline: auto; inline-size: 100%"
-  gap="4"
->
+  gap="4">
   <tp-field label="Search invoices">
     <tp-input-group>
       <tp-icon slot="inline-start" data-icon="search"></tp-icon>
@@ -100,16 +101,16 @@ Buttons in the `action` slot sit after the editor and stay independently operabl
 `action` sits after the editor, before the inline-end addon.
 
 <Preview
+  width="3"
   title="Actions"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 24rem; margin-inline: auto; inline-size: 100%" gap="4">
+  code={`<tp-stack  gap="4">
   <tp-field label="Invite link">
     <tp-input-group>
       <tp-input
         id="input-group-copy-input"
         readonly
-        default-value="https://tweakpad.app/join/8f2c41"
-      ></tp-input>
+        default-value="https://tweakpad.app/join/8f2c41"></tp-input>
       <tp-button id="input-group-copy" slot="action">Copy</tp-button>
     </tp-input-group>
   </tp-field>
@@ -137,21 +138,19 @@ button.addEventListener('click', async () => {
 An Input group can join a Button group as one member, beside Buttons or a static text segment, so a search field and its submit Button share one seamed edge.
 
 <Preview
+  width="4"
   title="Button group composition"
   align="stretch"
   code={`<tp-stack
   id="input-group-joined"
-  style="max-inline-size: 28rem; margin-inline: auto; inline-size: 100%"
-  gap="4"
->
+  gap="4">
   <tp-button-group label="Search the help center" style="inline-size: 100%">
     <tp-input-group style="flex: 1">
       <tp-icon slot="inline-start" data-icon="search"></tp-icon>
       <tp-input
         label="Search query"
         type="search"
-        placeholder="How do I export invoices?"
-      ></tp-input>
+        placeholder="How do I export invoices?"></tp-input>
     </tp-input-group>
     <tp-button variant="outline">Search</tp-button>
   </tp-button-group>
@@ -173,18 +172,16 @@ An Input group can join a Button group as one member, beside Buttons or a static
 Addon slots also take interactive components, such as a Menu that picks a country code or a Tooltip that explains the expected format. They keep their own focus and keyboard behavior; give an icon-only trigger an `aria-label`.
 
 <Preview
+  width="3"
   title="Interactive addons"
   align="stretch"
   code={`<tp-stack
   id="input-group-addons"
-  style="max-inline-size: 24rem; margin-inline: auto; inline-size: 100%"
-  gap="4"
->
+  gap="4">
   <tp-field label="Phone number">
     <tp-input-group>
       <tp-menu id="input-group-country" slot="inline-start" label="Country code">
-        <tp-button slot="trigger" variant="ghost" size="xs"
-          ><span id="input-group-country-label">+1</span
+        <tp-button slot="trigger" variant="ghost" size="xs"><span id="input-group-country-label">+1</span
           ><tp-icon slot="icon-end" data-icon="down"></tp-icon
         ></tp-button>
         <tp-menu-item value="+1">United States +1</tp-menu-item>
@@ -195,16 +192,14 @@ Addon slots also take interactive components, such as a Menu that picks a countr
         type="tel"
         name="phone"
         autocomplete="tel-national"
-        placeholder="415 555 0132"
-      ></tp-input>
+        placeholder="415 555 0132"></tp-input>
     </tp-input-group>
   </tp-field>
   <tp-field label="Project identifier">
     <tp-input-group>
       <tp-input mono placeholder="checkout-service"></tp-input>
       <tp-tooltip slot="inline-end" label="Lowercase letters, numbers and hyphens.">
-        <tp-button slot="trigger" variant="ghost" size="icon-xs" aria-label="Identifier format"
-          ><tp-icon slot="icon-start" data-icon="help"></tp-icon
+        <tp-button slot="trigger" variant="ghost" size="icon-xs" aria-label="Identifier format"><tp-icon slot="icon-start" data-icon="help"></tp-icon
         ></tp-button>
       </tp-tooltip>
     </tp-input-group>
@@ -227,9 +222,10 @@ document.querySelector('#input-group-country').addEventListener('tp-action', (ev
 Put a Button in a block edge for a multiline composer footer; it retains its own Button configuration.
 
 <Preview
+  width="5"
   title="Composer"
   align="stretch"
-  code={`<tp-field label="Reply" style="max-inline-size:30rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-field label="Reply">
   <tp-input-group>
     <span slot="block-start">Replying to Jonas Weber</span>
     <tp-text-area id="input-group-reply" maxlength="280" placeholder="Share an update with the team"></tp-text-area>
@@ -249,9 +245,10 @@ reply.addEventListener('input', () => {
 A native `textarea` or `input` in the default slot shares the same border and focus ring and keeps all of its own behavior, for example a textarea that grows with its content through `field-sizing: content`.
 
 <Preview
+  width="5"
   title="Native textarea"
   align="stretch"
-  code={`<tp-input-group style="max-inline-size:30rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-input-group>
   <textarea aria-label="Release notes" placeholder="Summarize what changed in this release. The box grows as you type." style="field-sizing:content;min-block-size:calc(var(--tp-control-height-md) * 2);inline-size:100%;font:inherit;padding:var(--tp-space-2);resize:vertical"></textarea>
   <span slot="block-end">Markdown supported</span>
 </tp-input-group>`}
@@ -262,9 +259,10 @@ A native `textarea` or `input` in the default slot shares the same border and fo
 The group reflects the editor's disabled and invalid states on its border. Errors still come from the Field.
 
 <Preview
+  width="3"
   title="Disabled and invalid"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 24rem; margin-inline: auto; inline-size: 100%" gap="4">
+  code={`<tp-stack  gap="4">
   <tp-field label="Subdomain" error="That subdomain is already taken." invalid>
     <tp-input-group>
       <tp-input default-value="acme"></tp-input>

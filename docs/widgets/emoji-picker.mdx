@@ -41,20 +41,18 @@ picker.addEventListener('tp-action', (event) => {
 `picker="popup"` renders a trigger Button showing the current emoji and opens the picker in a Popover. A pick closes it; cancel the `tp-open-change` with reason `item-press` to keep it open for several picks, as a message composer does. The trigger, Escape and outside presses still close it. Put your own trigger in the `trigger` slot to replace the Button.
 
 <Preview
+  width="4"
   title="Insert into a message"
   align="stretch"
   code={`<tp-stack
-  style="inline-size: 100%; max-inline-size: 28rem; margin-inline: auto"
   direction="row"
   gap="2"
-  align="end"
->
+  align="end">
   <tp-field label="Message" style="flex: 1">
     <tp-text-area
       id="emoji-picker-message"
       rows="3"
-      default-value="Release notes are ready "
-    ></tp-text-area>
+      default-value="Release notes are ready "></tp-text-area>
   </tp-field>
   <tp-emoji-picker id="emoji-picker-insert" picker="popup" label="Insert emoji"></tp-emoji-picker>
 </tp-stack>`}
@@ -197,9 +195,10 @@ document.querySelector('#emoji-picker-full').data = createEmojibaseSource({
 The picker is a form control: the emoji submits under `name`, `required` validates, and Reset restores `default-value`. Inside a Field, the label names the picker and the Field shows its error.
 
 <Preview
+  width="3"
   title="Popup in a form"
   align="stretch"
-  code={`<form id="emoji-picker-form" style="max-inline-size: 24rem; margin-inline: auto">
+  code={`<form id="emoji-picker-form">
   <tp-stack gap="4">
     <tp-field label="Status emoji" description="Shown next to your name in the workspace.">
       <tp-emoji-picker picker="popup" name="status" default-value="🏠" required></tp-emoji-picker>
@@ -218,8 +217,7 @@ The picker is a form control: the emoji submits under `name`, `required` validat
     text-align: center;
     color: var(--tp-muted-foreground);
     font-size: var(--tp-text-sm);
-  "
-  >Pick an emoji, then save.</output
+  ">Pick an emoji, then save.</output
 >`}
   script={`const form = document.querySelector('#emoji-picker-form');
 const output = document.querySelector('#emoji-picker-form-output');

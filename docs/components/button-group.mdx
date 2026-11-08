@@ -84,9 +84,10 @@ Groups nest. A vertical toolbar can hold several vertical groups, each with its 
 Inputs, selects and toggles can sit next to Buttons and keep their value and form behavior. `tp-button-group-text` adds a noninteractive prefix or suffix segment. For an associated label, put `<tp-label for="amount">Amount</tp-label>` inside it and give the editor the matching ID.
 
 <Preview
+  width="4"
   title="Mixed controls"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="4">
+  code={`<tp-stack  gap="4">
   <tp-button-group label="Workspace address">
     <tp-button-group-text>tweakpad.app/</tp-button-group-text>
     <tp-input label="Workspace slug" placeholder="acme"></tp-input>
@@ -101,21 +102,19 @@ Inputs, selects and toggles can sit next to Buttons and keep their value and for
 Buttons can sit on either side of an input, and a text segment can hold a real `tp-label` or a live count.
 
 <Preview
+  width="4"
   title="Steppers, labels and counts"
   align="stretch"
-  code={`<tp-stack id="button-group-segments" style="max-inline-size: 26rem; margin-inline: auto" gap="4">
+  code={`<tp-stack id="button-group-segments"  gap="4">
   <tp-button-group label="Seats">
-    <tp-button variant="outline" size="icon" aria-label="Remove a seat" data-step="-1"
-      ><span slot="icon-start" aria-hidden="true">−</span></tp-button
+    <tp-button variant="outline" size="icon" aria-label="Remove a seat" data-step="-1"><span slot="icon-start" aria-hidden="true">−</span></tp-button
     >
     <tp-input
       label="Seats"
       inputmode="numeric"
       default-value="12"
-      style="inline-size: 5rem"
-    ></tp-input>
-    <tp-button variant="outline" size="icon" aria-label="Add a seat" data-step="1"
-      ><span slot="icon-start" aria-hidden="true">+</span></tp-button
+      style="inline-size: 5rem"></tp-input>
+    <tp-button variant="outline" size="icon" aria-label="Add a seat" data-step="1"><span slot="icon-start" aria-hidden="true">+</span></tp-button
     >
   </tp-button-group>
   <tp-button-group label="Server port">
@@ -237,9 +236,10 @@ Overlay triggers join the group like any Button, while the Menu or Popover keeps
 Selects and native selects keep their values and submit with the form, so a currency and an amount can share one row.
 
 <Preview
+  width="4"
   title="Select and native select"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="4">
+  code={`<tp-stack  gap="4">
   <tp-form id="button-group-transfer">
     <tp-label for="button-group-amount">Transfer amount</tp-label>
     <tp-button-group label="Transfer">
@@ -252,8 +252,7 @@ Selects and native selects keep their values and submit with the form, so a curr
         id="button-group-amount"
         name="amount"
         inputmode="decimal"
-        placeholder="0.00"
-      ></tp-input>
+        placeholder="0.00"></tp-input>
       <tp-button type="submit" variant="outline">Send</tp-button>
     </tp-button-group>
     <output style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"></output>
@@ -280,9 +279,10 @@ form.addEventListener('tp-submit', (event) => {
 An Input group can be one member, keeping its addons inside the field's border. Groups also nest, which suits a message composer with an attachment button and a voice toggle.
 
 <Preview
+  width="4"
   title="Input groups and nesting"
   align="stretch"
-  code={`<tp-stack id="button-group-composer" style="max-inline-size: 28rem; margin-inline: auto" gap="4">
+  code={`<tp-stack id="button-group-composer"  gap="4">
   <tp-field label="Canvas width">
     <tp-button-group label="Canvas width">
       <tp-input-group>
@@ -301,8 +301,7 @@ An Input group can be one member, keeping its addons inside the field's border. 
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"
-        >
+          stroke-linejoin="round">
           <rect x="4" y="11" width="16" height="10" rx="2" />
           <path d="M8 11V7a4 4 0 0 1 8 0v4" />
         </svg>
@@ -321,8 +320,7 @@ An Input group can be one member, keeping its addons inside the field's border. 
           fill="none"
           stroke="currentColor"
           stroke-width="2"
-          stroke-linecap="round"
-        >
+          stroke-linecap="round">
           <path d="M12 5v14M5 12h14" />
         </svg>
       </tp-button>
@@ -340,8 +338,7 @@ An Input group can be one member, keeping its addons inside the field's border. 
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+            stroke-linejoin="round">
             <rect x="9" y="2" width="6" height="12" rx="3" />
             <path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4" />
           </svg>

@@ -5,9 +5,10 @@ tag: tp-label
 ---
 
 <Preview
+  width="3"
   title="Label"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 22rem" gap="2">
+  code={`<tp-stack  gap="2">
   <tp-label for="label-hero-name">Workspace name</tp-label>
   <tp-input id="label-hero-name" default-value="Northwind Studio"></tp-input>
 </tp-stack>`}
@@ -22,9 +23,10 @@ Use a Label when you lay out a control yourself. Inside `tp-field`, the Field's 
 Point `for` at the control's id, or nest the control as the Label's child. Either way the Label becomes the control's accessible name, and clicking the text focuses or activates it.
 
 <Preview
+  width="3"
   title="By id and by nesting"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 22rem" gap="5">
+  code={`<tp-stack  gap="5">
   <tp-stack gap="2">
     <tp-label for="label-assoc-email">Billing email</tp-label>
     <tp-input id="label-assoc-email" type="email" placeholder="billing@northwind.co"></tp-input>
@@ -41,9 +43,10 @@ Point `for` at the control's id, or nest the control as the Label's child. Eithe
 `optional` adds an "Optional" hint after the text. Mark the few fields people may skip rather than every required one. The hint hides itself while the associated control is `required`, so a shared form template can set `optional` unconditionally.
 
 <Preview
+  width="3"
   title="Optional"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 22rem" gap="5">
+  code={`<tp-stack  gap="5">
   <tp-stack gap="2">
     <tp-label for="label-optional-company" optional>Company</tp-label>
     <tp-input id="label-optional-company" placeholder="Acme Inc."></tp-input>

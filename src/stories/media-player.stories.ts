@@ -150,7 +150,6 @@ const meta = {
   },
   render: (args) => html`
     <tp-media-player
-      style="max-inline-size: 48rem"
       content-title=${args.contentTitle}
       poster=${samplePoster}
       stream-type=${args.streamType}
@@ -197,7 +196,7 @@ const exampleStory = (example: {
   code: string;
   description?: string | undefined;
 }): Story => ({
-  render: () => html`<div style="max-inline-size: 48rem">${example.render()}</div>`,
+  render: () => html`<div>${example.render()}</div>`,
   parameters: {
     controls: { disable: true },
     docs: {

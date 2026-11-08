@@ -5,9 +5,10 @@ tag: tp-form
 ---
 
 <Preview
+  width="4"
   title="Form"
   align="stretch"
-  code={`<tp-form id="form-demo-bug" aria-label="Report a bug" style="max-inline-size:28rem">
+  code={`<tp-form id="form-demo-bug" aria-label="Report a bug">
   <tp-field label="Summary" description="5 to 60 characters.">
     <tp-input name="summary" required minlength="5" maxlength="60" placeholder="Export to CSV skips archived rows"></tp-input>
   </tp-field>
@@ -48,9 +49,10 @@ An optional container with `slot="actions"` receives the actions part; `slot="er
 Every form-associated control takes part the same way: Select, Checkbox, Radio group and Switch validate `required` through their Field and submit under their `name`. A horizontal Field suits the Switch.
 
 <Preview
+  width="4"
   title="Notification settings"
   align="stretch"
-  code={`<tp-form id="form-demo-controls" aria-label="Notification settings" style="max-inline-size:28rem">
+  code={`<tp-form id="form-demo-controls" aria-label="Notification settings">
   <tp-field label="Send to">
     <tp-select name="email" required placeholder="Choose an address">
       <option value="maya@acme.com">maya@acme.com</option>
@@ -87,9 +89,10 @@ form.addEventListener('tp-reset', () => { output.textContent = ''; });`}
 By default errors appear on submit. Set `validationTiming` to `on-blur` or `on-change` to validate earlier for every Field in the form; a Field's own `validation-mode` still wins.
 
 <Preview
+  width="3"
   title="Validate on blur"
   align="stretch"
-  code={`<tp-form id="form-demo-timing" aria-label="Create account" style="max-inline-size:24rem">
+  code={`<tp-form id="form-demo-timing" aria-label="Create account">
   <tp-field label="Email">
     <tp-input name="email" type="email" required autocomplete="email" placeholder="maya@acme.com"></tp-input>
   </tp-field>
@@ -108,9 +111,10 @@ form.onFormSubmit = () => {};`}
 Assign `errors`, a record of field name to message, to show results from your server. They stay until you replace them, so clear them when the user edits the value.
 
 <Preview
+  width="3"
   title="External errors"
   align="stretch"
-  code={`<tp-form id="form-demo-errors" aria-label="Claim workspace URL" style="max-inline-size:24rem">
+  code={`<tp-form id="form-demo-errors" aria-label="Claim workspace URL">
   <tp-field label="Workspace URL" description="acme.app/your-team">
     <tp-input name="slug" required default-value="design"></tp-input>
   </tp-field>
@@ -129,9 +133,10 @@ form.onFormSubmit = (values) => {
 A Field's `validator` receives its value and every named value in the form, which covers rules that compare two fields.
 
 <Preview
+  width="3"
   title="Matching passwords"
   align="stretch"
-  code={`<tp-form id="form-demo-match" aria-label="Change password" style="max-inline-size:24rem">
+  code={`<tp-form id="form-demo-match" aria-label="Change password">
   <tp-field label="New password">
     <tp-input name="password" type="password" required autocomplete="new-password"></tp-input>
   </tp-field>
@@ -154,9 +159,10 @@ form.onFormSubmit = () => {
 A `validator` may return a promise, but submission does not wait for it. To wait, cancel `tp-submit` and await `event.detail.validationRun.completion` before saving.
 
 <Preview
+  width="3"
   title="Wait for async checks"
   align="stretch"
-  code={`<tp-form id="form-demo-async" aria-label="Choose a username" style="max-inline-size:24rem">
+  code={`<tp-form id="form-demo-async" aria-label="Choose a username">
   <tp-field id="form-demo-async-field" label="Username" description="Try maya, which is already taken.">
     <tp-input name="username" required default-value="maya"></tp-input>
   </tp-field>
@@ -184,21 +190,20 @@ form.addEventListener('tp-submit', async (event) => {
 Fields can be added and removed while the form is open; each registers as it connects. Controls that share a `name` submit together, in document order.
 
 <Preview
+  width="4"
   title="Repeated emails"
   align="stretch"
-  code={`<tp-form id="form-demo-repeat" aria-label="Invite teammates" style="max-inline-size: 28rem">
+  code={`<tp-form id="form-demo-repeat" aria-label="Invite teammates">
   <tp-stack id="form-demo-repeat-list" gap="4">
     <tp-field label="Email 1">
       <tp-input-group>
         <tp-input name="email" type="email" required placeholder="jordan@acme.com"></tp-input>
-        <tp-button slot="action" type="button" variant="ghost" data-remove disabled
-          >Remove</tp-button
+        <tp-button slot="action" type="button" variant="ghost" data-remove disabled>Remove</tp-button
         >
       </tp-input-group>
     </tp-field>
   </tp-stack>
-  <tp-button id="form-demo-repeat-add" type="button" variant="outline" style="justify-self: start"
-    >Add another email</tp-button
+  <tp-button id="form-demo-repeat-add" type="button" variant="outline" style="justify-self: start">Add another email</tp-button
   >
   <div slot="actions"><tp-button type="submit">Send invites</tp-button></div>
   <output
@@ -207,8 +212,7 @@ Fields can be added and removed while the form is open; each registers as it con
       color: var(--tp-muted-foreground);
       font-family: var(--tp-font-mono);
       font-size: var(--tp-text-sm);
-    "
-  ></output>
+    "></output>
 </tp-form>`}
   script={`const form = document.querySelector('#form-demo-repeat');
 const list = document.querySelector('#form-demo-repeat-list');
@@ -246,9 +250,10 @@ form.onFormSubmit = (values, { data }) => {
 Pending policy disables only submit controls and restores only the disabled state that the policy applied. An authored disabled action stays disabled.
 
 <Preview
+  width="3"
   title="Disable while invalid"
   align="stretch"
-  code={`<tp-form id="form-demo-policy" aria-label="Join the beta" style="max-inline-size:24rem">
+  code={`<tp-form id="form-demo-policy" aria-label="Join the beta">
   <tp-field label="Work email">
     <tp-input name="email" type="email" required placeholder="maya@acme.com"></tp-input>
   </tp-field>

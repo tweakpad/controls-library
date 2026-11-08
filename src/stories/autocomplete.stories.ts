@@ -118,7 +118,7 @@ const meta = {
       '<tp-autocomplete name="fruit"',
       `<tp-autocomplete name="fruit" ${attributes}`,
     );
-    return html`<div style="max-inline-size: 22rem">${unsafeHTML(markup)}</div>`;
+    return html`<div>${unsafeHTML(markup)}</div>`;
   },
 } satisfies Meta<Args>;
 export default meta;

@@ -44,3 +44,5 @@
 | preview | Surface only, and fields without a format choice | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Small and read-only | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Right-to-left | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Color input trigger | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

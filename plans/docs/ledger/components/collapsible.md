@@ -25,3 +25,10 @@
 
 | preview | Positional slots | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Open change | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Collapsible | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Leading indicator | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | As a heading | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Searchable | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Disabled | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Line-by-line reveal | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

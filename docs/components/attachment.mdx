@@ -6,15 +6,15 @@ parts: [tp-attachment-group]
 ---
 
 <Preview
+  width="4"
   title="Attachment"
   align="stretch"
-  code={`<tp-stack style="inline-size: 100%; max-inline-size: 26rem; margin-inline: auto" gap="2">
+  code={`<tp-stack  gap="2">
   <tp-attachment
     filename="Q2-board-deck.pdf"
     description="PDF · 4.2 MB"
     status="complete"
-    removable
-  >
+    removable>
     <svg
       slot="media"
       aria-hidden="true"
@@ -25,8 +25,7 @@ parts: [tp-attachment-group]
       stroke="currentColor"
       stroke-width="2"
       stroke-linecap="round"
-      stroke-linejoin="round"
-    >
+      stroke-linejoin="round">
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
       <path d="M14 2v6h6M16 13H8M16 17H8" />
     </svg>
@@ -35,8 +34,7 @@ parts: [tp-attachment-group]
     filename="customer-interviews.csv"
     description="Uploading · 61%"
     status="uploading"
-    removable
-  ></tp-attachment>
+    removable></tp-attachment>
 </tp-stack>`}
 />
 
@@ -47,38 +45,34 @@ parts: [tp-attachment-group]
 ### Status
 
 <Preview
+  width="4"
   title="Statuses"
   align="stretch"
-  code={`<tp-stack style="inline-size: 100%; max-inline-size: 26rem; margin-inline: auto" gap="2">
+  code={`<tp-stack  gap="2">
   <tp-attachment
     filename="contract-v3.docx"
     description="Ready to upload · 220 KB"
     status="idle"
-    removable
-  ></tp-attachment>
+    removable></tp-attachment>
   <tp-attachment
     filename="product-demo.mp4"
     description="Uploading · 38%"
-    status="uploading"
-  ></tp-attachment>
+    status="uploading"></tp-attachment>
   <tp-attachment
     filename="survey-results.xlsx"
     description="Scanning for viruses"
-    status="processing"
-  ></tp-attachment>
+    status="processing"></tp-attachment>
   <tp-attachment
     filename="receipt-0412.heic"
     status="error"
     error-message="HEIC isn't supported. Export as JPG or PNG and try again."
-    removable
-  ></tp-attachment>
+    removable></tp-attachment>
   <tp-attachment
     filename="brand-guidelines.pdf"
     file-size="3355443"
     status="complete"
     href="#attachment-status"
-    removable
-  ></tp-attachment>
+    removable></tp-attachment>
 </tp-stack>`}
 />
 
@@ -87,9 +81,10 @@ Busy states show a spinner when no media is supplied. An error must explain reco
 ### Images
 
 <Preview
+  width="6"
   title="Image cards"
   align="stretch"
-  code={`<tp-attachment-group aria-label="Moodboard images" style="inline-size:100%;inline-size:100%;max-inline-size:36rem;margin-inline:auto">
+  code={`<tp-attachment-group aria-label="Moodboard images">
   <tp-attachment filename="studio-desk.jpg" description="JPG · 1.8 MB" orientation="vertical" media-treatment="image" status="complete" removable>
     <div slot="media" style="inline-size:100%;block-size:100%;background:var(--tp-muted) url(https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80) center/cover"></div>
   </tp-attachment>
@@ -276,23 +271,22 @@ File marks work in vertical cards too, and a group mixes files and images freely
 ### Without media
 
 <Preview
+  width="4"
   title="Title and description only"
   align="stretch"
-  code={`<tp-stack style="inline-size: 100%; max-inline-size: 26rem; margin-inline: auto" gap="2">
+  code={`<tp-stack  gap="2">
   <tp-attachment filename="Onboarding checklist" status="complete" removable></tp-attachment>
   <tp-attachment
     filename="Security review notes"
     description="Shared by Priya · Edited 2 hours ago"
     status="complete"
-    removable
-  ></tp-attachment>
+    removable></tp-attachment>
   <tp-attachment
     size="sm"
     filename="Release policy"
     description="handbook.acme.dev/release-policy"
     href="#attachment-without-media"
-    status="complete"
-  ></tp-attachment>
+    status="complete"></tp-attachment>
 </tp-stack>`}
 />
 
@@ -301,19 +295,17 @@ Media is optional. Notes, linked pages and other resources without a file type r
 ### Triggers and actions
 
 <Preview
+  width="4"
   title="Preview trigger, download and retry"
   align="stretch"
   code={`<tp-stack
   id="attachment-actions"
-  style="inline-size: 100%; max-inline-size: 26rem; margin-inline: auto"
-  gap="2"
->
+  gap="2">
   <tp-attachment
     filename="research-summary.txt"
     description="Text · 1 KB · Select to preview"
     status="complete"
-    removable
-  >
+    removable>
     <svg
       slot="media"
       aria-hidden="true"
@@ -324,23 +316,20 @@ Media is optional. Notes, linked pages and other resources without a file type r
       stroke="currentColor"
       stroke-width="2"
       stroke-linecap="round"
-      stroke-linejoin="round"
-    >
+      stroke-linejoin="round">
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
       <path d="M14 2v6h6M16 13H8M16 17H8" />
     </svg>
     <tp-button
       slot="trigger"
       id="attachment-preview-trigger"
-      aria-label="Preview research-summary.txt"
-    ></tp-button>
+      aria-label="Preview research-summary.txt"></tp-button>
     <tp-button
       slot="actions"
       id="attachment-download"
       variant="ghost"
       size="sm"
-      download="research-summary.txt"
-      >Download</tp-button
+      download="research-summary.txt">Download</tp-button
     >
   </tp-attachment>
   <tp-attachment
@@ -348,15 +337,13 @@ Media is optional. Notes, linked pages and other resources without a file type r
     filename="interview-notes.docx"
     status="error"
     error-message="The upload was interrupted. Retry to continue."
-    removable
-  >
+    removable>
     <tp-button slot="actions" id="attachment-retry" variant="ghost" size="sm">Retry</tp-button>
   </tp-attachment>
   <tp-dialog
     id="attachment-preview-dialog"
     label="research-summary.txt"
-    description="Uploaded by Priya Shah · 2 June"
-  >
+    description="Uploaded by Priya Shah · 2 June">
     <p style="margin: 0">Twelve of fifteen customers asked for shared dashboards. Most export to spreadsheets today and rebuild the same charts every week.</p>
     <tp-button slot="close">Close</tp-button>
   </tp-dialog>
@@ -386,57 +373,51 @@ A `trigger` button makes the whole attachment open something, here a preview dia
 ### Sizes
 
 <Preview
+  width="4"
   title="Sizes"
   align="stretch"
-  code={`<tp-stack style="inline-size: 100%; max-inline-size: 26rem; margin-inline: auto" gap="2">
+  code={`<tp-stack  gap="2">
   <tp-attachment
     size="xs"
     filename="notes.md"
     description="Markdown · 4 KB"
-    status="complete"
-  ></tp-attachment>
+    status="complete"></tp-attachment>
   <tp-attachment
     size="sm"
     filename="notes.md"
     description="Markdown · 4 KB"
-    status="complete"
-  ></tp-attachment>
+    status="complete"></tp-attachment>
   <tp-attachment
     filename="notes.md"
     description="Markdown · 4 KB"
-    status="complete"
-  ></tp-attachment>
+    status="complete"></tp-attachment>
 </tp-stack>`}
 />
 
 ### Removing
 
 <Preview
+  width="4"
   title="Remove event"
   align="stretch"
   code={`<tp-stack
   id="attachment-remove-list"
-  style="inline-size: 100%; max-inline-size: 26rem; margin-inline: auto"
-  gap="2"
->
+  gap="2">
   <tp-attachment
     filename="invoice-march.pdf"
     description="PDF · 180 KB"
     status="complete"
-    removable
-  ></tp-attachment>
+    removable></tp-attachment>
   <tp-attachment
     filename="invoice-april.pdf"
     description="PDF · 176 KB"
     status="complete"
-    removable
-  ></tp-attachment>
+    removable></tp-attachment>
   <tp-attachment
     filename="invoice-may.pdf"
     description="PDF · 191 KB"
     status="complete"
-    removable
-  ></tp-attachment>
+    removable></tp-attachment>
 </tp-stack>`}
   script={`document.querySelector('#attachment-remove-list').addEventListener('tp-remove', (event) => {
   event.target.remove();

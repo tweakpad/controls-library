@@ -5,9 +5,10 @@ tag: tp-markdown
 ---
 
 <Preview
+  width="6"
   title="Markdown"
   align="stretch"
-  code={`<tp-markdown heading-offset="1" style="max-inline-size:36rem;margin-inline:auto">
+  code={`<tp-markdown heading-offset="1">
   ## Release 2.4
 
   Shared workspaces are here. Invite up to **50 teammates**, assign roles, and keep billing in one place. See the [migration notes](#usage) before you upgrade.
@@ -18,8 +19,8 @@ tag: tp-markdown
 
   | Plan | Seats | Price |
   | :--- | ---: | ---: |
-  | Starter | 5 | $0 |
-  | Team | 50 | $12 / seat |
+  | Starter | 5 | \$0 |
+  | Team | 50 | \$12 / seat |
 </tp-markdown>`}
 />
 
@@ -34,9 +35,10 @@ CommonMark blocks and inlines, plus GitHub Flavored Markdown tables (with column
 Plain text content is parsed by the browser first, so a literal `<tag>` in it would become an element. Wrap the source in a `<script type="text/markdown">` child to keep `<` and `&` exactly as written; HTML the element policy allows, such as `kbd`, still renders.
 
 <Preview
+  width="6"
   title="Script child"
   align="stretch"
-  code={`<tp-markdown style="max-inline-size:36rem;margin-inline:auto">
+  code={`<tp-markdown>
   <script type="text/markdown">
     Embed the widget with a \`<script async>\` tag and set \`data-theme="dark" & data-compact\` on it.
 
@@ -55,9 +57,10 @@ Plain text content is parsed by the browser first, so a literal `<tag>` in it wo
 Links to a heading or footnote of the same document (`#section`, footnote references and back-links) scroll to it and update the URL fragment. A URL that already names one of them scrolls there on the first render.
 
 <Preview
+  width="6"
   title="Heading offset"
   align="stretch"
-  code={`<tp-markdown heading-offset="2" id-prefix="changelog-" style="max-inline-size:36rem;margin-inline:auto">
+  code={`<tp-markdown heading-offset="2" id-prefix="changelog-">
   # Billing
 
   Invoices now show usage per workspace.
@@ -78,9 +81,10 @@ Prose becomes native semantic elements; fenced code, tables, rules, task items, 
 The first word of a fence's info string is the language. The rest of the line can set Code block options: `title="file.ts"` (the label), `{1,3-5}` (highlighted lines) and `showLineNumbers`.
 
 <Preview
+  width="6"
   title="Code and alerts"
   align="stretch"
-  code={`<tp-markdown style="max-inline-size:36rem;margin-inline:auto">
+  code={`<tp-markdown>
   Rotate your key from the dashboard, then update the client:
 
   \`\`\`ts title="client.ts" {2}
@@ -99,9 +103,10 @@ The first word of a fence's info string is the language. The rest of the line ca
 `size="sm"` steps body text and headings down one size, for chat bubbles, side panels and other dense surfaces.
 
 <Preview
+  width="3"
   title="Small"
   align="stretch"
-  code={`<tp-markdown size="sm" style="max-inline-size:24rem;margin-inline:auto">
+  code={`<tp-markdown size="sm">
   **Deploy finished** in 1m 12s.
 
   1. Built 214 pages
@@ -123,13 +128,12 @@ for await (const chunk of reply) markdown.append(chunk);
 markdown.streaming = false;`} language="js" />
 
 <Preview
+  width="6"
   title="Streaming"
   align="stretch"
   code={`<tp-stack
-  style="max-inline-size: 36rem; margin-inline: auto; inline-size: 100%"
   gap="4"
-  align="start"
->
+  align="start">
   <tp-markdown id="markdown-stream" style="min-block-size: 12rem; inline-size: 100%"></tp-markdown>
   <tp-button id="markdown-stream-replay" variant="outline" size="sm">Replay</tp-button>
 </tp-stack>`}
@@ -160,9 +164,10 @@ play();`}
 Raw HTML is never inserted as markup. Tags in the `elements` policy become real elements with only the attributes you list; anything else shows as literal text. Here the policy admits `tp-badge`.
 
 <Preview
+  width="6"
   title="Element policy"
   align="stretch"
-  code={`<tp-markdown id="markdown-elements" style="max-inline-size:36rem;margin-inline:auto"></tp-markdown>`}
+  code={`<tp-markdown id="markdown-elements"></tp-markdown>`}
   script={`const markdown = document.querySelector('#markdown-elements');
 markdown.elements = { 'tp-badge': ['variant'] };
 markdown.source = 'Workspace analytics <tp-badge variant="secondary">Beta</tp-badge>\\n\\nTrack active members and storage per project. Press <kbd>G</kbd> then <kbd>A</kbd> to open it.';`}
@@ -192,9 +197,10 @@ Event-handler attributes, `style` and `srcdoc` are always removed, and URL attri
 `renderers` replaces how one node type renders. Each renderer receives the parsed node and a context with `children()` and `fallback()`, the default rendering, and returns DOM or a Lit template, or `undefined` to keep the default. Here a `checklist` fence becomes a list of Checkboxes and links to other hosts get an outbound marker, while every other node renders as usual.
 
 <Preview
+  width="6"
   title="Custom node rendering"
   align="stretch"
-  code={`<tp-markdown id="markdown-renderers" style="max-inline-size:36rem;margin-inline:auto"></tp-markdown>`}
+  code={`<tp-markdown id="markdown-renderers"></tp-markdown>`}
   script={`import { html } from 'lit';
 
 const markdown = document.querySelector('#markdown-renderers');

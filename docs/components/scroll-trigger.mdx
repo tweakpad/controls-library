@@ -5,9 +5,10 @@ tag: tp-scroll-trigger
 ---
 
 <Preview
+  width="7"
   title="Scroll Trigger"
   align="stretch"
-  code={`<tp-scroll-trigger stagger="200" style="inline-size:100%;max-inline-size:40rem;margin-inline:auto">
+  code={`<tp-scroll-trigger stagger="200">
   <h3 style="margin:0 0 var(--tp-space-3);font-size:var(--tp-text-2xl);line-height:var(--tp-leading-tight)">
     <tp-mo-text-split split="words lines" mask="lines" reveal="up">Quiet spaces, open light</tp-mo-text-split>
   </h3>
@@ -37,9 +38,10 @@ The trigger prepares members within 25% of the visible area (and of scroll conta
 Members without their own `reveal` use the trigger's. `stagger-from` starts the sequence from the `first`, `last` or `center` member.
 
 <Preview
+  width="4"
   title="From the center"
   align="stretch"
-  code={`<tp-scroll-trigger stagger="120" stagger-from="center" reveal="fade up" style="inline-size:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(7rem,1fr));gap:var(--tp-space-4);text-align:center">
+  code={`<tp-scroll-trigger stagger="120" stagger-from="center" reveal="fade up" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(7rem,1fr));gap:var(--tp-space-4);text-align:center">
   <p style="margin:0;font-size:var(--tp-text-xl);font-weight:var(--tp-font-semibold)"><tp-mo-text-split split="chars" stagger="20">Plan</tp-mo-text-split></p>
   <p style="margin:0;font-size:var(--tp-text-xl);font-weight:var(--tp-font-semibold)"><tp-mo-text-split split="chars" stagger="20">Design</tp-mo-text-split></p>
   <p style="margin:0;font-size:var(--tp-text-xl);font-weight:var(--tp-font-semibold)"><tp-mo-text-split split="chars" stagger="20">Build</tp-mo-text-split></p>
@@ -231,9 +233,10 @@ The stage is one visible extent tall (minus `--tp-scroll-trigger-pin-top`, for f
 `tp-reveal-change` fires when the sequence starts and `tp-reveal-change-complete` when the last member settles. `tp-scroll-progress` reports scrubbed progress each frame, for driving your own animation. Members' events bubble under the same names, so check `event.target`. To sync other motion, set `reveal-hold`, wait for what you need, then clear it.
 
 <Preview
+  width="4"
   title="Reveal events"
   align="stretch"
-  code={`<tp-stack style="inline-size: 100%; text-align: center" gap="3">
+  code={`<tp-stack style="text-align:center" gap="3">
   <tp-scroll-trigger id="scroll-trigger-events" stagger="200" reveal="fade up">
     <p style="margin: 0; font-size: var(--tp-text-xl); font-weight: var(--tp-font-semibold)"><tp-mo-text-split split="words">Welcome to your workspace</tp-mo-text-split></p>
     <p style="margin: var(--tp-space-1) 0 0; color: var(--tp-muted-foreground)"><tp-mo-text-split>Your projects, people and files in one place.</tp-mo-text-split></p>
@@ -244,8 +247,7 @@ The stage is one visible extent tall (minus `--tp-scroll-trigger-pin-top`, for f
       color: var(--tp-muted-foreground);
       font-size: var(--tp-text-sm);
       font-family: var(--tp-font-mono);
-    "
-    >Waiting</output
+    ">Waiting</output
   >
 </tp-stack>`}
   script={`const trigger = document.querySelector('#scroll-trigger-events');

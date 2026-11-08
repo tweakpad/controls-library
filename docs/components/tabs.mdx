@@ -5,9 +5,10 @@ tag: tp-tabs
 ---
 
 <Preview
+  width="4"
   title="Tabs"
   align="stretch"
-  code={`<tp-tabs default-value="account" label="Settings" style="max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-tabs default-value="account" label="Settings">
   <button slot="tab" value="account">Account</button>
   <button slot="tab" value="password">Password</button>
   <section slot="panel" value="account">
@@ -44,9 +45,10 @@ Native button values are strings. For object or numeric member values, use a non
 ### Variants
 
 <Preview
+  width="4"
   title="Underline"
   align="stretch"
-  code={`<tp-tabs variant="underline" default-value="overview" label="Project" style="max-inline-size:28rem;margin-inline:auto">
+  code={`<tp-tabs variant="underline" default-value="overview" label="Project">
   <button slot="tab" value="overview">Overview</button>
   <button slot="tab" value="activity">Activity</button>
   <button slot="tab" value="settings">Settings</button>
@@ -61,15 +63,16 @@ Native button values are strings. For object or numeric member values, use a non
 ### Vertical
 
 <Preview
+  width="5"
   title="Vertical"
   align="stretch"
-  code={`<tp-tabs orientation="vertical" default-value="general" label="Workspace settings" style="max-inline-size:30rem;margin-inline:auto">
+  code={`<tp-tabs orientation="vertical" default-value="general" label="Workspace settings">
   <button slot="tab" value="general">General</button>
   <button slot="tab" value="members">Members</button>
   <button slot="tab" value="billing">Billing</button>
   <p slot="panel" value="general">Workspace name, URL and default language.</p>
   <p slot="panel" value="members">12 members, 3 pending invitations.</p>
-  <p slot="panel" value="billing">Team plan, renews on April 1 for $480.</p>
+  <p slot="panel" value="billing">Team plan, renews on April 1 for \$480.</p>
 </tp-tabs>`}
 />
 
@@ -78,9 +81,10 @@ Vertical lists use Up and Down instead of Left and Right, and expose `aria-orien
 ### Keyboard and activation
 
 <Preview
+  width="3"
   title="Automatic activation"
   align="stretch"
-  code={`<tp-tabs activation="automatic" default-value="day" label="Range" style="max-inline-size:24rem;margin-inline:auto">
+  code={`<tp-tabs activation="automatic" default-value="day" label="Range">
   <button slot="tab" value="day">Day</button>
   <button slot="tab" value="week">Week</button>
   <button slot="tab" value="month">Month</button>
@@ -97,6 +101,7 @@ Tab enters the list at its roving entry; another Tab reaches the active panel an
 ### Responding to changes
 
 <Preview
+  width="4"
   title="Change event and setValue"
   align="stretch"
   script={`const tabs = document.querySelector('#tabs-demo-report');
@@ -108,7 +113,7 @@ tabs.addEventListener('tp-value-change', (event) => {
 document.querySelector('#tabs-demo-report-jump').addEventListener('click', () => {
   tabs.setValue('refunds');
 });`}
-  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="3">
+  code={`<tp-stack  gap="3">
   <tp-tabs id="tabs-demo-report" default-value="revenue" label="Monthly report">
     <button slot="tab" value="revenue">Revenue</button>
     <button slot="tab" value="orders">Orders</button>
@@ -121,11 +126,9 @@ document.querySelector('#tabs-demo-report-jump').addEventListener('click', () =>
     <output
       id="tabs-demo-report-status"
       aria-live="polite"
-      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
-      >Showing revenue</output
+      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)">Showing revenue</output
     >
-    <tp-button id="tabs-demo-report-jump" variant="outline" size="sm"
-      >Review pending refunds</tp-button
+    <tp-button id="tabs-demo-report-jump" variant="outline" size="sm">Review pending refunds</tp-button
     >
   </tp-stack>
 </tp-stack>`}
@@ -138,6 +141,7 @@ Selection publishes a cancelable `tp-value-change` with the proposed `value`; ca
 For controlled Tabs, set `value` from the start and accept proposals in `onValueChange`. Skipping the write-back, or calling `preventDefault()`, keeps the current tab. Edit the name below, then try to leave the tab. The profile panel is `keep-mounted`, so its draft survives while another tab is showing. Programmatic controlled assignments do not emit change proposals. A controlled missing value selects nothing; the first enabled tab remains the keyboard entry.
 
 <Preview
+  width="4"
   title="Controlled with a veto"
   align="stretch"
   script={`const tabs = document.querySelector('#tabs-guard');
@@ -166,7 +170,7 @@ document.querySelector('#tabs-guard-discard').addEventListener('click', () => {
   name.setValue(saved);
   status.textContent = '';
 });`}
-  code={`<tp-tabs id="tabs-guard" value="profile" label="Account settings" style="max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-tabs id="tabs-guard" value="profile" label="Account settings">
   <button slot="tab" value="profile">Profile</button>
   <button slot="tab" value="notifications">Notifications</button>
   <section slot="panel" value="profile" keep-mounted>
@@ -193,9 +197,10 @@ document.querySelector('#tabs-guard-discard').addEventListener('click', () => {
 ### Disabled tabs
 
 <Preview
+  width="4"
   title="Disabled"
   align="stretch"
-  code={`<tp-tabs default-value="details" label="Order" style="max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-tabs default-value="details" label="Order">
   <button slot="tab" value="details">Details</button>
   <button slot="tab" value="shipping">Shipping</button>
   <button slot="tab" value="returns" aria-disabled="true">Returns</button>

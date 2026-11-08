@@ -5,9 +5,10 @@ tag: tp-file-upload
 ---
 
 <Preview
+  width="5"
   title="File upload"
   align="stretch"
-  code={`<tp-file-upload name="attachments" multiple accept="image/*,application/pdf" max-file-size="10MB" show-trigger style="inline-size:100%;max-inline-size:30rem;margin-inline:auto"></tp-file-upload>`}
+  code={`<tp-file-upload name="attachments" multiple accept="image/*,application/pdf" max-file-size="10MB" show-trigger></tp-file-upload>`}
 />
 
 ## Usage
@@ -21,9 +22,10 @@ Its name comes from the Field label, an `aria-label` on the host, or the title; 
 The surface generates its title and a hint from `accept` and the size limit. The `title` and `description` slots replace them with your own wording, and `media` replaces the upload mark. `show-trigger` adds a Browse Button; it duplicates the surface's own action and is not a separate tab stop. `size="sm"` makes a compact surface for sidebars and dialogs.
 
 <Preview
+  width="5"
   title="Custom text and compact size"
   align="stretch"
-  code={`<tp-stack style="inline-size: 100%; max-inline-size: 30rem; margin-inline: auto" gap="6">
+  code={`<tp-stack  gap="6">
   <tp-file-upload name="backup" accept=".sql,.sql.gz,.dump" max-file-size="10GB">
     <span slot="title">Restore from a backup</span>
     <span slot="description">A .sql, .sql.gz or .dump file from pg_dump, up to 10 GB</span>
@@ -33,8 +35,7 @@ The surface generates its title and a hint from `accept` and the size limit. The
     size="sm"
     accept="image/png,image/svg+xml"
     max-file-size="2MB"
-    show-trigger
-  ></tp-file-upload>
+    show-trigger></tp-file-upload>
 </tp-stack>`}
 />
 
@@ -45,9 +46,10 @@ Without `multiple` a new file replaces the current one, which suits a single log
 `accept` takes extensions, media types and wildcards such as `image/*`; it filters the picker and checks every dropped file too. `max-file-size`, `min-file-size` and `max-total-size` accept bytes or size text such as `25MB`. With `multiple`, `max-files` caps the count: a batch fills the remaining slots and rejects the rest. `hint-treatment="badges"` lists the rules as Badges instead of a sentence.
 
 <Preview
+  width="5"
   title="Rejected files"
   align="stretch"
-  code={`<tp-file-upload id="file-upload-limits" name="receipts" multiple max-files="5" accept=".pdf,.jpg,.png" max-file-size="5MB" hint-treatment="badges" style="inline-size:100%;max-inline-size:30rem;margin-inline:auto">
+  code={`<tp-file-upload id="file-upload-limits" name="receipts" multiple max-files="5" accept=".pdf,.jpg,.png" max-file-size="5MB" hint-treatment="badges">
   <span slot="title">Add receipts</span>
 </tp-file-upload>`}
   script={`await customElements.whenDefined('tp-file-upload');
@@ -65,9 +67,10 @@ Rejected files stay in the list as error items with the reason, and they block f
 For rules about a file's contents, assign a `fileValidator` function. It receives each file in turn and returns nothing to accept it, a message or `{ code, message }` to reject it, or `{ meta, description }` to attach metadata such as a row count.
 
 <Preview
+  width="5"
   title="Custom validator"
   align="stretch"
-  code={`<tp-file-upload id="file-upload-validator" name="contacts" multiple accept=".csv" style="inline-size:100%;max-inline-size:30rem;margin-inline:auto">
+  code={`<tp-file-upload id="file-upload-validator" name="contacts" multiple accept=".csv">
   <span slot="title">Import contacts</span>
   <span slot="description">CSV with name, email and phone columns</span>
 </tp-file-upload>`}
@@ -106,9 +109,10 @@ Text errors use `file-invalid`. Removing a file while it is checked excludes it;
 Files are listed as Attachment rows by default. `item-size="xs"` wraps them as chips, which keeps a composer or a comment box short; `clearable` adds a Clear all action to the summary.
 
 <Preview
+  width="5"
   title="Chips"
   align="stretch"
-  code={`<tp-file-upload id="file-upload-chips" name="attachments" multiple size="sm" item-size="xs" clearable show-trigger style="inline-size:100%;max-inline-size:30rem;margin-inline:auto"></tp-file-upload>`}
+  code={`<tp-file-upload id="file-upload-chips" name="attachments" multiple size="sm" item-size="xs" clearable show-trigger></tp-file-upload>`}
   script={`await customElements.whenDefined('tp-file-upload');
 const file = (name, size, type) => new File([new Uint8Array(size)], name, { type });
 document.querySelector('#file-upload-chips').value = [
@@ -119,9 +123,10 @@ document.querySelector('#file-upload-chips').value = [
 />
 
 <Preview
+  width="5"
   title="Rows"
   align="stretch"
-  code={`<tp-file-upload id="file-upload-rows" name="documents" multiple accept=".pdf,.docx,.xlsx" max-file-size="25MB" style="inline-size:100%;max-inline-size:30rem;margin-inline:auto"></tp-file-upload>`}
+  code={`<tp-file-upload id="file-upload-rows" name="documents" multiple accept=".pdf,.docx,.xlsx" max-file-size="25MB"></tp-file-upload>`}
   script={`await customElements.whenDefined('tp-file-upload');
 const file = (name, size, type) => new File([new Uint8Array(size)], name, { type });
 document.querySelector('#file-upload-rows').value = [
@@ -135,9 +140,10 @@ Assigning `value` sets files without validation or an event, which suits restori
 `layout="grid"` shows image previews as tiles, with the drop surface as a final Add tile that hides while `max-files` is reached. `paste="control"` also accepts an image pasted while the grid has focus or the pointer is over it.
 
 <Preview
+  width="5"
   title="Image grid"
   align="stretch"
-  code={`<tp-file-upload id="file-upload-grid" name="listing-photos" multiple layout="grid" max-files="6" accept="image/jpeg,image/png,image/webp" paste="control" style="inline-size:100%;max-inline-size:30rem;margin-inline:auto"></tp-file-upload>`}
+  code={`<tp-file-upload id="file-upload-grid" name="listing-photos" multiple layout="grid" max-files="6" accept="image/jpeg,image/png,image/webp" paste="control"></tp-file-upload>`}
   script={`await customElements.whenDefined('tp-file-upload');
 const photo = (name, hue) => new Promise((resolve) => {
   const canvas = document.createElement('canvas');
@@ -163,9 +169,10 @@ document.querySelector('#file-upload-grid').value = await Promise.all([
 Assign an `uploader` to transfer files. It is called once per accepted file with an `AbortSignal` and an `onProgress(loaded, total)` callback, and its result is stored as the item's `response`. Files queue and start in order with `upload-concurrency` in flight; a rejected promise shows the error with a Retry Button, and removing a file aborts its upload. Set `auto-upload="false"` to start them yourself with `upload()`.
 
 <Preview
+  width="5"
   title="Upload adapter"
   align="stretch"
-  code={`<tp-file-upload id="file-upload-adapter" name="assets" multiple upload-concurrency="2" style="inline-size:100%;max-inline-size:30rem;margin-inline:auto">
+  code={`<tp-file-upload id="file-upload-adapter" name="assets" multiple upload-concurrency="2">
   <span slot="description">Files upload as soon as they are added</span>
 </tp-file-upload>`}
   script={`await customElements.whenDefined('tp-file-upload');
@@ -217,9 +224,10 @@ Listen for `tp-upload-complete` and `tp-upload-error` to update your own state. 
 Inside a Field, the label names the control, `required` reports a missing file and rejected files show their message. Each accepted file is appended to the form data under `name`, and Reset clears the files. When your server refuses a file after upload, `rejectFile()` moves it to the error items.
 
 <Preview
+  width="5"
   title="Field and form"
   align="stretch"
-  code={`<tp-form id="file-upload-form" aria-label="Upload signed contract" style="max-inline-size:30rem;margin-inline:auto">
+  code={`<tp-form id="file-upload-form" aria-label="Upload signed contract">
   <tp-field label="Signed contract" description="PDF up to 5 MB">
     <tp-file-upload name="contract" required accept="application/pdf" max-file-size="5MB" hint-treatment="none" size="sm" show-trigger></tp-file-upload>
   </tp-field>
@@ -240,9 +248,10 @@ form.addEventListener('tp-reset', () => { output.textContent = ''; });`}
 Here the server check runs right after the files are added: `rejectFile()` turns the duplicate into an error item with your message, and it blocks submission until it is removed.
 
 <Preview
+  width="5"
   title="Server rejection"
   align="stretch"
-  code={`<tp-file-upload id="file-upload-server" name="invoices" multiple accept="application/pdf" size="sm" style="inline-size:100%;max-inline-size:30rem;margin-inline:auto"></tp-file-upload>`}
+  code={`<tp-file-upload id="file-upload-server" name="invoices" multiple accept="application/pdf" size="sm"></tp-file-upload>`}
   script={`await customElements.whenDefined('tp-file-upload');
 const upload = document.querySelector('#file-upload-server');
 const invoice = (name) => new File(['%PDF-1.7'], name, { type: 'application/pdf' });

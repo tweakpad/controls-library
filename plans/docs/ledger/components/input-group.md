@@ -26,3 +26,7 @@
 | preview | Button group composition | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Interactive addons | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Disabled and invalid | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Input group | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Composer | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Native textarea | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

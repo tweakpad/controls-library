@@ -28,3 +28,11 @@
 | --- | --- | --- |
 
 | preview | In a form | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Autocomplete | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Prefix matching | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Grouped suggestions | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Inline completion | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Searching hidden fields | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Ranking over several fields | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Search source | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

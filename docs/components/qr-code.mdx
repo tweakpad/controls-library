@@ -18,8 +18,10 @@ Set `value` to the text to encode and `label` to what scanning does. The label n
 The tile stays light in a dark theme, like a printed sticker, because many scanners cannot read a light code on a dark background.
 
 <Preview
+  width="2"
+  align="stretch"
   title="Connect a device"
-  code={`<tp-card style="max-inline-size:20rem">
+  code={`<tp-card>
   <h3 slot="header">Connect your phone</h3>
   <p slot="description">Open the app on your phone and scan the code to sign in to this workspace.</p>
   <tp-qr-code value="https://app.northwind.co/pair/7KD-2Q9" label="Scan to sign in on your phone" style="justify-self:center"></tp-qr-code>
@@ -61,13 +63,13 @@ pixels.
 Assign `value` as the source changes and the code re-encodes. `status` is `empty`, `encoded` or `error`, reflected as `data-status`, and the tile keeps its size while empty. The button here calls `download()` with a larger size of its own for printing.
 
 <Preview
+  width="2"
+  align="stretch"
   title="Live value"
   code={`<tp-stack
   id="qr-code-live"
-  style="inline-size: 18rem; max-inline-size: 100%"
   gap="4"
-  align="center"
->
+  align="center">
   <tp-field label="Wi-Fi network" style="inline-size: 100%">
     <tp-input default-value="Northwind Guest"></tp-input>
   </tp-field>

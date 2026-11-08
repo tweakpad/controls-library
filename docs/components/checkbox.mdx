@@ -18,9 +18,10 @@ The default slot is the Checkbox's inline label, and clicking it toggles the box
 Put a Checkbox in `tp-field` when it needs a description or error. The Field supplies the accessible name and shows validation for `required`, which is satisfied only when checked.
 
 <Preview
+  width="3"
   title="Field"
   align="stretch"
-  code={`<tp-field label="Email me product updates" description="About one email a month. Unsubscribe anytime." style="max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-field label="Email me product updates" description="About one email a month. Unsubscribe anytime.">
   <tp-checkbox name="updates" value="monthly"></tp-checkbox>
 </tp-field>`}
 />
@@ -30,9 +31,10 @@ Put a Checkbox in `tp-field` when it needs a description or error. The Field sup
 A checked box submits `name=value` (`value` defaults to `on`). An unchecked box submits nothing unless you set `unchecked-value`, which helps when the server expects an explicit off value. Reset restores `default-checked`. Native reset restores the latest uncontrolled default with `form-reset`; controlled reset does not change or notify the owner.
 
 <Preview
+  width="3"
   title="Form values"
   align="stretch"
-  code={`<form id="checkbox-form" style="max-inline-size: 22rem; margin-inline: auto">
+  code={`<form id="checkbox-form">
   <tp-stack gap="3">
     <tp-checkbox name="notifications" value="email" default-checked>Email</tp-checkbox>
     <tp-checkbox name="notifications" value="push">Push</tp-checkbox>
@@ -43,8 +45,7 @@ A checked box submits `name=value` (`value` defaults to `on`). An unchecked box 
     </tp-stack>
     <output
       id="checkbox-form-output"
-      style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)"
-      >Submit to see the form data.</output
+      style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)">Submit to see the form data.</output
     >
   </tp-stack>
 </form>`}
@@ -61,12 +62,12 @@ form.addEventListener('submit', (event) => {
 `indeterminate` shows a mixed indicator, typically on a "select all" box whose children are partly checked. A press always proposes checked, and your code clears the mixed state, because only it knows what the children hold.
 
 <Preview
+  width="3"
   title="Select all"
   align="stretch"
-  code={`<fieldset id="checkbox-mixed" style="margin: 0 auto; padding: 0; border: 0; max-inline-size: 22rem">
+  code={`<fieldset id="checkbox-mixed" style="margin:0;padding:0;border:0">
   <legend
-    style="padding: 0; margin-block-end: var(--tp-space-3); font-weight: var(--tp-font-medium)"
-  >
+    style="padding: 0; margin-block-end: var(--tp-space-3); font-weight: var(--tp-font-medium)">
     Export columns
   </legend>
   <tp-stack gap="3">
@@ -110,12 +111,12 @@ The mixed state is presentation only: the parent's submitted value stays a plain
 ### Group controller
 
 <Preview
+  width="3"
   title="CheckboxGroupController"
   align="stretch"
-  code={`<fieldset id="checkbox-group" style="margin: 0 auto; padding: 0; border: 0; max-inline-size: 22rem">
+  code={`<fieldset id="checkbox-group" style="margin:0;padding:0;border:0">
   <legend
-    style="padding: 0; margin-block-end: var(--tp-space-3); font-weight: var(--tp-font-medium)"
-  >
+    style="padding: 0; margin-block-end: var(--tp-space-3); font-weight: var(--tp-font-medium)">
     Notify me about new comments
   </legend>
   <tp-stack gap="3">
@@ -126,8 +127,7 @@ The mixed state is presentation only: the parent's submitted value stays a plain
       <tp-checkbox name="channels" value="slack">Slack</tp-checkbox>
       <tp-checkbox name="channels" value="sms" disabled>SMS (add a phone number first)</tp-checkbox>
     </tp-stack>
-    <output style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)"
-      >Channels: email</output
+    <output style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)">Channels: email</output
     >
   </tp-stack>
 </fieldset>`}
@@ -172,9 +172,10 @@ checkbox.onCheckedChange = (event) => {
 ### Inline
 
 <Preview
+  width="3"
   title="Inline"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="2">
+  code={`<tp-stack  gap="2">
   <tp-checkbox variant="inline" name="reminders" default-checked>Event reminders</tp-checkbox>
   <tp-checkbox variant="inline" name="digest">Weekly digest</tp-checkbox>
   <tp-select variant="inline" label="Reminder time" name="reminder-time" default-value="15">

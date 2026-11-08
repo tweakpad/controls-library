@@ -25,3 +25,7 @@
 | preview | Header and footer | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Sending and failed | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Attachment | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Message group | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Footer actions | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Retry a failed message | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

@@ -7,7 +7,7 @@ const date = (value: string) =>
   `<tp-time datetime="${value}" mode="absolute" pattern="MMM d"></tp-time>`;
 const muted = 'color: var(--tp-muted-foreground)';
 
-const timelineDefaultSource = `<tp-timeline value="shipped" aria-label="Order status" style="max-inline-size: 24rem">
+const timelineDefaultSource = `<tp-timeline value="shipped" aria-label="Order status" >
   <tp-timeline-item value="placed">
     <strong>Placed</strong>
     <div style="${muted}">${date('2026-03-18')}</div>
@@ -66,17 +66,10 @@ const meta = {
   },
   render: (args) => {
     // The default source is the composition; controls set the timeline's own properties.
-    const markup = timelineDefaultSource
-      .replace(
-        'value="shipped"',
-        `${args.value ? `value="${args.value}"` : ''} orientation="${args.orientation}" align="${args.align}"`,
-      )
-      .replace(
-        'max-inline-size: 24rem',
-        args.orientation === 'vertical' && !args.align.startsWith('alternate')
-          ? 'max-inline-size: 24rem'
-          : 'max-inline-size: 44rem',
-      );
+    const markup = timelineDefaultSource.replace(
+      'value="shipped"',
+      `${args.value ? `value="${args.value}"` : ''} orientation="${args.orientation}" align="${args.align}"`,
+    );
     return html`${unsafeHTML(markup)}`;
   },
 } satisfies Meta<Args>;

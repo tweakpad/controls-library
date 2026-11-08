@@ -22,9 +22,10 @@ A Color input opens the browser's own color picker from its chip, submits with i
 While the row is hovered or focused, a Copy button beside the label copies the color as text; `copyable="false"` removes it. An Icon in the `icon` slot leads the row, outside its boundary.
 
 <Preview
+  width="2"
   title="Inline"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 20rem; margin-inline: auto" gap="2">
+  code={`<tp-stack  gap="2">
   <tp-input variant="inline" label="Layer" default-value="Header card"></tp-input>
   <tp-color-input variant="inline" label="Fill" default-value="#0f766e"></tp-color-input>
   <tp-color-input variant="inline" label="Stroke" default-value="#f59e0b"></tp-color-input>
@@ -36,21 +37,20 @@ While the row is hovered or focused, a Copy button beside the label copies the c
 `show-value="false"` keeps only the chip at the end of the row, and `show-swatch="false"` keeps only the text, for a value people mostly type.
 
 <Preview
+  width="2"
   title="Chip or text"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 20rem; margin-inline: auto" gap="2">
+  code={`<tp-stack  gap="2">
   <tp-color-input
     variant="inline"
     label="Shadow"
     show-value="false"
-    default-value="#1e293b"
-  ></tp-color-input>
+    default-value="#1e293b"></tp-color-input>
   <tp-color-input
     variant="inline"
     label="Divider"
     show-swatch="false"
-    default-value="#cbd5e1"
-  ></tp-color-input>
+    default-value="#cbd5e1"></tp-color-input>
 </tp-stack>`}
 />
 
@@ -59,22 +59,21 @@ While the row is hovered or focused, a Copy button beside the label copies the c
 `format` sets the notation of the value and of its text; any CSS color goes in. `alpha` keeps transparency: the chip shows it over a checkerboard, and a color picked in a browser picker without alpha keeps the current one.
 
 <Preview
+  width="2"
   title="Formats and alpha"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 20rem; margin-inline: auto" gap="2">
+  code={`<tp-stack  gap="2">
   <tp-color-input
     variant="inline"
     label="Overlay"
     format="rgb"
     alpha
-    default-value="rgb(124 58 237 / 0.5)"
-  ></tp-color-input>
+    default-value="rgb(124 58 237 / 0.5)"></tp-color-input>
   <tp-color-input
     variant="inline"
     label="Link"
     format="oklch"
-    default-value="#38bdf8"
-  ></tp-color-input>
+    default-value="#38bdf8"></tp-color-input>
 </tp-stack>`}
 />
 
@@ -83,15 +82,15 @@ While the row is hovered or focused, a Copy button beside the label copies the c
 `size="sm"` matches small Inputs and Buttons, for dense panels.
 
 <Preview
+  width="2"
   title="Sizes"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 20rem; margin-inline: auto" gap="2">
+  code={`<tp-stack  gap="2">
   <tp-color-input
     variant="inline"
     size="sm"
     label="Grid lines"
-    default-value="#e11d48"
-  ></tp-color-input>
+    default-value="#e11d48"></tp-color-input>
   <tp-color-input variant="inline" label="Guides" default-value="#e11d48"></tp-color-input>
 </tp-stack>`}
 />
@@ -101,9 +100,10 @@ While the row is hovered or focused, a Copy button beside the label copies the c
 `required` asks for a color before the form submits, and a form reset brings back `default-value`. An input with no color shows an empty checkerboard.
 
 <Preview
+  width="2"
   title="In a form"
   align="stretch"
-  code={`<form style="max-inline-size: 20rem; margin-inline: auto">
+  code={`<form>
   <tp-stack gap="3">
     <tp-field label="Brand color" description="Used for buttons and links.">
       <tp-color-input name="brand" variant="inline" required></tp-color-input>
@@ -118,21 +118,20 @@ While the row is hovered or focused, a Copy button beside the label copies the c
 `disabled` takes the input out of the form and the tab order. `readonly` keeps it focusable and submitted, but the chip no longer opens the picker and the text cannot change.
 
 <Preview
+  width="2"
   title="Disabled and read-only"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 20rem; margin-inline: auto" gap="2">
+  code={`<tp-stack  gap="2">
   <tp-color-input
     variant="inline"
     label="Theme color"
     disabled
-    default-value="#2563eb"
-  ></tp-color-input>
+    default-value="#2563eb"></tp-color-input>
   <tp-color-input
     variant="inline"
     label="Locked color"
     readonly
-    default-value="#db2777"
-  ></tp-color-input>
+    default-value="#db2777"></tp-color-input>
 </tp-stack>`}
 />
 
@@ -145,9 +144,10 @@ While the row is hovered or focused, a Copy button beside the label copies the c
 The row follows the writing direction: the label sits at the start and the chip and text at the end.
 
 <Preview
+  width="2"
   title="Right-to-left"
   align="stretch"
-  code={`<div dir="rtl" lang="ar" style="max-inline-size:20rem;margin-inline:auto">
+  code={`<div dir="rtl" lang="ar">
   <tp-color-input variant="inline" label="التعبئة" default-value="#0891b2"></tp-color-input>
 </div>`}
 />

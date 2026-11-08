@@ -38,3 +38,8 @@
 | preview | Opening items | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Rendered rows | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Expand, collapse and reveal | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Tree view | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Permissions | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Chevron only | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Small, no guides | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

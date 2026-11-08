@@ -6,9 +6,10 @@ parts: [tp-list-item, tp-list-separator]
 ---
 
 <Preview
+  width="5"
   title="List"
   align="stretch"
-  code={`<tp-list aria-label="Workspace members" style="max-inline-size:30rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-list aria-label="Workspace members">
   <tp-list-item description="maya.chen@northwind.co">
     <tp-avatar slot="media" size="sm" fallback="MC" alt=""></tp-avatar>
     Maya Chen
@@ -38,22 +39,21 @@ parts: [tp-list-item, tp-list-separator]
 The default slot is the title and `description` adds supporting text; use the `title` and `description` slots when either needs markup. Empty regions collapse, so a title-only row needs nothing extra.
 
 <Preview
+  width="5"
   title="Content and actions"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 30rem; margin-inline: auto; inline-size: 100%" gap="3">
+  code={`<tp-stack  gap="3">
   <tp-list-item variant="outline">Two-factor authentication
     <tp-badge slot="actions" variant="secondary">On</tp-badge>
   </tp-list-item>
-  <tp-list-item variant="outline" description="Signed in from Chrome on macOS, Berlin."
-    >
+  <tp-list-item variant="outline" description="Signed in from Chrome on macOS, Berlin.">
     MacBook Pro
     <tp-button slot="actions" variant="outline" size="sm">Sign out</tp-button>
   </tp-list-item
   >
   <tp-list-item
     variant="outline"
-    description="Your plan renews on March 1. Downgrading takes effect then."
-    >
+    description="Your plan renews on March 1. Downgrading takes effect then.">
     Pro plan
     <tp-button slot="actions" variant="ghost" size="sm">Downgrade</tp-button>
     <tp-button slot="actions" size="sm">Upgrade</tp-button>
@@ -67,12 +67,12 @@ The default slot is the title and `description` adds supporting text; use the `t
 `variant` is `ghost`, `outline` or `subdued`; `size` steps the density down through `sm` and `xs` for tight panels and menus.
 
 <Preview
+  width="5"
   title="Variants and sizes"
   align="stretch"
-  code={`<tp-stack style="max-inline-size: 30rem; margin-inline: auto; inline-size: 100%" gap="3">
+  code={`<tp-stack  gap="3">
   <tp-list-item description="Ghost is the default.">Release notes</tp-list-item>
-  <tp-list-item variant="outline" description="Outline draws a boundary."
-    >Release notes</tp-list-item
+  <tp-list-item variant="outline" description="Outline draws a boundary.">Release notes</tp-list-item
   >
   <tp-list-item variant="subdued" description="Subdued fills the row.">Release notes</tp-list-item>
   <tp-list-item variant="outline" size="sm" description="Small">Release notes</tp-list-item>
@@ -85,9 +85,10 @@ The default slot is the title and `description` adds supporting text; use the `t
 The `media` slot takes an Icon, Avatar or image. `media-treatment` tells the row what it holds, `icon` or `image`, so the media gets the matching extent. With a description, media aligns to the first line of text.
 
 <Preview
+  width="5"
   title="Media"
   align="stretch"
-  code={`<tp-list id="list-item-media" aria-label="Recent files" style="max-inline-size:30rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-list id="list-item-media" aria-label="Recent files">
   <tp-list-item variant="outline" media-treatment="icon" description="Edited by Maya · 12 minutes ago">
     <tp-icon slot="media" data-icon="file"></tp-icon>
     Q3 roadmap.md
@@ -115,9 +116,10 @@ for (const icon of document.querySelectorAll('#list-item-media tp-icon')) icon.i
 `tp-list` carries the `list` role and its `aria-label` on the host, and its direct `tp-list-item` rows become list items. Name every list. Put `tp-list-separator` between rows for a divided list. A single `tp-list-item` also works on its own, outside a list, as in the examples above. A row that leaves the list, or a list that leaves the page, releases only the roles the list set; authored roles are preserved, and a standalone `tp-list-item` has no list item role. Ordinary `tp-separator` children are also supported; the list registers their presentation as `list-separator`, while their rendering contract remains on the Separator component.
 
 <Preview
+  width="5"
   title="Divided list"
   align="stretch"
-  code={`<tp-list aria-label="Notification channels" style="max-inline-size:30rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-list aria-label="Notification channels">
   <tp-list-item description="Mentions, replies and direct messages.">
     Email
     <tp-switch slot="actions" label="Email notifications" default-checked></tp-switch>
@@ -140,9 +142,10 @@ for (const icon of document.querySelectorAll('#list-item-media tp-icon')) icon.i
 `header` and `footer` span the full row above and below the main content, for an eyebrow label or metadata.
 
 <Preview
+  width="5"
   title="Header and footer"
   align="stretch"
-  code={`<tp-list-item variant="outline" description="Redesign the onboarding flow and pricing page." style="max-inline-size:30rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-list-item variant="outline" description="Redesign the onboarding flow and pricing page.">
   <span slot="header" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-xs)">Marketing site</span>
   Website refresh
   <tp-button slot="actions" variant="outline" size="sm">Open</tp-button>
@@ -185,9 +188,10 @@ Header media works too: a square Aspect ratio image in `header` turns each row i
 A whole row can be a native link: give the `list-item` part a `renderDelegate` that renders an `a` around the supplied `bind` and `content`. Controls in `actions` render beside the link, so they stay separate tab stops; decorative icons there let clicks reach the link. Put independent controls in `actions` (or `trailing`), not in the title, description, media, header or footer of an interactive Root. Native Tab order reaches Root before its actions; activating an action does not activate Root.
 
 <Preview
+  width="5"
   title="Link rows"
   align="stretch"
-  code={`<tp-list id="list-links" aria-label="Help resources" style="max-inline-size:30rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-list id="list-links" aria-label="Help resources">
   <tp-list-item variant="outline" data-href="#links" description="Set up your workspace in ten minutes.">
     Getting started guide
     <tp-icon slot="actions" data-icon="chevron"></tp-icon>
@@ -223,9 +227,10 @@ for (const icon of document.querySelectorAll('#list-links tp-icon')) icon.icon =
 Each part's `renderDelegate` can also wrap its content, for example to add a trailing duration column to the `list-item-content` part. With `media-treatment="image"`, an `img` in `media` gets a square thumbnail.
 
 <Preview
+  width="5"
   title="Recordings"
   align="stretch"
-  code={`<tp-list id="list-recordings" aria-label="Workshop recordings" style="max-inline-size:30rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-list id="list-recordings" aria-label="Workshop recordings">
   <tp-list-item variant="outline" media-treatment="image" description="Maya Chen" data-duration="42:10">
     <img slot="media" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=96&h=96&q=75&auto=format&fit=crop" alt="">
     <span slot="title">Designing for density <span style="color:var(--tp-muted-foreground)">· Day 1</span></span>
@@ -279,22 +284,20 @@ For a rich command, put a List item directly inside a Menu item. The Menu item k
 ### People and invitations
 
 <Preview
+  width="7"
   title="People and invitations"
   align="stretch"
   code={`<tp-stack
   id="list-people-example"
-  style="max-inline-size: calc(var(--tp-spacing) * 150); min-inline-size: 0"
-  gap="4"
-  ><tp-list-item variant="outline"><tp-avatar slot="media" size="sm" src="avatars/ravi-castellano.svg" fallback="RC" alt="Ravi Castellano" ></tp-avatar>Ravi Castellano<span slot="description">Last seen <tp-time mode="relative" datetime="2026-05-31T21:38:55.759Z"></tp-time></span><tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ravi Castellano" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
-  <tp-list-item variant="outline" description="Invite your team to collaborate on this project."
-    ><tp-avatar-group slot="media" size="sm"><tp-avatar slot="" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor" ></tp-avatar></tp-avatar-group>Project team<tp-button slot="actions" variant="outline" size="sm" data-feedback>Invite</tp-button></tp-list-item
+  style="min-inline-size:0"
+  gap="4"><tp-list-item variant="outline"><tp-avatar slot="media" size="sm" src="avatars/ravi-castellano.svg" fallback="RC" alt="Ravi Castellano"></tp-avatar>Ravi Castellano<span slot="description">Last seen <tp-time mode="relative" datetime="2026-05-31T21:38:55.759Z"></tp-time></span><tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ravi Castellano" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
+  <tp-list-item variant="outline" description="Invite your team to collaborate on this project."><tp-avatar-group slot="media" size="sm"><tp-avatar slot="" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor"></tp-avatar></tp-avatar-group>Project team<tp-button slot="actions" variant="outline" size="sm" data-feedback>Invite</tp-button></tp-list-item
   >
-  <tp-list aria-label="People"
-    ><tp-list-item description="maravoss@example.com"><tp-avatar slot="media" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss" ></tp-avatar>Mara Voss<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Mara Voss" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
+  <tp-list aria-label="People"><tp-list-item description="maravoss@example.com"><tp-avatar slot="media" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss"></tp-avatar>Mara Voss<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Mara Voss" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
     <tp-list-separator></tp-list-separator>
-    <tp-list-item description="theolind@example.com"><tp-avatar slot="media" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist" ></tp-avatar>Theo Lindqvist<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Theo Lindqvist" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
+    <tp-list-item description="theolind@example.com"><tp-avatar slot="media" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist"></tp-avatar>Theo Lindqvist<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Theo Lindqvist" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
     <tp-list-separator></tp-list-separator>
-    <tp-list-item description="inesokafor@example.com"><tp-avatar slot="media" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor" ></tp-avatar>Ines Okafor<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ines Okafor" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item></tp-list
+    <tp-list-item description="inesokafor@example.com"><tp-avatar slot="media" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor"></tp-avatar>Ines Okafor<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ines Okafor" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item></tp-list
   ><tp-toast></tp-toast
 ></tp-stack>`}
   script={`import { html } from 'lit';

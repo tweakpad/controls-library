@@ -6,20 +6,18 @@ parts: [tp-media-video-layout, tp-media-controls, tp-media-play-button, tp-media
 ---
 
 <Preview
+  width="7"
   title="Media Player"
   align="stretch"
   code={`<tp-media-player
   content-title="Spring bloom, time-lapse"
-  poster="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1280&q=80"
-  style="max-inline-size:44rem;margin-inline:auto"
->
+  poster="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1280&q=80">
   <video
     src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
     width="1280"
     height="720"
     preload="metadata"
-    playsinline
-  ></video>
+    playsinline></video>
   <tp-media-video-layout></tp-media-video-layout>
 </tp-media-player>`}
 />
@@ -37,9 +35,10 @@ Put a native `<video>` or `<audio>` and one layout inside the player. The player
 An `<audio>` element works the same way. `tp-media-audio-layout` is the standard audio player: an always-visible bar in the page's color scheme with play, the timeline, speed and volume, plus skip buttons when there is room. It takes the same `hide` and `seek-buttons` options as the video layout.
 
 <Preview
+  width="6"
   title="Audio layout"
   align="stretch"
-  code={`<tp-media-player content-title="T-Rex roar" style="max-inline-size:36rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-media-player content-title="T-Rex roar">
   <audio src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" preload="metadata"></audio>
   <tp-media-audio-layout id="media-player-audio-layout"></tp-media-audio-layout>
 </tp-media-player>`}
@@ -53,9 +52,10 @@ document.querySelector('#media-player-audio-layout').partPresentation = {
 For your own selection of controls, use an in-flow `tp-media-controls` with `visibility="always"` so the bar stays visible in the page's color scheme, and pick the controls a podcast or voice note needs.
 
 <Preview
+  width="6"
   title="Audio"
   align="stretch"
-  code={`<tp-media-player content-title="T-Rex roar" style="max-inline-size:36rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-media-player content-title="T-Rex roar">
   <audio src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" preload="metadata"></audio>
   <tp-media-controls visibility="always">
     <tp-media-controls-group label="Playback">
@@ -75,21 +75,19 @@ For your own selection of controls, use an in-flow `tp-media-controls` with `vis
 `hide` removes built-in controls from a layout by name, and `seek-buttons` adds skip back and forward next to play. Seek distance comes from the player's `seek-step`.
 
 <Preview
+  width="7"
   title="Trimmed layout"
   align="stretch"
   code={`<tp-media-player
   content-title="Product walkthrough"
   poster="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1280&q=80"
-  seek-step="15"
-  style="max-inline-size:44rem;margin-inline:auto"
->
+  seek-step="15">
   <video
     src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
     width="1280"
     height="720"
     preload="metadata"
-    playsinline
-  ></video>
+    playsinline></video>
   <tp-media-video-layout seek-buttons hide="pip remote settings"></tp-media-video-layout>
 </tp-media-player>`}
 />
@@ -101,29 +99,26 @@ Hidden controls are gone, not disabled. Controls the media cannot support, such 
 The video layout's `top`, `center`, `bottom-start` and `bottom-end` slots replace that region's default content, here the title in `top`. `playback-rates` sets the options of the speed menu as a space-separated list. Tooltips, menus and popovers portal into the container, so they stay visible in fullscreen. Layouts use container queries on the layout box, which fills the container. They never use viewport queries.
 
 <Preview
+  width="7"
   title="Custom top region"
   align="stretch"
   code={`<tp-media-player
   content-title="Lesson 4: Composition"
   poster="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1280&q=80"
-  playback-rates="0.75 1 1.25 1.5 2"
-  style="max-inline-size: 44rem; margin-inline: auto"
->
+  playback-rates="0.75 1 1.25 1.5 2">
   <video
     src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
     width="1280"
     height="720"
     preload="metadata"
-    playsinline
-  ></video>
+    playsinline></video>
   <tp-media-video-layout>
     <tp-stack
       slot="top"
       style="padding: var(--tp-space-4); color: white"
       direction="row"
       gap="2"
-      align="center"
-    >
+      align="center">
       <tp-badge variant="secondary">Lesson 4 of 12</tp-badge>
       <span style="font-weight: 500">Composition</span>
     </tp-stack>
@@ -136,20 +131,18 @@ The video layout's `top`, `center`, `bottom-start` and `bottom-end` slots replac
 `<track>` children of the media drive the text-track controls. Caption and subtitle tracks add the captions button and a Captions submenu in settings; a `chapters` track splits the timeline and names the chapter under the pointer.
 
 <Preview
+  width="7"
   title="Text tracks"
   align="stretch"
   code={`<tp-media-player
   content-title="Spring bloom, time-lapse"
-  poster="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1280&q=80"
-  style="max-inline-size:44rem;margin-inline:auto"
->
+  poster="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1280&q=80">
   <video
     src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
     width="1280"
     height="720"
     preload="metadata"
-    playsinline
-  >
+    playsinline>
     <track kind="captions" srclang="en" label="English" default src="data:text/vtt,WEBVTT%0A%0A00:00.000 --> 00:02.500%0AA tulip bud opens in the morning light.%0A%0A00:02.500 --> 00:05.000%0AA bee arrives as the petals spread.">
     <track kind="captions" srclang="es" label="Español" src="data:text/vtt,WEBVTT%0A%0A00:00.000 --> 00:02.500%0AUn tulipán se abre con la luz de la mañana.%0A%0A00:02.500 --> 00:05.000%0AUna abeja llega cuando se abren los pétalos.">
     <track kind="chapters" srclang="en" src="data:text/vtt,WEBVTT%0A%0A00:00.000 --> 00:02.500%0AThe bud%0A%0A00:02.500 --> 00:05.000%0AThe visitor">
@@ -165,20 +158,18 @@ The tracks here are inline `data:` URLs to keep the example self-contained; usua
 Skip the layout and place the constituents yourself when you need a different bar. Each control finds its player through the tree, and `tp-media-hotkey` adds or overrides a key binding. A control outside the player can name it with `player="<player id>"`.
 
 <Preview
+  width="7"
   title="Custom bar"
   align="stretch"
   code={`<tp-media-player
   content-title="Onboarding, part 1"
-  poster="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1280&q=80"
-  style="max-inline-size:44rem;margin-inline:auto"
->
+  poster="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1280&q=80">
   <video
     src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
     width="1280"
     height="720"
     preload="metadata"
-    playsinline
-  ></video>
+    playsinline></video>
   <tp-media-poster></tp-media-poster>
   <tp-media-buffering-indicator></tp-media-buffering-indicator>
   <tp-media-status-indicator></tp-media-status-indicator>
@@ -202,9 +193,10 @@ Skip the layout and place the constituents yourself when you need a different ba
 A stream is live when the media reports `streamType: 'live'` or an infinite duration, and it has a DVR window when it reports `targetLiveWindow`. The video layout then switches to its live variant: a live button that seeks to the edge and a timeline that spans only the window. Streaming engines report these members through their media element; this example adds them to a looping clip to simulate a 20-second window. Without DVR the time slider, rate controls and seek keys are disabled or hidden, and play jumps to the live edge.
 
 <Preview
+  width="7"
   title="Live with DVR (simulated)"
   align="stretch"
-  code={`<tp-media-player id="media-player-live" content-title="Launch keynote" style="max-inline-size:44rem;margin-inline:auto">
+  code={`<tp-media-player id="media-player-live" content-title="Launch keynote">
   <tp-media-video-layout></tp-media-video-layout>
 </tp-media-player>`}
   script={`const player = document.querySelector('#media-player-live');
@@ -231,21 +223,19 @@ player.prepend(video);`}
 Media without native rendition or audio-track lists, such as an HLS or DASH engine, supplies them through `mediaAdapter`. Each list is array-like and an event target; renditions add `selectedIndex`, where `-1` means adaptive. The settings menu then gains Quality and Audio submenus. This mock records the selection without changing the video. Getters are re-read on `loadstart`. `selectVideoRendition('auto')` restores adaptive selection.
 
 <Preview
+  width="7"
   title="Tracks adapter (mock)"
   align="stretch"
   code={`<tp-media-player
   id="media-player-tracks"
   content-title="Product walkthrough"
-  poster="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1280&q=80"
-  style="max-inline-size:44rem;margin-inline:auto"
->
+  poster="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1280&q=80">
   <video
     src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
     width="1280"
     height="720"
     preload="metadata"
-    playsinline
-  ></video>
+    playsinline></video>
   <tp-media-video-layout></tp-media-video-layout>
 </tp-media-player>`}
   script={`const list = (items) => Object.assign(new EventTarget(), items, { length: items.length });
@@ -295,21 +285,19 @@ document.querySelector('#media-player-tracks').mediaAdapter = { videoRenditions:
 `messages` replaces any control text, as a string with `{placeholders}` or a function of the parameters, and `locale` formats times and rates. The locale only formats: clock text is digital with the duration as a guide (`1:05`, `01:05`, `1:01:05`), and spoken text uses `Intl` units ("1 minute, 5 seconds"). Rates use `1.5×`. Diagnostics are not localized.
 
 <Preview
+  width="7"
   title="French controls"
   align="stretch"
   code={`<tp-media-player
   id="media-player-french"
   content-title="Printemps en accéléré"
-  poster="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1280&q=80"
-  style="max-inline-size:44rem;margin-inline:auto"
->
+  poster="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1280&q=80">
   <video
     src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
     width="1280"
     height="720"
     preload="metadata"
-    playsinline
-  ></video>
+    playsinline></video>
   <tp-media-video-layout seek-buttons></tp-media-video-layout>
 </tp-media-player>`}
   script={`await customElements.whenDefined('tp-media-player');

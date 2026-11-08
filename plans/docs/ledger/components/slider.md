@@ -63,3 +63,10 @@
 | preview | Ticks | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 
 | preview | Vertical | User-authorized Stack layout migration; preserve content and semantics, translate grid item alignment to flex alignment. |
+
+| preview | Slider | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Price range | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Compact readout | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Media timeline | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Authored thumbs | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Inline in a field | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

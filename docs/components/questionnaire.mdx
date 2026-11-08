@@ -5,10 +5,10 @@ tag: tp-questionnaire
 ---
 
 <Preview
+  width="4"
+  align="stretch"
   title="Questionnaire"
-  code={`<div style="inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-hero" label="Project kickoff" shortcut-mode="letters"></tp-questionnaire>
-</div>`}
+  code={`<tp-questionnaire id="questionnaire-hero" label="Project kickoff" shortcut-mode="letters"></tp-questionnaire>`}
   script={`const questionnaire = document.querySelector('#questionnaire-hero');
 questionnaire.questions = [
   {
@@ -64,10 +64,10 @@ Single-choice questions render native radios and `kind: 'multiple'` renders chec
 Multiple answers retain native checkbox semantics and repeated FormData values. A mixed single answer selects either a choice or entered text; an unselected text draft is preserved but has no successful form name. Multiple answers can combine fixed values and entered text. Selecting a fixed answer preserves the unselected text draft.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Choices and free text"
-  code={`<div style="inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-answers" label="Context sources"></tp-questionnaire>
-</div>`}
+  code={`<tp-questionnaire id="questionnaire-answers" label="Context sources"></tp-questionnaire>`}
   script={`const questionnaire = document.querySelector('#questionnaire-answers');
 questionnaire.questions = [
   {
@@ -100,10 +100,10 @@ questionnaire.addEventListener('tp-submit', (event) => event.preventDefault());`
 Intentional skip clears its answer and is distinct from leaving it unanswered. Empty or whitespace-only text and empty multiple sets are unanswered. Entering/selecting an answer clears skipped status. Answer presence and validity are separate: nonempty invalid text is still answered.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Skip and validate"
-  code={`<div style="inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-skip" label="Workspace setup"></tp-questionnaire>
-</div>`}
+  code={`<tp-questionnaire id="questionnaire-skip" label="Workspace setup"></tp-questionnaire>`}
   script={`const questionnaire = document.querySelector('#questionnaire-skip');
 questionnaire.questions = [
   {
@@ -132,14 +132,15 @@ To resume a draft, give choices `defaultChecked`, inputs a `defaultValue`, and s
 A restored active item alone does not create saved answers; supply `defaultValue`, per-question defaults, or per-answer defaults as appropriate.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Resume a draft"
-  code={`<tp-stack style="inline-size: 28rem; max-inline-size: 100%" gap="4" align="start">
+  code={`<tp-stack  gap="4" align="start">
   <tp-questionnaire
     id="questionnaire-resume"
     label="Migration plan"
     default-item="verification"
-    style="inline-size: 100%"
-  ></tp-questionnaire>
+    style="inline-size: 100%"></tp-questionnaire>
   <tp-button id="questionnaire-resume-reset" variant="outline" size="sm">Discard changes</tp-button>
 </tp-stack>`}
   script={`const questionnaire = document.querySelector('#questionnaire-resume');
@@ -182,10 +183,10 @@ document.querySelector('#questionnaire-resume-reset').addEventListener('click', 
 A question with `disabled: true` drops out of navigation, progress, validation and submission. Listen for `tp-value-change` and reassign `questions` to include follow-ups only when an answer calls for them.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Follow-up question"
-  code={`<div style="inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-conditional" label="Deployment"></tp-questionnaire>
-</div>`}
+  code={`<tp-questionnaire id="questionnaire-conditional" label="Deployment"></tp-questionnaire>`}
   script={`const questionnaire = document.querySelector('#questionnaire-conditional');
 const questions = [
   {
@@ -242,10 +243,10 @@ questionnaire.addEventListener('tp-submit', (event) => event.preventDefault());`
 Text entry retains normal editing. Native radio navigation and input editing remain native. Outside those paths, Up/Down move answer focus, the backward inline arrow (Left in left-to-right, Right in right-to-left writing) moves back, the forward inline arrow advances an answered valid question, and Enter on a filled answer or modified Enter validates and confirms. Shortcuts focus and activate enabled choices. Repeated commands, composition, consumed keys and arrows carrying Alt, Ctrl or Meta do not trigger navigation. New questions receive the selected/filled answer, first enabled control, or fieldset focus, in that order. Invalid filled inputs receive native feedback when enabled.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Number shortcuts"
-  code={`<div style="inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-shortcuts" label="Satisfaction survey" shortcut-mode="numbers"></tp-questionnaire>
-</div>`}
+  code={`<tp-questionnaire id="questionnaire-shortcuts" label="Satisfaction survey" shortcut-mode="numbers"></tp-questionnaire>`}
   script={`const questionnaire = document.querySelector('#questionnaire-shortcuts');
 questionnaire.questions = [
   {
@@ -271,13 +272,14 @@ questionnaire.addEventListener('tp-submit', (event) => event.preventDefault());`
 FormData retains prior active answers and omits disabled, skipped and unselected draft answers. Failed submission activates and focuses the first invalid question.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Submit"
-  code={`<tp-stack style="inline-size: 28rem; max-inline-size: 100%" gap="4">
+  code={`<tp-stack  gap="4">
   <tp-questionnaire id="questionnaire-submit" label="Release review"></tp-questionnaire>
   <output
     id="questionnaire-submit-output"
-    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
-  ></output>
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"></output>
 </tp-stack>`}
   script={`const questionnaire = document.querySelector('#questionnaire-submit');
 const output = document.querySelector('#questionnaire-submit-output');
@@ -306,8 +308,10 @@ Set `item` and accept moves in `onItemChange` to own which question is active, f
 With a controlled aggregate record, Root is the sole answer owner: do not also supply controlled choice.checked or input.value for those answers. Accept a controlled proposal by assigning its proposed value synchronously; ignoring it rejects the change.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Checkpoint and cross-answer validation"
-  code={`<tp-stack id="questionnaire-controlled" style="inline-size: 28rem; max-inline-size: 100%" gap="4">
+  code={`<tp-stack id="questionnaire-controlled"  gap="4">
   <output style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"></output>
 </tp-stack>`}
   script={`const root = document.querySelector('#questionnaire-controlled');
@@ -372,10 +376,10 @@ root.prepend(questionnaire);`}
 `disabled` and `hidden` can further restrict the component's own availability; they cannot enable an inapplicable action. Replace the record to update it. Disabled buttons remain disabled; this does not change the validation or programmatic navigation policy.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Disabled until answered"
-  code={`<div style="inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-actions" label="Access request"></tp-questionnaire>
-</div>`}
+  code={`<tp-questionnaire id="questionnaire-actions" label="Access request"></tp-questionnaire>`}
   script={`const questionnaire = document.querySelector('#questionnaire-actions');
 const synchronize = () => {
   const disabled = questionnaire.status !== 'answered';
@@ -423,10 +427,10 @@ The `questionnaire-progress` part takes `content` for different wording, or a `r
 };`} language="js" />
 
 <Preview
+  width="4"
+  align="stretch"
   title="Progress bar"
-  code={`<div style="inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-progress" label="Bug report"></tp-questionnaire>
-</div>`}
+  code={`<tp-questionnaire id="questionnaire-progress" label="Bug report"></tp-questionnaire>`}
   script={`import { html } from 'lit';
 const questionnaire = document.querySelector('#questionnaire-progress');
 questionnaire.partContracts = {
@@ -476,10 +480,10 @@ The `questionnaire-question` part's `elementReference` runs each time a new ques
 Do not animate each answer update or delay focus until the animation finishes.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Animated questions"
-  code={`<div style="inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-animated" label="Event RSVP"></tp-questionnaire>
-</div>`}
+  code={`<tp-questionnaire id="questionnaire-animated" label="Event RSVP"></tp-questionnaire>`}
   script={`const questionnaire = document.querySelector('#questionnaire-animated');
 let current;
 let animation;
@@ -537,10 +541,10 @@ Delegates can rearrange the parts Questionnaire has already rendered. Each part'
 `choices` already includes `input`; render `input` separately only when replacing the default Choices composition. Keep native inputs in the form's DOM tree; don't move them into a new shadow root or a second form.
 
 <Preview
+  width="4"
+  align="stretch"
   title="Inside a Card"
-  code={`<div style="inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-card" label="Plan upgrade" shortcut-mode="numbers"></tp-questionnaire>
-</div>`}
+  code={`<tp-questionnaire id="questionnaire-card" label="Plan upgrade" shortcut-mode="numbers"></tp-questionnaire>`}
   script={`import { html } from 'lit';
 const questionnaire = document.querySelector('#questionnaire-card');
 questionnaire.partContracts = {

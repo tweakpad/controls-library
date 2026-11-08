@@ -46,3 +46,11 @@
 
 | preview | Carousel | User-authorized Stack layout migration; preserve content and semantics, translate grid item alignment to flex alignment. |
 | preview | Crossfade | User-authorized Stack layout migration; preserve content and semantics, translate grid item alignment to flex alignment. |
+
+| preview | Items per view | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Bullets inside | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Autoplay | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Vertical | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Parallax | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Focus | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Virtual archive with controlled selection | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

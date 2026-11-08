@@ -275,6 +275,20 @@ Text with a \`<Preview />\` in code.
     expect(parsed.elements.map((element) => element.name)).toEqual(['Preview', 'Code']);
   });
 
+  it('keeps demo width metadata outside copyable code', () => {
+    for (const width of ['1', '2', '3', '4', '5', '6', '7', '8']) {
+      const parsed = page(`<Preview title="A" width="${width}" code="<tp-input></tp-input>" />`);
+      expect(parsed.hero?.width).toBe(width);
+      expect(parsed.hero?.code).toBe('<tp-input></tp-input>');
+    }
+    expect(page('<Preview title="A" code="x" />').hero?.width).toBeUndefined();
+    for (const width of ['0', '9', '24rem', '']) {
+      expect(() => page(`<Preview title="A" width="${width}" code="x" />`)).toThrow(
+        'Preview width must be a preset from 1 to 8',
+      );
+    }
+  });
+
   it('rejects unknown attributes, interpolation and unclosed elements', () => {
     expect(() => page('<Preview title="A" code="x" render="y" />')).toThrow(
       'unknown Preview attribute',

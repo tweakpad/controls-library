@@ -75,7 +75,6 @@ const meta = {
       ?hidden-until-found=${hiddenUntilFound}
       ?disabled=${disabled}
       .messages=${{ showMore, showLess }}
-      style="max-inline-size:28rem"
     >
       <tp-description-list-item label="Plot">B-14, east terrace</tp-description-list-item>
       <tp-description-list-item label="Gardener">Mara Lindqvist</tp-description-list-item>

@@ -21,3 +21,8 @@
 | Kind | A text | Reason |
 | --- | --- | --- |
 | preview | Line-by-line reveal | requested change (2026-10-29): the lines reveal with Text split and Scroll trigger instead of a hand-written content-role animation |
+
+| preview | Accordion | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Multiple open items | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Positional content | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Disabled item | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

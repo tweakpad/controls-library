@@ -87,7 +87,6 @@ const meta: Meta<Args> = {
     html`${keyed(
       args.variant,
       html`<tp-gradient-picker
-        style="max-inline-size: calc(var(--tp-spacing) * 100)"
         .variant=${args.variant}
         .defaultValue=${args.variant === 'field' ? anchors : stops}
         .defaultSelected=${args.variant === 'field' ? 0 : 1}

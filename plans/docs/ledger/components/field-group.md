@@ -28,3 +28,9 @@
 | preview | Color channels | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Inline | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Expanded | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Field group | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Separator | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Read-only and disabled | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Vertical | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Unjoined | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

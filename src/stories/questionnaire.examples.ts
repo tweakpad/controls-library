@@ -85,7 +85,7 @@ export const questionnaireExamples = cases.map(([kind, title, description]) => {
     kind === 'dialog'
       ? `<tp-dialog label="Agent clarification"><tp-button slot="trigger" variant="outline">Open clarification</tp-button>${questionnaire}<tp-button data-cancel slot="footer" variant="outline">Cancel</tp-button></tp-dialog>`
       : questionnaire;
-  const markup = `<div id="${id}" style="max-inline-size:28rem;margin-inline:auto">${before}${body}${after}<output aria-live="polite"></output></div>`;
+  const markup = `<div id="${id}" >${before}${body}${after}<output aria-live="polite"></output></div>`;
   return interactiveMarkupExample(
     title,
     markup,

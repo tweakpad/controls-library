@@ -15,3 +15,7 @@
 | preview | Form value | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Controlled value | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Disabled, read-only and invalid | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Native select | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Placeholder | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Multiple | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

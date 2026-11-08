@@ -6,9 +6,10 @@ parts: [tp-timeline-item]
 ---
 
 <Preview
+  width="2"
   title="Timeline"
   align="stretch"
-  code={`<tp-timeline value="shipped" aria-label="Order status" style="max-inline-size:20rem;margin-inline:auto">
+  code={`<tp-timeline value="shipped" aria-label="Order status">
   <tp-timeline-item value="placed">
     <strong>Order placed</strong>
     <div style="color:var(--tp-muted-foreground)"><tp-time datetime="2026-03-18" mode="absolute" pattern="MMM d"></tp-time></div>
@@ -41,9 +42,10 @@ The host has the `list` role (set as an attribute unless you supply one), so `ar
 `orientation="horizontal"` lays items along the inline axis, sharing the width equally. `responsive` switches from vertical to horizontal above a 40rem container.
 
 <Preview
+  width="7"
   title="Step tracker"
   align="stretch"
-  code={`<tp-timeline orientation="horizontal" value="review" aria-label="Release checklist" style="max-inline-size:40rem;margin-inline:auto">
+  code={`<tp-timeline orientation="horizontal" value="review" aria-label="Release checklist">
   <tp-timeline-item value="draft"><strong>Draft</strong><div style="color:var(--tp-muted-foreground)">Oct 2</div></tp-timeline-item>
   <tp-timeline-item value="review"><strong>Review</strong><div style="color:var(--tp-muted-foreground)">2 approvals left</div></tp-timeline-item>
   <tp-timeline-item value="staging"><strong>Staging</strong><div style="color:var(--tp-muted-foreground)">Oct 14</div></tp-timeline-item>
@@ -97,9 +99,10 @@ With `align="alternate"`, horizontal items take turns above and below the axis, 
 The `marker` slot replaces the dot with a number, an Icon or an Avatar. Hide a visible step number from assistive technology, since the list already conveys position. The marker box is at least one line tall and centers its content, so a dot, an icon or a number sits on the first line of the item's content. Larger markers, such as an Avatar, align with the start of the content. When the first line of content is inset, add the inset to `--tp-timeline-marker-offset`.
 
 <Preview
+  width="3"
   title="Numbered steps"
   align="stretch"
-  code={`<tp-timeline value="domain" aria-label="Workspace setup" style="max-inline-size:24rem;margin-inline:auto">
+  code={`<tp-timeline value="domain" aria-label="Workspace setup">
   <tp-timeline-item value="account">
     <span slot="marker" aria-hidden="true">1</span>
     <strong>Create your account</strong>
@@ -123,9 +126,10 @@ The `marker` slot replaces the dot with a number, an Icon or an Avatar. Hide a v
 Item content can be any component. Here each phase is a Collapsible, so expanding one is the Collapsible's own disclosure and the connectors stretch while it opens. The Collapsible pads its trigger by `--tp-space-2-5`, so `--tp-timeline-marker-offset` adds the same inset to keep each marker beside the trigger's first line.
 
 <Preview
+  width="5"
   title="Expandable phases"
   align="stretch"
-  code={`<tp-timeline id="timeline-phases" value="build" aria-label="Admin console redesign" style="max-inline-size:32rem;margin-inline:auto;--tp-timeline-gap:0;--tp-timeline-marker-offset:var(--tp-space-2-5)">
+  code={`<tp-timeline id="timeline-phases" value="build" aria-label="Admin console redesign" style="--tp-timeline-gap:0;--tp-timeline-marker-offset:var(--tp-space-2-5)">
   <tp-timeline-item value="research">
     <tp-icon slot="marker" data-icon="check"></tp-icon>
     <tp-collapsible indicator-position="trailing" content-alignment="label">
@@ -171,9 +175,10 @@ for (const icon of document.querySelectorAll('#timeline-phases tp-icon[data-icon
 Sides are logical. In a vertical timeline, start and end are the inline start and end and mirror in right-to-left text. In a horizontal timeline, start is above the axis and end below, and items run in the inline direction, so a right-to-left timeline runs right to left. A vertical alternating timeline puts every item on the end side below 40rem.
 
 <Preview
+  width="7"
   title="Conversation"
   align="stretch"
-  code={`<tp-timeline align="alternate" aria-label="Support conversation" style="max-inline-size:40rem;margin-inline:auto;--tp-timeline-gap:var(--tp-space-4)">
+  code={`<tp-timeline align="alternate" aria-label="Support conversation" style="--tp-timeline-gap:var(--tp-space-4)">
   <tp-timeline-item align="start">
     <tp-avatar slot="marker" size="sm" fallback="SC" alt="Sarah Chen"></tp-avatar>
     <tp-bubble align="start">The Stripe webhook PR is ready to merge.</tp-bubble>
@@ -194,20 +199,19 @@ Sides are logical. In a vertical timeline, start and end are the inline start an
 Without a `value`, items have no status and stay neutral. The `opposite` slot holds content on the other side of the axis, such as a version or a date.
 
 <Preview
+  width="5"
   title="Changelog"
   align="stretch"
   code={`<tp-timeline
   aria-label="Changelog"
-  style="max-inline-size: 32rem; margin-inline: auto; --tp-timeline-gap: var(--tp-space-8)"
->
+  style="--tp-timeline-gap:var(--tp-space-8)">
   <tp-timeline-item>
     <code slot="opposite">2.4.0</code>
     <strong>Team workspaces</strong>
     <div style="color: var(--tp-muted-foreground)">
       <tp-time datetime="2026-03-22" mode="absolute" pattern="MMM d, y"></tp-time>
     </div>
-    <tp-stack style="margin-block-start: var(--tp-space-2)" direction="row" gap="2" wrap="wrap"
-      ><tp-badge variant="secondary">Added</tp-badge
+    <tp-stack style="margin-block-start: var(--tp-space-2)" direction="row" gap="2" wrap="wrap"><tp-badge variant="secondary">Added</tp-badge
       ><tp-badge variant="outline">Fixed</tp-badge></tp-stack
     >
   </tp-timeline-item>
@@ -233,9 +237,10 @@ Without a `value`, items have no status and stay neutral. The `opposite` slot ho
 An item's `status` overrides only its own derived status, for statuses set item by item or a step that was skipped.
 
 <Preview
+  width="3"
   title="Explicit status"
   align="stretch"
-  code={`<tp-timeline aria-label="Incident response" style="max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-timeline aria-label="Incident response">
   <tp-timeline-item status="complete"><strong>Alert acknowledged</strong><div style="color:var(--tp-muted-foreground)">09:12</div></tp-timeline-item>
   <tp-timeline-item status="complete"><strong>Rollback deployed</strong><div style="color:var(--tp-muted-foreground)">09:31</div></tp-timeline-item>
   <tp-timeline-item status="current"><strong>Monitoring</strong><div style="color:var(--tp-muted-foreground)">Error rate back to baseline</div></tp-timeline-item>

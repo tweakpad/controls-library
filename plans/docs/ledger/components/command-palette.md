@@ -14,3 +14,6 @@
 | --- | --- | --- |
 
 | preview | Command palette | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Custom empty state | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Server-filtered list | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

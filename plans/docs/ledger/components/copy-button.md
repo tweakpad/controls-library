@@ -21,3 +21,6 @@
 
 | preview | In an input group and a field group | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Copy events | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Copy button | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Beside a value | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |

@@ -26,3 +26,10 @@
 | preview | Board lanes | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Controlled lanes | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Approve before committing | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Drag drop list | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Variants and sizes | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Whole-row drag with swap | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Horizontal | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Read-only | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+| preview | Vertical axis only | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
