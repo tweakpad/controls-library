@@ -1,5 +1,18 @@
 # @tweakpad/ui
 
+## 0.3.2
+
+### Minor Changes
+
+- a5c449b: Add Stack for row and column layouts with themed gaps, alignment, wrapping and responsive values based on the component's available width.
+
+### Patch Changes
+
+- 97381b9: Repair Text Editor documentation examples: load editing engines in Storybook, install optional features explicitly, align form actions, constrain demo widths and clean up simulated image uploads. Add working table and selection-toolbar examples.
+- d4c6952: Simplify documentation examples with demo-only width presets. Keep examples bounded in Storybook and the website without adding framing styles to copied code, while preserving dimensions that demonstrate component capabilities.
+- f5094b0: Simplify documentation and story layouts with Stack while preserving semantic wrappers, component-owned layout and grid-specific compositions. Make Stack inherit text color and fill assigned block geometry.
+- d26ea67: Share end-aligned, wrapping action layout across Card footers, Dialog, Alert Dialog, Drawer and Form action regions. Preserve reading and keyboard order at narrow widths and in RTL. Place secondary actions before completing actions in the affected examples without consumer alignment styles.
+
 ## 0.3.0
 
 ### Minor Changes
