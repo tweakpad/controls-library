@@ -13,6 +13,8 @@ export const TEXT_EDITOR_OWN_ATTRIBUTES = Object.freeze([
 ]);
 /** Attributes of the form control contract (uwg-te-req-prop-1). */
 export const TEXT_EDITOR_FORM_ATTRIBUTES = Object.freeze(['name', 'form']);
+/** Attributes of the scrollable interface implemented by the editor. */
+export const TEXT_EDITOR_SCROLLABLE_ATTRIBUTES = Object.freeze(['scroll-edge-fade']);
 /** Members that are properties only (uwg-te-req-prop-1). */
 export const TEXT_EDITOR_PROPERTY_ONLY = Object.freeze([
   'engine',
@@ -52,6 +54,7 @@ export function textEditorManifestProblems(manifest) {
   const expected = new Set([
     ...TEXT_EDITOR_OWN_ATTRIBUTES,
     ...TEXT_EDITOR_FORM_ATTRIBUTES,
+    ...TEXT_EDITOR_SCROLLABLE_ATTRIBUTES,
     ...(base.attributes ?? []).map((attribute) => attribute.name),
   ]);
   const missing = [...expected].filter((name) => !names.has(name));

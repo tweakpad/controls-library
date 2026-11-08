@@ -288,6 +288,7 @@ const describedEditor = (): Manifest => {
               })),
               inherited('name', 'TpFormElement'),
               inherited('form', 'TpFormElement'),
+              inherited('scroll-edge-fade', 'ScrollableElement'),
               inherited('disabled', 'TpElement'),
               inherited('readonly', 'TpElement'),
             ],
@@ -317,6 +318,7 @@ describe('custom elements manifest: tp-text-editor', () => {
     const paths = [
       'src/foundation/element.ts',
       'src/foundation/form-element.ts',
+      'src/foundation/scrollable.ts',
       'src/widgets/text-editor/text-editor.ts',
     ];
     const sources = Object.fromEntries(
@@ -341,6 +343,13 @@ describe('custom elements manifest: tp-text-editor', () => {
       return problems(manifest);
     };
     expect(problems(describedEditor())).toEqual([]);
+    expect(
+      withDefect((editor) => {
+        editor.attributes = editor.attributes.filter(
+          (attribute) => attribute.name !== 'scroll-edge-fade',
+        );
+      }),
+    ).toEqual(['attributes missing: scroll-edge-fade']);
     expect(withDefect((editor) => (editor.members[0]!.readonly = false))).toEqual([
       'field value is not read-only',
     ]);
