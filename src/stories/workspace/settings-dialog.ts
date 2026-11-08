@@ -368,8 +368,8 @@ function shortcuts() {
       'editing',
       'Brief editing',
       [
-        ['Bold', ['command', 'B']],
-        ['Italic', ['command', 'I']],
+        ['Bold preview', ['command', 'B']],
+        ['Italic preview', ['command', 'I']],
       ],
     ],
   ] as const;
@@ -491,7 +491,7 @@ export function renderSettingsDialog(host: SettingsHost) {
       host.open(e.detail.value ? 'settings' : '');
     }}
   >
-    <div class="workspace-settings-layout">
+    <div class="workspace-settings-layout" ?data-compact=${host.mobile}>
       ${
         host.mobile
           ? nothing

@@ -1,4 +1,5 @@
 catalog-workspace {
+  container: workspace / inline-size;
   display: block;
   color: var(--tp-foreground);
   background: var(--tp-background);
@@ -19,7 +20,7 @@ catalog-workspace {
   box-sizing: border-box;
   width: 100%;
 
-  /* dashboard-01 site header: h-12 with a bottom border. */
+  /* Keep the application header separate from the scrolling content. */
   min-height: var(--tp-space-12);
   padding-inline: var(--tp-space-4) var(--tp-space-6);
   align-self: stretch;
@@ -31,6 +32,7 @@ catalog-workspace {
 }
 
 .workspace-content {
+  container: workspace-content / inline-size;
   box-sizing: border-box;
   width: 100%;
   max-width: calc(var(--tp-spacing) * 400);
@@ -126,7 +128,7 @@ catalog-workspace {
 
 .workspace-metrics {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--tp-spacing) * 46)), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--tp-spacing) * 64)), 1fr));
   gap: var(--tp-space-4);
 }
 
@@ -315,11 +317,7 @@ catalog-workspace {
   border-radius: var(--tp-radius-lg);
 }
 
-@media (width <= 40rem) {
-  .workspace-settings-layout {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
+@container workspace (width <= 40rem) {
   .workspace-danger-row {
     flex-wrap: wrap;
   }
@@ -330,13 +328,13 @@ catalog-workspace {
   width: 75%;
 }
 
-@media (width <= 64rem) {
+@container workspace-content (width <= 56rem) {
   .workspace-columns {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
-@media (width <= 40rem) {
+@container workspace (width <= 40rem) {
   .workspace-topbar {
     padding-inline-end: var(--tp-space-4);
   }
@@ -364,4 +362,8 @@ catalog-workspace {
 .workspace-history {
   display: flex;
   justify-content: center;
+}
+
+.workspace-settings-layout[data-compact] {
+  grid-template-columns: minmax(0, 1fr);
 }

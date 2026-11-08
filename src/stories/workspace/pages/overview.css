@@ -1,15 +1,5 @@
-.overview-metric-footer {
-  display: flex;
-  flex-direction: column;
-  gap: var(--tp-space-1);
-  align-items: flex-start;
-}
-
-.overview-metric-note {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--tp-space-1-5);
-  font-weight: var(--tp-font-medium);
+.overview-metric-value {
+  white-space: nowrap;
 }
 
 .overview-grid {
@@ -50,7 +40,7 @@
   block-size: var(--tp-space-3);
 }
 
-@media (width <= 64rem) {
+@container workspace-content (width <= 48rem) {
   .overview-grid {
     grid-template-columns: minmax(0, 1fr);
   }

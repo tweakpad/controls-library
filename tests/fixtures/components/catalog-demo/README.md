@@ -1,0 +1,5 @@
+# Complete catalog demo verification
+
+Use Chrome DevTools MCP only. Open the static build at `/iframe.html?id=tweakpad-ui-complete-catalog--docs&viewMode=docs`. Invoke `reviewCatalogDemo()` from `review.js` at 1100px/dark and 420px/light. Load the local Axe script if running the optional accessibility checks. The fixture checks six pages, registration, outer scrolling bounds and metric value presentation; internal table, carousel and board overflow is intentional.
+
+Also constrain `catalog-workspace` to 600px in a wide browser and verify compact navigation, then reset the temporary style. Use real input to open the navigation, create a task and submit the form, search with Mod+K, open Settings with Mod+comma, and toggle Brief preview formatting with Mod+B/I and visibility with Mod+P. Verify C in a text field does not create a task. Settings should fit at both widths; dialogs and task state should survive normal page navigation. Do not treat API-driven navigation or Axe alone as real-input/visual verification.

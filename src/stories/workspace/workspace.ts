@@ -1,4 +1,6 @@
 import { LitElement, html, nothing, type PropertyValues } from 'lit';
+import { downloadBlob } from '../../foundation/download.js';
+import { workspaceCommand } from './shortcuts.js';
 import { keyed } from 'lit/directives/keyed.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { applyColorSchemePreference } from '../../foundation/color-scheme.js';
@@ -83,7 +85,7 @@ export class CatalogWorkspace extends LitElement implements WorkspaceHost {
   settingsSection: SettingsSection = 'general';
   readonly #views = new Map<string, unknown>();
   readonly #retained = new Map<string, () => void>();
-  #media: MediaQueryList | undefined;
+  #resize: ResizeObserver | undefined;
   readonly #dueCalendar = createRef<HTMLElement>();
   readonly #inviteDialog = createRef<TpDialog>();
 
@@ -95,13 +97,14 @@ export class CatalogWorkspace extends LitElement implements WorkspaceHost {
     // Apply the saved Appearance theme now, not when Settings first renders its switcher.
     applyColorSchemePreference({ target: this, storageKey: 'tp-workspace-theme' });
     this.ownerDocument.addEventListener('keydown', this.#shortcut);
-    this.#media = this.ownerDocument.defaultView?.matchMedia('(max-width: 40rem)');
+    this.#resize = new ResizeObserver(this.#responsive);
+    this.#resize.observe(this);
     this.#responsive();
-    this.#media?.addEventListener('change', this.#responsive);
   }
   override disconnectedCallback() {
     this.ownerDocument.removeEventListener('keydown', this.#shortcut);
-    this.#media?.removeEventListener('change', this.#responsive);
+    this.#resize?.disconnect();
+    this.#resize = undefined;
     for (const cleanup of this.#retained.values()) cleanup();
     this.#retained.clear();
     super.disconnectedCallback();
@@ -163,14 +166,48 @@ export class CatalogWorkspace extends LitElement implements WorkspaceHost {
   // Passing the press keeps its interaction type for the Dialog's initial focus policy.
   #invite = (event: Event) => this.#inviteDialog.value?.setOpen(true, 'trigger-press', event);
   #responsive = () => {
-    this.mobile = this.#media?.matches ?? false;
+    const rem = Number.parseFloat(getComputedStyle(this.ownerDocument.documentElement).fontSize);
+    this.mobile = this.getBoundingClientRect().width <= 40 * rem;
   };
   #shortcut = (event: KeyboardEvent) => {
-    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
-      event.preventDefault();
-      this.overlay = this.overlay === 'commands' ? '' : 'commands';
+    // Ignore documentation Controls and other applications on the same page.
+    if (!event.composedPath().includes(this)) return;
+    const editing = event
+      .composedPath()
+      .some(
+        (node) =>
+          node instanceof HTMLElement &&
+          (node.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(node.tagName)),
+      );
+    const command = workspaceCommand(event, this.section, this.overlay, editing);
+    if (!command) return;
+    event.preventDefault();
+    if (command === 'search') this.overlay = this.overlay === 'commands' ? '' : 'commands';
+    else if (command === 'settings') this.openSettings();
+    else if (command === 'new-task') this.newTask();
+    else if (command === 'complete-tasks') {
+      const selected = this.view<ReadonlySet<number>>('work.selected', new Set());
+      this.tasks = this.tasks.map((task) =>
+        selected.has(task.id) ? { ...task, status: 'Done' } : task,
+      );
+    } else if (command === 'brief-download') {
+      const text = this.view('brief.text', '');
+      downloadBlob(
+        this.ownerDocument,
+        new Blob([text], { type: 'text/markdown' }),
+        'Launch brief.md',
+      );
+    } else {
+      const key =
+        command === 'brief-preview'
+          ? 'brief.preview'
+          : command === 'brief-bold'
+            ? 'brief.bold'
+            : 'brief.italic';
+      this.setView(key, !this.view(key, key === 'brief.preview'));
     }
   };
+
   #open = (name: Overlay) => (event: WorkspaceOpenChange) => {
     if (event.target !== event.currentTarget || event.defaultPrevented) return;
     (event.target as HTMLElement & { open: boolean }).open = event.detail.value;

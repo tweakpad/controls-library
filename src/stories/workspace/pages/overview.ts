@@ -67,17 +67,23 @@ function metric(
   detail: string,
 ) {
   return html`<tp-card class="overview-metric">
-    <span slot="description">${label}</span>
-    <strong slot="header" class="workspace-metric">${value}</strong>
-    <tp-badge slot="action" variant="outline"
-      ><tp-icon .icon=${up ? trendUp : trendDown}></tp-icon>${trend}</tp-badge
-    >
-    <div slot="footer" class="overview-metric-footer">
-      <span class="overview-metric-note"
-        >${note} <tp-icon .icon=${up ? trendUp : trendDown}></tp-icon
-      ></span>
-      <span class="workspace-muted">${detail}</span>
-    </div>
+    <tp-stack gap="4">
+      <tp-stack gap="2">
+        <span class="workspace-muted">${label}</span>
+        <tp-stack direction="row" gap="2" align="center" justify="space-between" wrap="wrap">
+          <strong class="workspace-metric overview-metric-value">${value}</strong>
+          <tp-badge variant="outline"
+            ><tp-icon .icon=${up ? trendUp : trendDown}></tp-icon>${trend}</tp-badge
+          >
+        </tp-stack>
+      </tp-stack>
+      <tp-stack gap="1">
+        <tp-stack direction="row" gap="1" align="center" wrap="wrap">
+          <strong>${note}</strong><tp-icon .icon=${up ? trendUp : trendDown}></tp-icon>
+        </tp-stack>
+        <span class="workspace-muted">${detail}</span>
+      </tp-stack>
+    </tp-stack>
   </tp-card>`;
 }
 

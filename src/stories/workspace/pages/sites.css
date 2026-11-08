@@ -1,6 +1,6 @@
 .sites-metrics {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(calc(var(--tp-space-16) * 3), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--tp-space-16) * 3)), 1fr));
   gap: var(--tp-space-4);
 }
 
@@ -28,7 +28,7 @@
   gap: var(--tp-space-3);
 }
 
-@media (width <= 64rem) {
+@container workspace-content (width <= 48rem) {
   .sites-layout {
     grid-template-columns: minmax(0, 1fr);
   }
