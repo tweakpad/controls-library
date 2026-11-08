@@ -211,17 +211,28 @@ that returns ranked items and match positions:
 <Preview
   title="In a form"
   align="stretch"
-  code={`<form id="autocomplete-form" style="display:grid;gap:var(--tp-space-4);inline-size:100%;max-inline-size:22rem;margin-inline:auto">
-  <tp-field label="Job title">
-    <tp-autocomplete style="inline-size:100%" name="title" required submit-on-item-click placeholder="e.g. Product designer">
-      <option>Product designer</option>
-      <option>Product manager</option>
-      <option>Frontend engineer</option>
-      <option>Data analyst</option>
-    </tp-autocomplete>
-  </tp-field>
-  <tp-button type="submit" style="justify-self:start">Save profile</tp-button>
-  <output id="autocomplete-form-result" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)"></output>
+  code={`<form id="autocomplete-form" style="inline-size: 100%; max-inline-size: 22rem; margin-inline: auto">
+  <tp-stack gap="4">
+    <tp-field label="Job title">
+      <tp-autocomplete
+        style="inline-size: 100%"
+        name="title"
+        required
+        submit-on-item-click
+        placeholder="e.g. Product designer"
+      >
+        <option>Product designer</option>
+        <option>Product manager</option>
+        <option>Frontend engineer</option>
+        <option>Data analyst</option>
+      </tp-autocomplete>
+    </tp-field>
+    <tp-button type="submit" style="align-self: flex-start">Save profile</tp-button>
+    <output
+      id="autocomplete-form-result"
+      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    ></output>
+  </tp-stack>
 </form>`}
   script={`const form = document.querySelector('#autocomplete-form');
 form.addEventListener('submit', (event) => {

@@ -7,11 +7,11 @@ tag: tp-marker
 <Preview
   title="Marker"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-6);max-inline-size:32rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%" gap="6">
   <tp-marker><tp-spinner slot="icon" size="sm"></tp-spinner>Reading 4 files</tp-marker>
   <tp-marker variant="separator">Worked for 42s</tp-marker>
   <tp-marker variant="border">Switched to release-2.4</tp-marker>
-</div>`}
+</tp-stack>`}
 />
 
 ## Usage
@@ -25,11 +25,11 @@ The default has no boundary. `separator` centres the content between two rules, 
 <Preview
   title="Variants"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-8);max-inline-size:32rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%" gap="8">
   <tp-marker>Priya joined the project</tp-marker>
   <tp-marker variant="separator">Today</tp-marker>
   <tp-marker variant="border">Deployed to production</tp-marker>
-</div>`}
+</tp-stack>`}
 />
 
 ### Tones
@@ -39,12 +39,12 @@ The default has no boundary. `separator` centres the content between two rules, 
 <Preview
   title="Tones"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-6);max-inline-size:32rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%" gap="6">
   <tp-marker>Build queued</tp-marker>
   <tp-marker tone="accent">Review requested from Priya</tp-marker>
   <tp-marker variant="separator" tone="success">All 128 checks passed</tp-marker>
   <tp-marker variant="border" tone="danger">Deploy to production failed</tp-marker>
-</div>`}
+</tp-stack>`}
 />
 
 ### Icons
@@ -54,11 +54,15 @@ The `icon` slot takes an Icon or a decorative Spinner. The icon region is hidden
 <Preview
   title="With icons"
   align="stretch"
-  code={`<div id="marker-icons" style="display:grid;gap:var(--tp-space-6);max-inline-size:32rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack
+  id="marker-icons"
+  style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%"
+  gap="6"
+>
   <tp-marker role="status"><tp-spinner slot="icon" size="sm"></tp-spinner>Compacting conversation</tp-marker>
   <tp-marker variant="separator"><tp-icon slot="icon" data-icon="check"></tp-icon>Conversation compacted</tp-marker>
   <tp-marker variant="border"><tp-icon slot="icon" data-icon="branch"></tp-icon>Opened pull request #482</tp-marker>
-</div>`}
+</tp-stack>`}
   script={`const icons = {
   check: { viewBox: '0 0 24 24', paths: [{ d: 'M5 12l4 4L19 6', strokeWidth: 2 }] },
   branch: { viewBox: '0 0 24 24', paths: [{ d: 'M6 3v12M6 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6M18 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6M18 9a9 9 0 0 1-9 9', strokeWidth: 2 }] },
@@ -83,10 +87,10 @@ Marker declares the ambient `shimmer` motion role on its `marker-content` part, 
 <Preview
   title="Shimmer"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-6);max-inline-size:32rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%" gap="6">
   <tp-marker role="status" shimmer>Searching 14 files for “retry policy”</tp-marker>
   <tp-marker variant="separator" role="status" shimmer>Thinking</tp-marker>
-</div>`}
+</tp-stack>`}
 />
 
 ### Actions
@@ -96,10 +100,12 @@ A Marker owns no action state, but its content can hold a link or a Button. The 
 <Preview
   title="With an action"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-6);max-inline-size:32rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%" gap="6">
   <tp-marker variant="separator">Older messages hidden. <a href="#actions">Show all</a></tp-marker>
-  <tp-marker variant="separator"><tp-button variant="outline" size="sm">Review 3 changes</tp-button></tp-marker>
-</div>`}
+  <tp-marker variant="separator"
+    ><tp-button variant="outline" size="sm">Review 3 changes</tp-button></tp-marker
+  >
+</tp-stack>`}
 />
 
 To make the whole Marker the control, render its `marker` part as a native link or button through `partContracts`, keeping the supplied `bind` and `content`. `partPresentation` arranges the parts, for example to center the content or stack the icon above it.
@@ -109,13 +115,20 @@ A delegated link or button must preserve `bind` and `content`, supply its native
 <Preview
   title="Native hosts and layout"
   align="stretch"
-  code={`<div id="marker-hosts" style="display:grid;gap:var(--tp-space-6);max-inline-size:32rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack
+  id="marker-hosts"
+  style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%"
+  gap="6"
+>
   <tp-marker data-host="link"><tp-icon slot="icon" data-icon="branch"></tp-icon>Opened pull request #482</tp-marker>
   <tp-marker data-host="button"><tp-icon slot="icon" data-icon="clock"></tp-icon>Worked for 42s<tp-icon data-icon="chevron" style="flex:none;inline-size:var(--tp-icon-size-sm);block-size:var(--tp-icon-size-sm)"></tp-icon></tp-marker>
   <tp-marker data-layout="center"><strong>Priya</strong>&nbsp;left the conversation</tp-marker>
   <tp-marker data-layout="stack"><tp-icon slot="icon" data-icon="check"></tp-icon>All 128 checks passed</tp-marker>
-  <output id="marker-hosts-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)"></output>
-</div>`}
+  <output
+    id="marker-hosts-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+  ></output>
+</tp-stack>`}
   script={`import { html } from 'lit';
 
 const icons = {
@@ -151,10 +164,12 @@ root.querySelector('[data-layout="stack"]').partPresentation = { marker: { style
 
 <Preview
   title="Completion reveal"
-  code={`<div style="display:flex;align-items:center;gap:var(--tp-space-3)">
-  <tp-marker id="marker-sweep" tone="success" shimmer style="--tp-shimmer-iterations:1">Summary ready</tp-marker>
+  code={`<tp-stack direction="row" gap="3" align="center">
+  <tp-marker id="marker-sweep" tone="success" shimmer style="--tp-shimmer-iterations: 1"
+    >Summary ready</tp-marker
+  >
   <tp-button id="marker-sweep-replay" variant="outline" size="sm">Replay</tp-button>
-</div>`}
+</tp-stack>`}
   script={`const marker = document.querySelector('#marker-sweep');
 document.querySelector('#marker-sweep-replay').addEventListener('click', () => {
   marker.shimmer = false;
@@ -169,7 +184,11 @@ A Marker can label an Accordion item, so a step summary expands into its details
 <Preview
   title="Accordion label and drawer"
   align="stretch"
-  code={`<div id="marker-compositions" style="display:grid;gap:var(--tp-space-6);max-inline-size:32rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack
+  id="marker-compositions"
+  style="max-inline-size: 32rem; margin-inline: auto; inline-size: 100%"
+  gap="6"
+>
   <tp-accordion collapsible>
     <tp-accordion-item value="steps">
       <tp-marker slot="label"><tp-icon slot="icon" data-icon="clock"></tp-icon>Worked for 1m 12s</tp-marker>
@@ -177,7 +196,12 @@ A Marker can label an Accordion item, so a step summary expands into its details
     </tp-accordion-item>
   </tp-accordion>
   <tp-marker variant="separator">
-    <tp-drawer label="Files read" description="Opened while preparing this reply." edge="inline-end" style="text-align:start">
+    <tp-drawer
+      label="Files read"
+      description="Opened while preparing this reply."
+      edge="inline-end"
+      style="text-align: start"
+    >
       <tp-button slot="trigger" variant="outline" size="sm"><tp-icon slot="icon-start" data-icon="search"></tp-icon>Explored 3 files</tp-button>
       <tp-list aria-label="Files read">
         <tp-list-item variant="outline" size="sm">billing/proration.ts</tp-list-item>
@@ -187,7 +211,7 @@ A Marker can label an Accordion item, so a step summary expands into its details
       <tp-button slot="close" variant="outline">Close</tp-button>
     </tp-drawer>
   </tp-marker>
-</div>`}
+</tp-stack>`}
   script={`const icons = {
   clock: { viewBox: '0 0 24 24', paths: [{ d: 'M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0M12 6v6l4 2', strokeWidth: 2 }] },
   search: { viewBox: '0 0 24 24', paths: [{ d: 'M21 21l-5-5M10.5 3a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15', strokeWidth: 2 }] },

@@ -30,3 +30,9 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Resume a draft | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Submit | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Checkpoint and cross-answer validation | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Progress bar | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Clarification dialog | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

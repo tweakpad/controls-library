@@ -24,13 +24,13 @@ The `label` attribute names the progressbar for assistive technology. The `label
 <Preview
   title="Bare and captioned"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-6);max-inline-size:22rem">
+  code={`<tp-stack style="max-inline-size: 22rem" gap="6">
   <tp-progress value="33" label="Profile completion"></tp-progress>
   <tp-progress value="82" label="Storage used">
     <span slot="label">Storage used</span>
     <span slot="output">41 of 50 GB</span>
   </tp-progress>
-</div>`}
+</tp-stack>`}
 />
 
 ### Indeterminate
@@ -65,13 +65,13 @@ Set `value` from your own task as it reports progress. Each part publishes `data
 <Preview
   title="Import"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);justify-items:start;max-inline-size:22rem">
-  <tp-progress id="progress-import" value="0" label="Importing contacts" style="inline-size:100%">
+  code={`<tp-stack style="max-inline-size: 22rem" gap="4" align="start">
+  <tp-progress id="progress-import" value="0" label="Importing contacts" style="inline-size: 100%">
     <span slot="label">Importing contacts</span>
     <span slot="output" id="progress-import-output">0 of 1,200</span>
   </tp-progress>
   <tp-button id="progress-import-start" variant="outline" size="sm">Start import</tp-button>
-</div>`}
+</tp-stack>`}
   script={`const bar = document.querySelector('#progress-import');
 const output = document.querySelector('#progress-import-output');
 const start = document.querySelector('#progress-import-start');
@@ -95,14 +95,14 @@ Instead of writing the `output` text yourself, let the value part render `state.
 <Preview
   title="Formatted value"
   align="stretch"
-  code={`<div id="progress-formatted" style="display:grid;gap:var(--tp-space-6);max-inline-size:22rem">
+  code={`<tp-stack id="progress-formatted" style="max-inline-size: 22rem" gap="6">
   <tp-progress value="56" label="Hochladen" lang="de">
     <span slot="label">Hochladen</span>
   </tp-progress>
   <tp-progress value="41.5" maximum="50" label="Storage used" data-format="storage">
     <span slot="label">Storage used</span>
   </tp-progress>
-</div>`}
+</tp-stack>`}
   script={`await customElements.whenDefined('tp-progress');
 for (const bar of document.querySelectorAll('#progress-formatted tp-progress')) {
   if (bar.dataset.format === 'storage') {

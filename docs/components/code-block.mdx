@@ -138,7 +138,17 @@ The built-in highlighter covers TypeScript, JavaScript, HTML, CSS, JSON, Bash an
 <Preview
   title="Token theme"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:40rem;margin-inline:auto;--tp-syntax-keyword:light-dark(#6d28d9,#c4b5fd);--tp-syntax-string:light-dark(#047857,#6ee7b7);--tp-syntax-function:light-dark(#1d4ed8,#93c5fd);--tp-syntax-comment:var(--tp-muted-foreground)">
+  code={`<tp-stack
+  style="
+    max-inline-size: 40rem;
+    margin-inline: auto;
+    --tp-syntax-keyword: light-dark(#6d28d9, #c4b5fd);
+    --tp-syntax-string: light-dark(#047857, #6ee7b7);
+    --tp-syntax-function: light-dark(#1d4ed8, #93c5fd);
+    --tp-syntax-comment: var(--tp-muted-foreground);
+  "
+  gap="4"
+>
   <tp-code-block language="typescript" label="webhooks.ts">
     // Verify the signature before trusting the payload.
     export async function handleWebhook(request: Request) {
@@ -153,7 +163,7 @@ The built-in highlighter covers TypeScript, JavaScript, HTML, CSS, JSON, Bash an
     +const KEY_TTL = 5 * 60 * 1000;
      export const verifier = createVerifier({ ttl: KEY_TTL });
   </tp-code-block>
-</div>`}
+</tp-stack>`}
 />
 
 The wrapper above sets four `--tp-syntax-*` roles, and both blocks inside pick them up, light and dark alike. `language="diff"` colors a unified patch as written; use `added-lines` and `removed-lines` instead when you want to mark changes in highlighted source.

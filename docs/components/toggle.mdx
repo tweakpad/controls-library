@@ -6,11 +6,11 @@ tag: tp-toggle
 
 <Preview
   title="Toggle"
-  code={`<div id="toggle-hero" style="display:flex;gap:var(--tp-space-1)">
+  code={`<tp-stack id="toggle-hero" direction="row" gap="1">
   <tp-toggle aria-label="Bold" default-pressed><tp-icon data-icon="bold"></tp-icon></tp-toggle>
   <tp-toggle aria-label="Italic"><tp-icon data-icon="italic"></tp-icon></tp-toggle>
   <tp-toggle aria-label="Underline"><tp-icon data-icon="underline"></tp-icon></tp-toggle>
-</div>`}
+</tp-stack>`}
   script={`const icons = {
   bold: { viewBox: '0 0 24 24', paths: [{ d: 'M6 12h8a4 4 0 0 1 0 8H6V4h7a4 4 0 0 1 0 8', strokeWidth: 2 }] },
   italic: { viewBox: '0 0 24 24', paths: [{ d: 'M19 4h-9M14 20H5M15 4 9 20', strokeWidth: 2 }] },
@@ -32,18 +32,18 @@ Grouped Toggles derive pressed state from the Group; use `group.setValue()` inst
 
 <Preview
   title="Variants and sizes"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:center">
-  <div style="display:flex;gap:var(--tp-space-2)">
+  code={`<tp-stack gap="3" align="center">
+  <tp-stack direction="row" gap="2">
     <tp-toggle default-pressed>Ghost</tp-toggle>
     <tp-toggle variant="outline" default-pressed>Outline</tp-toggle>
-  </div>
-  <div style="display:flex;gap:var(--tp-space-2);align-items:center">
+  </tp-stack>
+  <tp-stack direction="row" gap="2" align="center">
     <tp-toggle variant="outline" size="xs">Extra small</tp-toggle>
     <tp-toggle variant="outline" size="sm">Small</tp-toggle>
     <tp-toggle variant="outline">Default</tp-toggle>
     <tp-toggle variant="outline" size="lg">Large</tp-toggle>
-  </div>
-</div>`}
+  </tp-stack>
+</tp-stack>`}
 />
 
 Pressed paint stays distinct while hovered, so the state reads the same whether or not the pointer is over it.
@@ -54,12 +54,14 @@ The host sizes to its content. A host given an inline size, or stretched by a co
 
 <Preview
   title="Icon sizes"
-  code={`<div id="toggle-icon-sizes" style="display:flex;gap:var(--tp-space-2);align-items:center">
+  code={`<tp-stack id="toggle-icon-sizes" direction="row" gap="2" align="center">
   <tp-toggle variant="outline" size="icon-xs" aria-label="Pin"><tp-icon></tp-icon></tp-toggle>
   <tp-toggle variant="outline" size="icon-sm" aria-label="Pin"><tp-icon></tp-icon></tp-toggle>
-  <tp-toggle variant="outline" size="icon" aria-label="Pin" default-pressed><tp-icon></tp-icon></tp-toggle>
+  <tp-toggle variant="outline" size="icon" aria-label="Pin" default-pressed
+    ><tp-icon></tp-icon
+  ></tp-toggle>
   <tp-toggle variant="outline" size="icon-lg" aria-label="Pin"><tp-icon></tp-icon></tp-toggle>
-</div>`}
+</tp-stack>`}
   script={`const pin = { viewBox: '0 0 24 24', paths: [{ d: 'M12 17v5M9 10.76V6h6v4.76l2.5 2.74V17h-11v-3.5Z', strokeWidth: 2 }] };
 await customElements.whenDefined('tp-icon');
 for (const icon of document.querySelectorAll('#toggle-icon-sizes tp-icon')) icon.icon = pin;`}
@@ -71,10 +73,12 @@ Compose a `tp-icon` in the default slot. Icons are decorative, so an icon-only T
 
 <Preview
   title="Icon and label"
-  code={`<div id="toggle-icons" style="display:flex;gap:var(--tp-space-2)">
-  <tp-toggle variant="outline" aria-label="Bookmark"><tp-icon data-glyph="bookmark"></tp-icon></tp-toggle>
+  code={`<tp-stack id="toggle-icons" direction="row" gap="2">
+  <tp-toggle variant="outline" aria-label="Bookmark"
+    ><tp-icon data-glyph="bookmark"></tp-icon
+  ></tp-toggle>
   <tp-toggle variant="outline" default-pressed><tp-icon data-icon="inline-start" data-glyph="bookmark"></tp-icon> Saved</tp-toggle>
-</div>`}
+</tp-stack>`}
   script={`const bookmark = { viewBox: '0 0 24 24', paths: [{ d: 'M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16l-7-4-7 4Z', strokeWidth: 2 }] };
 await customElements.whenDefined('tp-icon');
 for (const icon of document.querySelectorAll('#toggle-icons tp-icon')) icon.icon = bookmark;`}
@@ -86,10 +90,10 @@ To swap artwork with the pressed state, such as an outlined bookmark that fills 
 
 <Preview
   title="Pressed artwork"
-  code={`<div id="toggle-artwork" style="display:flex;gap:var(--tp-space-2)">
+  code={`<tp-stack id="toggle-artwork" direction="row" gap="2">
   <tp-toggle variant="outline" data-label="Save"></tp-toggle>
   <tp-toggle variant="outline" data-label="Save" default-pressed></tp-toggle>
-</div>`}
+</tp-stack>`}
   script={`import { html } from 'lit';
 
 const bookmark = { viewBox: '0 0 24 24', paths: [{ d: 'M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16l-7-4-7 4Z', strokeWidth: 2 }] };
@@ -110,12 +114,12 @@ Toggles share the Button's variants and sizes, so a Toggle and a Button of the s
 
 <Preview
   title="With Buttons"
-  code={`<div style="display:flex;flex-wrap:wrap;align-items:center;gap:var(--tp-space-2)">
+  code={`<tp-stack direction="row" gap="2" align="center" wrap="wrap">
   <tp-button variant="outline" size="sm">Insert link</tp-button>
   <tp-toggle variant="outline" size="sm">Spell check</tp-toggle>
   <tp-button variant="outline">Insert link</tp-button>
   <tp-toggle variant="outline" default-pressed>Spell check</tp-toggle>
-</div>`}
+</tp-stack>`}
 />
 
 ### Listening to changes
@@ -126,10 +130,14 @@ The first update fixes controlled/uncontrolled ownership. A controlled callback 
 
 <Preview
   title="Change events"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:center">
+  code={`<tp-stack gap="3" align="center">
   <tp-toggle id="toggle-mute" variant="outline">Mute notifications</tp-toggle>
-  <output id="toggle-mute-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Notifications are on</output>
-</div>`}
+  <output
+    id="toggle-mute-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Notifications are on</output
+  >
+</tp-stack>`}
   script={`const toggle = document.querySelector('#toggle-mute');
 const output = document.querySelector('#toggle-mute-output');
 toggle.addEventListener('tp-value-change', (event) => {

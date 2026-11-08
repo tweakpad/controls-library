@@ -40,20 +40,26 @@ The default slot is the title and `description` adds supporting text; use the `t
 <Preview
   title="Content and actions"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:30rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack style="max-inline-size: 30rem; margin-inline: auto; inline-size: 100%" gap="3">
   <tp-list-item variant="outline">Two-factor authentication
     <tp-badge slot="actions" variant="secondary">On</tp-badge>
   </tp-list-item>
-  <tp-list-item variant="outline" description="Signed in from Chrome on macOS, Berlin.">
+  <tp-list-item variant="outline" description="Signed in from Chrome on macOS, Berlin."
+    >
     MacBook Pro
     <tp-button slot="actions" variant="outline" size="sm">Sign out</tp-button>
-  </tp-list-item>
-  <tp-list-item variant="outline" description="Your plan renews on March 1. Downgrading takes effect then.">
+  </tp-list-item
+  >
+  <tp-list-item
+    variant="outline"
+    description="Your plan renews on March 1. Downgrading takes effect then."
+    >
     Pro plan
     <tp-button slot="actions" variant="ghost" size="sm">Downgrade</tp-button>
     <tp-button slot="actions" size="sm">Upgrade</tp-button>
-  </tp-list-item>
-</div>`}
+  </tp-list-item
+  >
+</tp-stack>`}
 />
 
 ### Variants and sizes
@@ -63,13 +69,15 @@ The default slot is the title and `description` adds supporting text; use the `t
 <Preview
   title="Variants and sizes"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:30rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack style="max-inline-size: 30rem; margin-inline: auto; inline-size: 100%" gap="3">
   <tp-list-item description="Ghost is the default.">Release notes</tp-list-item>
-  <tp-list-item variant="outline" description="Outline draws a boundary.">Release notes</tp-list-item>
+  <tp-list-item variant="outline" description="Outline draws a boundary."
+    >Release notes</tp-list-item
+  >
   <tp-list-item variant="subdued" description="Subdued fills the row.">Release notes</tp-list-item>
   <tp-list-item variant="outline" size="sm" description="Small">Release notes</tp-list-item>
   <tp-list-item variant="outline" size="xs" description="Extra small">Release notes</tp-list-item>
-</div>`}
+</tp-stack>`}
 />
 
 ### Media
@@ -273,13 +281,22 @@ For a rich command, put a List item directly inside a Menu item. The Menu item k
 <Preview
   title="People and invitations"
   align="stretch"
-  code={`<div id="list-people-example" style="display:grid;gap:var(--tp-space-4);max-inline-size:calc(var(--tp-spacing) * 150);min-inline-size:0"><tp-list-item variant="outline"><tp-avatar slot="media" size="sm" src="avatars/ravi-castellano.svg" fallback="RC" alt="Ravi Castellano" ></tp-avatar>Ravi Castellano<span slot="description">Last seen <tp-time mode="relative" datetime="2026-05-31T21:38:55.759Z"></tp-time></span><tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ravi Castellano" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
-<tp-list-item variant="outline" description="Invite your team to collaborate on this project."><tp-avatar-group slot="media" size="sm"><tp-avatar slot="" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor" ></tp-avatar></tp-avatar-group>Project team<tp-button slot="actions" variant="outline" size="sm" data-feedback>Invite</tp-button></tp-list-item>
-<tp-list aria-label="People"><tp-list-item description="maravoss@example.com"><tp-avatar slot="media" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss" ></tp-avatar>Mara Voss<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Mara Voss" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
-<tp-list-separator></tp-list-separator>
-<tp-list-item description="theolind@example.com"><tp-avatar slot="media" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist" ></tp-avatar>Theo Lindqvist<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Theo Lindqvist" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
-<tp-list-separator></tp-list-separator>
-<tp-list-item description="inesokafor@example.com"><tp-avatar slot="media" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor" ></tp-avatar>Ines Okafor<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ines Okafor" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item></tp-list><tp-toast></tp-toast></div>`}
+  code={`<tp-stack
+  id="list-people-example"
+  style="max-inline-size: calc(var(--tp-spacing) * 150); min-inline-size: 0"
+  gap="4"
+  ><tp-list-item variant="outline"><tp-avatar slot="media" size="sm" src="avatars/ravi-castellano.svg" fallback="RC" alt="Ravi Castellano" ></tp-avatar>Ravi Castellano<span slot="description">Last seen <tp-time mode="relative" datetime="2026-05-31T21:38:55.759Z"></tp-time></span><tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ravi Castellano" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
+  <tp-list-item variant="outline" description="Invite your team to collaborate on this project."
+    ><tp-avatar-group slot="media" size="sm"><tp-avatar slot="" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist" data-secondary-avatar></tp-avatar><tp-avatar slot="" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor" ></tp-avatar></tp-avatar-group>Project team<tp-button slot="actions" variant="outline" size="sm" data-feedback>Invite</tp-button></tp-list-item
+  >
+  <tp-list aria-label="People"
+    ><tp-list-item description="maravoss@example.com"><tp-avatar slot="media" size="sm" src="avatars/mara-voss.svg" fallback="MV" alt="Mara Voss" ></tp-avatar>Mara Voss<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Mara Voss" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
+    <tp-list-separator></tp-list-separator>
+    <tp-list-item description="theolind@example.com"><tp-avatar slot="media" size="sm" src="avatars/theo-lindqvist.svg" fallback="TL" alt="Theo Lindqvist" ></tp-avatar>Theo Lindqvist<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Theo Lindqvist" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item>
+    <tp-list-separator></tp-list-separator>
+    <tp-list-item description="inesokafor@example.com"><tp-avatar slot="media" size="sm" src="avatars/ines-okafor.svg" fallback="IO" alt="Ines Okafor" ></tp-avatar>Ines Okafor<tp-button slot="actions" variant="outline" size="icon-sm" aria-label="Invite Ines Okafor" data-round data-feedback><tp-icon slot="icon-start" data-icon="plus"></tp-icon></tp-button></tp-list-item></tp-list
+  ><tp-toast></tp-toast
+></tp-stack>`}
   script={`import { html } from 'lit';
 import { navigationIcons } from '@tweakpad/ui/icons/navigation';
 import { plusIcon } from '@tweakpad/ui/icons/plus';

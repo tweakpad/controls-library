@@ -46,11 +46,28 @@ Any number of values gives one thumb each, and every thumb is its own tab stop. 
     'slider-output': { content: (state) => state.formattedValues.join(' · ') },
   };
 }`}
-  code={`<div id="slider-demo-collisions" style="display:grid;gap:var(--tp-space-6);max-inline-size:22rem;margin-inline:auto">
-  <tp-slider label="Rollout stages (push)" default-value="10 50 90" step="5" min-steps-between-values="2" thumb-collision-behavior="push"></tp-slider>
-  <tp-slider label="Gradient stops (swap)" default-value="20 50 80" step="5" thumb-collision-behavior="swap"></tp-slider>
-  <tp-slider label="Price tiers (none)" default-value="25 50 75" step="5" min-steps-between-values="2" thumb-collision-behavior="none"></tp-slider>
-</div>`}
+  code={`<tp-stack id="slider-demo-collisions" style="max-inline-size: 22rem; margin-inline: auto" gap="6">
+  <tp-slider
+    label="Rollout stages (push)"
+    default-value="10 50 90"
+    step="5"
+    min-steps-between-values="2"
+    thumb-collision-behavior="push"
+  ></tp-slider>
+  <tp-slider
+    label="Gradient stops (swap)"
+    default-value="20 50 80"
+    step="5"
+    thumb-collision-behavior="swap"
+  ></tp-slider>
+  <tp-slider
+    label="Price tiers (none)"
+    default-value="25 50 75"
+    step="5"
+    min-steps-between-values="2"
+    thumb-collision-behavior="none"
+  ></tp-slider>
+</tp-stack>`}
 />
 
 ### Formatting
@@ -69,10 +86,25 @@ for (const slider of [budget, opacity]) {
     'slider-output': { content: (state) => state.formattedValues[0] },
   };
 }`}
-  code={`<div style="display:grid;gap:var(--tp-space-6);max-inline-size:22rem;margin-inline:auto">
-  <tp-slider id="slider-demo-budget" label="Monatsbudget" default-value="1200" maximum="5000" step="100" locale="de-DE"></tp-slider>
-  <tp-slider id="slider-demo-opacity" label="Layer opacity" default-value="0.6" minimum="0" maximum="1" step="0.05" large-step="0.1"></tp-slider>
-</div>`}
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="6">
+  <tp-slider
+    id="slider-demo-budget"
+    label="Monatsbudget"
+    default-value="1200"
+    maximum="5000"
+    step="100"
+    locale="de-DE"
+  ></tp-slider>
+  <tp-slider
+    id="slider-demo-opacity"
+    label="Layer opacity"
+    default-value="0.6"
+    minimum="0"
+    maximum="1"
+    step="0.05"
+    large-step="0.1"
+  ></tp-slider>
+</tp-stack>`}
 />
 
 ### Controlled
@@ -92,10 +124,21 @@ sampling.partContracts = {
 document.querySelector('#slider-demo-sampling-reset').addEventListener('click', () => {
   sampling.value = [0.3, 0.7];
 });`}
-  code={`<div style="display:grid;gap:var(--tp-space-4);justify-items:start;max-inline-size:22rem;margin-inline:auto">
-  <tp-slider id="slider-demo-sampling" label="Temperature window" value="0.3 0.7" minimum="0" maximum="1" step="0.1" large-step="0.2" style="inline-size:100%"></tp-slider>
-  <tp-button id="slider-demo-sampling-reset" variant="outline" size="sm">Restore defaults</tp-button>
-</div>`}
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="4" align="start">
+  <tp-slider
+    id="slider-demo-sampling"
+    label="Temperature window"
+    value="0.3 0.7"
+    minimum="0"
+    maximum="1"
+    step="0.1"
+    large-step="0.2"
+    style="inline-size: 100%"
+  ></tp-slider>
+  <tp-button id="slider-demo-sampling-reset" variant="outline" size="sm"
+    >Restore defaults</tp-button
+  >
+</tp-stack>`}
 />
 
 For controlled sliders, accept proposals synchronously through `value`, as shown above. Debouncing that acceptance introduces an actual delay; defer expensive work separately or use `tp-value-commit` for work needed only after release.
@@ -105,10 +148,17 @@ For controlled sliders, accept proposals synchronously through `value`, as shown
 <Preview
   title="Step and large step"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-6);max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="6">
   <tp-slider label="Team size" default-value="20" minimum="0" maximum="100" step="10"></tp-slider>
-  <tp-slider label="Opacity" default-value="0.8" minimum="0" maximum="1" step="0.01" large-step="0.1"></tp-slider>
-</div>`}
+  <tp-slider
+    label="Opacity"
+    default-value="0.8"
+    minimum="0"
+    maximum="1"
+    step="0.01"
+    large-step="0.1"
+  ></tp-slider>
+</tp-stack>`}
 />
 
 Values snap to `step` from `minimum`. Arrow keys move one step; Page Up, Page Down and Shift with an arrow move by `large-step`. On wide tracks a smaller step makes dragging feel continuous. The numeric value, Output and Thumb remain synchronized. Slider does not animate between discrete values or accept `step="any"`. Invalid or infeasible configuration emits `tp-diagnostic` and disables adjustment. Shift, Control or Command use `largeStep`. Page Up/Down use `largeStep`; Home/End request the bounds under the collision policy.
@@ -117,11 +167,11 @@ Values snap to `step` from `minimum`. Arrow keys move one step; Page Up, Page Do
 
 <Preview
   title="Vertical"
-  code={`<div style="display:flex;gap:var(--tp-space-8);block-size:12rem">
+  code={`<tp-stack style="block-size: 12rem" direction="row" gap="8">
   <tp-slider aria-label="Bass" orientation="vertical" default-value="60"></tp-slider>
   <tp-slider aria-label="Mid" orientation="vertical" default-value="45"></tp-slider>
   <tp-slider aria-label="Treble" orientation="vertical" default-value="70"></tp-slider>
-</div>`}
+</tp-stack>`}
 />
 
 Without a visible label, name each slider with `aria-label`. Vertical sliders use Up and Down. A vertical range works the same way, with the label and readout above the track.
@@ -208,16 +258,23 @@ remove.addEventListener('click', () => {
   const thumbs = trip.querySelectorAll('tp-slider-thumb');
   if (thumbs.length > 2) thumbs[thumbs.length - 1].remove();
 });`}
-  code={`<div style="display:grid;gap:var(--tp-space-4);justify-items:start;max-inline-size:22rem;margin-inline:auto">
-  <tp-slider id="slider-demo-trip" label="Trip days" default-value="1 8" minimum="1" maximum="28" style="inline-size:100%">
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="4" align="start">
+  <tp-slider
+    id="slider-demo-trip"
+    label="Trip days"
+    default-value="1 8"
+    minimum="1"
+    maximum="28"
+    style="inline-size: 100%"
+  >
     <tp-slider-thumb index="0" value-text="Departure, fixed" disabled></tp-slider-thumb>
     <tp-slider-thumb index="1" value-text="Hotel check-out"></tp-slider-thumb>
   </tp-slider>
-  <div style="display:flex;gap:var(--tp-space-2)">
+  <tp-stack direction="row" gap="2">
     <tp-button id="slider-demo-trip-add" variant="outline" size="sm">Add return flight</tp-button>
     <tp-button id="slider-demo-trip-remove" variant="ghost" size="sm">Remove</tp-button>
-  </div>
-</div>`}
+  </tp-stack>
+</tp-stack>`}
 />
 
 ### Endpoints and direction
@@ -227,12 +284,12 @@ remove.addEventListener('click', () => {
 <Preview
   title="Thumb alignment and right to left"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-6);max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="6">
   <tp-slider label="Center" default-value="0 100"></tp-slider>
   <tp-slider label="Edge" default-value="0 100" thumb-alignment="edge"></tp-slider>
   <tp-slider label="Delayed edge" default-value="0 100" thumb-alignment="delayed-edge"></tp-slider>
   <tp-slider dir="rtl" lang="ar" label="مستوى الصوت" default-value="70"></tp-slider>
-</div>`}
+</tp-stack>`}
 />
 
 ### Forms
@@ -258,10 +315,10 @@ The Slider is the one form participant: a range submits each value under the sam
 <Preview
   title="Disabled and read-only"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-6);max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="6">
   <tp-slider label="Storage quota" default-value="50" disabled></tp-slider>
   <tp-slider label="Recorded level" name="level" default-value="65" readonly></tp-slider>
-</div>`}
+</tp-stack>`}
 />
 
 Disabled sliders cannot be focused and submit nothing. Read-only thumbs stay focusable and submit their value, but cannot move.
@@ -276,10 +333,12 @@ const status = document.querySelector('#slider-demo-status');
 brightness.addEventListener('tp-value-commit', (event) => {
   status.textContent = 'Saved brightness ' + event.detail.value + '%';
 });`}
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="3">
   <tp-slider id="slider-demo-brightness" label="Brightness" default-value="70"></tp-slider>
-  <output id="slider-demo-status" aria-live="polite" style="color:var(--tp-muted-foreground)">Drag and release to save.</output>
-</div>`}
+  <output id="slider-demo-status" aria-live="polite" style="color: var(--tp-muted-foreground)"
+    >Drag and release to save.</output
+  >
+</tp-stack>`}
 />
 
 `tp-value-change` fires on every proposed value while dragging and can be canceled. `tp-value-commit` fires once on release, or immediately for keyboard changes; use it for saving or other expensive work. Click the track to choose the nearest eligible Thumb. Dragging preserves the grab offset and commits once on release. Pointer cancellation, lost capture, removal and disconnect release the interaction without a delayed commit. No-op or canceled proposals produce no commit notification.
@@ -303,10 +362,21 @@ ceiling.addEventListener('tp-value-change', (event) => {
 ceiling.addEventListener('tp-value-commit', (event) => {
   note.textContent = 'Rate limit set to ' + event.detail.value + ' requests per second.';
 });`}
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:22rem;margin-inline:auto">
-  <tp-slider id="slider-demo-ceiling" label="Rate limit" default-value="500" maximum="1000" step="50"></tp-slider>
-  <output id="slider-demo-ceiling-status" aria-live="polite" style="color:var(--tp-muted-foreground)">Plans above 800 req/s need an upgrade.</output>
-</div>`}
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="3">
+  <tp-slider
+    id="slider-demo-ceiling"
+    label="Rate limit"
+    default-value="500"
+    maximum="1000"
+    step="50"
+  ></tp-slider>
+  <output
+    id="slider-demo-ceiling-status"
+    aria-live="polite"
+    style="color: var(--tp-muted-foreground)"
+    >Plans above 800 req/s need an upgrade.</output
+  >
+</tp-stack>`}
 />
 
 ### Media extensions
@@ -345,11 +415,33 @@ seek.segments = [
   align="stretch"
   script={`document.querySelector('#slider-demo-inline-salary').format = { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 };
 document.querySelector('#slider-demo-inline-commute').format = { style: 'unit', unit: 'minute' };`}
-  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:22rem;margin-inline:auto">
-  <tp-slider id="slider-demo-inline-salary" variant="inline" label="Salary" default-value="45000 90000" minimum="20000" maximum="150000" step="5000"></tp-slider>
-  <tp-slider id="slider-demo-inline-commute" variant="inline" label="Commute" default-value="35" maximum="90" step="5"></tp-slider>
-  <tp-slider variant="inline" label="Office days" default-value="2" maximum="5" ticks="1" snap-to-ticks></tp-slider>
-</div>`}
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="2">
+  <tp-slider
+    id="slider-demo-inline-salary"
+    variant="inline"
+    label="Salary"
+    default-value="45000 90000"
+    minimum="20000"
+    maximum="150000"
+    step="5000"
+  ></tp-slider>
+  <tp-slider
+    id="slider-demo-inline-commute"
+    variant="inline"
+    label="Commute"
+    default-value="35"
+    maximum="90"
+    step="5"
+  ></tp-slider>
+  <tp-slider
+    variant="inline"
+    label="Office days"
+    default-value="2"
+    maximum="5"
+    ticks="1"
+    snap-to-ticks
+  ></tp-slider>
+</tp-stack>`}
 />
 
 `variant="inline"` fits the slider into one row the height of a control, with the label at the start and the value at the end, so several settings stack tightly. The row fills up to the value in the primary color, and a full-height edge marks the value while the row is hovered, dragged or focused. A press anywhere on the row, the label and the value included, moves the value there. Inside a Field, the Field's label moves into the row. A vertical slider keeps its usual look.
@@ -369,10 +461,24 @@ An Icon in the `icon` slot leads the row, outside its boundary.
 <Preview
   title="Editable value"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:22rem;margin-inline:auto">
-  <tp-slider variant="inline" label="Exposure" default-value="0.3" minimum="-2" maximum="2" step="0.1" editable-value></tp-slider>
-  <tp-slider variant="inline" label="Grain" default-value="24" maximum="100" editable-value></tp-slider>
-</div>`}
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="2">
+  <tp-slider
+    variant="inline"
+    label="Exposure"
+    default-value="0.3"
+    minimum="-2"
+    maximum="2"
+    step="0.1"
+    editable-value
+  ></tp-slider>
+  <tp-slider
+    variant="inline"
+    label="Grain"
+    default-value="24"
+    maximum="100"
+    editable-value
+  ></tp-slider>
+</tp-stack>`}
 />
 
 With `editable-value`, a number field stays beside the inline slider, outside its bar. The bar shows the label and fill; only the field shows the value. The whole bar keeps its press and drag behavior. Enter or leaving the field sets the typed value, kept within the range and on the step; Escape discards the edit. Enter and Escape return focus to the slider. The field follows changes to the slider and its disabled and read-only states. A range keeps its plain value.
@@ -382,10 +488,24 @@ With `editable-value`, a number field stays beside the inline slider, outside it
 <Preview
   title="Ticks"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-6);max-inline-size:22rem;margin-inline:auto">
-  <tp-slider label="Stereo balance" default-value="-20" minimum="-50" maximum="50" ticks="10"></tp-slider>
-  <tp-slider label="Playback speed" default-value="1" minimum="0" maximum="2" step="0.01" ticks="0.25" snap-to-ticks></tp-slider>
-</div>`}
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="6">
+  <tp-slider
+    label="Stereo balance"
+    default-value="-20"
+    minimum="-50"
+    maximum="50"
+    ticks="10"
+  ></tp-slider>
+  <tp-slider
+    label="Playback speed"
+    default-value="1"
+    minimum="0"
+    maximum="2"
+    step="0.01"
+    ticks="0.25"
+    snap-to-ticks
+  ></tp-slider>
+</tp-stack>`}
 />
 
 `ticks` draws a mark every so many value units from `minimum`. Every mark is a value the slider can take, and the midpoint, when it is one, gets a longer center mark. Values still move freely on `step`, and a drag that passes close to the center stops on it. With `snap-to-ticks` the ticks become the steps: dragging, the arrow keys and form values all land on a tick. When ticks would crowd a short track, some are left out; the center mark always stays.

@@ -93,7 +93,7 @@ export const Controlled: Story = {
 export const CollapsibleSidebar: Story = {
   tags: ['!autodocs'],
   render: () =>
-    html`<div style="display:grid;gap:var(--tp-space-4)">
+    html`<tp-stack gap="4">
       <tp-button
         variant="outline"
         @click=${(event: Event) => {
@@ -113,5 +113,5 @@ export const CollapsibleSidebar: Story = {
           ><div style="padding:var(--tp-space-6)">Content</div></tp-resizable-panel
         ></tp-resizable-panel-group
       >
-    </div>`,
+    </tp-stack>`,
 };

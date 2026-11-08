@@ -15,3 +15,6 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Drawer | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Edges | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

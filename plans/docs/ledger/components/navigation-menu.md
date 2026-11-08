@@ -12,3 +12,8 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Navigation menu | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Mixed items | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Active link | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Vertical | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

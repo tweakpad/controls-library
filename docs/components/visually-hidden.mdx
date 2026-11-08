@@ -53,7 +53,11 @@ Give the element `role="status"` and change its text when something happens that
 <Preview
   title="Filter results"
   align="stretch"
-  code={`<div id="visually-hidden-filter" style="display:grid;gap:var(--tp-space-3);max-inline-size:24rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack
+  id="visually-hidden-filter"
+  style="max-inline-size: 24rem; margin-inline: auto; inline-size: 100%"
+  gap="3"
+>
   <tp-field label="Filter members">
     <tp-input type="search" placeholder="Name or role"></tp-input>
   </tp-field>
@@ -64,7 +68,7 @@ Give the element `role="status"` and change its text when something happens that
     <tp-list-item description="Engineer">Priya Natarajan</tp-list-item>
   </tp-list>
   <tp-visually-hidden role="status"></tp-visually-hidden>
-</div>`}
+</tp-stack>`}
   script={`const root = document.getElementById('visually-hidden-filter');
 const input = root.querySelector('tp-input');
 const status = root.querySelector('tp-visually-hidden');

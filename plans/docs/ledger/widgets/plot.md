@@ -43,3 +43,5 @@ Palette checks pass: seven examples on both built renderings, light/dark Canvas 
 no application errors (browser pixel-readback performance advisory during verification only);
 shared page 20 tests + page, ESLint and both docs builds pass. Library light/dark colors were
 verified separately from the website application palette, which is inherited as intended.
+
+| preview | Push and revise | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

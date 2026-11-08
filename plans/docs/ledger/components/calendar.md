@@ -30,3 +30,8 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Nightly prices and booked dates | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Quick picks | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | French and Brazilian Portuguese | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Value change | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

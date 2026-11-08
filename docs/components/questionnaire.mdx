@@ -133,10 +133,15 @@ A restored active item alone does not create saved answers; supply `defaultValue
 
 <Preview
   title="Resume a draft"
-  code={`<div style="display:grid;gap:var(--tp-space-4);justify-items:start;inline-size:28rem;max-inline-size:100%">
-  <tp-questionnaire id="questionnaire-resume" label="Migration plan" default-item="verification" style="inline-size:100%"></tp-questionnaire>
+  code={`<tp-stack style="inline-size: 28rem; max-inline-size: 100%" gap="4" align="start">
+  <tp-questionnaire
+    id="questionnaire-resume"
+    label="Migration plan"
+    default-item="verification"
+    style="inline-size: 100%"
+  ></tp-questionnaire>
   <tp-button id="questionnaire-resume-reset" variant="outline" size="sm">Discard changes</tp-button>
-</div>`}
+</tp-stack>`}
   script={`const questionnaire = document.querySelector('#questionnaire-resume');
 questionnaire.questions = [
   {
@@ -267,10 +272,13 @@ FormData retains prior active answers and omits disabled, skipped and unselected
 
 <Preview
   title="Submit"
-  code={`<div style="display:grid;gap:var(--tp-space-4);inline-size:28rem;max-inline-size:100%">
+  code={`<tp-stack style="inline-size: 28rem; max-inline-size: 100%" gap="4">
   <tp-questionnaire id="questionnaire-submit" label="Release review"></tp-questionnaire>
-  <output id="questionnaire-submit-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)"></output>
-</div>`}
+  <output
+    id="questionnaire-submit-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+  ></output>
+</tp-stack>`}
   script={`const questionnaire = document.querySelector('#questionnaire-submit');
 const output = document.querySelector('#questionnaire-submit-output');
 questionnaire.questions = [
@@ -299,9 +307,9 @@ With a controlled aggregate record, Root is the sole answer owner: do not also s
 
 <Preview
   title="Checkpoint and cross-answer validation"
-  code={`<div id="questionnaire-controlled" style="display:grid;gap:var(--tp-space-4);inline-size:28rem;max-inline-size:100%">
-  <output style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)"></output>
-</div>`}
+  code={`<tp-stack id="questionnaire-controlled" style="inline-size: 28rem; max-inline-size: 100%" gap="4">
+  <output style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"></output>
+</tp-stack>`}
   script={`const root = document.querySelector('#questionnaire-controlled');
 const output = root.querySelector('output');
 const questionnaire = document.createElement('tp-questionnaire');
@@ -423,10 +431,10 @@ The `questionnaire-progress` part takes `content` for different wording, or a `r
 const questionnaire = document.querySelector('#questionnaire-progress');
 questionnaire.partContracts = {
   'questionnaire-progress': {
-    renderDelegate: ({ bind, state }) => html\`<div \${bind} style="display:grid;gap:var(--tp-space-2)">
+    renderDelegate: ({ bind, state }) => html\`<tp-stack \${bind} gap="2">
       <tp-progress aria-hidden="true" .value=\${state.current} .maximum=\${state.total}></tp-progress>
       <span>Step \${state.current} of \${state.total}</span>
-    </div>\`,
+    </tp-stack>\`,
   },
 };
 questionnaire.questions = [
@@ -590,14 +598,14 @@ For a short clarification flow, put the Questionnaire in a Dialog. The Dialog ow
 
 <Preview
   title="Clarification dialog"
-  code={`<div id="questionnaire-dialog" style="display:grid;gap:var(--tp-space-3);justify-items:center">
+  code={`<tp-stack id="questionnaire-dialog" gap="3" align="center">
   <tp-dialog label="Clarify the export">
     <tp-button slot="trigger" variant="outline">Export data</tp-button>
     <tp-questionnaire label="Export options"></tp-questionnaire>
     <tp-button slot="close" variant="outline">Cancel</tp-button>
   </tp-dialog>
-  <output style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)"></output>
-</div>`}
+  <output style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"></output>
+</tp-stack>`}
   script={`const root = document.querySelector('#questionnaire-dialog');
 const dialog = root.querySelector('tp-dialog');
 const questionnaire = root.querySelector('tp-questionnaire');

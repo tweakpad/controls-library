@@ -22,3 +22,6 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Positional slots | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Open change | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

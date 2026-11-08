@@ -47,15 +47,19 @@ Activating an item fires a cancelable `tp-action` with the item's `value`, then 
 
 <Preview
   title="Handling commands"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:center">
+  code={`<tp-stack gap="3" align="center">
   <tp-menu id="menu-actions" label="Invoice actions">
     <tp-button slot="trigger" variant="outline">Invoice INV-2041</tp-button>
     <tp-menu-item value="Download PDF">Download PDF</tp-menu-item>
     <tp-menu-item value="Send reminder">Send reminder</tp-menu-item>
     <tp-menu-item value="Mark as paid">Mark as paid</tp-menu-item>
   </tp-menu>
-  <output id="menu-actions-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">No action yet</output>
-</div>`}
+  <output
+    id="menu-actions-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >No action yet</output
+  >
+</tp-stack>`}
   script={`const menu = document.querySelector('#menu-actions');
 const output = document.querySelector('#menu-actions-output');
 menu.addEventListener('tp-action', (event) => {

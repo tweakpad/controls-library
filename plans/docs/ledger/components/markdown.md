@@ -27,3 +27,6 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Streaming | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Custom node rendering | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

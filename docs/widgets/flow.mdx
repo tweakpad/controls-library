@@ -304,15 +304,36 @@ document.querySelector('#flow-panels-layout').addEventListener('click', () => fl
 <Preview
   title="Automatic layout"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);inline-size:100%">
-  <tp-toggle-group id="flow-layout-mode" label="Layout direction" variant="outline" spacing="0" default-value='["horizontal"]' style="justify-self:center">
+  code={`<tp-stack style="inline-size: 100%" gap="3">
+  <tp-toggle-group
+    id="flow-layout-mode"
+    label="Layout direction"
+    variant="outline"
+    spacing="0"
+    default-value='["horizontal"]'
+    style="align-self: center"
+  >
     <tp-toggle value="horizontal">Horizontal</tp-toggle>
     <tp-toggle value="vertical">Vertical</tp-toggle>
     <tp-toggle value="smart">Smart</tp-toggle>
   </tp-toggle-group>
-  <tp-flow id="flow-layout" label="Support triage" auto-layout="horizontal" controls="fit layout undo redo" controls-position="bottom-center" controls-orientation="horizontal" fit-view size="sm" style="inline-size:100%;block-size:24rem"></tp-flow>
-  <output id="flow-layout-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Drag a node, or switch the direction.</output>
-</div>`}
+  <tp-flow
+    id="flow-layout"
+    label="Support triage"
+    auto-layout="horizontal"
+    controls="fit layout undo redo"
+    controls-position="bottom-center"
+    controls-orientation="horizontal"
+    fit-view
+    size="sm"
+    style="inline-size: 100%; block-size: 24rem"
+  ></tp-flow>
+  <output
+    id="flow-layout-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Drag a node, or switch the direction.</output
+  >
+</tp-stack>`}
   script={`await customElements.whenDefined('tp-flow');
 const flow = document.querySelector('#flow-layout');
 const mode = document.querySelector('#flow-layout-mode');
@@ -374,10 +395,21 @@ Every edit is a cancelable `tp-value-change` whose `detail.metadata.changes` lis
 <Preview
   title="Commit and selection"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);inline-size:100%">
-  <tp-flow id="flow-events" label="Signup flow" fit-view controls="fit undo redo" size="sm" style="inline-size:100%;block-size:22.5rem"></tp-flow>
-  <output id="flow-events-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Press a node, drag it or connect two ports.</output>
-</div>`}
+  code={`<tp-stack style="inline-size: 100%" gap="3">
+  <tp-flow
+    id="flow-events"
+    label="Signup flow"
+    fit-view
+    controls="fit undo redo"
+    size="sm"
+    style="inline-size: 100%; block-size: 22.5rem"
+  ></tp-flow>
+  <output
+    id="flow-events-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Press a node, drag it or connect two ports.</output
+  >
+</tp-stack>`}
   script={`await customElements.whenDefined('tp-flow');
 const flow = document.querySelector('#flow-events');
 const output = document.querySelector('#flow-events-output');
@@ -415,9 +447,13 @@ Cancel a `tp-value-change` to refuse an edit, or set `isValidConnection` to a fu
 <Preview
   title="Controlled owner"
   align="stretch"
-  code={`<div id="flow-controlled" style="display:grid;gap:var(--tp-space-3);inline-size:100%">
-  <output id="flow-controlled-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Try connecting Classify topic straight to Send auto-reply.</output>
-</div>`}
+  code={`<tp-stack id="flow-controlled" style="inline-size: 100%" gap="3">
+  <output
+    id="flow-controlled-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Try connecting Classify topic straight to Send auto-reply.</output
+  >
+</tp-stack>`}
   script={`await customElements.whenDefined('tp-flow');
 const host = document.querySelector('#flow-controlled');
 const output = document.querySelector('#flow-controlled-output');
@@ -652,16 +688,35 @@ flow.load({
 <Preview
   title="In a form"
   align="stretch"
-  code={`<form id="flow-form" style="display:grid;gap:var(--tp-space-4);inline-size:100%">
-  <tp-field label="Approval chain" description="Submitted as JSON under its name.">
-    <tp-flow id="flow-form-editor" name="approval-chain" required fit-view controls="fit undo redo" size="sm" style="inline-size:100%;block-size:22.5rem"></tp-flow>
-  </tp-field>
-  <div style="display:flex;gap:var(--tp-space-2)">
-    <tp-button type="submit">Save chain</tp-button>
-    <tp-button type="reset" variant="outline">Reset</tp-button>
-  </div>
+  code={`<form id="flow-form" style="inline-size: 100%">
+  <tp-stack gap="4">
+    <tp-field label="Approval chain" description="Submitted as JSON under its name.">
+      <tp-flow
+        id="flow-form-editor"
+        name="approval-chain"
+        required
+        fit-view
+        controls="fit undo redo"
+        size="sm"
+        style="inline-size: 100%; block-size: 22.5rem"
+      ></tp-flow>
+    </tp-field>
+    <tp-stack direction="row" gap="2">
+      <tp-button type="submit">Save chain</tp-button>
+      <tp-button type="reset" variant="outline">Reset</tp-button>
+    </tp-stack>
+  </tp-stack>
 </form>
-<output id="flow-form-output" style="display:block;margin-block-start:var(--tp-space-3);color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Move or connect a step, then save.</output>`}
+<output
+  id="flow-form-output"
+  style="
+    display: block;
+    margin-block-start: var(--tp-space-3);
+    color: var(--tp-muted-foreground);
+    font-size: var(--tp-text-sm);
+  "
+  >Move or connect a step, then save.</output
+>`}
   script={`await customElements.whenDefined('tp-flow');
 const form = document.querySelector('#flow-form');
 const flow = document.querySelector('#flow-form-editor');

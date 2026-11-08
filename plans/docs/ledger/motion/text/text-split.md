@@ -35,3 +35,5 @@
 | preview | Custom reveal | Text motion was renamed Text split (`tp-mo-text-split`) |
 | preview | Inline formatting | Text motion was renamed Text split (`tp-mo-text-split`) |
 | prose | Put Text motion inside the heading | Text motion was renamed Text split (`tp-mo-text-split`) |
+
+| preview | Scrubbed by the scroll | User-authorized Stack layout migration; preserve content and semantics, translate grid item alignment to flex alignment. |

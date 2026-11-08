@@ -30,7 +30,7 @@ The element edits the stops only and opens nothing. A stop's color, its location
 <Preview
   title="Stop controls"
   align="stretch"
-  code={`<div id="gradient-compose" style="display:grid;gap:var(--tp-space-2);max-inline-size:24rem;margin-inline:auto">
+  code={`<tp-stack id="gradient-compose" style="max-inline-size: 24rem; margin-inline: auto" gap="2">
   <tp-gradient-picker label="Fill" default-selected="0">
     <tp-gradient-stop position="0" color="#f97316"></tp-gradient-stop>
     <tp-gradient-stop position="0.6" color="#db2777"></tp-gradient-stop>
@@ -38,8 +38,16 @@ The element edits the stops only and opens nothing. A stop's color, its location
   </tp-gradient-picker>
   <tp-color-input variant="inline" label="Stop color"></tp-color-input>
   <tp-input variant="inline" label="Location" type="number" unit="%" min="0" max="100"></tp-input>
-  <tp-input variant="inline" label="Rotation" type="number" unit="deg" min="0" max="360" default-value="90"></tp-input>
-</div>`}
+  <tp-input
+    variant="inline"
+    label="Rotation"
+    type="number"
+    unit="deg"
+    min="0"
+    max="360"
+    default-value="90"
+  ></tp-input>
+</tp-stack>`}
   script={`const root = document.querySelector('#gradient-compose');
 const gradient = root.querySelector('tp-gradient-picker');
 const color = root.querySelector('tp-color-input');
@@ -101,7 +109,7 @@ ramp.fillRect(x, 0, 1, canvas.height);
 <Preview
   title="Small and read-only"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:24rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 24rem; margin-inline: auto" gap="4">
   <tp-gradient-picker label="Glow" size="sm">
     <tp-gradient-stop position="0" color="#facc15"></tp-gradient-stop>
     <tp-gradient-stop position="1" color="rgb(250 204 21 / 0)"></tp-gradient-stop>
@@ -111,7 +119,7 @@ ramp.fillRect(x, 0, 1, canvas.height);
     <tp-gradient-stop position="0.5" color="#06b6d4"></tp-gradient-stop>
     <tp-gradient-stop position="1" color="#3b82f6"></tp-gradient-stop>
   </tp-gradient-picker>
-</div>`}
+</tp-stack>`}
 />
 
 ### Field gradients
@@ -133,7 +141,7 @@ ramp.fillRect(x, 0, 1, canvas.height);
 <Preview
   title="Field settings"
   align="stretch"
-  code={`<div id="gradient-field-settings" style="display:grid;gap:var(--tp-space-2);max-inline-size:24rem;margin-inline:auto">
+  code={`<tp-stack id="gradient-field-settings" style="max-inline-size: 24rem; margin-inline: auto" gap="2">
   <tp-gradient-picker variant="field" label="Backdrop" projection="plane">
     <tp-gradient-stop x="0.15" y="0.2" color="#fde68a"></tp-gradient-stop>
     <tp-gradient-stop x="0.8" y="0.35" color="#f472b6"></tp-gradient-stop>
@@ -143,9 +151,23 @@ ramp.fillRect(x, 0, 1, canvas.height);
     <option value="inverse-distance">Inverse distance</option>
     <option value="gaussian">Gaussian</option>
   </tp-select>
-  <tp-slider variant="inline" label="Power" min="0.4" max="6" step="0.05" default-value="2.2"></tp-slider>
-  <tp-slider variant="inline" label="Warp" min="0" max="0.6" step="0.005" default-value="0.12"></tp-slider>
-</div>`}
+  <tp-slider
+    variant="inline"
+    label="Power"
+    min="0.4"
+    max="6"
+    step="0.05"
+    default-value="2.2"
+  ></tp-slider>
+  <tp-slider
+    variant="inline"
+    label="Warp"
+    min="0"
+    max="0.6"
+    step="0.005"
+    default-value="0.12"
+  ></tp-slider>
+</tp-stack>`}
   script={`const root = document.querySelector('#gradient-field-settings');
 const picker = root.querySelector('tp-gradient-picker');
 root.querySelector('tp-select').addEventListener('tp-value-change', (event) => {

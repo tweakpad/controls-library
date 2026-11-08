@@ -105,8 +105,12 @@ Each child Menu uses its nonempty `value`, otherwise its generated/stable `id`. 
 
 <Preview
   title="Active menu"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:center">
-  <output id="menubar-tracked-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">No menu open</output>
+  code={`<tp-stack gap="3" align="center">
+  <output
+    id="menubar-tracked-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >No menu open</output
+  >
   <tp-menubar id="menubar-tracked" aria-label="Mail">
     <tp-menu value="message" label="Message">
       <tp-button slot="trigger" variant="ghost">Message</tp-button>
@@ -119,7 +123,7 @@ Each child Menu uses its nonempty `value`, otherwise its generated/stable `id`. 
       <tp-menu-item value="junk">Move to junk</tp-menu-item>
     </tp-menu>
   </tp-menubar>
-</div>`}
+</tp-stack>`}
   script={`const bar = document.querySelector('#menubar-tracked');
 const output = document.querySelector('#menubar-tracked-output');
 bar.addEventListener('tp-value-change', (event) => {

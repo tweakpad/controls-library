@@ -17,3 +17,6 @@
 | prose | The host exposes `data-overflow-y-start` | The live contract now supplies content fades by default and exposes the shared distance token. |
 
 | prose | Scroll-edge fades are off by default. | User-directed correction: enable through scroll-edge-fade rather than a token override. |
+
+| preview | Horizontal | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Visibility | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

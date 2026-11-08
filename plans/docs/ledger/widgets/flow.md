@@ -51,3 +51,8 @@
 | Kind | A text | Reason |
 | --- | --- | --- |
 | prose | In a node body, `slider`, `number`… | `color` renders inline in node bodies (issue #29); list extended, one clause appended |
+
+| preview | Automatic layout | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Commit and selection | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Controlled owner | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | In a form | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

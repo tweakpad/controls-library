@@ -130,3 +130,56 @@ export async function assertStack() {
   container.replaceChildren();
   return { passed: checks.every((c) => c.passed), checks, mount100Ms };
 }
+
+/** Layout wrappers retain inherited text appearance and fill an assigned content box. */
+export async function assertStackLayoutInheritance(doc = document) {
+  await doc.defaultView.customElements.whenDefined('tp-stack');
+  const parent = doc.createElement('div');
+  parent.style.cssText = 'color:var(--tp-muted-foreground);inline-size:240px';
+  const stack = doc.createElement('tp-stack');
+  stack.style.cssText = 'block-size:192px;padding:16px';
+  stack.direction = 'column';
+  stack.justify = 'end';
+  stack.gap = 2;
+  const first = doc.createElement('span');
+  first.textContent = 'First line';
+  const last = doc.createElement('span');
+  last.textContent = 'Last line';
+  stack.append(first, last);
+  parent.append(stack);
+  doc.body.append(parent);
+  try {
+    await stack.updateComplete;
+    const root = stack.shadowRoot.querySelector('.root');
+    const view = doc.defaultView;
+    const fixed = stack.getBoundingClientRect();
+    const checks = [
+      {
+        name: 'inherits parent text color',
+        passed: view.getComputedStyle(stack).color === view.getComputedStyle(parent).color,
+      },
+      {
+        name: 'flex root fills fixed content box',
+        passed: Math.abs(root.getBoundingClientRect().height - (fixed.height - 32)) < 1,
+      },
+      {
+        name: 'end distribution reaches padded edge',
+        passed: Math.abs(last.getBoundingClientRect().bottom - (fixed.bottom - 16)) < 1,
+      },
+    ];
+    stack.style.blockSize = 'auto';
+    stack.style.minBlockSize = '192px';
+    await new Promise(view.requestAnimationFrame.bind(view));
+    checks.push({
+      name: 'minimum size distributes content without doubling padding',
+      passed:
+        Math.abs(stack.getBoundingClientRect().height - 192) < 1 &&
+        Math.abs(
+          last.getBoundingClientRect().bottom - (stack.getBoundingClientRect().bottom - 16),
+        ) < 1,
+    });
+    return { passed: checks.every((c) => c.passed), checks };
+  } finally {
+    parent.remove();
+  }
+}

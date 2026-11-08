@@ -107,7 +107,7 @@ The video layout's `top`, `center`, `bottom-start` and `bottom-end` slots replac
   content-title="Lesson 4: Composition"
   poster="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1280&q=80"
   playback-rates="0.75 1 1.25 1.5 2"
-  style="max-inline-size:44rem;margin-inline:auto"
+  style="max-inline-size: 44rem; margin-inline: auto"
 >
   <video
     src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
@@ -117,10 +117,16 @@ The video layout's `top`, `center`, `bottom-start` and `bottom-end` slots replac
     playsinline
   ></video>
   <tp-media-video-layout>
-    <div slot="top" style="display:flex;align-items:center;gap:var(--tp-space-2);padding:var(--tp-space-4);color:white">
+    <tp-stack
+      slot="top"
+      style="padding: var(--tp-space-4); color: white"
+      direction="row"
+      gap="2"
+      align="center"
+    >
       <tp-badge variant="secondary">Lesson 4 of 12</tp-badge>
-      <span style="font-weight:500">Composition</span>
-    </div>
+      <span style="font-weight: 500">Composition</span>
+    </tp-stack>
   </tp-media-video-layout>
 </tp-media-player>`}
 />

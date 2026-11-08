@@ -21,3 +21,7 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Value change | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Disabled, read-only and error | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Inline | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

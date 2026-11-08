@@ -27,10 +27,10 @@ Glow border follows each surface's own shape, from a small Button to a multi-lin
 
 <Preview
   title="Controls and fields"
-  code={`<tp-card style="inline-size:min(100%, 22rem)">
-  <h3 slot="header" style="margin:0">Report a sighting</h3>
-  <p slot="description" style="margin:0">Logged to the harbor master's desk.</p>
-  <div style="display:grid;gap:var(--tp-space-4)">
+  code={`<tp-card style="inline-size: min(100%, 22rem)">
+  <h3 slot="header" style="margin: 0">Report a sighting</h3>
+  <p slot="description" style="margin: 0">Logged to the harbor master's desk.</p>
+  <tp-stack gap="4">
     <tp-field label="Vessel">
       <tp-mo-glow-border trigger="focus" lights="1">
         <tp-input placeholder="Name or hull number"></tp-input>
@@ -41,7 +41,7 @@ Glow border follows each surface's own shape, from a small Button to a multi-lin
         <tp-text-area rows="3" placeholder="Course, speed, flags"></tp-text-area>
       </tp-mo-glow-border>
     </tp-field>
-  </div>
+  </tp-stack>
   <tp-button slot="footer">Send report</tp-button>
 </tp-card>`}
 />

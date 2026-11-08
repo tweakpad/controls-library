@@ -47,14 +47,32 @@ A Scroll Area keeps the browser's own scrolling (wheel, touch, keyboard, focus a
 <Preview
   title="Horizontal"
   align="stretch"
-  code={`<tp-scroll-area label="Recent files" orientation="horizontal" style="max-inline-size:32rem;border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-lg)">
-  <div style="display:flex;gap:var(--tp-space-3);padding:var(--tp-space-4);inline-size:max-content">
-    <tp-card style="inline-size:10rem;padding:var(--tp-space-4);font-size:var(--tp-text-sm)">Brand guidelines.pdf</tp-card>
-    <tp-card style="inline-size:10rem;padding:var(--tp-space-4);font-size:var(--tp-text-sm)">Q3 roadmap.key</tp-card>
-    <tp-card style="inline-size:10rem;padding:var(--tp-space-4);font-size:var(--tp-text-sm)">Pricing model.xlsx</tp-card>
-    <tp-card style="inline-size:10rem;padding:var(--tp-space-4);font-size:var(--tp-text-sm)">Hiring plan.docx</tp-card>
-    <tp-card style="inline-size:10rem;padding:var(--tp-space-4);font-size:var(--tp-text-sm)">Launch checklist.md</tp-card>
-  </div>
+  code={`<tp-scroll-area
+  label="Recent files"
+  orientation="horizontal"
+  style="
+    max-inline-size: 32rem;
+    border: var(--tp-border-width) solid var(--tp-border);
+    border-radius: var(--tp-radius-lg);
+  "
+>
+  <tp-stack style="padding: var(--tp-space-4); inline-size: max-content" direction="row" gap="3">
+    <tp-card style="inline-size: 10rem; padding: var(--tp-space-4); font-size: var(--tp-text-sm)"
+      >Brand guidelines.pdf</tp-card
+    >
+    <tp-card style="inline-size: 10rem; padding: var(--tp-space-4); font-size: var(--tp-text-sm)"
+      >Q3 roadmap.key</tp-card
+    >
+    <tp-card style="inline-size: 10rem; padding: var(--tp-space-4); font-size: var(--tp-text-sm)"
+      >Pricing model.xlsx</tp-card
+    >
+    <tp-card style="inline-size: 10rem; padding: var(--tp-space-4); font-size: var(--tp-text-sm)"
+      >Hiring plan.docx</tp-card
+    >
+    <tp-card style="inline-size: 10rem; padding: var(--tp-space-4); font-size: var(--tp-text-sm)"
+      >Launch checklist.md</tp-card
+    >
+  </tp-stack>
 </tp-scroll-area>`}
 />
 
@@ -95,20 +113,46 @@ A Scroll Area keeps the browser's own scrolling (wheel, touch, keyboard, focus a
 
 <Preview
   title="Visibility"
-  code={`<div style="display:flex;flex-wrap:wrap;gap:var(--tp-space-6)">
-  <tp-scroll-area label="Members, hover to reveal" scrollbar-visibility="on-hover" style="block-size:9rem;inline-size:12rem;border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-lg)">
-    <div style="display:grid;gap:var(--tp-space-2);padding:var(--tp-space-3) var(--tp-space-4);font-size:var(--tp-text-sm)">
+  code={`<tp-stack direction="row" gap="6" wrap="wrap">
+  <tp-scroll-area
+    label="Members, hover to reveal"
+    scrollbar-visibility="on-hover"
+    style="
+      block-size: 9rem;
+      inline-size: 12rem;
+      border: var(--tp-border-width) solid var(--tp-border);
+      border-radius: var(--tp-radius-lg);
+    "
+  >
+    <tp-stack
+      style="padding: var(--tp-space-3) var(--tp-space-4); font-size: var(--tp-text-sm)"
+      gap="2"
+    >
       <strong>on-hover</strong>
-      <span>Ada Okafor</span><span>Ben Carter</span><span>Chloé Martin</span><span>Diego Alvarez</span><span>Emi Tanaka</span><span>Farah Haddad</span>
-    </div>
+      <span>Ada Okafor</span><span>Ben Carter</span><span>Chloé Martin</span
+      ><span>Diego Alvarez</span><span>Emi Tanaka</span><span>Farah Haddad</span>
+    </tp-stack>
   </tp-scroll-area>
-  <tp-scroll-area label="Members, always visible" scrollbar-visibility="always" style="block-size:9rem;inline-size:12rem;border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-lg)">
-    <div style="display:grid;gap:var(--tp-space-2);padding:var(--tp-space-3) var(--tp-space-4);font-size:var(--tp-text-sm)">
+  <tp-scroll-area
+    label="Members, always visible"
+    scrollbar-visibility="always"
+    style="
+      block-size: 9rem;
+      inline-size: 12rem;
+      border: var(--tp-border-width) solid var(--tp-border);
+      border-radius: var(--tp-radius-lg);
+    "
+  >
+    <tp-stack
+      style="padding: var(--tp-space-3) var(--tp-space-4); font-size: var(--tp-text-sm)"
+      gap="2"
+    >
       <strong>always</strong>
-      <span>Ada Okafor</span><span>Ben Carter</span><span>Chloé Martin</span><span>Diego Alvarez</span><span>Emi Tanaka</span><span>Farah Haddad</span>
-    </div>
+      <span>Ada Okafor</span><span>Ben Carter</span><span>Chloé Martin</span
+      ><span>Diego Alvarez</span><span>Emi Tanaka</span><span>Farah Haddad</span>
+    </tp-stack>
   </tp-scroll-area>
-</div>`}
+</tp-stack>`}
 />
 
 ### Overflow markers
@@ -117,17 +161,22 @@ The host exposes `data-overflow-y-start` and `data-overflow-y-end` while content
 
 <Preview
   title="Edge fade"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:start">
-  <tp-scroll-area id="scroll-area-fade" label="Terms of service" scroll-edge-fade style="block-size:10rem;inline-size:18rem;max-inline-size:100%">
-    <div style="display:grid;gap:var(--tp-space-3);font-size:var(--tp-text-sm);line-height:var(--tp-leading-relaxed)">
-      <p style="margin:0">These terms govern your use of Tweakpad and any workspace you create or join.</p>
-      <p style="margin:0">You keep ownership of the content you upload. You grant us the rights needed to host and display it to the people you share it with.</p>
-      <p style="margin:0">Paid plans renew automatically each billing period until cancelled from the Billing page.</p>
-      <p style="margin:0">We may update these terms. Material changes are announced by email at least 30 days in advance.</p>
-    </div>
+  code={`<tp-stack gap="3" align="start">
+  <tp-scroll-area
+    id="scroll-area-fade"
+    label="Terms of service"
+    scroll-edge-fade
+    style="block-size: 10rem; inline-size: 18rem; max-inline-size: 100%"
+  >
+    <tp-stack style="font-size: var(--tp-text-sm); line-height: var(--tp-leading-relaxed)" gap="3">
+      <p style="margin: 0">These terms govern your use of Tweakpad and any workspace you create or join.</p>
+      <p style="margin: 0">You keep ownership of the content you upload. You grant us the rights needed to host and display it to the people you share it with.</p>
+      <p style="margin: 0">Paid plans renew automatically each billing period until cancelled from the Billing page.</p>
+      <p style="margin: 0">We may update these terms. Material changes are announced by email at least 30 days in advance.</p>
+    </tp-stack>
   </tp-scroll-area>
   <tp-button id="scroll-area-fade-top" variant="outline" size="sm">Back to top</tp-button>
-</div>`}
+</tp-stack>`}
   script={`await customElements.whenDefined('tp-scroll-area');
 const area = document.querySelector('#scroll-area-fade');
 document.querySelector('#scroll-area-fade-top').addEventListener('click', () => {

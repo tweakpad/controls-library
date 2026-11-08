@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-08T18:48:11.348Z",
+  "generatedAt": "2026-11-08T20:59:42.157Z",
   "version": "0.3.0",
   "method": "Each row imports and registers one component or widget from its public package entry. Rolldown tree-shakes and minifies an independent production JavaScript bundle, then measures its output before and after gzip. Required dependencies and embedded styles are included; Lit, optional engines, source maps and the separate global stylesheet are excluded. Each row's React and Vue sizes import its binding from @tweakpad/ui/react and @tweakpad/ui/vue the same way (the framework excluded); each adapter is measured alone. Sizes use kB of 1000 bytes.",
   "lit": { "bytes": 15977, "gzip": 6060 },
   "reactAdapter": { "bytes": 1100, "gzip": 603 },
   "vueAdapter": { "bytes": 1440, "gzip": 779 },
-  "full": { "bytes": 2054367, "gzip": 580245 },
+  "full": { "bytes": 2054390, "gzip": 580256 },
   "fullWidgets": { "bytes": 1695634, "gzip": 489598 },
   "components": [
     {
@@ -1288,10 +1288,10 @@
       "name": "Stack",
       "tagName": "tp-stack",
       "section": "components",
-      "react": { "bytes": 30625, "gzip": 10113 },
-      "vue": { "bytes": 30938, "gzip": 10289 },
-      "bytes": 29755,
-      "gzip": 9775,
+      "react": { "bytes": 30648, "gzip": 10121 },
+      "vue": { "bytes": 30961, "gzip": 10297 },
+      "bytes": 29778,
+      "gzip": 9783,
       "modules": 19,
       "includes": []
     },

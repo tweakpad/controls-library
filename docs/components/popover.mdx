@@ -38,11 +38,11 @@ Title and Description are optional when the popup has an adequate accessible nam
   <tp-button slot="trigger" variant="outline">Notifications</tp-button>
   <span slot="title">Notifications</span>
   <span slot="description">Choose what reaches your inbox.</span>
-  <div style="display:grid;gap:var(--tp-space-3)">
+  <tp-stack gap="3">
     <tp-checkbox default-checked>Mentions and replies</tp-checkbox>
     <tp-checkbox default-checked>Weekly project digest</tp-checkbox>
     <tp-checkbox>Product announcements</tp-checkbox>
-  </div>
+  </tp-stack>
 </tp-popover>`}
 />
 
@@ -109,12 +109,27 @@ Without a Trigger, the owner opens the Popover: it sets `open`, places the popup
 
 <Preview
   title="Separate anchor"
-  code={`<tp-popover label="Reschedule task" placement="block-end start" style="display:grid;justify-items:start;gap:var(--tp-space-3)">
+  code={`<tp-popover
+  label="Reschedule task"
+  placement="block-end start"
+  style="display: grid; justify-items: start; gap: var(--tp-space-3)"
+>
   <tp-button slot="trigger" variant="outline" size="sm">Reschedule</tp-button>
-  <div slot="anchor" style="display:flex;justify-content:space-between;gap:var(--tp-space-6);padding:var(--tp-space-3) var(--tp-space-4);border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-lg);font-size:var(--tp-text-sm)">
+  <tp-stack
+    slot="anchor"
+    style="
+      padding: var(--tp-space-3) var(--tp-space-4);
+      border: var(--tp-border-width) solid var(--tp-border);
+      border-radius: var(--tp-radius-lg);
+      font-size: var(--tp-text-sm);
+    "
+    direction="row"
+    gap="6"
+    justify="space-between"
+  >
     <span>Ship onboarding checklist</span>
-    <span style="color:var(--tp-muted-foreground)">Due Oct 14</span>
-  </div>
+    <span style="color: var(--tp-muted-foreground)">Due Oct 14</span>
+  </tp-stack>
   <span slot="title">Reschedule task</span>
   <span slot="description">The popup aligns with the task row, not the button.</span>
   <tp-field label="New due date">
@@ -130,7 +145,7 @@ Listen to `tp-open-change` to react to opening and closing, or set `open` yourse
 
 <Preview
   title="Open change"
-  code={`<div style="display:grid;justify-items:center;gap:var(--tp-space-3)">
+  code={`<tp-stack gap="3" align="center">
   <tp-popover id="popover-controlled" label="Share document">
     <tp-button slot="trigger" variant="outline">Share</tp-button>
     <span slot="title">Share document</span>
@@ -139,8 +154,12 @@ Listen to `tp-open-change` to react to opening and closing, or set `open` yourse
     </tp-field>
     <tp-button slot="close">Done</tp-button>
   </tp-popover>
-  <output id="popover-controlled-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Closed</output>
-</div>`}
+  <output
+    id="popover-controlled-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Closed</output
+  >
+</tp-stack>`}
   script={`const popover = document.querySelector('#popover-controlled');
 const output = document.querySelector('#popover-controlled-output');
 popover.addEventListener('tp-open-change', (event) => {

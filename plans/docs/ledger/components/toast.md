@@ -10,3 +10,6 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Types | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Manager | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

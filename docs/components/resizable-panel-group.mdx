@@ -91,18 +91,25 @@ Expansion restores the most recent valid expanded size, then the default or mini
 <Preview
   title="Collapsible sidebar"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:start">
+  code={`<tp-stack gap="3" align="start">
   <tp-button id="resizable-toggle" variant="outline" size="sm">Toggle sidebar</tp-button>
-  <tp-resizable-panel-group style="inline-size:100%;block-size:12rem;border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-lg)">
+  <tp-resizable-panel-group
+    style="
+      inline-size: 100%;
+      block-size: 12rem;
+      border: var(--tp-border-width) solid var(--tp-border);
+      border-radius: var(--tp-radius-lg);
+    "
+  >
     <tp-resizable-panel id="resizable-sidebar" default-size="28%" min-size="18%" collapsible>
-      <div style="padding:var(--tp-space-4);font-size:var(--tp-text-sm)">Channels</div>
+      <div style="padding: var(--tp-space-4); font-size: var(--tp-text-sm)">Channels</div>
     </tp-resizable-panel>
     <tp-resizable-handle label="Resize sidebar" with-handle></tp-resizable-handle>
     <tp-resizable-panel min-size="40%">
-      <div style="padding:var(--tp-space-4);font-size:var(--tp-text-sm)">#design-reviews</div>
+      <div style="padding: var(--tp-space-4); font-size: var(--tp-text-sm)">#design-reviews</div>
     </tp-resizable-panel>
   </tp-resizable-panel-group>
-</div>`}
+</tp-stack>`}
   script={`await customElements.whenDefined('tp-resizable-panel');
 const panel = document.querySelector('#resizable-sidebar');
 document.querySelector('#resizable-toggle').addEventListener('click', () => {
@@ -120,18 +127,33 @@ Stable authored panel IDs are required when saving a layout across page loads. M
 <Preview
   title="Layout events"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3)">
-  <tp-resizable-panel-group id="resizable-layout" style="block-size:10rem;border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-lg)">
+  code={`<tp-stack gap="3">
+  <tp-resizable-panel-group
+    id="resizable-layout"
+    style="
+      block-size: 10rem;
+      border: var(--tp-border-width) solid var(--tp-border);
+      border-radius: var(--tp-radius-lg);
+    "
+  >
     <tp-resizable-panel id="resizable-preview" default-size="50%" min-size="20%">
-      <div style="padding:var(--tp-space-4);font-size:var(--tp-text-sm)">Preview</div>
+      <div style="padding: var(--tp-space-4); font-size: var(--tp-text-sm)">Preview</div>
     </tp-resizable-panel>
     <tp-resizable-handle label="Resize preview" with-handle></tp-resizable-handle>
     <tp-resizable-panel id="resizable-inspector" min-size="20%">
-      <div style="padding:var(--tp-space-4);font-size:var(--tp-text-sm)">Inspector</div>
+      <div style="padding: var(--tp-space-4); font-size: var(--tp-text-sm)">Inspector</div>
     </tp-resizable-panel>
   </tp-resizable-panel-group>
-  <output id="resizable-layout-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm);font-family:var(--tp-font-mono)">Drag the handle</output>
-</div>`}
+  <output
+    id="resizable-layout-output"
+    style="
+      color: var(--tp-muted-foreground);
+      font-size: var(--tp-text-sm);
+      font-family: var(--tp-font-mono);
+    "
+    >Drag the handle</output
+  >
+</tp-stack>`}
   script={`const group = document.querySelector('#resizable-layout');
 const output = document.querySelector('#resizable-layout-output');
 group.addEventListener('tp-layout-change', (event) => {
@@ -149,21 +171,28 @@ Set `sizes` to own the layout, in panel order, and accept each proposal in `onSi
 <Preview
   title="Layout presets"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3)">
-  <div style="display:flex;gap:var(--tp-space-2)">
+  code={`<tp-stack gap="3">
+  <tp-stack direction="row" gap="2">
     <tp-button id="resizable-preset-split" variant="outline" size="sm">Side by side</tp-button>
     <tp-button id="resizable-preset-focus" variant="outline" size="sm">Focus on code</tp-button>
-  </div>
-  <tp-resizable-panel-group id="resizable-controlled" style="block-size:10rem;border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-lg)">
+  </tp-stack>
+  <tp-resizable-panel-group
+    id="resizable-controlled"
+    style="
+      block-size: 10rem;
+      border: var(--tp-border-width) solid var(--tp-border);
+      border-radius: var(--tp-radius-lg);
+    "
+  >
     <tp-resizable-panel id="resizable-controlled-code" min-size="20%">
-      <div style="padding:var(--tp-space-4);font-size:var(--tp-text-sm)">checkout.tsx</div>
+      <div style="padding: var(--tp-space-4); font-size: var(--tp-text-sm)">checkout.tsx</div>
     </tp-resizable-panel>
     <tp-resizable-handle label="Resize code" with-handle></tp-resizable-handle>
     <tp-resizable-panel id="resizable-controlled-preview" min-size="15%">
-      <div style="padding:var(--tp-space-4);font-size:var(--tp-text-sm)">Preview</div>
+      <div style="padding: var(--tp-space-4); font-size: var(--tp-text-sm)">Preview</div>
     </tp-resizable-panel>
   </tp-resizable-panel-group>
-</div>`}
+</tp-stack>`}
   script={`// sizes must be set before the group first connects, so this demo swaps in a fresh copy.
 await customElements.whenDefined('tp-resizable-panel-group');
 const authored = document.querySelector('#resizable-controlled');
@@ -188,18 +217,28 @@ Give the group a `persistence-key` and a `persistenceAdapter` with `load(key)` a
 <Preview
   title="Persisted sizes"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3)">
-  <tp-resizable-panel-group id="resizable-saved" persistence-key="docs-mail-layout" style="block-size:10rem;border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-lg)">
+  code={`<tp-stack gap="3">
+  <tp-resizable-panel-group
+    id="resizable-saved"
+    persistence-key="docs-mail-layout"
+    style="
+      block-size: 10rem;
+      border: var(--tp-border-width) solid var(--tp-border);
+      border-radius: var(--tp-radius-lg);
+    "
+  >
     <tp-resizable-panel id="resizable-saved-folders" default-size="25%" min-size="15%">
-      <div style="padding:var(--tp-space-4);font-size:var(--tp-text-sm)">Folders</div>
+      <div style="padding: var(--tp-space-4); font-size: var(--tp-text-sm)">Folders</div>
     </tp-resizable-panel>
     <tp-resizable-handle label="Resize folders" with-handle></tp-resizable-handle>
     <tp-resizable-panel id="resizable-saved-messages" min-size="30%">
-      <div style="padding:var(--tp-space-4);font-size:var(--tp-text-sm)">Messages</div>
+      <div style="padding: var(--tp-space-4); font-size: var(--tp-text-sm)">Messages</div>
     </tp-resizable-panel>
   </tp-resizable-panel-group>
-  <span style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Drag the handle, then press Refresh or reload the page.</span>
-</div>`}
+  <span style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Drag the handle, then press Refresh or reload the page.</span
+  >
+</tp-stack>`}
   script={`// The adapter must be set before the group first connects, so this demo swaps in a fresh copy.
 await customElements.whenDefined('tp-resizable-panel-group');
 const authored = document.querySelector('#resizable-saved');

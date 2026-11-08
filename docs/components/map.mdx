@@ -272,7 +272,7 @@ When pins carry essential information, pair the map with a list of the same plac
 <Preview
   title="Map with a list"
   align="stretch"
-  code={`<div style="display:flex;flex-wrap:wrap;gap:var(--tp-space-4);align-items:start">
+  code={`<tp-stack direction="row" gap="4" align="start" wrap="wrap">
   <tp-map
     id="map-list-demo"
     data-engine="tiles"
@@ -280,18 +280,39 @@ When pins carry essential information, pair the map with a list of the same plac
     default-bounds="38.705,-9.16,38.725,-9.13"
     reveal="if-hidden"
     controls="fit-pins"
-    style="flex:2 1 24rem;min-inline-size:0"
+    style="flex: 2 1 24rem; min-inline-size: 0"
   >
-    <tp-map-pin value="copenhagen" latitude="38.7106" longitude="-9.1446" label="Copenhagen Coffee Lab"></tp-map-pin>
-    <tp-map-pin value="fabrica" latitude="38.7180" longitude="-9.1430" label="Fábrica Coffee Roasters"></tp-map-pin>
-    <tp-map-pin value="hello-kristof" latitude="38.7135" longitude="-9.1505" label="Hello, Kristof"></tp-map-pin>
+    <tp-map-pin
+      value="copenhagen"
+      latitude="38.7106"
+      longitude="-9.1446"
+      label="Copenhagen Coffee Lab"
+    ></tp-map-pin>
+    <tp-map-pin
+      value="fabrica"
+      latitude="38.7180"
+      longitude="-9.1430"
+      label="Fábrica Coffee Roasters"
+    ></tp-map-pin>
+    <tp-map-pin
+      value="hello-kristof"
+      latitude="38.7135"
+      longitude="-9.1505"
+      label="Hello, Kristof"
+    ></tp-map-pin>
   </tp-map>
-  <tp-list id="map-list-places" aria-label="Coffee near the office" style="flex:1 1 14rem">
-    <tp-list-item value="copenhagen" description="R. Nova da Piedade 10">Copenhagen Coffee Lab</tp-list-item>
-    <tp-list-item value="fabrica" description="R. das Portas de Santo Antão 136">Fábrica Coffee Roasters</tp-list-item>
-    <tp-list-item value="hello-kristof" description="R. do Poço dos Negros 103">Hello, Kristof</tp-list-item>
+  <tp-list id="map-list-places" aria-label="Coffee near the office" style="flex: 1 1 14rem">
+    <tp-list-item value="copenhagen" description="R. Nova da Piedade 10"
+      >Copenhagen Coffee Lab</tp-list-item
+    >
+    <tp-list-item value="fabrica" description="R. das Portas de Santo Antão 136"
+      >Fábrica Coffee Roasters</tp-list-item
+    >
+    <tp-list-item value="hello-kristof" description="R. do Poço dos Negros 103"
+      >Hello, Kristof</tp-list-item
+    >
   </tp-list>
-</div>`}
+</tp-stack>`}
   script={`await customElements.whenDefined('tp-map');
 const map = document.getElementById('map-list-demo');
 const list = document.getElementById('map-list-places');
@@ -313,7 +334,7 @@ The **home view** is `default-bounds`, else `default-center` with `default-zoom`
 <Preview
   title="External controls"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3)">
+  code={`<tp-stack gap="3">
   <tp-button-group label="Map view">
     <tp-map-control map="map-controls-demo" action="zoom-in"></tp-map-control>
     <tp-map-control map="map-controls-demo" action="zoom-out"></tp-map-control>
@@ -325,9 +346,9 @@ The **home view** is `default-bounds`, else `default-center` with `default-zoom`
     label="Delivery area"
     default-center="38.7369,-9.1427"
     default-zoom="12"
-    style="block-size:calc(var(--tp-space-16) * 4)"
+    style="block-size: calc(var(--tp-space-16) * 4)"
   ></tp-map>
-</div>`}
+</tp-stack>`}
 />
 
 Controls stay focusable and become `aria-disabled` while the map is loading or at a zoom limit, so keyboard users always find them in the same place.

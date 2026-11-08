@@ -106,7 +106,7 @@ calendar.renderDay = (day) => {
   if (day.modifiers.booked) return html\`<s>\${number}</s>\`;
   if (day.outside) return undefined;
   const price = weekend(day.date) ? '$180' : '$140';
-  return html\`<span style="display:grid;line-height:1.1">\${number}<small style="font-size:var(--tp-text-xs);opacity:0.7">\${price}</small></span>\`;
+  return html\`<tp-stack style="line-height:1.1">\${number}<small style="font-size:var(--tp-text-xs);opacity:0.7">\${price}</small></tp-stack>\`;
 };`}
 />
 
@@ -168,14 +168,29 @@ Without navigation bounds, the year dropdown offers the current year minus 100 t
 
 <Preview
   title="Quick picks"
-  code={`<tp-card id="calendar-presets" size="sm" section-colors="off" style="inline-size:fit-content;max-inline-size:20rem">
-  <tp-calendar label="Follow-up date" today="2026-02-12" value="2026-02-12" displayed-month="2026-02-01" fixed-weeks></tp-calendar>
-  <div slot="footer" style="display:flex;flex-wrap:wrap;gap:var(--tp-space-2)">
-    <tp-button variant="outline" size="sm" data-days="0" style="flex:1 0 auto">Today</tp-button>
-    <tp-button variant="outline" size="sm" data-days="1" style="flex:1 0 auto">Tomorrow</tp-button>
-    <tp-button variant="outline" size="sm" data-days="7" style="flex:1 0 auto">Next week</tp-button>
-    <tp-button variant="outline" size="sm" data-days="30" style="flex:1 0 auto">In 30 days</tp-button>
-  </div>
+  code={`<tp-card
+  id="calendar-presets"
+  size="sm"
+  section-colors="off"
+  style="inline-size: fit-content; max-inline-size: 20rem"
+>
+  <tp-calendar
+    label="Follow-up date"
+    today="2026-02-12"
+    value="2026-02-12"
+    displayed-month="2026-02-01"
+    fixed-weeks
+  ></tp-calendar>
+  <tp-stack slot="footer" direction="row" gap="2" wrap="wrap">
+    <tp-button variant="outline" size="sm" data-days="0" style="flex: 1 0 auto">Today</tp-button>
+    <tp-button variant="outline" size="sm" data-days="1" style="flex: 1 0 auto">Tomorrow</tp-button>
+    <tp-button variant="outline" size="sm" data-days="7" style="flex: 1 0 auto"
+      >Next week</tp-button
+    >
+    <tp-button variant="outline" size="sm" data-days="30" style="flex: 1 0 auto"
+      >In 30 days</tp-button
+    >
+  </tp-stack>
 </tp-card>`}
   script={`await customElements.whenDefined('tp-calendar');
 const card = document.getElementById('calendar-presets');
@@ -226,14 +241,25 @@ Calendar values are dates only. Collect times in labelled time inputs beside it 
 
 <Preview
   title="French and Brazilian Portuguese"
-  code={`<div style="display:flex;flex-wrap:wrap;gap:var(--tp-space-4);justify-content:center">
-  <tp-card section-colors="off" style="inline-size:fit-content">
-    <tp-calendar id="calendar-locale-fr" label="Date de livraison" locale="fr" today="2026-06-08" default-value="2026-06-12"></tp-calendar>
+  code={`<tp-stack direction="row" gap="4" justify="center" wrap="wrap">
+  <tp-card section-colors="off" style="inline-size: fit-content">
+    <tp-calendar
+      id="calendar-locale-fr"
+      label="Date de livraison"
+      locale="fr"
+      today="2026-06-08"
+      default-value="2026-06-12"
+    ></tp-calendar>
   </tp-card>
-  <tp-card section-colors="off" style="inline-size:fit-content">
-    <tp-calendar label="Data de entrega" locale="pt-BR" today="2026-06-08" default-value="2026-06-12"></tp-calendar>
+  <tp-card section-colors="off" style="inline-size: fit-content">
+    <tp-calendar
+      label="Data de entrega"
+      locale="pt-BR"
+      today="2026-06-08"
+      default-value="2026-06-12"
+    ></tp-calendar>
   </tp-card>
-</div>`}
+</tp-stack>`}
   script={`await customElements.whenDefined('tp-calendar');
 document.getElementById('calendar-locale-fr').messages = {
   previous: (_month, caption) => 'Mois précédent, ' + caption,
@@ -319,12 +345,23 @@ With a `name`, the Calendar submits its value and takes part in validation; `req
 
 <Preview
   title="Value change"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:center">
-  <tp-card section-colors="off" style="inline-size:fit-content">
-    <tp-calendar id="calendar-events" label="Due date" name="due" required today="2026-06-08" default-value="2026-06-15"></tp-calendar>
+  code={`<tp-stack gap="3" align="center">
+  <tp-card section-colors="off" style="inline-size: fit-content">
+    <tp-calendar
+      id="calendar-events"
+      label="Due date"
+      name="due"
+      required
+      today="2026-06-08"
+      default-value="2026-06-15"
+    ></tp-calendar>
   </tp-card>
-  <output id="calendar-events-output" style="font-size:var(--tp-text-sm);color:var(--tp-muted-foreground)">Due: 2026-06-15</output>
-</div>`}
+  <output
+    id="calendar-events-output"
+    style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)"
+    >Due: 2026-06-15</output
+  >
+</tp-stack>`}
   script={`const calendar = document.getElementById('calendar-events');
 const output = document.getElementById('calendar-events-output');
 calendar.addEventListener('tp-value-change', (event) => {

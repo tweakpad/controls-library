@@ -106,12 +106,12 @@ Without `locale`, the closest `lang` decides separators, digits and currency pla
 
 <Preview
   title="Locales"
-  code={`<div style="display:grid;gap:var(--tp-space-2);font-size:var(--tp-text-sm)">
+  code={`<tp-stack style="font-size: var(--tp-text-sm)" gap="2">
   <span lang="en-US">en-US · <tp-text-transform preset="currency" currency="EUR" value="1234.5"></tp-text-transform> · <tp-text-transform preset="number" value="9876543.21"></tp-text-transform></span>
   <span lang="de-DE">de-DE · <tp-text-transform preset="currency" currency="EUR" value="1234.5"></tp-text-transform> · <tp-text-transform preset="number" value="9876543.21"></tp-text-transform></span>
   <span lang="fr-FR">fr-FR · <tp-text-transform preset="currency" currency="EUR" value="1234.5"></tp-text-transform> · <tp-text-transform preset="number" value="9876543.21"></tp-text-transform></span>
   <span>ja-JP · <tp-text-transform locale="ja-JP" preset="currency" currency="JPY" value="1234500"></tp-text-transform></span>
-</div>`}
+</tp-stack>`}
 />
 
 ### Truncation
@@ -121,14 +121,28 @@ Without `locale`, the closest `lang` decides separators, digits and currency pla
 <Preview
   title="Truncation"
   align="stretch"
-  code={`<tp-resizable-panel-group style="block-size:11rem;border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-lg)">
+  code={`<tp-resizable-panel-group
+  style="
+    block-size: 11rem;
+    border: var(--tp-border-width) solid var(--tp-border);
+    border-radius: var(--tp-radius-lg);
+  "
+>
   <tp-resizable-panel default-size="40%" min-size="15%">
-    <div style="display:grid;gap:var(--tp-space-3);padding:var(--tp-space-4);font-size:var(--tp-text-sm)">
-      <tp-text-transform truncate="end">Migrate billing to usage-based pricing before the October release</tp-text-transform>
-      <tp-text-transform truncate="end" truncate-by="words">Migrate billing to usage-based pricing before the October release</tp-text-transform>
-      <tp-text-transform truncate="middle">design-review-2026-10-14-final-screenshots.zip</tp-text-transform>
-      <tp-text-transform truncate="start">/workspace/marketing/campaigns/autumn-launch/brief.pdf</tp-text-transform>
-    </div>
+    <tp-stack style="padding: var(--tp-space-4); font-size: var(--tp-text-sm)" gap="3">
+      <tp-text-transform truncate="end"
+        >Migrate billing to usage-based pricing before the October release</tp-text-transform
+      >
+      <tp-text-transform truncate="end" truncate-by="words"
+        >Migrate billing to usage-based pricing before the October release</tp-text-transform
+      >
+      <tp-text-transform truncate="middle"
+        >design-review-2026-10-14-final-screenshots.zip</tp-text-transform
+      >
+      <tp-text-transform truncate="start"
+        >/workspace/marketing/campaigns/autumn-launch/brief.pdf</tp-text-transform
+      >
+    </tp-stack>
   </tp-resizable-panel>
   <tp-resizable-handle label="Resize the list" with-handle></tp-resizable-handle>
   <tp-resizable-panel min-size="20%"></tp-resizable-panel>
@@ -143,11 +157,19 @@ While shortened, the value can be focused and shows the full text in a tooltip; 
 
 <Preview
   title="Length limits"
-  code={`<div style="display:grid;gap:var(--tp-space-2);font-size:var(--tp-text-sm)">
-  <tp-text-transform max-length="32">Thanks for the quick turnaround on the pricing page copy, it reads much better now.</tp-text-transform>
-  <tp-text-transform max-length="6" truncate-by="words">Thanks for the quick turnaround on the pricing page copy, it reads much better now.</tp-text-transform>
-  <tp-text-transform max-length="24" truncate="middle">design-review-2026-10-14-final-screenshots.zip</tp-text-transform>
-</div>`}
+  code={`<tp-stack style="font-size: var(--tp-text-sm)" gap="2">
+  <tp-text-transform max-length="32"
+    >Thanks for the quick turnaround on the pricing page copy, it reads much better
+    now.</tp-text-transform
+  >
+  <tp-text-transform max-length="6" truncate-by="words"
+    >Thanks for the quick turnaround on the pricing page copy, it reads much better
+    now.</tp-text-transform
+  >
+  <tp-text-transform max-length="24" truncate="middle"
+    >design-review-2026-10-14-final-screenshots.zip</tp-text-transform
+  >
+</tp-stack>`}
 />
 
 ### Formatters
@@ -156,10 +178,10 @@ The `formatter` property replaces the preset for one element. It receives a cont
 
 <Preview
   title="Formatter"
-  code={`<div id="text-transform-formatter" style="display:grid;gap:var(--tp-space-2);font-size:var(--tp-text-sm)">
+  code={`<tp-stack id="text-transform-formatter" style="font-size: var(--tp-text-sm)" gap="2">
   <tp-text-transform data-format="seats" value="0.18"></tp-text-transform>
   <tp-text-transform data-format="order" value="482"></tp-text-transform>
-</div>`}
+</tp-stack>`}
   script={`const formatters = {
   seats: (context) => \`\${context.apply('percent')} of seats left\`,
   order: ({ value }) => ({ text: \`#ORD-\${String(value).padStart(6, '0')}\`, accessibleText: \`Order \${value}\` }),
@@ -178,11 +200,11 @@ For options beyond the attributes, assign `Intl.NumberFormatOptions` to the `for
 
 <Preview
   title="Named presets"
-  code={`<div style="display:grid;gap:var(--tp-space-2);font-size:var(--tp-text-sm)">
+  code={`<tp-stack style="font-size: var(--tp-text-sm)" gap="2">
   <span>Team plan <tp-text-transform preset="plan-price" value="480"></tp-text-transform> per year</span>
   <span>Business plan <tp-text-transform preset="plan-price" value="1200"></tp-text-transform> per year</span>
   <span>Assigned to <tp-text-transform preset="desk" value="14"></tp-text-transform></span>
-</div>`}
+</tp-stack>`}
   script={`import { defineTextPreset } from '@tweakpad/ui';
 
 defineTextPreset('plan-price', { preset: 'currency', format: { currency: 'EUR', maximumFractionDigits: 0 } });

@@ -20,3 +20,5 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Form actions | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

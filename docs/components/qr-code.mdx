@@ -62,13 +62,18 @@ Assign `value` as the source changes and the code re-encodes. `status` is `empty
 
 <Preview
   title="Live value"
-  code={`<div id="qr-code-live" style="display:grid;gap:var(--tp-space-4);justify-items:center;inline-size:18rem;max-inline-size:100%">
-  <tp-field label="Wi-Fi network" style="inline-size:100%">
+  code={`<tp-stack
+  id="qr-code-live"
+  style="inline-size: 18rem; max-inline-size: 100%"
+  gap="4"
+  align="center"
+>
+  <tp-field label="Wi-Fi network" style="inline-size: 100%">
     <tp-input default-value="Northwind Guest"></tp-input>
   </tp-field>
   <tp-qr-code size="lg" error-correction="Q" label="Scan to join the guest Wi-Fi"></tp-qr-code>
   <tp-button variant="outline" size="sm" data-download>Download print-ready PNG</tp-button>
-</div>`}
+</tp-stack>`}
   script={`const root = document.getElementById('qr-code-live');
 const input = root.querySelector('tp-input');
 const code = root.querySelector('tp-qr-code');
@@ -89,12 +94,32 @@ root.querySelector('[data-download]').addEventListener('click', () => {
 
 <Preview
   title="Error correction"
-  code={`<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:var(--tp-space-5)">
-  <tp-qr-code size="sm" error-correction="L" value="https://northwind.co/menu/table-12" label="Table 12 menu, level L"></tp-qr-code>
-  <tp-qr-code size="sm" error-correction="M" value="https://northwind.co/menu/table-12" label="Table 12 menu, level M"></tp-qr-code>
-  <tp-qr-code size="sm" error-correction="Q" value="https://northwind.co/menu/table-12" label="Table 12 menu, level Q"></tp-qr-code>
-  <tp-qr-code size="sm" error-correction="H" value="https://northwind.co/menu/table-12" label="Table 12 menu, level H"></tp-qr-code>
-</div>`}
+  code={`<tp-stack direction="row" gap="5" justify="center" wrap="wrap">
+  <tp-qr-code
+    size="sm"
+    error-correction="L"
+    value="https://northwind.co/menu/table-12"
+    label="Table 12 menu, level L"
+  ></tp-qr-code>
+  <tp-qr-code
+    size="sm"
+    error-correction="M"
+    value="https://northwind.co/menu/table-12"
+    label="Table 12 menu, level M"
+  ></tp-qr-code>
+  <tp-qr-code
+    size="sm"
+    error-correction="Q"
+    value="https://northwind.co/menu/table-12"
+    label="Table 12 menu, level Q"
+  ></tp-qr-code>
+  <tp-qr-code
+    size="sm"
+    error-correction="H"
+    value="https://northwind.co/menu/table-12"
+    label="Table 12 menu, level H"
+  ></tp-qr-code>
+</tp-stack>`}
 />
 
 `quiet-zone` is the light border scanners need around the modules, 4 modules by default. Keep it unless the code sits on a light surface that already provides the margin.
@@ -122,11 +147,20 @@ contrast is below 3:1.
 
 <Preview
   title="Sizes and colors"
-  code={`<div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:center;gap:var(--tp-space-5)">
+  code={`<tp-stack direction="row" gap="5" align="end" justify="center" wrap="wrap">
   <tp-qr-code size="sm" value="https://tweakpad.github.io" label="Small"></tp-qr-code>
   <tp-qr-code value="https://tweakpad.github.io" label="Default"></tp-qr-code>
-  <tp-qr-code value="https://tweakpad.github.io" label="Brand colors" error-correction="H" style="--tp-qr-code-size:12rem;--tp-qr-code-foreground:#1e3a8a;--tp-qr-code-background:#eff6ff"></tp-qr-code>
-</div>`}
+  <tp-qr-code
+    value="https://tweakpad.github.io"
+    label="Brand colors"
+    error-correction="H"
+    style="
+      --tp-qr-code-size: 12rem;
+      --tp-qr-code-foreground: #1e3a8a;
+      --tp-qr-code-background: #eff6ff;
+    "
+  ></tp-qr-code>
+</tp-stack>`}
 />
 
 ### Accessibility

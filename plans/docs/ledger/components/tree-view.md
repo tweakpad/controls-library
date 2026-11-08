@@ -34,3 +34,7 @@
 | preview | Virtualized | Configure the initial record source and expansion before the first render; preserve bounded virtualization. |
 | preview | Controlled lanes | Establish controlled items, value and expansion before connecting the tree; runtime mode changes are invalid. |
 | preview | Lazy folders | Configure the initial items and loader before connecting; constrain the viewport so loaded children exercise native scrolling. |
+
+| preview | Opening items | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Rendered rows | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Expand, collapse and reveal | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

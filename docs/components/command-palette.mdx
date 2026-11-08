@@ -7,10 +7,18 @@ tag: tp-command-palette
 <Preview
   title="Command palette"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:28rem;margin-inline:auto">
-  <tp-command-palette id="command-palette-demo" inline label="Commands" placeholder="Search commands…"></tp-command-palette>
-  <output id="command-palette-demo-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)"></output>
-</div>`}
+  code={`<tp-stack style="max-inline-size: 28rem; margin-inline: auto" gap="3">
+  <tp-command-palette
+    id="command-palette-demo"
+    inline
+    label="Commands"
+    placeholder="Search commands…"
+  ></tp-command-palette>
+  <output
+    id="command-palette-demo-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+  ></output>
+</tp-stack>`}
   script={`const outline = (...paths) => ({ viewBox: '0 0 24 24', paths: paths.map((d) => ({ d, strokeWidth: 1.75 })) });
 const icons = {
   file: outline('M14 3H6v18h12V7z', 'M14 3v4h4'),

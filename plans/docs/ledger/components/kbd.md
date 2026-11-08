@@ -21,3 +21,7 @@
 | Kind | A text | Reason |
 | --- | --- | --- |
 | prose | `key` renders platform notation | Key hint was renamed Kbd (`tp-kbd`) and its `key` property `value`: React and Vue reserve `key`, so no framework binding could set it |
+
+| preview | Modifiers | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Icon keys | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Localized and right-to-left | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

@@ -38,17 +38,23 @@ An editor that declares its own `inline-size` or `flex` keeps it. Inside a conta
 <Preview
   title="Color channels"
   align="stretch"
-  code={`<div style="display:flex;align-items:center;gap:var(--tp-space-2);max-inline-size:26rem">
-  <tp-field-group label="RGB" style="flex:1 1 0;min-inline-size:0">
-    <tp-input-group><span slot="prefix">R</span><tp-input label="Red" default-value="109"></tp-input></tp-input-group>
-    <tp-input-group><span slot="prefix">G</span><tp-input label="Green" default-value="93"></tp-input></tp-input-group>
-    <tp-input-group><span slot="prefix">B</span><tp-input label="Blue" default-value="252"></tp-input></tp-input-group>
+  code={`<tp-stack style="max-inline-size: 26rem" direction="row" gap="2" align="center">
+  <tp-field-group label="RGB" style="flex: 1 1 0; min-inline-size: 0">
+    <tp-input-group
+      ><span slot="prefix">R</span><tp-input label="Red" default-value="109"></tp-input
+    ></tp-input-group>
+    <tp-input-group
+      ><span slot="prefix">G</span><tp-input label="Green" default-value="93"></tp-input
+    ></tp-input-group>
+    <tp-input-group
+      ><span slot="prefix">B</span><tp-input label="Blue" default-value="252"></tp-input
+    ></tp-input-group>
   </tp-field-group>
-  <tp-input-group style="flex:0 0 6rem">
+  <tp-input-group style="flex: 0 0 6rem">
     <tp-input label="Opacity" default-value="100"></tp-input>
     <span slot="suffix">%</span>
   </tp-input-group>
-</div>`}
+</tp-stack>`}
 />
 
 ### Mixed members
@@ -120,22 +126,41 @@ Set the `joined` property to `false` to keep every editor's own corners with the
 <Preview
   title="Inline"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:20rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 20rem; margin-inline: auto" gap="2">
   <tp-input variant="inline" label="Layer" default-value="Header card"></tp-input>
   <tp-field-group variant="inline" label="Position">
-    <tp-input-group><span slot="prefix">X</span><tp-input label="X" type="number" default-value="120"></tp-input></tp-input-group>
-    <tp-input-group><span slot="prefix">Y</span><tp-input label="Y" type="number" default-value="48"></tp-input></tp-input-group>
+    <tp-input-group
+      ><span slot="prefix">X</span><tp-input label="X" type="number" default-value="120"></tp-input
+    ></tp-input-group>
+    <tp-input-group
+      ><span slot="prefix">Y</span><tp-input label="Y" type="number" default-value="48"></tp-input
+    ></tp-input-group>
   </tp-field-group>
   <tp-field-group variant="inline" label="Size">
-    <tp-input-group><span slot="prefix">W</span><tp-input label="Width" type="number" default-value="1280"></tp-input></tp-input-group>
-    <tp-input-group><span slot="prefix">H</span><tp-input label="Height" type="number" default-value="720"></tp-input></tp-input-group>
+    <tp-input-group
+      ><span slot="prefix">W</span
+      ><tp-input label="Width" type="number" default-value="1280"></tp-input
+    ></tp-input-group>
+    <tp-input-group
+      ><span slot="prefix">H</span
+      ><tp-input label="Height" type="number" default-value="720"></tp-input
+    ></tp-input-group>
   </tp-field-group>
   <tp-field-group variant="inline" label="Rotation">
-    <tp-input-group><span slot="prefix">X</span><tp-input label="Rotation X" type="number" min="-180" max="180" default-value="0"></tp-input></tp-input-group>
-    <tp-input-group><span slot="prefix">Y</span><tp-input label="Rotation Y" type="number" min="-180" max="180" default-value="45"></tp-input></tp-input-group>
-    <tp-input-group><span slot="prefix">Z</span><tp-input label="Rotation Z" type="number" min="-180" max="180" default-value="90"></tp-input></tp-input-group>
+    <tp-input-group
+      ><span slot="prefix">X</span
+      ><tp-input label="Rotation X" type="number" min="-180" max="180" default-value="0"></tp-input
+    ></tp-input-group>
+    <tp-input-group
+      ><span slot="prefix">Y</span
+      ><tp-input label="Rotation Y" type="number" min="-180" max="180" default-value="45"></tp-input
+    ></tp-input-group>
+    <tp-input-group
+      ><span slot="prefix">Z</span
+      ><tp-input label="Rotation Z" type="number" min="-180" max="180" default-value="90"></tp-input
+    ></tp-input-group>
   </tp-field-group>
-</div>`}
+</tp-stack>`}
 />
 
 `variant="inline"` fits the group into one row the height of a control, with `label` at the start and the values at the end, so it stacks with other inline controls such as an inline Input. Each editor becomes a segment of the row: its prefix, then its value, as wide as its text. The row carries the boundary, the focus ring and the invalid state, and a press on the label edits the first value.
@@ -149,18 +174,36 @@ An Icon in the `icon` slot leads the row, outside its boundary. A unit goes in e
 <Preview
   title="Expanded"
   align="stretch"
-  code={`<div id="field-group-expanded" style="display:grid;gap:var(--tp-space-2);max-inline-size:20rem;margin-inline:auto">
+  code={`<tp-stack id="field-group-expanded" style="max-inline-size: 20rem; margin-inline: auto" gap="2">
   <tp-field-group variant="inline" label="Position" expandable>
-    <tp-input-group><span slot="prefix">X</span><tp-input label="X" type="number" default-value="120"></tp-input><span slot="suffix">px</span></tp-input-group>
-    <tp-input-group><span slot="prefix">Y</span><tp-input label="Y" type="number" default-value="48"></tp-input><span slot="suffix">px</span></tp-input-group>
+    <tp-input-group
+      ><span slot="prefix">X</span><tp-input label="X" type="number" default-value="120"></tp-input
+      ><span slot="suffix">px</span></tp-input-group
+    >
+    <tp-input-group
+      ><span slot="prefix">Y</span><tp-input label="Y" type="number" default-value="48"></tp-input
+      ><span slot="suffix">px</span></tp-input-group
+    >
   </tp-field-group>
   <tp-field-group variant="inline" label="Rotation" expanded>
     <tp-icon slot="icon" data-icon="axes"></tp-icon>
-    <tp-input-group><span slot="prefix">X</span><tp-input label="Rotation X" type="number" min="-180" max="180" default-value="0"></tp-input><span slot="suffix">deg</span></tp-input-group>
-    <tp-input-group><span slot="prefix">Y</span><tp-input label="Rotation Y" type="number" min="-180" max="180" default-value="45"></tp-input><span slot="suffix">deg</span></tp-input-group>
-    <tp-input-group><span slot="prefix">Z</span><tp-input label="Rotation Z" type="number" min="-180" max="180" default-value="90"></tp-input><span slot="suffix">deg</span></tp-input-group>
+    <tp-input-group
+      ><span slot="prefix">X</span
+      ><tp-input label="Rotation X" type="number" min="-180" max="180" default-value="0"></tp-input
+      ><span slot="suffix">deg</span></tp-input-group
+    >
+    <tp-input-group
+      ><span slot="prefix">Y</span
+      ><tp-input label="Rotation Y" type="number" min="-180" max="180" default-value="45"></tp-input
+      ><span slot="suffix">deg</span></tp-input-group
+    >
+    <tp-input-group
+      ><span slot="prefix">Z</span
+      ><tp-input label="Rotation Z" type="number" min="-180" max="180" default-value="90"></tp-input
+      ><span slot="suffix">deg</span></tp-input-group
+    >
   </tp-field-group>
-</div>`}
+</tp-stack>`}
   script={`document.querySelector('#field-group-expanded tp-icon').icon = {
   viewBox: '0 0 24 24',
   paths: [{ d: 'M12 3v9m0 0-7 5m7-5 7 5', strokeWidth: 2 }],

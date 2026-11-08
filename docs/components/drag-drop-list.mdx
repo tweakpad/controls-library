@@ -31,10 +31,19 @@ Every row has a named handle Button. Focus it, press Space or Enter to pick the 
 <Preview
   title="Commit events"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:26rem;margin-inline:auto;inline-size:100%">
-  <tp-drag-drop-list id="drag-drop-list-commit" label="Sprint priorities" variant="outline" size="sm"></tp-drag-drop-list>
-  <output id="drag-drop-list-commit-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Drag a row to reprioritize.</output>
-</div>`}
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto; inline-size: 100%" gap="3">
+  <tp-drag-drop-list
+    id="drag-drop-list-commit"
+    label="Sprint priorities"
+    variant="outline"
+    size="sm"
+  ></tp-drag-drop-list>
+  <output
+    id="drag-drop-list-commit-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Drag a row to reprioritize.</output
+  >
+</tp-stack>`}
   script={`const list = document.querySelector('#drag-drop-list-commit');
 list.defaultValue = [
   { id: 'sso', label: 'SAML single sign-on' },
@@ -97,9 +106,17 @@ list.defaultValue = [
 <Preview
   title="Custom rows and overlay"
   align="stretch"
-  code={`<div id="drag-drop-list-rich" style="display:grid;gap:var(--tp-space-3);max-inline-size:30rem;margin-inline:auto;inline-size:100%">
-  <output id="drag-drop-list-rich-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Drag to reorder, or open a release.</output>
-</div>`}
+  code={`<tp-stack
+  id="drag-drop-list-rich"
+  style="max-inline-size: 30rem; margin-inline: auto; inline-size: 100%"
+  gap="3"
+>
+  <output
+    id="drag-drop-list-rich-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Drag to reorder, or open a release.</output
+  >
+</tp-stack>`}
   script={`import { html } from 'lit';
 
 // Configure the list before it first renders, then mount it.
@@ -159,10 +176,29 @@ Lists that share one `DragDropManager` from `@tweakpad/ui/drag-drop`, each with 
 <Preview
   title="Board lanes"
   align="stretch"
-  code={`<section id="drag-drop-list-board" style="display:grid;gap:var(--tp-space-4);max-inline-size:40rem;margin-inline:auto;inline-size:100%">
-  <div data-lanes style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:var(--tp-space-4)"></div>
-  <tp-button data-move variant="outline" style="justify-self:start">Move first item to Ready</tp-button>
-  <output data-status role="status" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Drag a card between lanes.</output>
+  code={`<section
+  id="drag-drop-list-board"
+  style="max-inline-size: 40rem; margin-inline: auto; inline-size: 100%"
+>
+  <tp-stack gap="4">
+    <div
+      data-lanes
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+        gap: var(--tp-space-4);
+      "
+    ></div>
+    <tp-button data-move variant="outline" style="align-self: flex-start"
+      >Move first item to Ready</tp-button
+    >
+    <output
+      data-status
+      role="status"
+      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+      >Drag a card between lanes.</output
+    >
+  </tp-stack>
 </section>`}
   script={`import { DragDropManager } from '@tweakpad/ui/drag-drop';
 
@@ -200,9 +236,29 @@ Direct Foundation callbacks and `onValueChange` exceptions are observed and canc
 <Preview
   title="Controlled lanes"
   align="stretch"
-  code={`<section id="drag-drop-list-owner" style="display:grid;gap:var(--tp-space-4);max-inline-size:40rem;margin-inline:auto;inline-size:100%">
-  <div data-lanes style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:var(--tp-space-4)"></div>
-  <output data-status role="status" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm);font-family:var(--tp-font-mono)"></output>
+  code={`<section
+  id="drag-drop-list-owner"
+  style="max-inline-size: 40rem; margin-inline: auto; inline-size: 100%"
+>
+  <tp-stack gap="4">
+    <div
+      data-lanes
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+        gap: var(--tp-space-4);
+      "
+    ></div>
+    <output
+      data-status
+      role="status"
+      style="
+        color: var(--tp-muted-foreground);
+        font-size: var(--tp-text-sm);
+        font-family: var(--tp-font-mono);
+      "
+    ></output>
+  </tp-stack>
 </section>`}
   script={`import { DragDropManager } from '@tweakpad/ui/drag-drop';
 
@@ -247,15 +303,32 @@ The manager's `monitor` reports each operation. Call `event.suspend()` inside `d
 <Preview
   title="Approve before committing"
   align="stretch"
-  code={`<section id="drag-drop-list-approve" style="display:grid;gap:var(--tp-space-4);max-inline-size:40rem;margin-inline:auto;inline-size:100%">
-  <div data-lanes style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:var(--tp-space-4)"></div>
-  <div data-decision hidden>
-    <div style="display:flex;flex-wrap:wrap;gap:var(--tp-space-2)">
-      <tp-button data-approve size="sm">Approve move</tp-button>
-      <tp-button data-reject size="sm" variant="outline">Reject</tp-button>
+  code={`<section
+  id="drag-drop-list-approve"
+  style="max-inline-size: 40rem; margin-inline: auto; inline-size: 100%"
+>
+  <tp-stack gap="4">
+    <div
+      data-lanes
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+        gap: var(--tp-space-4);
+      "
+    ></div>
+    <div data-decision hidden>
+      <tp-stack direction="row" gap="2" wrap="wrap">
+        <tp-button data-approve size="sm">Approve move</tp-button>
+        <tp-button data-reject size="sm" variant="outline">Reject</tp-button>
+      </tp-stack>
     </div>
-  </div>
-  <output data-status role="status" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Moving a teammate between teams needs approval.</output>
+    <output
+      data-status
+      role="status"
+      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+      >Moving a teammate between teams needs approval.</output
+    >
+  </tp-stack>
 </section>`}
   script={`import { DragDropManager } from '@tweakpad/ui/drag-drop';
 

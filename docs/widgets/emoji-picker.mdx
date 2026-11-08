@@ -17,10 +17,18 @@ Every pick dispatches `tp-action` with the emoji and its record, even when the s
 
 <Preview
   title="Picks"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:center">
-  <tp-emoji-picker id="emoji-picker-picks" label="Status emoji" default-value="🎧"></tp-emoji-picker>
-  <output id="emoji-picker-picks-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Status: 🎧 Headphone</output>
-</div>`}
+  code={`<tp-stack gap="3" align="center">
+  <tp-emoji-picker
+    id="emoji-picker-picks"
+    label="Status emoji"
+    default-value="🎧"
+  ></tp-emoji-picker>
+  <output
+    id="emoji-picker-picks-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Status: 🎧 Headphone</output
+  >
+</tp-stack>`}
   script={`const picker = document.querySelector('#emoji-picker-picks');
 const output = document.querySelector('#emoji-picker-picks-output');
 picker.addEventListener('tp-action', (event) => {
@@ -35,12 +43,21 @@ picker.addEventListener('tp-action', (event) => {
 <Preview
   title="Insert into a message"
   align="stretch"
-  code={`<div style="display:flex;gap:var(--tp-space-2);align-items:end;inline-size:100%;max-inline-size:28rem;margin-inline:auto">
-  <tp-field label="Message" style="flex:1">
-    <tp-text-area id="emoji-picker-message" rows="3" default-value="Release notes are ready "></tp-text-area>
+  code={`<tp-stack
+  style="inline-size: 100%; max-inline-size: 28rem; margin-inline: auto"
+  direction="row"
+  gap="2"
+  align="end"
+>
+  <tp-field label="Message" style="flex: 1">
+    <tp-text-area
+      id="emoji-picker-message"
+      rows="3"
+      default-value="Release notes are ready "
+    ></tp-text-area>
   </tp-field>
   <tp-emoji-picker id="emoji-picker-insert" picker="popup" label="Insert emoji"></tp-emoji-picker>
-</div>`}
+</tp-stack>`}
   script={`const message = document.querySelector('#emoji-picker-message');
 const picker = document.querySelector('#emoji-picker-insert');
 picker.addEventListener('tp-action', (event) => {
@@ -60,10 +77,19 @@ The skin tone Button in the footer opens a menu of tones. Emoji that accept a to
 
 <Preview
   title="Remembered tone"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:center">
-  <tp-emoji-picker id="emoji-picker-tone" label="Hand signs" default-skin-tone="medium" default-query="hand"></tp-emoji-picker>
-  <output id="emoji-picker-tone-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Saved tone: medium</output>
-</div>`}
+  code={`<tp-stack gap="3" align="center">
+  <tp-emoji-picker
+    id="emoji-picker-tone"
+    label="Hand signs"
+    default-skin-tone="medium"
+    default-query="hand"
+  ></tp-emoji-picker>
+  <output
+    id="emoji-picker-tone-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Saved tone: medium</output
+  >
+</tp-stack>`}
   script={`const picker = document.querySelector('#emoji-picker-tone');
 const output = document.querySelector('#emoji-picker-tone-output');
 picker.addEventListener('tp-skin-tone-change', (event) => {
@@ -173,16 +199,28 @@ The picker is a form control: the emoji submits under `name`, `required` validat
 <Preview
   title="Popup in a form"
   align="stretch"
-  code={`<form id="emoji-picker-form" style="display:grid;gap:var(--tp-space-4);max-inline-size:24rem;margin-inline:auto">
-  <tp-field label="Status emoji" description="Shown next to your name in the workspace.">
-    <tp-emoji-picker picker="popup" name="status" default-value="🏠" required></tp-emoji-picker>
-  </tp-field>
-  <div style="display:flex;gap:var(--tp-space-2)">
-    <tp-button type="submit">Save status</tp-button>
-    <tp-button type="reset" variant="outline">Reset</tp-button>
-  </div>
+  code={`<form id="emoji-picker-form" style="max-inline-size: 24rem; margin-inline: auto">
+  <tp-stack gap="4">
+    <tp-field label="Status emoji" description="Shown next to your name in the workspace.">
+      <tp-emoji-picker picker="popup" name="status" default-value="🏠" required></tp-emoji-picker>
+    </tp-field>
+    <tp-stack direction="row" gap="2">
+      <tp-button type="submit">Save status</tp-button>
+      <tp-button type="reset" variant="outline">Reset</tp-button>
+    </tp-stack>
+  </tp-stack>
 </form>
-<output id="emoji-picker-form-output" style="display:block;margin-block-start:var(--tp-space-3);text-align:center;color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Pick an emoji, then save.</output>`}
+<output
+  id="emoji-picker-form-output"
+  style="
+    display: block;
+    margin-block-start: var(--tp-space-3);
+    text-align: center;
+    color: var(--tp-muted-foreground);
+    font-size: var(--tp-text-sm);
+  "
+  >Pick an emoji, then save.</output
+>`}
   script={`const form = document.querySelector('#emoji-picker-form');
 const output = document.querySelector('#emoji-picker-form-output');
 form.addEventListener('submit', (event) => {
@@ -195,10 +233,15 @@ form.addEventListener('submit', (event) => {
 
 <Preview
   title="Small and read-only"
-  code={`<div style="display:flex;flex-wrap:wrap;gap:var(--tp-space-8);justify-content:center;align-items:start">
+  code={`<tp-stack direction="row" gap="8" align="start" justify="center" wrap="wrap">
   <tp-emoji-picker label="Board icon" size="sm" default-value="📌"></tp-emoji-picker>
-  <tp-emoji-picker label="Channel emoji" picker="popup" readonly default-value="🔔"></tp-emoji-picker>
-</div>`}
+  <tp-emoji-picker
+    label="Channel emoji"
+    picker="popup"
+    readonly
+    default-value="🔔"
+  ></tp-emoji-picker>
+</tp-stack>`}
 />
 
 `readonly` keeps focus, browsing and form submission but blocks picks; `disabled` removes all three. The list shows seven rows by default and fills a block size you set on the picker. Emoji glyphs use the `--tp-font-emoji` role, which you can point at an emoji web font.

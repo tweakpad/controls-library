@@ -32,15 +32,21 @@ A checked box submits `name=value` (`value` defaults to `on`). An unchecked box 
 <Preview
   title="Form values"
   align="stretch"
-  code={`<form id="checkbox-form" style="display:grid;gap:var(--tp-space-3);max-inline-size:22rem;margin-inline:auto">
-  <tp-checkbox name="notifications" value="email" default-checked>Email</tp-checkbox>
-  <tp-checkbox name="notifications" value="push">Push</tp-checkbox>
-  <tp-checkbox name="digest" value="weekly" unchecked-value="off">Weekly digest</tp-checkbox>
-  <div style="display:flex;gap:var(--tp-space-2)">
-    <tp-button type="submit" size="sm">Save</tp-button>
-    <tp-button type="reset" size="sm" variant="outline">Reset</tp-button>
-  </div>
-  <output id="checkbox-form-output" style="font-size:var(--tp-text-sm);color:var(--tp-muted-foreground)">Submit to see the form data.</output>
+  code={`<form id="checkbox-form" style="max-inline-size: 22rem; margin-inline: auto">
+  <tp-stack gap="3">
+    <tp-checkbox name="notifications" value="email" default-checked>Email</tp-checkbox>
+    <tp-checkbox name="notifications" value="push">Push</tp-checkbox>
+    <tp-checkbox name="digest" value="weekly" unchecked-value="off">Weekly digest</tp-checkbox>
+    <tp-stack direction="row" gap="2">
+      <tp-button type="submit" size="sm">Save</tp-button>
+      <tp-button type="reset" size="sm" variant="outline">Reset</tp-button>
+    </tp-stack>
+    <output
+      id="checkbox-form-output"
+      style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)"
+      >Submit to see the form data.</output
+    >
+  </tp-stack>
 </form>`}
   script={`const form = document.getElementById('checkbox-form');
 form.addEventListener('submit', (event) => {
@@ -57,15 +63,21 @@ form.addEventListener('submit', (event) => {
 <Preview
   title="Select all"
   align="stretch"
-  code={`<fieldset id="checkbox-mixed" style="display:grid;gap:var(--tp-space-3);margin:0 auto;padding:0;border:0;max-inline-size:22rem">
-  <legend style="padding:0;margin-block-end:var(--tp-space-3);font-weight:var(--tp-font-medium)">Export columns</legend>
-  <tp-checkbox id="checkbox-mixed-all" indeterminate>All columns</tp-checkbox>
-  <div style="display:grid;gap:var(--tp-space-3);padding-inline-start:var(--tp-space-6)">
-    <tp-checkbox name="columns" value="name" default-checked>Customer name</tp-checkbox>
-    <tp-checkbox name="columns" value="email" default-checked>Email</tp-checkbox>
-    <tp-checkbox name="columns" value="plan">Plan</tp-checkbox>
-    <tp-checkbox name="columns" value="mrr">Monthly revenue</tp-checkbox>
-  </div>
+  code={`<fieldset id="checkbox-mixed" style="margin: 0 auto; padding: 0; border: 0; max-inline-size: 22rem">
+  <legend
+    style="padding: 0; margin-block-end: var(--tp-space-3); font-weight: var(--tp-font-medium)"
+  >
+    Export columns
+  </legend>
+  <tp-stack gap="3">
+    <tp-checkbox id="checkbox-mixed-all" indeterminate>All columns</tp-checkbox>
+    <tp-stack style="padding-inline-start: var(--tp-space-6)" gap="3">
+      <tp-checkbox name="columns" value="name" default-checked>Customer name</tp-checkbox>
+      <tp-checkbox name="columns" value="email" default-checked>Email</tp-checkbox>
+      <tp-checkbox name="columns" value="plan">Plan</tp-checkbox>
+      <tp-checkbox name="columns" value="mrr">Monthly revenue</tp-checkbox>
+    </tp-stack>
+  </tp-stack>
 </fieldset>`}
   script={`await customElements.whenDefined('tp-checkbox');
 const all = document.getElementById('checkbox-mixed-all');
@@ -100,16 +112,24 @@ The mixed state is presentation only: the parent's submitted value stays a plain
 <Preview
   title="CheckboxGroupController"
   align="stretch"
-  code={`<fieldset id="checkbox-group" style="display:grid;gap:var(--tp-space-3);margin:0 auto;padding:0;border:0;max-inline-size:22rem">
-  <legend style="padding:0;margin-block-end:var(--tp-space-3);font-weight:var(--tp-font-medium)">Notify me about new comments</legend>
-  <tp-checkbox parent>All channels</tp-checkbox>
-  <div style="display:grid;gap:var(--tp-space-3);padding-inline-start:var(--tp-space-6)">
-    <tp-checkbox name="channels" value="email">Email</tp-checkbox>
-    <tp-checkbox name="channels" value="push">Push notifications</tp-checkbox>
-    <tp-checkbox name="channels" value="slack">Slack</tp-checkbox>
-    <tp-checkbox name="channels" value="sms" disabled>SMS (add a phone number first)</tp-checkbox>
-  </div>
-  <output style="font-size:var(--tp-text-sm);color:var(--tp-muted-foreground)">Channels: email</output>
+  code={`<fieldset id="checkbox-group" style="margin: 0 auto; padding: 0; border: 0; max-inline-size: 22rem">
+  <legend
+    style="padding: 0; margin-block-end: var(--tp-space-3); font-weight: var(--tp-font-medium)"
+  >
+    Notify me about new comments
+  </legend>
+  <tp-stack gap="3">
+    <tp-checkbox parent>All channels</tp-checkbox>
+    <tp-stack style="padding-inline-start: var(--tp-space-6)" gap="3">
+      <tp-checkbox name="channels" value="email">Email</tp-checkbox>
+      <tp-checkbox name="channels" value="push">Push notifications</tp-checkbox>
+      <tp-checkbox name="channels" value="slack">Slack</tp-checkbox>
+      <tp-checkbox name="channels" value="sms" disabled>SMS (add a phone number first)</tp-checkbox>
+    </tp-stack>
+    <output style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)"
+      >Channels: email</output
+    >
+  </tp-stack>
 </fieldset>`}
   script={`import { CheckboxGroupController } from '@tweakpad/ui';
 
@@ -131,11 +151,11 @@ For a plain list with a "select all" box, `CheckboxGroupController` does the boo
 
 <Preview
   title="Disabled and read-only"
-  code={`<div style="display:grid;gap:var(--tp-space-3)">
+  code={`<tp-stack gap="3">
   <tp-checkbox disabled>Two-factor authentication</tp-checkbox>
   <tp-checkbox disabled default-checked>Single sign-on (enforced by your admin)</tp-checkbox>
   <tp-checkbox readonly default-checked>Audit logging</tp-checkbox>
-</div>`}
+</tp-stack>`}
 />
 
 Disabled boxes leave the tab order and omit their value from form data. Read-only boxes stay focusable and submit their value, but ignore presses.
@@ -154,7 +174,7 @@ checkbox.onCheckedChange = (event) => {
 <Preview
   title="Inline"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="2">
   <tp-checkbox variant="inline" name="reminders" default-checked>Event reminders</tp-checkbox>
   <tp-checkbox variant="inline" name="digest">Weekly digest</tp-checkbox>
   <tp-select variant="inline" label="Reminder time" name="reminder-time" default-value="15">
@@ -162,7 +182,7 @@ checkbox.onCheckedChange = (event) => {
     <option value="15">15 minutes before</option>
     <option value="60">1 hour before</option>
   </tp-select>
-</div>`}
+</tp-stack>`}
 />
 
 `variant="inline"` fits the Checkbox into one row the height of a control, with its label at the start and the box at the end, so it stacks with other inline controls such as an inline Select. A press anywhere on the row toggles it. Inside a Field and without a label of its own, the Field's label moves into the row. An Icon in the `icon` slot leads the row, outside its boundary.

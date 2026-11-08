@@ -79,7 +79,7 @@ In a toolbar, the first tooltip should wait but the next ones should not. Give t
 
 <Preview
   title="Shared provider"
-  code={`<div id="tooltip-toolbar" role="toolbar" aria-label="Formatting" style="display:flex;gap:var(--tp-space-1)">
+  code={`<tp-stack id="tooltip-toolbar" role="toolbar" aria-label="Formatting" direction="row" gap="1">
   <tp-tooltip>
     <tp-button slot="trigger" variant="ghost" size="icon-sm" aria-label="Bold" data-glyph="bold"></tp-button>
     Bold
@@ -96,7 +96,7 @@ In a toolbar, the first tooltip should wait but the next ones should not. Give t
     <tp-button slot="trigger" variant="ghost" size="icon-sm" aria-label="Insert link" data-glyph="link"></tp-button>
     Insert link
   </tp-tooltip>
-</div>`}
+</tp-stack>`}
   script={`import { TooltipProvider } from '@tweakpad/ui';
 
 const glyphs = {
@@ -120,12 +120,36 @@ A long list does not need a tooltip per row. Create a handle with `createTooltip
 
 <Preview
   title="Shared handle"
-  code={`<div id="tooltip-handle" style="display:flex;gap:var(--tp-space-2)">
-  <tp-avatar fallback="MC" alt="Maya Chen" tabindex="0" data-name="Maya Chen" data-role="Design lead"></tp-avatar>
-  <tp-avatar fallback="JW" alt="Jonas Weber" tabindex="0" data-name="Jonas Weber" data-role="Backend engineer"></tp-avatar>
-  <tp-avatar fallback="PP" alt="Priya Patel" tabindex="0" data-name="Priya Patel" data-role="Product manager"></tp-avatar>
-  <tp-avatar fallback="LR" alt="Luca Rossi" tabindex="0" data-name="Luca Rossi" data-role="Support"></tp-avatar>
-</div>
+  code={`<tp-stack id="tooltip-handle" direction="row" gap="2">
+  <tp-avatar
+    fallback="MC"
+    alt="Maya Chen"
+    tabindex="0"
+    data-name="Maya Chen"
+    data-role="Design lead"
+  ></tp-avatar>
+  <tp-avatar
+    fallback="JW"
+    alt="Jonas Weber"
+    tabindex="0"
+    data-name="Jonas Weber"
+    data-role="Backend engineer"
+  ></tp-avatar>
+  <tp-avatar
+    fallback="PP"
+    alt="Priya Patel"
+    tabindex="0"
+    data-name="Priya Patel"
+    data-role="Product manager"
+  ></tp-avatar>
+  <tp-avatar
+    fallback="LR"
+    alt="Luca Rossi"
+    tabindex="0"
+    data-name="Luca Rossi"
+    data-role="Support"
+  ></tp-avatar>
+</tp-stack>
 <tp-tooltip id="tooltip-handle-tip"></tp-tooltip>`}
   script={`import { createTooltipHandle } from '@tweakpad/ui';
 import { html } from 'lit';
@@ -134,7 +158,7 @@ const handle = createTooltipHandle();
 const tooltip = document.querySelector('#tooltip-handle-tip');
 tooltip.handle = handle;
 tooltip.content = (person) =>
-  person ? html\`<span style="display:grid"><strong>\${person.name}</strong>\${person.role}</span>\` : '';
+  person ? html\`<tp-stack><strong>\${person.name}</strong>\${person.role}</tp-stack>\` : '';
 for (const avatar of document.querySelectorAll('#tooltip-handle tp-avatar')) {
   handle.registerTrigger(avatar, {
     identifier: avatar.dataset.name,

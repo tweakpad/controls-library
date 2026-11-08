@@ -8,14 +8,14 @@ tag: tp-dialog
   title="Dialog"
   code={`<tp-dialog label="Edit profile" description="Changes are visible to everyone in Acme Inc.">
   <tp-button slot="trigger" variant="outline">Edit profile</tp-button>
-  <div style="display:grid;gap:var(--tp-space-4)">
+  <tp-stack gap="4">
     <tp-field label="Name">
       <tp-input name="name" default-value="Maya Patel"></tp-input>
     </tp-field>
     <tp-field label="Username">
       <tp-input name="username" default-value="maya.patel"></tp-input>
     </tp-field>
-  </div>
+  </tp-stack>
   <tp-button slot="close">Save changes</tp-button>
 </tp-dialog>`}
 />

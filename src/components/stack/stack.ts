@@ -42,9 +42,10 @@ export class TpStack extends TpElementBase {
     TpElementBase.styles,
     css`
       :host {
-        display: block;
+        display: grid;
         min-inline-size: 0;
         text-align: inherit;
+        color: inherit;
       }
 
       .root {

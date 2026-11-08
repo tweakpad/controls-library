@@ -169,26 +169,40 @@ add.addEventListener('click', () => {
 });
 
 renderItems();`}
-  code={`<tp-scroll-area label="Onboarding checklist" style="block-size:20rem">
-  <div style="display:grid;grid-template-columns:minmax(0,1fr) 11rem;gap:var(--tp-space-8);padding:var(--tp-space-6);align-items:start">
+  code={`<tp-scroll-area label="Onboarding checklist" style="block-size: 20rem">
+  <div
+    style="
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 11rem;
+      gap: var(--tp-space-8);
+      padding: var(--tp-space-6);
+      align-items: start;
+    "
+  >
     <div id="toc-collected-article">
-      <div data-step="Create a project" style="margin-block-end:var(--tp-space-5)">
+      <div data-step="Create a project" style="margin-block-end: var(--tp-space-5)">
         <strong>Create a project</strong>
-        <p style="margin-block:var(--tp-space-2) 0">Start from a blank board or a template. Templates bring their own columns, labels and a few example tasks you can delete.</p>
+        <p style="margin-block: var(--tp-space-2) 0">Start from a blank board or a template. Templates bring their own columns, labels and a few example tasks you can delete.</p>
       </div>
-      <div data-step="Import tasks" style="margin-block-end:var(--tp-space-5)">
+      <div data-step="Import tasks" style="margin-block-end: var(--tp-space-5)">
         <strong>Import tasks</strong>
-        <p style="margin-block:var(--tp-space-2) 0">Upload a CSV from your previous tool. Columns are matched by name, and anything unmatched becomes a custom field you can rename later.</p>
+        <p style="margin-block: var(--tp-space-2) 0">Upload a CSV from your previous tool. Columns are matched by name, and anything unmatched becomes a custom field you can rename later.</p>
       </div>
-      <div data-step="Set up automations" style="margin-block-end:var(--tp-space-5)">
+      <div data-step="Set up automations" style="margin-block-end: var(--tp-space-5)">
         <strong>Set up automations</strong>
-        <p style="margin-block:var(--tp-space-2) 0">Move a task to Review when its pull request opens, or assign a reviewer when a due date is two days away.</p>
+        <p style="margin-block: var(--tp-space-2) 0">Move a task to Review when its pull request opens, or assign a reviewer when a due date is two days away.</p>
       </div>
-      <div data-end style="block-size:12rem"></div>
+      <div data-end style="block-size: 12rem"></div>
     </div>
-    <aside style="position:sticky;top:0;display:grid;gap:var(--tp-space-3);justify-items:start">
-      <tp-table-of-contents id="toc-collected-list" navigation="scroll" label="Steps"></tp-table-of-contents>
-      <tp-button id="toc-collected-add" variant="outline" size="sm">Add a step</tp-button>
+    <aside style="position: sticky; top: 0">
+      <tp-stack gap="3" align="start">
+        <tp-table-of-contents
+          id="toc-collected-list"
+          navigation="scroll"
+          label="Steps"
+        ></tp-table-of-contents>
+        <tp-button id="toc-collected-add" variant="outline" size="sm">Add a step</tp-button>
+      </tp-stack>
     </aside>
   </div>
 </tp-scroll-area>`}

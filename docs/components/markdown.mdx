@@ -125,10 +125,14 @@ markdown.streaming = false;`} language="js" />
 <Preview
   title="Streaming"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);justify-items:start;max-inline-size:36rem;margin-inline:auto;inline-size:100%">
-  <tp-markdown id="markdown-stream" style="min-block-size:12rem;inline-size:100%"></tp-markdown>
+  code={`<tp-stack
+  style="max-inline-size: 36rem; margin-inline: auto; inline-size: 100%"
+  gap="4"
+  align="start"
+>
+  <tp-markdown id="markdown-stream" style="min-block-size: 12rem; inline-size: 100%"></tp-markdown>
   <tp-button id="markdown-stream-replay" variant="outline" size="sm">Replay</tp-button>
-</div>`}
+</tp-stack>`}
   script={`const markdown = document.querySelector('#markdown-stream');
 const reply = 'To **invite a teammate**, open *Settings* and choose \`Members\`:\\n\\n1. Enter their work email.\\n2. Pick a role, such as **Editor**.\\n3. Select [Send invite](#streaming).\\n\\nThey get access as soon as they accept.';
 let timer;
@@ -197,9 +201,9 @@ const markdown = document.querySelector('#markdown-renderers');
 markdown.renderers = {
   code: (node) => {
     if (node.lang !== 'checklist') return undefined;
-    return html\`<div style="display:grid;gap:var(--tp-space-2);margin-block:var(--tp-space-3)">
+    return html\`<tp-stack style="margin-block:var(--tp-space-3)" gap="2">
       \${node.value.split('\\n').map((step) => html\`<tp-checkbox>\${step}</tp-checkbox>\`)}
-    </div>\`;
+    </tp-stack>\`;
   },
   link: (node, { fallback }) =>
     node.url.startsWith('http') ? html\`\${fallback()}<span aria-hidden="true"> ↗</span>\` : undefined,

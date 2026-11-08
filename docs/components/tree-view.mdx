@@ -76,8 +76,13 @@ Enter or a press fires a cancelable `tp-action` with the item's value, separatel
 
 <Preview
   title="Opening items"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:center">
-  <tp-tree-view id="tree-view-action" label="Handbook" default-expanded='["engineering"]' style="inline-size:16rem">
+  code={`<tp-stack gap="3" align="center">
+  <tp-tree-view
+    id="tree-view-action"
+    label="Handbook"
+    default-expanded='["engineering"]'
+    style="inline-size: 16rem"
+  >
     <tp-tree-item value="engineering">
       Engineering
       <tp-tree-item value="On-call rotation">On-call rotation</tp-tree-item>
@@ -85,8 +90,12 @@ Enter or a press fires a cancelable `tp-action` with the item's value, separatel
     </tp-tree-item>
     <tp-tree-item value="People">People</tp-tree-item>
   </tp-tree-view>
-  <output id="tree-view-action-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Nothing opened yet</output>
-</div>`}
+  <output
+    id="tree-view-action-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Nothing opened yet</output
+  >
+</tp-stack>`}
   script={`const tree = document.querySelector('#tree-view-action');
 const output = document.querySelector('#tree-view-action-output');
 tree.addEventListener('tp-action', (event) => {
@@ -161,9 +170,13 @@ In records mode, `renderItem(item, state)` returns each row's content, so the ar
 
 <Preview
   title="Rendered rows"
-  code={`<div id="tree-view-render" style="display:grid;gap:var(--tp-space-3);justify-items:center">
-  <output id="tree-view-render-status" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Press a file to open it</output>
-</div>`}
+  code={`<tp-stack id="tree-view-render" gap="3" align="center">
+  <output
+    id="tree-view-render-status"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Press a file to open it</output
+  >
+</tp-stack>`}
   script={`import { html } from 'lit';
 
 const folder = { viewBox: '0 0 24 24', paths: [{ d: 'M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z', strokeWidth: 1.75 }] };
@@ -244,13 +257,19 @@ To own selection and expansion yourself, set `items`, `value` and `expanded` and
 
 <Preview
   title="Controlled lanes"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:center">
+  code={`<tp-stack gap="3" align="center">
   <div id="tree-view-controlled-mount"></div>
-  <div style="display:flex;align-items:center;gap:var(--tp-space-3)">
-    <output id="tree-view-controlled-status" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Selected: Refund policy</output>
-    <tp-button id="tree-view-controlled-reveal" variant="outline" size="sm">Reveal selection</tp-button>
-  </div>
-</div>`}
+  <tp-stack direction="row" gap="3" align="center">
+    <output
+      id="tree-view-controlled-status"
+      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+      >Selected: Refund policy</output
+    >
+    <tp-button id="tree-view-controlled-reveal" variant="outline" size="sm"
+      >Reveal selection</tp-button
+    >
+  </tp-stack>
+</tp-stack>`}
   script={`await customElements.whenDefined('tp-tree-view');
 const tree = document.createElement('tp-tree-view');
 tree.id = 'tree-view-controlled';
@@ -344,13 +363,15 @@ A load that returns no children leaves the item expandable but empty.
 
 <Preview
   title="Expand, collapse and reveal"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:center">
-  <div style="display:flex;flex-wrap:wrap;gap:var(--tp-space-2);justify-content:center">
+  code={`<tp-stack gap="3" align="center">
+  <tp-stack direction="row" gap="2" justify="center" wrap="wrap">
     <tp-button id="tree-view-methods-expand" variant="outline" size="sm">Expand all</tp-button>
     <tp-button id="tree-view-methods-collapse" variant="outline" size="sm">Collapse all</tp-button>
-    <tp-button id="tree-view-methods-reveal" variant="outline" size="sm">Reveal pricing.ts</tp-button>
-  </div>
-  <tp-tree-view id="tree-view-methods" label="Repository" style="inline-size:16rem">
+    <tp-button id="tree-view-methods-reveal" variant="outline" size="sm"
+      >Reveal pricing.ts</tp-button
+    >
+  </tp-stack>
+  <tp-tree-view id="tree-view-methods" label="Repository" style="inline-size: 16rem">
     <tp-tree-item value="app">
       app
       <tp-tree-item value="routes">
@@ -365,7 +386,7 @@ A load that returns no children leaves the item expandable but empty.
       <tp-tree-item value="pricing.test.ts">pricing.test.ts</tp-tree-item>
     </tp-tree-item>
   </tp-tree-view>
-</div>`}
+</tp-stack>`}
   script={`const tree = document.querySelector('#tree-view-methods');
 document.querySelector('#tree-view-methods-expand').addEventListener('click', () => tree.expandAll());
 document.querySelector('#tree-view-methods-collapse').addEventListener('click', () => tree.collapseAll());

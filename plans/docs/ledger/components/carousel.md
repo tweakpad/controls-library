@@ -39,3 +39,10 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Layered 3D | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Shader transition | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Commit | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+
+| preview | Carousel | User-authorized Stack layout migration; preserve content and semantics, translate grid item alignment to flex alignment. |
+| preview | Crossfade | User-authorized Stack layout migration; preserve content and semantics, translate grid item alignment to flex alignment. |

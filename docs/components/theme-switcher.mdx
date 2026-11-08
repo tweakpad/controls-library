@@ -6,13 +6,13 @@ tag: tp-theme-switcher
 
 <Preview
   title="Theme switcher"
-  code={`<tp-card id="theme-switcher-hero" style="inline-size:22rem;max-inline-size:100%">
+  code={`<tp-card id="theme-switcher-hero" style="inline-size: 22rem; max-inline-size: 100%">
   <h3 slot="header">Appearance</h3>
   <p slot="description">This card follows the scheme you pick.</p>
-  <div style="display:flex;align-items:center;justify-content:space-between;gap:var(--tp-space-4)">
-    <span style="font-size:var(--tp-text-sm)">Dark mode</span>
+  <tp-stack direction="row" gap="4" align="center" justify="space-between">
+    <span style="font-size: var(--tp-text-sm)">Dark mode</span>
     <tp-theme-switcher storage-key="docs-theme-switcher-hero"></tp-theme-switcher>
-  </div>
+  </tp-stack>
 </tp-card>`}
   script={`// Theme only this card, so the rest of the documentation keeps its scheme.
 await customElements.whenDefined('tp-theme-switcher');
@@ -30,12 +30,18 @@ The switcher binds a shared preference store: it applies the scheme to its targe
 
 <Preview
   title="Variants"
-  code={`<tp-card id="theme-switcher-variants" style="inline-size:24rem;max-inline-size:100%">
-  <div style="display:flex;align-items:center;justify-content:space-around;gap:var(--tp-space-4)">
+  code={`<tp-card id="theme-switcher-variants" style="inline-size: 24rem; max-inline-size: 100%">
+  <tp-stack direction="row" gap="4" align="center" justify="space-around">
     <tp-theme-switcher storage-key="docs-theme-switcher-variants"></tp-theme-switcher>
-    <tp-theme-switcher variant="button" storage-key="docs-theme-switcher-variants"></tp-theme-switcher>
-    <tp-theme-switcher variant="group" storage-key="docs-theme-switcher-variants"></tp-theme-switcher>
-  </div>
+    <tp-theme-switcher
+      variant="button"
+      storage-key="docs-theme-switcher-variants"
+    ></tp-theme-switcher>
+    <tp-theme-switcher
+      variant="group"
+      storage-key="docs-theme-switcher-variants"
+    ></tp-theme-switcher>
+  </tp-stack>
 </tp-card>`}
   script={`await customElements.whenDefined('tp-theme-switcher');
 const card = document.querySelector('#theme-switcher-variants');
@@ -75,11 +81,16 @@ The same logic is exported as `applyColorSchemePreference({ target, storageKey }
 
 <Preview
   title="Small, defaulting to dark"
-  code={`<tp-card id="theme-switcher-default" size="sm" style="inline-size:18rem;max-inline-size:100%">
-  <div style="display:flex;align-items:center;justify-content:space-between;gap:var(--tp-space-4)">
-    <span style="font-size:var(--tp-text-sm)">Editor theme</span>
-    <tp-theme-switcher variant="button" size="sm" default-value="dark" storage-key="docs-theme-switcher-default"></tp-theme-switcher>
-  </div>
+  code={`<tp-card id="theme-switcher-default" size="sm" style="inline-size: 18rem; max-inline-size: 100%">
+  <tp-stack direction="row" gap="4" align="center" justify="space-between">
+    <span style="font-size: var(--tp-text-sm)">Editor theme</span>
+    <tp-theme-switcher
+      variant="button"
+      size="sm"
+      default-value="dark"
+      storage-key="docs-theme-switcher-default"
+    ></tp-theme-switcher>
+  </tp-stack>
 </tp-card>`}
   script={`await customElements.whenDefined('tp-theme-switcher');
 const card = document.querySelector('#theme-switcher-default');
@@ -92,11 +103,19 @@ card.querySelector('tp-theme-switcher').target = card;`}
 
 <Preview
   title="Explicit choices only"
-  code={`<tp-card id="theme-switcher-veto" style="inline-size:22rem;max-inline-size:100%">
-  <div style="display:grid;gap:var(--tp-space-3);justify-items:center">
-    <tp-theme-switcher variant="group" default-value="light" storage-key="docs-theme-switcher-veto"></tp-theme-switcher>
-    <output id="theme-switcher-veto-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Workspace theme: light</output>
-  </div>
+  code={`<tp-card id="theme-switcher-veto" style="inline-size: 22rem; max-inline-size: 100%">
+  <tp-stack gap="3" align="center">
+    <tp-theme-switcher
+      variant="group"
+      default-value="light"
+      storage-key="docs-theme-switcher-veto"
+    ></tp-theme-switcher>
+    <output
+      id="theme-switcher-veto-output"
+      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+      >Workspace theme: light</output
+    >
+  </tp-stack>
 </tp-card>`}
   script={`await customElements.whenDefined('tp-theme-switcher');
 const card = document.querySelector('#theme-switcher-veto');

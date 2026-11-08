@@ -100,13 +100,23 @@ Push a new frame to advance a uniformly spaced history. Revise the latest sample
 <Preview
   title="Push and revise"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3)">
-  <tp-plot id="plot-history" label="CPU usage" description="Retains 256 samples and displays the last 120 intervals." mode="push" window="120" y-domain="0 100" background="grid" render-strategy="incremental" style="height:12rem"></tp-plot>
-  <div style="display:flex;gap:var(--tp-space-2)">
+  code={`<tp-stack gap="3">
+  <tp-plot
+    id="plot-history"
+    label="CPU usage"
+    description="Retains 256 samples and displays the last 120 intervals."
+    mode="push"
+    window="120"
+    y-domain="0 100"
+    background="grid"
+    render-strategy="incremental"
+    style="height: 12rem"
+  ></tp-plot>
+  <tp-stack direction="row" gap="2">
     <tp-button id="plot-push" variant="outline">Next sample</tp-button>
     <tp-button id="plot-revise" variant="outline">Revise latest</tp-button>
-  </div>
-</div>`}
+  </tp-stack>
+</tp-stack>`}
   script={`import { createPlotStream } from '@tweakpad/ui/widgets';
 const plot = document.querySelector('#plot-history');
 const stream = createPlotStream({ seriesIds: ['cpu'], xMode: 'index', capacity: 256 });

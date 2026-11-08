@@ -72,21 +72,48 @@ Members without their own `reveal` use the trigger's. `stagger-from` starts the 
 <Preview
   title="Scrubbed band"
   align="stretch"
-  code={`<div style="inline-size:100%;block-size:20rem;overflow:auto;border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-lg);padding-inline:var(--tp-space-6)">
-  <div style="display:grid;gap:var(--tp-space-3);align-content:end;block-size:20rem;padding-block:var(--tp-space-6);box-sizing:border-box">
-    <tp-skeleton motion="none" style="block-size:0.75rem;inline-size:45%"></tp-skeleton>
-    <tp-skeleton motion="none" style="block-size:0.75rem;inline-size:90%"></tp-skeleton>
-    <tp-skeleton motion="none" style="block-size:6rem"></tp-skeleton>
-  </div>
-  <tp-scroll-trigger scrub scrub-range="cover" scrub-smoothing="0.8" stagger="150" reveal="fade left">
-    <p style="margin:0;font-size:var(--tp-text-xl)"><tp-mo-text-split>The first line slides in with the scroll,</tp-mo-text-split></p>
-    <p style="margin:0;font-size:var(--tp-text-xl)"><tp-mo-text-split>then the second,</tp-mo-text-split></p>
-    <p style="margin:0;font-size:var(--tp-text-xl)"><tp-mo-text-split>and back out as you scroll up.</tp-mo-text-split></p>
+  code={`<div
+  style="
+    inline-size: 100%;
+    block-size: 20rem;
+    overflow: auto;
+    border: var(--tp-border-width) solid var(--tp-border);
+    border-radius: var(--tp-radius-lg);
+    padding-inline: var(--tp-space-6);
+  "
+>
+  <tp-stack
+    style="block-size: 20rem; padding-block: var(--tp-space-6); box-sizing: border-box"
+    gap="3"
+    justify="end"
+  >
+    <tp-skeleton motion="none" style="block-size: 0.75rem; inline-size: 45%"></tp-skeleton>
+    <tp-skeleton motion="none" style="block-size: 0.75rem; inline-size: 90%"></tp-skeleton>
+    <tp-skeleton motion="none" style="block-size: 6rem"></tp-skeleton>
+  </tp-stack>
+  <tp-scroll-trigger
+    scrub
+    scrub-range="cover"
+    scrub-smoothing="0.8"
+    stagger="150"
+    reveal="fade left"
+  >
+    <p style="margin: 0; font-size: var(--tp-text-xl)"><tp-mo-text-split>The first line slides in with the scroll,</tp-mo-text-split></p>
+    <p style="margin: 0; font-size: var(--tp-text-xl)"><tp-mo-text-split>then the second,</tp-mo-text-split></p>
+    <p style="margin: 0; font-size: var(--tp-text-xl)"><tp-mo-text-split>and back out as you scroll up.</tp-mo-text-split></p>
   </tp-scroll-trigger>
-  <div style="display:grid;gap:var(--tp-space-3);block-size:20rem;padding-block:var(--tp-space-6);box-sizing:border-box">
-    <tp-skeleton motion="none" style="block-size:0.75rem;inline-size:80%"></tp-skeleton>
-    <tp-skeleton motion="none" style="block-size:6rem"></tp-skeleton>
-    <tp-skeleton motion="none" style="block-size:0.75rem;inline-size:60%"></tp-skeleton>
+  <div
+    style="
+      display: grid;
+      gap: var(--tp-space-3);
+      block-size: 20rem;
+      padding-block: var(--tp-space-6);
+      box-sizing: border-box;
+    "
+  >
+    <tp-skeleton motion="none" style="block-size: 0.75rem; inline-size: 80%"></tp-skeleton>
+    <tp-skeleton motion="none" style="block-size: 6rem"></tp-skeleton>
+    <tp-skeleton motion="none" style="block-size: 0.75rem; inline-size: 60%"></tp-skeleton>
   </div>
 </div>`}
 />
@@ -98,28 +125,70 @@ Members are still asked to prepare when the trigger nears the viewport, but scru
 <Preview
   title="Custom scroll range"
   align="stretch"
-  code={`<div style="inline-size:100%;block-size:22rem;overflow:auto;border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-lg);padding-inline:var(--tp-space-6)">
-  <div style="display:grid;gap:var(--tp-space-3);align-content:end;block-size:22rem;padding-block:var(--tp-space-6);box-sizing:border-box">
-    <tp-skeleton motion="none" style="block-size:0.75rem;inline-size:45%"></tp-skeleton>
-    <tp-skeleton motion="none" style="block-size:0.75rem;inline-size:90%"></tp-skeleton>
-    <tp-skeleton motion="none" style="block-size:6rem"></tp-skeleton>
-  </div>
+  code={`<div
+  style="
+    inline-size: 100%;
+    block-size: 22rem;
+    overflow: auto;
+    border: var(--tp-border-width) solid var(--tp-border);
+    border-radius: var(--tp-radius-lg);
+    padding-inline: var(--tp-space-6);
+  "
+>
+  <tp-stack
+    style="block-size: 22rem; padding-block: var(--tp-space-6); box-sizing: border-box"
+    gap="3"
+    justify="end"
+  >
+    <tp-skeleton motion="none" style="block-size: 0.75rem; inline-size: 45%"></tp-skeleton>
+    <tp-skeleton motion="none" style="block-size: 0.75rem; inline-size: 90%"></tp-skeleton>
+    <tp-skeleton motion="none" style="block-size: 6rem"></tp-skeleton>
+  </tp-stack>
   <tp-scroll-trigger scrub scrub-range="entry 25% contain 40%" scrub-once stagger="200">
-    <h3 style="margin:0 0 var(--tp-space-3);font-size:var(--tp-text-2xl);line-height:var(--tp-leading-tight)">
+    <h3
+      style="
+        margin: 0 0 var(--tp-space-3);
+        font-size: var(--tp-text-2xl);
+        line-height: var(--tp-leading-tight);
+      "
+    >
       <tp-mo-text-split split="words" mask="words" reveal="up" stagger="60">Book a room in two taps</tp-mo-text-split>
     </h3>
     <tp-image-group reveal="fade up" stagger="120">
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--tp-space-3)">
-        <tp-image ratio="1.5" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=480&q=75&auto=format&fit=crop" alt="" style="border-radius:var(--tp-radius-md)"></tp-image>
-        <tp-image ratio="1.5" src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=480&q=75&auto=format&fit=crop" alt="" style="border-radius:var(--tp-radius-md)"></tp-image>
-        <tp-image ratio="1.5" src="https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=480&q=75&auto=format&fit=crop" alt="" style="border-radius:var(--tp-radius-md)"></tp-image>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--tp-space-3)">
+        <tp-image
+          ratio="1.5"
+          src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=480&q=75&auto=format&fit=crop"
+          alt=""
+          style="border-radius: var(--tp-radius-md)"
+        ></tp-image>
+        <tp-image
+          ratio="1.5"
+          src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=480&q=75&auto=format&fit=crop"
+          alt=""
+          style="border-radius: var(--tp-radius-md)"
+        ></tp-image>
+        <tp-image
+          ratio="1.5"
+          src="https://images.unsplash.com/photo-1548516173-3cabfa4607e9?w=480&q=75&auto=format&fit=crop"
+          alt=""
+          style="border-radius: var(--tp-radius-md)"
+        ></tp-image>
       </div>
     </tp-image-group>
   </tp-scroll-trigger>
-  <div style="display:grid;gap:var(--tp-space-3);block-size:22rem;padding-block:var(--tp-space-6);box-sizing:border-box">
-    <tp-skeleton motion="none" style="block-size:0.75rem;inline-size:80%"></tp-skeleton>
-    <tp-skeleton motion="none" style="block-size:6rem"></tp-skeleton>
-    <tp-skeleton motion="none" style="block-size:0.75rem;inline-size:60%"></tp-skeleton>
+  <div
+    style="
+      display: grid;
+      gap: var(--tp-space-3);
+      block-size: 22rem;
+      padding-block: var(--tp-space-6);
+      box-sizing: border-box;
+    "
+  >
+    <tp-skeleton motion="none" style="block-size: 0.75rem; inline-size: 80%"></tp-skeleton>
+    <tp-skeleton motion="none" style="block-size: 6rem"></tp-skeleton>
+    <tp-skeleton motion="none" style="block-size: 0.75rem; inline-size: 60%"></tp-skeleton>
   </div>
 </div>`}
 />
@@ -164,13 +233,21 @@ The stage is one visible extent tall (minus `--tp-scroll-trigger-pin-top`, for f
 <Preview
   title="Reveal events"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);inline-size:100%;text-align:center">
+  code={`<tp-stack style="inline-size: 100%; text-align: center" gap="3">
   <tp-scroll-trigger id="scroll-trigger-events" stagger="200" reveal="fade up">
-    <p style="margin:0;font-size:var(--tp-text-xl);font-weight:var(--tp-font-semibold)"><tp-mo-text-split split="words">Welcome to your workspace</tp-mo-text-split></p>
-    <p style="margin:var(--tp-space-1) 0 0;color:var(--tp-muted-foreground)"><tp-mo-text-split>Your projects, people and files in one place.</tp-mo-text-split></p>
+    <p style="margin: 0; font-size: var(--tp-text-xl); font-weight: var(--tp-font-semibold)"><tp-mo-text-split split="words">Welcome to your workspace</tp-mo-text-split></p>
+    <p style="margin: var(--tp-space-1) 0 0; color: var(--tp-muted-foreground)"><tp-mo-text-split>Your projects, people and files in one place.</tp-mo-text-split></p>
   </tp-scroll-trigger>
-  <output id="scroll-trigger-events-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm);font-family:var(--tp-font-mono)">Waiting</output>
-</div>`}
+  <output
+    id="scroll-trigger-events-output"
+    style="
+      color: var(--tp-muted-foreground);
+      font-size: var(--tp-text-sm);
+      font-family: var(--tp-font-mono);
+    "
+    >Waiting</output
+  >
+</tp-stack>`}
   script={`const trigger = document.querySelector('#scroll-trigger-events');
 const output = document.querySelector('#scroll-trigger-events-output');
 trigger.addEventListener('tp-reveal-change', (event) => {

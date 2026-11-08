@@ -196,22 +196,34 @@ Without a `value`, items have no status and stay neutral. The `opposite` slot ho
 <Preview
   title="Changelog"
   align="stretch"
-  code={`<tp-timeline aria-label="Changelog" style="max-inline-size:32rem;margin-inline:auto;--tp-timeline-gap:var(--tp-space-8)">
+  code={`<tp-timeline
+  aria-label="Changelog"
+  style="max-inline-size: 32rem; margin-inline: auto; --tp-timeline-gap: var(--tp-space-8)"
+>
   <tp-timeline-item>
     <code slot="opposite">2.4.0</code>
     <strong>Team workspaces</strong>
-    <div style="color:var(--tp-muted-foreground)"><tp-time datetime="2026-03-22" mode="absolute" pattern="MMM d, y"></tp-time></div>
-    <div style="display:flex;flex-wrap:wrap;gap:var(--tp-space-2);margin-block-start:var(--tp-space-2)"><tp-badge variant="secondary">Added</tp-badge><tp-badge variant="outline">Fixed</tp-badge></div>
+    <div style="color: var(--tp-muted-foreground)">
+      <tp-time datetime="2026-03-22" mode="absolute" pattern="MMM d, y"></tp-time>
+    </div>
+    <tp-stack style="margin-block-start: var(--tp-space-2)" direction="row" gap="2" wrap="wrap"
+      ><tp-badge variant="secondary">Added</tp-badge
+      ><tp-badge variant="outline">Fixed</tp-badge></tp-stack
+    >
   </tp-timeline-item>
   <tp-timeline-item>
     <code slot="opposite">2.3.1</code>
     <strong>Faster search indexing</strong>
-    <div style="color:var(--tp-muted-foreground)"><tp-time datetime="2026-03-15" mode="absolute" pattern="MMM d, y"></tp-time></div>
+    <div style="color: var(--tp-muted-foreground)">
+      <tp-time datetime="2026-03-15" mode="absolute" pattern="MMM d, y"></tp-time>
+    </div>
   </tp-timeline-item>
   <tp-timeline-item>
     <code slot="opposite">2.3.0</code>
     <strong>Custom dashboards</strong>
-    <div style="color:var(--tp-muted-foreground)"><tp-time datetime="2026-03-08" mode="absolute" pattern="MMM d, y"></tp-time></div>
+    <div style="color: var(--tp-muted-foreground)">
+      <tp-time datetime="2026-03-08" mode="absolute" pattern="MMM d, y"></tp-time>
+    </div>
   </tp-timeline-item>
 </tp-timeline>`}
 />

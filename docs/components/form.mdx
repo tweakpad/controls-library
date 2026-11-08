@@ -186,18 +186,29 @@ Fields can be added and removed while the form is open; each registers as it con
 <Preview
   title="Repeated emails"
   align="stretch"
-  code={`<tp-form id="form-demo-repeat" aria-label="Invite teammates" style="max-inline-size:28rem">
-  <div id="form-demo-repeat-list" style="display:grid;gap:var(--tp-space-4)">
+  code={`<tp-form id="form-demo-repeat" aria-label="Invite teammates" style="max-inline-size: 28rem">
+  <tp-stack id="form-demo-repeat-list" gap="4">
     <tp-field label="Email 1">
       <tp-input-group>
         <tp-input name="email" type="email" required placeholder="jordan@acme.com"></tp-input>
-        <tp-button slot="action" type="button" variant="ghost" data-remove disabled>Remove</tp-button>
+        <tp-button slot="action" type="button" variant="ghost" data-remove disabled
+          >Remove</tp-button
+        >
       </tp-input-group>
     </tp-field>
-  </div>
-  <tp-button id="form-demo-repeat-add" type="button" variant="outline" style="justify-self:start">Add another email</tp-button>
+  </tp-stack>
+  <tp-button id="form-demo-repeat-add" type="button" variant="outline" style="justify-self: start"
+    >Add another email</tp-button
+  >
   <div slot="actions"><tp-button type="submit">Send invites</tp-button></div>
-  <output id="form-demo-repeat-output" style="color:var(--tp-muted-foreground);font-family:var(--tp-font-mono);font-size:var(--tp-text-sm)"></output>
+  <output
+    id="form-demo-repeat-output"
+    style="
+      color: var(--tp-muted-foreground);
+      font-family: var(--tp-font-mono);
+      font-size: var(--tp-text-sm);
+    "
+  ></output>
 </tp-form>`}
   script={`const form = document.querySelector('#form-demo-repeat');
 const list = document.querySelector('#form-demo-repeat-list');

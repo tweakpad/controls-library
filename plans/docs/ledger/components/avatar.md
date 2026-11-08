@@ -19,3 +19,6 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Custom shape and grayscale | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Decorative avatar | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

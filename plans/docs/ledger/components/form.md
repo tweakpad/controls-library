@@ -24,3 +24,5 @@
 | --- | --- | --- |
 
 | prose | Put submit and reset Buttons in an element with | Approved shared action-row layout and ordering contract. |
+
+| preview | Repeated emails | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

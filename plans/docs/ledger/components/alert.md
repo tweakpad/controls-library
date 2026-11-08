@@ -13,3 +13,6 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Severity | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Live update | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

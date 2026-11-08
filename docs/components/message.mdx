@@ -8,10 +8,12 @@ parts: [tp-message-group]
 <Preview
   title="Message"
   align="stretch"
-  code={`<div style="display:flex;flex-direction:column;gap:var(--tp-space-6);max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="6">
   <tp-message align="end" aria-label="Alex Morgan">
     <tp-avatar slot="avatar" fallback="AM" alt="Alex Morgan"></tp-avatar>
-    <tp-bubble align="end" variant="default">The onboarding checklist is ready for review.</tp-bubble>
+    <tp-bubble align="end" variant="default"
+      >The onboarding checklist is ready for review.</tp-bubble
+    >
   </tp-message>
   <tp-message aria-label="Sam Rivera">
     <tp-avatar slot="avatar" fallback="SR" alt="Sam Rivera"></tp-avatar>
@@ -30,7 +32,7 @@ parts: [tp-message-group]
     </tp-bubble-group>
   </tp-message>
   <tp-marker role="status">Sam is typing…</tp-marker>
-</div>`}
+</tp-stack>`}
 />
 
 ## Usage
@@ -44,16 +46,18 @@ A Message lays out one row: avatar column, header, content and footer. It does n
 <Preview
   title="Sender sides"
   align="stretch"
-  code={`<div style="display:flex;flex-direction:column;gap:var(--tp-space-6);max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="6">
   <tp-message aria-label="Priya Shah">
     <tp-avatar slot="avatar" fallback="PS" alt="Priya Shah"></tp-avatar>
     <tp-bubble>The staging deploy failed on the migration step.</tp-bubble>
   </tp-message>
   <tp-message align="end" aria-label="You">
     <tp-avatar slot="avatar" fallback="JL" alt="Jordan Lee"></tp-avatar>
-    <tp-bubble align="end" variant="default">Rolling it back now. I'll post the logs in a minute.</tp-bubble>
+    <tp-bubble align="end" variant="default"
+      >Rolling it back now. I'll post the logs in a minute.</tp-bubble
+    >
   </tp-message>
-</div>`}
+</tp-stack>`}
 />
 
 Alignment alone does not identify a sender. Give every row an accessible name through `aria-label`, the avatar's `alt` or a header. Rows are presentational articles, not implicit buttons or live regions. Use `tp-marker role="status"` for typing or action feedback, instead of making the whole transcript live.
@@ -65,7 +69,7 @@ Alignment alone does not identify a sender. Give every row an accessible name th
 <Preview
   title="Header and footer"
   align="stretch"
-  code={`<div style="display:flex;flex-direction:column;gap:var(--tp-space-6);max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="6">
   <tp-message author="Sam Rivera" timestamp="2026-10-09T14:32:00">
     <tp-bubble>The Q3 invoice export is attached to the ticket.</tp-bubble>
   </tp-message>
@@ -73,7 +77,7 @@ Alignment alone does not identify a sender. Give every row an accessible name th
     <tp-bubble align="end" variant="default">Thanks, forwarding it to finance.</tp-bubble>
     <span slot="footer">Read by Sam</span>
   </tp-message>
-</div>`}
+</tp-stack>`}
 />
 
 ### Delivery status
@@ -83,14 +87,14 @@ Alignment alone does not identify a sender. Give every row an accessible name th
 <Preview
   title="Sending and failed"
   align="stretch"
-  code={`<div style="display:flex;flex-direction:column;gap:var(--tp-space-6);max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="6">
   <tp-message align="end" aria-label="You" pending>
     <tp-bubble align="end" variant="default">Can we move the design review to 3pm?</tp-bubble>
   </tp-message>
   <tp-message align="end" aria-label="You" failed>
     <tp-bubble align="end" variant="default">Uploading the updated mockups now.</tp-bubble>
   </tp-message>
-</div>`}
+</tp-stack>`}
 />
 
 ### Group
@@ -145,22 +149,32 @@ Put files and images in `tp-attachment` next to the Bubble; the Message's conten
 <Preview
   title="Attachment"
   align="stretch"
-  code={`<div style="display:flex;flex-direction:column;gap:var(--tp-space-6);max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="6">
   <tp-message align="end" aria-label="Alex Morgan">
     <tp-attachment orientation="vertical" media-treatment="image" status="complete">
-      <img slot="media" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&q=80" alt="Open-plan office with long shared desks">
+      <img
+        slot="media"
+        src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&q=80"
+        alt="Open-plan office with long shared desks"
+      />
     </tp-attachment>
-    <tp-bubble align="end" variant="default">This is the floor we're looking at for the new team.</tp-bubble>
+    <tp-bubble align="end" variant="default"
+      >This is the floor we're looking at for the new team.</tp-bubble
+    >
   </tp-message>
   <tp-message align="end" aria-label="Alex Morgan">
-    <tp-attachment filename="q3-board-update.pdf" description="PDF · 1.2 MB" status="complete"></tp-attachment>
+    <tp-attachment
+      filename="q3-board-update.pdf"
+      description="PDF · 1.2 MB"
+      status="complete"
+    ></tp-attachment>
     <tp-bubble align="end" variant="default">Here's the deck for Thursday.</tp-bubble>
   </tp-message>
   <tp-message aria-label="Sam Rivera">
     <tp-avatar slot="avatar" fallback="SR" alt="Sam Rivera"></tp-avatar>
     <tp-bubble>Got it, I'll add the hiring numbers tonight.</tp-bubble>
   </tp-message>
-</div>`}
+</tp-stack>`}
 />
 
 ### Retry

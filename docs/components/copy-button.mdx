@@ -62,11 +62,15 @@ Inside an Input group's `action` slot or as a Field group member, the Copy butto
 <Preview
   title="In an input group and a field group"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);inline-size:100%;max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-stack style="inline-size: 100%; max-inline-size: 26rem; margin-inline: auto" gap="4">
   <tp-field label="Webhook signing secret">
     <tp-input-group>
       <tp-input readonly default-value="whsec_9b1e7c42d0"></tp-input>
-      <tp-copy-button slot="action" value="whsec_9b1e7c42d0" label="Copy signing secret"></tp-copy-button>
+      <tp-copy-button
+        slot="action"
+        value="whsec_9b1e7c42d0"
+        label="Copy signing secret"
+      ></tp-copy-button>
     </tp-input-group>
   </tp-field>
   <tp-field-group label="Map center">
@@ -78,9 +82,14 @@ Inside an Input group's `action` slot or as a Field group member, the Copy butto
       <span slot="prefix">Lng</span>
       <tp-input label="Longitude" default-value="-9.1393"></tp-input>
     </tp-input-group>
-    <tp-copy-button variant="outline" size="default" value="38.7223, -9.1393" label="Copy coordinates"></tp-copy-button>
+    <tp-copy-button
+      variant="outline"
+      size="default"
+      value="38.7223, -9.1393"
+      label="Copy coordinates"
+    ></tp-copy-button>
   </tp-field-group>
-</div>`}
+</tp-stack>`}
 />
 
 The copy action in a [Code block](../code-block/) is this same control, labelled by the block's `copy`, `copied` and `copyFailed` messages.
@@ -96,10 +105,21 @@ The copy action in a [Code block](../code-block/) is this same control, labelled
 
 <Preview
   title="Copy events"
-  code={`<div style="display:grid;gap:var(--tp-space-2);justify-items:center">
-  <tp-copy-button id="copy-button-events" variant="outline" size="default" show-label value="npm install @tweakpad/ui" label="Copy install command"></tp-copy-button>
-  <output id="copy-button-events-output" style="font-size:var(--tp-text-sm);color:var(--tp-muted-foreground)">Not copied yet</output>
-</div>`}
+  code={`<tp-stack gap="2" align="center">
+  <tp-copy-button
+    id="copy-button-events"
+    variant="outline"
+    size="default"
+    show-label
+    value="npm install @tweakpad/ui"
+    label="Copy install command"
+  ></tp-copy-button>
+  <output
+    id="copy-button-events-output"
+    style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)"
+    >Not copied yet</output
+  >
+</tp-stack>`}
   script={`const button = document.getElementById('copy-button-events');
 const output = document.getElementById('copy-button-events-output');
 button.addEventListener('tp-copied', (event) => {

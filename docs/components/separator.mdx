@@ -7,20 +7,22 @@ tag: tp-separator
 <Preview
   title="Separator"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:22rem;margin-inline:auto">
-  <div style="display:grid;gap:var(--tp-space-1)">
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="4">
+  <tp-stack gap="1">
     <strong>Tweakpad UI</strong>
-    <span style="color:var(--tp-muted-foreground)">Accessible web components for product teams.</span>
-  </div>
+    <span style="color: var(--tp-muted-foreground)"
+      >Accessible web components for product teams.</span
+    >
+  </tp-stack>
   <tp-separator></tp-separator>
-  <div style="display:flex;align-items:center;gap:var(--tp-space-4);block-size:var(--tp-space-5)">
+  <tp-stack style="block-size: var(--tp-space-5)" direction="row" gap="4" align="center">
     <span>Docs</span>
     <tp-separator orientation="vertical"></tp-separator>
     <span>Components</span>
     <tp-separator orientation="vertical"></tp-separator>
     <span>Changelog</span>
-  </div>
-</div>`}
+  </tp-stack>
+</tp-stack>`}
 />
 
 ## Usage
@@ -31,13 +33,13 @@ A Separator fills its container along its axis: full width when horizontal, full
 
 <Preview
   title="Vertical"
-  code={`<div style="display:flex;align-items:center;gap:var(--tp-space-3);block-size:var(--tp-space-6)">
+  code={`<tp-stack style="block-size: var(--tp-space-6)" direction="row" gap="3" align="center">
   <tp-button variant="ghost" size="sm">Edit</tp-button>
   <tp-separator orientation="vertical"></tp-separator>
   <tp-button variant="ghost" size="sm">Duplicate</tp-button>
   <tp-separator orientation="vertical"></tp-separator>
   <tp-button variant="ghost" size="sm">Archive</tp-button>
-</div>`}
+</tp-stack>`}
 />
 
 A vertical Separator takes the height of its container, so give the row a block size or let a flex row stretch it.
@@ -47,21 +49,21 @@ A vertical Separator takes the height of its container, so give the row a block 
 <Preview
   title="Between sections"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:24rem;margin-inline:auto">
-  <div style="display:flex;justify-content:space-between">
+  code={`<tp-stack style="max-inline-size: 24rem; margin-inline: auto" gap="4">
+  <tp-stack direction="row" justify="space-between">
     <span>Plan</span>
     <strong>Team, billed yearly</strong>
-  </div>
-  <div style="display:flex;justify-content:space-between">
+  </tp-stack>
+  <tp-stack direction="row" justify="space-between">
     <span>Seats</span>
     <strong>12 of 15</strong>
-  </div>
+  </tp-stack>
   <tp-separator></tp-separator>
-  <div style="display:flex;justify-content:space-between">
+  <tp-stack direction="row" justify="space-between">
     <span>Next invoice</span>
-    <strong>$1,440.00 on March 1</strong>
-  </div>
-</div>`}
+    <strong>\$1,440.00 on March 1</strong>
+  </tp-stack>
+</tp-stack>`}
 />
 
 Separators are decorative by default and hidden from assistive technology. Set the `decorative` property to `false` when the rule marks a real boundary between groups; it then exposes `role="separator"` with its orientation.

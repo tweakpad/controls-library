@@ -6,14 +6,14 @@ tag: tp-icon
 
 <Preview
   title="Icon"
-  code={`<div id="icon-hero" style="display:flex;gap:var(--tp-space-5);color:var(--tp-muted-foreground)">
+  code={`<tp-stack id="icon-hero" style="color: var(--tp-muted-foreground)" direction="row" gap="5">
   <tp-icon data-icon="search" label="Search" size="1.5rem"></tp-icon>
   <tp-icon data-icon="folder" label="Projects" size="1.5rem"></tp-icon>
   <tp-icon data-icon="calendar" label="Schedule" size="1.5rem"></tp-icon>
   <tp-icon data-icon="bell" label="Notifications" size="1.5rem"></tp-icon>
   <tp-icon data-icon="branch" label="Branches" size="1.5rem"></tp-icon>
   <tp-icon data-icon="shield" label="Security" size="1.5rem"></tp-icon>
-</div>`}
+</tp-stack>`}
   script={`const icons = {
   search: { viewBox: '0 0 24 24', paths: [{ d: 'M21 21l-5-5M10.5 3a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15', strokeWidth: 1.75 }] },
   folder: { viewBox: '0 0 24 24', paths: [{ d: 'M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z', strokeWidth: 1.75 }] },
@@ -43,16 +43,18 @@ Without `label` an Icon is decorative and hidden from assistive technology, whic
 
 <Preview
   title="Decorative and labelled"
-  code={`<div id="icon-meaning" style="display:grid;gap:var(--tp-space-3)">
+  code={`<tp-stack id="icon-meaning" gap="3">
   <tp-button variant="outline">
     <tp-icon slot="icon-start" data-icon="plus"></tp-icon>
     New project
   </tp-button>
-  <span style="display:inline-flex;align-items:center;gap:var(--tp-space-2)">
+  <span style="display: inline-flex; align-items: center; gap: var(--tp-space-2)"
+    >
     Maya Chen
     <tp-icon data-icon="check" label="Verified" style="color:var(--tp-success)"></tp-icon>
-  </span>
-</div>`}
+  </span
+  >
+</tp-stack>`}
   script={`const icons = {
   plus: { viewBox: '0 0 24 24', paths: [{ d: 'M12 5v14M5 12h14', strokeWidth: 2 }] },
   check: { viewBox: '0 0 24 24', paths: [{ d: 'M5 12l4 4L19 6', strokeWidth: 2 }] },
@@ -68,12 +70,12 @@ The default theme uses the shared medium icon extent (`1rem`, normally 16 CSS pi
 
 <Preview
   title="Size and color"
-  code={`<div id="icon-size" style="display:flex;align-items:center;gap:var(--tp-space-5)">
+  code={`<tp-stack id="icon-size" direction="row" gap="5" align="center">
   <tp-icon data-icon="clock" size="1rem"></tp-icon>
   <tp-icon data-icon="clock" size="1.25rem"></tp-icon>
-  <tp-icon data-icon="clock" size="1.5rem" style="color:var(--tp-muted-foreground)"></tp-icon>
-  <tp-icon data-icon="clock" size="2rem" style="color:var(--tp-primary)"></tp-icon>
-</div>`}
+  <tp-icon data-icon="clock" size="1.5rem" style="color: var(--tp-muted-foreground)"></tp-icon>
+  <tp-icon data-icon="clock" size="2rem" style="color: var(--tp-primary)"></tp-icon>
+</tp-stack>`}
   script={`const clock = { viewBox: '0 0 24 24', paths: [{ d: 'M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0M12 6v6l4 2', strokeWidth: 2 }] };
 for (const icon of document.querySelectorAll('#icon-size tp-icon')) icon.icon = clock;`}
 />
@@ -84,10 +86,15 @@ A definition is a `viewBox` and a list of paths, never an HTML string, so your o
 
 <Preview
   title="Custom definition"
-  code={`<div style="display:flex;gap:var(--tp-space-5)">
+  code={`<tp-stack direction="row" gap="5">
   <tp-icon id="icon-custom-outline" label="Starred" size="1.5rem"></tp-icon>
-  <tp-icon id="icon-custom-solid" label="Starred" size="1.5rem" style="color:var(--tp-warning)"></tp-icon>
-</div>`}
+  <tp-icon
+    id="icon-custom-solid"
+    label="Starred"
+    size="1.5rem"
+    style="color: var(--tp-warning)"
+  ></tp-icon>
+</tp-stack>`}
   script={`const star = 'm12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z';
 document.querySelector('#icon-custom-outline').icon = {
   viewBox: '0 0 24 24',

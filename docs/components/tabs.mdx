@@ -108,20 +108,27 @@ tabs.addEventListener('tp-value-change', (event) => {
 document.querySelector('#tabs-demo-report-jump').addEventListener('click', () => {
   tabs.setValue('refunds');
 });`}
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="3">
   <tp-tabs id="tabs-demo-report" default-value="revenue" label="Monthly report">
     <button slot="tab" value="revenue">Revenue</button>
     <button slot="tab" value="orders">Orders</button>
     <button slot="tab" value="refunds">Refunds</button>
-    <p slot="panel" value="revenue">$84,210 in September, up 6% on August.</p>
+    <p slot="panel" value="revenue">\$84,210 in September, up 6% on August.</p>
     <p slot="panel" value="orders">1,932 orders, 214 from new customers.</p>
-    <p slot="panel" value="refunds">37 refunds totalling $2,940; 9 still pending.</p>
+    <p slot="panel" value="refunds">37 refunds totalling \$2,940; 9 still pending.</p>
   </tp-tabs>
-  <div style="display:flex;align-items:center;justify-content:space-between;gap:var(--tp-space-3)">
-    <output id="tabs-demo-report-status" aria-live="polite" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Showing revenue</output>
-    <tp-button id="tabs-demo-report-jump" variant="outline" size="sm">Review pending refunds</tp-button>
-  </div>
-</div>`}
+  <tp-stack direction="row" gap="3" align="center" justify="space-between">
+    <output
+      id="tabs-demo-report-status"
+      aria-live="polite"
+      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+      >Showing revenue</output
+    >
+    <tp-button id="tabs-demo-report-jump" variant="outline" size="sm"
+      >Review pending refunds</tp-button
+    >
+  </tp-stack>
+</tp-stack>`}
 />
 
 Selection publishes a cancelable `tp-value-change` with the proposed `value`; call `preventDefault()` to keep the current tab, for example while a panel has unsaved edits. `setValue()` selects a tab from code through the same proposal and returns whether it was accepted. For controlled Tabs, set the `value` property from the start and write each accepted `detail.value` back to it. Equal selections are no-ops. Filter bubbled events by `event.target` when panels contain other controls.

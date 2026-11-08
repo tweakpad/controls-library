@@ -43,26 +43,74 @@ Reserving the box before media loads prevents layout shift in feeds, galleries a
 <Preview
   title="One ratio, three widths"
   align="stretch"
-  code={`<div style="display:flex;flex-wrap:wrap;align-items:start;gap:var(--tp-space-4)">
-  <figure style="margin:0;inline-size:10rem;max-inline-size:100%">
-    <tp-aspect-ratio ratio="1.7778" fit="cover" style="border-radius:var(--tp-radius-md);overflow:hidden;background:var(--tp-muted)">
-      <img style="color:transparent" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" alt="A winding road through green hills at sunset">
+  code={`<tp-stack direction="row" gap="4" align="start" wrap="wrap">
+  <figure style="margin: 0; inline-size: 10rem; max-inline-size: 100%">
+    <tp-aspect-ratio
+      ratio="1.7778"
+      fit="cover"
+      style="border-radius: var(--tp-radius-md); overflow: hidden; background: var(--tp-muted)"
+    >
+      <img
+        style="color: transparent"
+        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80"
+        alt="A winding road through green hills at sunset"
+      />
     </tp-aspect-ratio>
-    <figcaption style="margin-block-start:var(--tp-space-2);font-size:var(--tp-text-xs);color:var(--tp-muted-foreground)">Sidebar · 160 px</figcaption>
+    <figcaption
+      style="
+        margin-block-start: var(--tp-space-2);
+        font-size: var(--tp-text-xs);
+        color: var(--tp-muted-foreground);
+      "
+    >
+      Sidebar · 160 px
+    </figcaption>
   </figure>
-  <figure style="margin:0;inline-size:15rem;max-inline-size:100%">
-    <tp-aspect-ratio ratio="1.7778" fit="cover" style="border-radius:var(--tp-radius-md);overflow:hidden;background:var(--tp-muted)">
-      <img style="color:transparent" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" alt="A winding road through green hills at sunset">
+  <figure style="margin: 0; inline-size: 15rem; max-inline-size: 100%">
+    <tp-aspect-ratio
+      ratio="1.7778"
+      fit="cover"
+      style="border-radius: var(--tp-radius-md); overflow: hidden; background: var(--tp-muted)"
+    >
+      <img
+        style="color: transparent"
+        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80"
+        alt="A winding road through green hills at sunset"
+      />
     </tp-aspect-ratio>
-    <figcaption style="margin-block-start:var(--tp-space-2);font-size:var(--tp-text-xs);color:var(--tp-muted-foreground)">Card · 240 px</figcaption>
+    <figcaption
+      style="
+        margin-block-start: var(--tp-space-2);
+        font-size: var(--tp-text-xs);
+        color: var(--tp-muted-foreground);
+      "
+    >
+      Card · 240 px
+    </figcaption>
   </figure>
-  <figure style="margin:0;inline-size:20rem;max-inline-size:100%">
-    <tp-aspect-ratio ratio="1.7778" fit="cover" style="border-radius:var(--tp-radius-md);overflow:hidden;background:var(--tp-muted)">
-      <img style="color:transparent" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" alt="A winding road through green hills at sunset">
+  <figure style="margin: 0; inline-size: 20rem; max-inline-size: 100%">
+    <tp-aspect-ratio
+      ratio="1.7778"
+      fit="cover"
+      style="border-radius: var(--tp-radius-md); overflow: hidden; background: var(--tp-muted)"
+    >
+      <img
+        style="color: transparent"
+        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80"
+        alt="A winding road through green hills at sunset"
+      />
     </tp-aspect-ratio>
-    <figcaption style="margin-block-start:var(--tp-space-2);font-size:var(--tp-text-xs);color:var(--tp-muted-foreground)">Feature · 320 px</figcaption>
+    <figcaption
+      style="
+        margin-block-start: var(--tp-space-2);
+        font-size: var(--tp-text-xs);
+        color: var(--tp-muted-foreground);
+      "
+    >
+      Feature · 320 px
+    </figcaption>
   </figure>
-</div>`}
+</tp-stack>`}
 />
 
 The same 16:9 box keeps its shape in a sidebar, a card and a feature slot. Give it a width, or let the container shrink it, and the height follows.

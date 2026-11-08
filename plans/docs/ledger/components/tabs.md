@@ -17,3 +17,5 @@
 | Kind | A text | Reason |
 | --- | --- | --- |
 | preview | Controlled with a veto | Approved shared footer contract: remove local layout wrapper and place Discard before Save using native footer slots. |
+
+| preview | Change event and setValue | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

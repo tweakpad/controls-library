@@ -52,7 +52,7 @@ Author plain `option` and `optgroup` children and the component mirrors them int
 
 <Preview
   title="Sizes"
-  code={`<div style="display:grid;gap:var(--tp-space-3);inline-size:14rem">
+  code={`<tp-stack style="inline-size: 14rem" gap="3">
   <tp-native-select size="sm" label="Sort" default-value="recent">
     <option value="recent">Most recent</option>
     <option value="name">Name</option>
@@ -63,7 +63,7 @@ Author plain `option` and `optgroup` children and the component mirrors them int
     <option value="name">Name</option>
     <option value="size">File size</option>
   </tp-native-select>
-</div>`}
+</tp-stack>`}
 />
 
 ### Multiple
@@ -90,14 +90,20 @@ Native Select participates in forms like Input: it submits its `name`, resets to
 <Preview
   title="Form value"
   align="stretch"
-  code={`<form id="native-select-form" style="display:grid;gap:var(--tp-space-3);max-inline-size:22rem">
-  <tp-field label="Billing cycle">
-    <tp-native-select name="cycle" default-value="monthly">
-      <option value="monthly">Monthly — $12 per seat</option>
-      <option value="yearly">Yearly — $120 per seat</option>
-    </tp-native-select>
-  </tp-field>
-  <output id="native-select-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">cycle=monthly</output>
+  code={`<form id="native-select-form" style="max-inline-size: 22rem">
+  <tp-stack gap="3">
+    <tp-field label="Billing cycle">
+      <tp-native-select name="cycle" default-value="monthly">
+        <option value="monthly">Monthly — \$12 per seat</option>
+        <option value="yearly">Yearly — \$120 per seat</option>
+      </tp-native-select>
+    </tp-field>
+    <output
+      id="native-select-output"
+      style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+      >cycle=monthly</output
+    >
+  </tp-stack>
 </form>`}
   script={`const form = document.querySelector('#native-select-form');
 const output = document.querySelector('#native-select-output');
@@ -115,16 +121,20 @@ Set `value` to own the selection and accept each proposal in `onValueChange` by 
 <Preview
   title="Controlled value"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:22rem">
+  code={`<tp-stack style="max-inline-size: 22rem" gap="3">
   <tp-field label="Seat limit" description="18 members are active in this workspace.">
     <tp-native-select id="native-select-seats" value="25">
-      <option value="10">10 seats — $96/mo</option>
-      <option value="25">25 seats — $240/mo</option>
-      <option value="50">50 seats — $480/mo</option>
+      <option value="10">10 seats — \$96/mo</option>
+      <option value="25">25 seats — \$240/mo</option>
+      <option value="50">50 seats — \$480/mo</option>
     </tp-native-select>
   </tp-field>
-  <output id="native-select-seats-note" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Current plan: 25 seats.</output>
-</div>`}
+  <output
+    id="native-select-seats-note"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Current plan: 25 seats.</output
+  >
+</tp-stack>`}
   script={`const select = document.querySelector('#native-select-seats');
 const note = document.querySelector('#native-select-seats-note');
 const activeMembers = 18;
@@ -145,7 +155,7 @@ select.onValueChange = (event) => {
 <Preview
   title="Disabled, read-only and invalid"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:22rem">
+  code={`<tp-stack style="max-inline-size: 22rem" gap="4">
   <tp-field label="Plan" disabled>
     <tp-native-select default-value="team">
       <option value="team">Team</option>
@@ -164,7 +174,7 @@ select.onValueChange = (event) => {
       <option value="cet">Central European Time</option>
     </tp-native-select>
   </tp-field>
-</div>`}
+</tp-stack>`}
 />
 
 Native selects have no read-only mode, so `readonly` blocks changes while keeping the value focusable and submitted. Disabled omits it from form data.

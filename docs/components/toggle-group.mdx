@@ -135,13 +135,23 @@ In single mode, pressing the selected item clears the selection. When an empty s
 
 <Preview
   title="Required choice"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:center">
-  <tp-toggle-group id="toggle-group-plan" label="Billing period" variant="outline" spacing="0" default-value='["yearly"]'>
+  code={`<tp-stack gap="3" align="center">
+  <tp-toggle-group
+    id="toggle-group-plan"
+    label="Billing period"
+    variant="outline"
+    spacing="0"
+    default-value='["yearly"]'
+  >
     <tp-toggle value="monthly">Monthly</tp-toggle>
     <tp-toggle value="yearly">Yearly</tp-toggle>
   </tp-toggle-group>
-  <output id="toggle-group-plan-output" style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">$96 per seat, billed yearly</output>
-</div>`}
+  <output
+    id="toggle-group-plan-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >\$96 per seat, billed yearly</output
+  >
+</tp-stack>`}
   script={`const group = document.querySelector('#toggle-group-plan');
 const output = document.querySelector('#toggle-group-plan-output');
 group.addEventListener('tp-value-change', (event) => {

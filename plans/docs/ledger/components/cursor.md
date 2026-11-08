@@ -29,3 +29,6 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Sticking | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Programmatic state | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

@@ -56,14 +56,22 @@ field.validate();`}
 <Preview
   title="Horizontal"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-6);max-inline-size:28rem">
-  <tp-field label="Marketing emails" description="Product news and tips, about once a month." orientation="horizontal">
+  code={`<tp-stack style="max-inline-size: 28rem" gap="6">
+  <tp-field
+    label="Marketing emails"
+    description="Product news and tips, about once a month."
+    orientation="horizontal"
+  >
     <tp-switch name="marketing"></tp-switch>
   </tp-field>
-  <tp-field label="Two-factor authentication" description="Require a code from your authenticator app at sign-in." orientation="horizontal">
+  <tp-field
+    label="Two-factor authentication"
+    description="Require a code from your authenticator app at sign-in."
+    orientation="horizontal"
+  >
     <tp-switch name="mfa" default-checked></tp-switch>
   </tp-field>
-</div>`}
+</tp-stack>`}
 />
 
 `orientation="responsive"` switches between the stacked and horizontal layouts based on the Field's own container width. Only responsive orientation establishes size containment and fills its available container.
@@ -89,10 +97,14 @@ A Field renders a native `fieldset`. Give it a `legend` and put peer Fields in i
 <Preview
   title="Legend and group"
   align="stretch"
-  code={`<tp-field legend="Shipping address" style="max-inline-size:24rem">
-  <div slot="group" style="display:grid;gap:var(--tp-space-4)">
+  code={`<tp-field legend="Shipping address" style="max-inline-size: 24rem">
+  <tp-stack slot="group" gap="4">
     <tp-field label="Street address">
-      <tp-input name="street" autocomplete="street-address" default-value="221 Market Street"></tp-input>
+      <tp-input
+        name="street"
+        autocomplete="street-address"
+        default-value="221 Market Street"
+      ></tp-input>
     </tp-field>
     <tp-field label="City">
       <tp-input name="city" autocomplete="address-level2" default-value="San Francisco"></tp-input>
@@ -100,7 +112,7 @@ A Field renders a native `fieldset`. Give it a `legend` and put peer Fields in i
     <tp-field label="Postal code">
       <tp-input name="postal-code" autocomplete="postal-code" default-value="94105"></tp-input>
     </tp-field>
-  </div>
+  </tp-stack>
 </tp-field>`}
 />
 

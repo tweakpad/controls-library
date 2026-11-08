@@ -38,10 +38,10 @@ A group label does not replace an editor label. The group has no second value, s
 <Preview
   title="Text addons"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:24rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack style="max-inline-size: 24rem; margin-inline: auto; inline-size: 100%" gap="4">
   <tp-field label="Monthly budget">
     <tp-input-group>
-      <span slot="inline-start">$</span>
+      <span slot="inline-start">\$</span>
       <tp-input inputmode="decimal" default-value="2,400.00"></tp-input>
       <span slot="inline-end">USD</span>
     </tp-input-group>
@@ -53,7 +53,7 @@ A group label does not replace an editor label. The group has no second value, s
       <span slot="inline-end">.tweakpad.app</span>
     </tp-input-group>
   </tp-field>
-</div>`}
+</tp-stack>`}
 />
 
 Addons also report status: a result count, a check for an accepted value, or a Spinner while the value is being verified or saved.
@@ -61,7 +61,11 @@ Addons also report status: a result count, a check for an accepted value, or a S
 <Preview
   title="Status addons"
   align="stretch"
-  code={`<div id="input-group-status" style="display:grid;gap:var(--tp-space-4);max-inline-size:24rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack
+  id="input-group-status"
+  style="max-inline-size: 24rem; margin-inline: auto; inline-size: 100%"
+  gap="4"
+>
   <tp-field label="Search invoices">
     <tp-input-group>
       <tp-icon slot="inline-start" data-icon="search"></tp-icon>
@@ -72,7 +76,7 @@ Addons also report status: a result count, a check for an accepted value, or a S
   <tp-field label="Username" description="maya.chen is available.">
     <tp-input-group>
       <tp-input default-value="maya.chen"></tp-input>
-      <tp-icon slot="inline-end" data-icon="check" style="color:var(--tp-success)"></tp-icon>
+      <tp-icon slot="inline-end" data-icon="check" style="color: var(--tp-success)"></tp-icon>
     </tp-input-group>
   </tp-field>
   <tp-field label="Custom domain">
@@ -81,7 +85,7 @@ Addons also report status: a result count, a check for an accepted value, or a S
       <tp-spinner slot="inline-end" size="sm" label="Verifying domain"></tp-spinner>
     </tp-input-group>
   </tp-field>
-</div>`}
+</tp-stack>`}
   script={`const icons = {
   search: { viewBox: '0 0 24 24', paths: [{ d: 'M21 21l-5-5M10.5 3a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15', strokeWidth: 1.75 }] },
   check: { viewBox: '0 0 24 24', paths: [{ d: 'M5 12l4 4L19 6', strokeWidth: 2 }] },
@@ -98,10 +102,14 @@ Buttons in the `action` slot sit after the editor and stay independently operabl
 <Preview
   title="Actions"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:24rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack style="max-inline-size: 24rem; margin-inline: auto; inline-size: 100%" gap="4">
   <tp-field label="Invite link">
     <tp-input-group>
-      <tp-input id="input-group-copy-input" readonly default-value="https://tweakpad.app/join/8f2c41"></tp-input>
+      <tp-input
+        id="input-group-copy-input"
+        readonly
+        default-value="https://tweakpad.app/join/8f2c41"
+      ></tp-input>
       <tp-button id="input-group-copy" slot="action">Copy</tp-button>
     </tp-input-group>
   </tp-field>
@@ -111,7 +119,7 @@ Buttons in the `action` slot sit after the editor and stay independently operabl
       <tp-button slot="action">Apply</tp-button>
     </tp-input-group>
   </tp-field>
-</div>`}
+</tp-stack>`}
   script={`const button = document.querySelector('#input-group-copy');
 button.addEventListener('click', async () => {
   try {
@@ -131,21 +139,29 @@ An Input group can join a Button group as one member, beside Buttons or a static
 <Preview
   title="Button group composition"
   align="stretch"
-  code={`<div id="input-group-joined" style="display:grid;gap:var(--tp-space-4);max-inline-size:28rem;margin-inline:auto;inline-size:100%">
-  <tp-button-group label="Search the help center" style="inline-size:100%">
-    <tp-input-group style="flex:1">
+  code={`<tp-stack
+  id="input-group-joined"
+  style="max-inline-size: 28rem; margin-inline: auto; inline-size: 100%"
+  gap="4"
+>
+  <tp-button-group label="Search the help center" style="inline-size: 100%">
+    <tp-input-group style="flex: 1">
       <tp-icon slot="inline-start" data-icon="search"></tp-icon>
-      <tp-input label="Search query" type="search" placeholder="How do I export invoices?"></tp-input>
+      <tp-input
+        label="Search query"
+        type="search"
+        placeholder="How do I export invoices?"
+      ></tp-input>
     </tp-input-group>
     <tp-button variant="outline">Search</tp-button>
   </tp-button-group>
-  <tp-button-group label="Webhook endpoint" style="inline-size:100%">
+  <tp-button-group label="Webhook endpoint" style="inline-size: 100%">
     <tp-button-group-text>https://</tp-button-group-text>
-    <tp-input-group style="flex:1">
+    <tp-input-group style="flex: 1">
       <tp-input label="Webhook host" mono default-value="hooks.northwind.co/billing"></tp-input>
     </tp-input-group>
   </tp-button-group>
-</div>`}
+</tp-stack>`}
   script={`document.querySelector('#input-group-joined tp-icon').icon = {
   viewBox: '0 0 24 24',
   paths: [{ d: 'M21 21l-5-5M10.5 3a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15', strokeWidth: 1.75 }],
@@ -159,27 +175,41 @@ Addon slots also take interactive components, such as a Menu that picks a countr
 <Preview
   title="Interactive addons"
   align="stretch"
-  code={`<div id="input-group-addons" style="display:grid;gap:var(--tp-space-4);max-inline-size:24rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack
+  id="input-group-addons"
+  style="max-inline-size: 24rem; margin-inline: auto; inline-size: 100%"
+  gap="4"
+>
   <tp-field label="Phone number">
     <tp-input-group>
       <tp-menu id="input-group-country" slot="inline-start" label="Country code">
-        <tp-button slot="trigger" variant="ghost" size="xs"><span id="input-group-country-label">+1</span><tp-icon slot="icon-end" data-icon="down"></tp-icon></tp-button>
+        <tp-button slot="trigger" variant="ghost" size="xs"
+          ><span id="input-group-country-label">+1</span
+          ><tp-icon slot="icon-end" data-icon="down"></tp-icon
+        ></tp-button>
         <tp-menu-item value="+1">United States +1</tp-menu-item>
         <tp-menu-item value="+44">United Kingdom +44</tp-menu-item>
         <tp-menu-item value="+49">Germany +49</tp-menu-item>
       </tp-menu>
-      <tp-input type="tel" name="phone" autocomplete="tel-national" placeholder="415 555 0132"></tp-input>
+      <tp-input
+        type="tel"
+        name="phone"
+        autocomplete="tel-national"
+        placeholder="415 555 0132"
+      ></tp-input>
     </tp-input-group>
   </tp-field>
   <tp-field label="Project identifier">
     <tp-input-group>
       <tp-input mono placeholder="checkout-service"></tp-input>
       <tp-tooltip slot="inline-end" label="Lowercase letters, numbers and hyphens.">
-        <tp-button slot="trigger" variant="ghost" size="icon-xs" aria-label="Identifier format"><tp-icon slot="icon-start" data-icon="help"></tp-icon></tp-button>
+        <tp-button slot="trigger" variant="ghost" size="icon-xs" aria-label="Identifier format"
+          ><tp-icon slot="icon-start" data-icon="help"></tp-icon
+        ></tp-button>
       </tp-tooltip>
     </tp-input-group>
   </tp-field>
-</div>`}
+</tp-stack>`}
   script={`const icons = {
   down: { viewBox: '0 0 24 24', paths: [{ d: 'm6 9 6 6 6-6', strokeWidth: 2 }] },
   help: { viewBox: '0 0 24 24', paths: [{ d: 'M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01', strokeWidth: 2 }] },
@@ -234,7 +264,7 @@ The group reflects the editor's disabled and invalid states on its border. Error
 <Preview
   title="Disabled and invalid"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:24rem;margin-inline:auto;inline-size:100%">
+  code={`<tp-stack style="max-inline-size: 24rem; margin-inline: auto; inline-size: 100%" gap="4">
   <tp-field label="Subdomain" error="That subdomain is already taken." invalid>
     <tp-input-group>
       <tp-input default-value="acme"></tp-input>
@@ -247,5 +277,5 @@ The group reflects the editor's disabled and invalid states on its border. Error
       <tp-input default-value="8f2c41"></tp-input>
     </tp-input-group>
   </tp-field>
-</div>`}
+</tp-stack>`}
 />

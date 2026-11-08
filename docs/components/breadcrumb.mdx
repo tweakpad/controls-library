@@ -97,7 +97,21 @@ An ancestor can open a menu of its sibling sections, so readers jump sideways wi
   <span id="breadcrumb-responsive">
     <tp-menu label="Hidden pages" placement="block-end start">
       <tp-button slot="trigger" variant="ghost" size="icon-sm" aria-label="Show 3 hidden pages">
-        <svg slot="icon-start" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>
+        <svg
+          slot="icon-start"
+          aria-hidden="true"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <circle cx="5" cy="12" r="1" />
+          <circle cx="12" cy="12" r="1" />
+          <circle cx="19" cy="12" r="1" />
+        </svg>
       </tp-button>
       <a href="#breadcrumb-r-guides" close-on-click>Guides</a>
       <a href="#breadcrumb-r-data" close-on-click>Data</a>
@@ -105,12 +119,28 @@ An ancestor can open a menu of its sibling sections, so readers jump sideways wi
     </tp-menu>
     <tp-drawer label="Go to" description="Pages above Caching in the docs." hidden>
       <tp-button slot="trigger" variant="ghost" size="icon-sm" aria-label="Show 3 hidden pages">
-        <svg slot="icon-start" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>
+        <svg
+          slot="icon-start"
+          aria-hidden="true"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <circle cx="5" cy="12" r="1" />
+          <circle cx="12" cy="12" r="1" />
+          <circle cx="19" cy="12" r="1" />
+        </svg>
       </tp-button>
-      <nav style="display:grid;gap:var(--tp-space-2)">
-        <a href="#breadcrumb-r-guides">Guides</a>
-        <a href="#breadcrumb-r-data">Data</a>
-        <a href="#breadcrumb-r-fetching">Fetching</a>
+      <nav>
+        <tp-stack gap="2">
+          <a href="#breadcrumb-r-guides">Guides</a>
+          <a href="#breadcrumb-r-data">Data</a>
+          <a href="#breadcrumb-r-fetching">Fetching</a>
+        </tp-stack>
       </nav>
       <tp-button slot="close" variant="outline">Close</tp-button>
     </tp-drawer>

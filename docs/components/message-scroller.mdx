@@ -68,8 +68,16 @@ A single new anchored turn holds its reading line while its reply consumes reser
 <Preview
   title="Streaming"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:28rem;margin-inline:auto;inline-size:100%">
-  <tp-message-scroller id="message-scroller-stream" label="Assistant conversation" style="border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-xl);--tp-message-scroller-height:18rem">
+  code={`<tp-stack style="max-inline-size: 28rem; margin-inline: auto; inline-size: 100%" gap="3">
+  <tp-message-scroller
+    id="message-scroller-stream"
+    label="Assistant conversation"
+    style="
+      border: var(--tp-border-width) solid var(--tp-border);
+      border-radius: var(--tp-radius-xl);
+      --tp-message-scroller-height: 18rem;
+    "
+  >
     <tp-message-scroller-item message-id="intro">
       <tp-message aria-label="Assistant">
         <tp-bubble variant="ghost">Hi Dana, ask me anything about your workspace.</tp-bubble>
@@ -77,7 +85,7 @@ A single new anchored turn holds its reading line while its reply consumes reser
     </tp-message-scroller-item>
   </tp-message-scroller>
   <tp-button id="message-scroller-ask" variant="outline">Ask a question</tp-button>
-</div>`}
+</tp-stack>`}
   script={`const scroller = document.getElementById('message-scroller-stream');
 const ask = document.getElementById('message-scroller-ask');
 const turns = [
@@ -156,20 +164,44 @@ Rejected proposals retain the accepted state/mode and restore its position. In u
 <Preview
   title="Join marker as anchor"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:28rem;margin-inline:auto;inline-size:100%">
-  <tp-message-scroller id="message-scroller-group" label="Launch channel" previous-item-peek="64" style="border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-xl);--tp-message-scroller-height:18rem">
+  code={`<tp-stack style="max-inline-size: 28rem; margin-inline: auto; inline-size: 100%" gap="3">
+  <tp-message-scroller
+    id="message-scroller-group"
+    label="Launch channel"
+    previous-item-peek="64"
+    style="
+      border: var(--tp-border-width) solid var(--tp-border);
+      border-radius: var(--tp-radius-xl);
+      --tp-message-scroller-height: 18rem;
+    "
+  >
     <tp-message-scroller-item message-id="lena-1">
-      <tp-message author="Lena Ortiz"><tp-bubble>The pricing page is live on staging. Can someone check the annual toggle?</tp-bubble></tp-message>
+      <tp-message author="Lena Ortiz"
+        ><tp-bubble
+          >The pricing page is live on staging. Can someone check the annual toggle?</tp-bubble
+        ></tp-message
+      >
     </tp-message-scroller-item>
     <tp-message-scroller-item message-id="omar-1">
-      <tp-message author="Omar Haddad"><tp-bubble>Checked: annual prices show the 20% discount, but the badge overlaps the plan name on small screens. Screenshot is in the ticket.</tp-bubble></tp-message>
+      <tp-message author="Omar Haddad"
+        ><tp-bubble
+          >Checked: annual prices show the 20% discount, but the badge overlaps the plan name on
+          small screens. Screenshot is in the ticket.</tp-bubble
+        ></tp-message
+      >
     </tp-message-scroller-item>
     <tp-message-scroller-item message-id="lena-2">
-      <tp-message author="Lena Ortiz"><tp-bubble>Thanks. Let's bring in Grace from design before we fix it.</tp-bubble></tp-message>
+      <tp-message author="Lena Ortiz"
+        ><tp-bubble
+          >Thanks. Let's bring in Grace from design before we fix it.</tp-bubble
+        ></tp-message
+      >
     </tp-message-scroller-item>
   </tp-message-scroller>
-  <tp-button id="message-scroller-group-add" variant="outline" style="justify-self:start">Add Grace to the channel</tp-button>
-</div>`}
+  <tp-button id="message-scroller-group-add" variant="outline" style="align-self: flex-start"
+    >Add Grace to the channel</tp-button
+  >
+</tp-stack>`}
   script={`const scroller = document.getElementById('message-scroller-group');
 const add = document.getElementById('message-scroller-group-add');
 const item = (id, anchor, content) => {
@@ -208,30 +240,58 @@ Known unmounted targets and commands awaiting a measurable viewport return `pend
 <Preview
   title="Commands"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:28rem;margin-inline:auto;inline-size:100%">
-  <tp-button-group id="message-scroller-jumps" label="Jump to" style="justify-self:start">
+  code={`<tp-stack style="max-inline-size: 28rem; margin-inline: auto; inline-size: 100%" gap="3">
+  <tp-button-group id="message-scroller-jumps" label="Jump to" style="align-self: flex-start">
     <tp-button size="sm" variant="outline" data-target="kickoff">Kickoff</tp-button>
     <tp-button size="sm" variant="outline" data-target="scope">Scope change</tp-button>
     <tp-button size="sm" variant="outline" data-target="end">Latest</tp-button>
   </tp-button-group>
-  <tp-message-scroller id="message-scroller-commands" label="Project thread" style="border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-xl);--tp-message-scroller-height:14rem">
+  <tp-message-scroller
+    id="message-scroller-commands"
+    label="Project thread"
+    style="
+      border: var(--tp-border-width) solid var(--tp-border);
+      border-radius: var(--tp-radius-xl);
+      --tp-message-scroller-height: 14rem;
+    "
+  >
     <tp-message-scroller-item message-id="kickoff">
-      <tp-message author="Lena Ortiz" timestamp="2026-09-02T09:15:00"><tp-bubble>Kickoff notes are in the project doc. Launch target is October 20.</tp-bubble></tp-message>
+      <tp-message author="Lena Ortiz" timestamp="2026-09-02T09:15:00"
+        ><tp-bubble
+          >Kickoff notes are in the project doc. Launch target is October 20.</tp-bubble
+        ></tp-message
+      >
     </tp-message-scroller-item>
     <tp-message-scroller-item message-id="design">
-      <tp-message author="Omar Haddad" timestamp="2026-09-09T16:40:00"><tp-bubble>Design review passed. Two follow-ups on the empty states.</tp-bubble></tp-message>
+      <tp-message author="Omar Haddad" timestamp="2026-09-09T16:40:00"
+        ><tp-bubble
+          >Design review passed. Two follow-ups on the empty states.</tp-bubble
+        ></tp-message
+      >
     </tp-message-scroller-item>
     <tp-message-scroller-item message-id="scope">
-      <tp-message author="Lena Ortiz" timestamp="2026-09-18T11:05:00"><tp-bubble>Scope change: CSV import moves to the next release so we keep the date.</tp-bubble></tp-message>
+      <tp-message author="Lena Ortiz" timestamp="2026-09-18T11:05:00"
+        ><tp-bubble
+          >Scope change: CSV import moves to the next release so we keep the date.</tp-bubble
+        ></tp-message
+      >
     </tp-message-scroller-item>
     <tp-message-scroller-item message-id="qa">
-      <tp-message author="Grace Kim" timestamp="2026-09-30T14:20:00"><tp-bubble>QA found three blockers, all assigned. Retest is scheduled for Monday.</tp-bubble></tp-message>
+      <tp-message author="Grace Kim" timestamp="2026-09-30T14:20:00"
+        ><tp-bubble
+          >QA found three blockers, all assigned. Retest is scheduled for Monday.</tp-bubble
+        ></tp-message
+      >
     </tp-message-scroller-item>
     <tp-message-scroller-item message-id="ready">
-      <tp-message author="Omar Haddad" timestamp="2026-10-08T10:00:00"><tp-bubble>All blockers closed. We are ready for the launch checklist.</tp-bubble></tp-message>
+      <tp-message author="Omar Haddad" timestamp="2026-10-08T10:00:00"
+        ><tp-bubble
+          >All blockers closed. We are ready for the launch checklist.</tp-bubble
+        ></tp-message
+      >
     </tp-message-scroller-item>
   </tp-message-scroller>
-</div>`}
+</tp-stack>`}
   script={`const scroller = document.getElementById('message-scroller-commands');
 document.getElementById('message-scroller-jumps').addEventListener('click', (event) => {
   const target = event.target.closest('[data-target]')?.dataset.target;
@@ -252,36 +312,81 @@ The peek band is excluded from reading visibility. Subscribing does not synchron
 <Preview
   title="Outline and edges"
   align="stretch"
-  code={`<div style="display:grid;grid-template-columns:minmax(0,1fr) 10rem;gap:var(--tp-space-4);max-inline-size:36rem;margin-inline:auto;inline-size:100%">
-  <tp-message-scroller id="message-scroller-outline" label="Onboarding questions" initial-position="start" reading-line="16" style="border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-xl);--tp-message-scroller-height:18rem">
+  code={`<div
+  style="
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 10rem;
+    gap: var(--tp-space-4);
+    max-inline-size: 36rem;
+    margin-inline: auto;
+    inline-size: 100%;
+  "
+>
+  <tp-message-scroller
+    id="message-scroller-outline"
+    label="Onboarding questions"
+    initial-position="start"
+    reading-line="16"
+    style="
+      border: var(--tp-border-width) solid var(--tp-border);
+      border-radius: var(--tp-radius-xl);
+      --tp-message-scroller-height: 18rem;
+    "
+  >
     <tp-message-scroller-item message-id="sso" scroll-anchor>
-      <tp-message align="end" aria-label="You"><tp-bubble align="end">Can we require single sign-on?</tp-bubble></tp-message>
+      <tp-message align="end" aria-label="You"
+        ><tp-bubble align="end">Can we require single sign-on?</tp-bubble></tp-message
+      >
     </tp-message-scroller-item>
     <tp-message-scroller-item message-id="sso-reply">
-      <tp-message aria-label="Assistant"><tp-bubble variant="ghost">Yes. On the Business plan, turn on Enforce SSO under Security. Members without an identity-provider account are signed out at their next session refresh, so invite them in your provider first. Guests can keep email sign-in if you allow it.</tp-bubble></tp-message>
+      <tp-message aria-label="Assistant"
+        ><tp-bubble variant="ghost"
+          >Yes. On the Business plan, turn on Enforce SSO under Security. Members without an
+          identity-provider account are signed out at their next session refresh, so invite them in
+          your provider first. Guests can keep email sign-in if you allow it.</tp-bubble
+        ></tp-message
+      >
     </tp-message-scroller-item>
     <tp-message-scroller-item message-id="export" scroll-anchor>
-      <tp-message align="end" aria-label="You"><tp-bubble align="end">How do I export all projects?</tp-bubble></tp-message>
+      <tp-message align="end" aria-label="You"
+        ><tp-bubble align="end">How do I export all projects?</tp-bubble></tp-message
+      >
     </tp-message-scroller-item>
     <tp-message-scroller-item message-id="export-reply">
-      <tp-message aria-label="Assistant"><tp-bubble variant="ghost">Owners can start a full export from Settings → Data. You get an email with a download link when the archive is ready, usually within an hour. The archive holds every project as JSON plus all attachments, and the link stays valid for seven days.</tp-bubble></tp-message>
+      <tp-message aria-label="Assistant"
+        ><tp-bubble variant="ghost"
+          >Owners can start a full export from Settings → Data. You get an email with a download
+          link when the archive is ready, usually within an hour. The archive holds every project as
+          JSON plus all attachments, and the link stays valid for seven days.</tp-bubble
+        ></tp-message
+      >
     </tp-message-scroller-item>
     <tp-message-scroller-item message-id="seats" scroll-anchor>
-      <tp-message align="end" aria-label="You"><tp-bubble align="end">What happens when we run out of seats?</tp-bubble></tp-message>
+      <tp-message align="end" aria-label="You"
+        ><tp-bubble align="end">What happens when we run out of seats?</tp-bubble></tp-message
+      >
     </tp-message-scroller-item>
     <tp-message-scroller-item message-id="seats-reply">
-      <tp-message aria-label="Assistant"><tp-bubble variant="ghost">New invites wait as pending until a seat frees up or an owner adds one. Adding a seat mid-cycle is prorated on your next invoice. Nobody already in the workspace loses access.</tp-bubble></tp-message>
+      <tp-message aria-label="Assistant"
+        ><tp-bubble variant="ghost"
+          >New invites wait as pending until a seat frees up or an owner adds one. Adding a seat
+          mid-cycle is prorated on your next invoice. Nobody already in the workspace loses
+          access.</tp-bubble
+        ></tp-message
+      >
     </tp-message-scroller-item>
   </tp-message-scroller>
-  <nav aria-label="Questions" style="display:grid;gap:var(--tp-space-1);align-content:start">
-    <div id="message-scroller-outline-nav" style="display:grid;gap:var(--tp-space-1)">
-      <tp-button size="sm" variant="ghost" data-target="sso">Single sign-on</tp-button>
-      <tp-button size="sm" variant="ghost" data-target="export">Export</tp-button>
-      <tp-button size="sm" variant="ghost" data-target="seats">Seats</tp-button>
-    </div>
-    <tp-separator></tp-separator>
-    <tp-button id="message-scroller-outline-first" size="sm" variant="outline">First</tp-button>
-    <tp-button id="message-scroller-outline-latest" size="sm" variant="outline">Latest</tp-button>
+  <nav aria-label="Questions">
+    <tp-stack gap="1" justify="start">
+      <tp-stack id="message-scroller-outline-nav" gap="1">
+        <tp-button size="sm" variant="ghost" data-target="sso">Single sign-on</tp-button>
+        <tp-button size="sm" variant="ghost" data-target="export">Export</tp-button>
+        <tp-button size="sm" variant="ghost" data-target="seats">Seats</tp-button>
+      </tp-stack>
+      <tp-separator></tp-separator>
+      <tp-button id="message-scroller-outline-first" size="sm" variant="outline">First</tp-button>
+      <tp-button id="message-scroller-outline-latest" size="sm" variant="outline">Latest</tp-button>
+    </tp-stack>
   </nav>
 </div>`}
   script={`await customElements.whenDefined('tp-message-scroller');
@@ -315,25 +420,51 @@ Insert older messages at the top of Content as they load. While `preserve-on-pre
 <Preview
   title="Prepend history"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:28rem;margin-inline:auto;inline-size:100%">
-  <tp-button id="message-scroller-history-load" variant="outline" size="sm" style="justify-self:start">Load earlier messages</tp-button>
-  <tp-message-scroller id="message-scroller-history" label="Support ticket #5521" style="border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-xl);--tp-message-scroller-height:16rem">
+  code={`<tp-stack style="max-inline-size: 28rem; margin-inline: auto; inline-size: 100%" gap="3">
+  <tp-button
+    id="message-scroller-history-load"
+    variant="outline"
+    size="sm"
+    style="align-self: flex-start"
+    >Load earlier messages</tp-button
+  >
+  <tp-message-scroller
+    id="message-scroller-history"
+    label="Support ticket #5521"
+    style="
+      border: var(--tp-border-width) solid var(--tp-border);
+      border-radius: var(--tp-radius-xl);
+      --tp-message-scroller-height: 16rem;
+    "
+  >
     <tp-message-scroller-viewport>
       <tp-message-scroller-content>
         <tp-message-scroller-item message-id="t-4">
-          <tp-message author="Dana Wells" timestamp="2026-10-13T09:12:00"><tp-bubble>The export finished overnight, thank you. One project is missing its attachments, though.</tp-bubble></tp-message>
+          <tp-message author="Dana Wells" timestamp="2026-10-13T09:12:00"
+            ><tp-bubble
+              >The export finished overnight, thank you. One project is missing its attachments,
+              though.</tp-bubble
+            ></tp-message
+          >
         </tp-message-scroller-item>
         <tp-message-scroller-item message-id="t-5">
-          <tp-message author="Support" timestamp="2026-10-13T10:03:00"><tp-bubble variant="outline">That project was archived before the export started. I have restored it and queued a second export for it alone.</tp-bubble></tp-message>
+          <tp-message author="Support" timestamp="2026-10-13T10:03:00"
+            ><tp-bubble variant="outline"
+              >That project was archived before the export started. I have restored it and queued a
+              second export for it alone.</tp-bubble
+            ></tp-message
+          >
         </tp-message-scroller-item>
         <tp-message-scroller-item message-id="t-6">
-          <tp-message author="Dana Wells" timestamp="2026-10-13T11:40:00"><tp-bubble>Got it, everything is there now.</tp-bubble></tp-message>
+          <tp-message author="Dana Wells" timestamp="2026-10-13T11:40:00"
+            ><tp-bubble>Got it, everything is there now.</tp-bubble></tp-message
+          >
         </tp-message-scroller-item>
       </tp-message-scroller-content>
     </tp-message-scroller-viewport>
     <tp-message-scroller-return-control></tp-message-scroller-return-control>
   </tp-message-scroller>
-</div>`}
+</tp-stack>`}
   script={`const content = document.querySelector('#message-scroller-history tp-message-scroller-content');
 const load = document.getElementById('message-scroller-history-load');
 const earlier = [
@@ -368,14 +499,28 @@ The scroller has no animation property; animate a new message's inner presentati
 <Preview
   title="Animated send"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:28rem;margin-inline:auto;inline-size:100%">
-  <tp-message-scroller id="message-scroller-animate" label="Direct messages" style="border:var(--tp-border-width) solid var(--tp-border);border-radius:var(--tp-radius-xl);--tp-message-scroller-height:16rem">
+  code={`<tp-stack style="max-inline-size: 28rem; margin-inline: auto; inline-size: 100%" gap="3">
+  <tp-message-scroller
+    id="message-scroller-animate"
+    label="Direct messages"
+    style="
+      border: var(--tp-border-width) solid var(--tp-border);
+      border-radius: var(--tp-radius-xl);
+      --tp-message-scroller-height: 16rem;
+    "
+  >
     <tp-message-scroller-item message-id="m-1">
-      <tp-message author="Jonas Weber"><tp-bubble variant="secondary">Are we still on for the design review at 3?</tp-bubble></tp-message>
+      <tp-message author="Jonas Weber"
+        ><tp-bubble variant="secondary"
+          >Are we still on for the design review at 3?</tp-bubble
+        ></tp-message
+      >
     </tp-message-scroller-item>
   </tp-message-scroller>
-  <tp-button id="message-scroller-animate-send" style="justify-self:start">Send reply</tp-button>
-</div>`}
+  <tp-button id="message-scroller-animate-send" style="align-self: flex-start"
+    >Send reply</tp-button
+  >
+</tp-stack>`}
   script={`import { resolvesReducedMotion } from '@tweakpad/ui';
 
 const scroller = document.getElementById('message-scroller-animate');

@@ -23,14 +23,18 @@ Text area shares Input's value, editing and form model, but keeps newlines: Ente
   align="stretch"
   script={`const notes = document.querySelector('#text-area-demo-notes');
 notes.hostProperties = { style: { fieldSizing: 'fixed' } };`}
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="4">
   <tp-field label="Commit message" description="Grows as you type.">
     <tp-text-area resize="none" default-value="Fix rounding in invoice totals"></tp-text-area>
   </tp-field>
   <tp-field label="Release notes" description="Fixed at six rows; drag the corner to resize.">
-    <tp-text-area id="text-area-demo-notes" rows="6" placeholder="Summarize the changes in this release"></tp-text-area>
+    <tp-text-area
+      id="text-area-demo-notes"
+      rows="6"
+      placeholder="Summarize the changes in this release"
+    ></tp-text-area>
   </tp-field>
-</div>`}
+</tp-stack>`}
 />
 
 The default theme sizes the editor to its content from a minimum height, so short replies stay compact and long ones never scroll. For a fixed height, set native fixed sizing through `hostProperties` and choose the height with `rows`. `resize` follows writing mode: `block` (the default) lets people drag it taller, `none` removes the handle, and `inline` or `both` allow width changes.
@@ -72,12 +76,21 @@ const count = document.querySelector('#text-area-demo-count');
 message.addEventListener('tp-value-change', (event) => {
   count.textContent = \`\${event.detail.value.length} / 280\`;
 });`}
-  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="2">
   <tp-field label="Status update">
-    <tp-text-area id="text-area-demo-status" name="status" maxlength="280" default-value="Shipping the new billing dashboard to all workspaces this afternoon."></tp-text-area>
+    <tp-text-area
+      id="text-area-demo-status"
+      name="status"
+      maxlength="280"
+      default-value="Shipping the new billing dashboard to all workspaces this afternoon."
+    ></tp-text-area>
   </tp-field>
-  <output id="text-area-demo-count" style="justify-self:end;color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">68 / 280</output>
-</div>`}
+  <output
+    id="text-area-demo-count"
+    style="align-self: flex-end; color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >68 / 280</output
+  >
+</tp-stack>`}
 />
 
 Typing, pasting and clearing each publish a cancelable `tp-value-change` with the proposed `value`. Use it for live counters or previews; calling `preventDefault()` rolls the edit back. Controlled mode stays fixed for a lifetime; rejected edits restore committed text without unnecessary selection changes. Composition remains one edit.
@@ -105,16 +118,19 @@ The native textarea renders in light DOM and submits with its form; Reset restor
 <Preview
   title="Disabled and read-only"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="4">
   <tp-field label="Internal notes" disabled>
     <tp-text-area default-value="Waiting on legal review."></tp-text-area>
   </tp-field>
   <tp-field label="Shipping address">
-    <tp-text-area readonly default-value="Maya Chen
+    <tp-text-area
+      readonly
+      default-value="Maya Chen
 221 Mission Street, Suite 400
-San Francisco, CA 94105"></tp-text-area>
+San Francisco, CA 94105"
+    ></tp-text-area>
   </tp-field>
-</div>`}
+</tp-stack>`}
 />
 
 Disabled omits the value from form data. Read-only keeps it, along with selection and focus.

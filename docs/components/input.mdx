@@ -23,7 +23,7 @@ Labels, descriptions and errors belong to `tp-field`; the Input owns the native 
 <Preview
   title="Types"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:22rem">
+  code={`<tp-stack style="max-inline-size: 22rem" gap="4">
   <tp-field label="Password">
     <tp-input type="password" name="password" autocomplete="current-password"></tp-input>
   </tp-field>
@@ -33,7 +33,7 @@ Labels, descriptions and errors belong to `tp-field`; the Input owns the native 
   <tp-field label="Search">
     <tp-input type="search" name="q" placeholder="Search projects"></tp-input>
   </tp-field>
-</div>`}
+</tp-stack>`}
 />
 
 ### Code-like values
@@ -43,14 +43,14 @@ Labels, descriptions and errors belong to `tp-field`; the Input owns the native 
 <Preview
   title="Mono"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:22rem">
+  code={`<tp-stack style="max-inline-size: 22rem" gap="4">
   <tp-field label="Webhook secret">
     <tp-input mono name="secret" default-value="whsec_9f2b41c07a"></tp-input>
   </tp-field>
   <tp-field label="Branch">
     <tp-input mono name="branch" default-value="release/2026-10"></tp-input>
   </tp-field>
-</div>`}
+</tp-stack>`}
 />
 
 ### Controlled value
@@ -88,14 +88,14 @@ Native constraints such as `required`, `pattern` and `minlength` validate throug
 <Preview
   title="Disabled and read-only"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:22rem">
+  code={`<tp-stack style="max-inline-size: 22rem" gap="4">
   <tp-field label="Workspace" disabled>
     <tp-input default-value="tweakpad"></tp-input>
   </tp-field>
   <tp-field label="Project ID">
     <tp-input readonly default-value="prj_8f2c41"></tp-input>
   </tp-field>
-</div>`}
+</tp-stack>`}
 />
 
 Disabled omits the value from form data. Read-only keeps it, along with selection and focus.
@@ -113,15 +113,26 @@ Native form serialization follows the editable input's current representation, i
 <Preview
   title="Inline"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:22rem;margin-inline:auto">
-  <tp-input variant="inline" label="Display name" name="display-name" default-value="Rowan"></tp-input>
-  <tp-input variant="inline" label="Time zone offset" name="offset" type="number" default-value="2"></tp-input>
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="2">
+  <tp-input
+    variant="inline"
+    label="Display name"
+    name="display-name"
+    default-value="Rowan"
+  ></tp-input>
+  <tp-input
+    variant="inline"
+    label="Time zone offset"
+    name="offset"
+    type="number"
+    default-value="2"
+  ></tp-input>
   <tp-select variant="inline" label="Language" name="language" default-value="pt">
     <option value="en">English</option>
     <option value="pt">Português</option>
     <option value="ja">日本語</option>
   </tp-select>
-</div>`}
+</tp-stack>`}
 />
 
 `variant="inline"` fits the Input into one row the height of a control, with `label` at the start and the value at the end, so it stacks with other inline controls such as an inline Select. A press on the label edits the value. Inside a Field, the Field's label moves into the row.
@@ -133,10 +144,29 @@ A number value sits between a decrement and an increment arrow in place of the b
 <Preview
   title="Number steps"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:22rem;margin-inline:auto">
-  <tp-input variant="inline" label="Line height" name="line-height" type="number" step="0.1" min="1" max="3" default-value="1.5"></tp-input>
-  <tp-input variant="inline" label="Opacity" name="opacity" type="number" step="0.05" precision="2" min="0" max="1" default-value="0.8"></tp-input>
-</div>`}
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="2">
+  <tp-input
+    variant="inline"
+    label="Line height"
+    name="line-height"
+    type="number"
+    step="0.1"
+    min="1"
+    max="3"
+    default-value="1.5"
+  ></tp-input>
+  <tp-input
+    variant="inline"
+    label="Opacity"
+    name="opacity"
+    type="number"
+    step="0.05"
+    precision="2"
+    min="0"
+    max="1"
+    default-value="0.8"
+  ></tp-input>
+</tp-stack>`}
 />
 
 `unit` shows a unit after the value, such as `px`, `rem` or `deg`; it is not part of the value, and the editor announces it as its description. An Icon in the `icon` slot leads the row, outside its boundary.
@@ -144,15 +174,40 @@ A number value sits between a decrement and an increment arrow in place of the b
 <Preview
   title="Units and icons"
   align="stretch"
-  code={`<div id="input-inline-units" style="display:grid;gap:var(--tp-space-2);max-inline-size:22rem;margin-inline:auto">
-  <tp-input variant="inline" label="Corner radius" name="radius" type="number" unit="px" min="0" default-value="12">
+  code={`<tp-stack id="input-inline-units" style="max-inline-size: 22rem; margin-inline: auto" gap="2">
+  <tp-input
+    variant="inline"
+    label="Corner radius"
+    name="radius"
+    type="number"
+    unit="px"
+    min="0"
+    default-value="12"
+  >
     <tp-icon slot="icon" data-icon="radius"></tp-icon>
   </tp-input>
-  <tp-input variant="inline" label="Letter spacing" name="tracking" type="number" unit="em" step="0.01" default-value="0.02">
+  <tp-input
+    variant="inline"
+    label="Letter spacing"
+    name="tracking"
+    type="number"
+    unit="em"
+    step="0.01"
+    default-value="0.02"
+  >
     <tp-icon slot="icon" data-icon="tracking"></tp-icon>
   </tp-input>
-  <tp-input variant="inline" label="Skew" name="skew" type="number" unit="deg" min="-45" max="45" default-value="0"></tp-input>
-</div>`}
+  <tp-input
+    variant="inline"
+    label="Skew"
+    name="skew"
+    type="number"
+    unit="deg"
+    min="-45"
+    max="45"
+    default-value="0"
+  ></tp-input>
+</tp-stack>`}
   script={`const icons = {
   radius: { viewBox: '0 0 24 24', paths: [{ d: 'M4 20V11a7 7 0 0 1 7-7h9', strokeWidth: 2 }] },
   tracking: { viewBox: '0 0 24 24', paths: [{ d: 'M3 18 7 6l4 12M4.5 14h5M14 18l3-12 3 12', strokeWidth: 2 }] },

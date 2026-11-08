@@ -24,3 +24,7 @@
 | preview | Toggle and separator → Separator | The user rejected the lock toggle design (2026-11-05); the preview keeps the Price range group. |
 | prose | Buttons and Toggles can join beside the editors, for example a lock | The user rejected the lock toggle design (2026-11-05). |
 | prose | Input, Input group, Text area, Select and Native select are editor members. | The user rejected the lock toggle design (2026-11-05). |
+
+| preview | Color channels | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Inline | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Expanded | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

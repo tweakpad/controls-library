@@ -26,7 +26,7 @@ The group does not force a size or variant on its members. Set the same `size` o
 
 <Preview
   title="Sizes"
-  code={`<div style="display:grid;gap:var(--tp-space-4);justify-items:center">
+  code={`<tp-stack gap="4" align="center">
   <tp-button-group label="Small actions">
     <tp-button variant="outline" size="sm">Archive</tp-button>
     <tp-button variant="outline" size="sm">Report</tp-button>
@@ -42,7 +42,7 @@ The group does not force a size or variant on its members. Set the same `size` o
     <tp-button variant="outline" size="lg">Report</tp-button>
     <tp-button variant="outline" size="lg" disabled>Snooze</tp-button>
   </tp-button-group>
-</div>`}
+</tp-stack>`}
 />
 
 ### Orientation
@@ -86,7 +86,7 @@ Inputs, selects and toggles can sit next to Buttons and keep their value and for
 <Preview
   title="Mixed controls"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="4">
   <tp-button-group label="Workspace address">
     <tp-button-group-text>tweakpad.app/</tp-button-group-text>
     <tp-input label="Workspace slug" placeholder="acme"></tp-input>
@@ -95,7 +95,7 @@ Inputs, selects and toggles can sit next to Buttons and keep their value and for
     <tp-input label="Email" type="email" placeholder="name@company.com"></tp-input>
     <tp-button variant="outline">Send invite</tp-button>
   </tp-button-group>
-</div>`}
+</tp-stack>`}
 />
 
 Buttons can sit on either side of an input, and a text segment can hold a real `tp-label` or a live count.
@@ -103,11 +103,20 @@ Buttons can sit on either side of an input, and a text segment can hold a real `
 <Preview
   title="Steppers, labels and counts"
   align="stretch"
-  code={`<div id="button-group-segments" style="display:grid;gap:var(--tp-space-4);max-inline-size:26rem;margin-inline:auto">
+  code={`<tp-stack id="button-group-segments" style="max-inline-size: 26rem; margin-inline: auto" gap="4">
   <tp-button-group label="Seats">
-    <tp-button variant="outline" size="icon" aria-label="Remove a seat" data-step="-1"><span slot="icon-start" aria-hidden="true">−</span></tp-button>
-    <tp-input label="Seats" inputmode="numeric" default-value="12" style="inline-size:5rem"></tp-input>
-    <tp-button variant="outline" size="icon" aria-label="Add a seat" data-step="1"><span slot="icon-start" aria-hidden="true">+</span></tp-button>
+    <tp-button variant="outline" size="icon" aria-label="Remove a seat" data-step="-1"
+      ><span slot="icon-start" aria-hidden="true">−</span></tp-button
+    >
+    <tp-input
+      label="Seats"
+      inputmode="numeric"
+      default-value="12"
+      style="inline-size: 5rem"
+    ></tp-input>
+    <tp-button variant="outline" size="icon" aria-label="Add a seat" data-step="1"
+      ><span slot="icon-start" aria-hidden="true">+</span></tp-button
+    >
   </tp-button-group>
   <tp-button-group label="Server port">
     <tp-button-group-text><tp-label for="button-group-port">Port</tp-label></tp-button-group-text>
@@ -117,7 +126,7 @@ Buttons can sit on either side of an input, and a text segment can hold a real `
     <tp-toggle variant="outline" data-star>Star</tp-toggle>
     <tp-button-group-text data-star-count>2,418</tp-button-group-text>
   </tp-button-group>
-</div>`}
+</tp-stack>`}
   script={`const root = document.querySelector('#button-group-segments');
 const seats = root.querySelector('tp-input[label="Seats"]');
 for (const button of root.querySelectorAll('[data-step]')) {
@@ -167,12 +176,25 @@ Overlay triggers join the group like any Button, while the Menu or Popover keeps
 
 <Preview
   title="Menu and popover"
-  code={`<div style="display:grid;gap:var(--tp-space-4);justify-items:center">
+  code={`<tp-stack gap="4" align="center">
   <tp-button-group label="Document actions">
     <tp-button variant="outline">Share</tp-button>
     <tp-menu label="More document actions">
       <tp-button slot="trigger" variant="outline" size="icon" aria-label="More document actions">
-        <svg slot="icon-start" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        <svg
+          slot="icon-start"
+          aria-hidden="true"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
       </tp-button>
       <tp-menu-item value="duplicate">Duplicate</tp-menu-item>
       <tp-menu-item value="move">Move to…</tp-menu-item>
@@ -184,7 +206,20 @@ Overlay triggers join the group like any Button, while the Menu or Popover keeps
     <tp-button variant="outline">Remind me tomorrow</tp-button>
     <tp-popover label="Custom reminder">
       <tp-button slot="trigger" variant="outline" size="icon" aria-label="Pick a reminder time">
-        <svg slot="icon-start" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        <svg
+          slot="icon-start"
+          aria-hidden="true"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
       </tp-button>
       <span slot="title">Custom reminder</span>
       <span slot="description">We'll notify you on every device.</span>
@@ -194,7 +229,7 @@ Overlay triggers join the group like any Button, while the Menu or Popover keeps
       <tp-button slot="close">Set reminder</tp-button>
     </tp-popover>
   </tp-button-group>
-</div>`}
+</tp-stack>`}
 />
 
 ### Selects
@@ -204,8 +239,8 @@ Selects and native selects keep their values and submit with the form, so a curr
 <Preview
   title="Select and native select"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-4);max-inline-size:26rem;margin-inline:auto">
-  <tp-form id="button-group-transfer" style="display:grid;gap:var(--tp-space-2)">
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="4">
+  <tp-form id="button-group-transfer">
     <tp-label for="button-group-amount">Transfer amount</tp-label>
     <tp-button-group label="Transfer">
       <tp-select label="Currency" name="currency" default-value="EUR">
@@ -213,10 +248,15 @@ Selects and native selects keep their values and submit with the form, so a curr
         <option value="USD">USD</option>
         <option value="GBP">GBP</option>
       </tp-select>
-      <tp-input id="button-group-amount" name="amount" inputmode="decimal" placeholder="0.00"></tp-input>
+      <tp-input
+        id="button-group-amount"
+        name="amount"
+        inputmode="decimal"
+        placeholder="0.00"
+      ></tp-input>
       <tp-button type="submit" variant="outline">Send</tp-button>
     </tp-button-group>
-    <output style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)"></output>
+    <output style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"></output>
   </tp-form>
   <tp-button-group label="Trial length">
     <tp-input label="Trial length" inputmode="numeric" default-value="14"></tp-input>
@@ -226,7 +266,7 @@ Selects and native selects keep their values and submit with the form, so a curr
       <option value="months">months</option>
     </tp-native-select>
   </tp-button-group>
-</div>`}
+</tp-stack>`}
   script={`const form = document.querySelector('#button-group-transfer');
 form.addEventListener('tp-submit', (event) => {
   event.preventDefault();
@@ -242,7 +282,7 @@ An Input group can be one member, keeping its addons inside the field's border. 
 <Preview
   title="Input groups and nesting"
   align="stretch"
-  code={`<div id="button-group-composer" style="display:grid;gap:var(--tp-space-4);max-inline-size:28rem;margin-inline:auto">
+  code={`<tp-stack id="button-group-composer" style="max-inline-size: 28rem; margin-inline: auto" gap="4">
   <tp-field label="Canvas width">
     <tp-button-group label="Canvas width">
       <tp-input-group>
@@ -251,26 +291,65 @@ An Input group can be one member, keeping its addons inside the field's border. 
         <span slot="inline-end">px</span>
       </tp-input-group>
       <tp-button variant="outline" size="icon" aria-label="Lock aspect ratio">
-        <svg slot="icon-start" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        <svg
+          slot="icon-start"
+          aria-hidden="true"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="4" y="11" width="16" height="10" rx="2" />
+          <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+        </svg>
       </tp-button>
     </tp-button-group>
   </tp-field>
   <tp-button-group label="Message composer">
     <tp-button-group label="Attachments">
       <tp-button variant="outline" size="icon" aria-label="Attach a file">
-        <svg slot="icon-start" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        <svg
+          slot="icon-start"
+          aria-hidden="true"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <path d="M12 5v14M5 12h14" />
+        </svg>
       </tp-button>
     </tp-button-group>
     <tp-button-group label="Message">
       <tp-input-group>
         <tp-input label="Message" placeholder="Reply to #design…"></tp-input>
         <tp-toggle slot="inline-end" variant="ghost" size="sm" aria-label="Voice mode" data-voice>
-          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4"/></svg>
+          <svg
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="9" y="2" width="6" height="12" rx="3" />
+            <path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4" />
+          </svg>
         </tp-toggle>
       </tp-input-group>
     </tp-button-group>
   </tp-button-group>
-</div>`}
+</tp-stack>`}
   script={`const root = document.querySelector('#button-group-composer');
 root.querySelector('[data-voice]').addEventListener('tp-value-change', (event) => {
   const message = root.querySelector('tp-input[label="Message"]');
@@ -285,17 +364,59 @@ Buttons with `href` render real links, so history navigation can be a group too.
 
 <Preview
   title="Navigation and toolbar"
-  code={`<div style="display:flex;flex-wrap:wrap;gap:var(--tp-space-4);justify-content:center">
+  code={`<tp-stack direction="row" gap="4" justify="center" wrap="wrap">
   <tp-button-group label="Changelog navigation">
     <tp-button variant="outline" href="#links-and-icon-actions">← v2.3</tp-button>
     <tp-button variant="outline" href="#links-and-icon-actions">v2.5 →</tp-button>
   </tp-button-group>
   <tp-button-group label="Formatting">
-    <tp-button variant="outline" size="icon" aria-label="Bold"><svg slot="icon-start" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 0 8H6zM6 12h9a4 4 0 0 1 0 8H6z"/></svg></tp-button>
-    <tp-button variant="outline" size="icon" aria-label="Italic"><svg slot="icon-start" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 4h-9M14 20H5M15 4 9 20"/></svg></tp-button>
-    <tp-button variant="outline" size="icon" aria-label="Insert link"><svg slot="icon-start" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></tp-button>
+    <tp-button variant="outline" size="icon" aria-label="Bold"
+      ><svg
+        slot="icon-start"
+        aria-hidden="true"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M6 4h8a4 4 0 0 1 0 8H6zM6 12h9a4 4 0 0 1 0 8H6z" /></svg
+    ></tp-button>
+    <tp-button variant="outline" size="icon" aria-label="Italic"
+      ><svg
+        slot="icon-start"
+        aria-hidden="true"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      >
+        <path d="M19 4h-9M14 20H5M15 4 9 20" /></svg
+    ></tp-button>
+    <tp-button variant="outline" size="icon" aria-label="Insert link"
+      ><svg
+        slot="icon-start"
+        aria-hidden="true"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg
+    ></tp-button>
   </tp-button-group>
-</div>`}
+</tp-stack>`}
 />
 
 ### Pagination
@@ -305,7 +426,7 @@ Pagination can sit in a group as one member, or split across nested groups that 
 <Preview
   title="Grouped pagination"
   align="stretch"
-  code={`<div id="button-group-pages" style="display:grid;gap:var(--tp-space-4);justify-items:center">
+  code={`<tp-stack id="button-group-pages" gap="4" align="center">
   <tp-button-group label="Order pages">
     <tp-pagination label="Orders" page="2" pages="5"></tp-pagination>
   </tp-button-group>
@@ -314,10 +435,15 @@ Pagination can sit in a group as one member, or split across nested groups that 
       <tp-pagination label="Order pages" page="2" pages="5" data-pages-only></tp-pagination>
     </tp-button-group>
     <tp-button-group label="Previous and next">
-      <tp-pagination label="Previous and next orders" page="2" pages="5" data-directions-only></tp-pagination>
+      <tp-pagination
+        label="Previous and next orders"
+        page="2"
+        pages="5"
+        data-directions-only
+      ></tp-pagination>
     </tp-button-group>
   </tp-button-group>
-</div>`}
+</tp-stack>`}
   script={`import { html } from 'lit';
 
 await customElements.whenDefined('tp-pagination');

@@ -20,17 +20,29 @@ Use a Switch for a setting that takes effect as soon as it flips, such as turnin
 <Preview
   title="Settings"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-5);max-inline-size:26rem;margin-inline:auto">
-  <tp-field orientation="horizontal" label="Two-factor authentication" description="Require a code from your authenticator app.">
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="5">
+  <tp-field
+    orientation="horizontal"
+    label="Two-factor authentication"
+    description="Require a code from your authenticator app."
+  >
     <tp-switch name="two-factor" default-checked></tp-switch>
   </tp-field>
-  <tp-field orientation="horizontal" label="Login alerts" description="Notify me when a new device signs in.">
+  <tp-field
+    orientation="horizontal"
+    label="Login alerts"
+    description="Notify me when a new device signs in."
+  >
     <tp-switch name="login-alerts"></tp-switch>
   </tp-field>
-  <tp-field orientation="horizontal" label="Session timeout" description="Sign out after 30 minutes of inactivity.">
+  <tp-field
+    orientation="horizontal"
+    label="Session timeout"
+    description="Sign out after 30 minutes of inactivity."
+  >
     <tp-switch name="session-timeout" default-checked></tp-switch>
   </tp-field>
-</div>`}
+</tp-stack>`}
 />
 
 ### Sizes
@@ -50,11 +62,19 @@ A checked Switch submits its `value` (`on` by default) under its `name`; an unch
 <Preview
   title="Form value"
   align="stretch"
-  code={`<tp-form style="display:grid;gap:var(--tp-space-5);max-inline-size:26rem;margin-inline:auto">
-  <tp-field orientation="horizontal" label="Public profile" description="Show your name and avatar to other workspaces.">
+  code={`<tp-form style="max-inline-size: 26rem; margin-inline: auto">
+  <tp-field
+    orientation="horizontal"
+    label="Public profile"
+    description="Show your name and avatar to other workspaces."
+  >
     <tp-switch name="visibility" value="public" unchecked-value="private"></tp-switch>
   </tp-field>
-  <tp-field orientation="horizontal" label="Weekly digest" description="A Monday summary of activity in your projects.">
+  <tp-field
+    orientation="horizontal"
+    label="Weekly digest"
+    description="A Monday summary of activity in your projects."
+  >
     <tp-switch name="digest" default-checked></tp-switch>
   </tp-field>
   <div slot="actions">
@@ -68,14 +88,22 @@ A checked Switch submits its `value` (`on` by default) under its `name`; an unch
 <Preview
   title="Disabled and read-only"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-5);max-inline-size:26rem;margin-inline:auto">
-  <tp-field orientation="horizontal" label="Single sign-on" description="Available on the Enterprise plan.">
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="5">
+  <tp-field
+    orientation="horizontal"
+    label="Single sign-on"
+    description="Available on the Enterprise plan."
+  >
     <tp-switch name="sso" disabled></tp-switch>
   </tp-field>
-  <tp-field orientation="horizontal" label="Audit logging" description="Managed by your organization.">
+  <tp-field
+    orientation="horizontal"
+    label="Audit logging"
+    description="Managed by your organization."
+  >
     <tp-switch name="audit" default-checked readonly></tp-switch>
   </tp-field>
-</div>`}
+</tp-stack>`}
 />
 
 Disabled removes the Switch from the tab order and from form data. Read-only stays focusable and submitted, but rejects changes.
@@ -106,14 +134,18 @@ digest.onCheckedChange = (event) => {
   render();
 };
 render();`}
-  code={`<div style="display:grid;gap:var(--tp-space-5);max-inline-size:26rem;margin-inline:auto">
-  <tp-field orientation="horizontal" label="Email notifications" description="Mentions, assignments and review requests.">
+  code={`<tp-stack style="max-inline-size: 26rem; margin-inline: auto" gap="5">
+  <tp-field
+    orientation="horizontal"
+    label="Email notifications"
+    description="Mentions, assignments and review requests."
+  >
     <tp-switch id="switch-controlled-email" name="email"></tp-switch>
   </tp-field>
   <tp-field orientation="horizontal" label="Weekly digest" description="Needs email notifications.">
     <tp-switch id="switch-controlled-digest" name="digest"></tp-switch>
   </tp-field>
-</div>`}
+</tp-stack>`}
 />
 
 ### Thumb icon
@@ -150,10 +182,10 @@ const status = document.querySelector('#switch-demo-status');
 control.addEventListener('tp-value-change', (event) => {
   status.textContent = event.detail.value ? 'Wi-Fi is on' : 'Wi-Fi is off';
 });`}
-  code={`<div style="display:flex;align-items:center;gap:var(--tp-space-4)">
+  code={`<tp-stack direction="row" gap="4" align="center">
   <tp-switch id="switch-demo-wifi" aria-label="Wi-Fi" default-checked></tp-switch>
   <output id="switch-demo-status" aria-live="polite">Wi-Fi is on</output>
-</div>`}
+</tp-stack>`}
 />
 
 `tp-value-change` is cancelable and carries the proposed `checked` value. Calling `preventDefault()` keeps the current state, which is how you veto a change that needs confirmation first.
@@ -163,7 +195,7 @@ control.addEventListener('tp-value-change', (event) => {
 <Preview
   title="Inline"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:22rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 22rem; margin-inline: auto" gap="2">
   <tp-switch variant="inline" name="auto-lock" default-checked>Auto-lock</tp-switch>
   <tp-switch variant="inline" name="bluetooth">Bluetooth</tp-switch>
   <tp-select variant="inline" label="Lock after" name="lock-after" default-value="5">
@@ -171,7 +203,7 @@ control.addEventListener('tp-value-change', (event) => {
     <option value="5">5 minutes</option>
     <option value="15">15 minutes</option>
   </tp-select>
-</div>`}
+</tp-stack>`}
 />
 
 `variant="inline"` fits the Switch into one row the height of a control, with its label at the start and the track at the end, so it stacks with other inline controls such as an inline Select. A press anywhere on the row flips it. Inside a Field and without a label of its own, the Field's label moves into the row. An Icon in the `icon` slot leads the row, outside its boundary.

@@ -128,9 +128,11 @@ Each completed pointer or keyboard gesture activates at most once. A consumer ma
 
 <Preview
   title="Form actions"
-  code={`<form style="display:flex;gap:var(--tp-space-2)">
-  <tp-button type="submit" name="intent" value="save">Save</tp-button>
-  <tp-button type="reset" variant="outline">Reset</tp-button>
+  code={`<form>
+  <tp-stack direction="row" gap="2">
+    <tp-button type="submit" name="intent" value="save">Save</tp-button>
+    <tp-button type="reset" variant="outline">Reset</tp-button>
+  </tp-stack>
 </form>`}
 />
 

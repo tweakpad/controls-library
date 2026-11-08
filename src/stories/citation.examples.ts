@@ -13,7 +13,7 @@ const grid = siteMark('#16a34a', 'G');
 const coast = siteMark('#d97706', 'C');
 
 const row = (content: string) =>
-  `<div style="display:flex;flex-wrap:wrap;align-items:center;gap:var(--tp-space-3)">${content}</div>`;
+  `<tp-stack direction="row" gap="3" align="center" wrap="wrap">${content}</tp-stack>`;
 
 export const citationExamples = [
   markupExample(
@@ -41,7 +41,7 @@ export const citationExamples = [
   ),
   markupExample(
     'Numbered references',
-    `<article style="display:grid;gap:var(--tp-space-4);max-inline-size:36rem">
+    `<article style="max-inline-size:36rem"><tp-stack gap="4">
   <p style="margin:0">
     Output is predictable<tp-citation source="tidal-1" href="#tidal-1" superscript></tp-citation>
     and storage needs stay small<tp-citation source="tidal-2" href="#tidal-2" superscript></tp-citation>,
@@ -52,7 +52,7 @@ export const citationExamples = [
     <tp-citation id="tidal-2" href="https://grid.example/storage" src="${grid}" description="How predictable generation reduces battery sizing.">Grid storage notes</tp-citation>
     <tp-citation id="tidal-3" href="https://coast.example/survey" src="${coast}" description="Seasonal flow records for estuary sites.">Coastal survey 2025</tp-citation>
   </tp-citation-list>
-</article>`,
+</tp-stack></article>`,
     "For footnote-style references, raise numbered markers with `superscript` and list the sources in a Citation list, which numbers its entries in order. Each marker names its entry with `source`, taking its number, title and preview, and links to it with the entry's fragment: activating a marker moves focus to its entry, and the entry opens the site.",
   ),
   moduleExample({

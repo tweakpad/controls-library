@@ -104,16 +104,16 @@ The Show more button is a native button named by its text, with an expanded stat
 <Preview
   title="Alignment and stacking"
   align="stretch"
-  code={`<div style="display:flex;flex-wrap:wrap;gap:var(--tp-space-8);justify-content:center">
-  <tp-description-list align="center" style="inline-size:20rem">
+  code={`<tp-stack direction="row" gap="8" justify="center" wrap="wrap">
+  <tp-description-list align="center" style="inline-size: 20rem">
     <tp-description-list-item label="Flight">LH 2034</tp-description-list-item>
     <tp-description-list-item label="Departure">Munich, 07:15</tp-description-list-item>
     <tp-description-list-item label="Arrival">Lisbon, 09:40</tp-description-list-item>
     <tp-description-list-item label="Seat">14C</tp-description-list-item>
   </tp-description-list>
-  <tp-description-list layout="stacked" style="inline-size:14rem">
+  <tp-description-list layout="stacked" style="inline-size: 14rem">
     <tp-description-list-item label="Baggage">One cabin bag, 8 kg</tp-description-list-item>
     <tp-description-list-item label="Boarding">Gate G24, group 3</tp-description-list-item>
   </tp-description-list>
-</div>`}
+</tp-stack>`}
 />

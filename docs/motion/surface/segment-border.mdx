@@ -29,20 +29,26 @@ Each of these Buttons draws the same full border on hover: one segment traced al
 
 <Preview
   title="Patterns"
-  code={`<div style="display:flex;flex-wrap:wrap;gap:var(--tp-space-4);justify-content:center">
+  code={`<tp-stack direction="row" gap="4" justify="center" wrap="wrap">
   <tp-mo-segment-border>
     <tp-button variant="outline">Trace</tp-button>
     <tp-mo-border-segment origin="bottom-left" draw="0% 0%, -100% 0%"></tp-mo-border-segment>
   </tp-mo-segment-border>
   <tp-mo-segment-border>
     <tp-button variant="outline">Pinwheel</tp-button>
-    <tp-mo-border-segment draw="top-left top-left, top-left top-right, top-left bottom-right"></tp-mo-border-segment>
-    <tp-mo-border-segment draw="bottom-right bottom-right, bottom-right bottom-left, bottom-right top-left"></tp-mo-border-segment>
+    <tp-mo-border-segment
+      draw="top-left top-left, top-left top-right, top-left bottom-right"
+    ></tp-mo-border-segment>
+    <tp-mo-border-segment
+      draw="bottom-right bottom-right, bottom-right bottom-left, bottom-right top-left"
+    ></tp-mo-border-segment>
   </tp-mo-segment-border>
   <tp-mo-segment-border>
     <tp-button variant="outline">Corners</tp-button>
     <tp-mo-border-segment draw="top-left top-left, bottom-left top-right"></tp-mo-border-segment>
-    <tp-mo-border-segment draw="bottom-right bottom-right, top-right bottom-left"></tp-mo-border-segment>
+    <tp-mo-border-segment
+      draw="bottom-right bottom-right, top-right bottom-left"
+    ></tp-mo-border-segment>
   </tp-mo-segment-border>
   <tp-mo-segment-border>
     <tp-button variant="outline">Edges</tp-button>
@@ -51,7 +57,7 @@ Each of these Buttons draws the same full border on hover: one segment traced al
     <tp-mo-border-segment draw="bottom bottom, bottom-right bottom-left"></tp-mo-border-segment>
     <tp-mo-border-segment draw="left left, bottom-left top-left"></tp-mo-border-segment>
   </tp-mo-segment-border>
-</div>`}
+</tp-stack>`}
 />
 
 ### Leaving
@@ -60,25 +66,49 @@ Each of these Buttons draws the same full border on hover: one segment traced al
 
 <Preview
   title="Leave path"
-  code={`<div style="display:flex;flex-wrap:wrap;gap:var(--tp-space-4);justify-content:center">
+  code={`<tp-stack direction="row" gap="4" justify="center" wrap="wrap">
   <tp-mo-segment-border>
     <tp-button variant="outline">Across</tp-button>
-    <tp-mo-border-segment draw="top-left top-left, top-left top-right" leave="top-right top-right"></tp-mo-border-segment>
-    <tp-mo-border-segment draw="bottom-right bottom-right, bottom-right bottom-left" leave="bottom-left bottom-left"></tp-mo-border-segment>
+    <tp-mo-border-segment
+      draw="top-left top-left, top-left top-right"
+      leave="top-right top-right"
+    ></tp-mo-border-segment>
+    <tp-mo-border-segment
+      draw="bottom-right bottom-right, bottom-right bottom-left"
+      leave="bottom-left bottom-left"
+    ></tp-mo-border-segment>
   </tp-mo-segment-border>
   <tp-mo-segment-border>
     <tp-button variant="outline">Up and down</tp-button>
-    <tp-mo-border-segment draw="top-right top-right, top-right bottom-right" leave="bottom-right bottom-right"></tp-mo-border-segment>
-    <tp-mo-border-segment draw="bottom-left bottom-left, bottom-left top-left" leave="top-left top-left"></tp-mo-border-segment>
+    <tp-mo-border-segment
+      draw="top-right top-right, top-right bottom-right"
+      leave="bottom-right bottom-right"
+    ></tp-mo-border-segment>
+    <tp-mo-border-segment
+      draw="bottom-left bottom-left, bottom-left top-left"
+      leave="top-left top-left"
+    ></tp-mo-border-segment>
   </tp-mo-segment-border>
   <tp-mo-segment-border>
     <tp-button variant="outline">Around</tp-button>
-    <tp-mo-border-segment draw="top-left top-left, top-left top-right" leave="top-right top-right"></tp-mo-border-segment>
-    <tp-mo-border-segment draw="top-right top-right, top-right bottom-right" leave="bottom-right bottom-right"></tp-mo-border-segment>
-    <tp-mo-border-segment draw="bottom-right bottom-right, bottom-right bottom-left" leave="bottom-left bottom-left"></tp-mo-border-segment>
-    <tp-mo-border-segment draw="bottom-left bottom-left, bottom-left top-left" leave="top-left top-left"></tp-mo-border-segment>
+    <tp-mo-border-segment
+      draw="top-left top-left, top-left top-right"
+      leave="top-right top-right"
+    ></tp-mo-border-segment>
+    <tp-mo-border-segment
+      draw="top-right top-right, top-right bottom-right"
+      leave="bottom-right bottom-right"
+    ></tp-mo-border-segment>
+    <tp-mo-border-segment
+      draw="bottom-right bottom-right, bottom-right bottom-left"
+      leave="bottom-left bottom-left"
+    ></tp-mo-border-segment>
+    <tp-mo-border-segment
+      draw="bottom-left bottom-left, bottom-left top-left"
+      leave="top-left top-left"
+    ></tp-mo-border-segment>
   </tp-mo-segment-border>
-</div>`}
+</tp-stack>`}
 />
 
 ### Drawing the border in

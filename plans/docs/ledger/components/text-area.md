@@ -16,3 +16,7 @@
 | --- | --- | --- |
 
 | preview | Form | Approved shared action-row contract: secondary Reset/Discard precedes the completing action. |
+
+| preview | Content and fixed sizing | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Character count | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Disabled and read-only | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

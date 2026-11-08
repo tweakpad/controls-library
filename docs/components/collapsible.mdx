@@ -42,19 +42,31 @@ Assigning any content to the selected position suppresses the fallback; the assi
 <Preview
   title="Positional slots"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-2);inline-size:100%;max-inline-size:28rem;margin-inline:auto">
+  code={`<tp-stack style="inline-size: 100%; max-inline-size: 28rem; margin-inline: auto" gap="2">
   <tp-collapsible content-alignment="label">
-    <span slot="leading" aria-hidden="true" style="font-variant-numeric:tabular-nums;color:var(--tp-muted-foreground)">01</span>
+    <span
+      slot="leading"
+      aria-hidden="true"
+      style="font-variant-numeric: tabular-nums; color: var(--tp-muted-foreground)"
+      >01</span
+    >
     <span slot="label">Connect your repository</span>
-    <p style="margin:0">Install the GitHub app and choose which repositories Tweakpad can read.</p>
+    <p style="margin: 0">Install the GitHub app and choose which repositories Tweakpad can read.</p>
   </tp-collapsible>
   <tp-collapsible content-alignment="label">
-    <span slot="leading" aria-hidden="true" style="font-variant-numeric:tabular-nums;color:var(--tp-muted-foreground)">02</span>
+    <span
+      slot="leading"
+      aria-hidden="true"
+      style="font-variant-numeric: tabular-nums; color: var(--tp-muted-foreground)"
+      >02</span
+    >
     <span slot="label">Configure build settings</span>
-    <span slot="trailing" style="font-size:var(--tp-text-sm);color:var(--tp-muted-foreground)">Optional</span>
-    <p style="margin:0">Set the install command, output directory and environment variables.</p>
+    <span slot="trailing" style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)"
+      >Optional</span
+    >
+    <p style="margin: 0">Set the install command, output directory and environment variables.</p>
   </tp-collapsible>
-</div>`}
+</tp-stack>`}
 />
 
 ### Headings
@@ -98,13 +110,17 @@ After presence reaches its stable open or closed state, `tp-open-change-complete
 <Preview
   title="Open change"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);inline-size:100%;max-inline-size:28rem;margin-inline:auto">
+  code={`<tp-stack style="inline-size: 100%; max-inline-size: 28rem; margin-inline: auto" gap="3">
   <tp-collapsible id="collapsible-events">
     <span slot="label">API key</span>
-    <p style="margin:0;font-family:var(--tp-font-mono)">tp_live_4f9a…c21e</p>
+    <p style="margin: 0; font-family: var(--tp-font-mono)">tp_live_4f9a…c21e</p>
   </tp-collapsible>
-  <output id="collapsible-events-output" style="font-size:var(--tp-text-sm);color:var(--tp-muted-foreground)">Hidden</output>
-</div>`}
+  <output
+    id="collapsible-events-output"
+    style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)"
+    >Hidden</output
+  >
+</tp-stack>`}
   script={`const collapsible = document.getElementById('collapsible-events');
 const output = document.getElementById('collapsible-events-output');
 collapsible.addEventListener('tp-open-change', (event) => {

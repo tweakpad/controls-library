@@ -24,11 +24,11 @@ While the row is hovered or focused, a Copy button beside the label copies the c
 <Preview
   title="Inline"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:20rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 20rem; margin-inline: auto" gap="2">
   <tp-input variant="inline" label="Layer" default-value="Header card"></tp-input>
   <tp-color-input variant="inline" label="Fill" default-value="#0f766e"></tp-color-input>
   <tp-color-input variant="inline" label="Stroke" default-value="#f59e0b"></tp-color-input>
-</div>`}
+</tp-stack>`}
 />
 
 ### Chip or text
@@ -38,10 +38,20 @@ While the row is hovered or focused, a Copy button beside the label copies the c
 <Preview
   title="Chip or text"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:20rem;margin-inline:auto">
-  <tp-color-input variant="inline" label="Shadow" show-value="false" default-value="#1e293b"></tp-color-input>
-  <tp-color-input variant="inline" label="Divider" show-swatch="false" default-value="#cbd5e1"></tp-color-input>
-</div>`}
+  code={`<tp-stack style="max-inline-size: 20rem; margin-inline: auto" gap="2">
+  <tp-color-input
+    variant="inline"
+    label="Shadow"
+    show-value="false"
+    default-value="#1e293b"
+  ></tp-color-input>
+  <tp-color-input
+    variant="inline"
+    label="Divider"
+    show-swatch="false"
+    default-value="#cbd5e1"
+  ></tp-color-input>
+</tp-stack>`}
 />
 
 ### Formats and alpha
@@ -51,10 +61,21 @@ While the row is hovered or focused, a Copy button beside the label copies the c
 <Preview
   title="Formats and alpha"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:20rem;margin-inline:auto">
-  <tp-color-input variant="inline" label="Overlay" format="rgb" alpha default-value="rgb(124 58 237 / 0.5)"></tp-color-input>
-  <tp-color-input variant="inline" label="Link" format="oklch" default-value="#38bdf8"></tp-color-input>
-</div>`}
+  code={`<tp-stack style="max-inline-size: 20rem; margin-inline: auto" gap="2">
+  <tp-color-input
+    variant="inline"
+    label="Overlay"
+    format="rgb"
+    alpha
+    default-value="rgb(124 58 237 / 0.5)"
+  ></tp-color-input>
+  <tp-color-input
+    variant="inline"
+    label="Link"
+    format="oklch"
+    default-value="#38bdf8"
+  ></tp-color-input>
+</tp-stack>`}
 />
 
 ### Sizes
@@ -64,10 +85,15 @@ While the row is hovered or focused, a Copy button beside the label copies the c
 <Preview
   title="Sizes"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:20rem;margin-inline:auto">
-  <tp-color-input variant="inline" size="sm" label="Grid lines" default-value="#e11d48"></tp-color-input>
+  code={`<tp-stack style="max-inline-size: 20rem; margin-inline: auto" gap="2">
+  <tp-color-input
+    variant="inline"
+    size="sm"
+    label="Grid lines"
+    default-value="#e11d48"
+  ></tp-color-input>
   <tp-color-input variant="inline" label="Guides" default-value="#e11d48"></tp-color-input>
-</div>`}
+</tp-stack>`}
 />
 
 ### In a form
@@ -77,11 +103,13 @@ While the row is hovered or focused, a Copy button beside the label copies the c
 <Preview
   title="In a form"
   align="stretch"
-  code={`<form style="display:grid;gap:var(--tp-space-3);max-inline-size:20rem;margin-inline:auto">
-  <tp-field label="Brand color" description="Used for buttons and links.">
-    <tp-color-input name="brand" variant="inline" required></tp-color-input>
-  </tp-field>
-  <tp-button type="reset" variant="outline" style="justify-self:start">Reset</tp-button>
+  code={`<form style="max-inline-size: 20rem; margin-inline: auto">
+  <tp-stack gap="3">
+    <tp-field label="Brand color" description="Used for buttons and links.">
+      <tp-color-input name="brand" variant="inline" required></tp-color-input>
+    </tp-field>
+    <tp-button type="reset" variant="outline" style="align-self: flex-start">Reset</tp-button>
+  </tp-stack>
 </form>`}
 />
 
@@ -92,10 +120,20 @@ While the row is hovered or focused, a Copy button beside the label copies the c
 <Preview
   title="Disabled and read-only"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:20rem;margin-inline:auto">
-  <tp-color-input variant="inline" label="Theme color" disabled default-value="#2563eb"></tp-color-input>
-  <tp-color-input variant="inline" label="Locked color" readonly default-value="#db2777"></tp-color-input>
-</div>`}
+  code={`<tp-stack style="max-inline-size: 20rem; margin-inline: auto" gap="2">
+  <tp-color-input
+    variant="inline"
+    label="Theme color"
+    disabled
+    default-value="#2563eb"
+  ></tp-color-input>
+  <tp-color-input
+    variant="inline"
+    label="Locked color"
+    readonly
+    default-value="#db2777"
+  ></tp-color-input>
+</tp-stack>`}
 />
 
 ### Another picker

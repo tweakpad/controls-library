@@ -7,13 +7,21 @@ tag: tp-text-editor
 <Preview
   title="Text editor"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);inline-size:100%;max-inline-size:44rem;margin-inline:auto">
-  <tp-toggle-group id="text-editor-engine" label="Engine" variant="outline" spacing="0" size="sm" default-value='["tiptap"]' style="justify-self:start">
+  code={`<tp-stack style="inline-size: 100%; max-inline-size: 44rem; margin-inline: auto" gap="3">
+  <tp-toggle-group
+    id="text-editor-engine"
+    label="Engine"
+    variant="outline"
+    spacing="0"
+    size="sm"
+    default-value='["tiptap"]'
+    style="align-self: flex-start"
+  >
     <tp-toggle value="tiptap">Tiptap</tp-toggle>
     <tp-toggle value="lexical">Lexical</tp-toggle>
   </tp-toggle-group>
   <tp-text-editor id="text-editor-hero" label="Announcement"></tp-text-editor>
-</div>`}
+</tp-stack>`}
   script={`import * as core from '@tiptap/core';
 import * as state from '@tiptap/pm/state';
 import * as tiptapHistory from '@tiptap/pm/history';
@@ -503,10 +511,12 @@ setupCustomBlocks(document.querySelector('#text-editor-custom-blocks tp-text-edi
 <Preview
   title="Markdown in and out"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);inline-size:100%;max-inline-size:44rem;margin-inline:auto">
+  code={`<tp-stack style="inline-size: 100%; max-inline-size: 44rem; margin-inline: auto" gap="3">
   <tp-text-editor id="text-editor-markdown" label="Visit log" format="markdown"></tp-text-editor>
-  <tp-code-block id="text-editor-markdown-output" language="markdown" wrap></tp-code-block>
-</div>`}
+  <tp-code-block id="text-editor-markdown-output" language="markdown" wrap
+    ></tp-code-block
+  >
+</tp-stack>`}
   script={`import * as core from '@tiptap/core';
 import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';
@@ -551,15 +561,25 @@ With `name`, the editor submits its document in `format`, and form reset restore
 <Preview
   title="In a form"
   align="stretch"
-  code={`<form id="text-editor-form" style="display:grid;gap:var(--tp-space-4);inline-size:100%;max-inline-size:36rem;margin-inline:auto">
-  <tp-field label="Release notes" description="Submitted as Markdown.">
-    <tp-text-editor name="notes" format="markdown" placeholder="What changed in this release?"></tp-text-editor>
-  </tp-field>
-  <div style="display:flex;gap:var(--tp-space-2)">
-    <tp-button type="submit">Save notes</tp-button>
-    <tp-button type="reset" variant="outline">Reset</tp-button>
-  </div>
-  <output id="text-editor-form-output" style="white-space:pre-line;color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">Edit the notes, then save.</output>
+  code={`<form id="text-editor-form" style="inline-size: 100%; max-inline-size: 36rem; margin-inline: auto">
+  <tp-stack gap="4">
+    <tp-field label="Release notes" description="Submitted as Markdown.">
+      <tp-text-editor
+        name="notes"
+        format="markdown"
+        placeholder="What changed in this release?"
+      ></tp-text-editor>
+    </tp-field>
+    <tp-stack direction="row" gap="2">
+      <tp-button type="submit">Save notes</tp-button>
+      <tp-button type="reset" variant="outline">Reset</tp-button>
+    </tp-stack>
+    <output
+      id="text-editor-form-output"
+      style="white-space: pre-line; color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+      >Edit the notes, then save.</output
+    >
+  </tp-stack>
 </form>`}
   script={`import * as core from '@tiptap/core';
 import * as state from '@tiptap/pm/state';
@@ -599,10 +619,14 @@ Inside a `tp-field`, the Field's label names the editing root, its description a
 <Preview
   title="Read-only and disabled"
   align="stretch"
-  code={`<div id="text-editor-states" style="display:grid;gap:var(--tp-space-4);inline-size:100%;max-inline-size:36rem;margin-inline:auto">
+  code={`<tp-stack
+  id="text-editor-states"
+  style="inline-size: 100%; max-inline-size: 36rem; margin-inline: auto"
+  gap="4"
+>
   <tp-text-editor label="Published notes" readonly></tp-text-editor>
   <tp-text-editor label="Archived notes" disabled></tp-text-editor>
-</div>`}
+</tp-stack>`}
   script={`import * as core from '@tiptap/core';
 import * as state from '@tiptap/pm/state';
 import * as history from '@tiptap/pm/history';

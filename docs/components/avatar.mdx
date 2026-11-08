@@ -107,15 +107,38 @@ The `avatar-overflow-count` part can render an icon in place of the number throu
 
 <Preview
   title="Custom shape and grayscale"
-  code={`<div style="display:flex;flex-wrap:wrap;align-items:center;gap:var(--tp-space-4)">
-  <tp-avatar size="lg" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop" fallback="MC" alt="Maya Chen" style="border-radius:var(--tp-radius-lg)"></tp-avatar>
-  <tp-avatar size="lg" fallback="AC" alt="Acme Inc." style="border-radius:var(--tp-radius-lg)"></tp-avatar>
+  code={`<tp-stack direction="row" gap="4" align="center" wrap="wrap">
+  <tp-avatar
+    size="lg"
+    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop"
+    fallback="MC"
+    alt="Maya Chen"
+    style="border-radius: var(--tp-radius-lg)"
+  ></tp-avatar>
+  <tp-avatar
+    size="lg"
+    fallback="AC"
+    alt="Acme Inc."
+    style="border-radius: var(--tp-radius-lg)"
+  ></tp-avatar>
   <tp-avatar-group id="avatar-grayscale">
-    <tp-avatar src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop" fallback="DK" alt="Daniel Kim"></tp-avatar>
-    <tp-avatar src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=96&h=96&fit=crop" fallback="AO" alt="Amara Okafor"></tp-avatar>
-    <tp-avatar src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=96&h=96&fit=crop" fallback="NW" alt="Noah Williams"></tp-avatar>
+    <tp-avatar
+      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop"
+      fallback="DK"
+      alt="Daniel Kim"
+    ></tp-avatar>
+    <tp-avatar
+      src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=96&h=96&fit=crop"
+      fallback="AO"
+      alt="Amara Okafor"
+    ></tp-avatar>
+    <tp-avatar
+      src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=96&h=96&fit=crop"
+      fallback="NW"
+      alt="Noah Williams"
+    ></tp-avatar>
   </tp-avatar-group>
-</div>`}
+</tp-stack>`}
   script={`await customElements.whenDefined('tp-avatar');
 for (const avatar of document.querySelectorAll('#avatar-grayscale tp-avatar')) {
   avatar.partPresentation = { 'avatar-image': { styleHook: { filter: 'grayscale(1)' } } };
@@ -128,13 +151,19 @@ A `border-radius` on the avatar reshapes the image and the fallback alike, which
 
 <Preview
   title="Decorative avatar"
-  code={`<div style="display:flex;align-items:center;gap:var(--tp-space-3)">
-  <tp-avatar aria-hidden="true" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop" fallback="MC"></tp-avatar>
+  code={`<tp-stack direction="row" gap="3" align="center">
+  <tp-avatar
+    aria-hidden="true"
+    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop"
+    fallback="MC"
+  ></tp-avatar>
   <div>
-    <div style="font-weight:var(--tp-font-medium)">Maya Chen</div>
-    <div style="color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)">maya@northwind.io</div>
+    <div style="font-weight: var(--tp-font-medium)">Maya Chen</div>
+    <div style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)">
+      maya@northwind.io
+    </div>
   </div>
-</div>`}
+</tp-stack>`}
 />
 
 When a visible name sits next to the avatar, mark the avatar `aria-hidden="true"` so screen readers don't announce the person twice.

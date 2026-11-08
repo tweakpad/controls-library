@@ -21,3 +21,6 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Status in a list | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Interactive badges | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

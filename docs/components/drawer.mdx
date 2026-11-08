@@ -6,16 +6,28 @@ tag: tp-drawer
 
 <Preview
   title="Drawer"
-  code={`<tp-drawer label="Notifications" description="Choose what Acme sends to your inbox." show-swipe-handle>
+  code={`<tp-drawer
+  label="Notifications"
+  description="Choose what Acme sends to your inbox."
+  show-swipe-handle
+>
   <tp-button slot="trigger" variant="outline">Notification settings</tp-button>
-  <div style="display:grid;gap:var(--tp-space-4)">
-    <tp-field label="Mentions and replies" description="When someone mentions you or replies to your comment." orientation="horizontal">
+  <tp-stack gap="4">
+    <tp-field
+      label="Mentions and replies"
+      description="When someone mentions you or replies to your comment."
+      orientation="horizontal"
+    >
       <tp-switch name="mentions" default-checked></tp-switch>
     </tp-field>
-    <tp-field label="Weekly digest" description="A summary of project activity every Monday." orientation="horizontal">
+    <tp-field
+      label="Weekly digest"
+      description="A summary of project activity every Monday."
+      orientation="horizontal"
+    >
       <tp-switch name="digest"></tp-switch>
     </tp-field>
-  </div>
+  </tp-stack>
   <tp-button slot="close">Done</tp-button>
 </tp-drawer>`}
 />
@@ -30,21 +42,30 @@ Drawer is a Dialog attached to an edge of the viewport. It shares Dialog's slots
 
 <Preview
   title="Edges"
-  code={`<tp-drawer edge="inline-end" swipe-enabled="false" label="Edit task" description="DES-214 · Design review">
+  code={`<tp-drawer
+  edge="inline-end"
+  swipe-enabled="false"
+  label="Edit task"
+  description="DES-214 · Design review"
+>
   <tp-button slot="trigger" variant="outline">Edit task</tp-button>
-  <div style="display:grid;gap:var(--tp-space-4)">
+  <tp-stack gap="4">
     <tp-field label="Title">
       <tp-input name="title" default-value="Review onboarding flow"></tp-input>
     </tp-field>
     <tp-field label="Notes">
-      <tp-text-area name="notes" rows="4" default-value="Check empty states on the projects page."></tp-text-area>
+      <tp-text-area
+        name="notes"
+        rows="4"
+        default-value="Check empty states on the projects page."
+      ></tp-text-area>
     </tp-field>
-  </div>
+  </tp-stack>
   <tp-button slot="close">Save task</tp-button>
 </tp-drawer>
 <tp-drawer edge="inline-start" swipe-enabled="false" label="Workspaces">
   <tp-button slot="trigger" variant="outline">Switch workspace</tp-button>
-  <p style="margin:0">You belong to Acme Inc, Northwind and Personal.</p>
+  <p style="margin: 0">You belong to Acme Inc, Northwind and Personal.</p>
   <tp-button slot="close" variant="outline">Close</tp-button>
 </tp-drawer>`}
 />

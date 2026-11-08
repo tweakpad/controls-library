@@ -108,7 +108,7 @@ export function mapMarkup(options: MapMarkupOptions): string {
     .filter(Boolean)
     .join(' ');
   return `<section aria-label="Lisbon sights explorer" data-example="map" style="display: grid; gap: var(--tp-space-4); grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); align-items: start; max-inline-size: 64rem">
-  <div style="display: grid; gap: var(--tp-space-3); grid-column: span 2; min-inline-size: 0">
+  <tp-stack style="grid-column:span 2;min-inline-size:0" gap="3">
     ${
       options.externalControls
         ? `<tp-button-group label="Map view">
@@ -122,7 +122,7 @@ export function mapMarkup(options: MapMarkupOptions): string {
     }<tp-map ${attributes}>
     ${options.status ? `<p slot="status">${options.status}</p>\n    ` : ''}${pinMarkup()}
     </tp-map>
-  </div>
+  </tp-stack>
   ${listMarkup(options.id)}
 </section>`;
 }

@@ -8,19 +8,21 @@ parts: [tp-bubble-group]
 <Preview
   title="Conversation"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-6);max-inline-size:32rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto" gap="6">
   <tp-bubble-group>
     <tp-bubble>Hi Maya, the March invoice shows two seats we removed last week.</tp-bubble>
     <tp-bubble>Can you check whether the credit was applied?</tp-bubble>
   </tp-bubble-group>
   <tp-bubble-group>
-    <tp-bubble align="end" variant="tinted">Good catch. The credit posts on the next billing date, April 1.</tp-bubble>
+    <tp-bubble align="end" variant="tinted"
+      >Good catch. The credit posts on the next billing date, April 1.</tp-bubble
+    >
     <tp-bubble align="end" variant="tinted">
       I've added a note to your account so it shows on the receipt.
       <span slot="reactions" role="img" aria-label="Reaction: thumbs up">👍</span>
     </tp-bubble>
   </tp-bubble-group>
-</div>`}
+</tp-stack>`}
 />
 
 ## Usage
@@ -34,7 +36,7 @@ Grouping adds no conversation state or announcements.
 <Preview
   title="Variants"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:32rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto" gap="3">
   <tp-bubble variant="default">Default</tp-bubble>
   <tp-bubble>Secondary</tp-bubble>
   <tp-bubble variant="subdued">Subdued</tp-bubble>
@@ -42,7 +44,7 @@ Grouping adds no conversation state or announcements.
   <tp-bubble variant="outline">Outline</tp-bubble>
   <tp-bubble variant="ghost">Ghost</tp-bubble>
   <tp-bubble variant="destructive">Message failed to send. Tap to retry.</tp-bubble>
-</div>`}
+</tp-stack>`}
 />
 
 `secondary` is the default. Use one treatment per sender so the conversation reads at a glance, `ghost` for unframed assistant text that should take the full row, and `destructive` for delivery failures.
@@ -54,7 +56,7 @@ Grouping adds no conversation state or announcements.
 <Preview
   title="Alignment"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-6);max-inline-size:32rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto" gap="6">
   <tp-bubble-group>
     <tp-bubble variant="subdued">Deploy finished for web-prod.</tp-bubble>
     <tp-bubble variant="subdued">Error rate is back under 0.1%.</tp-bubble>
@@ -62,7 +64,7 @@ Grouping adds no conversation state or announcements.
   <tp-bubble-group>
     <tp-bubble align="end" variant="default">Thanks. I'll close the incident.</tp-bubble>
   </tp-bubble-group>
-</div>`}
+</tp-stack>`}
 />
 
 ### Reactions
@@ -74,20 +76,25 @@ Empty reactions have no visible surface.
 <Preview
   title="Reactions"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-10);max-inline-size:32rem;margin-inline:auto;padding-block:var(--tp-space-4)">
+  code={`<tp-stack
+  style="max-inline-size: 32rem; margin-inline: auto; padding-block: var(--tp-space-4)"
+  gap="10"
+>
   <tp-bubble variant="default">
     The new onboarding flow is live for 10% of signups.
     <span slot="reactions" role="img" aria-label="Reactions: party popper and fire">🎉 🔥</span>
   </tp-bubble>
-  <tp-bubble align="end" variant="tinted" reaction-side="block-start" reactions-align="start">
+  <tp-bubble align="end" variant="tinted" reaction-side="block-start" reactions-align="start"
+    >
     Nice. Let's review conversion on Friday.
     <span slot="reactions" role="img" aria-label="Reaction: eyes">👀</span>
-  </tp-bubble>
+  </tp-bubble
+  >
   <tp-bubble>
     Can someone own the follow-up survey?
     <tp-button slot="reactions" size="xs" variant="outline" aria-label="Like this message; 3 likes">Like · 3</tp-button>
   </tp-bubble>
-</div>`}
+</tp-stack>`}
 />
 
 ### Rich content
@@ -97,12 +104,12 @@ The default slot takes any content: paragraphs and links keep their own semantic
 <Preview
   title="Rich content"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:32rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto" gap="3">
   <tp-bubble variant="default" label="Message from Jordan">
-    <p style="margin:0">Release notes for 2.4 are drafted.</p>
-    <p style="margin:0">Highlights: SSO for all plans, faster exports, and the new audit log. <a href="#rich-content" style="color:inherit">Read the draft</a></p>
+    <p style="margin: 0">Release notes for 2.4 are drafted.</p>
+    <p style="margin: 0">Highlights: SSO for all plans, faster exports, and the new audit log. <a href="#rich-content" style="color:inherit">Read the draft</a></p>
   </tp-bubble>
-</div>`}
+</tp-stack>`}
 />
 
 ### Long messages
@@ -110,16 +117,16 @@ The default slot takes any content: paragraphs and links keep their own semantic
 <Preview
   title="Expandable message"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:32rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 32rem; margin-inline: auto" gap="3">
   <tp-bubble variant="subdued" label="Message from Priya">
-    <p style="margin:0">Here's the summary from this morning's incident review.</p>
+    <p style="margin: 0">Here's the summary from this morning's incident review.</p>
     <tp-collapsible id="bubble-expand">
       <span slot="label">Show more</span>
-      <p style="margin:0">Checkout errors started at 09:12 when the payments provider rotated its signing keys. Our webhook verifier cached the old key for up to an hour.</p>
-      <p style="margin-block:var(--tp-space-2) 0">We shortened the cache to five minutes and added an alert on signature failures. No orders were lost; 41 customers saw a retry prompt.</p>
+      <p style="margin: 0">Checkout errors started at 09:12 when the payments provider rotated its signing keys. Our webhook verifier cached the old key for up to an hour.</p>
+      <p style="margin-block: var(--tp-space-2) 0">We shortened the cache to five minutes and added an alert on signature failures. No orders were lost; 41 customers saw a retry prompt.</p>
     </tp-collapsible>
   </tp-bubble>
-</div>`}
+</tp-stack>`}
   script={`await customElements.whenDefined('tp-collapsible');
 const disclosure = document.querySelector('#bubble-expand');
 disclosure.partContracts = {
@@ -138,15 +145,17 @@ Put a Collapsible inside the bubble to keep long replies short in the thread. Th
 <Preview
   title="Quick replies"
   align="stretch"
-  code={`<div id="bubble-replies" style="display:grid;gap:var(--tp-space-3);max-inline-size:32rem;margin-inline:auto">
-  <tp-bubble variant="default">Hi Sam, your order #10482 is out for delivery. Anything I can help with?</tp-bubble>
+  code={`<tp-stack id="bubble-replies" style="max-inline-size: 32rem; margin-inline: auto" gap="3">
+  <tp-bubble variant="default"
+    >Hi Sam, your order #10482 is out for delivery. Anything I can help with?</tp-bubble
+  >
   <tp-bubble variant="outline" data-link>Track your package</tp-bubble>
   <tp-bubble-group data-suggestions>
     <tp-bubble variant="outline" align="end" data-reply>Change the delivery address</tp-bubble>
     <tp-bubble variant="outline" align="end" data-reply>Leave it with a neighbor</tp-bubble>
     <tp-bubble variant="outline" align="end" data-reply>Talk to a person</tp-bubble>
   </tp-bubble-group>
-</div>`}
+</tp-stack>`}
   script={`import { html } from 'lit';
 
 await customElements.whenDefined('tp-bubble');

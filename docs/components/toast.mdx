@@ -30,12 +30,12 @@ Tab traverses active notification roots and related controls; leaving the region
 
 <Preview
   title="Types"
-  code={`<div style="display:flex;flex-wrap:wrap;gap:var(--tp-space-2);justify-content:center">
+  code={`<tp-stack direction="row" gap="2" justify="center" wrap="wrap">
   <tp-button variant="outline" data-toast-type="success">Success</tp-button>
   <tp-button variant="outline" data-toast-type="info">Info</tp-button>
   <tp-button variant="outline" data-toast-type="warning">Warning</tp-button>
   <tp-button variant="outline" data-toast-type="error">Error</tp-button>
-</div>
+</tp-stack>
 <tp-toast id="toast-types"></tp-toast>`}
   script={`const toaster = document.querySelector('#toast-types');
 const messages = {
@@ -134,10 +134,10 @@ The manager service object may be retained across Provider lifetimes. Disconnect
 
 <Preview
   title="Manager"
-  code={`<div style="display:flex;flex-wrap:wrap;gap:var(--tp-space-2);justify-content:center">
+  code={`<tp-stack direction="row" gap="2" justify="center" wrap="wrap">
   <tp-button id="toast-manager-sync" variant="outline">Sync calendar</tp-button>
   <tp-button id="toast-manager-clear" variant="ghost">Dismiss all</tp-button>
-</div>
+</tp-stack>
 <tp-toast id="toast-manager" label="Calendar notifications"></tp-toast>`}
   script={`import { createToastManager } from '@tweakpad/ui';
 

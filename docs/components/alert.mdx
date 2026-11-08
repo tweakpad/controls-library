@@ -23,12 +23,20 @@ An Alert stays in the document flow until your application removes it. It never 
 <Preview
   title="Severity"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:36rem">
-  <tp-alert title="Scheduled maintenance">The API will be read-only on Sunday, 14 June, from 02:00 to 03:00 UTC.</tp-alert>
-  <tp-alert severity="success" title="Payment received">Invoice INV-2048 for $1,240.00 was paid on 3 June.</tp-alert>
-  <tp-alert severity="warning" title="Storage almost full">You've used 9.6 GB of 10 GB. Uploads will pause when the limit is reached.</tp-alert>
-  <tp-alert severity="danger" title="Could not sync your changes">The connection to GitHub expired. Reconnect to resume syncing.</tp-alert>
-</div>`}
+  code={`<tp-stack style="max-inline-size: 36rem" gap="3">
+  <tp-alert title="Scheduled maintenance"
+    >The API will be read-only on Sunday, 14 June, from 02:00 to 03:00 UTC.</tp-alert
+  >
+  <tp-alert severity="success" title="Payment received"
+    >Invoice INV-2048 for \$1,240.00 was paid on 3 June.</tp-alert
+  >
+  <tp-alert severity="warning" title="Storage almost full"
+    >You've used 9.6 GB of 10 GB. Uploads will pause when the limit is reached.</tp-alert
+  >
+  <tp-alert severity="danger" title="Could not sync your changes"
+    >The connection to GitHub expired. Reconnect to resume syncing.</tp-alert
+  >
+</tp-stack>`}
 />
 
 `severity` changes color only. Say what happened in the title, such as "Storage almost full", so the message holds up without color or an icon.
@@ -55,12 +63,12 @@ The `title` slot replaces the `title` attribute when you need emphasis, a link o
 <Preview
   title="Live update"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:start;max-inline-size:36rem">
+  code={`<tp-stack style="max-inline-size: 36rem" gap="3" align="start">
   <tp-button id="alert-demo-trigger" variant="outline">Export report</tp-button>
   <tp-alert id="alert-demo-status" announcement="polite" title="Export ready" hidden>
     Q2 revenue report.csv has been saved to Downloads.
   </tp-alert>
-</div>`}
+</tp-stack>`}
   script={`document.querySelector('#alert-demo-trigger').addEventListener('click', () => {
   document.querySelector('#alert-demo-status').hidden = false;
 });`}

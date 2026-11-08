@@ -7,23 +7,65 @@ tag: tp-carousel
 <Preview
   title="Carousel"
   align="stretch"
-  code={`<tp-carousel label="What's new in 2.4" style="max-inline-size:32rem;margin-inline:auto">
-  <div style="display:grid;align-content:end;gap:var(--tp-space-1);aspect-ratio:16/9;padding:var(--tp-space-6);border-radius:var(--tp-radius-lg);background:var(--tp-muted)">
-    <strong style="font-size:var(--tp-text-xl)">Single sign-on</strong>
-    <span style="color:var(--tp-muted-foreground)">SAML and OIDC are now available on every plan.</span>
-  </div>
-  <div style="display:grid;align-content:end;gap:var(--tp-space-1);aspect-ratio:16/9;padding:var(--tp-space-6);border-radius:var(--tp-radius-lg);background:var(--tp-muted)">
-    <strong style="font-size:var(--tp-text-xl)">Audit log</strong>
-    <span style="color:var(--tp-muted-foreground)">Every permission change, kept for 400 days.</span>
-  </div>
-  <div style="display:grid;align-content:end;gap:var(--tp-space-1);aspect-ratio:16/9;padding:var(--tp-space-6);border-radius:var(--tp-radius-lg);background:var(--tp-muted)">
-    <strong style="font-size:var(--tp-text-xl)">Faster exports</strong>
-    <span style="color:var(--tp-muted-foreground)">Large CSV exports finish up to 5× sooner.</span>
-  </div>
-  <div style="display:grid;align-content:end;gap:var(--tp-space-1);aspect-ratio:16/9;padding:var(--tp-space-6);border-radius:var(--tp-radius-lg);background:var(--tp-muted)">
-    <strong style="font-size:var(--tp-text-xl)">Scheduled reports</strong>
-    <span style="color:var(--tp-muted-foreground)">Email a dashboard to your team every Monday.</span>
-  </div>
+  code={`<tp-carousel label="What's new in 2.4" style="max-inline-size: 32rem; margin-inline: auto">
+  <tp-stack
+    style="
+      aspect-ratio: 16/9;
+      padding: var(--tp-space-6);
+      border-radius: var(--tp-radius-lg);
+      background: var(--tp-muted);
+    "
+    gap="1"
+    justify="end"
+  >
+    <strong style="font-size: var(--tp-text-xl)">Single sign-on</strong>
+    <span style="color: var(--tp-muted-foreground)"
+      >SAML and OIDC are now available on every plan.</span
+    >
+  </tp-stack>
+  <tp-stack
+    style="
+      aspect-ratio: 16/9;
+      padding: var(--tp-space-6);
+      border-radius: var(--tp-radius-lg);
+      background: var(--tp-muted);
+    "
+    gap="1"
+    justify="end"
+  >
+    <strong style="font-size: var(--tp-text-xl)">Audit log</strong>
+    <span style="color: var(--tp-muted-foreground)"
+      >Every permission change, kept for 400 days.</span
+    >
+  </tp-stack>
+  <tp-stack
+    style="
+      aspect-ratio: 16/9;
+      padding: var(--tp-space-6);
+      border-radius: var(--tp-radius-lg);
+      background: var(--tp-muted);
+    "
+    gap="1"
+    justify="end"
+  >
+    <strong style="font-size: var(--tp-text-xl)">Faster exports</strong>
+    <span style="color: var(--tp-muted-foreground)">Large CSV exports finish up to 5× sooner.</span>
+  </tp-stack>
+  <tp-stack
+    style="
+      aspect-ratio: 16/9;
+      padding: var(--tp-space-6);
+      border-radius: var(--tp-radius-lg);
+      background: var(--tp-muted);
+    "
+    gap="1"
+    justify="end"
+  >
+    <strong style="font-size: var(--tp-text-xl)">Scheduled reports</strong>
+    <span style="color: var(--tp-muted-foreground)"
+      >Email a dashboard to your team every Monday.</span
+    >
+  </tp-stack>
 </tp-carousel>`}
 />
 
@@ -135,19 +177,61 @@ By default the track slides between items. The `effect` property swaps in a rich
 <Preview
   title="Crossfade"
   align="stretch"
-  code={`<tp-carousel id="carousel-crossfade" label="Release highlights" loop style="max-inline-size:32rem;margin-inline:auto">
-  <div style="display:grid;align-content:end;gap:var(--tp-space-1);aspect-ratio:16/9;padding:var(--tp-space-6);border-radius:var(--tp-radius-lg);background:var(--tp-muted)">
-    <strong data-carousel-layer="1" style="font-size:var(--tp-text-xl)">Single sign-on</strong>
-    <span data-carousel-layer="2" style="color:var(--tp-muted-foreground)">SAML and OIDC are now available on every plan.</span>
-  </div>
-  <div style="display:grid;align-content:end;gap:var(--tp-space-1);aspect-ratio:16/9;padding:var(--tp-space-6);border-radius:var(--tp-radius-lg);background:var(--tp-foreground);color:var(--tp-background)">
-    <strong data-carousel-layer="1" style="font-size:var(--tp-text-xl)">Audit log</strong>
-    <span data-carousel-layer="2" style="opacity:.7">Every permission change, kept for 400 days.</span>
-  </div>
-  <div style="display:grid;align-content:end;gap:var(--tp-space-1);aspect-ratio:16/9;padding:var(--tp-space-6);border-radius:var(--tp-radius-lg);background:var(--tp-muted)">
-    <strong data-carousel-layer="1" style="font-size:var(--tp-text-xl)">Faster exports</strong>
-    <span data-carousel-layer="2" style="color:var(--tp-muted-foreground)">Large CSV exports finish up to 5× sooner.</span>
-  </div>
+  code={`<tp-carousel
+  id="carousel-crossfade"
+  label="Release highlights"
+  loop
+  style="max-inline-size: 32rem; margin-inline: auto"
+>
+  <tp-stack
+    style="
+      aspect-ratio: 16/9;
+      box-sizing: content-box;
+      padding: var(--tp-space-6);
+      border-radius: var(--tp-radius-lg);
+      background: var(--tp-muted);
+    "
+    gap="1"
+    justify="end"
+  >
+    <strong data-carousel-layer="1" style="font-size: var(--tp-text-xl)">Single sign-on</strong>
+    <span data-carousel-layer="2" style="color: var(--tp-muted-foreground)"
+      >SAML and OIDC are now available on every plan.</span
+    >
+  </tp-stack>
+  <tp-stack
+    style="
+      aspect-ratio: 16/9;
+      box-sizing: content-box;
+      padding: var(--tp-space-6);
+      border-radius: var(--tp-radius-lg);
+      background: var(--tp-foreground);
+      color: var(--tp-background);
+    "
+    gap="1"
+    justify="end"
+  >
+    <strong data-carousel-layer="1" style="font-size: var(--tp-text-xl)">Audit log</strong>
+    <span data-carousel-layer="2" style="opacity: 0.7"
+      >Every permission change, kept for 400 days.</span
+    >
+  </tp-stack>
+  <tp-stack
+    style="
+      aspect-ratio: 16/9;
+      box-sizing: content-box;
+      padding: var(--tp-space-6);
+      border-radius: var(--tp-radius-lg);
+      background: var(--tp-muted);
+    "
+    gap="1"
+    justify="end"
+  >
+    <strong data-carousel-layer="1" style="font-size: var(--tp-text-xl)">Faster exports</strong>
+    <span data-carousel-layer="2" style="color: var(--tp-muted-foreground)"
+      >Large CSV exports finish up to 5× sooner.</span
+    >
+  </tp-stack>
 </tp-carousel>`}
   script={`import { carouselCrossfadeEffect } from '@tweakpad/ui';
 
@@ -160,26 +244,128 @@ Mark the one image or video per slide that an effect transforms with `data-carou
 <Preview
   title="Layered 3D"
   align="stretch"
-  code={`<tp-carousel id="carousel-layered" label="Weekend escapes" style="max-inline-size:36rem;margin-inline:auto">
-  <figure style="position:relative;margin:0;aspect-ratio:16/9;overflow:hidden;border-radius:var(--tp-radius-lg);background:var(--tp-muted)">
-    <img data-carousel-media src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=80" alt="A winding road through green hills at sunset" style="display:block;inline-size:100%;block-size:100%;object-fit:cover;color:transparent">
-    <figcaption style="position:absolute;inset-inline-start:var(--tp-space-6);inset-block-end:var(--tp-space-6);display:grid;gap:var(--tp-space-1);color:white;text-shadow:0 1px 12px rgb(0 0 0 / 55%)">
-      <strong data-carousel-layer="1" style="font-size:var(--tp-text-2xl)">Hill country</strong>
-      <span data-carousel-layer="2" style="font-size:var(--tp-text-sm)">Three days by car · from $420</span>
+  code={`<tp-carousel
+  id="carousel-layered"
+  label="Weekend escapes"
+  style="max-inline-size: 36rem; margin-inline: auto"
+>
+  <figure
+    style="
+      position: relative;
+      margin: 0;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      border-radius: var(--tp-radius-lg);
+      background: var(--tp-muted);
+    "
+  >
+    <img
+      data-carousel-media
+      src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=80"
+      alt="A winding road through green hills at sunset"
+      style="
+        display: block;
+        inline-size: 100%;
+        block-size: 100%;
+        object-fit: cover;
+        color: transparent;
+      "
+    />
+    <figcaption
+      style="
+        position: absolute;
+        inset-inline-start: var(--tp-space-6);
+        inset-block-end: var(--tp-space-6);
+        color: white;
+        text-shadow: 0 1px 12px rgb(0 0 0 / 55%);
+      "
+    >
+      <tp-stack gap="1">
+        <strong data-carousel-layer="1" style="font-size: var(--tp-text-2xl)">Hill country</strong>
+        <span data-carousel-layer="2" style="font-size: var(--tp-text-sm)"
+          >Three days by car · from \$420</span
+        >
+      </tp-stack>
     </figcaption>
   </figure>
-  <figure style="position:relative;margin:0;aspect-ratio:16/9;overflow:hidden;border-radius:var(--tp-radius-lg);background:var(--tp-muted)">
-    <img data-carousel-media src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&q=80" alt="Mountain lake at dawn" style="display:block;inline-size:100%;block-size:100%;object-fit:cover;color:transparent">
-    <figcaption style="position:absolute;inset-inline-start:var(--tp-space-6);inset-block-end:var(--tp-space-6);display:grid;gap:var(--tp-space-1);color:white;text-shadow:0 1px 12px rgb(0 0 0 / 55%)">
-      <strong data-carousel-layer="1" style="font-size:var(--tp-text-2xl)">Alpine lakes</strong>
-      <span data-carousel-layer="2" style="font-size:var(--tp-text-sm)">Hut to hut · from $610</span>
+  <figure
+    style="
+      position: relative;
+      margin: 0;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      border-radius: var(--tp-radius-lg);
+      background: var(--tp-muted);
+    "
+  >
+    <img
+      data-carousel-media
+      src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&q=80"
+      alt="Mountain lake at dawn"
+      style="
+        display: block;
+        inline-size: 100%;
+        block-size: 100%;
+        object-fit: cover;
+        color: transparent;
+      "
+    />
+    <figcaption
+      style="
+        position: absolute;
+        inset-inline-start: var(--tp-space-6);
+        inset-block-end: var(--tp-space-6);
+        color: white;
+        text-shadow: 0 1px 12px rgb(0 0 0 / 55%);
+      "
+    >
+      <tp-stack gap="1">
+        <strong data-carousel-layer="1" style="font-size: var(--tp-text-2xl)">Alpine lakes</strong>
+        <span data-carousel-layer="2" style="font-size: var(--tp-text-sm)"
+          >Hut to hut · from \$610</span
+        >
+      </tp-stack>
     </figcaption>
   </figure>
-  <figure style="position:relative;margin:0;aspect-ratio:16/9;overflow:hidden;border-radius:var(--tp-radius-lg);background:var(--tp-muted)">
-    <img data-carousel-media src="https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?w=1200&q=80" alt="A bicycle in a wet alley" style="display:block;inline-size:100%;block-size:100%;object-fit:cover;color:transparent">
-    <figcaption style="position:absolute;inset-inline-start:var(--tp-space-6);inset-block-end:var(--tp-space-6);display:grid;gap:var(--tp-space-1);color:white;text-shadow:0 1px 12px rgb(0 0 0 / 55%)">
-      <strong data-carousel-layer="1" style="font-size:var(--tp-text-2xl)">Old town by bike</strong>
-      <span data-carousel-layer="2" style="font-size:var(--tp-text-sm)">Guided weekend · from $290</span>
+  <figure
+    style="
+      position: relative;
+      margin: 0;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      border-radius: var(--tp-radius-lg);
+      background: var(--tp-muted);
+    "
+  >
+    <img
+      data-carousel-media
+      src="https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?w=1200&q=80"
+      alt="A bicycle in a wet alley"
+      style="
+        display: block;
+        inline-size: 100%;
+        block-size: 100%;
+        object-fit: cover;
+        color: transparent;
+      "
+    />
+    <figcaption
+      style="
+        position: absolute;
+        inset-inline-start: var(--tp-space-6);
+        inset-block-end: var(--tp-space-6);
+        color: white;
+        text-shadow: 0 1px 12px rgb(0 0 0 / 55%);
+      "
+    >
+      <tp-stack gap="1">
+        <strong data-carousel-layer="1" style="font-size: var(--tp-text-2xl)"
+          >Old town by bike</strong
+        >
+        <span data-carousel-layer="2" style="font-size: var(--tp-text-sm)"
+          >Guided weekend · from \$290</span
+        >
+      </tp-stack>
     </figcaption>
   </figure>
 </tp-carousel>`}
@@ -262,8 +448,8 @@ Focus dims and shrinks cards as they move away from the center and reveals the c
 <Preview
   title="Shader transition"
   align="stretch"
-  code={`<div id="carousel-shader-demo" style="display:grid;gap:var(--tp-space-4);max-inline-size:36rem;margin-inline:auto">
-  <div style="display:flex;flex-wrap:wrap;gap:var(--tp-space-4)">
+  code={`<tp-stack id="carousel-shader-demo" style="max-inline-size: 36rem; margin-inline: auto" gap="4">
+  <tp-stack direction="row" gap="4" wrap="wrap">
     <tp-field label="Variant">
       <tp-select data-option="variant" default-value="wipe">
         <option value="wipe">Wipe</option>
@@ -283,22 +469,124 @@ Focus dims and shrinks cards as they move away from the center and reveals the c
         <option value="down-right">Down right</option>
       </tp-select>
     </tp-field>
-  </div>
+  </tp-stack>
   <tp-carousel label="Photo stories" loop>
-    <figure style="position:relative;margin:0;aspect-ratio:16/9;overflow:hidden;border-radius:var(--tp-radius-lg);background:var(--tp-muted)">
-      <img data-carousel-media crossorigin="anonymous" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&q=80" alt="Mountain lake at dawn" style="display:block;inline-size:100%;block-size:100%;object-fit:cover;color:transparent">
-      <figcaption data-carousel-layer="1" style="position:absolute;inset-inline-start:var(--tp-space-6);inset-block-end:var(--tp-space-6);color:white;font-size:var(--tp-text-xl);font-weight:var(--tp-font-semibold);text-shadow:0 1px 12px rgb(0 0 0 / 55%)">Before sunrise</figcaption>
+    <figure
+      style="
+        position: relative;
+        margin: 0;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        border-radius: var(--tp-radius-lg);
+        background: var(--tp-muted);
+      "
+    >
+      <img
+        data-carousel-media
+        crossorigin="anonymous"
+        src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&q=80"
+        alt="Mountain lake at dawn"
+        style="
+          display: block;
+          inline-size: 100%;
+          block-size: 100%;
+          object-fit: cover;
+          color: transparent;
+        "
+      />
+      <figcaption
+        data-carousel-layer="1"
+        style="
+          position: absolute;
+          inset-inline-start: var(--tp-space-6);
+          inset-block-end: var(--tp-space-6);
+          color: white;
+          font-size: var(--tp-text-xl);
+          font-weight: var(--tp-font-semibold);
+          text-shadow: 0 1px 12px rgb(0 0 0 / 55%);
+        "
+      >
+        Before sunrise
+      </figcaption>
     </figure>
-    <figure style="position:relative;margin:0;aspect-ratio:16/9;overflow:hidden;border-radius:var(--tp-radius-lg);background:var(--tp-muted)">
-      <img data-carousel-media crossorigin="anonymous" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=80" alt="A winding road through green hills at sunset" style="display:block;inline-size:100%;block-size:100%;object-fit:cover;color:transparent">
-      <figcaption data-carousel-layer="1" style="position:absolute;inset-inline-start:var(--tp-space-6);inset-block-end:var(--tp-space-6);color:white;font-size:var(--tp-text-xl);font-weight:var(--tp-font-semibold);text-shadow:0 1px 12px rgb(0 0 0 / 55%)">The long way home</figcaption>
+    <figure
+      style="
+        position: relative;
+        margin: 0;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        border-radius: var(--tp-radius-lg);
+        background: var(--tp-muted);
+      "
+    >
+      <img
+        data-carousel-media
+        crossorigin="anonymous"
+        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=80"
+        alt="A winding road through green hills at sunset"
+        style="
+          display: block;
+          inline-size: 100%;
+          block-size: 100%;
+          object-fit: cover;
+          color: transparent;
+        "
+      />
+      <figcaption
+        data-carousel-layer="1"
+        style="
+          position: absolute;
+          inset-inline-start: var(--tp-space-6);
+          inset-block-end: var(--tp-space-6);
+          color: white;
+          font-size: var(--tp-text-xl);
+          font-weight: var(--tp-font-semibold);
+          text-shadow: 0 1px 12px rgb(0 0 0 / 55%);
+        "
+      >
+        The long way home
+      </figcaption>
     </figure>
-    <figure style="position:relative;margin:0;aspect-ratio:16/9;overflow:hidden;border-radius:var(--tp-radius-lg);background:var(--tp-muted)">
-      <img data-carousel-media crossorigin="anonymous" src="https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?w=1200&q=80" alt="A bicycle in a wet alley" style="display:block;inline-size:100%;block-size:100%;object-fit:cover;color:transparent">
-      <figcaption data-carousel-layer="1" style="position:absolute;inset-inline-start:var(--tp-space-6);inset-block-end:var(--tp-space-6);color:white;font-size:var(--tp-text-xl);font-weight:var(--tp-font-semibold);text-shadow:0 1px 12px rgb(0 0 0 / 55%)">After the rain</figcaption>
+    <figure
+      style="
+        position: relative;
+        margin: 0;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        border-radius: var(--tp-radius-lg);
+        background: var(--tp-muted);
+      "
+    >
+      <img
+        data-carousel-media
+        crossorigin="anonymous"
+        src="https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?w=1200&q=80"
+        alt="A bicycle in a wet alley"
+        style="
+          display: block;
+          inline-size: 100%;
+          block-size: 100%;
+          object-fit: cover;
+          color: transparent;
+        "
+      />
+      <figcaption
+        data-carousel-layer="1"
+        style="
+          position: absolute;
+          inset-inline-start: var(--tp-space-6);
+          inset-block-end: var(--tp-space-6);
+          color: white;
+          font-size: var(--tp-text-xl);
+          font-weight: var(--tp-font-semibold);
+          text-shadow: 0 1px 12px rgb(0 0 0 / 55%);
+        "
+      >
+        After the rain
+      </figcaption>
     </figure>
   </tp-carousel>
-</div>`}
+</tp-stack>`}
   script={`import { carouselShaderEffect } from '@tweakpad/ui';
 
 await customElements.whenDefined('tp-carousel');
@@ -359,14 +647,48 @@ Set `items` to an array and `renderItem` to a Lit template to build slides from 
 <Preview
   title="Commit"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-3);max-inline-size:28rem;margin-inline:auto">
+  code={`<tp-stack style="max-inline-size: 28rem; margin-inline: auto" gap="3">
   <tp-carousel id="carousel-events" label="Onboarding steps">
-    <div style="display:grid;place-content:center;min-block-size:8rem;border-radius:var(--tp-radius-lg);background:var(--tp-muted)">Create a workspace</div>
-    <div style="display:grid;place-content:center;min-block-size:8rem;border-radius:var(--tp-radius-lg);background:var(--tp-muted)">Import your data</div>
-    <div style="display:grid;place-content:center;min-block-size:8rem;border-radius:var(--tp-radius-lg);background:var(--tp-muted)">Invite your team</div>
+    <div
+      style="
+        display: grid;
+        place-content: center;
+        min-block-size: 8rem;
+        border-radius: var(--tp-radius-lg);
+        background: var(--tp-muted);
+      "
+    >
+      Create a workspace
+    </div>
+    <div
+      style="
+        display: grid;
+        place-content: center;
+        min-block-size: 8rem;
+        border-radius: var(--tp-radius-lg);
+        background: var(--tp-muted);
+      "
+    >
+      Import your data
+    </div>
+    <div
+      style="
+        display: grid;
+        place-content: center;
+        min-block-size: 8rem;
+        border-radius: var(--tp-radius-lg);
+        background: var(--tp-muted);
+      "
+    >
+      Invite your team
+    </div>
   </tp-carousel>
-  <output id="carousel-events-output" style="font-size:var(--tp-text-sm);color:var(--tp-muted-foreground);text-align:center">Step 1 of 3</output>
-</div>`}
+  <output
+    id="carousel-events-output"
+    style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground); text-align: center"
+    >Step 1 of 3</output
+  >
+</tp-stack>`}
   script={`const carousel = document.getElementById('carousel-events');
 const output = document.getElementById('carousel-events-output');
 carousel.addEventListener('tp-value-commit', () => {

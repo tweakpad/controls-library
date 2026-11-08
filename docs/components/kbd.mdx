@@ -27,7 +27,7 @@ A Kbd only describes a shortcut; your application implements it. Compose one `tp
 
 <Preview
   title="Modifiers"
-  code={`<div style="display:grid;gap:var(--tp-space-3);justify-items:start">
+  code={`<tp-stack gap="3" align="start">
   <tp-kbd-group platform="mac" separator="none">
     <tp-kbd value="control"></tp-kbd>
     <tp-kbd value="alt"></tp-kbd>
@@ -39,7 +39,7 @@ A Kbd only describes a shortcut; your application implements it. Compose one `tp
     <tp-kbd value="shift"></tp-kbd>
     <tp-kbd>P</tp-kbd>
   </tp-kbd-group>
-</div>`}
+</tp-stack>`}
 />
 
 ### Separators and sequences
@@ -106,7 +106,7 @@ An explicit Icon size remains supported.
 
 <Preview
   title="Icon keys"
-  code={`<p id="kbd-icons" style="margin:0;display:flex;align-items:center;gap:var(--tp-space-2)">
+  code={`<p id="kbd-icons" style="margin: 0"><tp-stack direction="row" gap="2" align="center">
   Move between results with
   <tp-kbd-group separator="none">
     <tp-kbd label="Up arrow"><tp-icon data-icon="up"></tp-icon></tp-kbd>
@@ -114,7 +114,7 @@ An explicit Icon size remains supported.
   </tp-kbd-group>
   and open with
   <tp-kbd label="Return"><tp-icon data-icon="return"></tp-icon></tp-kbd>
-</p>`}
+</tp-stack></p>`}
   script={`const icons = {
   up: { viewBox: '0 0 24 24', paths: [{ d: 'm18 15-6-6-6 6', strokeWidth: 2 }] },
   down: { viewBox: '0 0 24 24', paths: [{ d: 'm6 9 6 6 6-6', strokeWidth: 2 }] },
@@ -131,21 +131,21 @@ Literal slotted content is authored content and is not translated automatically.
 
 <Preview
   title="Localized and right-to-left"
-  code={`<div style="display:grid;gap:var(--tp-space-4);justify-items:start">
-  <p style="margin:0">
+  code={`<tp-stack gap="4" align="start">
+  <p style="margin: 0">
     Commenter :
     <tp-kbd-group id="kbd-french" separator="then" platform="windows" label="Commenter la sélection">
       <tp-kbd-group separator="none"><tp-kbd value="control"></tp-kbd><tp-kbd>K</tp-kbd></tp-kbd-group>
       <tp-kbd-group separator="none"><tp-kbd value="control"></tp-kbd><tp-kbd>C</tp-kbd></tp-kbd-group>
     </tp-kbd-group>
   </p>
-  <div dir="rtl" lang="ar" style="display:flex;align-items:center;gap:var(--tp-space-3)">
+  <tp-stack dir="rtl" lang="ar" direction="row" gap="3" align="center">
     <span>اضغط
       <tp-kbd-group separator="none"><tp-kbd value="mod"></tp-kbd><tp-kbd>K</tp-kbd></tp-kbd-group>
       للبحث</span>
     <tp-button variant="outline">إرسال<tp-kbd slot="icon-end" value="enter" label="إدخال"></tp-kbd></tp-button>
-  </div>
-</div>`}
+  </tp-stack>
+</tp-stack>`}
   script={`await customElements.whenDefined('tp-kbd-group');
 document.querySelector('#kbd-french').keyLabels = {
   control: { text: 'Ctrl', label: 'Contrôle' },

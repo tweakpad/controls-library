@@ -7,18 +7,35 @@ tag: tp-time
 <Preview
   title="Time"
   align="stretch"
-  code={`<ul id="time-hero" style="display:grid;gap:var(--tp-space-3);max-inline-size:24rem;margin:0 auto;padding:0;list-style:none;font-size:var(--tp-text-sm)">
-  <li style="display:flex;justify-content:space-between;gap:var(--tp-space-4)">
-    <span><strong>Maya Chen</strong> merged #482</span>
-    <tp-time data-offset="-45" style="color:var(--tp-muted-foreground)"></tp-time>
+  code={`<ul
+  id="time-hero"
+  style="
+    display: grid;
+    gap: var(--tp-space-3);
+    max-inline-size: 24rem;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    font-size: var(--tp-text-sm);
+  "
+>
+  <li>
+    <tp-stack direction="row" gap="4" justify="space-between">
+      <span><strong>Maya Chen</strong> merged #482</span>
+      <tp-time data-offset="-45" style="color: var(--tp-muted-foreground)"></tp-time>
+    </tp-stack>
   </li>
-  <li style="display:flex;justify-content:space-between;gap:var(--tp-space-4)">
-    <span><strong>Jonas Weber</strong> deployed to production</span>
-    <tp-time data-offset="-1500" style="color:var(--tp-muted-foreground)"></tp-time>
+  <li>
+    <tp-stack direction="row" gap="4" justify="space-between">
+      <span><strong>Jonas Weber</strong> deployed to production</span>
+      <tp-time data-offset="-1500" style="color: var(--tp-muted-foreground)"></tp-time>
+    </tp-stack>
   </li>
-  <li style="display:flex;justify-content:space-between;gap:var(--tp-space-4)">
-    <span><strong>Priya Natarajan</strong> opened #479</span>
-    <tp-time data-offset="-97200" style="color:var(--tp-muted-foreground)"></tp-time>
+  <li>
+    <tp-stack direction="row" gap="4" justify="space-between">
+      <span><strong>Priya Natarajan</strong> opened #479</span>
+      <tp-time data-offset="-97200" style="color: var(--tp-muted-foreground)"></tp-time>
+    </tp-stack>
   </li>
 </ul>`}
   script={`// Demo data: instants relative to the moment the page loads.
@@ -76,11 +93,21 @@ Presets drop fields finer than the value: `datetime` on a date-only value shows 
 
 <Preview
   title="Absolute formats"
-  code={`<div style="display:grid;gap:var(--tp-space-2);justify-items:center;font-size:var(--tp-text-sm)">
-  <tp-time mode="absolute" preset="date-long" datetime="2026-10-05T14:30:00Z" time-zone="UTC"></tp-time>
+  code={`<tp-stack style="font-size: var(--tp-text-sm)" gap="2" align="center">
+  <tp-time
+    mode="absolute"
+    preset="date-long"
+    datetime="2026-10-05T14:30:00Z"
+    time-zone="UTC"
+  ></tp-time>
   <tp-time mode="absolute" preset="full" datetime="2026-10-05T14:30:00Z" time-zone="UTC"></tp-time>
-  <tp-time mode="absolute" pattern="EEE d MMM yyyy 'at' HH:mm" datetime="2026-10-05T14:30:00Z" time-zone="UTC"></tp-time>
-</div>`}
+  <tp-time
+    mode="absolute"
+    pattern="EEE d MMM yyyy 'at' HH:mm"
+    datetime="2026-10-05T14:30:00Z"
+    time-zone="UTC"
+  ></tp-time>
+</tp-stack>`}
 />
 
 Write `yyyy-MM-dd`, not Moment-style `YYYY-MM-DD`: unsupported letters render literally and raise a diagnostic instead of silently formatting a different year.
@@ -93,10 +120,10 @@ A date-only value stays on its calendar day in every time zone and compares by d
 
 <Preview
   title="Dates and zones"
-  code={`<div style="display:grid;gap:var(--tp-space-2);justify-items:center;font-size:var(--tp-text-sm)">
+  code={`<tp-stack style="font-size: var(--tp-text-sm)" gap="2" align="center">
   <span>Invoice due <tp-time mode="absolute" preset="date-medium" datetime="2026-11-01"></tp-time></span>
   <span>Standup: <tp-time mode="absolute" preset="time" datetime="2026-10-12T09:30:00Z" time-zone="America/New_York"></tp-time> New York · <tp-time mode="absolute" preset="time" datetime="2026-10-12T09:30:00Z" time-zone="Europe/Berlin" hour-cycle="h23"></tp-time> Berlin</span>
-</div>`}
+</tp-stack>`}
 />
 
 Relative date-only values compare by calendar days too, which suits due dates in a task list.
@@ -147,12 +174,12 @@ Relative text uses `Intl.RelativeTimeFormat` with one unit. Boundaries are 60 se
 
 <Preview
   title="Short and narrow"
-  code={`<div id="time-styles" style="display:flex;gap:var(--tp-space-6);font-size:var(--tp-text-sm)">
+  code={`<tp-stack id="time-styles" style="font-size: var(--tp-text-sm)" direction="row" gap="6">
   <tp-time data-offset="-7200"></tp-time>
   <tp-time data-offset="-7200" relative-style="short"></tp-time>
   <tp-time data-offset="-7200" relative-style="narrow"></tp-time>
   <tp-time data-offset="-86400" numeric="always"></tp-time>
-</div>`}
+</tp-stack>`}
   script={`for (const time of document.querySelectorAll('#time-styles tp-time')) {
   time.datetime = new Date(Date.now() + Number(time.dataset.offset) * 1000);
 }`}

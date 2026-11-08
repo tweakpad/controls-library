@@ -7,12 +7,27 @@ tag: tp-empty-state
 <Preview
   title="Empty state"
   align="stretch"
-  code={`<tp-empty-state title="No projects yet" description="Projects group your documents, tasks and teammates. Create your first one to get started." media-treatment="icon">
-  <svg slot="media" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h6l2 2h10v12H3z"/></svg>
-  <div slot="actions" style="display:flex;flex-wrap:wrap;justify-content:center;gap:var(--tp-space-2)">
+  code={`<tp-empty-state
+  title="No projects yet"
+  description="Projects group your documents, tasks and teammates. Create your first one to get started."
+  media-treatment="icon"
+>
+  <svg
+    slot="media"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M3 6h6l2 2h10v12H3z" />
+  </svg>
+  <tp-stack slot="actions" direction="row" gap="2" justify="center" wrap="wrap">
     <tp-button>Create project</tp-button>
     <tp-button variant="outline">Import from CSV</tp-button>
-  </div>
+  </tp-stack>
 </tp-empty-state>`}
 />
 
@@ -49,14 +64,17 @@ Default content sits between the description and the actions. Use it for recover
 <Preview
   title="No results"
   align="stretch"
-  code={`<tp-empty-state title="No results for “quarterly invoice”" description="Check the spelling or search all workspaces instead.">
-  <tp-input-group style="inline-size:100%;max-inline-size:22rem">
+  code={`<tp-empty-state
+  title="No results for “quarterly invoice”"
+  description="Check the spelling or search all workspaces instead."
+>
+  <tp-input-group style="inline-size: 100%; max-inline-size: 22rem">
     <tp-input type="search" label="Search documents" default-value="quarterly invoice"></tp-input>
   </tp-input-group>
-  <div slot="actions" style="display:flex;flex-wrap:wrap;justify-content:center;gap:var(--tp-space-2)">
+  <tp-stack slot="actions" direction="row" gap="2" justify="center" wrap="wrap">
     <tp-button variant="outline">Clear filters</tp-button>
     <tp-button variant="ghost" href="#search-recovery">Search all workspaces</tp-button>
-  </div>
+  </tp-stack>
 </tp-empty-state>`}
 />
 

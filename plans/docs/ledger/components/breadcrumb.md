@@ -15,3 +15,5 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Menu on wide screens, drawer on narrow ones | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

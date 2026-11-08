@@ -15,3 +15,6 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Horizontal | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| preview | Legend and group | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

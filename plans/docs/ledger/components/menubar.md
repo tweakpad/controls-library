@@ -11,3 +11,5 @@
 | Kind | A text | Reason |
 | --- | --- | --- |
 | preview | Menubar | `aria-label` on `tp-menu-radio-group` named a generic host; `label` names the group (same text) |
+
+| preview | Active menu | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |

@@ -6,11 +6,11 @@ tag: tp-status-dot
 
 <Preview
   title="Status dot"
-  code={`<div style="display:flex;flex-wrap:wrap;align-items:center;gap:var(--tp-space-6)">
+  code={`<tp-stack direction="row" gap="6" align="center" wrap="wrap">
   <tp-status-dot variant="success" label="Operational" show-label motion="ping"></tp-status-dot>
   <tp-status-dot variant="warning" label="Degraded" show-label></tp-status-dot>
   <tp-status-dot variant="destructive" label="Outage" show-label></tp-status-dot>
-</div>`}
+</tp-stack>`}
 />
 
 ## Usage
@@ -23,13 +23,13 @@ Color alone never carries the meaning, so give every dot a `label` unless nearby
 
 <Preview
   title="Variants"
-  code={`<div style="display:flex;flex-wrap:wrap;align-items:center;gap:var(--tp-space-6)">
+  code={`<tp-stack direction="row" gap="6" align="center" wrap="wrap">
   <tp-status-dot label="Syncing" show-label></tp-status-dot>
   <tp-status-dot variant="secondary" label="Paused" show-label></tp-status-dot>
   <tp-status-dot variant="success" label="Healthy" show-label></tp-status-dot>
   <tp-status-dot variant="warning" label="Delayed" show-label></tp-status-dot>
   <tp-status-dot variant="destructive" label="Failed" show-label></tp-status-dot>
-</div>`}
+</tp-stack>`}
 />
 
 For any other color, set `--tp-status-dot-color` on the dot or an ancestor; `--tp-status-dot-size` sets its diameter.
@@ -109,11 +109,11 @@ A dot with an empty `label` is decorative: it is hidden from assistive technolog
 
 <Preview
   title="Pulse and ping"
-  code={`<div style="display:flex;flex-wrap:wrap;align-items:center;gap:var(--tp-space-6)">
+  code={`<tp-stack direction="row" gap="6" align="center" wrap="wrap">
   <tp-status-dot variant="destructive" label="Recording" show-label motion="pulse"></tp-status-dot>
   <tp-status-dot variant="success" label="Live" show-label motion="ping"></tp-status-dot>
   <tp-status-dot variant="secondary" label="Idle" show-label></tp-status-dot>
-</div>`}
+</tp-stack>`}
 />
 
 Status dot adds no live region. Wrap dots whose changes must be announced in an element with `role="status"`.

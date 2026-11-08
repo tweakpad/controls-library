@@ -7,10 +7,10 @@ tag: tp-label
 <Preview
   title="Label"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-2);max-inline-size:22rem">
+  code={`<tp-stack style="max-inline-size: 22rem" gap="2">
   <tp-label for="label-hero-name">Workspace name</tp-label>
   <tp-input id="label-hero-name" default-value="Northwind Studio"></tp-input>
-</div>`}
+</tp-stack>`}
 />
 
 ## Usage
@@ -24,16 +24,16 @@ Point `for` at the control's id, or nest the control as the Label's child. Eithe
 <Preview
   title="By id and by nesting"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-5);max-inline-size:22rem">
-  <div style="display:grid;gap:var(--tp-space-2)">
+  code={`<tp-stack style="max-inline-size: 22rem" gap="5">
+  <tp-stack gap="2">
     <tp-label for="label-assoc-email">Billing email</tp-label>
     <tp-input id="label-assoc-email" type="email" placeholder="billing@northwind.co"></tp-input>
-  </div>
-  <tp-label style="align-items:center;gap:var(--tp-space-3)">
+  </tp-stack>
+  <tp-label style="align-items: center; gap: var(--tp-space-3)">
     <tp-switch default-checked></tp-switch>
     Send weekly usage reports
   </tp-label>
-</div>`}
+</tp-stack>`}
 />
 
 ### Optional
@@ -43,14 +43,14 @@ Point `for` at the control's id, or nest the control as the Label's child. Eithe
 <Preview
   title="Optional"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-5);max-inline-size:22rem">
-  <div style="display:grid;gap:var(--tp-space-2)">
+  code={`<tp-stack style="max-inline-size: 22rem" gap="5">
+  <tp-stack gap="2">
     <tp-label for="label-optional-company" optional>Company</tp-label>
     <tp-input id="label-optional-company" placeholder="Acme Inc."></tp-input>
-  </div>
-  <div style="display:grid;gap:var(--tp-space-2)">
+  </tp-stack>
+  <tp-stack gap="2">
     <tp-label for="label-optional-vat" optional>VAT number</tp-label>
     <tp-input id="label-optional-vat" placeholder="GB 123 4567 89"></tp-input>
-  </div>
-</div>`}
+  </tp-stack>
+</tp-stack>`}
 />

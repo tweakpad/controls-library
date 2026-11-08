@@ -23,13 +23,19 @@ The surface generates its title and a hint from `accept` and the size limit. The
 <Preview
   title="Custom text and compact size"
   align="stretch"
-  code={`<div style="display:grid;gap:var(--tp-space-6);inline-size:100%;max-inline-size:30rem;margin-inline:auto">
+  code={`<tp-stack style="inline-size: 100%; max-inline-size: 30rem; margin-inline: auto" gap="6">
   <tp-file-upload name="backup" accept=".sql,.sql.gz,.dump" max-file-size="10GB">
     <span slot="title">Restore from a backup</span>
     <span slot="description">A .sql, .sql.gz or .dump file from pg_dump, up to 10 GB</span>
   </tp-file-upload>
-  <tp-file-upload name="logo" size="sm" accept="image/png,image/svg+xml" max-file-size="2MB" show-trigger></tp-file-upload>
-</div>`}
+  <tp-file-upload
+    name="logo"
+    size="sm"
+    accept="image/png,image/svg+xml"
+    max-file-size="2MB"
+    show-trigger
+  ></tp-file-upload>
+</tp-stack>`}
 />
 
 Without `multiple` a new file replaces the current one, which suits a single logo or backup.

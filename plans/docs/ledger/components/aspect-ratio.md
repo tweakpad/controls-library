@@ -16,3 +16,5 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | One ratio, three widths | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
