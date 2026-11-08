@@ -244,6 +244,7 @@ export class TpMoGlowBorder extends SurfaceBorderElement {
     if (looping) this.#clock += elapsed;
     if (level <= 0) {
       renderer.paint(null, null);
+      if (!this.#fade.moving && !this.#on) renderer.release();
       return this.#fade.moving || moving || following;
     }
     const look = this.glowLook();

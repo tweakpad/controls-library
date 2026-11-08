@@ -119,3 +119,14 @@
 - Required failures or blocked checks: none. Optional spec wording: anatomy cell `uwg-fl-tab-anatomy-r5-c1-p` still says panel rows are "label and control rows"; suggested "property rows, each an inline control or a label and a control" (not changed).
 - Older out-of-scope gaps: a node's number field clamps while typing (typing 99 over a 1–64 field shows 64 after the second digit), pre-existing.
 - Changed source revisions / reopened gates: none.
+
+## Minimap direct-reconnect repair (2026-11-08)
+
+- Scope: the confirmed pre-existing direct TpFlowMinimap reconnect failure discovered while testing CanvasSurface consumers. No public API, presentation recipe, examples or generated binding changes.
+- Source: live Widgets Flow minimap contract via direct spec_search; repository HEAD c148dd70, minimap source previously unchanged. Existing minimap lifecycle is the reuse reference; CanvasSurface/Scheduler/PointerDrag remain their existing owners.
+- Capability/dependency map: preserve scene and canvas, dispose all resources on disconnect, re-create exactly once on connect, reset panning and refresh cached theme colors. Public composition and ownership unchanged.
+- Gates 0–2: bounded lifecycle repair mapped above. Early integration: original failing pixel-repaint check now passes; source diff uses one shared #connectCanvas routine for first render/reconnect.
+- Browser regression: tests/fixtures/widgets/flow/minimap-reconnect.ts failed on original CanvasSurface, then passed five times on source and five times on rebuilt package. Tests use twelve actual nodes and compare canvas pixels after viewport changes. Real MCP canvas click after reconnection pans x from 100 to -1221, retaining zoom 1; data-panning clears after release.
+- Verification: source TypeScript, targeted ESLint/stylelint and package build pass. Focused Flow/CanvasSurface unit results are recorded at handoff. No unrelated full-component claim; this repair closes only the direct-reconnect failure.
+
+Focused Flow/CanvasSurface checks: five test files, 27 tests passed (one worker, 2.98 seconds).

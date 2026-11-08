@@ -183,6 +183,7 @@ export class TpMoSegmentBorder extends SurfaceBorderElement {
         look,
       );
     }
+    if (!moving && glow.length === 0) renderer?.release();
     return moving;
   }
 

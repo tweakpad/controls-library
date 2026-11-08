@@ -35,6 +35,7 @@ export class CanvasSurface {
   #scheduler: Scheduler | undefined;
   #frame: (() => void) | undefined;
   #lost = false;
+  #suspended = false;
   #dirty = true;
   #pixelRatio = 1;
   #cssWidth = 0;
@@ -143,6 +144,24 @@ export class CanvasSurface {
     this.#scheduler = undefined;
   }
 
+  /** Releases backing pixels while retaining observation and measured geometry. */
+  suspend(): void {
+    this.#suspended = true;
+    this.#frame?.();
+    this.#frame = undefined;
+    const canvas = this.#options.canvas;
+    if (canvas.width !== 0) canvas.width = 0;
+    if (canvas.height !== 0) canvas.height = 0;
+    this.#dirty = true;
+  }
+
+  /** Re-measures and resumes painting after explicit suspension. */
+  resume(): void {
+    if (!this.#suspended) return;
+    this.#suspended = false;
+    this.refresh();
+  }
+
   /** Re-measure after an owner changes its DPR cap or layout configuration. */
   refresh(): void {
     this.#measure();
@@ -152,7 +171,7 @@ export class CanvasSurface {
   /** Requests one repaint on the next frame; coalesces repeated requests. */
   invalidate(): void {
     this.#dirty = true;
-    if (!this.#scope || !this.#scheduler || this.#lost || this.#frame) return;
+    if (this.#suspended || !this.#scope || !this.#scheduler || this.#lost || this.#frame) return;
     const owner = this.#owner;
     if (owner?.document?.visibilityState === 'hidden') return;
     if (this.#deviceWidth === 0 || this.#deviceHeight === 0) return;
@@ -236,7 +255,13 @@ export class CanvasSurface {
   }
 
   #paint(): void {
-    if (!this.#scope || this.#lost || this.#owner?.document.visibilityState === 'hidden') return;
+    if (
+      this.#suspended ||
+      !this.#scope ||
+      this.#lost ||
+      this.#owner?.document.visibilityState === 'hidden'
+    )
+      return;
     const canvas = this.#options.canvas;
     const width = this.#deviceWidth;
     const height = this.#deviceHeight;

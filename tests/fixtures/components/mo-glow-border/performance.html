@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      body {
+        margin: 0;
+      }
+      #stage {
+        position: relative;
+        width: 100%;
+        height: 800px;
+        overflow: hidden;
+      }
+      tp-mo-glow-border {
+        position: absolute;
+        width: 400px;
+        height: 220px;
+      }
+      tp-card {
+        width: 400px;
+        height: 220px;
+      }
+      tp-card::part(card) {
+        height: 100%;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stage"></div>
+    <script type="module">
+      const built = new URLSearchParams(location.search).has('built');
+      if (built) document.querySelector('link[rel=stylesheet]').href = '/dist/styles.css';
+      const { TpMoGlowBorder, TpCard, defineElement } = built
+        ? await import('/dist/index.js')
+        : await import('/src/index.ts');
+      const { GlowRenderer } = built
+        ? await import('/dist/foundation/border-ring/glow-renderer.js')
+        : await import('/src/foundation/border-ring/glow-renderer.ts');
+      const { CanvasSurface } = built
+        ? await import('/dist/foundation/canvas-surface.js')
+        : await import('/src/foundation/canvas-surface.ts');
+      const connectedSurfaces = new Set();
+      const originalConnect = CanvasSurface.prototype.connect;
+      const originalDisconnect = CanvasSurface.prototype.disconnect;
+      CanvasSurface.prototype.connect = function () {
+        const result = originalConnect.call(this);
+        connectedSurfaces.add(this);
+        return result;
+      };
+      CanvasSurface.prototype.disconnect = function () {
+        connectedSurfaces.delete(this);
+        return originalDisconnect.call(this);
+      };
+      let recording = false;
+      let paintTimes = [];
+      let allocationPaintTimes = [];
+      let allocationWrites = 0;
+      const originalPaint = GlowRenderer.prototype.paint;
+      GlowRenderer.prototype.paint = function (...args) {
+        if (!recording) return originalPaint.apply(this, args);
+        const writesBefore = allocationWrites;
+        const start = performance.now();
+        try {
+          return originalPaint.apply(this, args);
+        } finally {
+          const duration = performance.now() - start;
+          paintTimes.push(duration);
+          if (allocationWrites > writesBefore) allocationPaintTimes.push(duration);
+        }
+      };
+      const descriptors = ['width', 'height'].map((name) => [
+        name,
+        Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, name),
+      ]);
+      for (const [name, descriptor] of descriptors)
+        Object.defineProperty(HTMLCanvasElement.prototype, name, {
+          ...descriptor,
+          set(value) {
+            if (
+              recording &&
+              this.matches('canvas.glow,canvas.bloom') &&
+              descriptor.get.call(this) !== value
+            )
+              allocationWrites++;
+            descriptor.set.call(this, value);
+          },
+        });
+      const stats = (values) => {
+        const sorted = [...values].sort((a, b) => a - b);
+        return {
+          count: sorted.length,
+          median: sorted[Math.floor(sorted.length * 0.5)] ?? 0,
+          p95: sorted[Math.floor(sorted.length * 0.95)] ?? 0,
+          max: sorted.at(-1) ?? 0,
+          total: sorted.reduce((a, b) => a + b, 0),
+        };
+      };
+      defineElement(TpCard.tagName, TpCard);
+      defineElement(TpMoGlowBorder.tagName, TpMoGlowBorder);
+      const stage = document.querySelector('#stage');
+      let clears = 0;
+      const originalClear = CanvasRenderingContext2D.prototype.clearRect;
+      CanvasRenderingContext2D.prototype.clearRect = function (...args) {
+        if (this.canvas.matches('canvas.glow,canvas.bloom')) clears++;
+        return originalClear.apply(this, args);
+      };
+
+      const cards = Array.from({ length: 30 }, (_, i) => {
+        const el = document.createElement('tp-mo-glow-border');
+        el.motion = 'sweep';
+        el.trigger = 'none';
+        el.innerHTML = '<tp-card>Performance surface</tp-card>';
+        el.style.left = `${(i % 3) * 420}px`;
+        el.style.top = `${Math.floor(i / 3) * 240}px`;
+        stage.append(el);
+        return el;
+      });
+      window.glowPerf = {
+        cards,
+        get clears() {
+          return clears;
+        },
+        set(mode) {
+          cards.forEach((el, i) => {
+            el.trigger = mode === 'idle' ? 'none' : 'always';
+            el.style.transform =
+              mode === 'far' || (mode === 'mixed' && i >= 10) ? 'translateY(10000px)' : 'none';
+            el.style.top = mode === 'visible' ? '20px' : `${Math.floor(i / 3) * 240}px`;
+          });
+        },
+        async sample(milliseconds = 5000) {
+          paintTimes = [];
+          allocationPaintTimes = [];
+          allocationWrites = 0;
+          const before = clears;
+          const frames = [];
+          let previous = performance.now();
+          const end = previous + milliseconds;
+          recording = true;
+          await new Promise((resolve) => {
+            const frame = (now) => {
+              frames.push(now - previous);
+              previous = now;
+              if (now < end) requestAnimationFrame(frame);
+              else resolve();
+            };
+            requestAnimationFrame(frame);
+          });
+          recording = false;
+          if (clears > before && paintTimes.length === 0)
+            throw new Error(
+              'Renderer instrumentation missed active paints; check module identity before using timings.',
+            );
+          return {
+            paint: stats(paintTimes),
+            allocationPaint: stats(allocationPaintTimes),
+            connectedSurfaces: connectedSurfaces.size,
+            frames: stats(frames.slice(1)),
+            clears: clears - before,
+            allocationWrites,
+          };
+        },
+        restoreInstrumentation() {
+          GlowRenderer.prototype.paint = originalPaint;
+          CanvasSurface.prototype.connect = originalConnect;
+          CanvasSurface.prototype.disconnect = originalDisconnect;
+          connectedSurfaces.clear();
+          CanvasRenderingContext2D.prototype.clearRect = originalClear;
+          for (const [name, descriptor] of descriptors)
+            Object.defineProperty(HTMLCanvasElement.prototype, name, descriptor);
+        },
+        snapshot() {
+          const rows = cards.flatMap((el, i) =>
+            [...el.shadowRoot.querySelectorAll('canvas')].map((c) => ({
+              card: i,
+              part: c.getAttribute('part'),
+              width: c.width,
+              height: c.height,
+              bytes: c.width * c.height * 4,
+            })),
+          );
+          return {
+            viewport: [innerWidth, innerHeight],
+            dpr: devicePixelRatio,
+            canvases: rows.length,
+            connectedSurfaces: connectedSurfaces.size,
+            allocated: rows.filter((r) => r.bytes > 0).length,
+            bytes: rows.reduce((sum, r) => sum + r.bytes, 0),
+            rows,
+          };
+        },
+      };
+    </script>
+  </body>
+</html>

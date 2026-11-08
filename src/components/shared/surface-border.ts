@@ -413,6 +413,7 @@ export abstract class SurfaceBorderElement extends TpElement {
     near: true,
     changed: () => {
       this.toggleAttribute('data-tp-offscreen', !this.#viewport.near);
+      this.#renderer?.setEligible(this.near);
       this.triggerChanged();
       this.wake();
     },
@@ -482,6 +483,7 @@ export abstract class SurfaceBorderElement extends TpElement {
     });
     this.#releaseInvalid = () => observer.disconnect();
     this.syncState();
+    this.#renderer?.setEligible(this.near);
     this.#renderer?.connect();
     this.refresh();
     void this.updateComplete.then(() => this.triggerChanged());
@@ -533,12 +535,21 @@ export abstract class SurfaceBorderElement extends TpElement {
       >${
         this.glows
           ? html`<canvas
+                width="0"
+                height="0"
                 part=${parts.bloom}
                 class="bloom"
                 aria-hidden="true"
                 style=${canvas}
               ></canvas
-              ><canvas part=${parts.glow} class="glow" aria-hidden="true" style=${canvas}></canvas>`
+              ><canvas
+                width="0"
+                height="0"
+                part=${parts.glow}
+                class="glow"
+                aria-hidden="true"
+                style=${canvas}
+              ></canvas>`
           : nothing
       }`;
   }
@@ -683,6 +694,7 @@ export abstract class SurfaceBorderElement extends TpElement {
     }
     if (this.#renderer) return;
     this.#renderer = new GlowRenderer(line, bloom);
+    this.#renderer.setEligible(this.near);
     this.#renderer.connect();
     const geometry = this.#geometry;
     if (geometry)

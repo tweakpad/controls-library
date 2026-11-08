@@ -62,3 +62,13 @@ Button), `#pipeline` (vertical compact nodes, orthogonal edges, palette,
 `#readonly`, `#view` (`mode="view"`), `#disabled`, `#narrow` (320 px, `size="sm"`), `#field`
 inside `tp-field` within `#form` (`required`; the `#reset` button and the `#submitted` output),
 plus `#before` / `#after` focus stops.
+
+## Direct minimap reconnection regression
+
+Load a small nonempty graph with `await flowAPI.generate(12)`, fit the `large` graph,
+then import `verifyMinimapReconnect` from `./minimap-reconnect.ts` in the page through
+DevTools MCP and call it with `flowAPI.flows.large`. The check removes/reinserts the
+minimap itself and requires changed canvas pixels after a viewport change. Parent
+Flow reconnection and nonzero canvas dimensions are insufficient substitutes.
+This failed on baseline before the minimap lifecycle fix. It must pass after the fix,
+including repeated reconnection of the same element.

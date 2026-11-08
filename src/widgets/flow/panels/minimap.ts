@@ -201,6 +201,11 @@ export class TpFlowMinimap extends TpElement {
     this.#surface?.invalidate();
   }
 
+  override connectedCallback(): void {
+    super.connectedCallback();
+    if (this.hasUpdated) this.#connectCanvas();
+  }
+
   override disconnectedCallback(): void {
     this.#scheduler?.dispose();
     this.#scheduler = undefined;
@@ -209,13 +214,22 @@ export class TpFlowMinimap extends TpElement {
     this.#surface = undefined;
     this.#drag?.disconnect();
     this.#drag = undefined;
+    this.#panning = false;
+    this.#markPanning();
     super.disconnectedCallback();
   }
 
   protected override firstUpdated(changed: PropertyValues<this>): void {
     super.firstUpdated(changed);
+    this.#connectCanvas();
+  }
+
+  /** The existing canvas survives a DOM move; its disposed resources do not. */
+  #connectCanvas(): void {
+    if (!this.isConnected || this.#surface) return;
     const canvas = this.canvas;
     if (!canvas) return;
+    this.#colors = undefined;
     this.#scheduler = new Scheduler(this.ownerDocument.defaultView ?? undefined);
     this.#surface = new CanvasSurface({
       canvas,

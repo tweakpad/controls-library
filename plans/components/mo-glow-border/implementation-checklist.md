@@ -33,6 +33,10 @@
 | C-11 | Exact geometry under a CSS zoom or scale transform (ring and canvas), and fill-width surfaces keep filling their row | CL `sbf-states` | none | `BorderSurface.measure` scale, `inlineLevel`, `CanvasSurface` device ratio | none (internal) | V-09 | passed | V-09 |
 | C-12 | Pointer light is a local highlight along the line around its nearest point (a share of the perimeter), dimming with distance up to `track-reach`; calmer bloom and sweep (user, 2026-10-30: "all saturated and ugly") | CL `mbx-glow` (0.51.1) | none | `lights.ts` spot, `glow-renderer.ts` bloom ×1.2 and mean-per-stroke, sweep 0.65 | Usage, Controls and fields | V-10 | passed | unit test and V-10 |
 
+| C-13 | Demand-driven paired backing allocation and viewport/disconnect release | issue 37; CL mbx-motion; Foundation vr-signals | none (original effect) | CanvasSurface suspension, GlowRenderer eligibility, shared surface owner | no public API change | V-11 | passed | paired source and built snapshots |
+| C-14 | Suspended invalidations cannot reallocate; resume uses current geometry/DPR | issue 37; CanvasSurface lifecycle | existing CanvasSurface | suspend/resume guards | no component API change | V-12 | passed | lifecycle unit tests |
+| C-15 | Re-entry continuity, allocation costs and complete visual matrix | issue 37; CL mbx-fade, mbx-motion, sbf-states | existing effect state owners | resource lifecycle separate from component state | no public API change | V-13 | blocked | partial browser evidence; Chrome disconnected during final allocation run |
+
 | Issue | Concrete missing/conflicting contract | Affected dependencies | Proposed resolution | Authority / resolution evidence | Status |
 | ----- | ------------------------------------- | --------------------- | ------------------- | ------------------------------- | ------ |
 | G-01 | CL § 21.20 Border combined glow, dashes and segments behind `effect` | spec, docs, code | Section becomes Glow border; dashes, draw reveal, `effect` and the Scroll trigger membership removed; Segment border is § 21.21 | Committed `7b4113b7`, bumped 0.51.0 `3f4ac24c` | passed |
@@ -91,6 +95,10 @@
 | I-02 | Default visual regions match traced source and shared library recipes | passed | V-01 geometry; V-06 screenshots in both schemes |
 | I-03 | Independent constituent options work, including placement separately from action behavior | passed | triggers, motions, sources and fade exercised separately (V-02 to V-05) |
 
+| V-11 | C-13; performance | 30 fixed-size cards: inactive, all near, mixed and far | backing pixels follow eligibility, paired stores release | 116640000 → 0 inactive/far; mixed → 38880000; built agrees | local baseline/candidate JSON and performance.md | passed | estimates, not exact GPU residency |
+| V-12 | C-14; unit | queued paints, suspension, DPR/resize, context restoration and reconnect | no allocation while suspended, latest geometry on resume | CanvasSurface 8 tests plus GlowRenderer lifecycle test pass | focused Vitest and TypeScript | passed | browser capabilities not mocked as browser evidence |
+| V-13 | C-15; browser | 20 cycles, focus/fade, segments, shared consumers, final allocation timing | stable state and resources; complete final visual matrix | initial 20 cycles stable; focus/fade, held pixels, segments and consumer checks passed; final timing run interrupted | performance.md | blocked | Chrome target closed; connection retries timed out |
+
 ## Gate record
 
 | Gate | Status | Required exit evidence / remaining work |
@@ -101,9 +109,9 @@
 | 3. Behavior | passed | V-01 to V-05 in Chrome |
 | 4. Presentation and customization | passed | V-06 themes and custom colors |
 | 5. Accessibility | passed | V-07 axe 0 violations; no screen-reader test |
-| 6. Visual and interaction inspection | passed | V-06 screenshots in both schemes |
+| 6. Visual and interaction inspection | blocked | Resource revision: final matrix interrupted by Chrome disconnect; historical evidence: V-06 screenshots in both schemes |
 | 7. Documentation and demo reuse | passed | `check-docs.mjs motion/surface/glow-border` passes; static Storybook page read in Chrome |
-| 8. Regression and reconciliation | passed | full `vitest`, `tsc`, eslint, stylelint and prettier on touched files, `npm run build`, static Storybook build |
+| 8. Regression and reconciliation | blocked | Resource revision: browser completion pending; full 444-file tests and build passed; historical evidence: full `vitest`, `tsc`, eslint, stylelint and prettier on touched files, `npm run build`, static Storybook build |
 
 ## Documentation synchronization
 
@@ -129,3 +137,21 @@
 - Required failures or blocked checks: none
 - Older out-of-scope gaps: stylelint/prettier failures in `avatar.ts`, `field.ts`, `slider/styles.ts`, `text-control.ts` predate this work
 - Changed source revisions / reopened gates: the former Border record (`plans/components/mo-border/`) is replaced by this record and the Segment border record
+
+## Resource lifecycle revision (issue 37, 2026-11-08)
+
+Baseline revision: c148dd70124f89439151ad8db307821f44cb4991. Delivery is an internal lifecycle repair, preserving public contracts and examples. Live CL mbx-motion and Foundation vr-signals retain near-region loop ownership; no external counterpart exists for this original renderer.
+
+- Ownership: CanvasSurface owns line allocation and paint scheduling; GlowRenderer owns the paired bloom; SurfaceBorderElement owns viewport eligibility; Glow Border and Segment Border own demand and animation state.
+- Public API/framework bindings: unchanged. Plot, triangle and minimap remain default-active CanvasSurface consumers.
+- Additional capabilities: zero initial dormant allocation, paired eviction beyond near, no suspended invalidation allocation, state-preserving resume, explicit disconnect release.
+- Planned scenarios: baseline/candidate fixture snapshots, paint counts, repeated cycles, fade/focus/segments, DPR/resize and other CanvasSurface consumers.
+- Gates 0–2: source paths and shared ownership mapped; implementation ready. Gates 3–8 reopened for this revision; prior passed results above apply only to the historical implementation.
+- Measurement evidence: tmp/component-verification/mo-glow-border/resource-lifecycle/ (local artifacts). Browser runs serially; one worker for tests.
+
+### Resource revision results
+
+- Full suite: 444 files passed, 6265 tests passed, 3 skipped, one worker, 120.43 seconds. Added renderer unit test subsequently passed with the eight CanvasSurface tests.
+- Build passed: 1493 modules; 207 framework binding files, zero generated changes; docs 96 pages, zero pending tags. Targeted ESLint/stylelint and source TypeScript passed before the additional renderer test; final checks recorded in performance.md.
+- Chrome: paired backing estimates and source timings, initial twenty cycles, retained detached release, held-state pixel hashes, real hover/focus/Tab fade release, keyboard focus ring, reduced motion, built Segment Border and Plot/triangle/minimap checks completed.
+- Final allocation timing and remaining DPR/theme/forced-colors visual checks are blocked after Chrome target closure. No complete-component claim for this revision.

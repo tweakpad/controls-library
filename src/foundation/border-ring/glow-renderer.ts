@@ -65,6 +65,7 @@ export class GlowRenderer {
   #core: Lab | null = null;
   readonly #color: Lab = [0, 0, 0, 0];
   #painted = false;
+  #eligible = false;
 
   constructor(line: HTMLCanvasElement, bloom: HTMLCanvasElement) {
     this.#bloom = bloom;
@@ -73,6 +74,8 @@ export class GlowRenderer {
       canvas: line,
       render: (context, width, height, ratio) => this.#render(context, width, height, ratio),
     });
+    this.#surface.suspend();
+    bloom.width = bloom.height = 0;
   }
 
   connect(): void {
@@ -80,7 +83,22 @@ export class GlowRenderer {
   }
 
   disconnect(): void {
+    this.release();
     this.#surface.disconnect();
+  }
+
+  /** Viewport eligibility is independent of the current effect state. */
+  setEligible(eligible: boolean): void {
+    this.#eligible = eligible;
+    if (!eligible) this.release();
+  }
+
+  /** Releases both backing stores without discarding geometry or effect state. */
+  release(): void {
+    this.#surface.suspend();
+    if (this.#bloom.width !== 0) this.#bloom.width = 0;
+    if (this.#bloom.height !== 0) this.#bloom.height = 0;
+    this.#painted = false;
   }
 
   /** The ring box, line width, bloom spread and margin (CSS pixels) the canvases cover. */
@@ -99,7 +117,16 @@ export class GlowRenderer {
   paint(frame: GlowFrame | null, look: GlowLook | null): void {
     this.#frame = frame;
     this.#look = look;
-    if (!frame && !this.#painted) return;
+    if (!this.#eligible) return;
+    const drawable =
+      frame &&
+      look &&
+      this.#box &&
+      this.#samples &&
+      this.#samples.count >= 2 &&
+      frame.level * look.intensity > VISIBLE;
+    if (!drawable && !this.#painted) return;
+    if (drawable) this.#surface.resume();
     this.#surface.paint();
   }
 
