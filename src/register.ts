@@ -1,3 +1,4 @@
+import { TpStack } from './components/stack/index.js';
 import { TpAccordionItem } from './components/accordion/accordion-item.js';
 import { TpAccordion } from './components/accordion/accordion.js';
 import { TpAlertDialog } from './components/alert-dialog/alert-dialog.js';
@@ -417,3 +418,5 @@ defineElement(TpMediaQualityRadioGroup.tagName, TpMediaQualityRadioGroup);
 defineElement(TpMediaSettingsMenu.tagName, TpMediaSettingsMenu);
 defineElement(TpMediaVideoLayout.tagName, TpMediaVideoLayout);
 defineElement(TpMediaAudioLayout.tagName, TpMediaAudioLayout);
+
+defineElement(TpStack.tagName, TpStack);

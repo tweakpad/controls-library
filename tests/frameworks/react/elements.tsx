@@ -171,6 +171,7 @@ import {
   Slider,
   SliderThumb,
   Spinner,
+  Stack,
   StatusDot,
   Switch,
   Table,
@@ -404,6 +405,7 @@ import type { TpSkeleton as TpSkeletonType } from '../../../src/components/skele
 import type { TpSliderThumb as TpSliderThumbType } from '../../../src/components/slider/slider-thumb.js';
 import type { TpSlider as TpSliderType } from '../../../src/components/slider/slider.js';
 import type { TpSpinner as TpSpinnerType } from '../../../src/components/spinner/spinner.js';
+import type { TpStack as TpStackType } from '../../../src/components/stack/stack.js';
 import type { TpStatusDot as TpStatusDotType } from '../../../src/components/status-dot/status-dot.js';
 import type { TpSwitch as TpSwitchType } from '../../../src/components/switch/switch.js';
 import type { TpTableOfContentsItem as TpTableOfContentsItemType } from '../../../src/components/table-of-contents/table-of-contents-item.js';
@@ -634,6 +636,7 @@ export const elements: ReactElement[] = [
   <Slider ref={(element: TpSliderType | null) => void element} />,
   <SliderThumb ref={(element: TpSliderThumbType | null) => void element} />,
   <Spinner ref={(element: TpSpinnerType | null) => void element} />,
+  <Stack ref={(element: TpStackType | null) => void element} />,
   <StatusDot ref={(element: TpStatusDotType | null) => void element} />,
   <Switch ref={(element: TpSwitchType | null) => void element} />,
   <Table ref={(element: TpTableType | null) => void element} />,

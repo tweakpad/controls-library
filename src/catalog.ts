@@ -10,6 +10,7 @@ export interface CatalogEntry {
 }
 
 export const catalog = [
+  ['Stack', 'tp-stack', 'presentational-primitive'],
   ['Accordion', 'tp-accordion', 'compound-reexport'],
   ['Button', 'tp-button', 'compound-reexport'],
   ['Checkbox', 'tp-checkbox', 'compound-reexport'],

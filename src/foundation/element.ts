@@ -15,7 +15,8 @@ import type { PartPresentation } from '../presentation/resolver.js';
 import { renderPart } from './part.js';
 import type { ComponentPartContract, PartRenderOptions, PartState } from './part.js';
 
-export class TpElement extends LitElement {
+/** Shared element lifecycle and presentation, independent of layout property names. */
+export class TpElementBase extends LitElement {
   /** This element's presentation family: its definition, bindings and default appearance. */
   static presentation: PresentationFamily | undefined;
   /** Other families whose parts this element also presents. */
@@ -160,14 +161,6 @@ export class TpElement extends LitElement {
     super.connectedCallback();
   }
 
-  get direction(): Direction {
-    const own = this.getAttribute('dir');
-    if (own === 'rtl' || own === 'ltr') return own;
-    return this.ownerDocument.defaultView?.getComputedStyle(this).direction === 'rtl'
-      ? 'rtl'
-      : 'ltr';
-  }
-
   override disconnectedCallback(): void {
     cancelMotions(this);
     super.disconnectedCallback();
@@ -226,5 +219,16 @@ export class TpElement extends LitElement {
     this.toggleAttribute('data-invalid', this.invalid);
     if (this.getAttribute('data-orientation') !== this.orientation)
       this.setAttribute('data-orientation', this.orientation);
+  }
+}
+
+/** Standard component base with resolved writing direction. */
+export class TpElement extends TpElementBase {
+  get direction(): Direction {
+    const own = this.getAttribute('dir');
+    if (own === 'rtl' || own === 'ltr') return own;
+    return this.ownerDocument.defaultView?.getComputedStyle(this).direction === 'rtl'
+      ? 'rtl'
+      : 'ltr';
   }
 }

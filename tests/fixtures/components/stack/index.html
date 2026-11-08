@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stack verification</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Stack verification</h1>
+      <div id="sizer">
+        <tp-stack id="stack" direction='{"xs":"column","sm":"row"}' gap='{"xs":1,"sm":2}'
+          ><tp-button>First action</tp-button
+          ><tp-button variant="secondary">Second action</tp-button></tp-stack
+        >
+      </div>
+      <div id="many"></div>
+    </main>
+    <script type="module">
+      import '/src/register.ts';
+      await customElements.whenDefined('tp-stack');
+      window.ready = true;
+    </script>
+  </body>
+</html>

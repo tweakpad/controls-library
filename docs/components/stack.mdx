@@ -1,0 +1,98 @@
+---
+title: Stack
+description: Arrange content in a row or column with themed spacing, alignment and wrapping.
+tag: tp-stack
+---
+
+<Preview
+  title="Stack"
+  code={`<tp-stack gap="4">
+  <tp-button>First action</tp-button>
+  <tp-button variant="secondary">Second action</tp-button>
+</tp-stack>`}
+/>
+
+## Usage
+
+### Horizontal layout
+
+<Preview
+  title="Horizontal layout"
+  align="stretch"
+  code={`<tp-stack direction="row" gap="4" align="center" justify="space-between" wrap="wrap">
+  <tp-button>First action</tp-button>
+  <tp-button variant="secondary">Second action</tp-button>
+</tp-stack>`}
+/>
+
+### Responsive layout
+
+Responsive values follow the Stack's available inline size. The minimum sizes are `xs: 0`, `sm: 30rem`, `md: 48rem`, `lg: 64rem` and `xl: 80rem`. A value continues at larger sizes until another entry replaces it. Below the first entry, the property's default applies.
+
+<Preview
+  title="Responsive layout"
+  align="stretch"
+  code={`<tp-stack direction='{"xs":"column","sm":"row"}' gap='{"xs":1,"sm":2}' wrap="wrap">
+  <tp-button>First action</tp-button>
+  <tp-button variant="secondary">Second action</tp-button>
+</tp-stack>`}
+/>
+
+JavaScript properties accept objects directly. Replace an object to update its configuration.
+
+<Code
+  code={`const stack = document.querySelector('tp-stack');
+stack.direction = { xs: 'column', sm: 'row' };
+stack.gap = { xs: 1, sm: 2 };`}
+/>
+
+### Alignment and wrapping
+
+<Preview
+  title="Wrapping actions"
+  align="stretch"
+  code={`<tp-stack direction="row" gap="2" align="center" justify="end" wrap="wrap">
+  <tp-button>Save changes</tp-button>
+  <tp-button variant="secondary">Save a copy</tp-button>
+  <tp-button variant="secondary">Export selection</tp-button>
+</tp-stack>`}
+/>
+
+### Nested layouts
+
+<Preview
+  title="Nested layouts"
+  code={`<tp-stack gap="4">
+  <strong>Project actions</strong>
+  <tp-stack direction="row" gap="2" wrap="wrap">
+    <tp-button>Create project</tp-button>
+    <tp-button variant="secondary">Import project</tp-button>
+  </tp-stack>
+</tp-stack>`}
+/>
+
+### Spacing and density
+
+Gaps use the spacing scale, including fractional steps, and follow the surrounding theme and density.
+
+<Preview
+  title="Compact spacing"
+  code={`<tp-stack gap="1.5" density="compact">
+  <tp-button>First action</tp-button>
+  <tp-button variant="secondary">Second action</tp-button>
+</tp-stack>`}
+/>
+
+### Separators
+
+<Preview
+  title="Separated sections"
+  code={`<tp-stack gap="4">
+  <strong>Project settings</strong>
+  <tp-separator></tp-separator>
+  <tp-stack direction="row" gap="2" wrap="wrap">
+    <tp-button>Open settings</tp-button>
+    <tp-button variant="secondary">View history</tp-button>
+  </tp-stack>
+</tp-stack>`}
+/>

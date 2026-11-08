@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Type tests of the Vue bindings and of the elements' own tags in Vue templates.
 import { ref } from 'vue';
-import { Button, Checkbox, Dialog, Select } from '../../../src/vue/index.js';
+import { Button, Checkbox, Dialog, Select, Stack } from '../../../src/vue/index.js';
 import { Flow } from '../../../src/vue/widgets/index.js';
 import type {} from '../../../src/vue/elements.js';
 
@@ -12,6 +12,12 @@ const opened = (event: CustomEvent<{ open: boolean }>): boolean => event.detail.
 </script>
 
 <template>
+  <Stack
+    :direction="{ xs: 'column', sm: 'row' }"
+    :gap="{ xs: 1, sm: 2 }"
+    align="center"
+    wrap="wrap"
+  />
   <Checkbox v-model:checked="checked" disabled />
   <Checkbox v-model="checked" @tp-value-change="(event) => event.detail.value.valueOf()" />
   <Select v-model="fruit" :items="[{ value: 'a', label: 'A' }]" @tp-open-change-complete="opened" />

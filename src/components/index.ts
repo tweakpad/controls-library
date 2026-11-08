@@ -88,3 +88,4 @@ export * from './toggle-group/index.js';
 export * from './tooltip/index.js';
 export * from './tree-view/index.js';
 export * from './visually-hidden/index.js';
+export * from './stack/index.js';

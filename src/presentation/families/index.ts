@@ -1,3 +1,5 @@
+import { stackPresentation } from './stack.js';
+export { stackPresentation } from './stack.js';
 import type { PresentationFamily } from '../family.js';
 import { dragDropListPresentation } from './drag-drop-list.js';
 import { accordionPresentation } from './accordion.js';
@@ -228,6 +230,7 @@ export const presentationFamilies: readonly PresentationFamily[] = [
   toastPresentation,
   alertPresentation,
   aspectRatioPresentation,
+  stackPresentation,
   attachmentPresentation,
   badgePresentation,
   bubblePresentation,

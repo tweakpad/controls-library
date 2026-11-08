@@ -9,6 +9,7 @@ import {
   Menu,
   MenuItem,
   Select,
+  Stack,
   TreeView,
 } from '../../../src/react/index.js';
 import type { TpSelect } from '../../../src/components/select/select.js';
@@ -64,3 +65,19 @@ export const misuses: ReactElement[] = [
   // @ts-expect-error unknown props are rejected.
   <Input notAProp />,
 ];
+
+export const responsiveStack = (
+  <Stack
+    direction={{ xs: 'column', sm: 'row' }}
+    gap={{ xs: 1, sm: 2 }}
+    align="center"
+    justify="space-between"
+    wrap="wrap"
+  />
+);
+// @ts-expect-error Layout direction is independent of writing direction.
+export const invalidStackDirection = <Stack direction={{ sm: 'rtl' }} />;
+// @ts-expect-error Gaps select existing spacing tokens.
+export const invalidStackGap = <Stack gap={{ sm: 7 }} />;
+// @ts-expect-error Breakpoint names belong to the fixed scale.
+export const invalidStackBreakpoint = <Stack direction={{ mobile: 'row' }} />;

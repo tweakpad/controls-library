@@ -182,6 +182,7 @@ import type { TpSkeleton } from '../components/skeleton/skeleton.js';
 import type { TpSliderThumb } from '../components/slider/slider-thumb.js';
 import type { TpSlider } from '../components/slider/slider.js';
 import type { TpSpinner } from '../components/spinner/spinner.js';
+import type { TpStack } from '../components/stack/stack.js';
 import type { TpStatusDot } from '../components/status-dot/status-dot.js';
 import type { TpSwitch } from '../components/switch/switch.js';
 import type { TpTableOfContentsItem } from '../components/table-of-contents/table-of-contents-item.js';
@@ -4816,6 +4817,25 @@ type Tags = {
     | 'readOnly'
     | 'required'
     | 'size',
+    { 'tp-diagnostic': CustomEvent<foundationServices.Diagnostic> }
+  >;
+  'tp-stack': Tag<
+    TpStack,
+    | 'align'
+    | 'appearance'
+    | 'density'
+    | 'direction'
+    | 'disabled'
+    | 'gap'
+    | 'invalid'
+    | 'justify'
+    | 'motionPolicy'
+    | 'orientation'
+    | 'partContracts'
+    | 'partPresentation'
+    | 'readOnly'
+    | 'required'
+    | 'wrap',
     { 'tp-diagnostic': CustomEvent<foundationServices.Diagnostic> }
   >;
   'tp-status-dot': Tag<

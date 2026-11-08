@@ -73,6 +73,7 @@ export * from './separator.js';
 export * from './skeleton.js';
 export * from './slider.js';
 export * from './spinner.js';
+export * from './stack.js';
 export * from './status-dot.js';
 export * from './switch.js';
 export * from './table.js';

@@ -334,6 +334,11 @@ const examples = {
       <p>More content</p>
     </tp-scroll-area>
   `,
+  'tp-stack': () =>
+    html`<tp-stack gap="4"
+      ><tp-button>First action</tp-button
+      ><tp-button variant="secondary">Second action</tp-button></tp-stack
+    >`,
   'tp-separator': () => html`
     <div><span>Above</span><tp-separator></tp-separator><span>Below</span></div>
   `,

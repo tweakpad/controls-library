@@ -60,6 +60,22 @@ const press =
 
 export const propRows: PropRow[] = [
   {
+    entry: 'tp-stack',
+    binding: 'Stack',
+    props: {
+      direction: { xs: 'column', sm: 'row' },
+      gap: { xs: 1, sm: 2 },
+      align: 'center',
+      wrap: 'wrap',
+    },
+    children: [child('Button', {}, 'First action')],
+    update: {
+      props: { direction: { xs: 'row', md: 'column' }, gap: 4 },
+      children: [child('Button', {}, 'Updated action')],
+    },
+    text: ['First action', 'Updated action'],
+  },
+  {
     entry: 'tp-copy-button',
     binding: 'CopyButton',
     props: { value: 'kb_live_7d21', label: 'Copy access key', showLabel: true },
