@@ -115,9 +115,10 @@ function general(host: SettingsHost) {
       ></tp-slider
     ></tp-field>
     <div slot="actions">
+      <tp-button type="reset" variant="outline">Reset</tp-button>
       <tp-button type="submit" .loadingPosition=${saving ? 'leading' : null} ?disabled=${saving}
         >${saving ? 'Saving…' : 'Save changes'}</tp-button
-      ><tp-button type="reset" variant="outline">Reset</tp-button>
+      >
     </div>
   </tp-form>`;
 }

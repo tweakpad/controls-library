@@ -37,7 +37,7 @@ form.addEventListener('tp-reset', () => { output.textContent = ''; });`}
 
 `tp-form` renders a native `form` in light DOM and coordinates the Fields and form-associated controls inside it. Submitting validates every Field, focuses the first invalid control and blocks submission until the errors are fixed. A valid submission calls `onFormSubmit` with the named values and prevents navigation; without a callback the native submission proceeds. The Form does not send anything itself, so transport and persistence stay in your code.
 
-Put submit and reset Buttons in an element with `slot="actions"` to get the footer layout. Native attributes such as `action`, `method` and `name` are forwarded to the inner form.
+Put submit and reset Buttons in an element with `slot="actions"` to get the footer layout. Actions align to the logical end; place secondary actions before the completing action. Native attributes such as `action`, `method` and `name` are forwarded to the inner form.
 
 `no-autofill` opts every contained text-entry control (Input, Text area, Select and its query, One-time code field) out of browser and password-manager autofill. Use it for forms about other people or for app data, not for the user's own sign-in, address or payment details.
 

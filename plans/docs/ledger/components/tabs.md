@@ -16,3 +16,4 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+| preview | Controlled with a veto | Approved shared footer contract: remove local layout wrapper and place Discard before Save using native footer slots. |

@@ -13,3 +13,4 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+| prose | `header`, `description` and `action` make up the header | Approved shared footer contract changes default alignment; document logical end and secondary-first ordering. |

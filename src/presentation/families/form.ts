@@ -1,5 +1,6 @@
 import type { ComponentDefinition } from '../definition.js';
 import { definePresentation } from '../family.js';
+import { surfaceFooterLayout } from '../recipes/shared/surface.js';
 import { formAppearance } from '../recipes/form.js';
 
 const definition: ComponentDefinition = {
@@ -51,11 +52,7 @@ export const formPresentation = definePresentation({
     ],
     'form-actions': [
       {
-        declarations: {
-          display: 'flex',
-          'flex-wrap': 'wrap',
-          'align-items': 'center',
-        },
+        declarations: surfaceFooterLayout,
       },
     ],
   },

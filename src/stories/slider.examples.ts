@@ -107,7 +107,7 @@ export const sliderExamples = [
   ),
   example(
     'Field and form submission',
-    '<tp-form><tp-field label="Daily budget" description="Choose between 10 and 100 units."><tp-slider name="budget" minimum="10" maximum="100" default-value="40" required data-output></tp-slider></tp-field><div slot="actions"><tp-button type="submit">Save budget</tp-button><tp-button type="reset" variant="outline">Reset</tp-button></div><output data-status aria-live="polite" style="font:var(--tp-text-sm) var(--tp-font-mono)"></output></tp-form>',
+    '<tp-form><tp-field label="Daily budget" description="Choose between 10 and 100 units."><tp-slider name="budget" minimum="10" maximum="100" default-value="40" required data-output></tp-slider></tp-field><div slot="actions"><tp-button type="reset" variant="outline">Reset</tp-button><tp-button type="submit">Save budget</tp-button></div><output data-status aria-live="polite" style="font:var(--tp-text-sm) var(--tp-font-mono)"></output></tp-form>',
     'Field supplies the accessible label and description. Submit reports the numeric form value; Reset restores the uncontrolled default.',
   ),
   example(

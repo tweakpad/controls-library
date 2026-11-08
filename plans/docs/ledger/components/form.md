@@ -22,3 +22,5 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| prose | Put submit and reset Buttons in an element with | Approved shared action-row layout and ordering contract. |

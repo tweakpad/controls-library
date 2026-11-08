@@ -1,5 +1,6 @@
 import { css, html } from 'lit';
 import { TpElement } from '../../foundation/element.js';
+import { surfaceFooterStyles } from '../shared/surface-footer.js';
 import { elevatedProperty } from '../shared/elevation.js';
 import { cardPresentation } from '../../presentation/families/card.js';
 
@@ -11,7 +12,7 @@ import { cardPresentation } from '../../presentation/families/card.js';
  * @slot description - Supporting text under the title.
  * @slot action - A control at the end of the header, such as a Button that manages the card's subject.
  * @slot - The content.
- * @slot footer - Actions or metadata after the content, in reading order from the start.
+ * @slot footer - Actions or metadata after the content, in reading order, aligned to the logical end.
  */
 export class TpCard extends TpElement {
   static tagName = 'tp-card';
@@ -25,6 +26,7 @@ export class TpCard extends TpElement {
   };
   static override styles = [
     TpElement.styles,
+    surfaceFooterStyles,
     css`
       :host {
         display: block;
@@ -66,13 +68,6 @@ export class TpCard extends TpElement {
 
       .card > .content {
         display: grid;
-      }
-
-      /* Footer: a centered flex row, content from the logical start. */
-      .card > footer {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
       }
 
       .card > [hidden] {
@@ -135,7 +130,7 @@ export class TpCard extends TpElement {
       <div class="content" part="card-content" hidden>
         <slot @slotchange=${this.#syncSection}></slot>
       </div>
-      <footer part="card-footer" hidden>
+      <footer class="footer" part="card-footer" hidden>
         <slot name="footer" @slotchange=${this.#syncSection}></slot>
       </footer>
     </article>`;

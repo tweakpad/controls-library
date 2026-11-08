@@ -23,6 +23,14 @@ export const surfaceFadeAppearance: readonly PresentationRule[] = [
   rule({ transition: 'none' }, '&[data-tp-motion-driven]'),
 ];
 
+/** Structural action-row defaults shared by surface footers and Form actions. */
+export const surfaceFooterLayout = {
+  display: 'flex',
+  'flex-wrap': 'wrap',
+  'align-items': 'center',
+  'justify-content': 'flex-end',
+} as const;
+
 // Card and dialog-family footers share section paint; each owner supplies layout.
 export const sectionFooterAppearance: readonly PresentationRule[] = [
   rule({

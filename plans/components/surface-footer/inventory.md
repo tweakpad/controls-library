@@ -1,0 +1,83 @@
+# Surface footer use-case inventory
+
+- 0: components/alert-dialog.mdx — Alert dialog
+- 1: components/alert-dialog.mdx — Asynchronous confirm
+- 2: components/alert-dialog.mdx — Media and body
+- 3: components/alert-dialog.mdx — Initial focus on Confirm
+- 4: components/attachment.mdx — Preview trigger, download and retry
+- 5: components/breadcrumb.mdx — Menu on wide screens, drawer on narrow ones
+- 6: components/button-group.mdx — Select and native select
+- 7: components/calendar.mdx — Calendar
+- 8: components/calendar.mdx — Range
+- 9: components/calendar.mdx — Multiple
+- 10: components/calendar.mdx — Bookable dates
+- 11: components/calendar.mdx — Nightly prices and booked dates
+- 12: components/calendar.mdx — Dropdown caption
+- 13: components/calendar.mdx — Week numbers
+- 14: components/calendar.mdx — Quick picks
+- 15: components/calendar.mdx — Date with start and end times
+- 16: components/calendar.mdx — French and Brazilian Portuguese
+- 17: components/calendar.mdx — Arabic, right to left
+- 18: components/calendar.mdx — Value change
+- 19: components/card.mdx — Card
+- 20: components/card.mdx — Header action
+- 21: components/card.mdx — Content only
+- 22: components/card.mdx — Surface options
+- 23: components/card.mdx — Elevated
+- 24: components/card.mdx — Small
+- 25: components/carousel.mdx — Items per view
+- 26: components/carousel.mdx — Vertical
+- 27: components/description-list.mdx — Record details
+- 28: components/dialog.mdx — Dialog
+- 29: components/dialog.mdx — Footer and close
+- 30: components/dialog.mdx — Non-modal
+- 31: components/dialog.mdx — Container modality
+- 32: components/dialog.mdx — Blurred backdrop
+- 33: components/dialog.mdx — Registered trigger
+- 34: components/dialog.mdx — Veto closing
+- 35: components/drawer.mdx — Drawer
+- 36: components/drawer.mdx — Edges
+- 37: components/drawer.mdx — Blurred backdrop
+- 38: components/drawer.mdx — Snap points
+- 39: components/drawer.mdx — Nested
+- 40: components/drawer.mdx — Non-dismissible
+- 41: components/empty-state.mdx — In a card
+- 42: components/file-upload.mdx — Field and form
+- 43: components/form.mdx — Form
+- 44: components/form.mdx — Notification settings
+- 45: components/form.mdx — Validate on blur
+- 46: components/form.mdx — External errors
+- 47: components/form.mdx — Matching passwords
+- 48: components/form.mdx — Wait for async checks
+- 49: components/form.mdx — Repeated emails
+- 50: components/form.mdx — Disable while invalid
+- 51: components/image.mdx — Card hover
+- 52: components/marker.mdx — Accordion label and drawer
+- 53: components/one-time-code-field.mdx — One-time code field
+- 54: components/qr-code.mdx — Connect a device
+- 55: components/questionnaire.mdx — Clarification dialog
+- 56: components/scroll-area.mdx — Horizontal
+- 57: components/select.mdx — Select in a dialog
+- 58: components/skeleton.mdx — Card
+- 59: components/slider.mdx — Field and form
+- 60: components/switch.mdx — Form value
+- 61: components/tabs.mdx — Tabs
+- 62: components/tabs.mdx — Controlled with a veto
+- 63: components/text-area.mdx — Form
+- 64: components/theme-switcher.mdx — Theme switcher
+- 65: components/theme-switcher.mdx — Variants
+- 66: components/theme-switcher.mdx — Small, defaulting to dark
+- 67: components/theme-switcher.mdx — Explicit choices only
+- 68: components/theme-switcher.mdx — Color scheme store
+- 69: widgets/easing-editor.mdx — Compact in a dialog
+- 70: motion/surface/glow-border.mdx — Glow border
+- 71: motion/surface/glow-border.mdx — Controls and fields
+- 72: motion/surface/glow-border.mdx — Comets
+- 73: motion/surface/glow-border.mdx — Sweep, pulse and glint
+- 74: motion/surface/glow-border.mdx — Hover
+- 75: motion/surface/glow-border.mdx — Lingering light
+- 76: motion/surface/glow-border.mdx — Custom colors
+- 77: motion/surface/glow-border.mdx — Lit by an element
+- 78: motion/surface/segment-border.mdx — Traced in
+
+Additional consumers: Card/Tabs stories; workspace task, invite and settings forms; file/metric metadata footers; Flow delete confirmation; Media Player error/retry. Navigation, Calendar navigation, Message status and composer controls are not surface action footers.

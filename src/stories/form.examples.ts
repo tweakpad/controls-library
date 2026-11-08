@@ -27,8 +27,8 @@ export function renderFormExample(args: FormArgs = formDefaults) {
       ><tp-input name="name" required></tp-input
     ></tp-field>
     <div slot="actions">
-      <tp-button type="submit" name="intent" value="save">Save</tp-button>
       <tp-button type="reset" variant="outline">Reset</tp-button>
+      <tp-button type="submit" name="intent" value="save">Save</tp-button>
     </div>
     <output aria-live="polite"></output>
   </tp-form>`;

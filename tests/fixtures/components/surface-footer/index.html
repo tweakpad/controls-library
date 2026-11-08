@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      body {
+        margin: 32px;
+        background: var(--tp-background);
+        color: var(--tp-foreground);
+      }
+      main {
+        max-width: 700px;
+      }
+      tp-card {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <main></main>
+    <script type="module">
+      await import('/src/register.ts');
+      await import('/src/register/widgets.ts');
+      const cases = await (
+        await fetch('/tmp/component-verification/surface-footer/cases.json')
+      ).json();
+      const index = Number(new URLSearchParams(location.search).get('case') || 0);
+      const entry = cases[index];
+      document.querySelector('main').innerHTML = entry.code;
+      if (new URLSearchParams(location.search).has('interactive') && entry.script) {
+        const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+        await new AsyncFunction(entry.script)();
+      }
+      for (const e of document.querySelectorAll('tp-dialog,tp-alert-dialog,tp-drawer'))
+        e.open = true;
+      await new Promise((r) => setTimeout(r, 250));
+      const deep = (root) =>
+        [...root.querySelectorAll('*')].flatMap((e) => [
+          e,
+          ...(e.shadowRoot ? deep(e.shadowRoot) : []),
+        ]);
+      window.footerResult = () => ({
+        index,
+        file: entry.file,
+        title: entry.title,
+        footers: deep(document)
+          .filter(
+            (e) =>
+              e.matches(
+                '[part~="card-footer"],[part~="dialog-footer"],[part~="alert-dialog-actions"],[part~="drawer-footer"],form > [slot="actions"]',
+              ) && e.getBoundingClientRect().width > 0,
+          )
+          .map((e) => {
+            const style = getComputedStyle(e);
+            const items = [...e.children].flatMap((n) =>
+              n.localName === 'slot' ? n.assignedElements({ flatten: true }) : [n],
+            );
+            const actions = items
+              .flatMap((n) =>
+                n.localName === 'tp-button' ? [n] : [...n.querySelectorAll('tp-button')],
+              )
+              .filter((b) => b.getBoundingClientRect().width > 0);
+            const box = e.getBoundingClientRect();
+            const end =
+              style.direction === 'rtl'
+                ? box.left + parseFloat(style.paddingLeft)
+                : box.right - parseFloat(style.paddingRight);
+            const edge = actions.length
+              ? style.direction === 'rtl'
+                ? Math.min(...actions.map((b) => b.getBoundingClientRect().left))
+                : Math.max(...actions.map((b) => b.getBoundingClientRect().right))
+              : null;
+            return {
+              part: e.getAttribute('part') || 'form-actions',
+              justify: style.justifyContent,
+              direction: style.direction,
+              flexDirection: style.flexDirection,
+              actions: actions.map((b) => b.textContent.trim()),
+              edgeError: edge === null ? null : Math.abs(end - edge),
+              pass:
+                style.justifyContent === 'flex-end' &&
+                style.flexDirection === 'row' &&
+                (edge === null || Math.abs(end - edge) < 2),
+            };
+          }),
+      });
+      document.documentElement.dataset.ready = '';
+    </script>
+  </body>
+</html>

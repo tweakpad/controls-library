@@ -46,3 +46,5 @@
 | --- | --- | --- |
 
 | prose | With `editable-value`, the value of an inline slider can also be typed. | Approved contract 74703da7: no Copy action; editable-value composes a persistent adjacent Input, leaving the bar draggable. |
+
+| preview | Field and form | Approved shared action-row contract: secondary Reset/Discard precedes the completing action. |

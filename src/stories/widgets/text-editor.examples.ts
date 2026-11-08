@@ -146,8 +146,8 @@ const FORM_MARKUP = `<tp-form>
     <tp-text-editor name="notes" format="markdown" default-value="Low tide at 07:40. **Pools 4 to 7** need a recount."></tp-text-editor>
   </tp-field>
   <div slot="actions">
-    <tp-button type="submit">Save</tp-button>
     <tp-button type="reset" variant="outline">Reset</tp-button>
+    <tp-button type="submit">Save</tp-button>
   </div>
 </tp-form>
 <tp-code-block language="markdown" label="Submitted" hidden></tp-code-block>`;

@@ -89,22 +89,5 @@ export const dialogStyles = css`
     margin: 0;
   }
 
-  .footer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: end;
-  }
-
-  .footer slot {
-    display: contents;
-  }
-
   ${hiddenStyles}
-
-  @media (width < 32rem) {
-    .footer {
-      flex-direction: column-reverse;
-      align-items: stretch;
-    }
-  }
 `;

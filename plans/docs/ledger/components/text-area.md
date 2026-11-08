@@ -14,3 +14,5 @@
 
 | Kind | A text | Reason |
 | --- | --- | --- |
+
+| preview | Form | Approved shared action-row contract: secondary Reset/Discard precedes the completing action. |

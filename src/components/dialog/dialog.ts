@@ -1,3 +1,4 @@
+import { surfaceFooterStyles } from '../shared/surface-footer.js';
 import { Scrollable } from '../../foundation/scrollable.js';
 import { NativeScrollEdges } from '../shared/scroll-edges.js';
 import { SURFACE_HOST } from '../../foundation/surface-brand.js';
@@ -151,7 +152,7 @@ export class TpDialog extends Scrollable(TpElement) {
     triggerIdentifier: { attribute: 'trigger-identifier' },
     defaultTriggerIdentifier: { attribute: 'default-trigger-identifier' },
   };
-  static override styles: CSSResultGroup = [TpElement.styles, dialogStyles];
+  static override styles: CSSResultGroup = [TpElement.styles, dialogStyles, surfaceFooterStyles];
   /** Opens the dialog when it first connects, when `open` is not set. */
   defaultOpen = false;
   /** Keeps the content in the document after closing, hidden. */

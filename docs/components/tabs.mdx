@@ -170,10 +170,8 @@ document.querySelector('#tabs-guard-discard').addEventListener('click', () => {
         <tp-input id="tabs-guard-name" name="display-name" default-value="Maya Chen"></tp-input>
       </tp-field>
       <p id="tabs-guard-status" role="status" style="margin:0;color:var(--tp-muted-foreground);font-size:var(--tp-text-sm)"></p>
-      <div slot="footer" style="display:flex;gap:var(--tp-space-2)">
-        <tp-button id="tabs-guard-save">Save</tp-button>
-        <tp-button id="tabs-guard-discard" variant="ghost">Discard</tp-button>
-      </div>
+      <tp-button slot="footer" id="tabs-guard-discard" variant="ghost">Discard</tp-button>
+      <tp-button slot="footer" id="tabs-guard-save">Save</tp-button>
     </tp-card>
   </section>
   <section slot="panel" value="notifications">

@@ -519,8 +519,8 @@ export class CatalogWorkspace extends LitElement implements WorkspaceHost {
           ></tp-calendar></tp-popover
       ></tp-field>
       <div slot="actions">
-        <tp-button type="submit">${this.editing ? 'Save task' : 'Create task'}</tp-button
-        ><tp-button variant="outline" @click=${() => this.open('')}>Cancel</tp-button>
+        <tp-button variant="outline" @click=${() => this.open('')}>Cancel</tp-button>
+        <tp-button type="submit">${this.editing ? 'Save task' : 'Create task'}</tp-button>
       </div>
     </tp-form>`;
   }
@@ -587,8 +587,8 @@ export class CatalogWorkspace extends LitElement implements WorkspaceHost {
             ></tp-select
           ></tp-field>
           <div slot="actions">
-            <tp-button type="submit">Send invite</tp-button
-            ><tp-button variant="outline" @click=${() => this.open('')}>Cancel</tp-button>
+            <tp-button variant="outline" @click=${() => this.open('')}>Cancel</tp-button>
+            <tp-button type="submit">Send invite</tp-button>
           </div>
         </tp-form>
       </tp-dialog>
