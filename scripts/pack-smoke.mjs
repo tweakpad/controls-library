@@ -15,6 +15,7 @@ import { tmpdir } from 'node:os';
 import { join, posix, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { textEditorManifestProblems } from './pack-smoke-manifest.mjs';
+import { hasTagLiteral } from './pack-smoke-bundle.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 // The work folder is a fresh one outside the library root: a dev server that watches the root
@@ -512,8 +513,9 @@ const iconOnly = bundle('icon-only', 'icon-only.js');
 // One React binding from the barrel ships its element, not the other components'.
 writeFileSync(join(consumer, 'react-one.js'), "export { Switch } from '@tweakpad/ui/react';\n");
 const reactOne = bundle('react-one', 'react-one.js');
-if (!reactOne.includes('tp-switch')) fail('the single React binding bundle is missing tp-switch');
-if (reactOne.includes('tp-select') || reactOne.includes('tp-dialog'))
+if (!hasTagLiteral(reactOne, 'tp-switch'))
+  fail('the single React binding bundle is missing tp-switch');
+if (hasTagLiteral(reactOne, 'tp-select') || hasTagLiteral(reactOne, 'tp-dialog'))
   fail('the single React binding bundle includes unrelated components');
 if (!iconOnly.includes('M12 5v14M5 12h14')) fail('the icon-only bundle is missing the plus icon');
 if (iconOnly.includes('tp-button')) fail('the icon-only bundle includes unrelated components');
