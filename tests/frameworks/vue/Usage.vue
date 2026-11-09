@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Type tests of the Vue bindings and of the elements' own tags in Vue templates.
 import { ref } from 'vue';
-import { Button, Checkbox, Dialog, Select, Stack } from '../../../src/vue/index.js';
+import { Button, Checkbox, Dialog, Select, Stack, Tabs } from '../../../src/vue/index.js';
 import { Flow } from '../../../src/vue/widgets/index.js';
 import type {} from '../../../src/vue/elements.js';
 
@@ -12,6 +12,9 @@ const opened = (event: CustomEvent<{ open: boolean }>): boolean => event.detail.
 </script>
 
 <template>
+  <Tabs :full-width="true" label="Editor" />
+  <!-- @vue-expect-error fullWidth is a Boolean layout option. -->
+  <Tabs :full-width="'yes'" />
   <Stack
     :direction="{ xs: 'column', sm: 'row' }"
     :gap="{ xs: 1, sm: 2 }"

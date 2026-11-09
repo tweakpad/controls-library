@@ -18,6 +18,7 @@ export const Tabs = /*#__PURE__*/ createBinding(TpTabs, 'Tabs', {
   | 'defaultValue'
   | 'density'
   | 'disabled'
+  | 'fullWidth'
   | 'invalid'
   | 'label'
   | 'loopFocus'

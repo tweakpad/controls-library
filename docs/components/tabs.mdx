@@ -217,3 +217,21 @@ An explicit disabled `defaultValue` is honored initially. If a selected tab is r
 ### Panel mounting
 
 Inactive panels are detached from the DOM after their exit and restored on activation, so heavy content costs nothing while hidden. Add `keep-mounted` to a panel that must stay in the document, for example one holding form fields that still submit, and it is kept hidden and inert instead. Custom elements inside them receive disconnect/connect callbacks. The public `panels` getter includes retained and detached nodes. Keep application references to panels that need updating while detached; a host `querySelector` cannot find them. Remove a panel by calling `remove()` on that node, including while detached.
+
+### Full width
+
+Use a full-width strip to align navigation with the controls below it and give short tab labels equal click targets. Longer labels keep their space and scroll when the strip is narrow.
+
+<Preview
+  width="3"
+  title="Full width"
+  align="stretch"
+  code={`<tp-tabs full-width default-value="scene" label="Editor">
+  <button slot="tab" value="scene">Scene</button>
+  <button slot="tab" value="style">Style</button>
+  <button slot="tab" value="stats">Stats</button>
+  <p slot="panel" value="scene">Objects and lighting in the current scene.</p>
+  <p slot="panel" value="style">Colors, materials and effects.</p>
+  <p slot="panel" value="stats">Frame time and memory usage.</p>
+</tp-tabs>`}
+/>

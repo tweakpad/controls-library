@@ -25,3 +25,9 @@
 | preview | Vertical | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
 | preview | Automatic activation | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
 | preview | Disabled | User-authorized width cleanup: remove incidental framing and use preview stretch; retain capability dimensions. |
+
+## Additions after merge
+
+| Item | Reason | Target |
+| --- | --- | --- |
+| Full width section and preview | User-requested #33: demonstrate the supported layout option with the issue's Scene/Style/Stats use case. Existing sections and examples preserved. | ### Full width |

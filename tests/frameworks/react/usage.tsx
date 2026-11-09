@@ -10,6 +10,7 @@ import {
   MenuItem,
   Select,
   Stack,
+  Tabs,
   TreeView,
 } from '../../../src/react/index.js';
 import type { TpSelect } from '../../../src/components/select/select.js';
@@ -81,3 +82,7 @@ export const invalidStackDirection = <Stack direction={{ sm: 'rtl' }} />;
 export const invalidStackGap = <Stack gap={{ sm: 7 }} />;
 // @ts-expect-error Breakpoint names belong to the fixed scale.
 export const invalidStackBreakpoint = <Stack direction={{ mobile: 'row' }} />;
+
+export const fullWidthTabs = <Tabs fullWidth label="Editor" />;
+// @ts-expect-error fullWidth is a Boolean layout option.
+export const invalidFullWidthTabs = <Tabs fullWidth="yes" />;

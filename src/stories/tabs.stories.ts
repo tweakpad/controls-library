@@ -12,6 +12,7 @@ interface Args {
   activation: 'manual' | 'automatic';
   loopFocus: boolean;
   disabled: boolean;
+  fullWidth: boolean;
   renderBeforeActivation: boolean;
 }
 const meta: Meta<Args> = {
@@ -26,6 +27,7 @@ const meta: Meta<Args> = {
     activation: 'manual',
     loopFocus: true,
     disabled: false,
+    fullWidth: false,
     renderBeforeActivation: false,
   },
   argTypes: {
@@ -40,6 +42,7 @@ const meta: Meta<Args> = {
     activation: { control: 'select', options: ['manual', 'automatic'] },
     loopFocus: { control: 'boolean' },
     disabled: { control: 'boolean' },
+    fullWidth: { control: 'boolean' },
     renderBeforeActivation: {
       control: 'boolean',
       description: 'Allow an optional indicator to render before a measurable selection exists.',
@@ -55,6 +58,7 @@ const meta: Meta<Args> = {
       .activation=${args.activation}
       .loopFocus=${args.loopFocus}
       .disabled=${args.disabled}
+      .fullWidth=${args.fullWidth}
       .renderBeforeActivation=${args.renderBeforeActivation}
       @tp-value-change=${(event: TpValueChangeEvent<string>) => {
         if (event.target instanceof HTMLElement && event.target.localName === 'tp-tabs')

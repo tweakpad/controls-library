@@ -1,6 +1,9 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tabs verification</title><link rel="stylesheet" href="/src/styles.css"><style>
 body{margin:0;background:var(--tp-background);color:var(--tp-foreground);font-family:var(--tp-font-sans)}main{padding:24px;max-width:850px;margin:auto;display:grid;gap:24px}h1{font-size:1.25rem;margin:0}.narrow{width:280px;max-width:100%}.row{display:flex;gap:24px}.motion::part(tabs-content){transition:opacity 100ms}.motion [slot=panel]{transition:opacity 100ms}.motion [data-ending-style]{opacity:0}.motion [data-starting-style]{opacity:0}
 </style></head><body><main><h1>Tabs verification</h1>
+<tp-tabs id="full-width" full-width label="Editor" style="inline-size:269px;max-inline-size:100%">
+<button slot="tab" value="scene">Scene</button><button slot="tab" value="style">Style</button><button slot="tab" value="stats">Stats</button>
+<p slot="panel" value="scene">Scene content</p><p slot="panel" value="style">Style content</p><p slot="panel" value="stats">Stats content</p></tp-tabs>
 <tp-tabs id="basic" default-value="overview" label="Project">
 <button slot="tab" value="overview">Overview</button><button slot="tab" value="activity"><tp-icon size="1rem"></tp-icon>Activity <tp-badge variant="secondary">3</tp-badge></button><button slot="tab" value="locked" aria-disabled="true">Locked</button><button slot="tab" value="settings">Settings</button>
 <span slot="indicator"></span>

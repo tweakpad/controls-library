@@ -94,6 +94,7 @@ export class TpTabs extends Scrollable(TpElement) {
     loopFocus: { type: Boolean, attribute: 'loop-focus' },
     renderBeforeActivation: { type: Boolean, attribute: 'render-before-activation' },
     variant: { type: String, reflect: true },
+    fullWidth: { type: Boolean, attribute: 'full-width', reflect: true },
     label: { type: String },
   };
   static override styles = [
@@ -133,6 +134,15 @@ export class TpTabs extends Scrollable(TpElement) {
         flex-direction: column;
         align-items: stretch;
         max-inline-size: 50%;
+      }
+
+      :host([full-width]:not([orientation='vertical'])) .list {
+        inline-size: 100%;
+      }
+
+      :host([full-width]:not([orientation='vertical'])) ::slotted([slot='tab']) {
+        flex: 1 0 0;
+        min-inline-size: max-content;
       }
 
       /* Inset edges, so each side of the indicator can move on its own. */
@@ -218,6 +228,11 @@ export class TpTabs extends Scrollable(TpElement) {
   activation: 'automatic' | 'manual' = 'manual';
   /** Whether arrow keys wrap from the last tab to the first; set the property to `false` to stop at the ends. */
   loopFocus = true;
+  /**
+   * Fills the horizontal list and gives tabs equal shares of the available width. Labels retain
+   * their intrinsic minimum width and scroll when space is too small. Has no effect vertically.
+   */
+  fullWidth = false;
   /** Shows the indicator before any tab is selected and measured. */
   renderBeforeActivation = false;
   /** `enclosed` for tabs that switch a contained surface, `underline` for lighter page-level navigation. */

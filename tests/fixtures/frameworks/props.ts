@@ -60,6 +60,18 @@ const press =
 
 export const propRows: PropRow[] = [
   {
+    entry: 'tp-tabs',
+    binding: 'Tabs',
+    props: { fullWidth: true, label: 'Editor layout' },
+    update: { props: { fullWidth: false } },
+    children: [
+      tag('button', { slot: 'tab', value: 'scene' }, 'Scene'),
+      tag('button', { slot: 'tab', value: 'stats' }, 'Stats'),
+      tag('p', { slot: 'panel', value: 'scene' }, 'Scene content'),
+      tag('p', { slot: 'panel', value: 'stats' }, 'Stats content'),
+    ],
+  },
+  {
     entry: 'tp-stack',
     binding: 'Stack',
     props: {

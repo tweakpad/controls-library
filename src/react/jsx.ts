@@ -5105,6 +5105,7 @@ type Tags = {
     | 'defaultValue'
     | 'density'
     | 'disabled'
+    | 'fullWidth'
     | 'invalid'
     | 'label'
     | 'loopFocus'

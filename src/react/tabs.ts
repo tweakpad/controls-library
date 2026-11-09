@@ -15,6 +15,7 @@ export type TabsProps = ElementProps<
   | 'defaultValue'
   | 'density'
   | 'disabled'
+  | 'fullWidth'
   | 'invalid'
   | 'label'
   | 'loopFocus'
