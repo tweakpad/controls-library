@@ -10,6 +10,11 @@ const iconEntries = Object.fromEntries(
 );
 
 export default defineConfig({
+  optimizeDeps: {
+    // The git-ignored reference checkouts under `external/` hold their own HTML and tsconfig
+    // files; scanning them fails the dependency scan, so only the library's pages are entries.
+    entries: ['**/*.html', '!external/**', '!tmp/**', '!storybook-static/**'],
+  },
   plugins: [
     {
       name: 'bundled-source-licenses',

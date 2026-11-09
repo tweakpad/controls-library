@@ -75,6 +75,9 @@
 | V-05 | C-01; layout | positions before and after definition | no movement from the element | only the fixture's own Hide button grows | DevTools evaluate | passed | Observed values recorded in Actual result |
 | V-06 | C-08; customization | heavier outline case | thicker, slower outline | 2.4 s reveal, 0.05em stroke | DevTools evaluate | passed | Observed values recorded in Actual result |
 | V-07 | C-07, C-10; accessibility | accessibility tree, reduced motion | text once; filled at once | aria-hidden on every outline; accessibility tree has each text once, link once; with `--tp-motion-scale: 0` hide and reveal are instant and both events fire | DevTools snapshot (`a11y.txt`) and evaluate | passed | Automated axe analysis not run; screen reader not tested |
+| V-08 | C-01, C-08; behavior (#39) | `?outline`, settle; `--tp-mo-text-stroke-length: 2em`; `--tp-motion-scale: 0` | no dash at rest | `strokeDasharray` `none` at rest in every case; outlines whole | DevTools evaluate `sample()` and screenshot | passed | Observed values recorded in Actual result |
+| V-09 | C-05; behavior and visual (#39) | `?outline&slow`, hide `#hold`, then reveal | nothing left once hidden; no jump at the end of the draw | hidden: dash `320px, 40000px` at offset 320px, nothing on screen; at offset 0.15px before settling every outline already whole | DevTools evaluate, `issue-39/fixed-dash-hidden.png`, `issue-39/fixed-dash-late-draw.png` | passed | Fixed 8em dash: a contour longer than 8em would complete when the reveal settles |
+| V-10 | C-01; WebKit (#39) | Safari and iOS Safari, fixture "Whole outlines" steps 1 and 2 | whole at rest, nothing left when hidden | not run | Chrome DevTools MCP drives Chrome only | blocked | WebKit draws text dashes shorter (WebKit bug 212972), so the draw may show gaps there until it settles |
 
 ## Early integration checkpoint
 
@@ -100,4 +103,4 @@
 
 ## Completion / handoff
 
-Pending: automated axe analysis (Gate 5). Evidence is local only, under `tmp/component-verification/`.
+Pending: automated axe analysis (Gate 5); WebKit check for #39 (V-10). #39 drops the dash at rest and puts a 1000em gap after the 8em dash; live text has no measurable outline length, so the dash stays a fixed, overridable length. Spec Blocks was unreachable (HTTP 502), so the `--tp-mo-text-stroke-length` default (now 8em) is not yet reconciled with the live definition.

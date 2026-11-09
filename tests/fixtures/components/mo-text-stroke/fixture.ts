@@ -3,6 +3,18 @@ const built = params.has('built');
 if (built)
   document.querySelector<HTMLLinkElement>('link[rel=stylesheet]')!.href = '/dist/styles.css';
 
+// `?outline` keeps only the outlines (no fill) visible at all times; `?slow` plays reveals 10×
+// slower. Both are for checking by eye on devices without DevTools (#39).
+if (params.has('outline') || params.has('slow')) {
+  const view = document.createElement('style');
+  view.textContent = `${
+    params.has('outline')
+      ? 'tp-mo-text-stroke [data-tp-outline] { opacity: 1 !important; } tp-mo-text-stroke [data-tp-animate] { -webkit-text-fill-color: transparent !important; }'
+      : ''
+  } ${params.has('slow') ? ':root { --tp-motion-scale: 10; }' : ''}`;
+  document.head.append(view);
+}
+
 // Layout shifts are recorded from the start, before any element is defined.
 const shifts: { value: number; sources: string[] }[] = [];
 new PerformanceObserver((list) => {
@@ -61,6 +73,7 @@ const sample = (id: string) =>
       fill: getComputedStyle(piece).webkitTextFillColor,
       outline: outline ? getComputedStyle(outline).opacity : null,
       dash: text ? getComputedStyle(text).strokeDashoffset : null,
+      dasharray: text ? getComputedStyle(text).strokeDasharray : null,
     };
   });
 

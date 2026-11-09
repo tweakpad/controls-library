@@ -25,8 +25,8 @@ export const moTextStrokeRoles = textRevealRoles;
  * @cssprop --tp-mo-text-stroke-duration - Per-piece reveal duration. Default `var(--tp-duration-slow)`.
  * @cssprop --tp-mo-text-stroke-easing - Reveal easing. Default `var(--tp-easing-enter)`.
  * @cssprop --tp-mo-text-stroke-width - Outline width. Default `0.03em`.
- * @cssprop --tp-mo-text-stroke-length - Dash length that draws one glyph outline; longer outlines
- * draw faster. Default `6em`.
+ * @cssprop --tp-mo-text-stroke-length - Dash length that draws one glyph outline; an outline longer
+ * than the dash completes when the reveal settles. Default `8em`.
  */
 export class TpMoTextStroke extends TextRevealElement {
   static tagName = 'tp-mo-text-stroke';

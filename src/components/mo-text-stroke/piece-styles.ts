@@ -4,11 +4,11 @@ import { textDriverCss, textPieceCss } from '../shared/text-reveal-styles.js';
  * Light-tree styles for Text stroke pieces, adopted once per root. Each word or character carries
  * an outline of its own glyphs (an SVG over the piece). The outline draws over the whole duration,
  * the text fills in over its second half and the outline fades out over its last quarter; a hide
- * plays them back. The dash restarts on every glyph.
+ * plays them back. The dash restarts on every glyph contour; a settled outline has no dash.
  */
 export const moTextStrokePieceCss = /* css */ `${textPieceCss('tp-mo-text-stroke')}
 tp-mo-text-stroke {
-  --_tp-tm-stroke-length: var(--tp-mo-text-stroke-length, 6em);
+  --_tp-tm-stroke-length: var(--tp-mo-text-stroke-length, 8em);
 }
 
 tp-mo-text-stroke :is([data-tp-piece='word'], [data-tp-piece='char']) {
@@ -47,10 +47,17 @@ tp-mo-text-stroke [data-tp-outline] {
     stroke-dashoffset var(--_tp-tm-duration) var(--_tp-tm-easing) var(--_tp-tm-stroke-delay);
 }
 
+/* One dash draws a glyph's outline; the gap after it is far longer than any outline, so an undrawn
+   outline never shows a stray piece of the next dash, whatever the glyph. */
 tp-mo-text-stroke [data-tp-outline] text {
-  stroke-dasharray: var(--_tp-tm-stroke-length) var(--_tp-tm-stroke-length);
+  stroke-dasharray: var(--_tp-tm-stroke-length) 1000em;
   stroke-dashoffset: 0;
   transition: inherit;
+}
+
+/* A settled reveal (also reduced or skipped motion) draws the outline without a dash. */
+tp-mo-text-stroke[data-tp-at-rest] [data-tp-outline] text {
+  stroke-dasharray: none;
 }
 
 /* The start state: no fill, the whole outline undrawn. Returning to it is instant. */
