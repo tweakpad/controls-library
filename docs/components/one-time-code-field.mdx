@@ -11,11 +11,20 @@ tag: tp-one-time-code-field
   code={`<tp-card>
   <h3 slot="header" style="margin:0">Verify your login</h3>
   <p slot="description" style="margin:0">Enter the code we sent to maya@northwind.io.</p>
-  <tp-button slot="action" variant="outline" size="sm">Resend</tp-button>
-  <tp-field label="Verification code">
-    <tp-one-time-code-field length="6" name="code" group-lengths="[3,3]"></tp-one-time-code-field>
-  </tp-field>
-  <tp-button slot="footer">Verify</tp-button>
+  <tp-stack gap="4">
+    <tp-field style="text-align: center">
+      <tp-one-time-code-field
+        label="Verification code"
+        length="6"
+        name="code"
+        validation-type="numeric"
+        group-lengths="[3,3]"
+        variant="bubbles"
+      ></tp-one-time-code-field>
+    </tp-field>
+    <tp-button size="lg" style="inline-size: 100%">Verify</tp-button>
+  </tp-stack>
+  <tp-button slot="footer" variant="link" size="sm">Resend code</tp-button>
 </tp-card>`}
 />
 

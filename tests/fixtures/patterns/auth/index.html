@@ -106,7 +106,7 @@
   <p slot="description">Enter the 6-digit code we sent to <strong id="auth-sign-up-address"></strong>.</p>
   <tp-form id="auth-sign-up-verify-form" aria-label="Confirm your email">
     <tp-field style="text-align: center">
-      <tp-one-time-code-field label="Confirmation code" name="code" length="6" validation-type="numeric" group-lengths="[3,3]" auto-submit required></tp-one-time-code-field>
+      <tp-one-time-code-field label="Confirmation code" name="code" length="6" validation-type="numeric" group-lengths="[3,3]" auto-submit required variant="bubbles"></tp-one-time-code-field>
     </tp-field>
     <div slot="actions"><tp-button type="submit" size="lg" style="inline-size: 100%">Confirm email</tp-button></div>
   </tp-form>
@@ -158,7 +158,7 @@
   <p slot="description">We sent a 6-digit code to j•••@tweakpad.com.</p>
   <tp-form id="auth-verify-form" aria-label="Verify it's you">
     <tp-field style="text-align: center">
-      <tp-one-time-code-field label="Verification code" name="code" length="6" validation-type="numeric" group-lengths="[3,3]" auto-submit required></tp-one-time-code-field>
+      <tp-one-time-code-field label="Verification code" name="code" length="6" validation-type="numeric" group-lengths="[3,3]" auto-submit required variant="bubbles"></tp-one-time-code-field>
     </tp-field>
     <div slot="actions"><tp-button id="auth-verify-submit" type="submit" size="lg" style="inline-size: 100%">Verify</tp-button></div>
   </tp-form>
