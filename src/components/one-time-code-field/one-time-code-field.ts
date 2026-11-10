@@ -24,6 +24,12 @@ export interface CodeInvalidDetail {
 }
 
 /**
+ * `default` joins each group's slots into one boxed strip, `underline` puts every character on its
+ * own line, and `bubbles` draws every slot as a separate circle.
+ */
+export type OneTimeCodeVariant = 'default' | 'underline' | 'bubbles';
+
+/**
  * A fixed-length verification code shown as character slots. The slots are drawn over one native
  * input, so typing, deletion, selection, paste and SMS autofill behave as in one field, assistive
  * technology hears one field, and the form receives one value.
@@ -59,6 +65,7 @@ export class TpOneTimeCodeField extends TpFormElement {
     autoSubmit: { type: Boolean, attribute: 'auto-submit' },
     label: { type: String },
     placeholder: { type: String },
+    variant: { type: String, reflect: true },
     onValueChange: { attribute: false },
     onValueComplete: { attribute: false },
     onValueInvalid: { attribute: false },
@@ -69,13 +76,18 @@ export class TpOneTimeCodeField extends TpFormElement {
       :host {
         display: inline-block;
         min-inline-size: 0;
+        vertical-align: top;
       }
 
+      /* Top-aligned: an empty code has no text baseline, so a baseline-aligned root would add
+         descender space below its slots that the first character takes away again, moving
+         everything under the field. */
       .root {
         position: relative;
         display: inline-flex;
         align-items: center;
         max-inline-size: 100%;
+        vertical-align: top;
       }
 
       .group {
@@ -158,6 +170,12 @@ export class TpOneTimeCodeField extends TpFormElement {
   label = 'One-time code';
   /** A character shown in each empty slot. */
   placeholder = '';
+  /**
+   * How the slots are drawn: `default` joins each group into one boxed strip, `underline` puts
+   * every character on its own line, and `bubbles` makes every slot a separate circle. Groups keep
+   * their separator in every variant.
+   */
+  variant: OneTimeCodeVariant = 'default';
   /**
    * Called with each proposed code before it commits; assign `value` to accept it or cancel the
    * event to reject it.

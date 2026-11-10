@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>One-time code field verification</title>
+    <link rel="stylesheet" href="/src/styles.css">
+    <style>
+      body { margin: 0; background: var(--tp-background); color: var(--tp-foreground); font-family: var(--tp-font-sans); }
+      main { max-width: 960px; margin: 24px auto; padding: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+      section.case { display: grid; gap: 16px; align-content: start; }
+      section.case > h2.label { font-size: 0.875rem; margin: 0; color: var(--tp-muted-foreground); font-weight: 500; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="case"><h2 class="label">default</h2>
+        <tp-field label="Code"><tp-one-time-code-field id="default-plain" length="6" validation-type="numeric" variant="default"></tp-one-time-code-field></tp-field>
+        <tp-field label="Grouped"><tp-one-time-code-field id="default-grouped" length="6" group-lengths="[3,3]" default-value="K7Q2M9" variant="default"></tp-one-time-code-field></tp-field>
+        <tp-field label="Invalid" error="That code is incorrect." invalid><tp-one-time-code-field id="default-invalid" length="6" default-value="123" variant="default"></tp-one-time-code-field></tp-field>
+        <tp-field label="Disabled"><tp-one-time-code-field id="default-disabled" length="4" default-value="12" disabled variant="default"></tp-one-time-code-field></tp-field>
+        <tp-field label="Masked"><tp-one-time-code-field id="default-masked" length="4" default-value="2580" mask variant="default"></tp-one-time-code-field></tp-field>
+      </section>
+      <section class="case"><h2 class="label">underline</h2>
+        <tp-field label="Code"><tp-one-time-code-field id="underline-plain" length="6" validation-type="numeric" variant="underline"></tp-one-time-code-field></tp-field>
+        <tp-field label="Grouped"><tp-one-time-code-field id="underline-grouped" length="6" group-lengths="[3,3]" default-value="K7Q2M9" variant="underline"></tp-one-time-code-field></tp-field>
+        <tp-field label="Invalid" error="That code is incorrect." invalid><tp-one-time-code-field id="underline-invalid" length="6" default-value="123" variant="underline"></tp-one-time-code-field></tp-field>
+        <tp-field label="Disabled"><tp-one-time-code-field id="underline-disabled" length="4" default-value="12" disabled variant="underline"></tp-one-time-code-field></tp-field>
+        <tp-field label="Masked"><tp-one-time-code-field id="underline-masked" length="4" default-value="2580" mask variant="underline"></tp-one-time-code-field></tp-field>
+      </section>
+      <section class="case"><h2 class="label">bubbles</h2>
+        <tp-field label="Code"><tp-one-time-code-field id="bubbles-plain" length="6" validation-type="numeric" variant="bubbles"></tp-one-time-code-field></tp-field>
+        <tp-field label="Grouped"><tp-one-time-code-field id="bubbles-grouped" length="6" group-lengths="[3,3]" default-value="K7Q2M9" variant="bubbles"></tp-one-time-code-field></tp-field>
+        <tp-field label="Invalid" error="That code is incorrect." invalid><tp-one-time-code-field id="bubbles-invalid" length="6" default-value="123" variant="bubbles"></tp-one-time-code-field></tp-field>
+        <tp-field label="Disabled"><tp-one-time-code-field id="bubbles-disabled" length="4" default-value="12" disabled variant="bubbles"></tp-one-time-code-field></tp-field>
+        <tp-field label="Masked"><tp-one-time-code-field id="bubbles-masked" length="4" default-value="2580" mask variant="bubbles"></tp-one-time-code-field></tp-field>
+      </section>
+    </main>
+    <script type="module" src="./fixture.ts"></script>
+  </body>
+</html>

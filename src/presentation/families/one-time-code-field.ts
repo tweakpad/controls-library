@@ -6,23 +6,34 @@ const definition: ComponentDefinition = {
   name: 'One-time code field',
   tagName: 'tp-one-time-code-field',
   kind: 'compound-reexport',
-  axes: [],
+  axes: [
+    {
+      // underline: a line under each character; bubbles: every slot a separate circle.
+      name: 'variant',
+      values: ['default', 'underline', 'bubbles'],
+      default: 'default',
+    },
+  ],
   parts: [
     {
       name: 'one-time-code-field',
       description: 'The root that holds the character slots over the native input.',
+      axes: ['variant'],
     },
     {
       name: 'one-time-code-field-group',
       description: 'One group of character slots.',
+      axes: ['variant'],
     },
     {
       name: 'one-time-code-field-slot',
       description: 'One character position; shows the active and filled states.',
+      axes: ['variant'],
     },
     {
       name: 'one-time-code-field-separator',
       description: 'The mark between two groups of slots; never part of the value.',
+      axes: ['variant'],
     },
   ],
 };

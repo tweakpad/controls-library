@@ -4,6 +4,7 @@ import { useArgs } from 'storybook/preview-api';
 import type {
   TpOneTimeCodeField,
   CodeValidation,
+  OneTimeCodeVariant,
 } from '../components/one-time-code-field/index.js';
 import type { TpValueChangeEvent } from '../foundation/events.js';
 import { libraryDocs } from './library-docs.js';
@@ -13,6 +14,7 @@ interface Args {
   validationType: CodeValidation;
   groupLengths: number[];
   mask: boolean;
+  variant: OneTimeCodeVariant;
   disabled: boolean;
   readOnly: boolean;
   required: boolean;
@@ -33,6 +35,7 @@ const meta = {
     validationType: 'alphanumeric',
     groupLengths: [3, 3],
     mask: false,
+    variant: 'default',
     disabled: false,
     readOnly: false,
     required: false,
@@ -47,6 +50,7 @@ const meta = {
     validationType: { control: 'select', options: ['numeric', 'alphabetic', 'alphanumeric'] },
     groupLengths: { control: 'object' },
     mask: { control: 'boolean' },
+    variant: { control: 'select', options: ['default', 'underline', 'bubbles'] },
     disabled: { control: 'boolean' },
     readOnly: { control: 'boolean' },
     required: { control: 'boolean' },
@@ -63,6 +67,7 @@ const meta = {
         .value=${args.value}
         .validationType=${args.validationType}
         .groupLengths=${args.groupLengths}
+        .variant=${args.variant}
         .mask=${args.mask}
         .disabled=${args.disabled}
         .readOnly=${args.readOnly}

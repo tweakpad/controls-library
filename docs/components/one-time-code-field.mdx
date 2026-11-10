@@ -172,3 +172,40 @@ root.querySelector('[data-resend]').addEventListener('click', () => {
 />
 
 Disabled codes are left out of form data. An invalid Field paints every slot and announces its error once for the whole code.
+
+### Variants
+
+`variant="underline"` puts each character on its own line, and `variant="bubbles"` draws every slot as a separate circle. Groups keep their separator and a wider space in both.
+
+<Preview
+  title="Variants"
+  code={`<tp-stack gap="6">
+  <tp-field label="Verification code">
+    <tp-one-time-code-field
+      length="6"
+      name="code"
+      validation-type="numeric"
+      group-lengths="[3,3]"
+      variant="underline"
+    ></tp-one-time-code-field>
+  </tp-field>
+  <tp-field label="Unlock PIN">
+    <tp-one-time-code-field
+      length="4"
+      name="pin"
+      validation-type="numeric"
+      mask
+      variant="bubbles"
+    ></tp-one-time-code-field>
+  </tp-field>
+  <tp-field label="Pairing code">
+    <tp-one-time-code-field
+      length="6"
+      name="pairing"
+      group-lengths="[3,3]"
+      default-value="K7Q2M9"
+      variant="bubbles"
+    ></tp-one-time-code-field>
+  </tp-field>
+</tp-stack>`}
+/>

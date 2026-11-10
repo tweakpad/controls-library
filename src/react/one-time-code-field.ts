@@ -39,7 +39,8 @@ export type OneTimeCodeFieldProps = ElementProps<
   | 'readOnly'
   | 'required'
   | 'validationType'
-  | 'value',
+  | 'value'
+  | 'variant',
   {
     onTpComplete: CustomEvent<{ value: string; sourceEvent: Event }>;
     onTpDiagnostic: CustomEvent<foundationServices.Diagnostic>;

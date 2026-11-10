@@ -3979,7 +3979,8 @@ type Tags = {
     | 'readOnly'
     | 'required'
     | 'validationType'
-    | 'value',
+    | 'value'
+    | 'variant',
     {
       'tp-complete': CustomEvent<{ value: string; sourceEvent: Event }>;
       'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
