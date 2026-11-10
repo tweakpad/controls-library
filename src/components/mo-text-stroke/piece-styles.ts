@@ -48,8 +48,11 @@ tp-mo-text-stroke [data-tp-outline] {
 }
 
 /* One dash draws a glyph's outline; the gap after it is far longer than any outline, so an undrawn
-   outline never shows a stray piece of the next dash, whatever the glyph. */
+   outline never shows a stray piece of the next dash, whatever the glyph. Geometric precision
+   draws the text at its own size: otherwise WebKit draws text glyphs at the screen's pixel
+   density without scaling the dash, which then covers only part of each outline. */
 tp-mo-text-stroke [data-tp-outline] text {
+  text-rendering: geometricPrecision;
   stroke-dasharray: var(--_tp-tm-stroke-length) 1000em;
   stroke-dashoffset: 0;
   transition: inherit;
@@ -113,9 +116,18 @@ tp-mo-text-stroke[data-tp-hiding]:not([data-revealed]) [data-tp-outline] {
   }
 }
 
+/* A fully drawn outline drops its dash, as a settled reveal does. */
 @keyframes tp-mo-text-stroke-draw {
   from {
     stroke-dashoffset: var(--_tp-tm-stroke-length);
+  }
+
+  99.9% {
+    stroke-dasharray: var(--_tp-tm-stroke-length) 1000em;
+  }
+
+  to {
+    stroke-dasharray: none;
   }
 }
 
