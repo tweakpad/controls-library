@@ -45,6 +45,19 @@ Foundational components live in `src/components/<name>/` and ship through `@twea
 
 The tests enforce this structure: `tests/unit/widgets/catalog.test.ts` (catalog, families, folders, registration, that widget sources import only Lit and relative modules, and that the main entries never reach a widget or a companion entry), the extended source scanners, and `tests/unit/stories/stories.test.ts`. `node scripts/size-report.mjs` measures each widget from `@tweakpad/ui/widgets` and fails if `@tweakpad/ui/register` ships a widget or companion module; `npm run test:package` checks the same boundaries in the packed files.
 
+## Adding a pattern
+
+Patterns are real-case templates composed from library components; follow the
+[tweakpad-pattern skill](.agents/skills/tweakpad-pattern/SKILL.md). A pattern adds:
+
+1. `plans/patterns/<name>/record.md` from the skill's `assets/pattern-record.md`: the UX sources the pattern follows, its flows and states, its composition and its verification.
+2. `docs/patterns/<name>.mdx`: frontmatter `title`, `description`, `category` and `components` (block list of component page slugs), then one `##` section per flow with its previews.
+3. `src/patterns/<name>.ts`: one import and `defineElement` call per element the markup uses, from `../components/<c>/<c>.js` and `../foundation/define.js` only. The `./patterns/*` export, the side-effect entry and the Vite entry are generated from the folder.
+4. `src/stories/patterns/<name>.mdx`: `<Meta title="Patterns/<Title>" />` and `<PatternPage id="<name>" />`.
+5. `tests/fixtures/patterns/<name>/`: every screen's markup with only the pattern's entry imported.
+
+`tests/unit/patterns/patterns.test.ts`, `npm run docs:build` and `node .agents/skills/tweakpad-pattern/scripts/check-pattern.mjs <name>` check that the entry defines exactly the markup's elements, that `components` lists exactly the pages documenting them, and that the record's evidence occurs in the page. A component gap goes through the component skill and the specification, never into the pattern.
+
 ## Framework bindings
 
 `npm run cem` writes the Custom Elements Manifest and, from it, the framework bindings (`scripts/bindings/generate.mjs`): a React and a Vue component for every element that `src/register.ts` or `src/register/widgets.ts` defines (`src/react/`, `src/vue/`, with `widgets/` beside each), and the tag types for writing the elements in React, Preact, Solid, Svelte and Vue templates (`src/react/jsx.ts`, `src/preact/`, `src/solid/`, `src/svelte/`, `src/vue/elements.ts`). They are generated, never edited: only `src/react/adapter.ts` and `src/vue/adapter.ts` are written by hand. Each event's type is read from its dispatch (`scripts/manifest/event-types.mjs`), so dispatch typed details (`this.emit<Detail>(…)`, a typed event class) and export the types they use.

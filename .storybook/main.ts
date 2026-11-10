@@ -7,7 +7,11 @@ const cssTarget = viteConfig.build?.cssTarget;
 
 const config: StorybookConfig = {
   // Stories anywhere under src; the Widgets section also has an MDX overview page.
-  stories: ['../src/**/*.stories.ts', '../src/stories/widgets/*.mdx'],
+  stories: [
+    '../src/**/*.stories.ts',
+    '../src/stories/widgets/*.mdx',
+    '../src/stories/patterns/*.mdx',
+  ],
   addons: [
     '@storybook/addon-a11y',
     {

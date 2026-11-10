@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Auth pattern entry verification</title>
+    <link rel="stylesheet" href="/src/styles.css">
+    <style>
+      body { margin: 0; background: var(--tp-background); color: var(--tp-foreground); font-family: var(--tp-font-sans); }
+      main { max-width: 440px; margin: 24px auto; padding: 16px; display: grid; gap: 32px; }
+    </style>
+  </head>
+  <body>
+    <main>
+<tp-card id="auth-sign-in">
+  <h2 slot="header">Sign in to Tweakpad</h2>
+  <p slot="description">Welcome back. Pick up where you left off.</p>
+  <tp-stack gap="4">
+    <tp-stack gap="2">
+      <tp-button data-provider="google" variant="outline" size="lg" style="--tp-control: light-dark(#ffffff, #131314); --tp-input: light-dark(#747775, #8e918f); --tp-foreground: light-dark(#1f1f1f, #e3e3e3); font-family: 'Google Sans', Roboto, Arial, sans-serif"><img slot="icon-start" alt="" width="18" height="18">Sign in with Google</tp-button>
+      <tp-button data-provider="apple" variant="outline" size="lg" style="--tp-control: light-dark(#000000, #ffffff); --tp-input: light-dark(#000000, #ffffff); --tp-foreground: light-dark(#ffffff, #000000); font-family: system-ui, -apple-system, sans-serif; font-size: 1rem">Sign in with Apple</tp-button>
+      <tp-button data-provider="microsoft" variant="outline" size="lg" style="--tp-control: light-dark(#ffffff, #2f2f2f); --tp-input: light-dark(#8c8c8c, #2f2f2f); --tp-foreground: light-dark(#5e5e5e, #ffffff); font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 600">Sign in with Microsoft</tp-button>
+      <tp-button data-provider="github" variant="outline" size="lg">Sign in with GitHub</tp-button>
+      <tp-button data-provider="sso" variant="outline" size="lg">Sign in with single sign-on</tp-button>
+    </tp-stack>
+    <tp-stack direction="row" align="center" gap="3" style="color: var(--tp-muted-foreground); font-size: var(--tp-text-xs)">
+      <tp-separator style="flex: 1"></tp-separator>or<tp-separator style="flex: 1"></tp-separator>
+    </tp-stack>
+    <tp-form id="auth-sign-in-form" aria-label="Sign in with email">
+      <tp-alert id="auth-sign-in-error" slot="error-summary" severity="danger" announcement="assertive" title="Incorrect email or password" hidden>Check both and try again, or reset your password.</tp-alert>
+      <tp-field label="Email">
+        <tp-input type="email" name="email" autocomplete="username" enterkeyhint="next" required></tp-input>
+      </tp-field>
+      <tp-field label="Password">
+        <tp-input type="password" name="password" autocomplete="current-password" enterkeyhint="go" revealable required></tp-input>
+      </tp-field>
+      <tp-stack direction="row" align="center" justify="space-between" gap="2" wrap="wrap">
+        <tp-checkbox name="remember">Keep me signed in</tp-checkbox>
+        <tp-button variant="link" size="sm" href="/forgot-password">Forgot password?</tp-button>
+      </tp-stack>
+      <div slot="actions"><tp-button id="auth-sign-in-submit" type="submit" size="lg" style="inline-size: 100%">Sign in</tp-button></div>
+    </tp-form>
+  </tp-stack>
+  <p slot="footer" style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)">New to Tweakpad? <tp-button variant="link" href="/sign-up">Create an account</tp-button></p>
+</tp-card>
+<tp-card id="auth-compact">
+  <h2 slot="header">Sign in to Tweakpad</h2>
+  <p slot="description">Welcome back. Pick up where you left off.</p>
+  <tp-stack gap="4">
+    <tp-form id="auth-compact-form" aria-label="Sign in with email">
+      <tp-alert id="auth-compact-error" slot="error-summary" severity="danger" announcement="assertive" title="Incorrect email or password" hidden>Check both and try again, or reset your password.</tp-alert>
+      <tp-field label="Email">
+        <tp-input type="email" name="email" autocomplete="username" enterkeyhint="next" required></tp-input>
+      </tp-field>
+      <tp-field label="Password">
+        <tp-input type="password" name="password" autocomplete="current-password" enterkeyhint="go" revealable required></tp-input>
+      </tp-field>
+      <tp-stack direction="row" align="center" justify="space-between" gap="2" wrap="wrap">
+        <tp-checkbox name="remember">Keep me signed in</tp-checkbox>
+        <tp-button variant="link" size="sm" href="/forgot-password">Forgot password?</tp-button>
+      </tp-stack>
+      <div slot="actions"><tp-button id="auth-compact-submit" type="submit" size="lg" style="inline-size: 100%">Sign in</tp-button></div>
+    </tp-form>
+    <tp-stack direction="row" align="center" gap="3" style="color: var(--tp-muted-foreground); font-size: var(--tp-text-xs)">
+      <tp-separator style="flex: 1"></tp-separator>or<tp-separator style="flex: 1"></tp-separator>
+    </tp-stack>
+    <tp-stack direction="row" justify="center" gap="2">
+      <tp-button data-provider="google" variant="outline" size="icon-lg" style="--tp-control: light-dark(#ffffff, #131314); --tp-input: light-dark(#747775, #8e918f)"><img slot="icon-start" alt="" width="18" height="18">Sign in with Google</tp-button>
+      <tp-button data-provider="apple" variant="outline" size="icon-lg" style="--tp-control: light-dark(#000000, #ffffff); --tp-input: light-dark(#000000, #ffffff); --tp-foreground: light-dark(#ffffff, #000000)">Sign in with Apple</tp-button>
+      <tp-button data-provider="github" variant="outline" size="icon-lg">Sign in with GitHub</tp-button>
+    </tp-stack>
+  </tp-stack>
+  <p slot="footer" style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)">New to Tweakpad? <tp-button variant="link" href="/sign-up">Create an account</tp-button></p>
+</tp-card>
+<tp-card id="auth-sign-up">
+  <h2 slot="header">Create your Tweakpad account</h2>
+  <p slot="description">Design, tweak and share interfaces with your team.</p>
+  <tp-stack gap="4">
+    <tp-stack gap="2">
+      <tp-button data-provider="google" variant="outline" size="lg" style="--tp-control: light-dark(#ffffff, #131314); --tp-input: light-dark(#747775, #8e918f); --tp-foreground: light-dark(#1f1f1f, #e3e3e3); font-family: 'Google Sans', Roboto, Arial, sans-serif"><img slot="icon-start" alt="" width="18" height="18">Sign up with Google</tp-button>
+      <tp-button data-provider="apple" variant="outline" size="lg" style="--tp-control: light-dark(#000000, #ffffff); --tp-input: light-dark(#000000, #ffffff); --tp-foreground: light-dark(#ffffff, #000000); font-family: system-ui, -apple-system, sans-serif; font-size: 1rem">Sign up with Apple</tp-button>
+    </tp-stack>
+    <tp-stack direction="row" align="center" gap="3" style="color: var(--tp-muted-foreground); font-size: var(--tp-text-xs)">
+      <tp-separator style="flex: 1"></tp-separator>or<tp-separator style="flex: 1"></tp-separator>
+    </tp-stack>
+    <tp-form id="auth-sign-up-form" aria-label="Create an account with email" validation-mode="on-blur">
+      <tp-field label="Full name">
+        <tp-input name="name" autocomplete="name" enterkeyhint="next" required></tp-input>
+      </tp-field>
+      <tp-field label="Email" description="We'll send a code to confirm it.">
+        <tp-input type="email" name="email" autocomplete="email" enterkeyhint="next" required></tp-input>
+      </tp-field>
+      <tp-field label="Password" description="At least 12 characters. Spaces and symbols are welcome.">
+        <tp-input type="password" name="password" autocomplete="new-password" minlength="12" enterkeyhint="done" revealable required></tp-input>
+      </tp-field>
+      <tp-field id="auth-sign-up-terms">
+        <tp-checkbox name="terms" required>I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a></tp-checkbox>
+      </tp-field>
+      <div slot="actions"><tp-button id="auth-sign-up-submit" type="submit" size="lg" style="inline-size: 100%">Create account</tp-button></div>
+    </tp-form>
+  </tp-stack>
+  <p slot="footer" style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)">Already have an account? <tp-button variant="link" href="/sign-in">Sign in</tp-button></p>
+</tp-card>
+<tp-card id="auth-sign-up-verify" hidden>
+  <h2 slot="header">Check your email</h2>
+  <p slot="description">Enter the 6-digit code we sent to <strong id="auth-sign-up-address"></strong>.</p>
+  <tp-form id="auth-sign-up-verify-form" aria-label="Confirm your email">
+    <tp-field style="text-align: center">
+      <tp-one-time-code-field label="Confirmation code" name="code" length="6" validation-type="numeric" group-lengths="[3,3]" auto-submit required></tp-one-time-code-field>
+    </tp-field>
+    <div slot="actions"><tp-button type="submit" size="lg" style="inline-size: 100%">Confirm email</tp-button></div>
+  </tp-form>
+  <tp-stack slot="footer" direction="row" justify="space-between" gap="2" wrap="wrap" style="inline-size: 100%">
+    <tp-button id="auth-sign-up-back" variant="link" size="sm">Use a different email</tp-button>
+    <tp-button id="auth-sign-up-resend" variant="link" size="sm">Resend code</tp-button>
+  </tp-stack>
+</tp-card>
+<tp-card id="auth-recovery">
+  <h2 slot="header">Reset your password</h2>
+  <p slot="description">Enter the email you use for Tweakpad and we'll send you a link to choose a new password.</p>
+  <tp-form id="auth-recovery-form" aria-label="Request a password reset link">
+    <tp-field label="Email">
+      <tp-input type="email" name="email" autocomplete="username" enterkeyhint="send" required></tp-input>
+    </tp-field>
+    <div slot="actions"><tp-button id="auth-recovery-submit" type="submit" size="lg" style="inline-size: 100%">Send reset link</tp-button></div>
+  </tp-form>
+  <p slot="footer"><tp-button variant="link" href="/sign-in">Back to sign in</tp-button></p>
+</tp-card>
+<tp-card id="auth-recovery-sent" hidden>
+  <h2 slot="header">Check your email</h2>
+  <p slot="description">If <strong id="auth-recovery-address"></strong> has a Tweakpad account, we sent it a link to reset your password. The link expires in 1 hour.</p>
+  <tp-stack slot="footer" direction="row" justify="space-between" gap="2" wrap="wrap" style="inline-size: 100%">
+    <tp-button id="auth-recovery-back" variant="link" size="sm">Use a different email</tp-button>
+    <tp-button id="auth-recovery-resend" variant="link" size="sm">Resend link</tp-button>
+  </tp-stack>
+</tp-card>
+<tp-card id="auth-reset">
+  <h2 slot="header">Choose a new password</h2>
+  <p slot="description">You'll use it the next time you sign in to Tweakpad.</p>
+  <tp-form id="auth-reset-form" aria-label="Choose a new password">
+    <tp-alert id="auth-reset-expired" slot="error-summary" severity="danger" announcement="assertive" title="This link has expired" hidden>Reset links work once, for 1 hour. <tp-button slot="actions" variant="outline" size="sm" href="/forgot-password">Send a new link</tp-button></tp-alert>
+    <tp-field label="Email">
+      <tp-input type="email" name="username" autocomplete="username" default-value="jordan@tweakpad.com" readonly></tp-input>
+    </tp-field>
+    <tp-field label="New password" description="At least 12 characters. Spaces and symbols are welcome.">
+      <tp-input type="password" name="password" autocomplete="new-password" minlength="12" enterkeyhint="done" revealable required></tp-input>
+    </tp-field>
+    <div slot="actions"><tp-button id="auth-reset-submit" type="submit" size="lg" style="inline-size: 100%">Save new password</tp-button></div>
+  </tp-form>
+</tp-card>
+<tp-card id="auth-reset-done" hidden>
+  <h2 slot="header">Password changed</h2>
+  <p slot="description">Sign in with your new password. Other devices were signed out.</p>
+  <tp-button slot="footer" href="/sign-in">Sign in</tp-button>
+</tp-card>
+<tp-card id="auth-verify">
+  <h2 slot="header">Enter your verification code</h2>
+  <p slot="description">We sent a 6-digit code to j•••@tweakpad.com.</p>
+  <tp-form id="auth-verify-form" aria-label="Verify it's you">
+    <tp-field style="text-align: center">
+      <tp-one-time-code-field label="Verification code" name="code" length="6" validation-type="numeric" group-lengths="[3,3]" auto-submit required></tp-one-time-code-field>
+    </tp-field>
+    <div slot="actions"><tp-button id="auth-verify-submit" type="submit" size="lg" style="inline-size: 100%">Verify</tp-button></div>
+  </tp-form>
+  <tp-stack slot="footer" direction="row" justify="space-between" gap="2" wrap="wrap" style="inline-size: 100%">
+    <tp-button id="auth-verify-other" variant="link" size="sm">Use a recovery code</tp-button>
+    <tp-button id="auth-verify-resend" variant="link" size="sm">Resend code</tp-button>
+  </tp-stack>
+</tp-card>
+<tp-card id="auth-recovery-code" hidden>
+  <h2 slot="header">Enter a recovery code</h2>
+  <p slot="description">Use one of the codes you saved when you turned on two-step verification. Each works once.</p>
+  <tp-form id="auth-recovery-code-form" aria-label="Sign in with a recovery code">
+    <tp-field label="Recovery code">
+      <tp-input name="recovery" mono autocomplete="one-time-code" enterkeyhint="go" required></tp-input>
+    </tp-field>
+    <div slot="actions"><tp-button type="submit" size="lg" style="inline-size: 100%">Verify</tp-button></div>
+  </tp-form>
+  <p slot="footer"><tp-button id="auth-recovery-code-back" variant="link" size="sm">Use a verification code instead</tp-button></p>
+</tp-card>
+    </main>
+    <script type="module">
+      // Only the pattern's entry: every element its markup uses must be defined by it.
+      await import('/src/patterns/auth.ts');
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      window.undefinedElements = [...new Set([...document.querySelectorAll(':not(:defined)')].map((element) => element.localName))];
+      document.documentElement.toggleAttribute('data-ready', true);
+    </script>
+  </body>
+</html>

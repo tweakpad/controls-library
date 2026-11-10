@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Input verification</title>
+    <link rel="stylesheet" href="/src/styles.css">
+    <style>
+      body { margin: 0; background: var(--tp-background); color: var(--tp-foreground); font-family: var(--tp-font-sans); }
+      main { max-width: 480px; margin: 24px auto; padding: 16px; display: grid; gap: 32px; }
+      h1.fixture { font-size: 1.25rem; margin: 0; }
+      section.case { display: grid; gap: 12px; }
+      section.case > h2.label { font-size: 0.875rem; margin: 0; color: var(--tp-muted-foreground); font-weight: 500; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 class="fixture">Input verification</h1>
+
+      <section class="case" id="case-reveal"><h2 class="label">Revealable password in a form</h2>
+        <tp-form id="reveal-form" aria-label="Sign in">
+          <tp-field label="Email">
+            <tp-input id="email" type="email" name="email" autocomplete="username" enterkeyhint="next" required></tp-input>
+          </tp-field>
+          <tp-field label="Password">
+            <tp-input id="password" type="password" name="password" autocomplete="current-password" enterkeyhint="go" revealable required></tp-input>
+          </tp-field>
+          <tp-button slot="actions" type="submit">Sign in</tp-button>
+          <tp-button slot="actions" type="reset" variant="outline">Reset</tp-button>
+        </tp-form>
+      </section>
+
+      <section class="case" id="case-group"><h2 class="label">Revealable password in an Input group</h2>
+        <tp-field label="Recovery passphrase">
+          <tp-input-group>
+            <tp-input id="grouped" type="password" name="passphrase" revealable></tp-input>
+          </tp-input-group>
+        </tp-field>
+      </section>
+
+      <section class="case" id="case-states"><h2 class="label">Disabled, read-only, long value, localized</h2>
+        <tp-field label="Disabled"><tp-input id="disabled" type="password" revealable disabled default-value="correct horse battery staple"></tp-input></tp-field>
+        <tp-field label="Read-only"><tp-input id="readonly" type="password" revealable readonly default-value="correct horse battery staple"></tp-input></tp-field>
+        <tp-field label="Long value"><tp-input id="long" type="password" revealable default-value="a-very-long-passphrase-that-overflows-the-editor-box-easily"></tp-input></tp-field>
+        <tp-field label="Contraseña"><tp-input id="localized" type="password" revealable reveal-label="Mostrar contraseña"></tp-input></tp-field>
+        <tp-field label="Not a password"><tp-input id="text" type="text" revealable></tp-input></tp-field>
+      </section>
+
+      <section class="case" id="case-hints"><h2 class="label">Keyboard hints</h2>
+        <tp-field label="Amount"><tp-input id="amount" inputmode="decimal" enterkeyhint="done"></tp-input></tp-field>
+        <tp-field label="Override"><tp-input id="override" inputmode="decimal"></tp-input></tp-field>
+        <tp-field label="Notes"><tp-text-area id="notes" enterkeyhint="send"></tp-text-area></tp-field>
+      </section>
+    </main>
+    <script type="module" src="./fixture.ts"></script>
+  </body>
+</html>

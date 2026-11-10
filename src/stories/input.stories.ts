@@ -15,6 +15,7 @@ interface Args {
   readOnly: boolean;
   required: boolean;
   mono: boolean;
+  revealable: boolean;
   variant: InputVariant;
   unit: string;
 }
@@ -33,6 +34,7 @@ const meta: Meta<Args> = {
     readOnly: false,
     required: false,
     mono: false,
+    revealable: false,
   },
   argTypes: {
     value: { control: 'text', description: 'Controlled value; this example accepts proposals.' },
@@ -63,6 +65,10 @@ const meta: Meta<Args> = {
       control: 'boolean',
       description: 'Mono font, with spell checking, autocorrection and autocapitalization off.',
     },
+    revealable: {
+      control: 'boolean',
+      description: 'Password type: a Toggle that shows the value as plain text.',
+    },
   },
   render: (args) => {
     const [, updateArgs] = useArgs<Args>();
@@ -79,6 +85,7 @@ const meta: Meta<Args> = {
       .readOnly=${args.readOnly}
       .required=${args.required}
       .mono=${args.mono}
+      .revealable=${args.revealable}
       .onValueChange=${(event: TpValueChangeEvent<string>) => {
         if (!event.defaultPrevented && !event.detail.cancelled && control.value) {
           const owner = control.value;

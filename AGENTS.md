@@ -11,6 +11,12 @@ or the Storybook and website renderings — read and follow the
 [tweakpad-docs skill](.agents/skills/tweakpad-docs/SKILL.md). Its structure, merge and style
 rules are mandatory and its checker must pass.
 
+For any pattern work — the `docs/patterns/*.mdx` pages, their `@tweakpad/ui/patterns/<name>`
+registration entries, the Storybook Patterns section or the website's pattern pages — read and
+follow the [tweakpad-pattern skill](.agents/skills/tweakpad-pattern/SKILL.md). Patterns are real
+case templates grounded in established UX practice; its research gate, record and checker are
+mandatory.
+
 - Fresh live Foundation and Component Library specifications govern contracts;
   the UI Widgets Specification governs the widgets section. Access Spec Blocks
   through registered direct MCP tools; report unavailable tools instead of

@@ -198,7 +198,9 @@ const preview = definePreview({
     // Sidebar sections: the library pages first, then foundational components, Motion (grouped by
     // what moves: Text, then Surface) and widgets.
     options: {
-      storySort: { order: ['Tweakpad UI', 'Components', 'Motion', ['Text', 'Surface'], 'Widgets'] },
+      storySort: {
+        order: ['Tweakpad UI', 'Components', 'Motion', ['Text', 'Surface'], 'Widgets', 'Patterns'],
+      },
     },
     docs: {
       page: DocumentationPage,

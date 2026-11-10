@@ -65,6 +65,12 @@ const definition: ComponentDefinition = {
       axes: ['variant'],
     },
     {
+      name: 'input-reveal',
+      description:
+        'The Toggle at the end of a revealable password Input that shows or hides the value.',
+      axes: ['variant'],
+    },
+    {
       name: 'input-prefix',
       description:
         'Reserved for content before the editor; the Input renders none, so such content goes in an Input group.',
@@ -90,6 +96,7 @@ export const inputPresentation = definePresentation({
       '[part~="input-unit"]': 'input-unit',
       '[part~="input-decrement"]': 'input-decrement',
       '[part~="input-increment"]': 'input-increment',
+      '[part~="input-reveal"]': 'input-reveal',
     },
   },
   sources: [inputCoreAppearance, inputAppearance],

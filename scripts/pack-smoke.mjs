@@ -41,7 +41,7 @@ const forbidden = [...files].filter(
   (path) =>
     /^(src|tmp|plans|external|scripts|tests|\.storybook)\/|^\.env|stylesheet\.js/u.test(path) ||
     (/^docs\//u.test(path) &&
-      !/^docs\/(?:components|motion\/[^/]+|widgets)\/[^/]+\.mdx$/u.test(path)),
+      !/^docs\/(?:components|motion\/[^/]+|widgets|patterns)\/[^/]+\.mdx$/u.test(path)),
 );
 if (forbidden.length) fail(`unexpected files in the package: ${forbidden.slice(0, 10).join(', ')}`);
 const manifest = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
@@ -60,10 +60,17 @@ for (const required of [
   'docs/components/badge.mdx',
 ])
   if (!files.has(required)) fail(`${required} is not packed`);
-// Every license notice that the build emits for bundled third-party portions ships beside them.
+// Every packed pattern page ships its registration entry (`./patterns/*` is a wildcard export).
+for (const page of [...files].filter((path) => /^docs\/patterns\/[^/]+\.mdx$/u.test(path))) {
+  const slug = page.slice('docs/patterns/'.length, -'.mdx'.length);
+  for (const entry of [`dist/patterns/${slug}.js`, `dist/patterns/${slug}.d.ts`])
+    if (!files.has(entry)) fail(`${page} ships without ${entry}`);
+}
+// Every license and trademark notice that the build emits for bundled third-party portions ships
+// beside them.
 const notices = [
   ...readFileSync(join(root, 'vite.config.ts'), 'utf8').matchAll(
-    /\[\s*'src\/[^']+',\s*'(LICENSE\.[^']+)'\s*\]/gu,
+    /\[\s*'src\/[^']+',\s*'((?:LICENSE|NOTICE)\.[^']+)'\s*\]/gu,
   ),
 ].map((match) => `dist/${match[1]}`);
 if (notices.length === 0) fail('vite.config.ts lists no bundled license notice');
@@ -251,6 +258,8 @@ import { TpIcon } from '@tweakpad/ui/register/icon';
 import '@tweakpad/ui/register/widgets';
 import { widgetEntries } from '@tweakpad/ui/widgets';
 import { plusIcon } from '@tweakpad/ui/icons/plus';
+import { googleMarkUrl } from '@tweakpad/ui/icons/brands';
+import '@tweakpad/ui/patterns/auth';
 import * as carousel from '@tweakpad/ui/carousel';
 import * as dragDrop from '@tweakpad/ui/drag-drop';
 import * as media from '@tweakpad/ui/media';
@@ -275,7 +284,8 @@ const editor: HTMLElementTagNameMap['tp-text-editor'] = document.createElement('
 // @ts-expect-error The text editor publishes no controlled value.
 editor.value = editor.value;
 const pageIds: DocsIndex['pages'][number]['id'][] = docsIndex.pages.map((page) => page.id);
-export const used = [TpIcon, editor, plusIcon.viewBox, createId(), carousel, dragDrop, media, map, code, markdown, qr.encodeQr('x').size, emoji.builtinEmojiData().emojis.length, flow.FLOW_DOCUMENT_VERSION, textEditor, textEditorTiptap, textEditorLexical, widgetEntries.length, packageJson.version, parseDoc, elementApi, literalCode().name, pageIds.length];
+const patternTitles: DocsIndex['patterns'][number]['title'][] = docsIndex.patterns.map((pattern) => pattern.title);
+export const used = [TpIcon, editor, plusIcon.viewBox, createId(), carousel, dragDrop, media, map, code, markdown, qr.encodeQr('x').size, emoji.builtinEmojiData().emojis.length, flow.FLOW_DOCUMENT_VERSION, textEditor, textEditorTiptap, textEditorLexical, widgetEntries.length, packageJson.version, parseDoc, elementApi, literalCode().name, pageIds.length, patternTitles.length, googleMarkUrl.length];
 `,
 );
 writeFileSync(join(consumer, 'css.d.ts'), "declare module '*.css';\n");

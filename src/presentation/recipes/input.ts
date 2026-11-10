@@ -22,6 +22,15 @@ export const inputAppearance: PresentationDictionary = {
   input: [
     ...inputRules,
     { declarations: { 'block-size': 'var(--tp-control-height-md)', 'padding-block': '0' } },
+    // A revealable password reserves the room of its Toggle at the inline end, and the host's own
+    // reveal control stays hidden so one Toggle shows.
+    {
+      selector: '&[data-reveal]',
+      declarations: {
+        'padding-inline-end': 'calc(var(--tp-control-height-xs) + var(--tp-space-1) * 2)',
+      },
+    },
+    { selector: '&[data-reveal]::-ms-reveal', declarations: { display: 'none' } },
   ],
   // Inline variant: the row is the shared inline control row and owns the boundary, rings and
   // fill; the native editor joins it as in an Input group, with its value at the row's end.
@@ -72,6 +81,15 @@ export const inputAppearance: PresentationDictionary = {
       selector:
         '&[type="number"]::-webkit-inner-spin-button, &[type="number"]::-webkit-outer-spin-button',
       declarations: { appearance: 'none', margin: '0' },
+    },
+  ],
+  // The reveal Toggle tells its state by its icon, so pressed keeps the field's quiet surface.
+  'input-reveal': [
+    {
+      declarations: {
+        '--tp-pressed': 'transparent',
+        '--tp-pressed-foreground': 'var(--tp-foreground)',
+      },
     },
   ],
   // The Stepper sits at the row's end, inset like the Select trigger's chevron.

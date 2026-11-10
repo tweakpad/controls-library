@@ -1,0 +1,26 @@
+import { Source, Title } from '@storybook/addon-docs/blocks';
+import { DocContent } from './docs-library.mdx';
+import { libraryPattern } from '../src/stories/library-patterns.ts';
+
+export function PatternPage({ id }) {
+  // A pattern page: its name and description, the components it is built with (each a link to
+  // its Docs page), the import that registers them, then its flows with every preview.
+  const { page, Content, components } = libraryPattern(id);
+  return (
+    <>
+      <Title>{page.title}</Title>
+      <p className="tp-docs-pattern-description">{page.description}</p>
+      <ul className="tp-docs-pattern-components" aria-label="Built with">
+        {components.map((component) => (
+          <li key={component.href}>
+            <a href={component.href} target="_top">
+              {component.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <Source code={"import '" + page.entry + "';"} language="ts" format={false} dark />
+      <DocContent Content={Content} hero={null} previews={page.previews} standalone />
+    </>
+  );
+}

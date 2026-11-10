@@ -9,6 +9,7 @@ import type { CheckboxGroupController } from '../../foundation/checkbox-group.js
 import { nearestCheckboxGroup } from '../../foundation/checkbox-group.js';
 import { PresenceController } from '../../foundation/presence.js';
 import { componentHandlingPrevented } from '../../foundation/part.js';
+import { interactiveTargetInPath } from '../../foundation/interactive-target.js';
 import type { HostProperties } from '../../foundation/part.js';
 import { inlineIconStyles, renderInlineIcon } from '../shared/inline-icon.js';
 import { createId } from '../../foundation/id.js';
@@ -426,6 +427,12 @@ export class TpCheckbox extends TpFormElement {
     this.requestUpdate();
   };
   #click = (event: Event): void => {
+    // A link or control inside the label acts on its own, as inside a native label.
+    if (
+      event.currentTarget instanceof Element &&
+      interactiveTargetInPath(event, event.currentTarget)
+    )
+      return;
     this.#syncFocusVisible();
     queueMicrotask(() => {
       if (this.isConnected && !componentHandlingPrevented(event)) this.#request(event);

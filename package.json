@@ -27,9 +27,11 @@
     "./dist/register.js",
     "./dist/register/icon.js",
     "./dist/register/widgets.js",
+    "./dist/patterns/*.js",
     "./src/register.ts",
     "./src/register/icon.ts",
     "./src/register/widgets.ts",
+    "./src/patterns/*.ts",
     "./src/stories/**/*.ts"
   ],
   "files": [
@@ -38,7 +40,8 @@
     "!dist/stylesheet.js.map",
     "docs/components/*.mdx",
     "docs/motion/*/*.mdx",
-    "docs/widgets/*.mdx"
+    "docs/widgets/*.mdx",
+    "docs/patterns/*.mdx"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -198,6 +201,11 @@
       "types": "./dist/icons/*.d.ts",
       "import": "./dist/icons/*.js",
       "default": "./dist/icons/*.js"
+    },
+    "./patterns/*": {
+      "types": "./dist/patterns/*.d.ts",
+      "import": "./dist/patterns/*.js",
+      "default": "./dist/patterns/*.js"
     },
     "./styles.css": "./dist/styles.css",
     "./package.json": "./package.json"

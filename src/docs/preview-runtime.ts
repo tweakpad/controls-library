@@ -179,6 +179,20 @@ export function mountPreview(
   host.innerHTML = preview.code;
   const submit = (event: Event) => event.preventDefault();
   host.addEventListener('submit', submit);
+  // A preview's links name the routes of the app it stands for (`/sign-up`); following one would
+  // replace the documentation page. Links to other sites and to fragments still work.
+  const follow = (event: Event) => {
+    const link = event
+      .composedPath()
+      .find((node): node is HTMLAnchorElement => node instanceof HTMLAnchorElement && !!node.href);
+    if (!link) return;
+    const target = new URL(link.href, host.ownerDocument.baseURI);
+    const here = host.ownerDocument.location;
+    const fragment =
+      target.hash && target.pathname === here.pathname && target.search === here.search;
+    if (target.origin === here.origin && !fragment) event.preventDefault();
+  };
+  host.addEventListener('click', follow, true);
   let url: string | undefined;
   const ran = preview.script
     ? (async () => {
@@ -191,6 +205,7 @@ export function mountPreview(
     ran,
     dispose() {
       host.removeEventListener('submit', submit);
+      host.removeEventListener('click', follow, true);
       host.replaceChildren();
       if (url) URL.revokeObjectURL(url);
     },

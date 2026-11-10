@@ -9,6 +9,14 @@ const iconEntries = Object.fromEntries(
     .map((file) => [`icons/${file.slice(0, -3)}`, resolve(iconDirectory, file)]),
 );
 
+// Every pattern ships its own registration entry, `@tweakpad/ui/patterns/<name>`.
+const patternDirectory = resolve(import.meta.dirname, 'src/patterns');
+const patternEntries = Object.fromEntries(
+  readdirSync(patternDirectory)
+    .filter((file) => file.endsWith('.ts'))
+    .map((file) => [`patterns/${file.slice(0, -3)}`, resolve(patternDirectory, file)]),
+);
+
 export default defineConfig({
   optimizeDeps: {
     // The git-ignored reference checkouts under `external/` hold their own HTML and tsconfig
@@ -25,6 +33,7 @@ export default defineConfig({
           ['src/foundation/drag-drop/LICENSE.dnd-kit', 'LICENSE.dnd-kit'],
           ['src/foundation/flow/LICENSE.xyflow', 'LICENSE.xyflow'],
           ['src/icons/LICENSE.lucide', 'LICENSE.lucide'],
+          ['src/icons/NOTICE.brands', 'NOTICE.brands'],
         ] as const) {
           this.emitFile({
             type: 'asset',
@@ -81,6 +90,7 @@ export default defineConfig({
         'docs/index': resolve(import.meta.dirname, 'src/docs/index.ts'),
         'docs/vite': resolve(import.meta.dirname, 'src/docs/vite.ts'),
         ...iconEntries,
+        ...patternEntries,
       },
       formats: ['es'],
       cssFileName: 'styles',

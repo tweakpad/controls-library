@@ -133,12 +133,14 @@ export function docId(file: string): string {
   return `${match[1]}/${match[2]}`;
 }
 
-interface Frontmatter {
+/** @internal */
+export interface Frontmatter {
   readonly fields: Record<string, string | string[]>;
   readonly end: number;
 }
 
-function parseFrontmatter(lines: readonly string[], id: string): Frontmatter {
+/** The frontmatter fields of a page and the index of its closing line. @internal */
+export function parseFrontmatter(lines: readonly string[], id: string): Frontmatter {
   if (lines[0] !== '---') throw new DocParseError(id, 1, 'the page must start with frontmatter');
   const fields: Record<string, string | string[]> = {};
   for (let index = 1; index < lines.length; index += 1) {
@@ -289,28 +291,27 @@ function blankFences(body: string): string {
   );
 }
 
-/** Reads one documentation page. `id` is its page id, `components/badge`. */
-export function parseDoc(source: string, id: string): ParsedDoc {
-  const folder = id.slice(0, id.lastIndexOf('/'));
-  const slug = id.slice(id.lastIndexOf('/') + 1);
-  if (!isDocFolder(folder) || !slug) throw new Error(`${id} is not a page id`);
-  const text = source.replace(/\r\n?/g, '\n');
-  const lines = text.split('\n');
-  const frontmatter = parseFrontmatter(lines, id);
-  const field = (name: string): string => {
-    const value = frontmatter.fields[name];
-    if (typeof value !== 'string' || !value)
-      throw new DocParseError(id, 1, `frontmatter needs a ${name}`);
-    return value;
-  };
-  const tag = field('tag');
-  if (!tag.startsWith('tp-')) throw new DocParseError(id, 1, `tag must be a tp- element: ${tag}`);
-  const partsField = frontmatter.fields.parts ?? [];
-  if (!Array.isArray(partsField)) throw new DocParseError(id, 1, 'parts must be a list');
-  for (const key of Object.keys(frontmatter.fields))
-    if (!['title', 'description', 'tag', 'parts'].includes(key))
-      throw new DocParseError(id, 1, `unknown frontmatter field: ${key}`);
+/** What a page body holds after its frontmatter. @internal */
+export interface DocBody {
+  readonly headings: readonly DocHeading[];
+  readonly previews: readonly DocPreview[];
+  readonly elements: readonly DocElement[];
+  readonly moduleStatements: readonly number[];
+  readonly prose: string;
+}
 
+/**
+ * Reads the body of a page whose frontmatter closes on line index `frontmatterEnd`: its headings,
+ * its Preview and Code elements and its prose. Component and pattern pages share this grammar.
+ * @internal
+ */
+export function readBody(
+  text: string,
+  lines: readonly string[],
+  frontmatterEnd: number,
+  id: string,
+): DocBody {
+  const frontmatter = { end: frontmatterEnd };
   // Offsets of the body are offsets of the whole text, so lines stay right.
   const bodyStart = lines.slice(0, frontmatter.end + 1).join('\n').length + 1;
   const body = blankFences(text.slice(bodyStart));
@@ -415,6 +416,38 @@ export function parseDoc(source: string, id: string): ParsedDoc {
   prose.split('\n').forEach((line, index) => {
     if (/^(?:import|export)\b/.test(line)) moduleStatements.push(index + frontmatter.end + 2);
   });
+
+  return { headings, previews, elements, moduleStatements, prose };
+}
+
+/** Reads one documentation page. `id` is its page id, `components/badge`. */
+export function parseDoc(source: string, id: string): ParsedDoc {
+  const folder = id.slice(0, id.lastIndexOf('/'));
+  const slug = id.slice(id.lastIndexOf('/') + 1);
+  if (!isDocFolder(folder) || !slug) throw new Error(`${id} is not a page id`);
+  const text = source.replace(/\r\n?/g, '\n');
+  const lines = text.split('\n');
+  const frontmatter = parseFrontmatter(lines, id);
+  const field = (name: string): string => {
+    const value = frontmatter.fields[name];
+    if (typeof value !== 'string' || !value)
+      throw new DocParseError(id, 1, `frontmatter needs a ${name}`);
+    return value;
+  };
+  const tag = field('tag');
+  if (!tag.startsWith('tp-')) throw new DocParseError(id, 1, `tag must be a tp- element: ${tag}`);
+  const partsField = frontmatter.fields.parts ?? [];
+  if (!Array.isArray(partsField)) throw new DocParseError(id, 1, 'parts must be a list');
+  for (const key of Object.keys(frontmatter.fields))
+    if (!['title', 'description', 'tag', 'parts'].includes(key))
+      throw new DocParseError(id, 1, `unknown frontmatter field: ${key}`);
+
+  const { headings, previews, elements, moduleStatements, prose } = readBody(
+    text,
+    lines,
+    frontmatter.end,
+    id,
+  );
 
   const variantsHeading = headings.find(
     (heading) => heading.depth === 3 && heading.slug === 'variants',

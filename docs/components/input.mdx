@@ -108,6 +108,37 @@ Disabled omits the value from form data. Read-only keeps it, along with selectio
 
 Native form reset restores an uncontrolled default with `form-reset`; controlled reset does not propose or replace owner state. State restoration restores uncontrolled strings. Enter uses the associated form's default submitter; composition does not submit. File input retains its native file list and serializes files without duplicate participants.
 
+### Passwords
+
+`revealable` adds a Toggle at the end of a password Input that shows the value as plain text, so people can check what they typed. The value is hidden again when its form submits or resets. `reveal-label` renames the Toggle for another language.
+
+<Preview
+  width="3"
+  title="Revealable password"
+  align="stretch"
+  code={`<tp-field label="Password">
+  <tp-input type="password" name="password" autocomplete="current-password" revealable></tp-input>
+</tp-field>`}
+/>
+
+### Mobile keyboards
+
+`inputmode` picks the on-screen keyboard without changing the type, and `enterkeyhint` labels its Enter key, such as `next` on a field that leads to another and `go` on the last one.
+
+<Preview
+  width="3"
+  title="Keyboard hints"
+  align="stretch"
+  code={`<tp-stack gap="4">
+  <tp-field label="Email">
+    <tp-input type="email" name="email" autocomplete="email" enterkeyhint="next"></tp-input>
+  </tp-field>
+  <tp-field label="Discount code">
+    <tp-input name="code" inputmode="numeric" enterkeyhint="done"></tp-input>
+  </tp-field>
+</tp-stack>`}
+/>
+
 ### Anatomy and customization
 
 The native `<input>` is a real element in your tree: it renders into the Input's light DOM (`tp-input > input`), shares the Input's form owner and submits natively, so browser autofill and password managers classify and fill it like any form field. Customize semantic tokens, the presentation dictionary, `partPresentation.input`, or style `tp-input > input` directly; `::part(input)` does not apply because the editor is not in the shadow root. Keep caret, selection, autofill and type-specific affordances visible.

@@ -166,3 +166,15 @@ import { bulletListIcon, quoteIcon } from '@tweakpad/ui/icons/text-blocks';`} la
 | `@tweakpad/ui/icons/ban`             | `banIcon`                                                                                                                                                                                                             | No color, or none of a set                                                   |
 
 The text-alignment and column icons are physical: in a right-to-left editor, start alignment shows `textAlignRightIcon` and a column inserted before the current one shows `insertColumnRightIcon`. The horizontal ellipsis is the `more` entry of `navigationIcons` (`@tweakpad/ui/icons/navigation`). `@tweakpad/ui/icons/text-formatting` also exports `bookmarkIcon` and `filledBookmarkIcon`. Editing surfaces reuse `undoIcon`, `redoIcon`, `imageIcon`, `trashIcon`, `copyIcon`, `copyPlusIcon`, `minusIcon`, `plusIcon`, `gripVerticalIcon`, `chevronDownIcon`, `checkIcon` and `externalLinkIcon` from their own modules, such as `@tweakpad/ui/icons/undo`.
+
+### Password visibility
+
+`@tweakpad/ui/icons/eye` exports `eyeIcon` and `@tweakpad/ui/icons/eye-off` exports `eyeOffIcon`, the marks of a revealable password Input's Toggle.
+
+### Brand marks
+
+`@tweakpad/ui/icons/brands` holds the marks of common identity providers for their sign-in buttons: `appleIcon`, `microsoftIcon` and `githubIcon` are definitions, and `googleMarkUrl` is the image URL of the colored Google "G", for an `<img>`, since a single-color path cannot draw it.
+
+<Code code={`import { appleIcon, googleMarkUrl } from '@tweakpad/ui/icons/brands';`} language="ts" />
+
+The marks are trademarks of their owners, shipped unaltered. Show one only on a button that signs in with that provider, beside wording such as "Continue with Google", and follow the provider's button rules for color and size. A provider without a mark here passes its own definition or image.

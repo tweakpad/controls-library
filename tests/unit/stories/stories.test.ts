@@ -68,7 +68,7 @@ describe('Storybook catalog entries', () => {
     expect(read('widgets/overview.mdx')).toContain('<Meta title="Widgets/Overview" />');
     expect(preview).toContain("import '../src/register/widgets.js';");
     expect(preview).toContain(
-      "order: ['Tweakpad UI', 'Components', 'Motion', ['Text', 'Surface'], 'Widgets']",
+      "order: ['Tweakpad UI', 'Components', 'Motion', ['Text', 'Surface'], 'Widgets', 'Patterns']",
     );
   });
 

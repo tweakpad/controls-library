@@ -9,9 +9,12 @@ import type { CustomElementConstructorWithTag } from '../../foundation/define.js
 import { normalizeNumberFieldValue } from '../../foundation/number-field/numeric.js';
 import { chevronLeftIcon } from '../../icons/chevron-left.js';
 import { chevronRightIcon } from '../../icons/chevron-right.js';
+import { eyeIcon } from '../../icons/eye.js';
+import { eyeOffIcon } from '../../icons/eye-off.js';
 import { TpTextControl } from '../field/text-control.js';
 import { TpButton } from '../button/button.js';
 import { TpIcon } from '../icon/icon.js';
+import { TpToggle } from '../toggle/toggle.js';
 import { inlineCopy, renderInlineCopy } from '../shared/inline-copy.js';
 import { inlineIconStyles, renderInlineIcon } from '../shared/inline-icon.js';
 import { inputPresentation } from '../../presentation/families/input.js';
@@ -36,12 +39,14 @@ export type InputVariant = 'default' | 'inline';
  * inline number Input's row.
  * @csspart input-decrement - The Button before the value that steps an inline number Input down.
  * @csspart input-increment - The Button after the value that steps an inline number Input up.
+ * @csspart input-reveal - The Toggle at the end of a revealable password Input that shows or hides
+ * the value.
  */
 export class TpInput extends TpTextControl {
   static tagName = 'tp-input';
   /** Library elements this element renders; defining it defines them too. */
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {
-    return [TpButton, TpIcon, ...inlineCopy.elements];
+    return [TpButton, TpIcon, TpToggle, ...inlineCopy.elements];
   }
   static override presentation = inputPresentation;
   static override properties = {
@@ -55,6 +60,8 @@ export class TpInput extends TpTextControl {
     variant: { type: String, reflect: true },
     copyable: { converter: defaultTrue, reflect: true },
     unit: { type: String },
+    revealable: { type: Boolean, reflect: true },
+    revealLabel: { type: String, attribute: 'reveal-label' },
   };
   static override styles = [
     ...TpTextControl.styles,
@@ -113,6 +120,25 @@ export class TpInput extends TpTextControl {
         display: inline-flex;
       }
 
+      /* A revealable password keeps its Toggle inside the editor's box, at the inline end; the
+         editor reserves the Toggle's room so the value never runs under it. */
+      :host([revealable]:not([variant='inline'])) {
+        position: relative;
+      }
+
+      .reveal {
+        position: absolute;
+        inset-block: 0;
+        inset-inline-end: var(--tp-space-1);
+        display: flex;
+        align-items: center;
+      }
+
+      .row .reveal {
+        position: static;
+        flex: none;
+      }
+
       /* The arrows point away from the value in either writing direction. */
       :host(:dir(rtl)) .step {
         scale: -1 1;
@@ -152,13 +178,29 @@ export class TpInput extends TpTextControl {
    * the value. The editor announces it as its description.
    */
   unit = '';
+  /**
+   * Adds a Toggle at the end of a password Input that shows the value as plain text while pressed.
+   * The value is hidden again when its form submits or resets, or when the Input is disabled.
+   * Other types ignore it.
+   */
+  revealable = false;
+  /** The accessible name of the reveal Toggle, for localization. */
+  revealLabel = 'Show password';
+  #revealed = false;
+  /** Whether a revealable password shows its value. */
+  get revealed(): boolean {
+    return this.#revealing && this.#revealed;
+  }
+  get #revealing(): boolean {
+    return this.revealable && this.type === 'password';
+  }
   /** An inline Input shows its Field's label inside its row. */
   override get rendersFieldLabel(): boolean {
     return this.variant === 'inline';
   }
   protected override render() {
     const editor = this.#editor();
-    if (this.variant !== 'inline') return editor;
+    if (this.variant !== 'inline') return html`${editor}${this.#reveal()}`;
     const label = this.fieldLabel || this.label;
     const state = {
       disabled: this.effectiveDisabled,
@@ -188,7 +230,7 @@ export class TpInput extends TpTextControl {
               content: label,
             })
           : nothing
-      }${this.type === 'number' ? this.#stepper(state, editor) : html`${editor}${this.#unit(state)}`}${renderInlineCopy(
+      }${this.type === 'number' ? this.#stepper(state, editor) : html`${editor}${this.#unit(state)}${this.#reveal()}`}${renderInlineCopy(
         {
           part: 'input-copy',
           value: this.value,
@@ -209,6 +251,64 @@ export class TpInput extends TpTextControl {
       properties: { class: 'unit', part: 'input-unit', 'aria-hidden': 'true' },
       content: this.unit,
     });
+  }
+
+  /**
+   * The Toggle that shows a revealable password as plain text. It keeps one name, `revealLabel`,
+   * and announces whether the value shows with its pressed state; the icon follows that state.
+   */
+  #reveal() {
+    if (!this.#revealing) return nothing;
+    const revealed = this.revealed;
+    return html`<span class="reveal"
+      ><tp-toggle
+        part="input-reveal"
+        variant="ghost"
+        size="icon-xs"
+        .pressed=${revealed}
+        .ariaLabel=${this.revealLabel}
+        ?disabled=${this.effectiveDisabled}
+        @tp-value-change=${this.#toggleReveal}
+        ><tp-icon .icon=${revealed ? eyeOffIcon : eyeIcon}></tp-icon></tp-toggle
+    ></span>`;
+  }
+
+  readonly #toggleReveal = (event: CustomEvent<{ value: boolean }>): void => {
+    event.stopPropagation();
+    this.#setRevealed(event.detail.value);
+  };
+
+  /** Shows or hides the value, keeping the editor's selection across the type change. */
+  #setRevealed(revealed: boolean): void {
+    if (this.#revealed === revealed) return;
+    const editor = this.inputElement as HTMLInputElement | null;
+    const selection =
+      editor && editor.selectionStart !== null
+        ? ([editor.selectionStart, editor.selectionEnd ?? editor.selectionStart] as const)
+        : null;
+    this.#revealed = revealed;
+    this.requestUpdate();
+    if (!selection) return;
+    void this.updateComplete.then(() => {
+      const current = this.inputElement as HTMLInputElement | null;
+      if (current && current === this.ownerDocument.activeElement)
+        current.setSelectionRange(selection[0], selection[1]);
+    });
+  }
+
+  /** A submitted or reset form hides the value again. */
+  readonly #formSubmitted = (event: Event): void => {
+    if (this.#revealed && event.target === this.form) this.#setRevealed(false);
+  };
+
+  override formResetCallback(): void {
+    super.formResetCallback();
+    this.#setRevealed(false);
+  }
+
+  override connectedCallback(): void {
+    super.connectedCallback();
+    this.ownerDocument.addEventListener('submit', this.#formSubmitted, true);
   }
 
   #steppers = new Map<TpButton, PressAndHold>();
@@ -291,12 +391,19 @@ export class TpInput extends TpTextControl {
     return this.#typing ? value : this.#format(value);
   }
 
+  protected override willUpdate(changed: PropertyValues<this>): void {
+    super.willUpdate(changed);
+    // A disabled Input, or one that stops being revealable, hides its value again.
+    if (this.#revealed && (!this.#revealing || this.effectiveDisabled)) this.#revealed = false;
+  }
+
   protected override updated(changed: PropertyValues<this>): void {
     super.updated(changed);
     this.#bindSteppers();
   }
 
   override disconnectedCallback(): void {
+    this.ownerDocument.removeEventListener('submit', this.#formSubmitted, true);
     for (const [button, hold] of this.#steppers) {
       hold.dispose();
       compositeControl(button)?.release(this);
@@ -437,7 +544,7 @@ export class TpInput extends TpTextControl {
     return this.renderControl('input', 'input', {
       class: 'control',
       part: 'input focusable',
-      '.type': this.type,
+      '.type': this.revealed ? 'text' : this.type,
       '.name': this.effectiveName,
       ...(this.type === 'file' ? {} : { '.value': this.editingValue }),
       '.placeholder': this.placeholder,
@@ -454,6 +561,7 @@ export class TpInput extends TpTextControl {
       ...(this.label ? { 'aria-label': this.label } : {}),
       'aria-invalid': this.effectiveInvalid ? 'true' : nothing,
       'data-unit': this.variant === 'inline' && this.unit ? '' : nothing,
+      'data-reveal': this.#revealing ? '' : nothing,
       // The unit is drawn in the Input's own tree, out of the editor's reach; it describes it.
       'aria-description': this.variant === 'inline' && this.unit ? this.unit : nothing,
       '@input': this.#numberInput,

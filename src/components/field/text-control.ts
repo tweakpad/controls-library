@@ -52,6 +52,8 @@ export abstract class TpTextControl extends TpFormElement {
     maxLength: { type: Number, attribute: 'maxlength' },
     label: { type: String },
     mono: { type: Boolean, reflect: true },
+    inputMode: { type: String, attribute: 'inputmode' },
+    enterKeyHint: { type: String, attribute: 'enterkeyhint' },
   };
   static override styles = [
     TpFormElement.styles,
@@ -103,6 +105,16 @@ export abstract class TpTextControl extends TpFormElement {
    * autocapitalization, for code-like values. Explicit hints in `hostProperties` still win.
    */
   mono = false;
+  /**
+   * The virtual keyboard the native editor requests, such as `numeric`, `decimal` or `email`,
+   * independently of the type. Explicit hints in `hostProperties` still win.
+   */
+  override inputMode = '';
+  /**
+   * The label of a virtual keyboard's Enter key, such as `next` on a field that leads to another or
+   * `go` on the last one. Explicit hints in `hostProperties` still win.
+   */
+  override enterKeyHint = '';
   #composite = new CompositeControlController(
     this,
     () => this.inputElement,
@@ -350,6 +362,8 @@ export abstract class TpTextControl extends TpFormElement {
       spellcheck: this.mono ? 'false' : nothing,
       autocorrect: this.mono ? 'off' : nothing,
       autocapitalize: this.mono ? 'off' : nothing,
+      inputmode: this.inputMode || nothing,
+      enterkeyhint: this.enterKeyHint || nothing,
     };
     this.#editor = renderPart(
       part,

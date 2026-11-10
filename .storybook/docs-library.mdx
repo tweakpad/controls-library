@@ -72,6 +72,20 @@ export function Preview(props) {
     ? context.previews.filter((candidate) => candidate.afterHeading === parsed.afterHeading).length
     : 1;
   const captioned = Boolean(props.title) && siblings > 1;
+  // A page without stories (a pattern) has no story for Canvas to attach to: the preview renders
+  // in its own frame, with its source below.
+  if (context?.standalone)
+    return (
+      <figure className="tp-docs-example">
+        {captioned && <figcaption>{props.title}</figcaption>}
+        {!props.codeOnly && (
+          <div className="tp-docs-standalone-canvas sb-unstyled">
+            <PreviewCanvas preview={preview} />
+          </div>
+        )}
+        <Source code={source.code} language={source.language} format={false} dark />
+      </figure>
+    );
   return (
     <figure className="tp-docs-example">
       {captioned && <figcaption>{props.title}</figcaption>}
@@ -95,7 +109,7 @@ export function Code({ code, language, label }) {
   return (
     <figure className="tp-docs-example">
       {label && <figcaption>{label}</figcaption>}
-      <Source code={code.trim()} language={language || 'html'} format={false} />
+      <Source code={code.trim()} language={language || 'html'} format={false} dark />
     </figure>
   );
 }
@@ -155,20 +169,26 @@ export function PageHeader() {
   );
 }
 
-export function LibraryDoc() {
-  const doc = useLibraryDoc();
-  if (!doc) return null;
-  const { page, Content } = doc;
+export function DocContent({ Content, hero, previews, standalone = false }) {
+  // A page's body with the library's elements: component pages skip their hero (the Default
+  // story shows it), pattern pages show every preview.
   const components = { Preview, Code, Keys, table: DocsTable };
   // MDX resolves member-expression elements through its provider, so the context provider is
   // created directly.
   return React.createElement(
     LibraryDocContext.Provider,
-    { value: { hero: page.hero, previews: page.previews } },
+    { value: { hero, previews, standalone } },
     <MDXProvider components={components}>
       <Content components={components} />
     </MDXProvider>,
   );
+}
+
+export function LibraryDoc() {
+  const doc = useLibraryDoc();
+  if (!doc) return null;
+  const { page, Content } = doc;
+  return <DocContent Content={Content} hero={page.hero} previews={page.previews} />;
 }
 
 export function ApiRows({ label, id, level, rows }) {

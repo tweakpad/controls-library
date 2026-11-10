@@ -1,0 +1,14 @@
+Identity provider marks
+
+The Apple logo, the Google "G" logo, the Microsoft logo and the GitHub mark in `icons/brands` are
+trademarks of Apple Inc., Google LLC, Microsoft Corporation and GitHub, Inc. respectively. They are
+included unaltered so that sign-in buttons for these providers can show the mark each provider
+requires. Their use is subject to each provider's branding guidelines for sign-in buttons:
+
+- Sign in with Apple: https://developer.apple.com/design/human-interface-guidelines/sign-in-with-apple
+- Sign in with Google: https://developers.google.com/identity/branding-guidelines
+- Sign in with Microsoft: https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-branding-in-apps
+- GitHub logos and usage: https://github.com/logos
+
+No license to these trademarks is granted by this package, and their inclusion does not imply
+endorsement by their owners. Use a mark only on a button that signs in with that provider.

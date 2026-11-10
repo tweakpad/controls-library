@@ -60,6 +60,27 @@ export default {
       to: { path: '^src/foundation/(?:text-editor|emoji|flow)/', reachable: true },
     },
     {
+      name: 'main-entries-reach-no-pattern',
+      severity: 'error',
+      comment:
+        'Patterns ship only through @tweakpad/ui/patterns/<name>; the main entries never reach a ' +
+        'pattern entry.',
+      from: { path: MAIN_ENTRIES },
+      to: { path: '^src/patterns/', reachable: true },
+    },
+    {
+      name: 'pattern-entries-reach-components-only',
+      severity: 'error',
+      comment:
+        'A pattern entry registers library components; it never reaches a widget, a companion ' +
+        'entry or another pattern.',
+      from: { path: '^src/patterns/' },
+      to: {
+        path: '^src/widgets/|^src/foundation/(?:text-editor|emoji|flow)/|^src/patterns/',
+        reachable: true,
+      },
+    },
+    {
       name: 'shipped-not-to-stories',
       severity: 'error',
       comment: 'Stories and their examples are Storybook material, not part of the package.',

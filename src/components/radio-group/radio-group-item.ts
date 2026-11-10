@@ -5,6 +5,7 @@ import { stateMarkers } from '../../foundation/state-markers.js';
 import { TpFormElement } from '../../foundation/form-element.js';
 import { PresenceController } from '../../foundation/presence.js';
 import { componentHandlingPrevented } from '../../foundation/part.js';
+import { interactiveTargetInPath } from '../../foundation/interactive-target.js';
 import { radioGroupPresentation } from '../../presentation/families/radio-group.js';
 import { selectionBoxStyles } from '../shared/control-styles.js';
 
@@ -221,6 +222,12 @@ export class TpRadioGroupItem extends TpFormElement<unknown> {
     if (!this.radioDisabled && !this.radioReadOnly) this.#owner?.requestSelection(this, event);
   }
   #click = (event: Event): void => {
+    // A link or control inside the label acts on its own, as inside a native label.
+    if (
+      event.currentTarget instanceof Element &&
+      interactiveTargetInPath(event, event.currentTarget)
+    )
+      return;
     queueMicrotask(() => {
       if (this.isConnected && !componentHandlingPrevented(event)) this.#request(event);
     });

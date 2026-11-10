@@ -22,7 +22,7 @@ unfinished task, whatever else was done.
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | The page (authored)                    | `docs/components/<slug>.mdx`, `docs/motion/<group>/<slug>.mdx`, `docs/widgets/<slug>.mdx` (library)                                                                           |
 | API Reference data (generated)         | JSDoc on the element → Custom Elements Manifest → `elementApi` (`src/docs/api.ts`)                                                            |
-| Related data (generated, website only) | manifest `renders` → `relatedPages` → `dist/docs.json`, plus pattern frontmatter `components`                                                 |
+| Related data (generated, website only) | manifest `renders` → `relatedPages` → `dist/docs.json`, plus pattern frontmatter `components` (pattern pages: tweakpad-pattern skill) |
 | Storybook rendering                    | `.storybook/docs-page.mdx`, `.storybook/docs-library.mdx`, `src/stories/<slug>.stories.ts`                                                    |
 | Website rendering                      | `src/pages/docs/[...slug].astro`, `src/components/{Preview,Code,Keys,ApiTable}.astro` (site repo)                                             |
 | Design tokens list (both systems)      | `src/docs/token-catalog.ts` → `dist/docs.json` `tokens`; Storybook's Design tokens page, the website's Design tokens page (`TokenList.astro`) |
