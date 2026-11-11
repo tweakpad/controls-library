@@ -48,8 +48,11 @@ export class TpStack extends TpElementBase {
         color: inherit;
       }
 
+      /* The row fills the host whatever display an owning layout gives the host, such as a
+         Form's flex actions row. */
       .root {
         display: flex;
+        flex: 1 1 auto;
         min-inline-size: 0;
         min-block-size: 0;
       }

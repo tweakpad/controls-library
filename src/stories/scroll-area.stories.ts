@@ -13,7 +13,7 @@ interface Args {
 const records = Array.from({ length: 30 }, (_, i) => `Release 1.${i}.0`);
 const defaults: Args = {
   orientation: 'vertical',
-  scrollbarVisibility: 'automatic',
+  scrollbarVisibility: 'while-scrolling',
   keepMounted: false,
   disabled: false,
   showCorner: true,

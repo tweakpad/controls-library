@@ -31,8 +31,11 @@ export const calendarStyles = css`
     }
   }
 
+  /* Months and columns grow to fill an inline size wider than the cells need, while rows keep the
+     cell height and days keep the cell size; without one the calendar keeps its natural size. */
   .month {
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
     min-inline-size: 0;
   }
@@ -104,11 +107,11 @@ export const calendarStyles = css`
   .weekdays,
   .week {
     display: grid;
-    grid-template-columns: repeat(7, var(--tp-calendar-cell-size));
+    grid-template-columns: repeat(7, minmax(var(--tp-calendar-cell-size), 1fr));
   }
 
   .grid[data-week-numbers] :is(.weekdays, .week) {
-    grid-template-columns: repeat(8, var(--tp-calendar-cell-size));
+    grid-template-columns: repeat(8, minmax(var(--tp-calendar-cell-size), 1fr));
   }
 
   .weekday,
@@ -121,18 +124,20 @@ export const calendarStyles = css`
     position: relative;
     isolation: isolate;
     display: grid;
+    justify-items: center;
     min-inline-size: 0;
-    aspect-ratio: 1;
+    block-size: var(--tp-calendar-cell-size);
   }
 
   .day {
     display: block;
+    inline-size: var(--tp-calendar-cell-size);
     min-inline-size: 0;
   }
 
   .day::part(button) {
     inline-size: 100%;
-    block-size: var(--tp-calendar-cell-size);
+    block-size: 100%;
     min-block-size: 0;
     padding: 0;
   }
@@ -147,6 +152,11 @@ export const calendarStyles = css`
   .day:focus-within {
     position: relative;
     z-index: 2;
+  }
+
+  /* A range interior spans its whole column, so the band stays continuous across wide columns. */
+  .day-cell[data-range-middle] .day {
+    inline-size: 100%;
   }
 
   .dropdown::part(native-select-control) {

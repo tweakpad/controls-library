@@ -84,6 +84,9 @@ function moduloCalendar(value: number, divisor: number): number {
 }
 
 /** Developer diagnostics for rejected programmatic selections; not localized. */
+/** Calendars whose `value` was written since their last update; see `#revealSelection`. */
+const valueWritten = new WeakSet<TpCalendar>();
+
 const selectionDiagnostics: Record<Exclude<CalendarValidityCode, 'value-missing'>, string> = {
   'excluded-date': 'Calendar selection contains an excluded date.',
   'selection-count': 'Calendar selection violates its count limits.',
@@ -164,6 +167,9 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
   }
   override set value(value: CalendarValue) {
     super.value = value;
+    // Writing the selection brings it into view, even when it rewrites the committed value.
+    valueWritten.add(this);
+    this.requestUpdate();
   }
   /**
    * The month caption as text, or as dropdowns for the month and year, the month only or the year
@@ -712,6 +718,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     super.willUpdate(changed);
     if (!this.#initialized) {
       this.#initialize();
+      valueWritten.delete(this);
       return;
     }
     if (changed.has('calendarAdapter') || changed.has('selectionMode')) {
@@ -752,6 +759,35 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     } else if (!this.#monthControlled && changed.has('displayedMonth') && this.displayedMonth) {
       this.#diagnose('Calendar cannot change from uncontrolled to controlled displayed month.');
     }
+    if (valueWritten.delete(this) && this.#selectionControlled) this.#revealSelection();
+  }
+
+  /**
+   * Shows the committed selection when none of its dates is on a displayed grid: the displayed
+   * month moves to its first date through the cancelable displayed-month proposal.
+   */
+  #revealSelection(): void {
+    const dates = calendarValueDates(this.selectionMode, this.#selection, this.calendarAdapter);
+    const months = this.#visibleMonthStarts();
+    const first = dates[0];
+    if (!first || !months.length) return;
+    const weekStart = this.#resolvedWeekStart();
+    const shown = (date: string) =>
+      months.some(
+        (month) =>
+          this.#sameMonth(date, month) ||
+          (this.showOutsideDays &&
+            calendarGridDates(month, weekStart, this.calendarAdapter, this.fixedWeeks).includes(
+              date,
+            )),
+      );
+    if (dates.some(shown)) return;
+    const target = this.calendarAdapter.startOfMonth(first);
+    const display =
+      this.calendarAdapter.compare(target, months[0]!) < 0
+        ? target
+        : this.calendarAdapter.addMonths(target, -(months.length - 1));
+    this.#requestDisplayedMonth(display, new Event('value'));
   }
 
   protected override updated(changed: PropertyValues<this>): void {

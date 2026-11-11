@@ -167,73 +167,112 @@ Without navigation bounds, the year dropdown offers the current year minus 100 t
 ### Presets
 
 <Preview
-  title="Quick picks"
-  code={`<tp-card
-  id="calendar-presets"
-  size="sm"
-  section-colors="off"
-  style="inline-size: fit-content; max-inline-size: 20rem"
->
-  <tp-calendar
-    label="Follow-up date"
-    today="2026-02-12"
-    value="2026-02-12"
-    displayed-month="2026-02-01"
-    fixed-weeks
-  ></tp-calendar>
-  <tp-stack slot="footer" direction="row" gap="2" wrap="wrap">
-    <tp-button variant="outline" size="sm" data-days="0" style="flex: 1 0 auto">Today</tp-button>
-    <tp-button variant="outline" size="sm" data-days="1" style="flex: 1 0 auto">Tomorrow</tp-button>
-    <tp-button variant="outline" size="sm" data-days="7" style="flex: 1 0 auto"
-      >Next week</tp-button
-    >
-    <tp-button variant="outline" size="sm" data-days="30" style="flex: 1 0 auto"
-      >In 30 days</tp-button
-    >
+  title="Due date"
+  code={`<tp-card id="calendar-due" size="sm" section-colors="off" style="inline-size: 22rem; max-inline-size: 100%">
+  <h3 slot="header" style="margin:0">Due date</h3>
+  <p slot="description" style="margin:0">Draft the quarterly report</p>
+  <tp-stack gap="3">
+    <tp-calendar label="Due date" today="2026-02-12" value="2026-02-13" fixed-weeks></tp-calendar>
+    <tp-scroll-area orientation="horizontal" scroll-edge-fade style="margin-inline: calc(var(--tp-space-1) * -1)">
+      <tp-toggle-group label="Quick picks" variant="outline" size="sm" value='["1"]' style="inline-size: max-content; padding: var(--tp-space-1) var(--tp-space-1) var(--tp-space-3)">
+        <tp-toggle value="0">Today</tp-toggle>
+        <tp-toggle value="1">Tomorrow</tp-toggle>
+        <tp-toggle value="monday">Next Monday</tp-toggle>
+        <tp-toggle value="7">In a week</tp-toggle>
+        <tp-toggle value="14">In 2 weeks</tp-toggle>
+      </tp-toggle-group>
+    </tp-scroll-area>
+  </tp-stack>
+  <tp-stack slot="footer" direction="row" align="center" justify="space-between" gap="2" style="inline-size: 100%">
+    <output style="font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)">Due Friday, 13 February</output>
+    <tp-button variant="ghost" size="sm">Remove date</tp-button>
   </tp-stack>
 </tp-card>`}
   script={`await customElements.whenDefined('tp-calendar');
-const card = document.getElementById('calendar-presets');
+const card = document.getElementById('calendar-due');
 const calendar = card.querySelector('tp-calendar');
-calendar.addEventListener('tp-value-change', (event) => {
-  if (!event.defaultPrevented) calendar.value = event.detail.value;
+const picks = card.querySelector('tp-toggle-group');
+const summary = card.querySelector('output');
+const iso = (date) =>
+  [date.getFullYear(), date.getMonth() + 1, date.getDate()]
+    .map((part) => String(part).padStart(2, '0'))
+    .join('-');
+// Each quick pick names a date relative to today.
+const pickDate = (pick) => {
+  const date = new Date(calendar.today + 'T00:00');
+  const days = pick === 'monday' ? (8 - date.getDay()) % 7 || 7 : Number(pick);
+  date.setDate(date.getDate() + days);
+  return iso(date);
+};
+const show = (value) => {
+  calendar.value = value;
+  const match = [...picks.querySelectorAll('tp-toggle')].find((pick) => pickDate(pick.value) === value);
+  picks.value = match ? [match.value] : [];
+  summary.textContent = value
+    ? 'Due ' + new Date(value + 'T00:00').toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' })
+    : 'No due date';
+};
+calendar.addEventListener('tp-value-change', (event) => show(event.detail.value));
+// A pick applies on every press, so pressing the current pick again brings its date back into view.
+picks.addEventListener('click', (event) => {
+  const pick = event.target.closest('tp-toggle');
+  if (pick) show(pickDate(pick.value));
 });
-calendar.addEventListener('tp-displayed-month-change', (event) => {
-  if (!event.defaultPrevented) calendar.displayedMonth = event.detail.value;
-});
-for (const button of card.querySelectorAll('[data-days]')) {
-  button.addEventListener('click', () => {
-    const date = new Date(calendar.today + 'T00:00');
-    date.setDate(date.getDate() + Number(button.dataset.days));
-    const iso = [date.getFullYear(), date.getMonth() + 1, date.getDate()]
-      .map((part) => String(part).padStart(2, '0'))
-      .join('-');
-    calendar.value = iso;
-    calendar.displayedMonth = iso.slice(0, 8) + '01';
-  });
-}`}
+card.querySelector('tp-button').addEventListener('click', () => show(null));
+show(calendar.value);`}
 />
 
-Shortcut buttons can drive a controlled Calendar: set `value` to pick the date and `displayed-month` to bring its month into view. Because both are controlled, the listeners accept the reader's own clicks and month changes too. `fixed-weeks` keeps the card from changing height between months.
+Quick picks and the Calendar drive one controlled date: a pick writes `value`, which brings the date into view even when it is already selected, and a date picked on the grid selects the matching pick or none. `fixed-weeks` keeps the card from changing height between months.
 
 ### Date and time
 
 <Preview
-  title="Date with start and end times"
-  code={`<tp-card size="sm" section-colors="off" style="inline-size:fit-content">
-  <tp-calendar label="Meeting date" today="2026-06-08" default-value="2026-06-12"></tp-calendar>
-  <div slot="footer" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--tp-space-3);inline-size:100%">
-    <tp-field label="Starts">
-      <tp-input type="time" default-value="10:30"></tp-input>
-    </tp-field>
-    <tp-field label="Ends">
-      <tp-input type="time" default-value="11:15"></tp-input>
-    </tp-field>
-  </div>
+  title="Schedule a call"
+  code={`<tp-card id="calendar-call" size="sm" section-colors="off" style="inline-size: 22rem">
+  <h3 slot="header" style="margin:0">Schedule a call</h3>
+  <p slot="description" style="margin:0">Weekdays only, in your time zone.</p>
+  <tp-calendar label="Call date" today="2026-06-08" min="2026-06-08" default-value="2026-06-12"></tp-calendar>
+  <tp-form slot="footer" id="calendar-call-form" aria-label="Call time" style="inline-size: 100%">
+    <tp-stack direction="row" gap="3">
+      <tp-field label="Starts" style="flex: 1">
+        <tp-input type="time" name="start" default-value="10:30" required></tp-input>
+      </tp-field>
+      <tp-field id="calendar-call-end" label="Ends" style="flex: 1">
+        <tp-input type="time" name="end" default-value="11:15" required></tp-input>
+      </tp-field>
+    </tp-stack>
+    <tp-stack slot="actions" direction="row" align="center" justify="space-between" gap="2" style="inline-size: 100%">
+      <output style="flex: 1; font-size: var(--tp-text-sm); color: var(--tp-muted-foreground)"></output>
+      <tp-button type="submit" size="sm">Schedule</tp-button>
+    </tp-stack>
+  </tp-form>
 </tp-card>`}
+  script={`await customElements.whenDefined('tp-calendar');
+const calendar = document.querySelector('#calendar-call tp-calendar');
+const form = document.getElementById('calendar-call-form');
+const summary = form.querySelector('output');
+calendar.disabledDates = (date) => [0, 6].includes(new Date(date + 'T00:00').getDay());
+document.getElementById('calendar-call-end').validator = (end, values) =>
+  end > values.start ? null : 'End the call after it starts.';
+const format = new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+const call = () => {
+  const { start, end } = form.values;
+  const from = new Date(calendar.selection + 'T' + start);
+  const to = new Date(calendar.selection + 'T' + end);
+  return to > from ? format.formatRange(from, to) : '';
+};
+const describe = () => {
+  summary.textContent = call();
+};
+calendar.addEventListener('tp-value-change', () => queueMicrotask(describe));
+form.addEventListener('tp-value-change', () => queueMicrotask(describe));
+form.onFormSubmit = () => {
+  summary.textContent = 'Booked: ' + call();
+};
+describe();`}
 />
 
-Calendar values are dates only. Collect times in labelled time inputs beside it and combine the two in your own code.
+Calendar values are dates only. Collect times in labelled time inputs beside it, validate them together through their Fields, and combine date and times in your own code.
 
 ### Locale
 

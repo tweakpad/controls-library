@@ -20,3 +20,4 @@
 
 | preview | Horizontal | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
 | preview | Visibility | User-authorized Stack layout migration: replace equivalent flow CSS while preserving content, native semantics and existing dimensions. |
+| prose | `scrollbar-visibility` decides when tracks appear. | User request (2026-11-11): tracks show only while scrolling by default; the paragraph names the new default. |

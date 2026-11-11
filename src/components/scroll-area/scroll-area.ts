@@ -117,8 +117,11 @@ export class TpScrollArea extends Scrollable(TpElement) {
   axis: 'x' | 'y' | 'both' | undefined;
   /** Names the viewport as a region, which helps when it holds a lot of content. */
   label = '';
-  /** When the tracks appear: on overflow, always, only while scrolling or only on hover. */
-  scrollbarVisibility: ScrollbarVisibility = 'automatic';
+  /**
+   * When the tracks appear: only while scrolling (the default), on overflow, always or only on
+   * hover. A dragged track and a focused viewport keep theirs.
+   */
+  scrollbarVisibility: ScrollbarVisibility = 'while-scrolling';
   /** Keeps a track rendered when its axis does not overflow; it stays hidden unless visibility is `always`. */
   keepMounted = false;
   /** Configures each track on its own (orientation, visibility, keep-mounted), replacing `axis` and `orientation`; an empty list keeps native scrolling with no custom tracks. */

@@ -49,6 +49,7 @@ the mapping must be complete even though implementation/test statuses are pendin
 | C-08 | Default slot and root part; unchanged DOM/focus/semantics | ucl22-stack | Local reference layout; approved user API | Stack config and Lit element | components/stack | V-01, V-02 | passed | Unit/config and Chrome fixture coverage; React/Vue source and built scenarios. |
 | C-09 | Shared Foundation, theming/density, lifecycle, stylesheet caching | ucl22-stack | Local reference layout; approved user API | Stack config and Lit element | components/stack | V-01, V-02 | passed | Unit/config and Chrome fixture coverage; React/Vue source and built scenarios. |
 | C-10 | Catalog/package and generated framework object property projections | ucl22-stack | Local reference layout; approved user API | Stack config and Lit element | components/stack | V-01, V-02 | passed | Unit/config and Chrome fixture coverage; React/Vue source and built scenarios. |
+| C-11 | The root fills the host whatever display an owning layout assigns it (2026-11-11: a Stack as a Form `actions` child shrank to its content and was pushed to the end) | ucl22-stack | Form actions `surfaceFooterLayout` | `.root { flex: 1 1 auto }` | none | V-03 | passed | Calendar Schedule a call summary at the start edge; root 326 px of 326 |
 
 Record spec/reference conflicts here before dependent implementation:
 
@@ -110,6 +111,7 @@ source/capability evidence. Tool limitations are blocked, not passed or N/A.
 | ---- | ---------------------------------- | ------------------- | ------------------- | ------------- | -------------------------- | ------- | ------------------- |
 | V-01 | C-01 through C-10; unit/build/package | Config, CSS, common base, framework compilation | Contract values and package integration | passed | Full suite 6274 pass; types/build/package/size pass | passed | Logs under local evidence directory |
 | V-02 | C-01 through C-10; browser/visual/a11y/performance | Chrome fixture, exact boundaries, nesting, RTL, density, real Tab, AX, Axe, framework props | Correct layout and unchanged semantics | 26 checks pass; 100 instances 17.9–20.4 ms; 0 resize updates | Chrome MCP; browser.json | passed | Dark/light screenshots observed; root part custom padding 7px verified |
+| V-03 | C-11; browser | Stack with `justify="space-between"` in a tp-form `slot="actions"`, Calendar docs Schedule a call | summary at the start, button at the end | output starts at the stack start; stack root 326/326 px | DevTools evaluate, `tmp/component-verification/calendar/schedule-fill.png` | passed | Observed values recorded in Actual result |
 
 Record viewport, theme, direction, motion conditions and relevant browser features
 for visual/interaction rows. Record what was visually inspected as well as the
