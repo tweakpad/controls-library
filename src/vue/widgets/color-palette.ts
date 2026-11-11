@@ -20,6 +20,7 @@ export const ColorPalette = /*#__PURE__*/ createBinding(TpColorPalette, 'ColorPa
   | 'collections'
   | 'columns'
   | 'defaultCollection'
+  | 'defaultFavorites'
   | 'defaultGrouping'
   | 'defaultLayout'
   | 'defaultMode'
@@ -30,7 +31,9 @@ export const ColorPalette = /*#__PURE__*/ createBinding(TpColorPalette, 'ColorPa
   | 'defaultValue'
   | 'density'
   | 'disabled'
+  | 'favorites'
   | 'formOwner'
+  | 'format'
   | 'grouping'
   | 'inputElementReference'
   | 'invalid'
@@ -47,17 +50,22 @@ export const ColorPalette = /*#__PURE__*/ createBinding(TpColorPalette, 'ColorPa
   | 'paletteStyle'
   | 'partContracts'
   | 'partPresentation'
+  | 'persistence'
   | 'readOnly'
   | 'required'
   | 'size'
   | 'sort'
   | 'sortDirection'
+  | 'storageKey'
   | 'strings'
   | 'toolbar'
   | 'value',
   {
     'tp-collection-change': foundationEvents.TpValueChangeEvent<string>;
     'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
+    'tp-favorites-change': foundationEvents.TpValueChangeEvent<
+      readonly widgetsColorPaletteTypes.ColorPaletteFavorite[]
+    >;
     'tp-field-value': CustomEvent<{
       value: string;
       previousValue: string;

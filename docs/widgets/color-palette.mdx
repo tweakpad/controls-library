@@ -11,9 +11,11 @@ tag: tp-color-palette
 
 ## Usage
 
-The value is the color text the collection gives for the chosen swatch, and it submits with a form under `name`. Colors sit next to each other without gaps or lines between them, so small differences in grading stay visible. The list takes focus as one control: the arrow keys move through the grid, letters jump to a color by name, and Enter or Space picks. The list is virtualized, so a collection of several hundred colors stays fast. Without `collections` the palette offers its built-in default collection.
+The value is the color text the collection gives for the chosen swatch, and it submits with a form under `name`. Colors sit next to each other without gaps or lines between them, so small differences in grading stay visible. The list takes focus as one control: the arrow keys move through the grid, letters jump to a color by name, and Enter or Space picks. The list is virtualized, so a collection of several hundred colors stays fast. The palette always offers its built-in default collection, and `collections` loads more.
 
-A pick of a different color proposes a cancelable `tp-value-change` whose metadata names the swatch and the collection, followed by `tp-value-commit`. Supply `value` for a controlled palette or `defaultValue` for an uncontrolled one; the mode stays fixed for the element's lifetime. The same rule applies to the mode, collection, layout, palette style, grouping, sort, sort direction and size lanes.
+A pick of a different color proposes a cancelable `tp-value-change` whose metadata names the swatch and the collection, followed by `tp-value-commit`. Supply `value` for a controlled palette or `defaultValue` for an uncontrolled one; the mode stays fixed for the element's lifetime. The same rule applies to the mode, collection, layout, palette style, grouping, sort, sort direction, size and favorites lanes.
+
+The status bar under the list shows the chosen color in `format` (`hex` by default, or `rgb`, `hsl`, `hwb`, `hsv`, `lab`, `oklab`, `oklch` or `cmyk`) with its name, or the chosen palette's name and size. Its copy button copies that color, or every color of the palette, and its heart adds the choice to the favorites or removes it. With nothing chosen, the bar names the active collection and how many colors or palettes it lists, or counts the favorites.
 
 <Preview
   title="Picks"
@@ -39,7 +41,7 @@ palette.addEventListener('tp-value-commit', (event) => {
 
 ### Collections
 
-A collection is a JSON document: its colors as color texts or as records with a name and a group, optional groups in display order, optional preset palettes of two to twelve colors with their shares, and who made it. The default and a reduced collection ship with `@tweakpad/ui/color-palette`; every other collection is its own import from `@tweakpad/ui/color-palette/collections/<id>`, so an application bundles only the collections it uses. With more than one collection, a Select in the toolbar switches between them and the footer credits the active one.
+A collection is a JSON document: its colors as color texts or as records with a name and a group, optional groups in display order, optional preset palettes of two to twelve colors with their shares, an optional description, and who made it. The default and a reduced collection ship with `@tweakpad/ui/color-palette`; every other collection is its own import from `@tweakpad/ui/color-palette/collections/<id>`, so an application bundles only the collections it uses. Once a collection is loaded, Color libraries in the view options lists the default collection and then the loaded ones; the palette opens on the first loaded collection. When the active collection names its source and nothing is chosen, an info icon at the start of the status bar shows the source and its license in a Tooltip on hover or focus; a collection with a description shows a Preview Card instead, with the source as a link, the description and the license.
 
 <Code
   label="harbor.json"
@@ -47,6 +49,7 @@ A collection is a JSON document: its colors as color texts or as records with a 
   code={`{
   "id": "harbor",
   "name": "Harbor inks",
+  "description": "Process and spot inks for coastal print runs.",
   "attribution": { "name": "Harbor Print Co.", "url": "https://example.com/inks", "license": "CC BY 4.0" },
   "groups": [{ "id": "blues", "name": "Blues" }, { "id": "warm", "name": "Warm" }],
   "colors": [
@@ -115,7 +118,7 @@ document.querySelector('#color-palette-sorted').collections = [cssNamedColors];`
 
 ### Palettes
 
-`mode="palettes"` lists the collection's palettes, one row each. A palette holds two to twelve colors, and its weights set each color's share of the row; without weights the colors share it equally.
+`mode="palettes"` lists the collection's palettes, one row each. A palette holds two to twelve colors, and its weights set each color's share of the row; without weights the colors share it equally. A collection without palettes shows an empty state instead. Pressing a color of a palette picks that color and marks the whole palette as chosen.
 
 `palette-style="gradient"` blends each palette into one gradient whose colors stay pickable, each at the middle of its share; the default `stops` shows the colors side by side. Display in the view options switches between Hard stops and Gradient.
 
@@ -127,6 +130,28 @@ document.querySelector('#color-palette-sorted').collections = [cssNamedColors];`
   default-palette-style="gradient"
   default-value="#e64a7c"
 ></tp-color-palette>`}
+/>
+
+### Favorites
+
+`mode="favorites"` lists the colors, palettes and gradients you bookmarked, in three sections, each palette and gradient under its name. Double-click a color to add it, or a color of a palette to add the whole palette; a palette shown as a gradient is added as a gradient. A heart appears in the color or across the palette for two seconds to confirm it. In the favorites, double-click a favorite to remove it; Delete or Backspace removes the highlighted favorite, and so does Remove from favorites in its context menu. Each change proposes a cancelable `tp-favorites-change` whose metadata names the `action` and the `favorite`.
+
+Favorites are kept in local storage under `storage-key` by default. To keep them in your own state instead, set `persistence="none"`, pass them as `favorites` and write the proposed list back.
+
+<Preview
+  title="Favorites"
+  code={`<tp-color-palette id="color-palette-favorites" label="Fill" persistence="none"></tp-color-palette>`}
+  script={`const palette = document.querySelector('#color-palette-favorites');
+let favorites = [
+  { kind: 'color', value: '#e64a7c', name: 'Rose 500' },
+  { kind: 'gradient', name: 'Lagoon', colors: ['#143e79', '#00a392', '#b3e9f6'] },
+];
+palette.favorites = favorites;
+palette.mode = 'favorites';
+palette.addEventListener('tp-favorites-change', (event) => {
+  favorites = event.detail.value;
+  palette.favorites = favorites;
+});`}
 />
 
 ### Size and density
@@ -161,7 +186,9 @@ Focusing the list with the keyboard highlights the chosen color, or the first on
 | Home, End              | First or last color                                                                   |
 | Letters                | The next color whose name starts with the typed letters                               |
 | Enter, Space           | Pick the highlighted color                                                            |
+| Delete, Backspace      | Remove the highlighted favorite                                                       |
+| Shift+F10, Menu        | Open the context menu of the highlighted favorite                                     |
 | Arrows on the tabs     | Move between colors and palettes                                                      |
-| Tab                    | Move between the tabs, the view options, the list and the credit link                 |
+| Tab                    | Reach the tabs, the view options, the list, the copy button and the source info       |
 
-Pressing a color picks it. Only the chosen color is marked, with a white and a black line along its edge.
+Pressing a color picks it, and double-clicking it adds it to the favorites, or removes it in the favorites. Only the chosen color is marked, with a white and a black line along its edge; in a palette the line runs around the whole palette.

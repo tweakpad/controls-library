@@ -51,6 +51,8 @@ export interface ColorCollection {
   readonly $schema?: string;
   readonly id: string;
   readonly name?: string;
+  /** What the collection holds and what it is for, in a sentence or two. */
+  readonly description?: string;
   readonly attribution?: ColorCollectionAttribution;
   readonly groups?: readonly ColorCollectionGroup[];
   readonly colors: readonly ColorCollectionColor[];
@@ -91,6 +93,7 @@ export interface PaletteIssue {
 export interface ResolvedColorCollection {
   readonly id: string;
   readonly name?: string;
+  readonly description?: string;
   readonly attribution?: ColorCollectionAttribution;
   readonly groups: readonly ColorCollectionGroup[];
   readonly swatches: readonly PaletteSwatch[];

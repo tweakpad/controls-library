@@ -6,6 +6,9 @@ import {
 import {
   blendPaint,
   buildListModel,
+  selectedKey,
+  sameFavorite,
+  sanitizeFavorites,
   hslText,
   listText,
 } from '../../../../src/widgets/color-palette/model.js';
@@ -30,6 +33,7 @@ const model = (layout: ColorPaletteLayout) =>
     direction: 'ascending',
     strings,
     columns: 9,
+    favorites: [],
   });
 
 describe('color palette list layout', () => {
@@ -70,6 +74,7 @@ describe('color palette list layout', () => {
       direction: 'ascending',
       strings,
       columns: 4,
+      favorites: [],
     });
     // Every named group starts with its label row; option rows hold at most `columns` options.
     for (const [index, group] of grid.groups.entries()) {
@@ -96,6 +101,7 @@ describe('color palette list layout', () => {
       direction: 'ascending',
       strings,
       columns: 9,
+      favorites: [],
     });
     expect(sets.columns).toBeGreaterThan(1);
     expect(sets.slots.get(sets.keys[0]!)!.paint).toHaveProperty('--_tp-color-palette-paint');
@@ -126,6 +132,7 @@ describe('color palette list layout', () => {
       direction: 'ascending' as const,
       strings,
       columns: 9,
+      favorites: [],
     };
     const stops = buildListModel({ ...input, paletteStyle: 'stops' });
     const blend = buildListModel({ ...input, paletteStyle: 'gradient' });
@@ -166,5 +173,124 @@ describe('color palette list layout', () => {
     expect(ltr).toContain(' 37.5%');
     expect(ltr).toContain(' 87.5%');
     expect(ltr.endsWith(' 100%)')).toBe(true);
+  });
+
+  it('lists favorites in sections of colors, palettes and gradients', () => {
+    const favorites = [
+      { kind: 'color', value: '#3a89fa' },
+      { kind: 'gradient', name: 'Sunrise', colors: ['#ff0000', '#ffa500', '#ffff00'] },
+      { kind: 'color', value: '#123456', name: 'Ink' },
+      { kind: 'palette', colors: ['#ff0000', '#0000ff'], weights: [3, 1] },
+      { kind: 'color', value: 'not a color' },
+    ] as const;
+    const model = buildListModel({
+      collection: resolveColorCollection(defaultColorCollection),
+      mode: 'favorites',
+      layout: 'grid',
+      paletteStyle: 'stops',
+      grouping: 'collection',
+      sort: 'collection',
+      direction: 'ascending',
+      strings,
+      columns: 9,
+      favorites,
+    });
+    // Section headings for palettes and gradients, then one group named after each of them.
+    expect(model.groups.map((group) => [group.label, group.name, !!group.section])).toEqual([
+      ['Colors', 'Colors', true],
+      ['Palettes', undefined, true],
+      ['Palette 1', 'Palette 1', false],
+      ['Gradients', undefined, true],
+      ['Sunrise', 'Sunrise', false],
+    ]);
+    const slots = [...model.slots.values()];
+    // A collection color keeps its collection name; an unknown one keeps the given name.
+    expect(slots.filter((slot) => !slot.set).map((slot) => slot.swatch.name)).toEqual([
+      'Blue 500',
+      'Ink',
+    ]);
+    // Every option points back to the favorite it belongs to, for removal.
+    expect(slots.map((slot) => slot.favorite)).toEqual([0, 2, 3, 3, 1, 1, 1]);
+    // Weights become shares of their sum, as a collection's palette weights do.
+    const palette = model.units.find((unit) => unit.kind === 'row' && unit.palette);
+    expect(palette?.kind === 'row' && palette.slots.map((slot) => slot.share)).toEqual([
+      0.75, 0.25,
+    ]);
+    expect(slots.filter((slot) => slot.blend)).toHaveLength(3);
+  });
+
+  it('shows no sections without favorites', () => {
+    const model = buildListModel({
+      collection,
+      mode: 'favorites',
+      layout: 'grid',
+      paletteStyle: 'stops',
+      grouping: 'none',
+      sort: 'collection',
+      direction: 'ascending',
+      strings,
+      columns: 9,
+      favorites: [],
+    });
+    expect(model.units).toHaveLength(0);
+  });
+
+  it('reads back only well-formed favorites and compares them by color', () => {
+    expect(
+      sanitizeFavorites([
+        { kind: 'color', value: '#fff', name: '' },
+        { kind: 'palette', colors: ['#fff'] },
+        { kind: 'gradient', colors: Array.from({ length: 14 }, () => '#000'), weights: [1] },
+        { kind: 'other' },
+        'x',
+      ]),
+    ).toEqual([
+      { kind: 'color', value: '#fff' },
+      { kind: 'gradient', colors: Array.from({ length: 12 }, () => '#000') },
+    ]);
+    expect(sanitizeFavorites('nope')).toEqual([]);
+    expect(sameFavorite({ kind: 'color', value: '#FFF' }, { kind: 'color', value: 'white' })).toBe(
+      true,
+    );
+    expect(
+      sameFavorite(
+        { kind: 'palette', colors: ['#fff', '#000'] },
+        { kind: 'gradient', colors: ['#fff', '#000'] },
+      ),
+    ).toBe(false);
+  });
+
+  it('marks a palette color only when it was picked from that palette', () => {
+    const input = {
+      collection: resolveColorCollection(defaultColorCollection),
+      layout: 'grid' as const,
+      paletteStyle: 'stops' as const,
+      grouping: 'collection' as const,
+      sort: 'collection' as const,
+      direction: 'ascending' as const,
+      strings,
+      columns: 9,
+      favorites: [{ kind: 'color', value: '#00a392' }] as const,
+    };
+    const identity = (value: string) =>
+      resolveColorCollection(defaultColorCollection).swatches.find(
+        (swatch) => swatch.value === value,
+      )?.identity;
+    const palettes = buildListModel({ ...input, mode: 'palettes' });
+    // Teal 500 is in Lagoon and Harbor, but the value alone selects no palette color.
+    expect(selectedKey(palettes, '#00a392', undefined, identity)).toBeUndefined();
+    const lagoonTeal = palettes.keys.find(
+      (key) =>
+        palettes.slots.get(key)!.setName === 'Lagoon' &&
+        palettes.slots.get(key)!.swatch.value === '#00a392',
+    )!;
+    expect(selectedKey(palettes, '#00a392', lagoonTeal, identity)).toBe(lagoonTeal);
+    // Plain colors still follow the value: the grid and the favorite colors.
+    const colors = buildListModel({ ...input, mode: 'colors' });
+    expect(
+      colors.slots.get(selectedKey(colors, '#00a392', lagoonTeal, identity)!)!.swatch.name,
+    ).toBe('Teal 500');
+    const favorites = buildListModel({ ...input, mode: 'favorites' });
+    expect(selectedKey(favorites, '#00a392', undefined, identity)).toBe('f0');
   });
 });

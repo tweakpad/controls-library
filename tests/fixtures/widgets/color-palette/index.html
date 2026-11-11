@@ -90,6 +90,25 @@
         </div>
       </section>
       <section>
+        <h2>Favorites</h2>
+        <div class="row">
+          <tp-color-palette
+            id="favorites"
+            class="surface"
+            label="Favorites"
+            default-mode="favorites"
+            storage-key="tp-color-palette-fixture-favorites"
+          ></tp-color-palette>
+          <tp-color-palette
+            id="favorites-external"
+            class="surface"
+            label="External favorites"
+            default-mode="favorites"
+            persistence="none"
+          ></tp-color-palette>
+        </div>
+      </section>
+      <section>
         <h2>In a popover, right to left, disabled</h2>
         <div class="row">
           <tp-popover id="popover">

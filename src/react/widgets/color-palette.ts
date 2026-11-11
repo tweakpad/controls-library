@@ -17,6 +17,7 @@ export type ColorPaletteProps = ElementProps<
   | 'collections'
   | 'columns'
   | 'defaultCollection'
+  | 'defaultFavorites'
   | 'defaultGrouping'
   | 'defaultLayout'
   | 'defaultMode'
@@ -27,7 +28,9 @@ export type ColorPaletteProps = ElementProps<
   | 'defaultValue'
   | 'density'
   | 'disabled'
+  | 'favorites'
   | 'formOwner'
+  | 'format'
   | 'grouping'
   | 'inputElementReference'
   | 'invalid'
@@ -44,17 +47,22 @@ export type ColorPaletteProps = ElementProps<
   | 'paletteStyle'
   | 'partContracts'
   | 'partPresentation'
+  | 'persistence'
   | 'readOnly'
   | 'required'
   | 'size'
   | 'sort'
   | 'sortDirection'
+  | 'storageKey'
   | 'strings'
   | 'toolbar'
   | 'value',
   {
     onTpCollectionChange: foundationEvents.TpValueChangeEvent<string>;
     onTpDiagnostic: CustomEvent<foundationServices.Diagnostic>;
+    onTpFavoritesChange: foundationEvents.TpValueChangeEvent<
+      readonly widgetsColorPaletteTypes.ColorPaletteFavorite[]
+    >;
     onTpFieldValue: CustomEvent<{
       value: string;
       previousValue: string;
@@ -78,6 +86,7 @@ export const ColorPalette = /*#__PURE__*/ createBinding<ColorPaletteProps>(
   {
     onTpCollectionChange: 'tp-collection-change',
     onTpDiagnostic: 'tp-diagnostic',
+    onTpFavoritesChange: 'tp-favorites-change',
     onTpFieldValue: 'tp-field-value',
     onTpGroupingChange: 'tp-grouping-change',
     onTpLayoutChange: 'tp-layout-change',

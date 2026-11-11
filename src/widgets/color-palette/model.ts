@@ -1,9 +1,12 @@
 import { fillTemplate } from '../../foundation/template.js';
 import { contrastColor } from '../../foundation/color/contrast.js';
 import { convertColor, mixColors } from '../../foundation/color/convert.js';
-import { displayColor, flatGradient } from '../../foundation/color/serialize.js';
+import { parseColor } from '../../foundation/color/parse.js';
+import { normalizeWeights } from '../../foundation/color-palette/parse.js';
+import { displayColor, flatGradient, serializeColor } from '../../foundation/color/serialize.js';
 import type { ColorValue } from '../../foundation/color/types.js';
 import {
+  MAX_PALETTE_STOPS,
   groupSwatches,
   type PaletteGroup,
   type PaletteGrouping,
@@ -15,6 +18,7 @@ import {
 } from '../../foundation/color-palette/index.js';
 import { FAMILY_KEYS } from './strings.js';
 import type {
+  ColorPaletteFavorite,
   ColorPaletteLayout,
   ColorPaletteMode,
   ColorPalettePaletteStyle,
@@ -32,6 +36,8 @@ export interface PaletteSlot {
   readonly share?: number;
   /** Whether the option shows its stretch of its palette's blended gradient. */
   readonly blend?: boolean;
+  /** Index of the favorite it belongs to, in the favorites mode. */
+  readonly favorite?: number;
   /** Value paint of the option, as custom properties. */
   readonly paint: Readonly<Record<string, string>>;
 }
@@ -43,6 +49,8 @@ export interface PaletteListGroup {
   readonly name?: string;
   /** Visible label content; absent for an unnamed group, which shows no label row. */
   readonly label?: unknown;
+  /** A section heading of the favorites, above the groups of its kind. */
+  readonly section?: boolean;
 }
 
 /**
@@ -55,6 +63,8 @@ export type PaletteUnit =
       readonly key: string;
       readonly group: number;
       readonly slots: readonly PaletteSlot[];
+      /** A palette's row: its options share the row by their shares. */
+      readonly palette?: boolean;
     };
 
 /** The groups and rows of one mode and the slots behind their options. */
@@ -86,6 +96,8 @@ export interface PaletteListInput {
   readonly strings: ColorPaletteStrings;
   /** Grid columns (the palettes mode puts each palette on one row). */
   readonly columns: number;
+  /** The bookmarked colors, palettes and gradients, for the favorites mode. */
+  readonly favorites: readonly ColorPaletteFavorite[];
 }
 
 /** The display name of a swatch: its name, otherwise its color text. */
@@ -160,52 +172,47 @@ export function buildListModel(input: PaletteListInput): PaletteListModel {
     keys.push(result.key);
     return result;
   };
-  const addGroup = (group: PaletteListGroup, members: readonly PaletteSlot[], columns: number) => {
-    const index = groups.push(group) - 1;
-    if (group.label !== undefined)
-      units.push({ kind: 'label', key: `${group.key}:label`, group: index });
-    for (let start = 0; start < members.length; start += columns) {
-      const row = members.slice(start, start + columns);
-      for (const member of row) rowOf.set(member.key, units.length);
-      units.push({ kind: 'row', key: `${group.key}:${start}`, group: index, slots: row });
-    }
+  const group = (entry: PaletteListGroup): number => {
+    const index = groups.push(entry) - 1;
+    if (entry.label !== undefined)
+      units.push({ kind: 'label', key: `${entry.key}:label`, group: index });
+    return index;
   };
-  const groupsOf = groupSwatches(collection, input.grouping, input.sort, input.direction);
-  if (input.mode === 'colors') {
-    const columns = list ? 1 : Math.max(1, input.columns);
-    groupsOf.forEach((group, index) => {
-      const name = groupName(group, strings);
-      addGroup(
-        { key: `g${index}`, ...(name ? { name, label: name } : {}) },
-        group.swatches.map((swatch) => slot({ key: `g:${swatch.key}`, swatch })),
-        columns,
-      );
-    });
-    return { groups, units, slots, keys, rowOf, columns, longest: 0 };
-  }
-  let longest = 1;
-  collection.palettes.forEach((set, index) => {
-    const name = setName(set, index, strings);
-    longest = Math.max(longest, set.swatches.length);
-    const count = set.swatches.length;
-    const shares = set.weights ?? set.swatches.map(() => 1 / count);
-    const blend =
-      input.paletteStyle === 'gradient'
-        ? blendPaint(
-            set.swatches.map((swatch) => swatch.color),
-            shares,
-          )
-        : undefined;
+  const row = (index: number, key: string, members: readonly PaletteSlot[], palette = false) => {
+    for (const member of members) rowOf.set(member.key, units.length);
+    units.push({ kind: 'row', key, group: index, slots: members, ...(palette ? { palette } : {}) });
+  };
+  const cells = (index: number, key: string, members: readonly PaletteSlot[], columns: number) => {
+    for (let start = 0; start < members.length; start += columns)
+      row(index, `${key}:${start}`, members.slice(start, start + columns));
+  };
+  // The options of one palette: hard stops, or stretches of one row-wide blend.
+  const paletteRow = (
+    key: string,
+    palette: PaletteSet,
+    name: string,
+    blended: boolean,
+    favorite?: number,
+  ): PaletteSlot[] => {
+    const count = palette.swatches.length;
+    const shares = palette.weights ?? palette.swatches.map(() => 1 / count);
+    const blend = blended
+      ? blendPaint(
+          palette.swatches.map((swatch) => swatch.color),
+          shares,
+        )
+      : undefined;
     let start = 0;
-    const members = set.swatches.map((swatch, position) => {
+    return palette.swatches.map((swatch, position) => {
       const share = shares[position]!;
       const option = slot(
         {
-          key: `${set.key}:${position}`,
+          key: `${key}:${position}`,
           swatch,
-          set,
+          set: palette,
           setName: name,
-          ...(set.weights ? { share } : {}),
+          ...(palette.weights ? { share } : {}),
+          ...(favorite !== undefined ? { favorite } : {}),
         },
         blend && {
           '--_tp-color-palette-blend': blend.ltr,
@@ -219,10 +226,174 @@ export function buildListModel(input: PaletteListInput): PaletteListModel {
       start += share;
       return option;
     });
-    // Each set is one row: its colors share the list's inline size.
-    addGroup({ key: set.key, name, label: name }, members, Math.max(1, members.length));
+  };
+  if (input.mode === 'colors') {
+    const columns = list ? 1 : Math.max(1, input.columns);
+    groupSwatches(collection, input.grouping, input.sort, input.direction).forEach(
+      (entry, index) => {
+        const name = groupName(entry, strings);
+        cells(
+          group({ key: `g${index}`, ...(name ? { name, label: name } : {}) }),
+          `g${index}`,
+          entry.swatches.map((swatch) => slot({ key: `g:${swatch.key}`, swatch })),
+          columns,
+        );
+      },
+    );
+    return { groups, units, slots, keys, rowOf, columns, longest: 0 };
+  }
+  let longest = 1;
+  if (input.mode === 'palettes') {
+    collection.palettes.forEach((palette, index) => {
+      const name = setName(palette, index, strings);
+      longest = Math.max(longest, palette.swatches.length);
+      // Each palette is one row: its colors share the list's inline size.
+      row(
+        group({ key: palette.key, name, label: name }),
+        palette.key,
+        paletteRow(palette.key, palette, name, input.paletteStyle === 'gradient'),
+        true,
+      );
+    });
+    return { groups, units, slots, keys, rowOf, columns: longest, longest };
+  }
+  // Favorites: sections of colors, palettes and gradients, each in the order they were added.
+  const colors: PaletteSlot[] = [];
+  const sets: { kind: 'palette' | 'gradient'; index: number; palette: PaletteSet; name: string }[] =
+    [];
+  input.favorites.forEach((favorite, index) => {
+    if (favorite.kind === 'color') {
+      const swatch = favoriteSwatch(collection, favorite.value, favorite.name, `f${index}`);
+      if (swatch) colors.push(slot({ key: `f${index}`, swatch, favorite: index }));
+      return;
+    }
+    const swatches = favorite.colors
+      .map((value, position) =>
+        favoriteSwatch(collection, value, undefined, `f${index}-${position}`),
+      )
+      .filter((swatch): swatch is PaletteSwatch => !!swatch);
+    if (swatches.length < 2) return;
+    const weights =
+      favorite.weights && favorite.weights.length === swatches.length
+        ? normalizeWeights(favorite.weights)
+        : undefined;
+    const palette: PaletteSet = {
+      key: `f${index}`,
+      ...(favorite.name ? { name: favorite.name } : {}),
+      swatches,
+      ...(weights ? { weights } : {}),
+    };
+    sets.push({
+      kind: favorite.kind,
+      index,
+      palette,
+      // An unnamed one is numbered among the favorites of its kind.
+      name: setName(palette, sets.filter((entry) => entry.kind === favorite.kind).length, strings),
+    });
   });
-  return { groups, units, slots, keys, rowOf, columns: longest, longest };
+  const columns = Math.max(1, input.columns);
+  if (colors.length) {
+    const label = strings.favoriteColors;
+    cells(
+      group({ key: 'favorites:colors', name: label, label, section: true }),
+      'favorites:colors',
+      colors,
+      columns,
+    );
+  }
+  for (const kind of ['palette', 'gradient'] as const) {
+    const members = sets.filter((entry) => entry.kind === kind);
+    if (!members.length) continue;
+    // The section heading stands alone; each palette below it is a group named like the palettes.
+    const label = kind === 'palette' ? strings.favoritePalettes : strings.favoriteGradients;
+    group({ key: `favorites:${kind}s`, label, section: true });
+    for (const entry of members) {
+      longest = Math.max(longest, entry.palette.swatches.length);
+      const key = entry.palette.key;
+      row(
+        group({ key: `favorites:${key}`, name: entry.name, label: entry.name }),
+        key,
+        paletteRow(entry.palette.key, entry.palette, entry.name, kind === 'gradient', entry.index),
+        true,
+      );
+    }
+  }
+  return { groups, units, slots, keys, rowOf, columns, longest };
+}
+
+/**
+ * The swatch of a bookmarked color: the collection's own swatch when it holds the color, so it
+ * keeps its name, otherwise a swatch of the color text; nothing when the text is not a color.
+ */
+function favoriteSwatch(
+  collection: ResolvedColorCollection,
+  value: string,
+  name: string | undefined,
+  key: string,
+): PaletteSwatch | undefined {
+  const parsed = parseColor(value);
+  if (!parsed) return undefined;
+  const identity = serializeColor(parsed, 'hex');
+  const known = collection.swatches.find((swatch) => swatch.identity === identity);
+  if (known && (name === undefined || name === known.name)) return known;
+  return {
+    key,
+    value,
+    ...((name ?? known?.name) ? { name: name ?? known!.name! } : {}),
+    color: parsed,
+    index: -1,
+    identity,
+  };
+}
+
+/** Whether two favorites bookmark the same color, palette or gradient. */
+export function sameFavorite(a: ColorPaletteFavorite, b: ColorPaletteFavorite): boolean {
+  if (a.kind !== b.kind) return false;
+  if (a.kind === 'color' && b.kind === 'color') return identity(a.value) === identity(b.value);
+  if (a.kind === 'color' || b.kind === 'color') return false;
+  return (
+    a.colors.length === b.colors.length &&
+    a.colors.every((value, index) => identity(value) === identity(b.colors[index]!)) &&
+    (a.weights ?? []).join() === (b.weights ?? []).join()
+  );
+}
+
+const identity = (value: string): string => {
+  const parsed = parseColor(value);
+  return parsed ? serializeColor(parsed, 'hex') : value;
+};
+
+/**
+ * Favorites read back from storage or given by an application: the well-formed entries only,
+ * palettes and gradients cut to twelve colors.
+ */
+export function sanitizeFavorites(value: unknown): ColorPaletteFavorite[] {
+  if (!Array.isArray(value)) return [];
+  const result: ColorPaletteFavorite[] = [];
+  for (const entry of value) {
+    if (!entry || typeof entry !== 'object') continue;
+    const record = entry as Record<string, unknown>;
+    const name = typeof record.name === 'string' && record.name ? { name: record.name } : {};
+    if (record.kind === 'color' && typeof record.value === 'string')
+      result.push({ kind: 'color', value: record.value, ...name });
+    else if (
+      (record.kind === 'palette' || record.kind === 'gradient') &&
+      Array.isArray(record.colors)
+    ) {
+      const colors = record.colors
+        .filter((color): color is string => typeof color === 'string')
+        .slice(0, MAX_PALETTE_STOPS);
+      if (colors.length < 2) continue;
+      const weights =
+        Array.isArray(record.weights) &&
+        record.weights.length === colors.length &&
+        record.weights.every((weight) => typeof weight === 'number' && weight >= 0)
+          ? { weights: record.weights as number[] }
+          : {};
+      result.push({ kind: record.kind, colors, ...name, ...weights });
+    }
+  }
+  return result;
 }
 
 /** OKLab samples between neighboring stops, so every renderer shows the same blend. */
@@ -268,7 +439,8 @@ export function blendPaint(
 
 /**
  * The option key that shows as selected: the last picked option while it still holds the value,
- * otherwise the first option of the value's color.
+ * otherwise the first plain color option of the value's color. A color inside a palette shows as
+ * selected only when it was picked from that palette, not because the value matches it.
  */
 export function selectedKey(
   model: PaletteListModel,
@@ -279,5 +451,8 @@ export function selectedKey(
   const identity = identityOf(value);
   if (identity === undefined) return undefined;
   if (picked !== undefined && model.slots.get(picked)?.swatch.identity === identity) return picked;
-  return model.keys.find((key) => model.slots.get(key)!.swatch.identity === identity);
+  return model.keys.find((key) => {
+    const slot = model.slots.get(key)!;
+    return !slot.set && slot.swatch.identity === identity;
+  });
 }

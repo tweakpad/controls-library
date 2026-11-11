@@ -54,7 +54,7 @@ const meta: Meta<Args> = {
   },
   argTypes: {
     value: { control: 'text', description: 'Controlled color; the story accepts proposals.' },
-    mode: { control: 'select', options: ['colors', 'palettes'] },
+    mode: { control: 'select', options: ['colors', 'palettes', 'favorites'] },
     paletteStyle: { control: 'select', options: ['stops', 'gradient'] },
     layout: { control: 'select', options: ['grid', 'list'] },
     grouping: { control: 'select', options: ['collection', 'hue', 'none'] },
@@ -104,6 +104,7 @@ const meta: Meta<Args> = {
       @tp-mode-change=${accept('mode')}
       @tp-layout-change=${accept('layout')}
       @tp-palette-style-change=${accept('paletteStyle')}
+      persistence="none"
       @tp-size-change=${accept('size')}
       @tp-grouping-change=${accept('grouping')}
       @tp-sort-change=${accept('sort')}

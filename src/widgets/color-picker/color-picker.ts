@@ -323,8 +323,8 @@ export class TpColorPicker extends TpFormElement<string> {
   recent: readonly string[] = [];
   /**
    * Swatch collections for the swatches view, after the saved and recent colors; import them from
-   * `@tweakpad/ui/color-palette/collections/<id>` or parse fetched documents. The view offers the
-   * default collection when swatches, recent and collections are all empty.
+   * `@tweakpad/ui/color-palette/collections/<id>` or parse fetched documents. The palette's default
+   * collection is always offered first; the view opens on the saved colors or the first collection.
    */
   collections: readonly ColorCollection[] = [];
   /**
@@ -2110,6 +2110,7 @@ export class TpColorPicker extends TpFormElement<string> {
         content: html`<tp-color-palette
           class="color-palette"
           .collections=${this.#paletteCollections()}
+          .format=${this.format}
           .value=${this.#identity() ?? ''}
           .label=${dimensionLabel(this.label, strings.viewSwatches)}
           .defaultSize=${this.size}

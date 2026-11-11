@@ -14,6 +14,7 @@ export const colorCollectionSchema = {
     $schema: { type: 'string' },
     id: text,
     name: text,
+    description: text,
     attribution: {
       type: 'object',
       properties: { name: text, url: { type: 'string', format: 'uri' }, license: text },

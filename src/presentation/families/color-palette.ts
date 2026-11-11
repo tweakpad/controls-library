@@ -12,22 +12,18 @@ const definition: ComponentDefinition = {
     {
       name: 'color-palette',
       axes: ['size'],
-      description: 'The root: the toolbar, the list and the attribution.',
+      description: 'The root: the toolbar and the list.',
     },
     {
       name: 'color-palette-toolbar',
       axes: ['size'],
-      description: 'The row of the mode Tabs, the view options and the collection Select.',
+      description:
+        'The row of the mode Tabs and the view options, whose menu holds the color libraries.',
     },
     {
       name: 'color-palette-modes',
       axes: ['size'],
       description: 'The Tabs that switch between the colors and the palettes.',
-    },
-    {
-      name: 'color-palette-collection',
-      axes: ['size'],
-      description: 'The Select of the collections, shown when more than one is given.',
     },
     {
       name: 'color-palette-options',
@@ -70,14 +66,33 @@ const definition: ComponentDefinition = {
       description: "A list row's color name, or its HSL text when the color has no name.",
     },
     {
-      name: 'color-palette-empty',
+      name: 'color-palette-favorite-mark',
       axes: ['size'],
-      description: 'The message shown when the collection has no colors.',
+      description:
+        'The solid heart that shows briefly in a color or palette row that just became a favorite.',
+    },
+    {
+      name: 'color-palette-status',
+      axes: ['size'],
+      description:
+        'The bar under the list: a copy button, the chosen color in the configured format or the chosen palette, and the source info.',
+    },
+    {
+      name: 'color-palette-favorite-toggle',
+      axes: ['size'],
+      description:
+        'The heart Toggle at the end of the status bar that bookmarks the chosen color or palette.',
+    },
+    {
+      name: 'color-palette-source',
+      axes: ['size'],
+      description: 'The info icon at the end of the status bar, whose Tooltip credits the source.',
     },
     {
       name: 'color-palette-attribution',
       axes: ['size'],
-      description: "The active collection's source and license.",
+      description:
+        "The active collection's source and license in the source info's Tooltip, or its source link, description and license in a Preview Card.",
     },
   ],
 };
@@ -89,15 +104,16 @@ export const colorPalettePresentation = definePresentation({
       '[part~="color-palette"]': 'color-palette',
       '[part~="color-palette-toolbar"]': 'color-palette-toolbar',
       'tp-tabs.modes': 'color-palette-modes',
-      'tp-select.collection': 'color-palette-collection',
       'tp-button.options': 'color-palette-options',
+      '[part~="color-palette-status"]': 'color-palette-status',
+      '[part~="color-palette-source"]': 'color-palette-source',
+      '[part~="color-palette-favorite-toggle"]': 'color-palette-favorite-toggle',
       '[part~="color-palette-attribution"]': 'color-palette-attribution',
       '[part~="color-palette-list"]': 'color-palette-list',
       '[part~="color-palette-group"]': 'color-palette-group',
       '[part~="color-palette-group-label"]': 'color-palette-group-label',
       '[part~="color-palette-row"]': 'color-palette-row',
       '[part~="color-palette-item"]': 'color-palette-item',
-      '[part~="color-palette-empty"]': 'color-palette-empty',
       '.swatch': 'color-palette-swatch',
       '.row-text': 'color-palette-row-text',
     },

@@ -56,6 +56,7 @@ const LANES = [
   'tp-sort-direction-change',
   'tp-layout-change',
   'tp-palette-style-change',
+  'tp-favorites-change',
   'tp-size-change',
 ];
 for (const type of LANES)

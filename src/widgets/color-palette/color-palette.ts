@@ -14,6 +14,9 @@ import { fillTemplate } from '../../foundation/template.js';
 import { reportDiagnostic } from '../../foundation/services.js';
 import type { CustomElementConstructorWithTag } from '../../foundation/define.js';
 import { parseColor } from '../../foundation/color/parse.js';
+import { serializeColor } from '../../foundation/color/serialize.js';
+import { isColorFormat, type ColorFormat } from '../../foundation/color/types.js';
+import { infoIcon } from '../../icons/info.js';
 import { colorIdentity, resolveColorCollection } from '../../foundation/color-palette/parse.js';
 import { defaultColorCollection } from '../../foundation/color-palette/collections/default.js';
 import type {
@@ -30,13 +33,26 @@ import { TpIcon } from '../../components/icon/icon.js';
 import { TpMenu } from '../../components/menu/menu.js';
 import { TpMenuRadioGroup } from '../../components/menu/menu-radio-group.js';
 import { TpMenuRadioItem } from '../../components/menu/menu-radio-item.js';
-import { TpSelect } from '../../components/select/select.js';
+import { TpMenuItem } from '../../components/menu/menu-item.js';
+import { TpEmptyState } from '../../components/empty-state/empty-state.js';
+import { emptyStateIcons } from '../../icons/empty-state.js';
+import { paletteIcon, favoriteHeartIcon } from '../../icons/color-palette.js';
+import { resolveMotionTiming } from '../../foundation/motion.js';
+import { contrastColor } from '../../foundation/color/contrast.js';
 import { TpSeparator } from '../../components/separator/separator.js';
 import { TpScrollArea } from '../../components/scroll-area/scroll-area.js';
 import { TpTabs } from '../../components/tabs/tabs.js';
-import { PaletteList } from './list.js';
+import { TpTooltip } from '../../components/tooltip/tooltip.js';
+import { TpCopyButton } from '../../components/copy-button/copy-button.js';
+import { TpTextTransform } from '../../components/text-transform/text-transform.js';
+import { TpPreviewCard } from '../../components/preview-card/preview-card.js';
+import { TpStack } from '../../components/stack/stack.js';
+import { TpToggle } from '../../components/toggle/toggle.js';
+import { PaletteList, optionKey } from './list.js';
 import {
   buildListModel,
+  sameFavorite,
+  sanitizeFavorites,
   hslText,
   listText,
   selectedKey,
@@ -51,6 +67,9 @@ import type {
   ColorPaletteLayout,
   ColorPaletteMode,
   ColorPalettePaletteStyle,
+  ColorPaletteFavorite,
+  ColorPaletteFavoritesMetadata,
+  ColorPalettePersistence,
   ColorPaletteSize,
   ColorPaletteStrings,
   ColorPaletteSwatchInfo,
@@ -62,7 +81,18 @@ export type ColorPaletteValueCommitCallback = (event: TpValueCommitEvent<string>
 /** The detail of the palette's `tp-value-change`. */
 export type ColorPaletteChangeDetail = TpValueChangeEvent<string>['detail'];
 
-const MODES: readonly ColorPaletteMode[] = ['colors', 'palettes'];
+const MODES: readonly ColorPaletteMode[] = ['colors', 'palettes', 'favorites'];
+const PERSISTENCES: readonly ColorPalettePersistence[] = ['local', 'none'];
+/** Where uncontrolled favorites are kept in local storage unless `storageKey` names another. */
+const DEFAULT_STORAGE_KEY = 'tp-color-palette-favorites';
+/** How long the heart of a new favorite stays before it leaves. */
+const FAVORITE_MARK_MS = 2000;
+/** The heart's arrival grows past its size to this scale, then settles back (back out). */
+const FAVORITE_MARK_OVERSHOOT = 1.08;
+/** The part of the arrival spent growing to the overshoot. */
+const FAVORITE_MARK_PEAK = 0.6;
+/** The heart stays translucent over its color. */
+const FAVORITE_MARK_OPACITY = 0.75;
 const PALETTE_STYLES: readonly ColorPalettePaletteStyle[] = ['stops', 'gradient'];
 const GROUPINGS: readonly PaletteGrouping[] = ['collection', 'hue', 'none'];
 const SORTS: readonly PaletteSort[] = ['collection', 'lightness', 'hue', 'chroma'];
@@ -87,8 +117,9 @@ const NESTED_EVENT_TYPES = [
   'tp-presence-complete',
   'tp-action',
 ] as const;
+const stop = (event: Event): void => event.stopPropagation();
 const NESTED_HOSTS =
-  'tp-scroll-area, tp-tabs, tp-select, tp-button, tp-menu, tp-menu-radio-group, tp-menu-radio-item';
+  'tp-scroll-area, tp-tabs, tp-button, tp-menu, tp-menu-radio-group, tp-menu-radio-item, tp-menu-item, tp-empty-state, tp-tooltip, tp-copy-button, tp-text-transform, tp-toggle, tp-preview-card';
 
 interface ImmediateCommit {
   readonly reason: ChangeReason;
@@ -110,6 +141,7 @@ class Lane<T> {
     readDefault: () => T | undefined,
     eventFactory: NonNullable<ControllableStateOptions<T>['eventFactory']>,
     code: string,
+    equals?: (a: T, b: T) => boolean,
   ) {
     this.state = new ControllableState<T>({
       host,
@@ -118,6 +150,7 @@ class Lane<T> {
       readDefaultValue: readDefault,
       hasDefaultValue: () => readDefault() !== undefined,
       eventFactory,
+      ...(equals ? { equals } : {}),
       onCommit: () => host.requestUpdate(),
       diagnostic: (message) => host.diagnose(code, message),
     });
@@ -154,6 +187,8 @@ const oneOf =
  * @fires tp-sort-direction-change - Cancelable proposal of another sort direction.
  * @fires tp-layout-change - Cancelable proposal of another layout of the colors mode.
  * @fires tp-palette-style-change - Cancelable proposal of hard stops or gradients for palettes.
+ * @fires tp-favorites-change - Cancelable proposal of the favorites with a color, palette or
+ * gradient added or removed; `detail.metadata` carries the `action` and the `favorite`.
  * @fires tp-size-change - Cancelable proposal of another cell size.
  * @fires tp-field-value - Each committed value, for a surrounding Field's validation state.
  */
@@ -164,13 +199,20 @@ export class TpColorPalette extends TpFormElement<string> {
     return [
       TpScrollArea,
       TpTabs,
-      TpSelect,
       TpButton,
       TpIcon,
       TpMenu,
       TpMenuRadioGroup,
       TpMenuRadioItem,
+      TpMenuItem,
+      TpEmptyState,
       TpSeparator,
+      TpTooltip,
+      TpCopyButton,
+      TpTextTransform,
+      TpPreviewCard,
+      TpStack,
+      TpToggle,
     ];
   }
   static override presentation = colorPalettePresentation;
@@ -192,6 +234,11 @@ export class TpColorPalette extends TpFormElement<string> {
     defaultSortDirection: { type: String, attribute: 'default-sort-direction' },
     layout: { type: String, noAccessor: true },
     paletteStyle: { type: String, attribute: 'palette-style', noAccessor: true },
+    favorites: { attribute: false, noAccessor: true },
+    defaultFavorites: { attribute: false },
+    persistence: { type: String },
+    format: { type: String },
+    storageKey: { type: String, attribute: 'storage-key' },
     defaultPaletteStyle: { type: String, attribute: 'default-palette-style' },
     defaultLayout: { type: String, attribute: 'default-layout' },
     columns: { type: Number },
@@ -209,8 +256,8 @@ export class TpColorPalette extends TpFormElement<string> {
   /** Starting color of an uncontrolled palette; form reset returns to it. */
   defaultValue: string | undefined;
   /**
-   * The collections offered, as documents or typed modules; the built-in default collection when
-   * empty. Import more from `@tweakpad/ui/color-palette/collections/<id>`, or parse a fetched
+   * The collections loaded besides the built-in default collection, which the Color libraries menu
+   * always offers first, as documents or typed modules. Import more from `@tweakpad/ui/color-palette/collections/<id>`, or parse a fetched
    * document with `parseColorCollection`.
    */
   collections: readonly ColorCollection[] = [];
@@ -230,6 +277,17 @@ export class TpColorPalette extends TpFormElement<string> {
   defaultLayout: ColorPaletteLayout | undefined;
   /** Starting palette style of an uncontrolled palettes mode. */
   defaultPaletteStyle: ColorPalettePaletteStyle | undefined;
+  /** Starting favorites of uncontrolled favorites, when local storage holds none. */
+  defaultFavorites: readonly ColorPaletteFavorite[] | undefined;
+  /**
+   * Where uncontrolled favorites are kept between visits: `local` storage under `storageKey`, or
+   * `none` when an external state layer owns them through `favorites`.
+   */
+  persistence: ColorPalettePersistence = 'local';
+  /** How the status bar writes the chosen color and what its copy button copies: `hex` by default. */
+  format: ColorFormat = 'hex';
+  /** Local storage key of the favorites; palettes that share it share their favorites. */
+  storageKey = DEFAULT_STORAGE_KEY;
   /** Starting cell size of an uncontrolled size. */
   defaultSize: ColorPaletteSize | undefined;
   /** Cells per row of the grid; the list layout keeps the same width. */
@@ -378,6 +436,27 @@ export class TpColorPalette extends TpFormElement<string> {
       ),
     'color-palette-palette-style',
   );
+  readonly #favorites = new Lane<readonly ColorPaletteFavorite[]>(
+    this,
+    [],
+    () => this.#initialFavorites(),
+    (value, previous, reason, sourceEvent, options) =>
+      new TpValueChangeEvent<readonly ColorPaletteFavorite[]>(
+        value,
+        previous,
+        reason,
+        sourceEvent,
+        options,
+        'tp-favorites-change',
+      ),
+    'color-palette-favorites',
+    // Lists of the same favorites are equal: writing back an equal list proposes nothing.
+    (a, b) =>
+      a.length === b.length &&
+      a.every(
+        (favorite, index) => sameFavorite(favorite, b[index]!) && favorite.name === b[index]!.name,
+      ),
+  );
   readonly #size = new Lane<ColorPaletteSize>(
     this,
     'default',
@@ -468,6 +547,20 @@ export class TpColorPalette extends TpFormElement<string> {
     this.requestUpdate('layout', previous);
   }
   /**
+   * The bookmarked colors, palettes and gradients, listed in the favorites mode; setting it makes
+   * the favorites controlled, and an application keeps them, with `persistence` set to `none`.
+   */
+  get favorites(): readonly ColorPaletteFavorite[] {
+    return this.#favorites.state.value;
+  }
+  set favorites(value: readonly ColorPaletteFavorite[]) {
+    const previous = this.favorites;
+    this.#favorites.write(
+      value === null || value === undefined ? undefined : sanitizeFavorites(value),
+    );
+    this.requestUpdate('favorites', previous);
+  }
+  /**
    * How the palettes mode shows each palette: hard stops side by side, or blended as one gradient
    * whose colors stay pickable; setting it makes the style controlled.
    */
@@ -494,11 +587,11 @@ export class TpColorPalette extends TpFormElement<string> {
 
   // ---- read-only state ---------------------------------------------------------------------
 
-  /** The active collection, parsed. */
+  /** The active collection, parsed: the chosen one, otherwise the first loaded, or the default. */
   get activeCollection(): ResolvedColorCollection {
     const resolved = this.#resolved();
     const id = this.#collection.state.value;
-    return resolved.find((collection) => collection.id === id) ?? resolved[0]!;
+    return resolved.find((collection) => collection.id === id) ?? resolved[1] ?? resolved[0]!;
   }
   /** The highlighted color with where it is listed, or null. */
   get activeSwatch(): ColorPaletteSwatchInfo | null {
@@ -564,7 +657,7 @@ export class TpColorPalette extends TpFormElement<string> {
         this,
         {
           code: 'color-palette-collection',
-          message: `No collection "${id}"; the first collection is shown.`,
+          message: `No collection "${id}"; the first loaded collection is shown.`,
           severity: 'warning',
         },
         { once: this.#reported },
@@ -580,11 +673,13 @@ export class TpColorPalette extends TpFormElement<string> {
     this.setAttribute('data-sort', this.sort);
     this.setAttribute('data-layout', this.layout);
     this.setAttribute('data-palette-style', this.paletteStyle);
+    this.#storeFavorites();
     this.setFormValue(this.value || null, this.value);
     this.setRequiredValidity(this.required && !this.value, this.#strings.valueMissing);
     this.#syncComposition();
     this.#observeProbes();
     this.#revealAfterViewChange();
+    this.#runFavoriteMarks();
   }
 
   protected override resetFormValue(): void {
@@ -624,6 +719,7 @@ export class TpColorPalette extends TpFormElement<string> {
       this.#direction,
       this.#layout,
       this.#paletteStyle,
+      this.#favorites,
       this.#size,
     ] as unknown as readonly Lane<unknown>[];
   }
@@ -631,9 +727,15 @@ export class TpColorPalette extends TpFormElement<string> {
   #resolvedCache:
     { source: readonly ColorCollection[]; resolved: ResolvedColorCollection[] } | undefined;
   #resolved(): ResolvedColorCollection[] {
-    const source = this.collections?.length ? this.collections : [defaultColorCollection];
-    if (this.#resolvedCache?.source !== source)
-      this.#resolvedCache = { source, resolved: source.map(resolveColorCollection) };
+    const source = this.collections ?? [];
+    if (this.#resolvedCache?.source !== source) {
+      // The default collection comes first, then the loaded ones; a loaded default is not repeated.
+      const loaded = source.filter((entry) => entry.id !== defaultColorCollection.id);
+      this.#resolvedCache = {
+        source,
+        resolved: [defaultColorCollection, ...loaded].map(resolveColorCollection),
+      };
+    }
     return this.#resolvedCache.resolved;
   }
 
@@ -692,6 +794,7 @@ export class TpColorPalette extends TpFormElement<string> {
       mode,
       this.layout,
       this.paletteStyle,
+      this.mode === 'favorites' ? this.favorites : undefined,
       this.grouping,
       this.sort,
       this.sortDirection,
@@ -710,6 +813,7 @@ export class TpColorPalette extends TpFormElement<string> {
       direction: this.sortDirection,
       strings: this.#strings,
       columns: this.#cellColumns(),
+      favorites: this.favorites,
     });
     this.#model = { key, model };
     return model;
@@ -718,6 +822,343 @@ export class TpColorPalette extends TpFormElement<string> {
   #selectedKey(): string | undefined {
     return selectedKey(this.#listModel(), this.value, this.#picked, identityOf);
   }
+
+  // ---- favorites ---------------------------------------------------------------------------
+
+  /** The favorites text last read from or written to local storage. */
+  #storedText: string | undefined;
+
+  /** Uncontrolled favorites start from local storage, otherwise from `defaultFavorites`. */
+  #initialFavorites(): readonly ColorPaletteFavorite[] | undefined {
+    if (this.persistence === 'local') {
+      try {
+        const text = this.ownerDocument.defaultView?.localStorage.getItem(this.#storageKey());
+        if (text) {
+          this.#storedText = text;
+          return sanitizeFavorites(JSON.parse(text));
+        }
+      } catch {
+        // Unreadable or unavailable storage: start from the default.
+      }
+    }
+    return this.defaultFavorites ? sanitizeFavorites(this.defaultFavorites) : undefined;
+  }
+
+  #storageKey(): string {
+    return this.storageKey || DEFAULT_STORAGE_KEY;
+  }
+
+  /** Keeps uncontrolled favorites in local storage; controlled favorites are the owner's. */
+  #storeFavorites(): void {
+    if (oneOf(PERSISTENCES)(this.persistence) !== 'local' || this.#favorites.state.controlled)
+      return;
+    const text = JSON.stringify(this.favorites);
+    if (text === this.#storedText || (this.#storedText === undefined && text === '[]')) return;
+    this.#storedText = text;
+    try {
+      this.ownerDocument.defaultView?.localStorage.setItem(this.#storageKey(), text);
+    } catch {
+      // Storage can be unavailable (privacy modes, quotas); the favorites still apply.
+    }
+  }
+
+  /** The favorite an option bookmarks: its color, or its whole palette in the shown style. */
+  #favoriteOf(key: string): ColorPaletteFavorite | undefined {
+    const slot = this.#listModel().slots.get(key);
+    if (!slot) return undefined;
+    if (this.mode === 'colors')
+      return {
+        kind: 'color',
+        value: slot.swatch.value,
+        ...(slot.swatch.name ? { name: slot.swatch.name } : {}),
+      };
+    const set = slot.set;
+    if (this.mode !== 'palettes' || !set) return undefined;
+    return {
+      kind: this.paletteStyle === 'gradient' ? 'gradient' : 'palette',
+      ...(set.name ? { name: set.name } : {}),
+      colors: set.swatches.map((swatch) => swatch.value),
+      ...(set.weights ? { weights: set.weights } : {}),
+    };
+  }
+
+  /**
+   * The chosen color or palette as a favorite: the bookmark the status bar's heart toggles, with
+   * its place in the favorites when it is one.
+   */
+  #chosenFavorite(): { key: string; favorite: ColorPaletteFavorite; index: number } | undefined {
+    const key = this.#selectedKey();
+    if (key === undefined) return undefined;
+    if (this.mode === 'favorites') {
+      const index = this.#listModel().slots.get(key)?.favorite;
+      const favorite = index === undefined ? undefined : this.favorites[index];
+      return favorite && index !== undefined ? { key, favorite, index } : undefined;
+    }
+    const favorite = this.#favoriteOf(key);
+    if (!favorite) return undefined;
+    return {
+      key,
+      favorite,
+      index: this.favorites.findIndex((entry) => sameFavorite(entry, favorite)),
+    };
+  }
+
+  /** The status bar's heart: bookmarks the chosen color or palette, or removes its bookmark. */
+  #favoriteToggle = (event: Event): void => {
+    event.stopPropagation();
+    const chosen = this.#chosenFavorite();
+    if (!chosen) return;
+    const { key, favorite, index } = chosen;
+    if (index >= 0) {
+      this.#proposeFavorites(
+        this.favorites.filter((_, position) => position !== index),
+        'item-press',
+        event,
+        { action: 'remove', favorite: this.favorites[index]! },
+      );
+      return;
+    }
+    if (
+      this.#proposeFavorites([...this.favorites, favorite], 'item-press', event, {
+        action: 'add',
+        favorite,
+      })
+    )
+      this.#markFavorite(key);
+  };
+
+  #proposeFavorites(
+    next: readonly ColorPaletteFavorite[],
+    reason: ChangeReason,
+    event: Event,
+    metadata: ColorPaletteFavoritesMetadata,
+  ): boolean {
+    if (this.readOnly || this.effectiveDisabled) return false;
+    return this.#favorites.state.set(next, reason, event, { metadata });
+  }
+
+  /**
+   * A double click on a color bookmarks it, on a palette the whole palette; in the favorites it
+   * removes the favorite.
+   */
+  #favoriteDoubleClick = (event: MouseEvent): void => {
+    const key = optionKey(event);
+    // In the favorites, a double click removes the favorite instead.
+    if (this.mode === 'favorites') {
+      if (key !== undefined) this.#removeFavoriteOf(key, 'item-press', event);
+      return;
+    }
+    const favorite = key === undefined ? undefined : this.#favoriteOf(key);
+    if (!favorite || this.favorites.some((entry) => sameFavorite(entry, favorite))) return;
+    if (
+      this.#proposeFavorites([...this.favorites, favorite], 'item-press', event, {
+        action: 'add',
+        favorite,
+      })
+    )
+      this.#markFavorite(key!);
+  };
+
+  /**
+   * Hearts that signal new favorites, by the key of the color option or of the palette row they
+   * show in, with the color a palette row's heart takes.
+   */
+  readonly #marks = new Map<string, string | undefined>();
+  readonly #marksRunning = new Set<string>();
+
+  /** Shows a heart in the color, or across the palette row, that just became a favorite. */
+  #markFavorite(key: string): void {
+    const model = this.#listModel();
+    const slot = model.slots.get(key);
+    if (!slot) return;
+    if (!slot.set) {
+      this.#marks.set(key, undefined);
+    } else {
+      const row = model.units[model.rowOf.get(key) ?? -1];
+      if (!row || row.kind !== 'row') return;
+      // The heart sits at the middle of the row: it takes the contrast of the color there.
+      const shares = row.slots.map((entry) => entry.share ?? 1 / row.slots.length);
+      let start = 0;
+      const middle =
+        row.slots.find((_, index) => (start += shares[index]!) >= 0.5) ?? row.slots[0]!;
+      this.#marks.set(row.key, contrastColor(middle.swatch.color));
+    }
+    this.#marksRunning.delete(slot.set ? (model.units[model.rowOf.get(key)!]?.key ?? key) : key);
+    this.requestUpdate();
+  }
+
+  /** Runs the hearts rendered since the last update: fade and scale in, stay, fade out. */
+  #runFavoriteMarks(): void {
+    for (const key of this.#marks.keys()) {
+      if (this.#marksRunning.has(key)) continue;
+      this.#marksRunning.add(key);
+      void this.#runFavoriteMark(key);
+    }
+  }
+
+  async #runFavoriteMark(key: string): Promise<void> {
+    const find = () =>
+      this.renderRoot.querySelector<HTMLElement>(`.favorite-mark[data-mark="${CSS.escape(key)}"]`);
+    const mark = find();
+    if (mark) {
+      // A back out from the motion roles: the enter curve grows past the size, the standard curve
+      // settles back.
+      const enter = resolveMotionTiming(mark, 'normal', 'enter');
+      const settle = resolveMotionTiming(mark, 'normal', 'standard');
+      await mark
+        .animate(
+          [
+            { opacity: 0, scale: 0.4, easing: enter.easing },
+            {
+              opacity: FAVORITE_MARK_OPACITY,
+              scale: FAVORITE_MARK_OVERSHOOT,
+              offset: FAVORITE_MARK_PEAK,
+              easing: settle.easing,
+            },
+            { opacity: FAVORITE_MARK_OPACITY, scale: 1 },
+          ],
+          { duration: enter.duration, fill: 'both' },
+        )
+        .finished.catch(() => undefined);
+    }
+    await new Promise((resolve) => setTimeout(resolve, FAVORITE_MARK_MS));
+    // The row may have scrolled out of the window and back: leave from the current element.
+    const current = find();
+    if (current) {
+      const exit = resolveMotionTiming(current, 'fast', 'exit');
+      await current
+        .animate(
+          [
+            { opacity: FAVORITE_MARK_OPACITY, scale: 1 },
+            { opacity: 0, scale: 0.8 },
+          ],
+          { duration: exit.duration, easing: exit.easing, fill: 'forwards' },
+        )
+        .finished.catch(() => undefined);
+    }
+    this.#marks.delete(key);
+    this.#marksRunning.delete(key);
+    this.requestUpdate();
+  }
+
+  /** The heart of a new favorite, decorative: the change event announces the favorite. */
+  #renderFavoriteMark(key: string): unknown {
+    if (!this.#marks.has(key)) return nothing;
+    const color = this.#marks.get(key);
+    return html`<span
+      class="favorite-mark"
+      part="color-palette-favorite-mark"
+      data-mark=${key}
+      aria-hidden="true"
+      style=${color ? `color:${color}` : ''}
+      ><tp-icon .icon=${favoriteHeartIcon} size="var(--tp-icon-size-md)"></tp-icon
+    ></span>`;
+  }
+
+  /** Removes the favorite an option of the favorites mode belongs to. */
+  #removeFavoriteOf(key: string, reason: ChangeReason, event: Event): void {
+    const index = this.#listModel().slots.get(key)?.favorite;
+    const favorite = index === undefined ? undefined : this.favorites[index];
+    if (index === undefined || !favorite) return;
+    const keys = this.#listModel().keys;
+    const at = keys.indexOf(key);
+    const next = this.favorites.filter((_, position) => position !== index);
+    if (!this.#proposeFavorites(next, reason, event, { action: 'remove', favorite })) return;
+    // The highlight moves to the option that takes the removed one's place.
+    void this.updateComplete.then(() => {
+      const after = this.#listModel().keys;
+      this.#list.highlight(after[Math.min(at, after.length - 1)], true);
+    });
+  }
+
+  /** The option the favorites context menu acts on. */
+  #contextKey: string | undefined;
+
+  /**
+   * A context click on a favorite opens its menu; anywhere else, and in the other modes, the
+   * browser's own menu opens.
+   */
+  #listContextMenu = (event: MouseEvent): void => {
+    const key = this.mode === 'favorites' ? optionKey(event) : undefined;
+    if (key === undefined) {
+      event.stopPropagation();
+      return;
+    }
+    this.#contextKey = key;
+    this.#list.highlight(key);
+  };
+
+  /** Whether the open favorites menu was opened from the keyboard, to return focus to the list. */
+  #menuFromKeyboard = false;
+
+  /**
+   * Opens the favorites menu from the keyboard at the highlighted favorite, as a context click
+   * inside it would, then focuses its command.
+   */
+  #openFavoriteMenu(key: string): void {
+    const option = this.renderRoot.querySelector<HTMLElement>(`#${CSS.escape(optionId(key))}`);
+    const menu = this.renderRoot.querySelector<TpMenu>('tp-menu.favorites-menu');
+    if (!option || !menu) return;
+    const box = option.getBoundingClientRect();
+    this.#menuFromKeyboard = true;
+    option.dispatchEvent(
+      new MouseEvent('contextmenu', {
+        bubbles: true,
+        composed: true,
+        cancelable: true,
+        button: 2,
+        clientX: box.left + Math.min(box.width / 2, 24),
+        clientY: box.top + box.height / 2,
+      }),
+    );
+    void menu.updateComplete.then(() =>
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          if (menu.open) menu.querySelector<HTMLElement>('tp-menu-item')?.focus();
+        }),
+      ),
+    );
+  }
+
+  /** A menu opened from the keyboard returns focus to the list when it closes. */
+  #favoriteMenuClosed = (event: Event): void => {
+    event.stopPropagation();
+    const menu = event.currentTarget as TpMenu;
+    if (menu.open || !this.#menuFromKeyboard) return;
+    this.#menuFromKeyboard = false;
+    this.#listbox?.focus({ preventScroll: true });
+  };
+
+  #favoriteAction = (event: CustomEvent<{ value: unknown; sourceEvent?: Event }>): void => {
+    event.stopPropagation();
+    const key = this.#contextKey;
+    if (event.detail.value === 'remove' && key !== undefined)
+      this.#removeFavoriteOf(key, 'item-press', event);
+  };
+
+  /** Delete and Backspace remove the highlighted favorite; the menu keys open its menu. */
+  #listKeyDown = (event: KeyboardEvent): void => {
+    if (this.mode === 'favorites' && !event.defaultPrevented) {
+      const highlighted = this.#list.highlighted;
+      if (event.key === 'Delete' || event.key === 'Backspace') {
+        if (highlighted !== undefined) {
+          event.preventDefault();
+          this.#removeFavoriteOf(highlighted, 'keyboard', event);
+        }
+        return;
+      }
+      if (event.key === 'ContextMenu' || (event.key === 'F10' && event.shiftKey)) {
+        event.stopPropagation();
+        if (highlighted !== undefined) {
+          event.preventDefault();
+          this.#openFavoriteMenu(highlighted);
+        }
+        return;
+      }
+    } else if (event.key === 'ContextMenu' || (event.key === 'F10' && event.shiftKey))
+      event.stopPropagation();
+    this.#list.keyDown(event);
+  };
 
   // ---- picks -------------------------------------------------------------------------------
 
@@ -913,17 +1354,32 @@ export class TpColorPalette extends TpFormElement<string> {
     const parts = [shown ? `${shown}, ${swatch.value}` : swatch.value];
     if (slot.share !== undefined)
       parts.push(fillTemplate(this.#strings.share, { share: Math.round(slot.share * 100) }));
+    // In the favorites, the section names the kind: the palette's own name follows.
+    if (this.mode === 'favorites' && slot.setName) parts.push(slot.setName);
     return parts.join(', ');
+  }
+
+  /** The favorites' context menu: its target is the Scroll area, its subject the option. */
+  #renderFavoritesMenu(): unknown {
+    if (this.mode !== 'favorites' || !this.favorites.length || this.effectiveDisabled)
+      return nothing;
+    return html`<tp-menu
+      class="favorites-menu"
+      invocation="context"
+      .portal=${false}
+      label=${this.#strings.modeFavorites}
+      @tp-action=${this.#favoriteAction}
+      @tp-open-change=${stop}
+      @tp-open-change-complete=${this.#favoriteMenuClosed}
+      ><tp-menu-item value="remove" variant="destructive"
+        >${this.#strings.removeFavorite}</tp-menu-item
+      ></tp-menu
+    >`;
   }
 
   /** The listbox: its mounted groups, label rows and option rows, with spaces for the rest. */
   #renderList(model: PaletteListModel, label: string, state: Record<string, unknown>): unknown {
-    if (!model.units.length)
-      return this.renderPart('color-palette-empty', state, {
-        tag: 'div',
-        properties: { part: 'color-palette-empty', class: 'empty', role: 'presentation' },
-        content: this.#strings.empty,
-      });
+    if (!model.units.length) return this.#renderEmpty();
     const highlighted = this.#list.highlighted;
     const selected = this.#selectedKey();
     const disabled = this.effectiveDisabled;
@@ -956,15 +1412,24 @@ export class TpColorPalette extends TpFormElement<string> {
                 part: 'color-palette-group-label',
                 class: 'label',
                 'aria-hidden': 'true',
+                'data-section': group.section,
               },
               reference: this.#rowRef(unit.key),
               content: group.label,
             })
           : this.renderPart('color-palette-row', state, {
               tag: 'div',
-              properties: { part: 'color-palette-row', class: 'row', role: 'presentation' },
+              properties: {
+                part: 'color-palette-row',
+                class: 'row',
+                role: 'presentation',
+                'data-palette': unit.palette,
+                // A palette is selected as a whole: its row carries the mark, not the color.
+                'data-selected':
+                  !!unit.palette && unit.slots.some((option) => option.key === selected),
+              },
               reference: this.#rowRef(unit.key),
-              content: repeat(
+              content: html`${repeat(
                 unit.slots,
                 (option) => option.key,
                 (option) =>
@@ -973,8 +1438,9 @@ export class TpColorPalette extends TpFormElement<string> {
                     highlighted: option.key === highlighted,
                     disabled,
                     list,
+                    member: !!unit.palette,
                   }),
-              ),
+              )}${this.#renderFavoriteMark(unit.key)}`,
             }),
       );
     }
@@ -990,7 +1456,9 @@ export class TpColorPalette extends TpFormElement<string> {
           highlighted !== undefined && !disabled ? optionId(highlighted) : undefined,
         'aria-disabled': disabled ? 'true' : undefined,
         'aria-readonly': this.readOnly ? 'true' : undefined,
-        '@keydown': this.#list.keyDown,
+        '@keydown': this.#listKeyDown,
+        '@dblclick': this.#favoriteDoubleClick,
+        '@contextmenu': this.#listContextMenu,
         '@focusin': this.#list.focusIn,
         '@pointermove': this.#list.pointerMove,
         '@click': this.#list.click,
@@ -1015,10 +1483,169 @@ export class TpColorPalette extends TpFormElement<string> {
     });
   }
 
+  /**
+   * The status bar: a copy button and the chosen color in `format`, or the chosen palette's name
+   * and size; with nothing chosen, an info icon that credits the collection's source and license
+   * (in a Preview Card with the description when the collection has one), then its summary.
+   */
+  #renderStatus(model: PaletteListModel, collection: ResolvedColorCollection): unknown {
+    const strings = this.#strings;
+    const format = isColorFormat(this.format) ? this.format : 'hex';
+    const key = this.#selectedKey();
+    const slot = key === undefined ? undefined : model.slots.get(key);
+    // The name truncates; the count or the color text beside it stays whole.
+    const named = (name: string, rest: unknown) =>
+      html`<tp-text-transform class="status-name" truncate="end">${name}</tp-text-transform
+        >${rest}`;
+    const count = (value: number, one: string, other: string) =>
+      fillTemplate(
+        new Intl.PluralRules(this.locale || undefined).select(value) === 'one' ? one : other,
+        {
+          count: value.toLocaleString(this.locale || undefined),
+        },
+      );
+    const summary = (value: string) =>
+      html`<span class="status-count"
+        >${fillTemplate(strings.summaryCount, { count: value })}</span
+      >`;
+    let text: unknown;
+    let copy = '';
+    if (slot?.set) {
+      // A palette is chosen as a whole: its name and size, and all its colors to copy.
+      const colors = slot.set.swatches.map((swatch) => serializeColor(swatch.color, format));
+      copy = colors.join(', ');
+      text = named(
+        slot.setName ?? '',
+        summary(count(colors.length, strings.colorCountOne, strings.colorCount)),
+      );
+    } else {
+      const parsed = slot?.swatch.color ?? (this.value ? parseColor(this.value) : null);
+      if (parsed) {
+        copy = serializeColor(parsed, format);
+        const value = html`<span class="status-value">${copy}</span>`;
+        text = slot?.swatch.name ? html`${value}${named(slot.swatch.name, nothing)}` : value;
+      } else if (this.mode === 'favorites') {
+        // Nothing chosen: what the mode lists, the favorites or the active library.
+        text = count(this.favorites.length, strings.favoriteCountOne, strings.favoriteCount);
+      } else {
+        const name = collection.name ?? collection.id;
+        text = named(
+          name,
+          summary(
+            this.mode === 'palettes'
+              ? count(collection.palettes.length, strings.paletteCountOne, strings.paletteCount)
+              : count(collection.swatches.length, strings.colorCountOne, strings.colorCount),
+          ),
+        );
+      }
+    }
+    const attribution = collection.attribution;
+    const sourceName = attribution?.name ?? collection.name ?? collection.id;
+    const license = attribution?.license
+      ? fillTemplate(strings.license, { license: attribution.license })
+      : '';
+    const icon = html`<tp-icon
+      slot="trigger"
+      class="source-icon"
+      part="color-palette-source"
+      tabindex="0"
+      .label=${strings.source}
+      .icon=${infoIcon}
+    ></tp-icon>`;
+    // The source info takes the start of the bar while nothing is chosen; the copy button does
+    // once something is. A collection with a description opens a Preview Card that can hold its
+    // source link; otherwise a Tooltip names the source, then its license on a line of its own.
+    const source =
+      copy || (!attribution && !collection.description)
+        ? nothing
+        : collection.description
+          ? html`<tp-preview-card class="source" label=${strings.source}
+              >${icon}<tp-stack class="source-card" part="color-palette-attribution" gap="1"
+                >${
+                  attribution?.url
+                    ? html`<a href=${attribution.url} target="_blank" rel="noopener noreferrer"
+                        >${sourceName}</a
+                      >`
+                    : html`<span class="source-name">${sourceName}</span>`
+                }<span class="source-description">${collection.description}</span
+                >${license ? html`<span class="source-license">${license}</span>` : nothing}</tp-stack
+              ></tp-preview-card
+            >`
+          : html`<tp-tooltip class="source"
+              >${icon}<span part="color-palette-attribution"
+                ><span class="credit-line">${sourceName}</span>${
+                  license ? html`<span class="credit-line">${license}</span>` : nothing
+                }</span
+              ></tp-tooltip
+            >`;
+    const copyButton = copy
+      ? html`<tp-copy-button
+          class="copy"
+          size="xs"
+          .value=${copy}
+          .label=${slot?.set ? strings.copyPalette : strings.copyColor}
+        ></tp-copy-button>`
+      : nothing;
+    return html`<div class="status" part="color-palette-status">
+      ${source}${copyButton}<span class="status-text">${text}</span>${this.#renderFavoriteToggle()}
+    </div>`;
+  }
+
+  /**
+   * The heart at the end of the status bar, for a chosen color or palette: a dimmed outline, or the
+   * solid heart while the choice is a favorite.
+   */
+  #renderFavoriteToggle(): unknown {
+    const chosen = this.#chosenFavorite();
+    if (!chosen) return nothing;
+    const pressed = chosen.index >= 0;
+    return html`<tp-toggle
+      class="favorite-toggle"
+      part="color-palette-favorite-toggle"
+      size="icon-xs"
+      aria-label=${this.#strings.favorite}
+      .pressed=${pressed}
+      ?disabled=${this.effectiveDisabled || this.readOnly}
+      @tp-value-change=${this.#favoriteToggle}
+      ><tp-icon
+        class=${pressed ? 'heart' : 'heart dim'}
+        .icon=${pressed ? favoriteHeartIcon : emptyStateIcons.heart}
+      ></tp-icon
+    ></tp-toggle>`;
+  }
+
+  /**
+   * The empty state of the mode: how to add favorites, or that the collection has no palettes or
+   * no colors.
+   */
+  #renderEmpty(): unknown {
+    const strings = this.#strings;
+    const [title, description, icon] =
+      this.mode === 'favorites'
+        ? [strings.favoritesEmpty, strings.favoritesHint, emptyStateIcons.heart]
+        : this.mode === 'palettes'
+          ? [strings.palettesEmpty, strings.palettesHint, paletteIcon]
+          : [strings.empty, strings.emptyHint, paletteIcon];
+    return html`<tp-empty-state
+      class="empty"
+      media-treatment="icon"
+      .title=${title}
+      .description=${description}
+      ><tp-icon slot="media" .icon=${icon} aria-hidden="true"></tp-icon
+    ></tp-empty-state>`;
+  }
+
   /** One color: a gapless cell, or in the list layout a row with its color and its name. */
   #renderOption(
     slot: PaletteSlot,
-    flags: { selected: boolean; highlighted: boolean; disabled: boolean; list: boolean },
+    flags: {
+      selected: boolean;
+      highlighted: boolean;
+      disabled: boolean;
+      list: boolean;
+      /** A color of a palette row, whose row carries the selection mark. */
+      member?: boolean;
+    },
   ): unknown {
     return this.renderPart(
       'color-palette-item',
@@ -1039,12 +1666,13 @@ export class TpColorPalette extends TpFormElement<string> {
           'data-disabled': flags.disabled,
           'data-layout': flags.list ? 'list' : undefined,
           'data-paint': slot.blend ? 'blend' : undefined,
+          'data-member': flags.member,
           style: slot.paint,
         },
         content: flags.list
-          ? html`<span class="swatch"></span
+          ? html`<span class="swatch">${this.#renderFavoriteMark(slot.key)}</span
               ><span class="row-text">${listText(slot.swatch, this.#strings)}</span>`
-          : nothing,
+          : this.#renderFavoriteMark(slot.key),
       },
     );
   }
@@ -1083,22 +1711,6 @@ export class TpColorPalette extends TpFormElement<string> {
           onSize: this.#onSize,
         })
       : nothing;
-    const attribution = collection.attribution;
-    const credit = attribution
-      ? html`<div class="attribution" part="color-palette-attribution">
-          ${
-            attribution.url
-              ? html`<a href=${attribution.url} target="_blank" rel="noopener noreferrer"
-                  >${attribution.name ?? collection.name ?? collection.id}</a
-                >`
-              : (attribution.name ?? collection.name ?? collection.id)
-          }${
-            attribution.license
-              ? html` · ${fillTemplate(strings.license, { license: attribution.license })}`
-              : nothing
-          }
-        </div>`
-      : nothing;
     return this.renderPart('color-palette', state, {
       tag: 'div',
       properties: {
@@ -1123,8 +1735,8 @@ export class TpColorPalette extends TpFormElement<string> {
           <span class="probe-cell"></span><span class="probe-frame"></span>
         </div>
         ${toolbar}<tp-scroll-area class="scroller" axis="y"
-          >${this.#renderList(model, label, state)}</tp-scroll-area
-        >${credit}`,
+          >${this.#renderList(model, label, state)}${this.#renderFavoritesMenu()}</tp-scroll-area
+        >${this.#renderStatus(model, collection)}`,
     });
   }
 }

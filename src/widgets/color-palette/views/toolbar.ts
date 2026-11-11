@@ -1,7 +1,7 @@
 import { html, nothing } from 'lit';
 import type { TpValueChangeEvent } from '../../../foundation/events.js';
 import type { PaletteGrouping } from '../../../foundation/color-palette/index.js';
-import { viewOptionsIcon } from '../../../icons/color-palette.js';
+import { librariesIcon, viewOptionsIcon } from '../../../icons/color-palette.js';
 import type {
   ColorPaletteLayout,
   ColorPaletteMode,
@@ -48,22 +48,22 @@ function radioGroup<T extends string>(
 }
 
 /**
- * The toolbar: the mode Tabs, the view options menu and the collection Select. The Tabs have no
- * panels: the list below shows the selected mode. The menu's Display section shapes the active
- * mode (the colors' layout, then their Group by section, or the palettes' hard stops or
- * gradient); its Size section sizes the cells of every mode.
+ * The toolbar: the mode Tabs and the view options menu. The Tabs have no panels: the list below
+ * shows the selected mode. The menu's Color libraries submenu chooses the collection, the default
+ * first and then the loaded ones; its Display section shapes the active mode (the colors' layout, then their Group by section, or the palettes' hard stops or
+ * gradient; the favorites keep their own); its Size section sizes the cells of every mode.
  */
 export function renderToolbar(options: ToolbarOptions) {
   const { strings } = options;
   const modeNames: Readonly<Record<ColorPaletteMode, string>> = {
     colors: strings.modeColors,
     palettes: strings.modePalettes,
+    favorites: strings.modeFavorites,
   };
   const modes =
     options.modes.length > 1
       ? html`<tp-tabs
           class="modes"
-          variant="underline"
           activation="automatic"
           label=${strings.modes}
           .value=${options.mode}
@@ -77,20 +77,22 @@ export function renderToolbar(options: ToolbarOptions) {
           )}</tp-tabs
         >`
       : nothing;
-  const collection =
+  // The collections, once more than the default is loaded: a submenu of the view options.
+  const collections = radioGroup(
+    strings.libraries,
+    undefined,
+    options.collection,
+    options.collections.map((entry) => [entry.id, entry.label] as const),
+    options.onCollection,
+  );
+  const libraries =
     options.collections.length > 1
-      ? html`<tp-select
-          class="collection"
-          size="sm"
-          label=${strings.collection}
-          .items=${options.collections.map((entry) => ({ value: entry.id, label: entry.label }))}
-          .value=${options.collection}
-          ?disabled=${options.disabled}
-          @tp-value-change=${options.onCollection}
-          @tp-field-value=${stop}
-          @tp-open-change=${stop}
-          @tp-open-change-complete=${stop}
-        ></tp-select>`
+      ? html`<tp-menu .portal=${false} .modal=${false} label=${strings.libraries}
+            ><tp-button slot="trigger" variant="ghost"
+              ><tp-icon slot="icon-start" .icon=${librariesIcon}></tp-icon
+              >${strings.libraries}</tp-button
+            >${collections}</tp-menu
+          ><tp-separator></tp-separator>`
       : nothing;
   // Auto groups are the hue families ordered by lightness; collection groups keep the document.
   const groups = options.grouping === 'hue' ? 'auto' : options.grouping;
@@ -117,16 +119,19 @@ export function renderToolbar(options: ToolbarOptions) {
             ],
             options.onGroups,
           )}<tp-separator></tp-separator>`
-      : html`${radioGroup(
-            strings.display,
-            strings.display,
-            options.paletteStyle,
-            [
-              ['stops', strings.paletteStops],
-              ['gradient', strings.paletteGradient],
-            ],
-            options.onPaletteStyle,
-          )}<tp-separator></tp-separator>`;
+      : options.mode === 'palettes'
+        ? html`${radioGroup(
+              strings.display,
+              strings.display,
+              options.paletteStyle,
+              [
+                ['stops', strings.paletteStops],
+                ['gradient', strings.paletteGradient],
+              ],
+              options.onPaletteStyle,
+            )}<tp-separator></tp-separator>`
+        : // Favorites keep the style each was bookmarked in: only the size applies.
+          nothing;
   const menu = html`<tp-menu
     class="options-menu"
     .portal=${false}
@@ -139,12 +144,12 @@ export function renderToolbar(options: ToolbarOptions) {
       slot="trigger"
       class="options"
       variant="ghost"
-      size="icon-sm"
+      size="icon"
       .icon=${viewOptionsIcon}
       aria-label=${strings.options}
       ?disabled=${options.disabled}
     ></tp-button
-    >${display}${radioGroup(
+    >${libraries}${display}${radioGroup(
       strings.size,
       strings.size,
       options.size,
@@ -156,5 +161,5 @@ export function renderToolbar(options: ToolbarOptions) {
       options.onSize,
     )}</tp-menu
   >`;
-  return html`<div class="toolbar" part="color-palette-toolbar">${modes}${menu}${collection}</div>`;
+  return html`<div class="toolbar" part="color-palette-toolbar">${modes}${menu}</div>`;
 }

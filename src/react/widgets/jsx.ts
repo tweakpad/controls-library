@@ -50,6 +50,7 @@ type Tags = {
     | 'collections'
     | 'columns'
     | 'defaultCollection'
+    | 'defaultFavorites'
     | 'defaultGrouping'
     | 'defaultLayout'
     | 'defaultMode'
@@ -60,7 +61,9 @@ type Tags = {
     | 'defaultValue'
     | 'density'
     | 'disabled'
+    | 'favorites'
     | 'formOwner'
+    | 'format'
     | 'grouping'
     | 'inputElementReference'
     | 'invalid'
@@ -75,17 +78,22 @@ type Tags = {
     | 'paletteStyle'
     | 'partContracts'
     | 'partPresentation'
+    | 'persistence'
     | 'readOnly'
     | 'required'
     | 'size'
     | 'sort'
     | 'sortDirection'
+    | 'storageKey'
     | 'strings'
     | 'toolbar'
     | 'value',
     {
       'tp-collection-change': foundationEvents.TpValueChangeEvent<string>;
       'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
+      'tp-favorites-change': foundationEvents.TpValueChangeEvent<
+        readonly widgetsColorPaletteTypes.ColorPaletteFavorite[]
+      >;
       'tp-field-value': CustomEvent<{
         value: string;
         previousValue: string;

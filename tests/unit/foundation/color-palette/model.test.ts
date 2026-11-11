@@ -42,6 +42,7 @@ describe('parseColorCollection', () => {
     const { collection, issues } = parseColorCollection({
       id: 'json',
       name: 'From JSON',
+      description: 'Inks of the spring run.',
       attribution: { name: 'Studio', url: 'https://example.com', extra: 1 },
       groups: [{ id: 'a', name: 'A' }, { name: 'no id' }],
       colors: ['#fff', { value: '#000', name: 'Black', group: 'a' }, 42],
@@ -54,6 +55,8 @@ describe('parseColorCollection', () => {
     expect(collection.colors).toEqual(['#fff', { value: '#000', name: 'Black', group: 'a' }]);
     expect(collection.groups).toEqual([{ id: 'a', name: 'A' }]);
     expect(collection.attribution).toEqual({ name: 'Studio', url: 'https://example.com' });
+    expect(collection.description).toBe('Inks of the spring run.');
+    expect(resolveColorCollection(collection).description).toBe('Inks of the spring run.');
     expect(collection.palettes).toEqual([
       { colors: ['#fff', '#000'] },
       { colors: ['#fff', '#000'] },

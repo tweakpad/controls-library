@@ -79,6 +79,7 @@ export function parseColorCollection(document: unknown): {
     collection: {
       id: document.id as string,
       ...(text(document.name) ? { name: document.name as string } : {}),
+      ...(text(document.description) ? { description: document.description as string } : {}),
       ...(attribution && Object.keys(attribution).length ? { attribution } : {}),
       groups,
       colors,
@@ -183,7 +184,7 @@ export function resolveColorCollection(collection: ColorCollection): ResolvedCol
       const given = entry.weights;
       const weights =
         given && given.length === entry.colors.length
-          ? normalize(kept.map((index) => given[index]!))
+          ? normalizeWeights(kept.map((index) => given[index]!))
           : undefined;
       sets.push({
         key: `collection:palette:${setIndex}`,
@@ -197,6 +198,7 @@ export function resolveColorCollection(collection: ColorCollection): ResolvedCol
   const resolved: ResolvedColorCollection = {
     id: collection.id,
     ...(collection.name ? { name: collection.name } : {}),
+    ...(collection.description ? { description: collection.description } : {}),
     ...(collection.attribution ? { attribution: collection.attribution } : {}),
     groups: collection.groups ?? [],
     swatches,
@@ -208,7 +210,8 @@ export function resolveColorCollection(collection: ColorCollection): ResolvedCol
   return resolved;
 }
 
-function normalize(weights: readonly number[]): readonly number[] {
+/** Weights as shares of their sum; equal shares when they sum to zero. */
+export function normalizeWeights(weights: readonly number[]): readonly number[] {
   const sum = weights.reduce((total, weight) => total + weight, 0);
   return sum > 0 ? weights.map((weight) => weight / sum) : weights.map(() => 1 / weights.length);
 }

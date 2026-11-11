@@ -238,7 +238,7 @@ function textOf(slot: PaletteSlot): string {
 }
 
 /** The option key under an event, from the option's `data-key`. */
-function optionKey(event: Event): string | undefined {
+export function optionKey(event: Event): string | undefined {
   for (const target of event.composedPath()) {
     if (!(target instanceof HTMLElement)) continue;
     if (target.getAttribute('role') === 'listbox') return undefined;

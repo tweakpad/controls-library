@@ -51,14 +51,16 @@ export const colorPaletteStyles = css`
   }
 
   /* The toolbar never widens the palette: the grid sets the width. The mode Tabs and the options
-     share the first row, the Tabs shrinking before the options; the collection Select takes the
-     second. */
+     share the row, the Tabs shrinking before the options. */
   .toolbar {
     box-sizing: border-box;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     flex: none;
-    align-items: center;
+
+    /* The Tabs keep their panel gap below the tab list even without panels, so the buttons align
+       with the list at the top, where both are one control high. */
+    align-items: start;
     contain: inline-size;
     inline-size: 100%;
     min-inline-size: 0;
@@ -71,13 +73,8 @@ export const colorPaletteStyles = css`
     min-inline-size: 0;
   }
 
-  .toolbar .options {
+  .toolbar .options-menu {
     grid-column: 2;
-  }
-
-  .toolbar .collection {
-    grid-column: 1 / -1;
-    min-inline-size: 0;
   }
 
   /* The Scroll area holds six rows of medium cells, whatever the size. */
@@ -109,8 +106,30 @@ export const colorPaletteStyles = css`
 
   /* Rows are as wide as their cells. */
   .row {
+    position: relative;
     display: flex;
     inline-size: fit-content;
+  }
+
+  /* A selected palette's mark, over its colors. */
+  .row[data-palette][data-selected]::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    box-shadow: var(--_tp-color-palette-mark, none);
+    pointer-events: none;
+  }
+
+  /* The heart of a new favorite: centered over its color or its palette row. */
+  .favorite-mark {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    opacity: 0.75;
+    pointer-events: none;
   }
 
   .option {
@@ -132,11 +151,11 @@ export const colorPaletteStyles = css`
   }
 
   /* A palette's options share the list's inline size: equally, or by their share. */
-  .root[data-mode='palettes'] .row {
+  .row[data-palette] {
     inline-size: 100%;
   }
 
-  .root[data-mode='palettes'] .option {
+  .row[data-palette] > .option {
     flex: var(--_tp-color-palette-share, 1) 1 0;
     inline-size: auto;
     min-inline-size: 0;
@@ -157,6 +176,7 @@ export const colorPaletteStyles = css`
 
   /* A list row's color: three cells wide, one cell tall. */
   .swatch {
+    position: relative;
     flex: none;
     inline-size: calc(var(--_tp-color-palette-cell) * 3);
     block-size: var(--_tp-color-palette-cell);
@@ -169,13 +189,41 @@ export const colorPaletteStyles = css`
     white-space: nowrap;
   }
 
-  .attribution {
+  /* The status bar: the copy button and the chosen color or palette at the start, the source info
+     at the end; the text ellipsizes before the bar widens the palette. */
+  .status {
     box-sizing: border-box;
+    display: flex;
     flex: none;
+    align-items: center;
     contain: inline-size;
     inline-size: 100%;
+    min-inline-size: 0;
+  }
+
+  /* The name truncates and the count or color text beside it stays whole. */
+  .status-text {
+    display: flex;
+    flex: 1 1 0;
+    align-items: center;
+    gap: var(--tp-space-1-5);
+    inline-size: 0;
     overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .status .copy,
+  .status .source,
+  .status .favorite-toggle {
+    flex: none;
+  }
+
+  .status-name {
+    min-inline-size: 0;
+  }
+
+  .status-count,
+  .status-value {
+    flex: none;
   }
 `;

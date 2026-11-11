@@ -6,6 +6,8 @@ import type { ColorCollection } from '../../types.js';
 const cssNamedColors: ColorCollection = {
   id: 'css-named',
   name: 'CSS named colors',
+  description:
+    'The 148 color keywords every browser understands, from aliceblue to yellowgreen, grouped by hue.',
   attribution: {
     name: 'CSS Color Module Level 4',
     url: 'https://www.w3.org/TR/css-color-4/#named-colors',

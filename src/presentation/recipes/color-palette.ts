@@ -1,6 +1,6 @@
+import { floatEdge } from './shared/edges.js';
 import type { PresentationDictionary } from '../resolver.js';
 import { selectAppearance } from './select.js';
-import { floatEdge } from './shared/edges.js';
 import { swatchFill } from './shared/swatch.js';
 
 // Widgets Specification Color palette Presentation: the list and labels take the Select recipes;
@@ -67,7 +67,6 @@ export const colorPaletteAppearance: PresentationDictionary = {
   ],
   // The toolbar controls are library components; their recipes style them.
   'color-palette-modes': [],
-  'color-palette-collection': [],
   'color-palette-options': [],
   // The listbox marks no focus of its own: only the chosen color is marked.
   'color-palette-list': [{ declarations: { outline: '0' } }],
@@ -80,9 +79,20 @@ export const colorPaletteAppearance: PresentationDictionary = {
         'font-weight': 'var(--tp-font-medium)',
       },
     },
+    // A favorites section heads the named palettes below it, so it reads stronger than they do.
+    { selector: '&[data-section]', declarations: { color: 'var(--tp-popover-foreground)' } },
   ],
-  // The cells meet each other and the surface without an edge.
-  'color-palette-row': [],
+  // The cells meet each other and the surface without an edge. A selected palette row carries the
+  // selection mark around the whole palette, drawn over its colors.
+  'color-palette-row': [
+    {
+      selector: '&[data-selected]',
+      declarations: {
+        '--_tp-color-palette-mark':
+          'inset 0 0 0 var(--tp-border-width) white, inset 0 0 0 calc(var(--tp-border-width) * 2) black',
+      },
+    },
+  ],
   'color-palette-item': [
     {
       declarations: {
@@ -105,6 +115,8 @@ export const colorPaletteAppearance: PresentationDictionary = {
         'box-shadow': 'var(--_tp-color-palette-mark)',
       },
     },
+    // A color of a palette leaves the selection mark to its row.
+    { selector: '&[data-selected][data-member]', declarations: { 'box-shadow': 'none' } },
     // A palette shown as a gradient: every option paints its own stretch of the palette's
     // row-wide blend over the transparency checker, so the row reads as one gradient.
     {
@@ -148,17 +160,48 @@ export const colorPaletteAppearance: PresentationDictionary = {
   'color-palette-row-text': [
     { declarations: { color: 'var(--tp-popover-foreground)', 'font-size': 'var(--tp-text-sm)' } },
   ],
-  'color-palette-empty': selectAppearance['select-empty-state']!,
-  'color-palette-attribution': [
+  // The status bar under the list: the chosen color's text in the configured format, its name
+  // muted, and the source info at the end.
+  'color-palette-status': [
     {
       declarations: {
+        gap: 'var(--tp-space-1-5)',
         color: 'var(--tp-muted-foreground)',
         'font-size': 'var(--tp-text-xs)',
-        padding: 'var(--tp-space-1-5) var(--_tp-color-palette-space)',
+        padding: 'var(--tp-space-1) var(--_tp-color-palette-space)',
         'border-block-start': `var(--tp-border-width) solid ${floatEdge.color}`,
       },
     },
-    { selector: '& a', declarations: { color: 'inherit', 'text-underline-offset': '2px' } },
+    {
+      selector: '& .status-value',
+      declarations: {
+        color: 'var(--tp-popover-foreground)',
+        'font-family': 'var(--tp-font-mono)',
+      },
+    },
+  ],
+  // The heart toggle: a dimmed outline until the choice is a favorite, then the solid heart.
+  'color-palette-favorite-toggle': [
+    { selector: '& .dim', declarations: { color: 'var(--tp-muted-foreground)' } },
+  ],
+  'color-palette-source': [{ declarations: { color: 'var(--tp-muted-foreground)' } }],
+  // The source info's text: in a Tooltip the source, then its license; in the Preview Card of a
+  // described collection the source (a link when it has one), the description and the license.
+  'color-palette-attribution': [
+    { declarations: { display: 'grid', 'max-inline-size': '18rem' } },
+    {
+      selector: '& a, & .source-name',
+      declarations: {
+        color: 'inherit',
+        'font-weight': 'var(--tp-font-medium)',
+        'text-underline-offset': '2px',
+      },
+    },
+    { selector: '& .source-description', declarations: { color: 'var(--tp-muted-foreground)' } },
+    {
+      selector: '& .source-license',
+      declarations: { color: 'var(--tp-muted-foreground)', 'font-size': 'var(--tp-text-xs)' },
+    },
   ],
 };
 

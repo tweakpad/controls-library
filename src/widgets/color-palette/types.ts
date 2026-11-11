@@ -1,5 +1,29 @@
-/** How the active collection is presented: its colors, or its palettes. */
-export type ColorPaletteMode = 'colors' | 'palettes';
+/** What the palette lists: the collection's colors, its palettes, or the favorites. */
+export type ColorPaletteMode = 'colors' | 'palettes' | 'favorites';
+/** Where uncontrolled favorites are kept between visits: local storage, or nowhere. */
+export type ColorPalettePersistence = 'local' | 'none';
+
+/**
+ * A bookmarked color, palette or gradient. A palette shows its colors as hard stops and a
+ * gradient blends them; both keep their colors' shares.
+ */
+export type ColorPaletteFavorite =
+  | { readonly kind: 'color'; readonly value: string; readonly name?: string }
+  | {
+      readonly kind: 'palette' | 'gradient';
+      readonly name?: string;
+      /** Two to twelve color texts. */
+      readonly colors: readonly string[];
+      /** Shares of the colors, summing to 1; equal shares when absent. */
+      readonly weights?: readonly number[];
+    };
+
+/** Metadata of a favorites proposal: what was added or removed. */
+export interface ColorPaletteFavoritesMetadata {
+  readonly [key: string]: unknown;
+  readonly action: 'add' | 'remove';
+  readonly favorite: ColorPaletteFavorite;
+}
 /** How a palette shows its colors: hard stops side by side, or blended as one gradient. */
 export type ColorPalettePaletteStyle = 'stops' | 'gradient';
 export type ColorPaletteSize = 'sm' | 'default' | 'lg';
@@ -31,10 +55,21 @@ export interface ColorPaletteChangeMetadata {
 export interface ColorPaletteStrings {
   label: string;
   empty: string;
+  emptyHint: string;
+  palettesEmpty: string;
+  palettesHint: string;
   modes: string;
   modeColors: string;
   modePalettes: string;
-  collection: string;
+  modeFavorites: string;
+  favoriteColors: string;
+  favoritePalettes: string;
+  favoriteGradients: string;
+  favoritesEmpty: string;
+  favoritesHint: string;
+  removeFavorite: string;
+  favorite: string;
+  libraries: string;
   options: string;
   display: string;
   layoutGrid: string;
@@ -64,5 +99,15 @@ export interface ColorPaletteStrings {
   palette: string;
   share: string;
   license: string;
+  source: string;
+  summaryCount: string;
+  colorCount: string;
+  colorCountOne: string;
+  paletteCount: string;
+  paletteCountOne: string;
+  favoriteCount: string;
+  favoriteCountOne: string;
+  copyColor: string;
+  copyPalette: string;
   valueMissing: string;
 }
