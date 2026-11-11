@@ -23,3 +23,15 @@ export {
 export { clipToGamut, deltaEOK, inGamut, toGamut } from './gamut.js';
 export { colorEquals, hueDistance } from './equality.js';
 export { namedColorHex } from './named.js';
+export {
+  HUE_FAMILIES,
+  NEUTRAL_CHROMA,
+  hueFamily,
+  oklchOf,
+  sortByColor,
+  type ColorSortKey,
+  type HueFamily,
+  type SortDirection,
+} from './palette.js';
+export { generateSchemeRows, type SchemeRow, type SchemeRowId } from './scheme.js';
+export { contrastColor, relativeLuminance } from './contrast.js';

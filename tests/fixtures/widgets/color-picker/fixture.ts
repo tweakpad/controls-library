@@ -78,12 +78,11 @@ Object.assign(window, {
     ...checks,
   },
 });
-// Saved swatches and consumer schemes for the swatches/schemes views (object properties).
-const schemesInstance = document.getElementById('schemes') as HTMLElement & {
+// Saved swatches for the swatches view (object property).
+const swatchesInstance = document.getElementById('swatches') as HTMLElement & {
   swatches: unknown;
-  schemes: unknown;
 };
-schemesInstance.swatches = [
+swatchesInstance.swatches = [
   '#fb8c00',
   '#e53935',
   '#8e24aa',

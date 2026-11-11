@@ -289,19 +289,26 @@ const settle = async (target: TpColorPicker) => {
   await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 };
 
-/** V-18: swatch selection and re-press on the schemes instance. */
+/** The options of the swatches view's Color palette. */
+function paletteOptions(target: HTMLElement): HTMLElement[] {
+  const palette = target.shadowRoot!.querySelector('tp-color-palette');
+  return [...(palette?.shadowRoot?.querySelectorAll<HTMLElement>('[role="option"]') ?? [])];
+}
+
+/** V-18: swatch selection and re-press on the swatches instance. */
 export async function assertSwatches(): Promise<Report> {
   const checks: Check[] = [];
-  const target = picker('schemes');
+  const target = picker('swatches');
   target.view = 'swatches';
   await settle(target);
-  const groups = [...target.shadowRoot!.querySelectorAll('tp-toggle-group.swatches')];
-  checks.push(check('saved and brand groups render', groups.length >= 2, groups.length));
-  const toggles = groups[0]!.querySelectorAll<HTMLElement & { pressed: boolean }>('tp-toggle');
-  const second = toggles[1]!;
-  const expected = second.getAttribute('value');
+  await wait(60);
+  const options = paletteOptions(target);
+  const labels = options.map((option) => option.getAttribute('aria-label'));
+  checks.push(check('saved and brand colors are listed', options.length === 11, labels));
+  const second = options[1]!;
+  const expected = '#e53935';
   const captured = capture(target, ['tp-value-change', 'tp-value-commit']);
-  second.shadowRoot!.querySelector('button')!.click();
+  second.click();
   await wait(40);
   await settle(target);
   checks.push(check('swatch press publishes its color', target.value === expected, target.value));
@@ -316,9 +323,15 @@ export async function assertSwatches(): Promise<Report> {
       captured.events,
     ),
   );
-  checks.push(check('pressed state follows the value', second.pressed, second.pressed));
+  checks.push(
+    check(
+      'selected state follows the value',
+      paletteOptions(target)[1]?.hasAttribute('data-selected') === true,
+      null,
+    ),
+  );
   captured.events.length = 0;
-  second.shadowRoot!.querySelector('button')!.click();
+  paletteOptions(target)[1]!.click();
   await wait(40);
   await settle(target);
   captured.stop();
@@ -329,7 +342,13 @@ export async function assertSwatches(): Promise<Report> {
       captured.events,
     ),
   );
-  checks.push(check('still pressed after the re-press', second.pressed, second.pressed));
+  checks.push(
+    check(
+      'still selected after the re-press',
+      paletteOptions(target)[1]?.hasAttribute('data-selected') === true,
+      null,
+    ),
+  );
   return report(checks, { expected });
 }
 
@@ -391,21 +410,24 @@ export async function assertRecent(): Promise<Report> {
   await settle(target);
   await wait(60);
   // The swatches view lists the same colors.
-  const schemes = picker('schemes');
-  schemes.recent = colors;
-  schemes.view = 'swatches';
-  await settle(schemes);
-  const groups = [...schemes.shadowRoot!.querySelectorAll('tp-toggle-group.swatches')];
-  const recentGroup = groups.find((g) => g.getAttribute('label') === 'Recent colors');
+  const swatches = picker('swatches');
+  swatches.recent = colors;
+  swatches.view = 'swatches';
+  await settle(swatches);
+  await wait(60);
+  const list = swatches.shadowRoot!.querySelector('tp-color-palette')?.shadowRoot;
+  const recentLabel = [...(list?.querySelectorAll('.label') ?? [])].find(
+    (label) => label.textContent?.trim() === 'Recent colors',
+  );
   checks.push(
     check(
       'swatches view lists a Recent colors group with the supplied colors',
-      recentGroup?.querySelectorAll('tp-toggle').length === 3,
-      recentGroup?.querySelectorAll('tp-toggle').length,
+      recentLabel !== undefined && paletteOptions(swatches).length === 14,
+      paletteOptions(swatches).length,
     ),
   );
-  schemes.recent = [];
-  await settle(schemes);
+  swatches.recent = [];
+  await settle(swatches);
   return report(checks, { events: captured.events });
 }
 

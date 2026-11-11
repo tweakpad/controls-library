@@ -1,0 +1,167 @@
+---
+title: Color palette
+description: Chooses a color from swatch collections of any size, as a gapless grid or list of colors, or as palettes shown as hard stops or gradients, with grouping and sorting.
+tag: tp-color-palette
+---
+
+<Preview
+  title="Color palette"
+  code={`<tp-color-palette label="Fill"></tp-color-palette>`}
+/>
+
+## Usage
+
+The value is the color text the collection gives for the chosen swatch, and it submits with a form under `name`. Colors sit next to each other without gaps or lines between them, so small differences in grading stay visible. The list takes focus as one control: the arrow keys move through the grid, letters jump to a color by name, and Enter or Space picks. The list is virtualized, so a collection of several hundred colors stays fast. Without `collections` the palette offers its built-in default collection.
+
+A pick of a different color proposes a cancelable `tp-value-change` whose metadata names the swatch and the collection, followed by `tp-value-commit`. Supply `value` for a controlled palette or `defaultValue` for an uncontrolled one; the mode stays fixed for the element's lifetime. The same rule applies to the mode, collection, layout, palette style, grouping, sort, sort direction and size lanes.
+
+<Preview
+  title="Picks"
+  code={`<tp-stack gap="3" align="center">
+  <tp-color-palette
+    id="color-palette-picks"
+    label="Header fill"
+    default-value="#1e6dd8"
+  ></tp-color-palette>
+  <output
+    id="color-palette-picks-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Header fill: Blue 600</output
+  >
+</tp-stack>`}
+  script={`const palette = document.querySelector('#color-palette-picks');
+const output = document.querySelector('#color-palette-picks-output');
+palette.addEventListener('tp-value-commit', (event) => {
+  const swatch = event.detail.metadata.swatch;
+  output.textContent = \`Header fill: \${swatch.name ?? swatch.value}\`;
+});`}
+/>
+
+### Collections
+
+A collection is a JSON document: its colors as color texts or as records with a name and a group, optional groups in display order, optional preset palettes of two to twelve colors with their shares, and who made it. The default and a reduced collection ship with `@tweakpad/ui/color-palette`; every other collection is its own import from `@tweakpad/ui/color-palette/collections/<id>`, so an application bundles only the collections it uses. With more than one collection, a Select in the toolbar switches between them and the footer credits the active one.
+
+<Code
+  label="harbor.json"
+  language="json"
+  code={`{
+  "id": "harbor",
+  "name": "Harbor inks",
+  "attribution": { "name": "Harbor Print Co.", "url": "https://example.com/inks", "license": "CC BY 4.0" },
+  "groups": [{ "id": "blues", "name": "Blues" }, { "id": "warm", "name": "Warm" }],
+  "colors": [
+    { "value": "#0d2c54", "name": "Deep harbor", "group": "blues" },
+    { "value": "#2a6f97", "name": "Tide", "group": "blues" },
+    { "value": "#f4a259", "name": "Buoy", "group": "warm" },
+    "#e9ecef"
+  ],
+  "palettes": [
+    { "name": "Dusk tide", "colors": ["#0d2c54", "#2a6f97", "#f4a259"] },
+    { "name": "Dock", "colors": ["#0d2c54", "#f4a259", "#e9ecef"], "weights": [60, 30, 10] }
+  ]
+}`}
+/>
+
+<Preview
+  title="Several collections"
+  code={`<tp-color-palette id="color-palette-collections" label="Ink"></tp-color-palette>`}
+  script={`import { defaultColorCollection, reducedColorCollection } from '@tweakpad/ui/color-palette';
+import { cssNamedColors } from '@tweakpad/ui/color-palette/collections/css-named';
+
+document.querySelector('#color-palette-collections').collections = [
+  reducedColorCollection,
+  cssNamedColors,
+  defaultColorCollection,
+];`}
+/>
+
+A document fetched at run time goes through `parseColorCollection`, which drops malformed entries and lists them as issues; colors that do not parse are reported as diagnostics when the palette shows the collection.
+
+<Code
+  label="Loading a collection"
+  language="typescript"
+  code={`import { parseColorCollection } from '@tweakpad/ui/color-palette';
+
+const response = await fetch('/collections/harbor.json');
+const { collection, issues } = parseColorCollection(await response.json());
+palette.collections = [collection];`}
+/>
+
+### Grouping and sorting
+
+The grid groups colors as the collection does by default. `grouping="hue"` regroups them into hue families with the neutrals last, and `grouping="none"` lists one flat grid. `sort` orders each group by lightness, hue or chroma instead of the collection's order, which turns a scattered collection into readable gradings. Group by in the view options beside the mode tabs offers three choices: Auto shows the hue families ordered by lightness, Collection the collection's own groups and order, and None one flat grid in the collection's order.
+
+<Preview
+  title="Hue families by lightness"
+  code={`<tp-color-palette
+  id="color-palette-sorted"
+  label="Named colors"
+  default-grouping="hue"
+  default-sort="lightness"
+></tp-color-palette>`}
+  script={`import { cssNamedColors } from '@tweakpad/ui/color-palette/collections/css-named';
+
+document.querySelector('#color-palette-sorted').collections = [cssNamedColors];`}
+/>
+
+### List
+
+`layout="list"` shows the grid as one row per color: its color, one cell tall and three cells wide, then its name, or its HSL values when the color has no name. It is also under Display in the view options. The rows keep the height of the grid's cells and the palette keeps its width.
+
+<Preview
+  title="List"
+  code={`<tp-color-palette label="Ink" default-layout="list" default-value="#1e6dd8"></tp-color-palette>`}
+/>
+
+### Palettes
+
+`mode="palettes"` lists the collection's palettes, one row each. A palette holds two to twelve colors, and its weights set each color's share of the row; without weights the colors share it equally.
+
+`palette-style="gradient"` blends each palette into one gradient whose colors stay pickable, each at the middle of its share; the default `stops` shows the colors side by side. Display in the view options switches between Hard stops and Gradient.
+
+<Preview
+  title="Palettes as gradients"
+  code={`<tp-color-palette
+  label="Theme"
+  default-mode="palettes"
+  default-palette-style="gradient"
+  default-value="#e64a7c"
+></tp-color-palette>`}
+/>
+
+### Size and density
+
+`size` sets the cell size, Small, Medium or Large (24, 32 and 42 px, or 16, 24 and 32 px in a compact region), and is also under Size in the view options; the grid and the list share it. The palette keeps its size: smaller or larger cells reflow inside it, more or fewer to a row. `columns` sets how many medium cells wide the palette is. Only the density of the region resizes the palette: in a `density="compact"` region it shrinks with the controls around them.
+
+<Preview
+  title="Compact"
+  code={`<tp-color-palette label="Paint" density="compact" default-value="#ee4848"></tp-color-palette>`}
+/>
+
+### In a popover
+
+The palette is made for floating panels: put it in a Popover next to the control it fills. Hide the toolbar with `toolbar="false"` when one presentation is enough.
+
+<Preview
+  title="Fill menu"
+  code={`<tp-popover>
+  <tp-button slot="trigger" variant="outline">Fill</tp-button>
+  <tp-color-palette label="Fill" default-value="#8949d0"></tp-color-palette>
+</tp-popover>`}
+/>
+
+### Keyboard
+
+Focusing the list with the keyboard highlights the chosen color, or the first one.
+
+| Key                    | Action                                                                                |
+| ---------------------- | ------------------------------------------------------------------------------------- |
+| Down, Up               | Next or previous row, keeping the column; the first color when nothing is highlighted |
+| Left, Right            | Previous or next color in the row, following the writing direction                    |
+| Home, End              | First or last color                                                                   |
+| Letters                | The next color whose name starts with the typed letters                               |
+| Enter, Space           | Pick the highlighted color                                                            |
+| Arrows on the tabs     | Move between colors and palettes                                                      |
+| Tab                    | Move between the tabs, the view options, the list and the credit link                 |
+
+Pressing a color picks it. Only the chosen color is marked, with a white and a black line along its edge.

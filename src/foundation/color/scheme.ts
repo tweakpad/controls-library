@@ -1,6 +1,6 @@
-import { convertColor, mixColors, normalizeHue } from '../../../foundation/color/convert.js';
-import { toGamut } from '../../../foundation/color/gamut.js';
-import { color, type ColorValue } from '../../../foundation/color/types.js';
+import { convertColor, mixColors, normalizeHue } from './convert.js';
+import { toGamut } from './gamut.js';
+import { color, type ColorValue } from './types.js';
 
 export type SchemeRowId =
   'tints' | 'shades' | 'tones' | 'analogous' | 'complementary' | 'triad' | 'tetrad';
@@ -16,8 +16,12 @@ const STEPS = 7;
 
 const range = (count: number): number[] => Array.from({ length: count }, (_, index) => index);
 
+/**
+ * The color turned by `offset` degrees of OKLCH hue, its lightness moved by `lightnessOffset`
+ * (clamped to 0–1); not gamut-mapped.
+ */
 function withHue(base: ColorValue, offset: number, lightnessOffset = 0): ColorValue {
-  const [l, c, h] = base.coords;
+  const [l, c, h] = convertColor(base, 'oklch').coords;
   return color(
     'oklch',
     [Math.min(1, Math.max(0, l + lightnessOffset)), c, normalizeHue(h + offset)],
@@ -27,7 +31,7 @@ function withHue(base: ColorValue, offset: number, lightnessOffset = 0): ColorVa
 
 /**
  * Scheme rows generated from one color in OKLab/OKLCH, every entry gamut-mapped to sRGB.
- * Used by the schemes view when the consumer supplies no palettes.
+ * Used by the Color palette to generate gradients and combinations.
  */
 export function generateSchemeRows(base: ColorValue): readonly SchemeRow[] {
   const oklch = convertColor(base, 'oklch');

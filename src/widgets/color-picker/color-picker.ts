@@ -39,7 +39,6 @@ import { TpToggle } from '../../components/toggle/toggle.js';
 import { TpPopover } from '../../components/popover/popover.js';
 import { TpTooltip } from '../../components/tooltip/tooltip.js';
 import { pipetteIcon } from '../../icons/pipette.js';
-import { wandSparklesIcon } from '../../icons/wand-sparkles.js';
 import {
   ALPHA_CHANNEL,
   channelDefinitions,
@@ -56,10 +55,10 @@ import {
   type HarmonyRule,
   type Hsv,
 } from './color/harmony.js';
-import { contrastColor } from './color/contrast.js';
+import { contrastColor } from '../../foundation/color/contrast.js';
 import { ringSegments } from './palette-ring.js';
 import { parseColor } from '../../foundation/color/parse.js';
-import { generateSchemeRows, type SchemeRowId } from './color/scheme.js';
+import type { ColorCollection } from '../../foundation/color-palette/types.js';
 import {
   displayColor,
   flatGradient,
@@ -101,7 +100,8 @@ import {
 import { TpColorPickerArea } from './surfaces/area.js';
 import { TpColorPickerWheel } from './surfaces/wheel.js';
 import { TpColorPickerTriangle } from './surfaces/triangle.js';
-import { renderSwatchRow, type SwatchRow } from './views/swatches.js';
+import { renderSwatchRow } from './views/swatches.js';
+import { TpColorPalette } from '../color-palette/color-palette.js';
 import {
   COLOR_PICKER_VIEWS,
   listConverter,
@@ -112,7 +112,6 @@ import {
   type ColorPickerStrings,
   type ColorPickerSurface,
   type ColorPickerView,
-  type ColorScheme,
   type ColorSwatchInput,
 } from './types.js';
 
@@ -163,7 +162,6 @@ const VIEW_STRING_KEYS: Readonly<Record<ColorPickerView, keyof ColorPickerString
   wheel: 'viewWheel',
   triangle: 'viewTriangle',
   swatches: 'viewSwatches',
-  schemes: 'viewSchemes',
 };
 const HARMONY_STRING_KEYS: Readonly<Record<HarmonyRule, keyof ColorPickerStrings>> = {
   none: 'harmonyNone',
@@ -172,15 +170,6 @@ const HARMONY_STRING_KEYS: Readonly<Record<HarmonyRule, keyof ColorPickerStrings
   triad: 'harmonyTriad',
   compound: 'harmonyCompound',
   custom: 'harmonyCustom',
-};
-const SCHEME_STRING_KEYS: Readonly<Record<SchemeRowId, keyof ColorPickerStrings>> = {
-  tints: 'schemeTints',
-  shades: 'schemeShades',
-  tones: 'schemeTones',
-  analogous: 'schemeAnalogous',
-  complementary: 'schemeComplementary',
-  triad: 'schemeTriad',
-  tetrad: 'schemeTetrad',
 };
 const NESTED_EVENT_TYPES = [
   'tp-value-change',
@@ -248,6 +237,7 @@ export class TpColorPicker extends TpFormElement<string> {
       TpToggle,
       TpPopover,
       TpTooltip,
+      TpColorPalette,
     ];
   }
   static override presentation = colorPickerPresentation;
@@ -273,7 +263,7 @@ export class TpColorPicker extends TpFormElement<string> {
     defaultHarmony: { type: String, attribute: 'default-harmony' },
     swatches: { attribute: false },
     recent: { attribute: false },
-    schemes: { attribute: false },
+    collections: { attribute: false },
     allowWheelScrub: { type: Boolean, attribute: 'allow-wheel-scrub' },
     label: { type: String },
     locale: { type: String },
@@ -332,10 +322,11 @@ export class TpColorPicker extends TpFormElement<string> {
   /** Recent colors supplied by the application; the widget keeps no history of its own. */
   recent: readonly string[] = [];
   /**
-   * Palette templates for the schemes view, chosen through a template Select; when empty, the view
-   * generates tints, shades and related strips from the current color.
+   * Swatch collections for the swatches view, after the saved and recent colors; import them from
+   * `@tweakpad/ui/color-palette/collections/<id>` or parse fetched documents. The view offers the
+   * default collection when swatches, recent and collections are all empty.
    */
-  schemes: readonly ColorScheme[] = [];
+  collections: readonly ColorCollection[] = [];
   /**
    * Lets the mouse wheel step the hovered surface or Slider; off so that scrolling the page never
    * edits the color.
@@ -382,9 +373,7 @@ export class TpColorPicker extends TpFormElement<string> {
   /** The value when the popup opened; the comparison swatch restores it. */
   #original: string | undefined;
   #customHandles: readonly Hsv[] = [];
-  #templateIndex = 0;
-  #generatedBase: ColorValue | null = null;
-  #generated: { identity: string; rows: readonly SwatchRow[] } | undefined;
+  #paletteSource: { key: readonly unknown[]; collections: readonly ColorCollection[] } | undefined;
   #numberFields = new Map<string, NumberFieldBinding>();
   #registeredParts = new Map<Element, () => void>();
   #composed = new WeakSet<Element>();
@@ -1282,23 +1271,7 @@ export class TpColorPicker extends TpFormElement<string> {
     else (event.currentTarget as TpSelect).value = this.harmony;
   };
 
-  #templateChange = (event: TpValueChangeEvent<unknown>): void => {
-    if (event.target !== event.currentTarget) return;
-    event.stopPropagation();
-    const index = Number(event.detail.value);
-    if (!Number.isInteger(index) || index < 0 || index >= this.schemes.length) return;
-    this.#templateIndex = index;
-    (event.currentTarget as TpSelect).value = String(index);
-    this.requestUpdate();
-  };
-
-  #generate = (): void => {
-    if (this.effectiveDisabled || this.readOnly) return;
-    this.#generatedBase = this.#model;
-    this.requestUpdate();
-  };
-
-  #swatchChange(event: TpValueChangeEvent<readonly string[]>, surface: 'swatch' | 'scheme'): void {
+  #swatchChange(event: TpValueChangeEvent<readonly string[]>): void {
     if (event.target !== event.currentTarget) return;
     event.stopPropagation();
     // The widget's value lane owns the selection; the group never adopts on its own.
@@ -1312,22 +1285,57 @@ export class TpColorPicker extends TpFormElement<string> {
       surfaceInteraction(source) === 'keyboard' ? 'keyboard' : 'item-press';
     this.#proposeColor(this.#adoptAlpha(toWorkingSpace(parsed, this.format)), reason, source, {
       immediate: true,
-      surface,
+      surface: 'swatch',
     });
   }
 
-  /** Rows stay pinned to the color they were generated from, so strips never move under a press. */
-  #generatedRows(): readonly SwatchRow[] {
-    const base = (this.#generatedBase ??= this.#model ?? BLACK);
-    const identity = `${serializeColor(base, 'hex')}|${this.#strings.schemeTints}`;
-    if (this.#generated?.identity === identity) return this.#generated.rows;
+  /**
+   * The palette's proposal re-proposed on the value lane; the palette's own value is controlled,
+   * so a rejected proposal leaves it unchanged.
+   */
+  #paletteChange = (event: TpValueChangeEvent<string>): void => {
+    if (event.target !== event.currentTarget) return;
+    event.stopPropagation();
+    event.preventDefault();
+    const parsed = parseColor(event.detail.value);
+    if (!parsed || this.readOnly || this.effectiveDisabled) return;
+    const reason: ChangeReason = event.detail.reason === 'keyboard' ? 'keyboard' : 'item-press';
+    this.#proposeColor(
+      this.#adoptAlpha(toWorkingSpace(parsed, this.format)),
+      reason,
+      event.detail.sourceEvent,
+      { immediate: true, surface: 'swatch' },
+    );
+  };
+
+  /** The swatches view's collections: the saved and recent colors, then `collections`. */
+  #paletteCollections(): readonly ColorCollection[] {
     const strings = this.#strings;
-    const rows = generateSchemeRows(base).map((row) => ({
-      label: strings[SCHEME_STRING_KEYS[row.id]],
-      colors: row.colors.map((entry) => serializeColor(entry, 'hex')),
-    }));
-    this.#generated = { identity, rows };
-    return rows;
+    const key = [this.swatches, this.recent, this.collections, strings] as const;
+    const cached = this.#paletteSource;
+    if (cached && cached.key.every((part, index) => part === key[index])) return cached.collections;
+    const groups: { id: string; name: string }[] = [];
+    const colors: { value: string; group: string }[] = [];
+    const add = (id: string, name: string, list: readonly string[]) => {
+      if (!list.length) return;
+      groups.push({ id, name });
+      for (const value of list) colors.push({ value, group: id });
+    };
+    add(
+      'saved',
+      strings.savedColors,
+      this.swatches.filter((entry): entry is string => typeof entry === 'string'),
+    );
+    this.swatches.forEach((entry, index) => {
+      if (typeof entry !== 'string') add(`group-${index}`, entry.label, entry.colors);
+    });
+    add('recent', strings.recentColors, this.recent);
+    const inline: ColorCollection[] = colors.length
+      ? [{ id: 'saved', name: strings.savedColors, groups, colors }]
+      : [];
+    const collections = [...inline, ...this.collections];
+    this.#paletteSource = { key, collections };
+    return collections;
   }
 
   // ---- open lane (popup) --------------------------------------------------------------------
@@ -1430,11 +1438,9 @@ export class TpColorPicker extends TpFormElement<string> {
       if (!group.isConnected) continue;
       this.#registerOnce(
         group.shadowRoot?.querySelector<HTMLElement>('[part~="toggle-group"]') ?? null,
-        group.classList.contains('scheme') ? 'color-picker-scheme' : 'color-picker-swatch-grid',
+        'color-picker-swatch-grid',
       );
-      const itemName = group.classList.contains('scheme')
-        ? 'color-picker-scheme-item'
-        : 'color-picker-swatch-item';
+      const itemName = 'color-picker-swatch-item';
       for (const toggle of group.querySelectorAll<TpToggle>('tp-toggle')) {
         await toggle.updateComplete;
         this.#registerOnce(
@@ -1771,12 +1777,10 @@ export class TpColorPicker extends TpFormElement<string> {
 
   #swatchRowOptions() {
     return {
-      kind: 'swatches' as const,
       selected: this.#identity(),
       disabled: this.effectiveDisabled,
       readOnly: this.readOnly,
-      onChange: (event: TpValueChangeEvent<readonly string[]>) =>
-        this.#swatchChange(event, 'swatch'),
+      onChange: (event: TpValueChangeEvent<readonly string[]>) => this.#swatchChange(event),
     };
   }
 
@@ -1847,8 +1851,6 @@ export class TpColorPicker extends TpFormElement<string> {
         return this.#renderTriangleView();
       case 'swatches':
         return this.#renderSwatchesView();
-      case 'schemes':
-        return this.#renderSchemesView();
       default:
         return nothing;
     }
@@ -2099,83 +2101,24 @@ export class TpColorPicker extends TpFormElement<string> {
 
   #renderSwatchesView() {
     const strings = this.#strings;
-    const rows: SwatchRow[] = [];
-    const loose = this.swatches.filter((entry): entry is string => typeof entry === 'string');
-    if (loose.length) rows.push({ label: strings.savedColors, colors: loose });
-    for (const entry of this.swatches) if (typeof entry !== 'string') rows.push(entry);
-    if (this.recent.length) rows.push({ label: strings.recentColors, colors: this.recent });
-    const options = this.#swatchRowOptions();
     return this.renderPart(
       'color-picker-swatches',
-      { rows: rows.length },
+      {},
       {
         tag: 'div',
         properties: { part: 'color-picker-swatches', class: 'swatches-view' },
-        content: rows.map(
-          (row) =>
-            html`<div class="swatch-group">
-              <tp-label class="heading">${row.label}</tp-label>${renderSwatchRow(row, options)}
-            </div>`,
-        ),
-      },
-    );
-  }
-
-  #renderSchemesView() {
-    const strings = this.#strings;
-    const consumer = this.schemes.length > 0;
-    const index = Math.min(this.#templateIndex, Math.max(0, this.schemes.length - 1));
-    const rows: readonly SwatchRow[] = consumer
-      ? this.schemes[index]!.palettes
-      : this.#generatedRows();
-    const template = consumer
-      ? html`<tp-label class="heading">${strings.template}</tp-label
-          ><tp-select
-            class="template"
-            label=${strings.template}
-            .items=${this.schemes.map((scheme, position) => ({ value: String(position), label: scheme.label }))}
-            .value=${String(index)}
-            ?disabled=${this.effectiveDisabled}
-            @tp-value-change=${this.#templateChange}
-            @tp-field-value=${stop}
-          ></tp-select>`
-      : html`<tp-button
-          class="generate"
-          variant="ghost"
-          size="icon-sm"
-          .icon=${wandSparklesIcon}
-          aria-label=${strings.generate}
-          ?disabled=${this.effectiveDisabled || this.readOnly}
-          @click=${this.#generate}
-        ></tp-button>`;
-    const options = {
-      kind: 'scheme' as const,
-      selected: this.#identity(),
-      disabled: this.effectiveDisabled,
-      readOnly: this.readOnly,
-      onChange: (event: TpValueChangeEvent<readonly string[]>) =>
-        this.#swatchChange(event, 'scheme'),
-    };
-    return this.renderPart(
-      'color-picker-schemes',
-      { rows: rows.length, consumer },
-      {
-        tag: 'div',
-        properties: { part: 'color-picker-schemes', class: 'schemes-view' },
-        content: html`${this.renderPart(
-          'color-picker-toolbar',
-          { view: 'schemes' },
-          {
-            tag: 'div',
-            properties: { part: 'color-picker-toolbar', class: 'toolbar' },
-            content: template,
-          },
-        )}${rows.map(
-          (row) =>
-            html`<div class="scheme-row">
-              <span class="heading">${row.label}</span>${renderSwatchRow(row, options)}
-            </div>`,
-        )}`,
+        content: html`<tp-color-palette
+          class="color-palette"
+          .collections=${this.#paletteCollections()}
+          .value=${this.#identity() ?? ''}
+          .label=${dimensionLabel(this.label, strings.viewSwatches)}
+          .defaultSize=${this.size}
+          .disabled=${this.effectiveDisabled}
+          .readOnly=${this.readOnly}
+          @tp-value-change=${this.#paletteChange}
+          @tp-value-commit=${stop}
+          @tp-field-value=${stop}
+        ></tp-color-palette>`,
       },
     );
   }

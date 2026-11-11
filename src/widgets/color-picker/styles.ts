@@ -194,19 +194,15 @@ export const colorPickerStyles = css`
     min-inline-size: 0;
   }
 
-  .swatches-view,
-  .schemes-view {
+  .swatches-view {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     min-inline-size: 0;
   }
 
-  .swatch-group,
-  .scheme-row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--tp-space-1-5);
-    min-inline-size: 0;
+  /* The palette spans the view; its cells shrink when the panel is narrower than its columns. */
+  .swatches-view tp-color-palette {
+    inline-size: 100%;
   }
 
   .heading {
@@ -214,16 +210,10 @@ export const colorPickerStyles = css`
     color: var(--tp-muted-foreground);
   }
 
-  /* Each row's Toggle group spans its row: a wrapping swatch grid or a joined strip. */
-  tp-toggle-group.swatches,
-  tp-toggle-group.scheme {
-    inline-size: 100%;
-  }
-
-  /* Strip members share the row. */
-  tp-toggle-group.scheme tp-toggle {
-    flex: 1 1 0;
-    min-inline-size: 0;
+  /* The recent strip is as wide as its cells, so its one edge wraps them. */
+  tp-toggle-group.swatches {
+    inline-size: fit-content;
+    max-inline-size: 100%;
   }
 
   /* The fill is slotted into the Toggle; it covers the Toggle's own box (flat-tree containing block). */

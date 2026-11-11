@@ -1,6 +1,9 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { colorPickerAppearance } from '../../../../../src/presentation/recipes/color-picker.js';
+import {
+  colorPickerAppearance,
+  colorPickerStructure,
+} from '../../../../../src/presentation/recipes/color-picker.js';
 import { swatchEdge } from '../../../../../src/presentation/recipes/shared/edges.js';
 import { swatchCorner, swatchFill } from '../../../../../src/presentation/recipes/shared/swatch.js';
 
@@ -20,12 +23,17 @@ describe('shared swatch fill box', () => {
     ]);
   });
 
-  it('rounds the swatch square with the medium radius (`uwg-te-req-pres-3`)', () => {
+  it('rounds the recent strip, not its gapless cells, with the medium radius (`cinp-q8`)', () => {
     expect(swatchCorner).toBe('var(--tp-radius-md)');
     const item = colorPickerAppearance['color-picker-swatch-item']?.find(
       (rule) => rule.selector === '&[part~="toggle"]',
     );
-    expect(item?.declarations['border-radius']).toBe(swatchCorner);
+    expect(item?.declarations['border-radius']).toBe('0');
+    const strip = colorPickerStructure['color-picker-swatch-grid']?.find(
+      (rule) => rule.selector === '&[part~="toggle-group"]',
+    );
+    expect(strip?.declarations['border-radius']).toBe(swatchCorner);
+    expect(strip?.declarations.gap).toBe('0');
   });
 
   it('rounds the preview swatch with the shared swatch corner (`uwg-cp-tab-anatomy-r10-c1-p`)', () => {
@@ -56,7 +64,7 @@ describe('shared swatch fill box', () => {
   });
 
   it('keeps the toggle step-aside and pressed ring with the color picker (`uwg-cp-tab-anatomy-r12`)', () => {
-    for (const key of ['color-picker-swatch-item', 'color-picker-scheme-item']) {
+    for (const key of ['color-picker-swatch-item']) {
       const rules = colorPickerAppearance[key] ?? [];
       expect(
         rules.find((rule) => rule.selector === '&[part~="toggle"] > [part~="toggle-content"]')

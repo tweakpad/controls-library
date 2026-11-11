@@ -45,6 +45,9 @@ of a canvas.
 
 ## Published widgets
 
+- [Color palette](color-palette.mdx): `tp-color-palette`, with the collection model and the
+  default and reduced collections in `@tweakpad/ui/color-palette` and one entry per further
+  collection, `@tweakpad/ui/color-palette/collections/<id>`.
 - [Color picker](color-picker.mdx): `tp-color-picker`.
 - [Easing editor](easing-editor.mdx): `tp-easing-editor`.
 - [Emoji picker](emoji-picker.mdx): `tp-emoji-picker`, with the data helpers in `@tweakpad/ui/emoji`.

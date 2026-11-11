@@ -109,7 +109,7 @@ const publishedGraph = (...entries) => {
 // included), `/emoji` or `/flow`.
 const optInModule = (file) =>
   /^dist\/(?:widgets\/|widgets\.js$|presentation\/(?:families\/)?widgets\.js$)/u.test(file) ||
-  /^dist\/(?:foundation\/(?:text-editor|emoji|flow)\/|(?:text-editor|emoji|flow)(?:\/[^/]+)*\.js$)/u.test(
+  /^dist\/(?:foundation\/(?:text-editor|emoji|flow|color-palette)\/|(?:text-editor|emoji|flow|color-palette)(?:\/[^/]+)*\.js$)/u.test(
     file,
   );
 for (const entry of ['dist/index.js', 'dist/register.js']) {
@@ -268,6 +268,8 @@ import * as code from '@tweakpad/ui/code';
 import * as markdown from '@tweakpad/ui/markdown';
 import * as qr from '@tweakpad/ui/qr';
 import * as emoji from '@tweakpad/ui/emoji';
+import * as colorPalette from '@tweakpad/ui/color-palette';
+import cssNamedColors from '@tweakpad/ui/color-palette/collections/css-named';
 import * as flow from '@tweakpad/ui/flow';
 import * as textEditor from '@tweakpad/ui/text-editor';
 import * as textEditorTiptap from '@tweakpad/ui/text-editor/adapters/tiptap';
@@ -285,7 +287,7 @@ const editor: HTMLElementTagNameMap['tp-text-editor'] = document.createElement('
 editor.value = editor.value;
 const pageIds: DocsIndex['pages'][number]['id'][] = docsIndex.pages.map((page) => page.id);
 const patternTitles: DocsIndex['patterns'][number]['title'][] = docsIndex.patterns.map((pattern) => pattern.title);
-export const used = [TpIcon, editor, plusIcon.viewBox, createId(), carousel, dragDrop, media, map, code, markdown, qr.encodeQr('x').size, emoji.builtinEmojiData().emojis.length, flow.FLOW_DOCUMENT_VERSION, textEditor, textEditorTiptap, textEditorLexical, widgetEntries.length, packageJson.version, parseDoc, elementApi, literalCode().name, pageIds.length, patternTitles.length, googleMarkUrl.length];
+export const used = [TpIcon, editor, plusIcon.viewBox, createId(), carousel, dragDrop, media, map, code, markdown, qr.encodeQr('x').size, emoji.builtinEmojiData().emojis.length, colorPalette.defaultColorCollection.colors.length, cssNamedColors.colors.length, flow.FLOW_DOCUMENT_VERSION, textEditor, textEditorTiptap, textEditorLexical, widgetEntries.length, packageJson.version, parseDoc, elementApi, literalCode().name, pageIds.length, patternTitles.length, googleMarkUrl.length];
 `,
 );
 writeFileSync(join(consumer, 'css.d.ts'), "declare module '*.css';\n");
@@ -372,6 +374,18 @@ run(
   consumer,
 );
 console.log('pack-smoke: @tweakpad/ui/emoji runs in Node');
+
+// The color palette model is DOM-free: collections resolve, group and generate sets in Node.
+run(
+  process.execPath,
+  [
+    '--input-type=module',
+    '-e',
+    "const { defaultColorCollection, resolveColorCollection, groupSwatches, generateGradients } = await import('@tweakpad/ui/color-palette'); const { default: named } = await import('@tweakpad/ui/color-palette/collections/css-named'); const resolved = resolveColorCollection(defaultColorCollection); if (groupSwatches(resolved, 'hue').length < 2 || !generateGradients(resolved, [resolved.swatches[4]]).length || resolveColorCollection(named).swatches.length !== 148) process.exit(1);",
+  ],
+  consumer,
+);
+console.log('pack-smoke: @tweakpad/ui/color-palette runs in Node');
 
 // The flow engine is DOM-free as well: model, routing and layout must run in Node (and workers).
 run(

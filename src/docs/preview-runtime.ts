@@ -20,6 +20,8 @@ export const PREVIEW_SPECIFIERS: readonly string[] = [
   '@tweakpad/ui/code',
   '@tweakpad/ui/drag-drop',
   '@tweakpad/ui/emoji',
+  '@tweakpad/ui/color-palette',
+  '@tweakpad/ui/color-palette/collections/css-named',
   '@tweakpad/ui/flow',
   '@tweakpad/ui/map',
   '@tweakpad/ui/markdown',

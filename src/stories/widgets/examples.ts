@@ -47,6 +47,8 @@ const examples = {
       }}
     ></tp-plot>`,
   'tp-text-editor': () => html`<tp-text-editor label="Field notes" name="notes"></tp-text-editor>`,
+  'tp-color-palette': () =>
+    html`<tp-color-palette label="Fill" default-value="#3a89fa"></tp-color-palette>`,
 } satisfies Record<WidgetTag, () => TemplateResult>;
 
 export function renderWidgetExample(tagName: WidgetTag): TemplateResult {

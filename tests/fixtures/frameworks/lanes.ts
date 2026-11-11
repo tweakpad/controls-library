@@ -413,6 +413,14 @@ export const laneRows: LaneRow[] = [
     props: { label: 'Fade in' },
   },
   {
+    entry: 'tp-color-palette',
+    binding: 'ColorPalette',
+    lane: 'value',
+    initial: '#3a89fa',
+    propose: call('setValue', '#ee4848'),
+    props: { label: 'Fill' },
+  },
+  {
     entry: 'tp-emoji-picker',
     binding: 'EmojiPicker',
     lane: 'value',

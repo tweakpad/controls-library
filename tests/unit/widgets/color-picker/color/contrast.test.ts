@@ -1,8 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  contrastColor,
-  relativeLuminance,
-} from '../../../../../src/widgets/color-picker/color/contrast.js';
+import { contrastColor, relativeLuminance } from '../../../../../src/foundation/color/contrast.js';
 import { parseColor } from '../../../../../src/foundation/color/parse.js';
 
 describe('contrast', () => {

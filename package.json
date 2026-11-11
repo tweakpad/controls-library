@@ -57,6 +57,16 @@
       "import": "./dist/emoji.js",
       "default": "./dist/emoji.js"
     },
+    "./color-palette": {
+      "types": "./dist/foundation/color-palette/index.d.ts",
+      "import": "./dist/color-palette.js",
+      "default": "./dist/color-palette.js"
+    },
+    "./color-palette/collections/*": {
+      "types": "./dist/foundation/color-palette/collections/*/index.d.ts",
+      "import": "./dist/color-palette/collections/*.js",
+      "default": "./dist/color-palette/collections/*.js"
+    },
     "./drag-drop": {
       "types": "./dist/foundation/drag-drop/index.d.ts",
       "import": "./dist/drag-drop.js",

@@ -170,13 +170,13 @@ picker.addEventListener('tp-value-commit', render);
 picker.addEventListener('tp-harmony-change', () => queueMicrotask(render));`}
 />
 
-### Swatches and schemes
+### Swatches and collections
 
-Saved swatches are a property, set from data; recent colors are application-owned too, since the widget keeps no history. The schemes view generates tints, shades and related strips from the current color.
+Saved swatches are a property, set from data; recent colors are application-owned too, since the widget keeps no history. The swatches view lists them in a [Color palette](color-palette.mdx), which also shows palettes, and `collections` adds swatch collections to it.
 
 <Preview
   title="Brand swatches"
-  code={`<tp-color-picker id="color-picker-swatches" label="Chart series" views="area swatches schemes" default-view="swatches" default-value="#fb8c00" style="inline-size:18rem"></tp-color-picker>`}
+  code={`<tp-color-picker id="color-picker-swatches" label="Chart series" views="area swatches" default-view="swatches" default-value="#fb8c00" style="inline-size:18rem"></tp-color-picker>`}
   script={`await customElements.whenDefined('tp-color-picker');
 const picker = document.querySelector('#color-picker-swatches');
 picker.swatches = [
@@ -188,7 +188,7 @@ picker.recent = ['#039be5', '#8e24aa', '#43a047'];`}
 
 `swatches` accepts strings or `{ label, colors }` groups.
 
-Without consumer data the widget generates tints, shades, tones, analogous, complementary, triad and tetrad rows in OKLab/OKLCH from the current color, every entry gamut-mapped to sRGB; the rows stay pinned to the color they were generated from until the "Generate schemes" wand is pressed, so strips never move under a press. Supply `schemes` (`{ label, palettes: [{ label, colors }] }[]`) to replace generation with templates chosen through the Template Select. Pressing a scheme or saved swatch proposes that color (`item-press`, or `keyboard` when selected from the keyboard); pressing the selected swatch again proposes nothing.
+Without saved or recent colors and without `collections`, the view offers the palette's default collection. Picking a swatch proposes that color (`item-press`, or `keyboard` when picked from the keyboard); picking the selected swatch again proposes nothing.
 
 ### Listening to changes
 
@@ -216,7 +216,7 @@ picker.addEventListener('tp-value-commit', (event) => {
 });`}
 />
 
-`metadata` carries the floating-point `color` of the proposal and, when known, the edited `channel`, the `surface` (`area`, `wheel`, `triangle`, `slider`, `field`, `swatch`, `scheme`, `eyedropper`, `compare`) and `formatChange`. Only the widget's own events cross its boundary; the Sliders, Inputs, Selects, Tabs, Toggle Groups and Popover inside never leak their lane events.
+`metadata` carries the floating-point `color` of the proposal and, when known, the edited `channel`, the `surface` (`area`, `wheel`, `triangle`, `slider`, `field`, `swatch`, `eyedropper`, `compare`) and `formatChange`. Only the widget's own events cross its boundary; the Sliders, Inputs, Selects, Tabs, Toggle Groups and Popover inside never leak their lane events.
 
 Escape during a drag restores the pre-press value (`escape-key`) and pointer cancellation restores it as well (`pointer`); neither commits. A capture lost before the release, or a move that reports no pressed button, ends the drag where the pointer last was and commits it (`drag`), so the last release always settles. Keyboard steps, wheel scrubbing (opt-in through `allowWheelScrub`), swatches, the eyedropper, hex Enter and blur, and `setValue()` commit immediately (a paste counts as typing, so it commits on Enter or blur). Numeric fields commit when the Number field commits (Enter or blur).
 
@@ -348,7 +348,7 @@ Every editable dimension is a hidden native range input inside its thumb or hand
 | Wheel saturation         | arrows step saturation; Home/End reach the bounds                                                                                                                           |
 | Hue and alpha Sliders    | the Slider keyboard model; the hue Slider wraps past 0 and 360 instead of clamping                                                                                          |
 | Channel Sliders / fields | Slider and Number field models (arrows, Page keys, Home/End, Shift/Control/Meta for the large step, Alt for the small one)                                                  |
-| Swatches, schemes        | Toggle Group roving focus; Space/Enter select                                                                                                                               |
+| Swatches                 | the Color palette: typing filters, arrows move through the grid, Enter picks; the recent strip is a Toggle Group roving stop                                                |
 | Popup                    | Enter/Space on the trigger opens; Escape closes and returns focus; the header's Select, original swatch, Copy button and eyedropper are ordinary stops ahead of the surface |
 
 On the surfaces and Sliders arrow steps use the channel step; Shift, Control or Command and the Page keys use the large step, Alt the small step. The numeric fields follow the Number field model with their last displayed digit as the step (0.001 for the OK channels, 0.1 for Lab and the OKLCH hue, 1 elsewhere), so every value the fields show is valid; Shift still uses the channel's large step. Horizontal arrows follow the writing direction on the area and Sliders; angular axes (wheel, ring) do not flip. Pointer presses capture the pointer, coalesce movement to one proposal per frame and release once. A press inside a handle (the area thumb, a wheel handle, the ring or triangle thumb, a Slider thumb) keeps the pointer's offset from the handle's center, so the handle moves with the pointer instead of jumping under it; a press elsewhere moves the handle to the press point. Under a harmony rule the derived wheel handles follow the base, so a press on one of them moves nothing, and where a derived handle shares or overlaps the base's position the base still takes the press. Shift snaps coarsely and Alt moves finely on Sliders.

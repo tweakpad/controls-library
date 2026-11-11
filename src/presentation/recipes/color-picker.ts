@@ -143,6 +143,8 @@ export const colorPickerAppearance: PresentationDictionary = {
   'color-picker-swatch': [{ declarations: { ...checker, 'box-shadow': swatchEdge.ring } }],
   'color-picker-swatch-shape-round': [],
   'color-picker-swatch-shape-square': [],
+  // Recent strip cells: borderless and square, meeting without a gap or an edge between them
+  // (cinp-q8); the strip draws the one boundary edge.
   'color-picker-swatch-item': [
     {
       selector: '&[part~="toggle"]',
@@ -150,11 +152,12 @@ export const colorPickerAppearance: PresentationDictionary = {
         position: 'relative',
         overflow: 'hidden',
         padding: '0',
+        border: '0',
+        'border-radius': '0',
         'inline-size': 'var(--_tp-color-picker-swatch)',
         'block-size': 'var(--_tp-color-picker-swatch)',
         'min-inline-size': '0',
         'min-block-size': '0',
-        'border-radius': swatchCorner,
       },
     },
     {
@@ -164,39 +167,16 @@ export const colorPickerAppearance: PresentationDictionary = {
       declarations: { position: 'static' },
     },
     {
-      // The pressed ring sits on the fill (the Toggle's own box is covered by it).
-      selector: '&[part~="toggle"][data-pressed] slot::slotted(.swatch)',
-      declarations: {
-        'box-shadow':
-          'inset 0 0 0 var(--tp-border-width-strong) var(--tp-background), inset 0 0 0 calc(var(--tp-border-width-strong) * 2) var(--tp-ring)',
-      },
-    },
-  ],
-  // Strip members: borderless, joined through the Toggle Group seam geometry, equal widths.
-  'color-picker-scheme-item': [
-    {
-      selector: '&[part~="toggle"]',
-      declarations: {
-        position: 'relative',
-        overflow: 'hidden',
-        padding: '0',
-        border: '0',
-        'inline-size': '100%',
-        'block-size': 'var(--_tp-color-picker-swatch)',
-        'min-inline-size': '0',
-        'min-block-size': '0',
-      },
-    },
-    {
-      selector: '&[part~="toggle"] > [part~="toggle-content"]',
-      declarations: { position: 'static' },
+      // A gapless cell draws no edge of its own.
+      selector: '&[part~="toggle"] slot::slotted(.swatch)',
+      declarations: { 'box-shadow': 'none' },
     },
     {
       // The pressed ring sits on the fill (the Toggle's own box is covered by it).
       selector: '&[part~="toggle"][data-pressed] slot::slotted(.swatch)',
       declarations: {
         'box-shadow':
-          'inset 0 0 0 var(--tp-border-width-strong) var(--tp-background), inset 0 0 0 calc(var(--tp-border-width-strong) * 2) var(--tp-ring)',
+          'inset 0 0 0 var(--tp-border-width-strong) var(--tp-ring), inset 0 0 0 calc(var(--tp-border-width-strong) * 2) var(--tp-background)',
       },
     },
   ],
@@ -250,7 +230,7 @@ export const colorPickerAppearance: PresentationDictionary = {
     },
   ],
   // The comparison swatch: the original Button and the current text segment are square
-  // control-height boxes whose slotted fills cover them (same scheme as the swatch items).
+  // control-height boxes whose slotted fills cover them (as the strip cells are).
   'color-picker-compare-original': [
     {
       selector: '&[part~="button"]',
@@ -392,17 +372,18 @@ export const colorPickerStructure: PresentationDictionary = {
     {
       selector: '&[part~="toggle-group"]',
       declarations: {
-        display: 'grid',
-        'grid-template-columns': 'repeat(auto-fill, var(--_tp-color-picker-swatch))',
-        gap: 'var(--tp-space-1)',
-        'justify-content': 'start',
+        display: 'flex',
+        'flex-wrap': 'wrap',
+        gap: '0',
+        'inline-size': 'fit-content',
+        'border-radius': swatchCorner,
+        overflow: 'hidden',
+        'box-shadow': `0 0 0 var(--tp-border-width) ${floatEdge.color}`,
       },
     },
   ],
   'color-picker-swatch': [{ declarations: { display: 'block' } }],
-  'color-picker-swatches': [{ declarations: { gap: 'var(--tp-space-3)' } }],
-  'color-picker-schemes': [{ declarations: { gap: 'var(--tp-space-2)' } }],
-  'color-picker-scheme': [],
+  'color-picker-swatches': [],
   'color-picker-wheel': [
     {
       declarations: {

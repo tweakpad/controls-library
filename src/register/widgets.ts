@@ -8,6 +8,7 @@ import { TpFlow } from '../widgets/flow/flow.js';
 import { TpEmojiPicker } from '../widgets/emoji-picker/emoji-picker.js';
 import { TpPlot } from '../widgets/plot/plot.js';
 import { TpTextEditor } from '../widgets/text-editor/text-editor.js';
+import { TpColorPalette } from '../widgets/color-palette/color-palette.js';
 import { defineElement } from '../foundation/define.js';
 
 defineElement(TpColorPicker.tagName, TpColorPicker);
@@ -18,5 +19,6 @@ defineElement(TpFlow.tagName, TpFlow);
 defineElement(TpEmojiPicker.tagName, TpEmojiPicker);
 defineElement(TpPlot.tagName, TpPlot);
 defineElement(TpTextEditor.tagName, TpTextEditor);
+defineElement(TpColorPalette.tagName, TpColorPalette);
 
 export * from '../widgets/index.js';

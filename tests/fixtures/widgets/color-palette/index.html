@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Color palette verification</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      body {
+        margin: 0;
+        background: var(--tp-background);
+        color: var(--tp-foreground);
+        font-family: var(--tp-font-sans);
+      }
+      main {
+        margin: 24px auto;
+        padding: 20px;
+        max-width: 1100px;
+        display: grid;
+        gap: 32px;
+      }
+      section {
+        display: grid;
+        gap: 12px;
+        justify-items: start;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        align-items: start;
+      }
+      .surface {
+        border: 1px solid var(--tp-border);
+        border-radius: var(--tp-radius-lg);
+        background: var(--tp-popover);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section>
+        <h2>Default collection</h2>
+        <div class="row">
+          <tp-color-palette
+            id="default"
+            class="surface"
+            label="Fill"
+            default-value="#3a89fa"
+          ></tp-color-palette>
+          <tp-color-palette
+            id="compact"
+            class="surface"
+            label="Compact"
+            density="compact"
+          ></tp-color-palette>
+        </div>
+      </section>
+      <section>
+        <h2>Collections</h2>
+        <div class="row">
+          <tp-color-palette
+            id="collections"
+            class="surface"
+            label="Ink"
+            default-grouping="hue"
+            default-sort="lightness"
+          ></tp-color-palette>
+          <tp-color-palette id="large" class="surface" label="Large collection"></tp-color-palette>
+        </div>
+      </section>
+      <section>
+        <h2>Palettes: hard stops and gradient</h2>
+        <div class="row">
+          <tp-color-palette
+            id="stops"
+            class="surface"
+            label="Stops"
+            default-mode="palettes"
+            default-value="#00a392"
+          ></tp-color-palette>
+          <tp-color-palette
+            id="blend"
+            class="surface"
+            label="Blend"
+            default-mode="palettes"
+            default-palette-style="gradient"
+            default-value="#e64a7c"
+          ></tp-color-palette>
+        </div>
+      </section>
+      <section>
+        <h2>In a popover, right to left, disabled</h2>
+        <div class="row">
+          <tp-popover id="popover">
+            <tp-button slot="trigger" variant="outline">Open palette</tp-button>
+            <tp-color-palette id="popup" label="Popup" default-value="#cc272f"></tp-color-palette>
+          </tp-popover>
+          <tp-color-palette id="rtl" class="surface" dir="rtl" label="RTL"></tp-color-palette>
+          <tp-color-palette
+            id="disabled"
+            class="surface"
+            label="Disabled"
+            disabled
+          ></tp-color-palette>
+        </div>
+      </section>
+      <tp-button id="after" variant="outline">After palette</tp-button>
+    </main>
+    <script type="module" src="./fixture.ts"></script>
+  </body>
+</html>

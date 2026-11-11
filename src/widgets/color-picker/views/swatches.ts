@@ -4,15 +4,13 @@ import type { TpValueChangeEvent } from '../../../foundation/events.js';
 import { parseColor } from '../../../foundation/color/parse.js';
 import { displayColor, flatGradient, serializeColor } from '../../../foundation/color/serialize.js';
 
-/** One labelled grid or strip of swatches. */
+/** One labelled strip of swatches. */
 export interface SwatchRow {
   readonly label: string;
   readonly colors: readonly string[];
 }
 
 export interface SwatchRowOptions {
-  /** `swatches`: wrapping grid of saved/recent colors; `scheme`: a joined strip. */
-  readonly kind: 'swatches' | 'scheme';
   /** Hex identity (`#rrggbb` / `#rrggbbaa`) of the current color, or null when empty. */
   readonly selected: string | null;
   readonly disabled: boolean;
@@ -29,8 +27,9 @@ export function swatchIdentity(text: string): string | null {
 }
 
 /**
- * A Toggle Group of Toggles, one per color; the fill span inside each Toggle is value-domain
- * paint. Single selection mirrors the current color; the widget owns the selection lane.
+ * A joined Toggle Group of Toggles, one per color, whose cells meet without a gap or an edge
+ * between them; the fill span inside each Toggle is value-domain paint. Single selection mirrors
+ * the current color; the widget owns the selection lane.
  */
 export function renderSwatchRow(row: SwatchRow, options: SwatchRowOptions) {
   const seen = new Set<string>();
@@ -56,9 +55,9 @@ export function renderSwatchRow(row: SwatchRow, options: SwatchRowOptions) {
     ></tp-toggle>`;
   });
   return html`<tp-toggle-group
-    class=${options.kind}
-    variant=${options.kind === 'scheme' ? 'ghost' : 'outline'}
-    .spacing=${options.kind === 'scheme' ? 0 : 1}
+    class="swatches"
+    variant="ghost"
+    .spacing=${0}
     label=${row.label}
     .value=${options.selected ? [options.selected] : []}
     ?disabled=${options.disabled}

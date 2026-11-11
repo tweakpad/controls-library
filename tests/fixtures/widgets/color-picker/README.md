@@ -23,6 +23,6 @@ Browser verification of `tp-color-picker`, driven only through the Chrome DevToo
    `emulate` for color scheme, viewport and device pixel ratio.
 
 Instances: `#inline` (area), `#popup` (five application-supplied `recent` colors), `#sliders` (HSL), `#wheel` (triad), `#triangle`,
-`#schemes` (area, swatches, schemes with saved swatches), `#field` inside `tp-field`,
+`#swatches` (area and the swatches view with saved swatches), `#field` inside `tp-field`,
 `#narrow-picker` (240px), `#rtl`, plus `#before` / `#after` focus stops and the `#reset` button
 of the surrounding form.

@@ -47,14 +47,6 @@
 /* color-picker-eyedropper-size-sm */
 /* color-picker-eyedropper-size-default */
 /* color-picker-eyedropper-size-lg */
-/* color-picker-generate */
-/* color-picker-generate-size-sm */
-/* color-picker-generate-size-default */
-/* color-picker-generate-size-lg */
-/* color-picker-template */
-/* color-picker-template-size-sm */
-/* color-picker-template-size-default */
-/* color-picker-template-size-lg */
 /* color-picker-harmony */
 /* color-picker-harmony-size-sm */
 /* color-picker-harmony-size-default */
@@ -139,9 +131,10 @@
 /* color-picker-swatch-grid-size-default */
 /* color-picker-swatch-grid-size-lg */
 /* color-picker-swatch-item */
-&[part~="toggle"]{position:relative;overflow:hidden;padding:0;inline-size:var(--_tp-color-picker-swatch);block-size:var(--_tp-color-picker-swatch);min-inline-size:0;min-block-size:0;border-radius:var(--tp-radius-md)}
+&[part~="toggle"]{position:relative;overflow:hidden;padding:0;border:0;border-radius:0;inline-size:var(--_tp-color-picker-swatch);block-size:var(--_tp-color-picker-swatch);min-inline-size:0;min-block-size:0}
 &[part~="toggle"] > [part~="toggle-content"]{position:static}
-&[part~="toggle"][data-pressed] slot::slotted(.swatch){box-shadow:inset 0 0 0 var(--tp-border-width-strong) var(--tp-background), inset 0 0 0 calc(var(--tp-border-width-strong) * 2) var(--tp-ring)}
+&[part~="toggle"] slot::slotted(.swatch){box-shadow:none}
+&[part~="toggle"][data-pressed] slot::slotted(.swatch){box-shadow:inset 0 0 0 var(--tp-border-width-strong) var(--tp-ring), inset 0 0 0 calc(var(--tp-border-width-strong) * 2) var(--tp-background)}
 /* color-picker-swatch-item-size-sm */
 /* color-picker-swatch-item-size-default */
 /* color-picker-swatch-item-size-lg */
@@ -155,21 +148,6 @@
 /* color-picker-swatch-size-lg */
 /* color-picker-swatch-shape-square */
 /* color-picker-swatch-shape-round */
-/* color-picker-schemes */
-/* color-picker-schemes-size-sm */
-/* color-picker-schemes-size-default */
-/* color-picker-schemes-size-lg */
-/* color-picker-scheme */
-/* color-picker-scheme-size-sm */
-/* color-picker-scheme-size-default */
-/* color-picker-scheme-size-lg */
-/* color-picker-scheme-item */
-&[part~="toggle"]{position:relative;overflow:hidden;padding:0;border:0;inline-size:100%;block-size:var(--_tp-color-picker-swatch);min-inline-size:0;min-block-size:0}
-&[part~="toggle"] > [part~="toggle-content"]{position:static}
-&[part~="toggle"][data-pressed] slot::slotted(.swatch){box-shadow:inset 0 0 0 var(--tp-border-width-strong) var(--tp-background), inset 0 0 0 calc(var(--tp-border-width-strong) * 2) var(--tp-ring)}
-/* color-picker-scheme-item-size-sm */
-/* color-picker-scheme-item-size-default */
-/* color-picker-scheme-item-size-lg */
 /* color-picker-wheel */
 &{border-radius:var(--tp-radius-full);background-image:var(--_tp-color-picker-paint);box-shadow:inset 0 0 0 var(--tp-border-width) var(--tp-hairline)}
 &::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--_tp-color-picker-dim, transparent);pointer-events:none}
@@ -277,14 +255,10 @@
 /* color-picker-field */
 &{min-inline-size:calc(var(--tp-spacing) * 14)}
 /* color-picker-swatch-grid */
-&[part~="toggle-group"]{display:grid;grid-template-columns:repeat(auto-fill, var(--_tp-color-picker-swatch));gap:var(--tp-space-1);justify-content:start}
+&[part~="toggle-group"]{display:flex;flex-wrap:wrap;gap:0;inline-size:fit-content;border-radius:var(--tp-radius-md);overflow:hidden;box-shadow:0 0 0 var(--tp-border-width) var(--tp-hairline)}
 /* color-picker-swatch */
 &{display:block}
 /* color-picker-swatches */
-&{gap:var(--tp-space-3)}
-/* color-picker-schemes */
-&{gap:var(--tp-space-2)}
-/* color-picker-scheme */
 /* color-picker-wheel */
 &{position:relative;aspect-ratio:1;inline-size:min(100%, var(--_tp-color-picker-area));margin-inline:auto}
 /* color-picker-ring */

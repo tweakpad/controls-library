@@ -52,23 +52,12 @@ const definition: ComponentDefinition = {
     {
       name: 'color-picker-toolbar',
       axes: ['size'],
-      description:
-        'The row of choices above the wheel or the schemes: the Harmony or template Select and the generate Button.',
+      description: 'The row of choices above the wheel: the Harmony Select.',
     },
     {
       name: 'color-picker-eyedropper',
       axes: ['size'],
       description: 'The Button that picks a color from the screen.',
-    },
-    {
-      name: 'color-picker-generate',
-      axes: ['size'],
-      description: 'The Button that regenerates the scheme strips from the current color.',
-    },
-    {
-      name: 'color-picker-template',
-      axes: ['size'],
-      description: 'The Select of palette templates in the schemes view.',
     },
     {
       name: 'color-picker-harmony',
@@ -148,37 +137,23 @@ const definition: ComponentDefinition = {
     {
       name: 'color-picker-swatches',
       axes: ['size'],
-      description: 'A grid of saved or recent colors.',
+      description:
+        'The swatches view: the Color palette of the saved and recent colors and the collections.',
     },
     {
       name: 'color-picker-swatch-grid',
       axes: ['size'],
-      description: 'The Toggle group that lays out a swatch grid.',
+      description: 'The joined Toggle group of the recent strip.',
     },
     {
       name: 'color-picker-swatch-item',
       axes: ['size', 'shape'],
-      description: 'One pressable swatch in a grid.',
+      description: 'One pressable cell of the recent strip.',
     },
     {
       name: 'color-picker-swatch',
       axes: ['size', 'shape'],
       description: 'The color fill inside a swatch or a comparison half.',
-    },
-    {
-      name: 'color-picker-schemes',
-      axes: ['size'],
-      description: 'The schemes view: its toolbar and the scheme strips.',
-    },
-    {
-      name: 'color-picker-scheme',
-      axes: ['size'],
-      description: 'One strip of related colors.',
-    },
-    {
-      name: 'color-picker-scheme-item',
-      axes: ['size'],
-      description: 'One pressable color in a scheme strip.',
     },
     {
       name: 'color-picker-wheel',
@@ -278,8 +253,6 @@ export const colorPickerPresentation = definePresentation({
       '[part~="color-picker-controls"]': 'color-picker-controls',
       '[part~="color-picker-toolbar"]': 'color-picker-toolbar',
       'tp-button.eyedropper': 'color-picker-eyedropper',
-      'tp-button.generate': 'color-picker-generate',
-      'tp-select.template': 'color-picker-template',
       'tp-select.harmony': 'color-picker-harmony',
       '[part~="color-picker-palette"]': 'color-picker-palette',
       'tp-slider.channel': 'color-picker-slider',
@@ -291,7 +264,6 @@ export const colorPickerPresentation = definePresentation({
       'tp-select.format': 'color-picker-format',
       'tp-toggle-group.swatches': 'color-picker-swatches',
       '.swatch': 'color-picker-swatch',
-      '[part~="color-picker-schemes"]': 'color-picker-schemes',
       '[part~="color-picker-trigger"]': 'color-picker-trigger',
       '[part~="color-picker-popup"]': 'color-picker-popup',
       '[part~="color-picker-header"]': 'color-picker-header',

@@ -27,6 +27,7 @@ const PUBLISHED_FOUNDATION_ENTRIES: readonly string[] = [
   'qr',
   'flow',
   'text-editor',
+  'color-palette',
 ];
 
 /** Rewrites repository-relative icon imports (any depth) to the published `@tweakpad/ui/icons/*`. */
@@ -53,8 +54,13 @@ const publishedAdapterModule = new RegExp(
  * to `@tweakpad/ui/<entry>/adapters/<engine>`, a module of a published entry to `@tweakpad/ui/<entry>`,
  * every other foundation module to `@tweakpad/ui`.
  */
+/** A module of a color collection folder, which ships at `@tweakpad/ui/color-palette/collections/<id>`. */
+const publishedCollectionModule =
+  /'(?:\.\.\/)+foundation\/color-palette\/collections\/([^/']+)\/[^']+'/g;
+
 const publishedFoundationImports = (raw: string) =>
   raw
+    .replace(publishedCollectionModule, "'@tweakpad/ui/color-palette/collections/$1'")
     .replace(publishedAdapterModule, "'@tweakpad/ui/$1/adapters/$2'")
     .replace(publishedEntryModule, "'@tweakpad/ui/$1'")
     .replace(/'(?:\.\.\/)+foundation\/[^']+'/g, "'@tweakpad/ui'");

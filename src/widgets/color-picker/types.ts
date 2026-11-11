@@ -2,28 +2,19 @@ import type { ChannelKey } from '../../foundation/color/channels.js';
 import type { HarmonyRule } from './color/harmony.js';
 import type { ColorFormat, ColorValue } from '../../foundation/color/types.js';
 
-export type ColorPickerView = 'area' | 'sliders' | 'wheel' | 'triangle' | 'swatches' | 'schemes';
+export type ColorPickerView = 'area' | 'sliders' | 'wheel' | 'triangle' | 'swatches';
 export const COLOR_PICKER_VIEWS: readonly ColorPickerView[] = [
   'area',
   'sliders',
   'wheel',
   'triangle',
   'swatches',
-  'schemes',
 ];
 export type ColorPickerPicker = 'inline' | 'popup';
 export type ColorPickerSize = 'sm' | 'default' | 'lg';
 export type ColorPickerShape = 'square' | 'round';
 export type ColorPickerSurface =
-  | 'area'
-  | 'wheel'
-  | 'triangle'
-  | 'slider'
-  | 'field'
-  | 'swatch'
-  | 'scheme'
-  | 'eyedropper'
-  | 'compare';
+  'area' | 'wheel' | 'triangle' | 'slider' | 'field' | 'swatch' | 'eyedropper' | 'compare';
 
 /** Saved swatches: a flat list of colors or labeled groups. */
 export interface ColorSwatchGroup {
@@ -31,15 +22,6 @@ export interface ColorSwatchGroup {
   readonly colors: readonly string[];
 }
 export type ColorSwatchInput = string | ColorSwatchGroup;
-
-export interface ColorPalette {
-  readonly label: string;
-  readonly colors: readonly string[];
-}
-export interface ColorScheme {
-  readonly label: string;
-  readonly palettes: readonly ColorPalette[];
-}
 
 /** Metadata of a `tp-value-change` / `tp-value-commit` detail. */
 export interface ColorPickerChangeMetadata extends Record<string, unknown> {
@@ -82,8 +64,6 @@ export interface ColorPickerStrings {
   readonly original: string;
   readonly copy: string;
   readonly empty: string;
-  readonly generate: string;
-  readonly template: string;
   readonly savedColors: string;
   readonly recentColors: string;
   readonly views: string;
@@ -92,7 +72,6 @@ export interface ColorPickerStrings {
   readonly viewWheel: string;
   readonly viewTriangle: string;
   readonly viewSwatches: string;
-  readonly viewSchemes: string;
   readonly formatHex: string;
   readonly formatRgb: string;
   readonly formatHsl: string;
@@ -108,13 +87,6 @@ export interface ColorPickerStrings {
   readonly harmonyTriad: string;
   readonly harmonyCompound: string;
   readonly harmonyCustom: string;
-  readonly schemeTints: string;
-  readonly schemeShades: string;
-  readonly schemeTones: string;
-  readonly schemeAnalogous: string;
-  readonly schemeComplementary: string;
-  readonly schemeTriad: string;
-  readonly schemeTetrad: string;
   readonly valueMissing: string;
 }
 

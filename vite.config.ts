@@ -17,6 +17,20 @@ const patternEntries = Object.fromEntries(
     .map((file) => [`patterns/${file.slice(0, -3)}`, resolve(patternDirectory, file)]),
 );
 
+// Each color collection is its own entry, so an application bundles only the collections it imports.
+const collectionDirectory = resolve(
+  import.meta.dirname,
+  'src/foundation/color-palette/collections',
+);
+const collectionEntries = Object.fromEntries(
+  readdirSync(collectionDirectory, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => [
+      `color-palette/collections/${entry.name}`,
+      resolve(collectionDirectory, entry.name, 'index.ts'),
+    ]),
+);
+
 export default defineConfig({
   optimizeDeps: {
     // The git-ignored reference checkouts under `external/` hold their own HTML and tsconfig
@@ -61,6 +75,8 @@ export default defineConfig({
         map: resolve(import.meta.dirname, 'src/foundation/map/index.ts'),
         code: resolve(import.meta.dirname, 'src/foundation/code/index.ts'),
         emoji: resolve(import.meta.dirname, 'src/foundation/emoji/index.ts'),
+        'color-palette': resolve(import.meta.dirname, 'src/foundation/color-palette/index.ts'),
+        ...collectionEntries,
         markdown: resolve(import.meta.dirname, 'src/foundation/markdown/index.ts'),
         qr: resolve(import.meta.dirname, 'src/foundation/qr/index.ts'),
         flow: resolve(import.meta.dirname, 'src/foundation/flow/index.ts'),

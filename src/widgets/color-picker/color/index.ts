@@ -41,4 +41,8 @@ export {
   type HarmonyRule,
   type Hsv,
 } from './harmony.js';
-export { generateSchemeRows, type SchemeRow, type SchemeRowId } from './scheme.js';
+export {
+  generateSchemeRows,
+  type SchemeRow,
+  type SchemeRowId,
+} from '../../../foundation/color/scheme.js';

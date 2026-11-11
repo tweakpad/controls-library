@@ -9,7 +9,7 @@ import {
   harmonyPrincipals,
   seedCustomHandles,
 } from '../../../../../src/widgets/color-picker/color/harmony.js';
-import { generateSchemeRows } from '../../../../../src/widgets/color-picker/color/scheme.js';
+import { generateSchemeRows } from '../../../../../src/foundation/color/scheme.js';
 import { color } from '../../../../../src/foundation/color/types.js';
 
 const base = { h: 0, s: 100, v: 100 };
