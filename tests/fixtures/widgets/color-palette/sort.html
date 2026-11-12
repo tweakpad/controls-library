@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Collection order</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      body {
+        margin: 0;
+        background: var(--tp-background);
+        color: var(--tp-foreground);
+        font-family: var(--tp-font-sans);
+      }
+      main {
+        margin: 24px auto;
+        padding: 20px;
+        max-width: 1100px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 32px;
+        align-items: start;
+      }
+      /* Rows 1px apart with no padding, so neighbouring colors meet and their grading reads: the
+         list's spacing tokens are zeroed for this page only. */
+      .list {
+        --tp-space-1: 0px;
+        --tp-space-1-5: 0px;
+        --tp-space-2: 0px;
+        --tp-space-2-5: 0px;
+        --tp-space-3: 0px;
+
+        max-block-size: calc(100dvh - 160px);
+        overflow: auto;
+      }
+      .list tp-drag-drop-list::part(list) {
+        gap: 1px;
+      }
+      aside {
+        position: sticky;
+        top: 24px;
+        display: grid;
+        gap: 12px;
+        justify-items: start;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section>
+        <h1>Collection order</h1>
+        <p>
+          Pick a collection and drag its colors into the order the palette should list them. Each
+          collection keeps its order in this browser as you go; Copy order puts it on the clipboard
+          as JSON with the collection id.
+        </p>
+        <tp-select id="collection" label="Collection" size="sm"></tp-select>
+        <div class="list" id="list"></div>
+      </section>
+      <aside>
+        <tp-stack direction="row" gap="2">
+          <tp-copy-button id="copy" show-label label="Copy order"></tp-copy-button>
+          <tp-button id="reset" variant="outline" size="sm">Reset</tp-button>
+        </tp-stack>
+        <tp-color-palette id="preview" label="Preview" default-grouping="none"></tp-color-palette>
+      </aside>
+    </main>
+    <script type="module" src="./sort.ts"></script>
+  </body>
+</html>

@@ -2,6 +2,7 @@ import { parseColor, serializeColor, type ColorValue } from '../color/index.js';
 import {
   MAX_PALETTE_STOPS,
   type ColorCollection,
+  type ColorCollectionAttribution,
   type ColorCollectionColor,
   type ColorCollectionGroup,
   type ColorCollectionPalette,
@@ -66,21 +67,32 @@ export function parseColorCollection(document: unknown): {
       ...weights,
     });
   }
-  const attribution = isRecord(document.attribution)
-    ? {
-        ...(text(document.attribution.name) ? { name: document.attribution.name as string } : {}),
-        ...(text(document.attribution.url) ? { url: document.attribution.url as string } : {}),
-        ...(text(document.attribution.license)
-          ? { license: document.attribution.license as string }
-          : {}),
-      }
+  // One source, or several; a source keeps only its text fields, and an empty one is dropped.
+  const source = (entry: unknown): ColorCollectionAttribution | undefined => {
+    if (!isRecord(entry)) return undefined;
+    const kept = {
+      ...(text(entry.name) ? { name: entry.name as string } : {}),
+      ...(text(entry.url) ? { url: entry.url as string } : {}),
+      ...(text(entry.license) ? { license: entry.license as string } : {}),
+    };
+    return Object.keys(kept).length ? kept : undefined;
+  };
+  const sources = Array.isArray(document.attribution)
+    ? document.attribution
+        .map(source)
+        .filter((entry): entry is ColorCollectionAttribution => !!entry)
     : undefined;
+  const attribution = sources
+    ? sources.length
+      ? sources
+      : undefined
+    : source(document.attribution);
   return {
     collection: {
       id: document.id as string,
       ...(text(document.name) ? { name: document.name as string } : {}),
       ...(text(document.description) ? { description: document.description as string } : {}),
-      ...(attribution && Object.keys(attribution).length ? { attribution } : {}),
+      ...(attribution ? { attribution } : {}),
       groups,
       colors,
       palettes,

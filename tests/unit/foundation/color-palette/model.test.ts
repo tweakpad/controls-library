@@ -10,6 +10,15 @@ import {
   type ColorCollection,
 } from '../../../../src/foundation/color-palette/index.js';
 import cssNamedColors from '../../../../src/foundation/color-palette/collections/css-named/index.js';
+import risoInks from '../../../../src/foundation/color-palette/collections/riso/index.js';
+import colorBrewer from '../../../../src/foundation/color-palette/collections/colorbrewer/index.js';
+import nipponColors from '../../../../src/foundation/color-palette/collections/nippon/index.js';
+import sanzoWada from '../../../../src/foundation/color-palette/collections/sanzo-wada/index.js';
+import wesAnderson from '../../../../src/foundation/color-palette/collections/wes-anderson/index.js';
+import leCorbusier from '../../../../src/foundation/color-palette/collections/le-corbusier/index.js';
+import wernerColors from '../../../../src/foundation/color-palette/collections/werner/index.js';
+import lospecPalettes from '../../../../src/foundation/color-palette/collections/lospec/index.js';
+import niceColorPalettes from '../../../../src/foundation/color-palette/collections/nice-color-palettes/index.js';
 
 const sample: ColorCollection = {
   id: 'sample',
@@ -67,6 +76,23 @@ describe('parseColorCollection', () => {
       'color-palette-palette',
     ]);
   });
+  it('keeps several sources, each with its own link and license', () => {
+    const { collection } = parseColorCollection({
+      id: 'sources',
+      colors: ['#fff'],
+      attribution: [
+        { name: 'Inks', url: 'https://example.com/inks', license: 'CC BY 4.0' },
+        { name: 'Sets', url: 'https://example.com/sets', extra: 1 },
+        'not a source',
+        {},
+      ],
+    });
+    expect(collection.attribution).toEqual([
+      { name: 'Inks', url: 'https://example.com/inks', license: 'CC BY 4.0' },
+      { name: 'Sets', url: 'https://example.com/sets' },
+    ]);
+  });
+
   it('rejects a document without an id or colors', () => {
     expect(() => parseColorCollection({ colors: [] })).toThrow(TypeError);
     expect(() => parseColorCollection({ id: 'x' })).toThrow(TypeError);
@@ -151,10 +177,93 @@ describe('findSwatch', () => {
 
 describe('collections', () => {
   it('resolve without issues', () => {
-    for (const collection of [defaultColorCollection, reducedColorCollection, cssNamedColors])
+    for (const collection of [
+      defaultColorCollection,
+      reducedColorCollection,
+      cssNamedColors,
+      risoInks,
+      colorBrewer,
+      nipponColors,
+      sanzoWada,
+      wesAnderson,
+      leCorbusier,
+      wernerColors,
+      lospecPalettes,
+      niceColorPalettes,
+    ])
       expect(resolveColorCollection(collection).issues).toEqual([]);
     expect(reducedColorCollection.colors).toHaveLength(24);
     expect(cssNamedColors.colors).toHaveLength(148);
+  });
+  it('numbers the nice-color-palettes palettes by their place in the package', () => {
+    const nice = resolveColorCollection(niceColorPalettes);
+    expect([nice.swatches.length, nice.palettes.length]).toEqual([200, 40]);
+    expect(nice.palettes.map((palette) => palette.name).slice(0, 2)).toEqual([
+      'Palette 1',
+      'Palette 2',
+    ]);
+    expect(nice.palettes.every((palette) => palette.swatches.length === 5)).toBe(true);
+  });
+  it('lists the Lospec palettes named with their authors and the colors they use', () => {
+    const lospec = resolveColorCollection(lospecPalettes);
+    expect([lospec.swatches.length, lospec.palettes.length]).toEqual([236, 40]);
+    expect(lospec.palettes[0]?.name).toBe('SLSO8 by Luis Miguel Maldonado');
+    expect(
+      lospec.palettes.every((palette) => palette.swatches.every((swatch) => swatch.index >= 0)),
+    ).toBe(true);
+  });
+  it('names the Werner colors after the book, first letter capitalized, with no palettes', () => {
+    const werner = resolveColorCollection(wernerColors);
+    expect([werner.swatches.length, werner.palettes.length]).toEqual([110, 0]);
+    expect(werner.swatches.find((swatch) => swatch.identity === '#f1e9ce')?.name).toBe(
+      'Snow white',
+    );
+    for (const swatch of werner.swatches) expect(swatch.name).toMatch(/^[A-Z][^A-Z]*$/);
+  });
+  it('lists the Le Corbusier colors with the keyboard selections, named by keyboard', () => {
+    const corbusier = resolveColorCollection(leCorbusier);
+    expect([corbusier.swatches.length, corbusier.palettes.length]).toEqual([63, 886]);
+    expect(corbusier.palettes[0]?.name).toBe('Espace I A, 1');
+    expect(new Set(corbusier.palettes.map((palette) => palette.name)).size).toBe(886);
+  });
+  it('lists the wesanderson discrete palettes with the colors they use', () => {
+    const wes = resolveColorCollection(wesAnderson);
+    expect([wes.swatches.length, wes.palettes.length]).toEqual([107, 22]);
+    expect(wes.palettes.map((palette) => palette.name)).not.toContain('Zissou1Continuous');
+  });
+  it('lists the Sanzo Wada colors by name with every numbered combination', () => {
+    const wada = resolveColorCollection(sanzoWada);
+    expect([wada.swatches.length, wada.palettes.length]).toEqual([159, 348]);
+    expect(wada.swatches.every((swatch) => !!swatch.name)).toBe(true);
+    expect(Math.min(...wada.palettes.map((palette) => palette.swatches.length))).toBe(2);
+  });
+  it('names the Nippon colors after their slugs, first letter capitalized', () => {
+    const nippon = resolveColorCollection(nipponColors);
+    expect(nippon.swatches).toHaveLength(250);
+    expect(nippon.swatches.find((swatch) => swatch.identity === '#dc9fb4')?.name).toBe('Nadeshiko');
+    for (const swatch of nippon.swatches) expect(swatch.name).toMatch(/^[A-Z][a-z0-9]*$/);
+  });
+  it('lists the ColorBrewer colors once each, with every scheme size as a palette', () => {
+    const brewer = resolveColorCollection(colorBrewer);
+    expect([brewer.swatches.length, brewer.palettes.length]).toEqual([378, 264]);
+    const identities = new Set(brewer.swatches.map((swatch) => swatch.identity));
+    expect(identities.size).toBe(brewer.swatches.length);
+    for (const palette of brewer.palettes)
+      for (const swatch of palette.swatches) expect(identities.has(swatch.identity)).toBe(true);
+  });
+  it('lists the riso inks with their club palettes, every palette color an ink', () => {
+    const inks = resolveColorCollection(risoInks);
+    expect([inks.swatches.length, inks.palettes.length]).toEqual([79, 92]);
+    const identities = new Set(inks.swatches.map((swatch) => swatch.identity));
+    // Inks that share a value are one color.
+    expect(identities.size).toBe(inks.swatches.length);
+    for (const palette of inks.palettes) {
+      expect(palette.swatches.length).toBeGreaterThanOrEqual(3);
+      for (const swatch of palette.swatches) expect(identities.has(swatch.identity)).toBe(true);
+    }
+    // Every ink belongs to a declared group.
+    const groups = new Set(risoInks.groups!.map((group) => group.id));
+    for (const ink of inks.swatches) expect(groups.has(ink.group!)).toBe(true);
   });
   it('normalizes palette weights to one', () => {
     for (const set of resolveColorCollection(defaultColorCollection).palettes)

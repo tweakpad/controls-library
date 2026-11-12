@@ -41,26 +41,45 @@ palette.addEventListener('tp-value-commit', (event) => {
 
 ### Collections
 
-A collection is a JSON document: its colors as color texts or as records with a name and a group, optional groups in display order, optional preset palettes of two to twelve colors with their shares, an optional description, and who made it. The default and a reduced collection ship with `@tweakpad/ui/color-palette`; every other collection is its own import from `@tweakpad/ui/color-palette/collections/<id>`, so an application bundles only the collections it uses. Once a collection is loaded, Color libraries in the view options lists the default collection and then the loaded ones; the palette opens on the first loaded collection. When the active collection names its source and nothing is chosen, an info icon at the start of the status bar shows the source and its license in a Tooltip on hover or focus; a collection with a description shows a Preview Card instead, with the source as a link, the description and the license.
+A collection is a JSON document: its colors as color texts or as records with a name and a group, optional groups in display order, optional preset palettes of two to twelve colors with their shares, an optional description, and who made it: one source, or several, each with its own link and license. The default and a reduced collection ship with `@tweakpad/ui/color-palette`; every other collection is its own import from `@tweakpad/ui/color-palette/collections/<id>`, so an application bundles only the collections it uses; the table lists every collection that ships. Once a collection is loaded, Color collections in the view options lists the default collection and then the loaded ones; the palette opens on the first loaded collection. When the active collection names its source and nothing is chosen, an info icon at the start of the status bar shows the source and its license in a Tooltip on hover or focus; a collection with a description shows a Preview Card instead, with the source as a link, the description and the license.
+
+| Collection | Import | Colors | Palettes |
+| --- | --- | --- | --- |
+| Default | `defaultColorCollection` from `@tweakpad/ui/color-palette` | 119 | 6 |
+| Reduced | `reducedColorCollection` from `@tweakpad/ui/color-palette` | 24 | — |
+| [CSS named colors](https://www.w3.org/TR/css-color-4/#named-colors) | `@tweakpad/ui/color-palette/collections/css-named` | 148 | — |
+| [Riso inks](https://stencil.wiki/wiki/Category:Riso_inks) | `@tweakpad/ui/color-palette/collections/riso` | 79 | 92 |
+| [ColorBrewer](https://colorbrewer2.org) | `@tweakpad/ui/color-palette/collections/colorbrewer` | 378 | 264 |
+| [Nippon Colors](https://nipponcolors.com/) | `@tweakpad/ui/color-palette/collections/nippon` | 250 | — |
+| [Sanzo Wada](https://github.com/mattdesl/dictionary-of-colour-combinations) | `@tweakpad/ui/color-palette/collections/sanzo-wada` | 159 | 348 |
+| [Wes Anderson palettes](https://github.com/karthik/wesanderson) | `@tweakpad/ui/color-palette/collections/wes-anderson` | 107 | 22 |
+| [Le Corbusier](https://dz.lescouleurs.ch/fr/les-couleurs/63-couleurs/) | `@tweakpad/ui/color-palette/collections/le-corbusier` | 63 | 886 |
+| [Werner's Nomenclature of Colours](https://www.c82.net/werner/) | `@tweakpad/ui/color-palette/collections/werner` | 110 | — |
+| [Lospec palettes](https://lospec.com/palette-list) | `@tweakpad/ui/color-palette/collections/lospec` | 236 | 40 |
+| [Nice Color Palettes](https://github.com/Experience-Monks/nice-color-palettes) | `@tweakpad/ui/color-palette/collections/nice-color-palettes` | 200 | 40 |
+
 
 <Code
-  label="harbor.json"
+  label="riso.json (excerpt)"
   language="json"
   code={`{
-  "id": "harbor",
-  "name": "Harbor inks",
-  "description": "Process and spot inks for coastal print runs.",
-  "attribution": { "name": "Harbor Print Co.", "url": "https://example.com/inks", "license": "CC BY 4.0" },
-  "groups": [{ "id": "blues", "name": "Blues" }, { "id": "warm", "name": "Warm" }],
+  "id": "riso",
+  "name": "Riso inks",
+  "description": "The risograph inks as 79 flat colors, with the 92 ink combinations of the Riso Club issues as palettes.",
+  "attribution": [
+    { "name": "Stencil Wiki", "url": "https://stencil.wiki/wiki/Category:Riso_inks", "license": "CC BY-NC-SA 4.0" },
+    { "name": "Riso Club Atlas", "url": "https://risottostudio.com/pages/riso-club-atlas" }
+  ],
+  "groups": [{ "id": "red", "name": "Reds" }, { "id": "yellow", "name": "Yellows" }, { "id": "blue", "name": "Blues" }, { "id": "neutral", "name": "Neutrals" }],
   "colors": [
-    { "value": "#0d2c54", "name": "Deep harbor", "group": "blues" },
-    { "value": "#2a6f97", "name": "Tide", "group": "blues" },
-    { "value": "#f4a259", "name": "Buoy", "group": "warm" },
-    "#e9ecef"
+    { "value": "#ff665e", "name": "Red", "group": "red" },
+    { "value": "#ffe800", "name": "Yellow", "group": "yellow" },
+    { "value": "#3255a4", "name": "Medium Blue", "group": "blue" },
+    { "value": "#3d5588", "name": "Riso-Federal Blue", "group": "blue" },
+    { "value": "#000000", "name": "Black", "group": "neutral" }
   ],
   "palettes": [
-    { "name": "Dusk tide", "colors": ["#0d2c54", "#2a6f97", "#f4a259"] },
-    { "name": "Dock", "colors": ["#0d2c54", "#f4a259", "#e9ecef"], "weights": [60, 30, 10] }
+    { "name": "Seoul", "colors": ["#ff665e", "#ffe800", "#3255a4", "#000000"] }
   ]
 }`}
 />
@@ -68,13 +87,30 @@ A collection is a JSON document: its colors as color texts or as records with a 
 <Preview
   title="Several collections"
   code={`<tp-color-palette id="color-palette-collections" label="Ink"></tp-color-palette>`}
-  script={`import { defaultColorCollection, reducedColorCollection } from '@tweakpad/ui/color-palette';
+  script={`import { reducedColorCollection } from '@tweakpad/ui/color-palette';
 import { cssNamedColors } from '@tweakpad/ui/color-palette/collections/css-named';
+import { risoInks } from '@tweakpad/ui/color-palette/collections/riso';
+import { colorBrewer } from '@tweakpad/ui/color-palette/collections/colorbrewer';
+import { nipponColors } from '@tweakpad/ui/color-palette/collections/nippon';
+import { sanzoWada } from '@tweakpad/ui/color-palette/collections/sanzo-wada';
+import { wesAnderson } from '@tweakpad/ui/color-palette/collections/wes-anderson';
+import { leCorbusier } from '@tweakpad/ui/color-palette/collections/le-corbusier';
+import { wernerColors } from '@tweakpad/ui/color-palette/collections/werner';
+import { lospecPalettes } from '@tweakpad/ui/color-palette/collections/lospec';
+import { niceColorPalettes } from '@tweakpad/ui/color-palette/collections/nice-color-palettes';
 
 document.querySelector('#color-palette-collections').collections = [
-  reducedColorCollection,
+  risoInks,
+  colorBrewer,
+  nipponColors,
+  sanzoWada,
+  wesAnderson,
+  leCorbusier,
+  wernerColors,
+  lospecPalettes,
+  niceColorPalettes,
   cssNamedColors,
-  defaultColorCollection,
+  reducedColorCollection,
 ];`}
 />
 
@@ -85,7 +121,7 @@ A document fetched at run time goes through `parseColorCollection`, which drops 
   language="typescript"
   code={`import { parseColorCollection } from '@tweakpad/ui/color-palette';
 
-const response = await fetch('/collections/harbor.json');
+const response = await fetch('/collections/riso.json');
 const { collection, issues } = parseColorCollection(await response.json());
 palette.collections = [collection];`}
 />

@@ -14,6 +14,15 @@ import {
   type TpColorPalette,
 } from '../../widgets/color-palette/index.js';
 import cssNamedColors from '../../foundation/color-palette/collections/css-named/index.js';
+import risoInks from '../../foundation/color-palette/collections/riso/index.js';
+import colorBrewer from '../../foundation/color-palette/collections/colorbrewer/index.js';
+import nipponColors from '../../foundation/color-palette/collections/nippon/index.js';
+import sanzoWada from '../../foundation/color-palette/collections/sanzo-wada/index.js';
+import wesAnderson from '../../foundation/color-palette/collections/wes-anderson/index.js';
+import leCorbusier from '../../foundation/color-palette/collections/le-corbusier/index.js';
+import wernerColors from '../../foundation/color-palette/collections/werner/index.js';
+import lospecPalettes from '../../foundation/color-palette/collections/lospec/index.js';
+import niceColorPalettes from '../../foundation/color-palette/collections/nice-color-palettes/index.js';
 import type { TpValueChangeEvent } from '../../foundation/events.js';
 import { libraryDocs } from '../library-docs.js';
 
@@ -67,7 +76,8 @@ const meta: Meta<Args> = {
     readOnly: { control: 'boolean' },
     moreCollections: {
       control: 'boolean',
-      description: 'Story setup: adds the CSS named colors and the reduced collection.',
+      description:
+        'Story setup: adds the shipped collections (Riso, ColorBrewer, Nippon, Sanzo Wada, Wes Anderson, Le Corbusier, CSS named colors) and the reduced collection.',
     },
   },
   render: (args) => {
@@ -98,7 +108,22 @@ const meta: Meta<Args> = {
       .disabled=${args.disabled}
       .readOnly=${args.readOnly}
       .collections=${
-        args.moreCollections ? [defaultColorCollection, cssNamedColors, reducedColorCollection] : []
+        args.moreCollections
+          ? [
+              defaultColorCollection,
+              cssNamedColors,
+              risoInks,
+              colorBrewer,
+              nipponColors,
+              sanzoWada,
+              wesAnderson,
+              leCorbusier,
+              wernerColors,
+              lospecPalettes,
+              niceColorPalettes,
+              reducedColorCollection,
+            ]
+          : []
       }
       @tp-value-change=${accept('value')}
       @tp-mode-change=${accept('mode')}

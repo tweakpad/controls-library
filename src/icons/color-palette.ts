@@ -10,8 +10,8 @@ export const viewOptionsIcon: IconDefinition = {
   ],
 };
 
-/** The color libraries: books and a leaning one on a shelf. */
-export const librariesIcon: IconDefinition = {
+/** The color collections: books and a leaning one on a shelf. */
+export const collectionsIcon: IconDefinition = {
   viewBox: '0 0 24 24',
   paths: [{ d: 'm16 6 4 14M12 6v14M8 8v12M4 4v16', strokeWidth: 2 }],
 };

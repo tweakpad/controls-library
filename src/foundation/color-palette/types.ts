@@ -53,7 +53,8 @@ export interface ColorCollection {
   readonly name?: string;
   /** What the collection holds and what it is for, in a sentence or two. */
   readonly description?: string;
-  readonly attribution?: ColorCollectionAttribution;
+  /** Who made it: one source, or several, each with its own link and license. */
+  readonly attribution?: ColorCollectionAttribution | readonly ColorCollectionAttribution[];
   readonly groups?: readonly ColorCollectionGroup[];
   readonly colors: readonly ColorCollectionColor[];
   readonly palettes?: readonly ColorCollectionPalette[];
@@ -94,7 +95,7 @@ export interface ResolvedColorCollection {
   readonly id: string;
   readonly name?: string;
   readonly description?: string;
-  readonly attribution?: ColorCollectionAttribution;
+  readonly attribution?: ColorCollectionAttribution | readonly ColorCollectionAttribution[];
   readonly groups: readonly ColorCollectionGroup[];
   readonly swatches: readonly PaletteSwatch[];
   readonly palettes: readonly PaletteSet[];

@@ -16,6 +16,51 @@ const named = await import(
     ? '/dist/color-palette/collections/css-named.js'
     : '/src/foundation/color-palette/collections/css-named/index.ts'
 );
+const riso = await import(
+  /* @vite-ignore */ built
+    ? '/dist/color-palette/collections/riso.js'
+    : '/src/foundation/color-palette/collections/riso/index.ts'
+);
+const brewer = await import(
+  /* @vite-ignore */ built
+    ? '/dist/color-palette/collections/colorbrewer.js'
+    : '/src/foundation/color-palette/collections/colorbrewer/index.ts'
+);
+const nippon = await import(
+  /* @vite-ignore */ built
+    ? '/dist/color-palette/collections/nippon.js'
+    : '/src/foundation/color-palette/collections/nippon/index.ts'
+);
+const wada = await import(
+  /* @vite-ignore */ built
+    ? '/dist/color-palette/collections/sanzo-wada.js'
+    : '/src/foundation/color-palette/collections/sanzo-wada/index.ts'
+);
+const wes = await import(
+  /* @vite-ignore */ built
+    ? '/dist/color-palette/collections/wes-anderson.js'
+    : '/src/foundation/color-palette/collections/wes-anderson/index.ts'
+);
+const corbusier = await import(
+  /* @vite-ignore */ built
+    ? '/dist/color-palette/collections/le-corbusier.js'
+    : '/src/foundation/color-palette/collections/le-corbusier/index.ts'
+);
+const werner = await import(
+  /* @vite-ignore */ built
+    ? '/dist/color-palette/collections/werner.js'
+    : '/src/foundation/color-palette/collections/werner/index.ts'
+);
+const lospec = await import(
+  /* @vite-ignore */ built
+    ? '/dist/color-palette/collections/lospec.js'
+    : '/src/foundation/color-palette/collections/lospec/index.ts'
+);
+const nice = await import(
+  /* @vite-ignore */ built
+    ? '/dist/color-palette/collections/nice-color-palettes.js'
+    : '/src/foundation/color-palette/collections/nice-color-palettes/index.ts'
+);
 
 /** About 600 colors: 24 hues × 25 lightness and chroma steps, a stress test for the window. */
 function stressCollection() {
@@ -77,7 +122,20 @@ for (const type of LANES)
 const byId = (id: string) => document.getElementById(id) as HTMLElement & Record<string, unknown>;
 const collections = byId('collections');
 if (collections)
-  collections.collections = [named.default, api.defaultColorCollection, api.reducedColorCollection];
+  collections.collections = [
+    named.default,
+    riso.default,
+    brewer.default,
+    nippon.default,
+    wada.default,
+    wes.default,
+    corbusier.default,
+    werner.default,
+    lospec.default,
+    nice.default,
+    api.defaultColorCollection,
+    api.reducedColorCollection,
+  ];
 const large = byId('large');
 if (large) large.collections = [stressCollection()];
 

@@ -1,5 +1,6 @@
 import { html, nothing, type PropertyValues } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
+import { join } from 'lit/directives/join.js';
 import { TpElement } from '../../foundation/element.js';
 import { TpFormElement } from '../../foundation/form-element.js';
 import {
@@ -21,6 +22,7 @@ import { colorIdentity, resolveColorCollection } from '../../foundation/color-pa
 import { defaultColorCollection } from '../../foundation/color-palette/collections/default.js';
 import type {
   ColorCollection,
+  ColorCollectionAttribution,
   PaletteGrouping,
   PaletteSort,
   ResolvedColorCollection,
@@ -256,7 +258,7 @@ export class TpColorPalette extends TpFormElement<string> {
   /** Starting color of an uncontrolled palette; form reset returns to it. */
   defaultValue: string | undefined;
   /**
-   * The collections loaded besides the built-in default collection, which the Color libraries menu
+   * The collections loaded besides the built-in default collection, which the Color collections menu
    * always offers first, as documents or typed modules. Import more from `@tweakpad/ui/color-palette/collections/<id>`, or parse a fetched
    * document with `parseColorCollection`.
    */
@@ -1520,7 +1522,9 @@ export class TpColorPalette extends TpFormElement<string> {
         summary(count(colors.length, strings.colorCountOne, strings.colorCount)),
       );
     } else {
-      const parsed = slot?.swatch.color ?? (this.value ? parseColor(this.value) : null);
+      // The bar follows the visible selection: a value the active collection does not list (after
+      // switching collections) shows the collection's summary and source instead.
+      const parsed = slot?.swatch.color;
       if (parsed) {
         copy = serializeColor(parsed, format);
         const value = html`<span class="status-value">${copy}</span>`;
@@ -1540,11 +1544,29 @@ export class TpColorPalette extends TpFormElement<string> {
         );
       }
     }
+    // One source or several, each a short link (or name) with its own license.
     const attribution = collection.attribution;
-    const sourceName = attribution?.name ?? collection.name ?? collection.id;
-    const license = attribution?.license
-      ? fillTemplate(strings.license, { license: attribution.license })
-      : '';
+    const sources: readonly ColorCollectionAttribution[] =
+      attribution === undefined ? [] : Array.isArray(attribution) ? attribution : [attribution];
+    const sourceName = (source: ColorCollectionAttribution) =>
+      source.name ?? collection.name ?? collection.id;
+    const links = (sources.length ? sources : [{}]).map((source) =>
+      source.url
+        ? html`<a href=${source.url} target="_blank" rel="noopener noreferrer"
+            >${sourceName(source)}</a
+          >`
+        : html`<span class="source-name">${sourceName(source)}</span>`,
+    );
+    const licenses = sources
+      .filter((source) => source.license)
+      .map((source) =>
+        fillTemplate(strings.license, {
+          license:
+            sources.length > 1 && source.name
+              ? `${source.license} (${source.name})`
+              : source.license!,
+        }),
+      );
     const icon = html`<tp-icon
       slot="trigger"
       class="source-icon"
@@ -1557,26 +1579,22 @@ export class TpColorPalette extends TpFormElement<string> {
     // once something is. A collection with a description opens a Preview Card that can hold its
     // source link; otherwise a Tooltip names the source, then its license on a line of its own.
     const source =
-      copy || (!attribution && !collection.description)
+      copy || (!sources.length && !collection.description)
         ? nothing
         : collection.description
           ? html`<tp-preview-card class="source" label=${strings.source}
               >${icon}<tp-stack class="source-card" part="color-palette-attribution" gap="1"
-                >${
-                  attribution?.url
-                    ? html`<a href=${attribution.url} target="_blank" rel="noopener noreferrer"
-                        >${sourceName}</a
-                      >`
-                    : html`<span class="source-name">${sourceName}</span>`
-                }<span class="source-description">${collection.description}</span
-                >${license ? html`<span class="source-license">${license}</span>` : nothing}</tp-stack
+                ><span class="source-links">${join(links, ' · ')}</span
+                ><span class="source-description">${collection.description}</span>${licenses.map(
+                  (license) => html`<span class="source-license">${license}</span>`,
+                )}</tp-stack
               ></tp-preview-card
             >`
           : html`<tp-tooltip class="source" wrap max-width="18rem"
               >${icon}<span part="color-palette-attribution"
-                ><span class="credit-line">${sourceName}</span>${
-                  license ? html`<span class="credit-line">${license}</span>` : nothing
-                }</span
+                >${sources.map(
+                  (source) => html`<span class="credit-line">${sourceName(source)}</span>`,
+                )}${licenses.map((license) => html`<span class="credit-line">${license}</span>`)}</span
               ></tp-tooltip
             >`;
     const copyButton = copy

@@ -18,7 +18,7 @@ const definition: ComponentDefinition = {
       name: 'color-palette-toolbar',
       axes: ['size'],
       description:
-        'The row of the mode Tabs and the view options, whose menu holds the color libraries.',
+        'The row of the mode Tabs and the view options, whose menu holds the color collections.',
     },
     {
       name: 'color-palette-modes',

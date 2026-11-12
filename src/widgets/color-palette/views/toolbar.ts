@@ -1,7 +1,7 @@
 import { html, nothing } from 'lit';
 import type { TpValueChangeEvent } from '../../../foundation/events.js';
 import type { PaletteGrouping } from '../../../foundation/color-palette/index.js';
-import { librariesIcon, viewOptionsIcon } from '../../../icons/color-palette.js';
+import { collectionsIcon, viewOptionsIcon } from '../../../icons/color-palette.js';
 import type {
   ColorPaletteLayout,
   ColorPaletteMode,
@@ -49,7 +49,7 @@ function radioGroup<T extends string>(
 
 /**
  * The toolbar: the mode Tabs and the view options menu. The Tabs have no panels: the list below
- * shows the selected mode. The menu's Color libraries submenu chooses the collection, the default
+ * shows the selected mode. The menu's Color collections submenu chooses the collection, the default
  * first and then the loaded ones; its Display section shapes the active mode (the colors' layout, then their Group by section, or the palettes' hard stops or
  * gradient; the favorites keep their own); its Size section sizes the cells of every mode.
  */
@@ -79,18 +79,18 @@ export function renderToolbar(options: ToolbarOptions) {
       : nothing;
   // The collections, once more than the default is loaded: a submenu of the view options.
   const collections = radioGroup(
-    strings.libraries,
+    strings.collections,
     undefined,
     options.collection,
     options.collections.map((entry) => [entry.id, entry.label] as const),
     options.onCollection,
   );
-  const libraries =
+  const collectionsMenu =
     options.collections.length > 1
-      ? html`<tp-menu .portal=${false} .modal=${false} label=${strings.libraries}
+      ? html`<tp-menu .portal=${false} .modal=${false} label=${strings.collections}
             ><tp-button slot="trigger" variant="ghost"
-              ><tp-icon slot="icon-start" .icon=${librariesIcon}></tp-icon
-              >${strings.libraries}</tp-button
+              ><tp-icon slot="icon-start" .icon=${collectionsIcon}></tp-icon
+              >${strings.collections}</tp-button
             >${collections}</tp-menu
           ><tp-separator></tp-separator>`
       : nothing;
@@ -149,7 +149,7 @@ export function renderToolbar(options: ToolbarOptions) {
       aria-label=${strings.options}
       ?disabled=${options.disabled}
     ></tp-button
-    >${libraries}${display}${radioGroup(
+    >${collectionsMenu}${display}${radioGroup(
       strings.size,
       strings.size,
       options.size,

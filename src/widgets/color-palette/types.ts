@@ -69,7 +69,7 @@ export interface ColorPaletteStrings {
   favoritesHint: string;
   removeFavorite: string;
   favorite: string;
-  libraries: string;
+  collections: string;
   options: string;
   display: string;
   layoutGrid: string;

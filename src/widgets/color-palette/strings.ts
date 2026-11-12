@@ -18,7 +18,7 @@ export const DEFAULT_STRINGS: ColorPaletteStrings = {
   favoritesHint: 'Double-click a color or a palette to add it to your favorites.',
   removeFavorite: 'Remove from favorites',
   favorite: 'Favorite',
-  libraries: 'Color libraries',
+  collections: 'Color collections',
   options: 'View options',
   display: 'Display',
   layoutGrid: 'Grid',

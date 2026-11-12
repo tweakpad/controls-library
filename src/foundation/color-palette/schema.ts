@@ -5,6 +5,13 @@ const colors = { type: 'array', items: text } as const;
  * The JSON Schema (2020-12) of a color collection document, for editors and for validating
  * collection files before they ship.
  */
+/** One source of a collection: who made it, where it comes from and its license. */
+const source = {
+  type: 'object',
+  properties: { name: text, url: { type: 'string', format: 'uri' }, license: text },
+  additionalProperties: false,
+} as const;
+
 export const colorCollectionSchema = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   title: 'Color collection',
@@ -16,9 +23,7 @@ export const colorCollectionSchema = {
     name: text,
     description: text,
     attribution: {
-      type: 'object',
-      properties: { name: text, url: { type: 'string', format: 'uri' }, license: text },
-      additionalProperties: false,
+      anyOf: [source, { type: 'array', items: source }],
     },
     groups: {
       type: 'array',

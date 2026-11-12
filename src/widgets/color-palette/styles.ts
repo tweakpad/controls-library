@@ -234,6 +234,11 @@ export const colorPaletteStyles = css`
     flex: none;
   }
 
+  /* The source info is a hover target, unlike a decorative Icon. */
+  .source-icon {
+    pointer-events: auto;
+  }
+
   .status-name {
     min-inline-size: 0;
   }

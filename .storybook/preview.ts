@@ -36,6 +36,24 @@ installPreviewModules(
     '@tweakpad/ui/color-palette': () => import('../src/foundation/color-palette/index.js'),
     '@tweakpad/ui/color-palette/collections/css-named': () =>
       import('../src/foundation/color-palette/collections/css-named/index.js'),
+    '@tweakpad/ui/color-palette/collections/riso': () =>
+      import('../src/foundation/color-palette/collections/riso/index.js'),
+    '@tweakpad/ui/color-palette/collections/colorbrewer': () =>
+      import('../src/foundation/color-palette/collections/colorbrewer/index.js'),
+    '@tweakpad/ui/color-palette/collections/nippon': () =>
+      import('../src/foundation/color-palette/collections/nippon/index.js'),
+    '@tweakpad/ui/color-palette/collections/sanzo-wada': () =>
+      import('../src/foundation/color-palette/collections/sanzo-wada/index.js'),
+    '@tweakpad/ui/color-palette/collections/wes-anderson': () =>
+      import('../src/foundation/color-palette/collections/wes-anderson/index.js'),
+    '@tweakpad/ui/color-palette/collections/le-corbusier': () =>
+      import('../src/foundation/color-palette/collections/le-corbusier/index.js'),
+    '@tweakpad/ui/color-palette/collections/werner': () =>
+      import('../src/foundation/color-palette/collections/werner/index.js'),
+    '@tweakpad/ui/color-palette/collections/lospec': () =>
+      import('../src/foundation/color-palette/collections/lospec/index.js'),
+    '@tweakpad/ui/color-palette/collections/nice-color-palettes': () =>
+      import('../src/foundation/color-palette/collections/nice-color-palettes/index.js'),
     '@tweakpad/ui/flow': () => import('../src/foundation/flow/index.js'),
     '@tweakpad/ui/map': () => import('../src/foundation/map/index.js'),
     '@tweakpad/ui/markdown': () => import('../src/foundation/markdown/index.js'),
