@@ -6,7 +6,7 @@
  */
 import { existsSync, readFileSync } from 'node:fs';
 import type * as TypeScript from 'typescript';
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 
 interface ManifestType {
   text: string;
@@ -192,6 +192,9 @@ let analysis: Promise<(tagName: string) => AnalyzedElement> | undefined;
 const analyzed = () => (analysis ??= analyze());
 
 describe('custom elements manifest: inherited attributes of redeclared properties', () => {
+  // The analyzer and its plugins load once here, on a budget of their own, not in the first test.
+  beforeAll(() => analyzed(), 30_000);
+
   it('drops an inherited attribute that the element redeclares with attribute: false, keeping its own member and type', async () => {
     const element = await analyzed();
     const files = element('tp-fixture-files');
@@ -411,5 +414,5 @@ describe('custom elements manifest: documentation fields', () => {
         description: 'The pill: the host of the label and of the variant appearance.',
       },
     ]);
-  });
+  }, 30_000);
 });

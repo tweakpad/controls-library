@@ -2,6 +2,20 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import ts from 'typescript';
 
+/** Type keywords, which are never choice lists. */
+const KEYWORD_TYPES = new Set([
+  'string',
+  'number',
+  'boolean',
+  'bigint',
+  'symbol',
+  'object',
+  'unknown',
+  'any',
+  'never',
+  'void',
+]);
+
 /** An interface with more fields than this shows its first fields and a count. */
 const MAX_FIELDS = 8;
 
@@ -133,12 +147,19 @@ export function scanChoices(root, folder = 'src') {
         read(path, relative(root, path).split('\\').join('/'));
     }
   };
-  walk(resolve(root, folder));
-  const library = resolve(root, 'node_modules/typescript/lib/lib.dom.d.ts');
-  if (existsSync(library)) read(library, '#lib.dom');
+  // Read on the first lookup, so loading the config costs nothing until a name needs resolving.
+  let scanned = false;
+  const scan = () => {
+    if (scanned) return;
+    scanned = true;
+    walk(resolve(root, folder));
+    const library = resolve(root, 'node_modules/typescript/lib/lib.dom.d.ts');
+    if (existsSync(library)) read(library, '#lib.dom');
+  };
 
   /** The module whose `kind` declaration `name` means in `module`. */
   const owner = (kind, name, module) => {
+    scan();
     if (modules.get(module)?.[kind].has(name)) return module;
     const owners = (index[kind].get(name) ?? []).filter((path) => path !== '#lib.dom');
     if (owners.length === 1) return owners[0];
@@ -229,6 +250,7 @@ export function scanChoices(root, folder = 'src') {
     const found = [];
     for (const part of parts) {
       if (/^'[^']*'$/u.test(part) || /^"[^"]*"$/u.test(part)) found.push(part.slice(1, -1));
+      else if (KEYWORD_TYPES.has(part)) return undefined;
       else if (/^[A-Za-z_]\w*$/u.test(part)) {
         const named = nameValues(part, module);
         if (!named) return undefined;

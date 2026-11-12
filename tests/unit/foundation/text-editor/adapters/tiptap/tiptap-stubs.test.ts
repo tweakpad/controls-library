@@ -623,16 +623,24 @@ export class TestView implements TiptapDispatchViewLike {
   }
 }
 
-/** A headless state with a structural view, the caret at a position. */
+/**
+ * A headless state with a structural view, the caret at a position, or by default in the first
+ * text of the document, inside a table cell or a list item when the document starts with one.
+ */
 export function ruleView(
   draft: TextEditorPortableDraft,
-  caret = 1,
+  caret?: number,
   options: { readonly nodes?: readonly TextEditorNodeDefinition[] } = {},
 ) {
   const headless = headlessTiptap(draft, options);
   const view = new TestView(headless.state);
-  const { TextSelection } = TIPTAP_MODULES.state;
-  view.dispatch(view.state.tr.setSelection(TextSelection.create(view.state.doc, caret)));
+  const { Selection, TextSelection } = TIPTAP_MODULES.state;
+  const doc = view.state.doc;
+  view.dispatch(
+    view.state.tr.setSelection(
+      caret === undefined ? Selection.atStart(doc) : TextSelection.create(doc, caret),
+    ),
+  );
   return { ...headless, view };
 }
 

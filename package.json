@@ -305,6 +305,10 @@
     "vue-tsc": "^3.3.14",
     "w3c-keyname": "2.2.8"
   },
+  "allowScripts": {
+    "esbuild": true,
+    "rs-module-lexer": true
+  },
   "overrides": {
     "minimatch@^10.0.0": "^11.0.4"
   },
