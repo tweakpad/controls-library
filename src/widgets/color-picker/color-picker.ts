@@ -193,6 +193,22 @@ const isView = (value: unknown): value is ColorPickerView =>
 const isHarmony = (value: unknown): value is HarmonyRule =>
   typeof value === 'string' && (HARMONY_RULES as readonly string[]).includes(value);
 const stop = (event: Event): void => event.stopPropagation();
+/** The hex editor's width in spacing units: the `#` prefix and six digits. */
+const HEX_FIELD_UNITS = 24;
+/**
+ * A numeric editor's width in spacing units for its widest value: the inline padding, the
+ * characters of the widest number (sign, integer digits, decimal point and fraction digits) in
+ * the monospace font, and the unit suffix.
+ */
+function fieldUnits(definition: ChannelDefinition): number {
+  const integer = Math.max(
+    String(Math.trunc(Math.abs(definition.max))).length,
+    String(Math.trunc(Math.abs(definition.min))).length,
+  );
+  const characters =
+    integer + (definition.min < 0 ? 1 : 0) + (definition.precision ? definition.precision + 1 : 0);
+  return Math.ceil(6 + characters * 2.25 + (definition.unit ? 4 : 0));
+}
 
 /**
  * Edits one CSS color through a saturation and brightness area with hue and alpha Sliders, a
@@ -1642,8 +1658,21 @@ export class TpColorPicker extends TpFormElement<string> {
     return html`<div
       ${bindPart({ class: 'panel', ...this.#nestedListeners }, [this.#panelReference])}
     >
-      ${this.#renderViews()}${this.#renderFields()}
+      ${this.#renderFormatRow()}${this.#renderViews()}${this.#renderFields()}
     </div>`;
+  }
+
+  /**
+   * The first row of the inline panel, above the views: the preview swatch, the eyedropper (an
+   * outline icon Button as tall as the Select) and the format Select, which takes the rest of the
+   * row. The popup shows them in its header instead.
+   */
+  #renderFormatRow() {
+    const preview = this.#renderPreview();
+    const eyedropper = this.#renderEyedropper('icon', 'outline');
+    const formatSelect = this.#renderFormatSelect();
+    if (preview === nothing && eyedropper === nothing && formatSelect === nothing) return nothing;
+    return html`<div class="fields-row format-row">${preview}${eyedropper}${formatSelect}</div>`;
   }
 
   #renderPopup(state: Record<string, unknown>) {
@@ -1794,11 +1823,11 @@ export class TpColorPicker extends TpFormElement<string> {
     };
   }
 
-  #renderEyedropper(size: 'icon' | 'icon-sm') {
+  #renderEyedropper(size: 'icon' | 'icon-sm', variant: 'ghost' | 'outline' = 'ghost') {
     if (!this.eyedropper || !this.#eyedropperSupported) return nothing;
     return html`<tp-button
       class="eyedropper"
-      variant="ghost"
+      variant=${variant}
       size=${size}
       .icon=${pipetteIcon}
       aria-label=${dimensionLabel(this.label, this.#strings.eyedropper)}
@@ -1866,32 +1895,40 @@ export class TpColorPicker extends TpFormElement<string> {
     }
   }
 
+  /** The Sliders under the surface, each across the full width. */
   #renderControls(sliders: unknown[]) {
-    // In the popup the eyedropper sits in the header.
-    const eyedropper = this.picker === 'popup' ? nothing : this.#renderEyedropper('icon-sm');
     return this.renderPart(
       'color-picker-controls',
-      { eyedropper: eyedropper !== nothing },
+      {},
       {
         tag: 'div',
-        properties: {
-          part: 'color-picker-controls',
-          class: 'controls',
-          'data-eyedropper': eyedropper !== nothing,
-        },
-        content: html`${eyedropper}
-          <div class="sliders">${sliders}</div>`,
+        properties: { part: 'color-picker-controls', class: 'controls' },
+        content: html`<div class="sliders">${sliders}</div>`,
       },
     );
   }
 
+  /** The alpha Slider under the surface, with its opacity field at the end when fields show. */
   #alphaSlider(model: ColorValue) {
-    return this.alpha
-      ? this.#renderSlider(ALPHA_CHANNEL, model.alpha * 100, this.#strings.alpha, {
-          '--_tp-color-picker-paint': alphaGradient(model),
-          '--_tp-color-picker-thumb-paint': displayColor(model),
-        })
-      : nothing;
+    if (!this.alpha) return nothing;
+    const slider = this.#renderSlider(ALPHA_CHANNEL, model.alpha * 100, this.#strings.alpha, {
+      '--_tp-color-picker-paint': alphaGradient(model),
+      '--_tp-color-picker-thumb-paint': displayColor(model),
+    });
+    if (!this.fields) return slider;
+    return this.renderPart(
+      'color-picker-channel',
+      { channel: ALPHA_CHANNEL.key },
+      {
+        tag: 'div',
+        properties: {
+          part: 'color-picker-channel',
+          class: 'channel-row alpha-row',
+          'data-channel': ALPHA_CHANNEL.key,
+        },
+        content: html`${slider}${this.#renderField(ALPHA_CHANNEL, 'channel')}`,
+      },
+    );
   }
 
   #renderArea() {
@@ -2201,11 +2238,8 @@ export class TpColorPicker extends TpFormElement<string> {
   #renderFields() {
     if (!this.fields) return nothing;
     const strings = this.#strings;
-    // In the popup the preview and the Select belong to the header; the row keeps the editors.
-    const popup = this.picker === 'popup';
-    const preview = popup ? nothing : this.#renderPreview();
-    const formatSelect = popup ? nothing : this.#renderFormatSelect();
-    // The format's editors are one Field group (a joined tuple); alpha stays apart.
+    // The format's editors are one Field group (a joined tuple); alpha has its own field beside
+    // the alpha Slider.
     const members =
       this.format === 'hex'
         ? html`<tp-input-group class="field" part="color-picker-field" data-field="hex"
@@ -2227,53 +2261,47 @@ export class TpColorPicker extends TpFormElement<string> {
         : channelDefinitions(this.format, false).map((definition) =>
             this.#renderField(definition, 'fields'),
           );
-    const memberCount = this.#memberCount();
     const channels = html`<tp-field-group
       class="channels"
       data-format=${this.format}
-      style=${`--_tp-color-picker-members: ${memberCount}; --_tp-color-picker-group-min: ${this.#groupUnits()}`}
+      style=${`--_tp-color-picker-group-min: ${this.#groupUnits()}`}
       label=${dimensionLabel(this.label, strings[FORMAT_STRING_KEYS[this.format]])}
       >${members}</tp-field-group
     >`;
-    const alphaField = this.alpha ? this.#renderField(ALPHA_CHANNEL, 'fields') : nothing;
     return this.renderPart(
       'color-picker-fields',
       { format: this.format },
       {
         tag: 'div',
-        properties: {
-          part: 'color-picker-fields',
-          class: 'fields',
-          'data-preview': this.preview && !popup,
-        },
-        content: html`${preview}
-          <div class="fields-row">${formatSelect}${channels}${alphaField}</div>`,
+        properties: { part: 'color-picker-fields', class: 'fields' },
+        // The editors alone, across the full width, so every format's values fit; the preview,
+        // the eyedropper and the Select are the panel's first row (#renderFormatRow).
+        content: html`<div class="fields-row">${channels}</div>`,
       },
     );
-  }
-
-  /** Editors in the Field group: the hex editor alone, or one per channel of the format. */
-  #memberCount(): number {
-    return this.format === 'hex' ? 1 : channelDefinitions(this.format, false).length;
   }
 
   /**
    * Narrowest Field group that still shows every member's digits, in spacing units: 16 per
    * channel editor, 18 with a unit suffix (`100%`, `360°`), 22 for the prefixed hex editor.
    */
+  /**
+   * Narrowest Field group that still shows every member's widest value, in spacing units: the
+   * group splits its width evenly, so it needs its widest member's share for each member.
+   */
   #groupUnits(): number {
-    if (this.format === 'hex') return 22;
-    return channelDefinitions(this.format, false).reduce(
-      (units, definition) => units + (definition.unit ? 18 : 16),
-      0,
-    );
+    const members =
+      this.format === 'hex'
+        ? [HEX_FIELD_UNITS]
+        : channelDefinitions(this.format, false).map(fieldUnits);
+    return members.length * Math.max(...members);
   }
 
   /** Width the popup's editors row needs on one line, in spacing units; 0 without fields. */
   #editorsRowUnits(): number {
     if (!this.fields) return 0;
     const panelPadding = 8;
-    return this.#groupUnits() + (this.alpha ? 18 + 2 : 0) + panelPadding;
+    return this.#groupUnits() + panelPadding;
   }
 
   /** One editor: the Input group host is the field part and the NumberField root. */

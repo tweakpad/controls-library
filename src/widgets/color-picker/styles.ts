@@ -57,10 +57,6 @@ export const colorPickerStyles = css`
     min-inline-size: 0;
   }
 
-  .controls[data-eyedropper] {
-    grid-template-columns: auto minmax(0, 1fr);
-  }
-
   .sliders {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -76,13 +72,8 @@ export const colorPickerStyles = css`
 
   .fields {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: center;
-    min-inline-size: 0;
-  }
-
-  .fields:not([data-preview]) {
     grid-template-columns: minmax(0, 1fr);
+    min-inline-size: 0;
   }
 
   .fields-row {
@@ -93,29 +84,24 @@ export const colorPickerStyles = css`
     min-inline-size: 0;
   }
 
-  .fields-row > tp-select {
+  .fields-row > :is(.eyedropper, .preview) {
     flex: none;
   }
 
+  /* The format Select takes the rest of the first row. */
+  .format-row > tp-select {
+    flex: 1 1 0;
+    min-inline-size: 0;
+  }
+
   /*
-   * The channel editors are one Field group that grows with its member count; the alpha
-   * editor keeps one editor's share. Both wrap below their basis instead of truncating text.
+   * The color editors and alpha are one Field group that takes the rest of the row, never
+   * narrower than the width that shows every editor's digits (the widget sets
+   * --_tp-color-picker-group-min from the format's editors and alpha); below it, the row wraps.
    */
   .fields-row > .channels {
-    flex: var(--_tp-color-picker-members, 3) 1
-      calc(var(--tp-spacing) * 20 * var(--_tp-color-picker-members, 3));
-    min-inline-size: calc(var(--tp-spacing) * 14 * var(--_tp-color-picker-members, 3));
-  }
-
-  /* Six hex digits plus the prefix never truncate; the alpha field wraps first. */
-  .fields-row > .channels[data-format='hex'] {
-    flex-basis: calc(var(--tp-spacing) * 24);
-    min-inline-size: calc(var(--tp-spacing) * 22);
-  }
-
-  .fields-row > .field {
-    flex: 1 1 calc(var(--tp-spacing) * 20);
-    min-inline-size: calc(var(--tp-spacing) * 14);
+    flex: 1 1 calc(var(--tp-spacing) * var(--_tp-color-picker-group-min, 48));
+    min-inline-size: calc(var(--tp-spacing) * var(--_tp-color-picker-group-min, 48));
   }
 
   .channels > .field {
@@ -133,6 +119,11 @@ export const colorPickerStyles = css`
     min-inline-size: 0;
   }
 
+  /* The alpha row under the surface has no visible label, so its field centers on the Slider. */
+  .alpha-row {
+    align-items: center;
+  }
+
   .channel-row .field {
     flex: none;
     inline-size: calc(var(--tp-spacing) * 20);
@@ -145,14 +136,6 @@ export const colorPickerStyles = css`
    */
   .popup-panel .fields-row {
     flex-wrap: nowrap;
-  }
-
-  .popup-panel .fields-row > .channels {
-    min-inline-size: calc(var(--tp-spacing) * var(--_tp-color-picker-group-min, 48));
-  }
-
-  .popup-panel .fields-row > .field {
-    min-inline-size: calc(var(--tp-spacing) * 18);
   }
 
   tp-slider {
