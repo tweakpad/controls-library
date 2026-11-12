@@ -61,6 +61,7 @@ export type CheckboxVariant = 'default' | 'inline';
  * form and validated by the Field around it. Pointer and Space toggle it; Enter does not, so it
  * never competes with a form's submit key.
  *
+ * @attr value - The value submitted with the form while the box is checked.
  * @slot - The inline label; a press on it toggles the box.
  * @slot icon - An Icon before an inline Checkbox's row, outside its boundary.
  * @csspart checkbox-icon - The box before an inline Checkbox's row that holds the `icon` slot.

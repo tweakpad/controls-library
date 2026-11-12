@@ -13,6 +13,7 @@ import { sliderPresentation } from '../../presentation/families/slider.js';
  * One thumb of a Slider, authored when a thumb needs its own name, value text, disabled state or
  * tab order. It holds the native range input; its value and form submission belong to the Slider.
  *
+ * @attr value - This thumb's current value, read from the Slider; setting it does nothing, so set the Slider's `value`.
  * @attr tabindex - Tab order of the native input, moved from the host to the input.
  * @csspart focusable - The native range input inside the thumb, which takes focus.
  */

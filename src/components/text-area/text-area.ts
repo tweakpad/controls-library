@@ -7,6 +7,7 @@ import { textAreaPresentation } from '../../presentation/families/text-area.js';
  * Several lines of text for a form value: a native textarea in the page's own tree that submits
  * with its form and joins the Field around it for its label, help text, errors and validation.
  *
+ * @attr value - The text in the field, submitted with the form.
  * @slot - Holds the native textarea the element renders; leave it empty.
  */
 export class TpTextArea extends TpTextControl {

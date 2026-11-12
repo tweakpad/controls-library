@@ -34,6 +34,7 @@ export interface ToggleSelectionOwner {
  * action with a remembered state, not a form value; inside a Toggle group the group owns its
  * state, size and paint.
  *
+ * @attr value - Identifies this Toggle in a Toggle group's value; a Toggle on its own submits nothing.
  * @slot - The label: text, an Icon, or both. Mark a leading or trailing Icon with
  * `data-icon="inline-start"` or `data-icon="inline-end"` to tighten the padding on that edge.
  * @fires tp-value-change - Cancelable proposal of the inverse pressed state on each press of a

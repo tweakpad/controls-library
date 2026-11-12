@@ -24,6 +24,7 @@ export interface RadioSelectionOwner {
  * One option of a Radio group: a radio with its label, whose checked state is read from the group's
  * value.
  *
+ * @attr value - The value the Radio group takes while this item is selected.
  * @slot - The option's label; a press on it selects the option.
  */
 export class TpRadioGroupItem extends TpFormElement<unknown> {

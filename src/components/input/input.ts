@@ -27,6 +27,7 @@ export type InputVariant = 'default' | 'inline';
  * password managers fill it and it submits with its form, that joins the Field around it for its
  * label, help text, errors and validation.
  *
+ * @attr value - The text in the field, submitted with the form.
  * @slot - Holds the native input the element renders; leave it empty.
  * @slot icon - An Icon before an inline Input's row, outside its boundary.
  * @csspart input-row - The row of an inline Input around its label and editor.

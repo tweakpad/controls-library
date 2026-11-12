@@ -32,6 +32,7 @@ const SWITCH_THUMB_MARKERS = BOOLEAN_CONTROL_MARKERS.filter((key) => key !== 'in
  * A binary setting that takes effect as soon as it flips, with Checkbox's form, Field and
  * validation behavior. Pointer, Space and Enter toggle it; it has no mixed state.
  *
+ * @attr value - The value submitted with the form while the switch is on.
  * @slot - The inline label; a press on it toggles the switch.
  * @slot thumb - Decorative content inside the thumb, such as a small icon.
  * @slot icon - An Icon before an inline Switch's row, outside its boundary.
