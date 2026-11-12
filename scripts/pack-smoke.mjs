@@ -15,7 +15,7 @@ import { tmpdir } from 'node:os';
 import { join, posix, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { textEditorManifestProblems } from './pack-smoke-manifest.mjs';
-import { hasTagLiteral } from './pack-smoke-bundle.mjs';
+import { bundlesModule } from './pack-smoke-bundle.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 // The work folder is a fresh one outside the library root: a dev server that watches the root
@@ -520,7 +520,14 @@ const bundle = (name, entry) => {
     outDir: ${JSON.stringify(`out/${name}`)},
     minify: false,
     lib: { entry: { ${JSON.stringify(name)}: ${JSON.stringify(entry)} }, formats: ['es'] },
-    rollupOptions: { external: [/^lit/] },
+    rollupOptions: {
+      external: [/^lit/],
+      // The React bindings are client modules for server-component frameworks; a client bundle
+      // has no use for the directive, so its "may not be preserved" notice is expected.
+      onwarn(warning, warn) {
+        if (warning.code !== 'MODULE_LEVEL_DIRECTIVE') warn(warning);
+      },
+    },
   },
 };
 `,
@@ -537,12 +544,16 @@ const iconOnly = bundle('icon-only', 'icon-only.js');
 // One React binding from the barrel ships its element, not the other components'.
 writeFileSync(join(consumer, 'react-one.js'), "export { Switch } from '@tweakpad/ui/react';\n");
 const reactOne = bundle('react-one', 'react-one.js');
-if (!hasTagLiteral(reactOne, 'tp-switch'))
+if (!bundlesModule(reactOne, 'components/switch/switch'))
   fail('the single React binding bundle is missing tp-switch');
-if (hasTagLiteral(reactOne, 'tp-select') || hasTagLiteral(reactOne, 'tp-dialog'))
+if (
+  bundlesModule(reactOne, 'components/select/select') ||
+  bundlesModule(reactOne, 'components/dialog/dialog')
+)
   fail('the single React binding bundle includes unrelated components');
 if (!iconOnly.includes('M12 5v14M5 12h14')) fail('the icon-only bundle is missing the plus icon');
-if (iconOnly.includes('tp-button')) fail('the icon-only bundle includes unrelated components');
+if (bundlesModule(iconOnly, 'components/button/button'))
+  fail('the icon-only bundle includes unrelated components');
 // One definition of a module that holds several ships without its siblings.
 if (!iconOnly.includes('M14 12a4 4 0 0 1 0 8H6'))
   fail('the icon-only bundle is missing the strikethrough icon');
