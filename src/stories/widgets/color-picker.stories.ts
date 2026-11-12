@@ -74,11 +74,11 @@ const meta: Meta<Args> = {
     picker: { control: 'select', options: ['inline', 'popup'] },
     views: {
       control: 'object',
-      description: 'Ordered views: area, sliders, wheel, triangle, swatches.',
+      description: 'Ordered views: area, sliders, wheel, triangle.',
     },
     view: {
       control: 'select',
-      options: ['area', 'sliders', 'wheel', 'triangle', 'swatches'],
+      options: ['area', 'sliders', 'wheel', 'triangle'],
     },
     fields: { control: 'boolean' },
     formatSelect: { control: 'boolean' },
@@ -209,8 +209,6 @@ export const HueTriangle: Story = {
 export const Swatches: Story = {
   tags: ['!autodocs'],
   args: {
-    views: ['area', 'swatches'],
-    view: 'swatches',
     value: '#db6500',
     label: 'Swatch',
     swatches: ['#db6500', '#cc272f', '#8949d0', '#1e6dd8', '#00a392'],
@@ -219,7 +217,7 @@ export const Swatches: Story = {
     docs: {
       source: {
         code: sourceFor(
-          '<tp-color-picker label="Swatch" views="area swatches" default-view="swatches" default-value="#db6500"></tp-color-picker>',
+          '<tp-color-picker label="Swatch" default-value="#db6500"></tp-color-picker>',
         ),
       },
     },

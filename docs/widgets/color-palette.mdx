@@ -122,7 +122,7 @@ palette.collections = [
 
 ### Grouping and sorting
 
-The grid groups colors as the collection does by default. `grouping="hue"` regroups them into hue families with the neutrals last, and `grouping="none"` lists one flat grid. `sort` orders each group by lightness, hue or chroma instead of the collection's order, which turns a scattered collection into readable gradings. Group by in the view options beside the mode tabs offers three choices: Auto shows the hue families ordered by lightness, Collection the collection's own groups and order, and None one flat grid in the collection's order.
+The grid lists the colors as one flat grid in the collection's order by default. `grouping="collection"` groups them as the collection does, and `grouping="hue"` regroups them into hue families with the neutrals last. `sort` orders each group by lightness, hue or chroma instead of the collection's order, which turns a scattered collection into readable gradings. Group by in the view options beside the mode tabs offers three choices: Auto shows the hue families ordered by lightness, Collection the collection's own groups and order, and None one flat grid in the collection's order.
 
 <Preview
   title="Hue families by lightness"
@@ -186,7 +186,7 @@ palette.addEventListener('tp-favorites-change', (event) => {
 
 ### Size and density
 
-`size` sets the cell size, Small, Medium or Large (24, 32 and 42 px, or 16, 24 and 32 px in a compact region), and is also under Size in the view options; the grid and the list share it. The palette keeps its size: smaller or larger cells reflow inside it, more or fewer to a row. `columns` sets how many medium cells wide the palette is. Only the density of the region resizes the palette: in a `density="compact"` region it shrinks with the controls around them.
+`size` sets the cell size, Small, Medium or Large (24, 32 and 42 px, or 16, 24 and 32 px in a compact region), and is also under Size in the view options; the grid and the list share it. The palette keeps its size: smaller or larger cells reflow inside it, more or fewer to a row. `columns` sets how many medium cells wide the palette is. Only the density of the region resizes the palette: in a `density="compact"` region it shrinks with the controls around them. `fill` instead makes it take its container's width and height: the grid fits as many whole cells as the width holds, stretched to span it, and the list takes the height left, as the Color picker does when it opens the palette over its body.
 
 <Preview
   title="Compact"

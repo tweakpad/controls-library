@@ -38,7 +38,7 @@ export const DEFAULT_STRINGS: ColorPickerStrings = {
   viewSliders: 'Sliders',
   viewWheel: 'Wheel',
   viewTriangle: 'Triangle',
-  viewSwatches: 'Swatches',
+  colorPalette: 'Color palette',
   formatHex: 'Hex',
   formatRgb: 'RGB',
   formatHsl: 'HSL',

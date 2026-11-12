@@ -289,7 +289,19 @@ const settle = async (target: TpColorPicker) => {
   await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 };
 
-/** The options of the swatches view's Color palette. */
+/** Opens the picker's Color palette through its Toggle, as a press does. */
+async function openPalette(
+  target: HTMLElement & { updateComplete: Promise<unknown> },
+): Promise<void> {
+  if (target.shadowRoot!.querySelector('.palette-layer')) return;
+  // The Toggle's own button takes the press (a click on the host does not reach it).
+  const toggle = target.shadowRoot!.querySelector<HTMLElement>('.palette-toggle')!;
+  (toggle.shadowRoot?.querySelector<HTMLElement>('button') ?? toggle).click();
+  await settle(target);
+  await wait(60);
+}
+
+/** The options of the picker's Color palette, while it is open. */
 function paletteOptions(target: HTMLElement): HTMLElement[] {
   const palette = target.shadowRoot!.querySelector('tp-color-palette');
   return [...(palette?.shadowRoot?.querySelectorAll<HTMLElement>('[role="option"]') ?? [])];
@@ -299,9 +311,7 @@ function paletteOptions(target: HTMLElement): HTMLElement[] {
 export async function assertSwatches(): Promise<Report> {
   const checks: Check[] = [];
   const target = picker('swatches');
-  target.view = 'swatches';
-  await settle(target);
-  await wait(60);
+  await openPalette(target);
   const options = paletteOptions(target);
   const labels = options.map((option) => option.getAttribute('aria-label'));
   checks.push(check('saved and brand colors are listed', options.length === 11, labels));
@@ -409,21 +419,18 @@ export async function assertRecent(): Promise<Report> {
   target.close();
   await settle(target);
   await wait(60);
-  // The swatches view lists the same colors.
+  // The palette lists the same colors, after the saved ones (one flat grid by default).
   const swatches = picker('swatches');
   swatches.recent = colors;
-  swatches.view = 'swatches';
   await settle(swatches);
-  await wait(60);
-  const list = swatches.shadowRoot!.querySelector('tp-color-palette')?.shadowRoot;
-  const recentLabel = [...(list?.querySelectorAll('.label') ?? [])].find(
-    (label) => label.textContent?.trim() === 'Recent colors',
-  );
+  await openPalette(swatches);
+  // Unnamed colors are named by their hex value.
+  const listed = paletteOptions(swatches).map((option) => option.getAttribute('aria-label') ?? '');
   checks.push(
     check(
-      'swatches view lists a Recent colors group with the supplied colors',
-      recentLabel !== undefined && paletteOptions(swatches).length === 14,
-      paletteOptions(swatches).length,
+      'the palette lists the supplied recent colors after the saved ones',
+      listed.length === 14 && colors.every((color) => listed.slice(-3).includes(color)),
+      listed,
     ),
   );
   swatches.recent = [];
@@ -446,10 +453,11 @@ export async function assertPopupHeader(): Promise<Report> {
     : [];
   checks.push(
     check(
-      'header holds the Select, the comparison, the Copy button and the eyedropper in order',
+      'header holds the Select, the comparison, the Copy button, the eyedropper and the palette Toggle in order',
       order.join() ===
-        'tp-select.format,tp-button-group.compare,tp-copy-button.copy,tp-button.eyedropper' ||
-        order.join() === 'tp-select.format,tp-button-group.compare,tp-copy-button.copy',
+        'tp-select.format,tp-button-group.compare,tp-copy-button.copy,tp-button.eyedropper,tp-toggle.palette-toggle' ||
+        order.join() ===
+          'tp-select.format,tp-button-group.compare,tp-copy-button.copy,tp-toggle.palette-toggle',
       order,
     ),
   );

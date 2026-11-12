@@ -29,6 +29,7 @@ export type ColorPaletteProps = ElementProps<
   | 'density'
   | 'disabled'
   | 'favorites'
+  | 'fill'
   | 'formOwner'
   | 'format'
   | 'grouping'

@@ -39,6 +39,7 @@ import { TpToggle } from '../../components/toggle/toggle.js';
 import { TpPopover } from '../../components/popover/popover.js';
 import { TpTooltip } from '../../components/tooltip/tooltip.js';
 import { pipetteIcon } from '../../icons/pipette.js';
+import { paletteIcon } from '../../icons/color-palette.js';
 import {
   ALPHA_CHANNEL,
   channelDefinitions,
@@ -164,7 +165,6 @@ const VIEW_STRING_KEYS: Readonly<Record<ColorPickerView, keyof ColorPickerString
   sliders: 'viewSliders',
   wheel: 'viewWheel',
   triangle: 'viewTriangle',
-  swatches: 'viewSwatches',
 };
 const HARMONY_STRING_KEYS: Readonly<Record<HarmonyRule, keyof ColorPickerStrings>> = {
   none: 'harmonyNone',
@@ -276,6 +276,7 @@ export class TpColorPicker extends TpFormElement<string> {
     formatSelect: { type: Boolean, attribute: 'format-select', converter: defaultTrue },
     preview: { type: Boolean, converter: defaultTrue },
     eyedropper: { type: Boolean, converter: defaultTrue },
+    palette: { type: Boolean, converter: defaultTrue },
     size: { type: String, reflect: true },
     shape: { type: String, reflect: true },
     harmony: { type: String, noAccessor: true },
@@ -327,6 +328,13 @@ export class TpColorPicker extends TpFormElement<string> {
   preview = true;
   /** Offers the screen color picker where the browser supports it. */
   eyedropper = true;
+  /**
+   * Offers the Color palette: a Toggle after the eyedropper opens it over the picker's body, with
+   * the saved and recent colors and `collections`.
+   */
+  palette = true;
+  /** Whether the palette covers the body; the palette Toggle and Escape switch it. */
+  #paletteOpen = false;
   /** Scales the surfaces, tracks, thumbs and swatches together. */
   size: ColorPickerSize = 'default';
   /** Shapes the preview and the swatches as squares or circles. */
@@ -1658,7 +1666,7 @@ export class TpColorPicker extends TpFormElement<string> {
     return html`<div
       ${bindPart({ class: 'panel', ...this.#nestedListeners }, [this.#panelReference])}
     >
-      ${this.#renderFormatRow()}${this.#renderViews()}${this.#renderFields()}
+      ${this.#renderFormatRow()}${this.#renderBody(html`${this.#renderViews()}${this.#renderFields()}`)}
     </div>`;
   }
 
@@ -1670,9 +1678,13 @@ export class TpColorPicker extends TpFormElement<string> {
   #renderFormatRow() {
     const preview = this.#renderPreview();
     const eyedropper = this.#renderEyedropper('icon', 'outline');
+    const paletteToggle = this.#renderPaletteToggle();
     const formatSelect = this.#renderFormatSelect();
-    if (preview === nothing && eyedropper === nothing && formatSelect === nothing) return nothing;
-    return html`<div class="fields-row format-row">${preview}${eyedropper}${formatSelect}</div>`;
+    if ([preview, eyedropper, paletteToggle, formatSelect].every((item) => item === nothing))
+      return nothing;
+    return html`<div class="fields-row format-row">
+      ${preview}${eyedropper}${paletteToggle}${formatSelect}
+    </div>`;
   }
 
   #renderPopup(state: Record<string, unknown>) {
@@ -1721,7 +1733,9 @@ export class TpColorPicker extends TpFormElement<string> {
             },
             ...this.#nestedListeners,
           },
-          content: html`${this.#renderHeader()}${this.#renderViews()}${this.#renderFields()}${this.#renderRecent()}`,
+          content: html`${this.#renderHeader()}${this.#renderBody(
+            html`${this.#renderViews()}${this.#renderFields()}${this.#renderRecent()}`,
+          )}`,
         })}</tp-popover
       >`;
   }
@@ -1746,7 +1760,7 @@ export class TpColorPicker extends TpFormElement<string> {
             label=${dimensionLabel(this.label, strings.copy)}
             ?disabled=${this.effectiveDisabled || !this.value}
           ></tp-copy-button
-          >${this.#renderEyedropper('icon')}`,
+          >${this.#renderEyedropper('icon')}${this.#renderPaletteToggle()}`,
       },
     );
   }
@@ -1888,8 +1902,6 @@ export class TpColorPicker extends TpFormElement<string> {
         return this.#renderWheelView();
       case 'triangle':
         return this.#renderTriangleView();
-      case 'swatches':
-        return this.#renderSwatchesView();
       default:
         return nothing;
     }
@@ -2146,29 +2158,79 @@ export class TpColorPicker extends TpFormElement<string> {
       ${this.#renderControls([this.#alphaSlider(model)])}`;
   }
 
-  #renderSwatchesView() {
+  /** The palette Toggle: it opens the Color palette over the picker's body, and closes it. */
+  #renderPaletteToggle() {
+    if (!this.palette) return nothing;
+    return html`<tp-toggle
+      class="palette-toggle"
+      variant="outline"
+      size="icon"
+      aria-label=${dimensionLabel(this.label, this.#strings.colorPalette)}
+      .pressed=${this.#paletteOpen}
+      ?disabled=${this.effectiveDisabled}
+      @tp-value-change=${this.#paletteToggle}
+      @tp-field-value=${stop}
+      ><tp-icon .icon=${paletteIcon}></tp-icon
+    ></tp-toggle>`;
+  }
+
+  #paletteToggle = (event: TpValueChangeEvent<boolean>): void => {
+    event.stopPropagation();
+    this.#paletteOpen = !!event.detail.value;
+    this.requestUpdate();
+  };
+
+  /** Escape inside the open palette closes it and returns focus to its Toggle. */
+  #paletteKeyDown = (event: KeyboardEvent): void => {
+    if (event.key !== 'Escape' || event.defaultPrevented) return;
+    event.preventDefault();
+    event.stopPropagation();
+    // Focus moves to the Toggle before the palette leaves: removing the focused palette first
+    // would drop focus, which a popup reads as focus leaving it and closes.
+    this.renderRoot.querySelector<HTMLElement>('.palette-toggle')?.focus();
+    this.#paletteOpen = false;
+    this.requestUpdate();
+  };
+
+  /**
+   * The picker's body (views, fields, recent strip) and, while open, the Color palette over it,
+   * filling exactly the body's box; the covered body keeps its size but is hidden and inert.
+   */
+  #renderBody(content: unknown) {
+    const open = this.palette && this.#paletteOpen;
     const strings = this.#strings;
-    return this.renderPart(
-      'color-picker-swatches',
-      {},
-      {
-        tag: 'div',
-        properties: { part: 'color-picker-swatches', class: 'swatches-view' },
-        content: html`<tp-color-palette
-          class="color-palette"
-          .collections=${this.#paletteCollections()}
-          .format=${this.format}
-          .value=${this.#identity() ?? ''}
-          .label=${dimensionLabel(this.label, strings.viewSwatches)}
-          .defaultSize=${this.size}
-          .disabled=${this.effectiveDisabled}
-          .readOnly=${this.readOnly}
-          @tp-value-change=${this.#paletteChange}
-          @tp-value-commit=${stop}
-          @tp-field-value=${stop}
-        ></tp-color-palette>`,
-      },
-    );
+    const layer = open
+      ? this.renderPart(
+          'color-picker-swatches',
+          {},
+          {
+            tag: 'div',
+            properties: {
+              part: 'color-picker-swatches',
+              class: 'palette-layer',
+              '@keydown': this.#paletteKeyDown,
+            },
+            content: html`<tp-color-palette
+              class="color-palette"
+              fill
+              .collections=${this.#paletteCollections()}
+              .format=${this.format}
+              .value=${this.#identity() ?? ''}
+              .label=${dimensionLabel(this.label, strings.colorPalette)}
+              .defaultSize=${this.size}
+              .disabled=${this.effectiveDisabled}
+              .readOnly=${this.readOnly}
+              @tp-value-change=${this.#paletteChange}
+              @tp-value-commit=${stop}
+              @tp-field-value=${stop}
+            ></tp-color-palette>`,
+          },
+        )
+      : nothing;
+    return html`<div class="body" ?data-palette=${open}>
+      <div class="body-content" .inert=${open}>${content}</div>
+      ${layer}
+    </div>`;
   }
 
   #renderSlider(

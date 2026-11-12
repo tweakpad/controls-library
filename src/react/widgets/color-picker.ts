@@ -40,6 +40,7 @@ export type ColorPickerProps = ElementProps<
   | 'onValueCommitted'
   | 'open'
   | 'orientation'
+  | 'palette'
   | 'partContracts'
   | 'partPresentation'
   | 'picker'

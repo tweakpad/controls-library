@@ -84,7 +84,7 @@ export const colorPickerStyles = css`
     min-inline-size: 0;
   }
 
-  .fields-row > :is(.eyedropper, .preview) {
+  .fields-row > :is(.eyedropper, .palette-toggle, .preview) {
     flex: none;
   }
 
@@ -177,15 +177,35 @@ export const colorPickerStyles = css`
     min-inline-size: 0;
   }
 
-  .swatches-view {
+  /*
+   * The body under the first row: the views and fields, and while open the Color palette over
+   * them, filling the body's box exactly. The covered content keeps its size, so the picker never
+   * moves, but it is hidden and inert.
+   */
+  .body {
+    position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     min-inline-size: 0;
   }
 
-  /* The palette spans the view; its cells shrink when the panel is narrower than its columns. */
-  .swatches-view tp-color-palette {
-    inline-size: 100%;
+  .body-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--_tp-color-picker-space, var(--tp-space-3));
+    min-inline-size: 0;
+  }
+
+  .body[data-palette] > .body-content {
+    visibility: hidden;
+  }
+
+  .palette-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    min-inline-size: 0;
+    min-block-size: 0;
   }
 
   .heading {

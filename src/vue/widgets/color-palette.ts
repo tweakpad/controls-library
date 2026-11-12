@@ -32,6 +32,7 @@ export const ColorPalette = /*#__PURE__*/ createBinding(TpColorPalette, 'ColorPa
   | 'density'
   | 'disabled'
   | 'favorites'
+  | 'fill'
   | 'formOwner'
   | 'format'
   | 'grouping'

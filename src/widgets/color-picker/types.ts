@@ -2,13 +2,12 @@ import type { ChannelKey } from '../../foundation/color/channels.js';
 import type { HarmonyRule } from './color/harmony.js';
 import type { ColorFormat, ColorValue } from '../../foundation/color/types.js';
 
-export type ColorPickerView = 'area' | 'sliders' | 'wheel' | 'triangle' | 'swatches';
+export type ColorPickerView = 'area' | 'sliders' | 'wheel' | 'triangle';
 export const COLOR_PICKER_VIEWS: readonly ColorPickerView[] = [
   'area',
   'sliders',
   'wheel',
   'triangle',
-  'swatches',
 ];
 export type ColorPickerPicker = 'inline' | 'popup';
 export type ColorPickerSize = 'sm' | 'default' | 'lg';
@@ -71,7 +70,8 @@ export interface ColorPickerStrings {
   readonly viewSliders: string;
   readonly viewWheel: string;
   readonly viewTriangle: string;
-  readonly viewSwatches: string;
+  /** Name of the palette Toggle and of the Color palette it opens. */
+  readonly colorPalette: string;
   readonly formatHex: string;
   readonly formatRgb: string;
   readonly formatHsl: string;

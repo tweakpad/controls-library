@@ -50,6 +50,10 @@ export const colorPaletteStyles = css`
     inline-size: var(--_tp-color-palette-frame);
   }
 
+  .probe-chrome {
+    inline-size: var(--_tp-color-palette-chrome);
+  }
+
   /* The toolbar never widens the palette: the grid sets the width. The mode Tabs and the options
      share the row, the Tabs shrinking before the options. */
   .toolbar {
@@ -63,9 +67,10 @@ export const colorPaletteStyles = css`
     min-inline-size: 0;
   }
 
+  /* The mode Tabs take the row up to the options, each tab an equal share. */
   .toolbar .modes {
     grid-column: 1;
-    justify-self: start;
+    justify-self: stretch;
     max-inline-size: 100%;
     min-inline-size: 0;
   }
@@ -246,5 +251,23 @@ export const colorPaletteStyles = css`
   .status-count,
   .status-value {
     flex: none;
+  }
+
+  /* A filling palette takes its container's box; the list takes the height left over. */
+  :host([fill]) {
+    display: flex;
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
+  :host([fill]) .root {
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
+  :host([fill]) .scroller {
+    flex: 1 1 0;
+    block-size: auto;
+    min-block-size: 0;
   }
 `;

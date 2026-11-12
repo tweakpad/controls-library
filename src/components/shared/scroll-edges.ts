@@ -203,7 +203,7 @@ export class NativeScrollEdges implements ReactiveController {
         characterData: true,
         attributes: true,
         attributeOldValue: true,
-        attributeFilter: ['style', 'class', 'hidden', 'dir', 'slot', 'aria-activedescendant'],
+        attributeFilter: ['style', 'class', 'hidden', 'dir', 'slot'],
       });
     };
     for (const viewport of viewports) {
@@ -331,9 +331,14 @@ export class NativeScrollEdges implements ReactiveController {
             protectedRects.push(local(bounds));
         }
         // A list that keeps focus on itself and points at its current item through
-        // `aria-activedescendant` protects that item, not the whole list; with no current item
-        // nothing is protected, so the list's edges fade like unfocused content.
-        const focused = active && composedContains(content, active) ? activeItem(active) : null;
+        // `aria-activedescendant` protects nothing: the owner's scroll padding keeps a revealed item
+        // clear of the fade, and an item highlighted by hover at the edge fades like its neighbours.
+        const focused =
+          active &&
+          composedContains(content, active) &&
+          !active.hasAttribute('aria-activedescendant')
+            ? active
+            : null;
         if (focused) {
           let focusRect = focused.getBoundingClientRect();
           if ((focused as HTMLElement).isContentEditable) {
@@ -461,15 +466,4 @@ export class NativeScrollEdges implements ReactiveController {
     else target.setAttribute('data-tp-scroll-edge-mask', own.marker);
     this.#owned.delete(target);
   }
-}
-
-/**
- * The element whose box focus protects: the item an `aria-activedescendant` list points at, or
- * null when it points at none; otherwise the focused element itself.
- */
-function activeItem(active: Element): Element | null {
-  if (!active.hasAttribute('aria-activedescendant')) return active;
-  const id = active.getAttribute('aria-activedescendant');
-  const root = active.getRootNode() as Document | ShadowRoot;
-  return (id && root.getElementById?.(id)) || null;
 }

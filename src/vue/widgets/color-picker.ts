@@ -43,6 +43,7 @@ export const ColorPicker = /*#__PURE__*/ createBinding(TpColorPicker, 'ColorPick
   | 'onValueCommitted'
   | 'open'
   | 'orientation'
+  | 'palette'
   | 'partContracts'
   | 'partPresentation'
   | 'picker'

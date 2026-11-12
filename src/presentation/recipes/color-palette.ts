@@ -49,8 +49,11 @@ export const colorPaletteAppearance: PresentationDictionary = {
       declarations: {
         ...extents(CELL.default),
         '--_tp-color-palette-frame': CELL.default,
+        // The inline inset of the toolbar, the list and the status bar; a filling palette sets it
+        // to zero so its content meets the edges of the box it fills.
+        '--_tp-color-palette-inset': 'var(--tp-space-2)',
         // The list's insets: the same as the toolbar's, on both sides of the centered cells.
-        '--_tp-color-palette-chrome': 'calc(var(--tp-space-2) * 2)',
+        '--_tp-color-palette-chrome': 'calc(var(--_tp-color-palette-inset) * 2)',
         '--_tp-color-palette-space': 'var(--tp-space-2)',
         // Color chips: rounded and apart by a gap, or gapless squares in a flat region
         // (`--_tp-color-palette-flat`, set by the widget from the appearance). Each chip keeps its
@@ -79,7 +82,7 @@ export const colorPaletteAppearance: PresentationDictionary = {
     {
       declarations: {
         gap: 'var(--tp-space-1)',
-        padding: 'var(--_tp-color-palette-space)',
+        padding: 'var(--_tp-color-palette-space) var(--_tp-color-palette-inset)',
       },
     },
   ],
@@ -189,7 +192,7 @@ export const colorPaletteAppearance: PresentationDictionary = {
         gap: 'var(--tp-space-1-5)',
         color: 'var(--tp-muted-foreground)',
         'font-size': 'var(--tp-text-xs)',
-        padding: 'var(--tp-space-1) var(--_tp-color-palette-space)',
+        padding: 'var(--tp-space-1) var(--_tp-color-palette-inset)',
         'border-block-start': `var(--tp-border-width) solid ${floatEdge.color}`,
       },
     },

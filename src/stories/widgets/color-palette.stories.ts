@@ -42,7 +42,7 @@ const meta: Meta<Args> = {
     mode: 'colors',
     layout: 'grid',
     paletteStyle: 'stops',
-    grouping: 'collection',
+    grouping: 'none',
     sort: 'collection',
     size: 'default',
     columns: 9,

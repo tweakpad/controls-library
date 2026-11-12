@@ -271,6 +271,7 @@ export class TpColorPalette extends TpFormElement<string> {
     defaultPaletteStyle: { type: String, attribute: 'default-palette-style' },
     defaultLayout: { type: String, attribute: 'default-layout' },
     columns: { type: Number },
+    fill: { type: Boolean, reflect: true },
     toolbar: { type: Boolean, converter: defaultTrue },
     size: { type: String, noAccessor: true },
     defaultSize: { type: String, attribute: 'default-size' },
@@ -321,6 +322,11 @@ export class TpColorPalette extends TpFormElement<string> {
   defaultSize: ColorPaletteSize | undefined;
   /** Cells per row of the grid. */
   columns = DEFAULT_COLUMNS;
+  /**
+   * Fills its container: the palette takes the host's width and height, the grid fits as many
+   * whole cells as the width holds, and the list takes the height the toolbar and status bar leave.
+   */
+  fill = false;
   /** Shows the toolbar: the tabs and the view options. */
   toolbar = true;
   /** Accessible name of the color list; a surrounding Field supplies it otherwise. */
@@ -398,7 +404,7 @@ export class TpColorPalette extends TpFormElement<string> {
   );
   readonly #grouping = new Lane<PaletteGrouping>(
     this,
-    'collection',
+    'none',
     () => oneOf(GROUPINGS)(this.defaultGrouping),
     (value, previous, reason, sourceEvent, options) =>
       new TpValueChangeEvent<PaletteGrouping>(
@@ -551,7 +557,7 @@ export class TpColorPalette extends TpFormElement<string> {
   }
   /**
    * How the grid groups its colors: by the collection's own groups, by hue, or not at all.
-   * @default 'collection'
+   * @default 'none'
    */
   get grouping(): PaletteGrouping {
     return this.#grouping.state.value;
@@ -902,31 +908,52 @@ export class TpColorPalette extends TpFormElement<string> {
    */
   #cellColumns(): number {
     const cell = this.#measured?.cell || SIZE_PIXELS[this.size] || SIZE_PIXELS.default;
+    // A filling palette fits whole cells across the width its box leaves for them.
+    if (this.fill && this.#measured?.width)
+      return Math.max(1, Math.floor((this.#measured.width - this.#measured.chrome) / cell + 1e-6));
     const frame = this.#measured?.frame || SIZE_PIXELS.default;
     return Math.max(1, Math.floor((this.#columns() * frame) / cell + 1e-6));
   }
 
-  #measured: { cell: number; frame: number } | undefined;
+  #measured: { cell: number; frame: number; chrome: number; width: number } | undefined;
+
+  /** A row's extent: the cell of the current size, stretched across the width when filling. */
+  #cellExtent(): number {
+    const measured = this.#measured;
+    if (this.fill && measured?.width)
+      return (measured.width - measured.chrome) / this.#cellColumns();
+    return measured?.cell || SIZE_PIXELS[this.size] || SIZE_PIXELS.default;
+  }
   #probes: readonly Element[] | undefined;
   #probeObserver: ResizeObserver | undefined;
 
   /** Follows the rendered cell and medium cell, which the size and the region's density set. */
   #observeProbes(): void {
+    const root = this.renderRoot.querySelector('.root');
     const probes = [...this.renderRoot.querySelectorAll('.probe > span')];
-    if (probes.length !== 2 || probes.every((probe, index) => this.#probes?.[index] === probe))
+    if (
+      !root ||
+      probes.length !== 3 ||
+      [...probes, root].every((probe, index) => this.#probes?.[index] === probe)
+    )
       return;
-    this.#probes = probes;
+    this.#probes = [...probes, root];
     this.#probeObserver?.disconnect();
     const view = this.ownerDocument.defaultView;
     if (!view?.ResizeObserver) return;
     this.#probeObserver = new view.ResizeObserver(() => {
-      const [cell, frame] = probes.map((probe) => probe.getBoundingClientRect().width);
+      const [cell, frame, chrome] = probes.map((probe) => probe.getBoundingClientRect().width);
       if (!cell || !frame) return;
       const previous = this.#cellColumns();
-      this.#measured = { cell, frame };
+      this.#measured = {
+        cell,
+        frame,
+        chrome: chrome ?? 0,
+        width: root.getBoundingClientRect().width,
+      };
       if (this.#cellColumns() !== previous) this.requestUpdate();
     });
-    for (const probe of probes) this.#probeObserver.observe(probe);
+    for (const probe of [...probes, root]) this.#probeObserver.observe(probe);
   }
 
   #listModel(): PaletteListModel {
@@ -1377,7 +1404,7 @@ export class TpColorPalette extends TpFormElement<string> {
     model: () => this.#listModel(),
     listbox: () => this.#listbox,
     viewport: () => this.#viewport,
-    extent: () => this.#measured?.cell || SIZE_PIXELS[this.size] || SIZE_PIXELS.default,
+    extent: () => this.#cellExtent(),
     selected: () => this.#selectedKey(),
     disabled: () => this.effectiveDisabled,
     locale: () => this.locale || undefined,
@@ -1939,11 +1966,21 @@ export class TpColorPalette extends TpFormElement<string> {
           // The box: medium cells and rows, whatever the size; the cells reflow inside it.
           '--_tp-color-palette-frame-columns': String(columns),
           '--_tp-color-palette-columns': String(this.#cellColumns()),
+          // A filling palette stretches its cells so the columns span the whole width.
+          ...(this.fill
+            ? {
+                // A filling palette's content meets the edges of the box it fills.
+                '--_tp-color-palette-inset': '0px',
+                '--_tp-color-palette-cell':
+                  'calc((100cqi - var(--_tp-color-palette-chrome)) / var(--_tp-color-palette-columns, 9))',
+              }
+            : {}),
           '--_tp-color-palette-list': `calc(var(--_tp-color-palette-frame) * ${ROWS + 1} + var(--tp-space-1) * 2)`,
         },
       },
       content: html`<div class="probe" aria-hidden="true">
-          <span class="probe-cell"></span><span class="probe-frame"></span>
+          <span class="probe-cell"></span><span class="probe-frame"></span
+          ><span class="probe-chrome"></span>
         </div>
         ${toolbar}<tp-scroll-area class="scroller" axis="y" scroll-edge-fade
           >${this.#renderList(model, label, state)}${this.#renderFavoritesMenu()}</tp-scroll-area

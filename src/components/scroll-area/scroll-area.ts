@@ -60,6 +60,11 @@ export class TpScrollArea extends Scrollable(TpElement) {
         border-radius: inherit;
       }
 
+      /* Content revealed by keyboard, focus or a list's current item stops clear of the fade. */
+      :host([scroll-edge-fade]) .viewport {
+        scroll-padding: var(--tp-scroll-edge-fade-size, 24px);
+      }
+
       .viewport::-webkit-scrollbar {
         display: none;
       }

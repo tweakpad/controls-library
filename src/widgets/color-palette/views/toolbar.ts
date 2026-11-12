@@ -65,6 +65,7 @@ export function renderToolbar(options: ToolbarOptions) {
       ? html`<tp-tabs
           class="modes"
           activation="automatic"
+          full-width
           label=${strings.modes}
           .value=${options.mode}
           @tp-value-change=${options.onMode}

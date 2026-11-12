@@ -138,7 +138,7 @@ const definition: ComponentDefinition = {
       name: 'color-picker-swatches',
       axes: ['size'],
       description:
-        'The swatches view: the Color palette of the saved and recent colors and the collections.',
+        "The palette layer over the picker's body: the Color palette of the saved and recent colors and the collections, opened by the palette Toggle.",
     },
     {
       name: 'color-picker-swatch-grid',
