@@ -8,6 +8,8 @@
 // - ledger: `plans/docs/ledger/<id>.md` gives every captured B item
 //   (`plans/docs/sources/storybook/<id>.json`) exactly one known disposition and names real
 //   sections as targets;
+// - API rows: every choice-list attribute of the page's elements lists its values, when `dist/`
+//   is built;
 // - then the library's own checks: the docs and stories tests, and `docs:build --check` (the
 //   catalog, the parts and every API row described) when `dist/` is built.
 //
@@ -22,6 +24,7 @@ import { pathToFileURL } from 'node:url';
 
 export const root = resolve(import.meta.dirname, '../../../..');
 const { parseDoc, slugify } = await import(pathToFileURL(join(root, 'src/docs/parse.ts')).href);
+const { elementApi, unlistedChoices } = await import(pathToFileURL(join(root, 'src/docs/api.ts')).href);
 
 export const DISPOSITIONS = new Set([
   'in-A',
@@ -274,6 +277,15 @@ export function checkPage(id, options = {}) {
       }
       for (const item of captured)
         if (!listed.has(item)) problems.push(`${id}: ledger has no row for B item "${item}"`);
+    }
+  }
+  // API rows: every choice-list attribute lists its values (Controls' select, the site's list).
+  const manifestPath = join(base, 'dist/custom-elements.json');
+  if (existsSync(manifestPath)) {
+    const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    for (const tag of [page.tag, ...(page.parts ?? [])]) {
+      const api = tag && elementApi(manifest, tag);
+      if (api) for (const problem of unlistedChoices(api)) problems.push(`${id}: ${tag} ${problem}`);
     }
   }
   return problems;

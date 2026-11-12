@@ -12,7 +12,7 @@ const definition: ComponentDefinition = {
     {
       name: 'color-palette',
       axes: ['size'],
-      description: 'The root: the toolbar and the list.',
+      description: 'The root: the toolbar, the list and the status bar.',
     },
     {
       name: 'color-palette-toolbar',
@@ -23,12 +23,13 @@ const definition: ComponentDefinition = {
     {
       name: 'color-palette-modes',
       axes: ['size'],
-      description: 'The Tabs that switch between the colors and the palettes.',
+      description: 'The Tabs that switch between the colors, the palettes and the favorites.',
     },
     {
       name: 'color-palette-options',
       axes: ['size'],
-      description: 'The Button that opens the Display and Size menu.',
+      description:
+        'The Button that opens the view options: collections, display, grouping and size.',
     },
     {
       name: 'color-palette-list',
@@ -48,7 +49,7 @@ const definition: ComponentDefinition = {
     {
       name: 'color-palette-row',
       axes: ['size'],
-      description: 'One row of gapless colors.',
+      description: 'One row of colors, or one palette.',
     },
     {
       name: 'color-palette-item',
@@ -86,7 +87,8 @@ const definition: ComponentDefinition = {
     {
       name: 'color-palette-source',
       axes: ['size'],
-      description: 'The info icon at the end of the status bar, whose Tooltip credits the source.',
+      description:
+        "The info icon at the start of the status bar, whose Tooltip or Preview Card credits the collection's source.",
     },
     {
       name: 'color-palette-attribution',

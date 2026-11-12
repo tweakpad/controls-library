@@ -152,6 +152,12 @@ body:has(.sbdocs-wrapper) {
   overflow-x: auto;
 }
 
+/* A long type definition in an API row wraps inside its column instead of widening the table. */
+.sbdocs .docblock-argstable td code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 @media (width <= 600px) {
   .sbdocs.sbdocs-wrapper {
     padding-inline: var(--tp-space-4);

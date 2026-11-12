@@ -87,9 +87,11 @@ import type {
 } from './types.js';
 import { renderToolbar } from './views/toolbar.js';
 
+/** Receives each proposed color; a controlled owner writes `value` back to accept it. */
 export type ColorPaletteValueChangeCallback = (event: TpValueChangeEvent<string>) => void;
+/** Receives each settled color. */
 export type ColorPaletteValueCommitCallback = (event: TpValueCommitEvent<string>) => void;
-/** Called with each loading status change of a collection loader and the collection's id. */
+/** Receives each loading status change of a collection, with the collection's id. */
 export type ColorPaletteLoadingStatusCallback = (
   status: ColorCollectionStatus,
   collection: string,
@@ -206,8 +208,7 @@ const oneOf =
  * picked `swatch` and the `collection` id.
  * @fires tp-value-commit - The settled color, right after an accepted pick.
  * @fires tp-collection-change - Cancelable proposal of another active collection.
- * @fires tp-loading-status-change - Each loading status change of a collection loader;
- * `detail.status`, `detail.collection` (its id) and, on a failure, `detail.error`.
+ * @fires tp-loading-status-change - A collection's loading status changed.
  * @fires tp-mode-change - Cancelable proposal of another mode.
  * @fires tp-grouping-change - Cancelable proposal of another grouping of the grid.
  * @fires tp-sort-change - Cancelable proposal of another sort of the grid.
@@ -285,18 +286,15 @@ export class TpColorPalette extends TpFormElement<string> {
   /** Starting color of an uncontrolled palette; form reset returns to it. */
   defaultValue: string | undefined;
   /**
-   * The collections offered besides the built-in default collection, which the Color collections
-   * menu always offers first: documents or typed modules, imported from
-   * `@tweakpad/ui/color-palette/collections/<id>`, or loaders, which the palette calls only when
-   * their collection becomes active. `colorCollectionCatalog` offers every shipped collection as a
-   * loader; a loader can also fetch a document and parse it with `parseColorCollection`.
+   * Collections offered after the built-in default: documents, or loaders that load when chosen.
+   * `colorCollectionCatalog` offers every shipped collection as a loader.
    */
   collections: readonly ColorCollectionEntry[] = [];
   /** Starting collection id of an uncontrolled collection choice. */
   defaultCollection: string | undefined;
   /** Starting mode of an uncontrolled mode choice. */
   defaultMode: ColorPaletteMode | undefined;
-  /** The modes the toolbar offers, in order; one mode hides the mode toggles. */
+  /** The tabs the toolbar offers, in order; with one, the tabs are hidden. */
   modes: readonly ColorPaletteMode[] = MODES;
   /** Starting grouping of an uncontrolled grid. */
   defaultGrouping: PaletteGrouping | undefined;
@@ -311,25 +309,25 @@ export class TpColorPalette extends TpFormElement<string> {
   /** Starting favorites of uncontrolled favorites, when local storage holds none. */
   defaultFavorites: readonly ColorPaletteFavorite[] | undefined;
   /**
-   * Where uncontrolled favorites are kept between visits: `local` storage under `storageKey`, or
-   * `none` when an external state layer owns them through `favorites`.
+   * Where favorites are kept between visits: local storage under `storage-key`, or nowhere when
+   * the application owns them through `favorites`.
    */
   persistence: ColorPalettePersistence = 'local';
-  /** How the status bar writes the chosen color and what its copy button copies: `hex` by default. */
+  /** How the status bar writes the chosen color, and what its copy button copies. */
   format: ColorFormat = 'hex';
   /** Local storage key of the favorites; palettes that share it share their favorites. */
   storageKey = DEFAULT_STORAGE_KEY;
   /** Starting cell size of an uncontrolled size. */
   defaultSize: ColorPaletteSize | undefined;
-  /** Cells per row of the grid; the list layout keeps the same width. */
+  /** Cells per row of the grid. */
   columns = DEFAULT_COLUMNS;
-  /** Shows the toolbar with the modes, the collections and the view options. */
+  /** Shows the toolbar: the tabs and the view options. */
   toolbar = true;
   /** Accessible name of the color list; a surrounding Field supplies it otherwise. */
   label = '';
   /** Language of the texts; the document language when empty. */
   locale = '';
-  /** Replaces built-in texts (mode, group and set names) for localization. */
+  /** Replacement texts, for localization; the English ones are `colorPaletteStrings`. */
   strings: Partial<ColorPaletteStrings> = {};
   /**
    * Called synchronously with each `tp-value-change` proposal, before listeners; a controlled owner
@@ -338,7 +336,7 @@ export class TpColorPalette extends TpFormElement<string> {
   onValueChange: ColorPaletteValueChangeCallback | undefined;
   /** Called with each settled pick. */
   onValueCommitted: ColorPaletteValueCommitCallback | undefined;
-  /** Called with each loading status change of a collection loader, before the event. */
+  /** Called with each loading status change of a collection, before `tp-loading-status-change`. */
   onLoadingStatusChange: ColorPaletteLoadingStatusCallback | undefined;
 
   #provided: string | undefined;
@@ -518,6 +516,7 @@ export class TpColorPalette extends TpFormElement<string> {
 
   // ---- lanes -------------------------------------------------------------------------------
 
+  /** The chosen color, as its swatch's CSS color text; empty when nothing is chosen. */
   override get value(): string {
     return this.#state.value;
   }
@@ -527,7 +526,7 @@ export class TpColorPalette extends TpFormElement<string> {
     if (this.hasUpdated) this.#state.sync();
     this.requestUpdate('value', previous);
   }
-  /** Id of the active collection; setting it makes the collection choice controlled. */
+  /** Id of the active collection; the first of `collections` when none is set. */
   get collection(): string {
     return this.activeCollection.id;
   }
@@ -536,7 +535,10 @@ export class TpColorPalette extends TpFormElement<string> {
     this.#collection.write(value === null || value === undefined ? undefined : String(value));
     this.requestUpdate('collection', previous);
   }
-  /** How the active collection is presented; setting it makes the mode controlled. */
+  /**
+   * The tab the palette shows.
+   * @default 'colors'
+   */
   get mode(): ColorPaletteMode {
     const mode = this.#mode.state.value;
     const offered = this.#modes();
@@ -547,7 +549,10 @@ export class TpColorPalette extends TpFormElement<string> {
     this.#mode.write(oneOf(MODES)(value));
     this.requestUpdate('mode', previous);
   }
-  /** Groups of the grid; setting it makes the grouping controlled. */
+  /**
+   * How the grid groups its colors: by the collection's own groups, by hue, or not at all.
+   * @default 'collection'
+   */
   get grouping(): PaletteGrouping {
     return this.#grouping.state.value;
   }
@@ -556,7 +561,10 @@ export class TpColorPalette extends TpFormElement<string> {
     this.#grouping.write(oneOf(GROUPINGS)(value));
     this.requestUpdate('grouping', previous);
   }
-  /** Order inside each group of the grid; setting it makes the sort controlled. */
+  /**
+   * Order inside each group: the collection's order, or by a color feature.
+   * @default 'collection'
+   */
   get sort(): PaletteSort {
     return this.#sort.state.value;
   }
@@ -565,7 +573,10 @@ export class TpColorPalette extends TpFormElement<string> {
     this.#sort.write(oneOf(SORTS)(value));
     this.requestUpdate('sort', previous);
   }
-  /** Direction of the sort; setting it makes the direction controlled. */
+  /**
+   * Direction of the sort.
+   * @default 'ascending'
+   */
   get sortDirection(): SortDirection {
     return this.#direction.state.value;
   }
@@ -574,7 +585,10 @@ export class TpColorPalette extends TpFormElement<string> {
     this.#direction.write(oneOf(DIRECTIONS)(value));
     this.requestUpdate('sortDirection', previous);
   }
-  /** Cells in rows, or one row per color with its name; setting it makes the layout controlled. */
+  /**
+   * Cells in rows, or one row per color with its name.
+   * @default 'grid'
+   */
   get layout(): ColorPaletteLayout {
     return this.#layout.state.value;
   }
@@ -584,8 +598,8 @@ export class TpColorPalette extends TpFormElement<string> {
     this.requestUpdate('layout', previous);
   }
   /**
-   * The bookmarked colors, palettes and gradients, listed in the favorites mode; setting it makes
-   * the favorites controlled, and an application keeps them, with `persistence` set to `none`.
+   * The bookmarked colors, palettes and gradients; an application that keeps them sets this and
+   * `persistence` to `none`.
    */
   get favorites(): readonly ColorPaletteFavorite[] {
     return this.#favorites.state.value;
@@ -598,8 +612,8 @@ export class TpColorPalette extends TpFormElement<string> {
     this.requestUpdate('favorites', previous);
   }
   /**
-   * How the palettes mode shows each palette: hard stops side by side, or blended as one gradient
-   * whose colors stay pickable; setting it makes the style controlled.
+   * How each palette shows: hard stops side by side, or blended as one gradient.
+   * @default 'stops'
    */
   get paletteStyle(): ColorPalettePaletteStyle {
     return this.#paletteStyle.state.value;
@@ -610,8 +624,8 @@ export class TpColorPalette extends TpFormElement<string> {
     this.requestUpdate('paletteStyle', previous);
   }
   /**
-   * The cell size, the same in the grid and the list, scaled with the density of the region;
-   * setting it makes the size controlled.
+   * Cell size of the grid and the list.
+   * @default 'default'
    */
   get size(): ColorPaletteSize {
     return this.#size.state.value;
@@ -624,10 +638,7 @@ export class TpColorPalette extends TpFormElement<string> {
 
   // ---- read-only state ---------------------------------------------------------------------
 
-  /**
-   * The active collection, parsed: the chosen one, otherwise the first of `collections`, or the
-   * default. While a loader's collection has not loaded it has its id and name and no colors.
-   */
+  /** The active collection, parsed; until a loader's collection loads, only its id and name. */
   get activeCollection(): ResolvedColorCollection {
     const entry = this.#activeEntry();
     return entry.resolved ?? placeholder(entry);
@@ -637,7 +648,7 @@ export class TpColorPalette extends TpFormElement<string> {
     const loader = this.#activeEntry().loader;
     return loader ? this.#statusOf(loader) : 'loaded';
   }
-  /** The highlighted color with where it is listed, or null. */
+  /** The highlighted color and where it is listed. */
   get activeSwatch(): ColorPaletteSwatchInfo | null {
     const key = this.#list.highlighted;
     const slot = key === undefined ? undefined : this.#listModel().slots.get(key);
@@ -1934,7 +1945,7 @@ export class TpColorPalette extends TpFormElement<string> {
       content: html`<div class="probe" aria-hidden="true">
           <span class="probe-cell"></span><span class="probe-frame"></span>
         </div>
-        ${toolbar}<tp-scroll-area class="scroller" axis="y"
+        ${toolbar}<tp-scroll-area class="scroller" axis="y" scroll-edge-fade
           >${this.#renderList(model, label, state)}${this.#renderFavoritesMenu()}</tp-scroll-area
         >${this.#renderStatus(model, collection)}`,
     });

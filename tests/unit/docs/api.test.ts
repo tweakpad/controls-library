@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { elementApi, type Manifest } from '../../../src/docs/api.js';
+import { elementApi, unlistedChoices, type Manifest } from '../../../src/docs/api.js';
 
 const manifest = (inheritedFrom: string) =>
   ({
@@ -43,5 +43,111 @@ describe('element API rows', () => {
     expect(api.properties.map((row) => row.name)).toEqual(['own', 'shared']);
     expect(api.methods.map((row) => row.name)).toEqual(['reset']);
     expect(api.attributes.map((row) => row.name)).toEqual(['shared-attribute']);
+  });
+});
+
+const control = {
+  schemaVersion: '1.0.0',
+  modules: [
+    {
+      kind: 'javascript-module',
+      path: 'src/control.ts',
+      declarations: [
+        {
+          kind: 'class',
+          name: 'TpControl',
+          tagName: 'tp-control',
+          members: [
+            {
+              kind: 'field',
+              name: 'value',
+              attribute: 'value',
+              type: { text: 'string' },
+              inheritedFrom: { name: 'TpFormElement' },
+            },
+            { kind: 'field', name: 'items', type: { text: 'readonly Item[]' } },
+            { kind: 'field', name: 'defaultItems', type: { text: 'readonly Item[] | undefined' } },
+            {
+              kind: 'method',
+              name: 'setValue',
+              description: 'Sets the value.',
+              parameters: [
+                { name: 'value', type: { text: 'string' } },
+                { name: 'reason', default: "'programmatic'", type: { text: 'ChangeReason' } },
+              ],
+              return: { type: { text: 'boolean' } },
+            },
+          ],
+          attributes: [
+            {
+              name: 'value',
+              fieldName: 'value',
+              type: { text: 'string' },
+              inheritedFrom: { name: 'TpFormElement' },
+            },
+            { name: 'name', fieldName: 'name', inheritedFrom: { name: 'TpFormElement' } },
+            {
+              name: 'mode',
+              fieldName: 'mode',
+              type: { text: 'Mode', values: ['a', 'b'] },
+              default: "'a'",
+              description: 'The mode.',
+            },
+            {
+              name: 'default-mode',
+              fieldName: 'defaultMode',
+              type: { text: 'Mode | undefined', values: ['a', 'b'] },
+              description: 'Starting mode.',
+            },
+            {
+              name: 'size',
+              fieldName: 'size',
+              type: { text: 'Size' },
+              description: 'Size.',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+} as unknown as Manifest;
+
+describe('API table rules', () => {
+  const api = elementApi(control, 'tp-control')!;
+
+  it("lists a form control's value and merges starting values into their setting", () => {
+    expect(api.formControl).toBe(true);
+    expect(api.attributes.map((row) => [row.name, row.type, row.default, row.values])).toEqual([
+      ['value', 'string', '', undefined],
+      ['mode', 'Mode', "'a'", ['a', 'b']],
+      ['size', 'Size', '', undefined],
+    ]);
+    expect(api.attributes[1]!.description).toBe('The mode. Uncontrolled start: `default-mode`.');
+    expect(api.properties.map((row) => row.name)).toEqual(['items']);
+    expect(api.properties[0]!.description).toContain('`defaultItems`');
+  });
+
+  it('types method signatures; a defaulted parameter is optional', () => {
+    expect(api.methods[0]!.signature).toBe('setValue(value: string, reason?: ChangeReason)');
+    expect(api.methods[0]!.returns).toBe('boolean');
+  });
+
+  it('accepts a named type the docs define', () => {
+    const defined = structuredClone(control) as unknown as Manifest;
+    const size = (
+      defined.modules[0]!.declarations![0]!.attributes as { name: string; type: object }[]
+    ).find((attribute) => attribute.name === 'size')!;
+    size.type = { text: 'Size', definitions: [{ name: 'Size', text: 'number | string' }] };
+    const rows = elementApi(defined, 'tp-control')!;
+    expect(rows.attributes.find((row) => row.name === 'size')!.definitions).toEqual([
+      { name: 'Size', text: 'number | string' },
+    ]);
+    expect(unlistedChoices(rows)).toEqual([]);
+  });
+
+  it('reports a named attribute type whose values are not listed', () => {
+    expect(unlistedChoices(api)).toEqual([
+      'attribute size: Size is not defined in the docs; list its values or use a primitive type',
+    ]);
   });
 });

@@ -2,6 +2,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import ts from 'typescript';
 import { analyzeEventTypes } from './scripts/manifest/event-types.mjs';
+import { scanChoices, tweakpadMemberTypes } from './scripts/manifest/member-types.mjs';
 
 /**
  * Custom elements manifest for consumers' editors and tooling (`customElements` in package.json).
@@ -28,8 +29,7 @@ function scanEventSources(...directories) {
     for (const entry of readdirSync(folder, { withFileTypes: true })) {
       const path = join(folder, entry.name);
       if (entry.isDirectory()) walk(path);
-      else if (entry.name.endsWith('.ts'))
-        sources.push(readFileSync(path, 'utf8'));
+      else if (entry.name.endsWith('.ts')) sources.push(readFileSync(path, 'utf8'));
     }
   };
   for (const directory of directories) walk(directory);
@@ -637,7 +637,10 @@ const tweakpadParts = (families) => {
         }
         if (names.size) {
           declaration.cssParts ??= [];
-          for (const name of [...names].sort()) {
+          // Anatomy order: the family's definition order, then any other part by name.
+          const order = [...(family?.parts.keys() ?? [])];
+          const rank = (name) => (order.includes(name) ? order.indexOf(name) : order.length);
+          for (const name of [...names].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b))) {
             const existing = declaration.cssParts.find((part) => part.name === name);
             const description =
               family?.parts.get(name) ??
@@ -679,5 +682,6 @@ export default {
     tweakpadAttributeDefaults(),
     tweakpadRenders(),
     tweakpadParts(scanFamilies('src/presentation/families')),
+    tweakpadMemberTypes(scanChoices(import.meta.dirname)),
   ],
 };

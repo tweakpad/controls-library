@@ -166,13 +166,31 @@ const preview = definePreview({
         ...api.attributes.flatMap((attribute) => [attribute.name, attribute.property]),
         ...api.properties.map((property) => property.name),
       ]);
+      // A choice list's values (the docs data's `values`) fill its select, unless the story sets
+      // its own options.
+      const values = new Map<string, readonly string[]>();
+      for (const row of [...api.attributes, ...api.properties])
+        if (row.values?.length && !('readonly' in row && row.readonly)) {
+          values.set(row.name, row.values);
+          if ('property' in row && row.property) values.set(row.property, row.values);
+        }
       return Object.fromEntries(
-        Object.entries(argTypes).filter(
-          ([name, argType]) =>
-            own.has(name) ||
-            // A story's own fixture knob; the manifest's event handlers arrive as empty entries.
-            (argType.table?.category === undefined && Object.keys(argType).length > 0),
-        ),
+        Object.entries(argTypes)
+          .filter(
+            ([name, argType]) =>
+              own.has(name) ||
+              // A story's own fixture knob; the manifest's event handlers arrive as empty entries.
+              (argType.table?.category === undefined && Object.keys(argType).length > 0),
+          )
+          .map(([name, argType]) => {
+            const options = values.get(name);
+            return [
+              name,
+              options && !argType.options
+                ? { ...argType, options: [...options], control: { type: 'select' } }
+                : argType,
+            ];
+          }),
       );
     },
   ],

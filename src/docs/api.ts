@@ -7,6 +7,16 @@
 
 export interface ManifestType {
   text?: string;
+  /** A choice list's values, written out or read through its alias (tweakpad-member-types). */
+  values?: string[];
+  /** The source definitions of the other named types it mentions (tweakpad-member-types). */
+  definitions?: ApiDefinition[];
+}
+
+/** A named type and its source definition, one level deep: `PanelExtent` = `number | string`. */
+export interface ApiDefinition {
+  name: string;
+  text: string;
 }
 export interface ManifestAttribute {
   name: string;
@@ -33,7 +43,13 @@ export interface ManifestMember {
   type?: ManifestType;
   default?: string;
   description?: string;
-  parameters?: { name: string; optional?: boolean; type?: ManifestType; description?: string }[];
+  parameters?: {
+    name: string;
+    optional?: boolean;
+    default?: string;
+    type?: ManifestType;
+    description?: string;
+  }[];
   return?: { type?: ManifestType };
   inheritedFrom?: { name?: string };
 }
@@ -66,12 +82,20 @@ export interface ApiAttribute {
   /** The property the attribute reflects to or from. */
   property: string;
   type: string;
+  /** The valid values of a choice list; Controls lists them in a select. */
+  values?: string[];
+  /** The definitions of the named types `type` mentions. */
+  definitions?: ApiDefinition[];
   default: string;
   description: string;
 }
 export interface ApiProperty {
   name: string;
   type: string;
+  /** The valid values of a choice list; Controls lists them in a select. */
+  values?: string[];
+  /** The definitions of the named types `type` mentions. */
+  definitions?: ApiDefinition[];
   default: string;
   readonly: boolean;
   description: string;
@@ -110,6 +134,8 @@ export interface ElementApi {
   slots: ApiNamed[];
   cssParts: ApiNamed[];
   cssProperties: ApiCssProperty[];
+  /** A form control: it also accepts `name`, `disabled`, `required` and `read-only`. */
+  formControl: boolean;
 }
 
 const DIAGNOSTIC_EVENT = 'tp-diagnostic';
@@ -126,8 +152,49 @@ const OWN_API_BASES: ReadonlySet<string> = new Set(['TextRevealElement', 'Surfac
  * extends) are not repeated on every page that inherits them, except those of an own-API base.
  * A member the element redeclares is its own.
  */
-const inherited = (entry: { inheritedFrom?: { name?: string } }) =>
-  !!entry.inheritedFrom && !OWN_API_BASES.has(entry.inheritedFrom.name ?? '');
+const inherited = (entry: { name?: string; inheritedFrom?: { name?: string } }) =>
+  !!entry.inheritedFrom &&
+  !OWN_API_BASES.has(entry.inheritedFrom.name ?? '') &&
+  // A form control's value is its own API, whatever base declares it.
+  !(entry.inheritedFrom.name === FORM_BASE && entry.name === 'value');
+
+/** The base of form-associated elements. */
+const FORM_BASE = 'TpFormElement';
+
+/** The cell of a type: `undefined` is absence, which the Default cell shows, so it is dropped. */
+const cell = (type: ManifestType | undefined): string =>
+  topLevelUnion(type?.text ?? '')
+    .filter((part) => part !== 'undefined')
+    .join(' | ');
+
+/** A type text's top-level union members; `|` inside brackets, parentheses or quotes stays. */
+function topLevelUnion(text: string): string[] {
+  const parts: string[] = [];
+  let depth = 0;
+  let quote = '';
+  let start = 0;
+  for (let index = 0; index < text.length; index++) {
+    const char = text[index]!;
+    if (quote) {
+      if (char === quote) quote = '';
+    } else if (char === "'" || char === '"' || char === '`') quote = char;
+    else if ('([{<'.includes(char)) depth++;
+    else if (')]}>'.includes(char) && text[index - 1] !== '=') depth--;
+    else if (char === '|' && depth === 0) {
+      parts.push(text.slice(start, index).trim());
+      start = index + 1;
+    }
+  }
+  parts.push(text.slice(start).trim());
+  return parts.filter(Boolean);
+}
+/** A choice list's values, or the definitions of the named types it mentions. */
+const valuesOf = (...types: (ManifestType | undefined)[]) => {
+  const values = types.find((type) => type?.values?.length)?.values;
+  if (values) return { values };
+  const definitions = types.find((type) => type?.definitions?.length)?.definitions;
+  return definitions ? { definitions } : {};
+};
 
 /** Public API the element declares itself. */
 const ownPublic = (member: ManifestMember) =>
@@ -146,19 +213,27 @@ function methodsOf(members: ManifestMember[]): ApiMethod[] {
   return [...byName].map(([name, overloads]) => {
     // A parameter is optional when any overload lets it be left out.
     const parameters = new Map<string, boolean>();
+    // A parameter with a default value is optional too.
     for (const overload of overloads)
       for (const parameter of overload.parameters ?? [])
         parameters.set(
           parameter.name,
-          (parameters.get(parameter.name) ?? false) || !!parameter.optional,
+          (parameters.get(parameter.name) ?? false) ||
+            !!parameter.optional ||
+            parameter.default !== undefined,
         );
     const described = overloads.find((overload) => overload.description) ?? overloads[0];
+    const typeOf = (parameter: string) =>
+      cell(described?.parameters?.find((entry) => entry.name === parameter)?.type);
     return {
       name,
       signature: `${name}(${[...parameters]
-        .map(([parameter, optional]) => (optional ? `${parameter}?` : parameter))
+        .map(([parameter, optional]) => {
+          const type = typeOf(parameter);
+          return `${parameter}${optional ? '?' : ''}${type ? `: ${type}` : ''}`;
+        })
         .join(', ')})`,
-      returns: described?.return?.type?.text ?? '',
+      returns: cell(described?.return?.type),
       description: described?.description ?? '',
     };
   });
@@ -191,17 +266,32 @@ export function elementApi(manifest: Manifest, tagName: string): ElementApi | un
   const fieldByName = new Map(
     members.filter((member) => member.kind === 'field').map((member) => [member.name, member]),
   );
-  const attributes = (declaration.attributes ?? [])
+  const listed = (declaration.attributes ?? [])
     .filter((attribute) => !attribute.name.startsWith('_') && !inherited(attribute))
     .map((attribute) => {
       const field = attribute.fieldName ? fieldByName.get(attribute.fieldName) : undefined;
       return {
         name: attribute.name,
         property: attribute.fieldName ?? '',
-        type: attribute.type?.text ?? field?.type?.text ?? '',
+        type: cell(attribute.type) || cell(field?.type),
+        ...valuesOf(attribute.type, field?.type),
         default: attribute.default ?? field?.default ?? '',
         description: attribute.description ?? field?.description ?? '',
       };
+    });
+  // A controlled setting and its `default-*` starting value are one row: the setting's values and
+  // default, with the starting attribute named.
+  const attributes = listed
+    .filter((attribute) => !pairOf(attribute.name, listed))
+    .map((attribute) => {
+      const start = listed.find((entry) => entry.name === `default-${attribute.name}`);
+      return start
+        ? {
+            ...attribute,
+            default: attribute.default || start.default,
+            description: `${attribute.description} Uncontrolled start: \`${start.name}\`.`.trim(),
+          }
+        : attribute;
     });
   const seenEvents = new Set<string>();
   const events: ApiEvent[] = [];
@@ -211,7 +301,7 @@ export function elementApi(manifest: Manifest, tagName: string): ElementApi | un
     seenEvents.add(name);
     events.push({
       name,
-      type: event.type?.text ?? '',
+      type: cell(event.type),
       description: event.description ?? '',
     });
   }
@@ -222,15 +312,7 @@ export function elementApi(manifest: Manifest, tagName: string): ElementApi | un
     className: declaration.name ?? '',
     description: declaration.description ?? '',
     attributes,
-    properties: members
-      .filter((member) => member.kind === 'field' && !member.attribute)
-      .map((member) => ({
-        name: member.name,
-        type: member.type?.text ?? '',
-        default: member.default ?? '',
-        readonly: !!member.readonly,
-        description: member.description ?? '',
-      })),
+    properties: propertyRows(members),
     methods: methodsOf(members),
     events,
     slots: named(declaration.slots),
@@ -240,7 +322,63 @@ export function elementApi(manifest: Manifest, tagName: string): ElementApi | un
       default: entry.default ?? '',
       description: entry.description ?? '',
     })),
+    formControl: [...(declaration.attributes ?? []), ...(declaration.members ?? [])].some(
+      (entry) => entry.inheritedFrom?.name === FORM_BASE,
+    ),
   };
+}
+
+/** Whether an attribute is the `default-*` starting value of another listed attribute. */
+function pairOf(name: string, rows: readonly { name: string }[]): boolean {
+  return name.startsWith('default-') && rows.some((row) => `default-${row.name}` === name);
+}
+
+/** Property rows: a `default*` starting value merges into its property, as attributes do. */
+function propertyRows(members: ManifestMember[]): ApiProperty[] {
+  const fields = members.filter((member) => member.kind === 'field' && !member.attribute);
+  const startOf = (name: string) =>
+    fields.find((field) => field.name === `default${name[0]!.toUpperCase()}${name.slice(1)}`);
+  const starts = new Set(
+    fields.filter((field) => fields.some((other) => startOf(other.name) === field)),
+  );
+  return fields
+    .filter((field) => !starts.has(field))
+    .map((field) => {
+      const start = startOf(field.name);
+      return {
+        name: field.name,
+        type: cell(field.type),
+        ...valuesOf(field.type),
+        default: field.default ?? start?.default ?? '',
+        readonly: !!field.readonly,
+        description: start
+          ? `${field.description ?? ''} Uncontrolled start: \`${start.name}\`.`.trim()
+          : (field.description ?? ''),
+      };
+    });
+}
+
+/**
+ * Attributes a reader cannot fill in from the docs: one typed by a name (`SortDirection`) that the
+ * docs neither list the values of (a choice list, Controls' select) nor define (`PanelExtent =
+ * number | string`). A name alone tells a reader nothing.
+ */
+export function unlistedChoices(api: ElementApi): string[] {
+  return api.attributes
+    .filter((row) => {
+      const parts = row.type
+        .split('|')
+        .map((part) => part.trim())
+        .filter((part) => part && part !== 'undefined' && part !== 'null');
+      const defined = new Set(row.definitions?.map((entry) => entry.name));
+      return (
+        !row.values?.length && parts.some((part) => /^[A-Z]\w*$/u.test(part) && !defined.has(part))
+      );
+    })
+    .map(
+      (row) =>
+        `attribute ${row.name}: ${row.type} is not defined in the docs; list its values or use a primitive type`,
+    );
 }
 
 /** Rows of an element's API that carry no description, as `kind name` labels. */

@@ -232,7 +232,10 @@ export function ElementApi({ tag, level }) {
     id: `api-${tag}-${name.toLowerCase().replace(/\s+/g, '-')}`,
     level,
   });
-  const described = (text, note) => [text, note].filter(Boolean).join('\n\n');
+  const described = (...parts) => parts.filter(Boolean).join('\n\n');
+  // The named types a row's type mentions, each with its definition: `PanelExtent = number | string`.
+  const definitionsOf = (row) =>
+    (row.definitions ?? []).map((entry) => `\`${entry.name} = ${entry.text}\``).join('\n\n');
   return (
     <>
       <ApiRows
@@ -242,14 +245,21 @@ export function ElementApi({ tag, level }) {
           description: described(
             row.description,
             row.property && row.property !== row.name && `Property: \`${row.property}\``,
+            definitionsOf(row),
           ),
         }))}
       />
+      {api.formControl ? (
+        <p>
+          As a form control it also accepts <code>name</code>, <code>disabled</code>,{' '}
+          <code>required</code> and <code>read-only</code>.
+        </p>
+      ) : null}
       <ApiRows
         {...group('Properties')}
         rows={api.properties.map((row) => ({
           ...row,
-          description: described(row.description, row.readonly && 'Read-only.'),
+          description: described(row.description, row.readonly && 'Read-only.', definitionsOf(row)),
         }))}
       />
       <ApiRows {...group('Events')} rows={api.events} />

@@ -51,7 +51,7 @@ export interface ColorPaletteChangeMetadata {
   readonly collection?: string;
 }
 
-/** Texts of the widget, replaceable through `strings` for localization. */
+/** Texts of the widget by key, listed in English as `colorPaletteStrings`. */
 export interface ColorPaletteStrings {
   label: string;
   empty: string;
