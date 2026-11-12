@@ -57,10 +57,7 @@ export const colorPaletteStyles = css`
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     flex: none;
-
-    /* The Tabs keep their panel gap below the tab list even without panels, so the buttons align
-       with the list at the top, where both are one control high. */
-    align-items: start;
+    align-items: center;
     contain: inline-size;
     inline-size: 100%;
     min-inline-size: 0;
@@ -111,14 +108,33 @@ export const colorPaletteStyles = css`
     inline-size: fit-content;
   }
 
-  /* A selected palette's mark, over its colors. */
+  /* A selected palette's mark, over its colors, along the chips' outer edge. */
   .row[data-palette][data-selected]::after {
     content: '';
     position: absolute;
-    inset: 0;
+    inset: var(--_tp-color-palette-chip-border, 0);
     z-index: 1;
+    border-radius: var(--_tp-color-palette-chip-radius, 0);
     box-shadow: var(--_tp-color-palette-mark, none);
     pointer-events: none;
+  }
+
+  .row[data-blend][data-selected]::after {
+    inset: var(--_tp-color-palette-chip-border, 0) 0;
+  }
+
+  /* A palette shown as a gradient is one chip: the row clips its stretches to the chip. */
+  .row[data-blend] {
+    clip-path: inset(
+      var(--_tp-color-palette-chip-border, 0) 0 round var(--_tp-color-palette-chip-radius, 0)
+    );
+  }
+
+  /* A flat region draws gapless square chips (the appearance's edges are transparent). */
+  @container style(--tp-edge: transparent) {
+    .root {
+      --_tp-color-palette-flat: 1;
+    }
   }
 
   /* The heart of a new favorite: centered over its color or its palette row. */

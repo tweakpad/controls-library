@@ -181,3 +181,13 @@ for (const avatar of document.querySelectorAll('#tooltip-handle tp-avatar')) {
 />
 
 `disabled` on the Tooltip suppresses the description only; the Button it describes stays active and keeps its hover appearance.
+
+### Width and wrapping
+
+A tooltip is as wide as its text and keeps it on one line, up to the available width. `max-width` limits it to a CSS length; `wrap` breaks the text onto more lines at that width, and without `wrap` a longer line is cropped.
+
+<Preview
+  title="Width and wrapping"
+  code={`<tp-tooltip open-delay="0" wrap max-width="12rem"><tp-button slot="trigger" variant="outline">Wrapped</tp-button>Exports every layer of the scene as separate images at the current scale</tp-tooltip>
+<tp-tooltip open-delay="0" max-width="12rem"><tp-button slot="trigger" variant="outline">Cropped</tp-button>Exports every layer of the scene as separate images at the current scale</tp-tooltip>`}
+/>

@@ -126,6 +126,10 @@ export class TpTabs extends Scrollable(TpElement) {
         min-inline-size: 0;
       }
 
+      .panels[hidden] {
+        display: none;
+      }
+
       :host([orientation='vertical']) .root {
         flex-direction: row;
       }
@@ -478,6 +482,8 @@ export class TpTabs extends Scrollable(TpElement) {
           this.#panels.delete(element);
         }
       }
+      // Tabs without panels drop the panels box, and with it the gap below the list.
+      if (this.#panelless() !== this.#renderedPanelless) this.requestUpdate();
       this.#selection!.reconcile(
         tabs.map((tab) => ({ value: memberValue(tab), disabled: this.#isDisabled(tab) })),
       );
@@ -761,7 +767,14 @@ export class TpTabs extends Scrollable(TpElement) {
       this.#sync();
     });
   }
+  /** The panels box rendered last: hidden while the Tabs have no panels. */
+  #renderedPanelless = false;
+  /** Whether no panel is registered or slotted: Tabs that only switch, with no panels of their own. */
+  #panelless(): boolean {
+    return this.#panels.size === 0 && !this.querySelector(':scope > [slot="panel"]');
+  }
   protected override render() {
+    this.#renderedPanelless = this.#panelless();
     return html`<div class="root" part="tabs">
       <div
         class="list"
@@ -783,7 +796,9 @@ export class TpTabs extends Scrollable(TpElement) {
           ><span class="indicator" part="tabs-indicator" aria-hidden="true"></span
         ></slot>
       </div>
-      <div class="panels"><slot name="panel" @slotchange=${this.#sync}></slot></div>
+      <div class="panels" ?hidden=${this.#renderedPanelless}>
+        <slot name="panel" @slotchange=${this.#sync}></slot>
+      </div>
     </div>`;
   }
 }

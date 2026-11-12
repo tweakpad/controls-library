@@ -114,6 +114,18 @@
         ><tp-button slot="trigger" variant="outline">Edge</tp-button>A description that stays on
         screen</tp-tooltip
       >
+      <div class="row">
+        <tp-tooltip id="long" open-delay="0"
+          ><tp-button slot="trigger" variant="outline">One line</tp-button>A longer description that
+          stays on a single line by default</tp-tooltip
+        ><tp-tooltip id="wrapped" open-delay="0" wrap max-width="12rem"
+          ><tp-button slot="trigger" variant="outline">Wrapped</tp-button>A longer description that
+          wraps onto more lines at twelve rem</tp-tooltip
+        ><tp-tooltip id="cropped" open-delay="0" max-width="12rem"
+          ><tp-button slot="trigger" variant="outline">Cropped</tp-button>A longer description that
+          is cropped at twelve rem</tp-tooltip
+        >
+      </div>
     </main>
     <script type="module" src="./fixture.ts"></script>
   </body>

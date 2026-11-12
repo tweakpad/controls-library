@@ -43,6 +43,7 @@ export type TooltipProps = ElementProps<
   | 'invalid'
   | 'keepMounted'
   | 'label'
+  | 'maxWidth'
   | 'modal'
   | 'motionPolicy'
   | 'offset'
@@ -70,7 +71,8 @@ export type TooltipProps = ElementProps<
   | 'sideOffset'
   | 'sticky'
   | 'trackCursorAxis'
-  | 'triggerIdentifier',
+  | 'triggerIdentifier'
+  | 'wrap',
   {
     onTpDiagnostic: CustomEvent<foundationServices.Diagnostic>;
     onTpOpenChange: foundationSurfaceState.TpSurfaceOpenChangeEvent;

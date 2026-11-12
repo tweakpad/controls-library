@@ -143,8 +143,9 @@ export const colorPickerAppearance: PresentationDictionary = {
   'color-picker-swatch': [{ declarations: { ...checker, 'box-shadow': swatchEdge.ring } }],
   'color-picker-swatch-shape-round': [],
   'color-picker-swatch-shape-square': [],
-  // Recent strip cells: borderless and square, meeting without a gap or an edge between them
-  // (cinp-q8); the strip draws the one boundary edge.
+  // Recent strip cells: each fill is a rounded chip inset by half the gap, or, in a flat region
+  // (`--_tp-color-picker-flat`, set by the widget from the appearance), a square cell meeting its
+  // neighbours without a gap or an edge (cinp-q8), the strip drawing the one boundary edge.
   'color-picker-swatch-item': [
     {
       selector: '&[part~="toggle"]',
@@ -376,9 +377,10 @@ export const colorPickerStructure: PresentationDictionary = {
         'flex-wrap': 'wrap',
         gap: '0',
         'inline-size': 'fit-content',
-        'border-radius': swatchCorner,
+        // The strip's one rounded edge belongs to the flat, gapless cells; chips need none.
+        'border-radius': `calc(${swatchCorner} * var(--_tp-color-picker-flat, 0))`,
         overflow: 'hidden',
-        'box-shadow': `0 0 0 var(--tp-border-width) ${floatEdge.color}`,
+        'box-shadow': `0 0 0 calc(var(--tp-border-width) * var(--_tp-color-picker-flat, 0)) ${floatEdge.color}`,
       },
     },
   ],

@@ -1,6 +1,6 @@
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
 import { observeResize, observeScroll, scrollEventTarget } from './observation.js';
-import { SCROLL_SETTLE_MS, scrollableAncestors, scrollport } from './scroll.js';
+import { SCROLL_SETTLE_MS, isDocumentScroller, scrollableAncestors, scrollport } from './scroll.js';
 import { ExtentIndex, virtualRange, type VirtualRange } from './virtual-range.js';
 
 export interface VirtualListOptions {
@@ -170,11 +170,15 @@ export class VirtualList implements ReactiveController {
     const bottom = top + this.#index.extent(index);
     const height = this.#clientHeight(viewport);
     const scrollTop = viewport.scrollTop;
+    // The viewport's scroll padding insets the edges a row is aligned to, as native
+    // `scrollIntoView` does, so a row revealed at the start keeps the list's leading space.
+    const [paddingStart, paddingEnd] = scrollPadding(viewport);
     let target = scrollTop;
-    if (block === 'start') target = top;
+    if (block === 'start') target = top - paddingStart;
     else if (block === 'center') target = top - (height - (bottom - top)) / 2;
-    else if (top < scrollTop) target = top;
-    else if (bottom > scrollTop + height) target = bottom - height;
+    else if (top - paddingStart < scrollTop) target = top - paddingStart;
+    else if (bottom + paddingEnd > scrollTop + height) target = bottom + paddingEnd - height;
+    target = Math.max(0, target);
     if (Math.abs(target - scrollTop) < 0.5) return false;
     viewport.scrollTop = target;
     this.#compute();
@@ -339,4 +343,16 @@ export class VirtualList implements ReactiveController {
       else this.#host.requestUpdate();
     }
   }
+}
+
+/** The block-start and block-end scroll padding of a scroll container, in pixels. */
+function scrollPadding(viewport: HTMLElement): readonly [number, number] {
+  const view = viewport.ownerDocument.defaultView;
+  const root = isDocumentScroller(viewport) ? viewport.ownerDocument.documentElement : viewport;
+  const style = view?.getComputedStyle(root);
+  const read = (value: string | undefined): number => {
+    const pixels = Number.parseFloat(value ?? '');
+    return Number.isFinite(pixels) ? Math.max(0, pixels) : 0;
+  };
+  return [read(style?.scrollPaddingTop), read(style?.scrollPaddingBottom)];
 }

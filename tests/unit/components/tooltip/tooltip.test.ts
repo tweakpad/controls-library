@@ -91,3 +91,20 @@ describe('tp-tooltip describes', () => {
     expect(tooltip.popupProperties()['aria-hidden']).toBe('true');
   });
 });
+
+describe('tp-tooltip width and wrapping', () => {
+  it('keeps one line with no limit by default', () => {
+    const tooltip = createTooltip() as DescribingTooltip;
+    expect([tooltip.wrap, tooltip.maxWidth]).toEqual([false, '']);
+    expect(tooltip.popupProperties()['data-wrap']).toBe(false);
+    expect(tooltip.popupProperties()['style']).toEqual({});
+  });
+
+  it('passes the limit to the content and marks wrapping', () => {
+    const tooltip = createTooltip() as DescribingTooltip;
+    tooltip.wrap = true;
+    tooltip.maxWidth = ' 16rem ';
+    expect(tooltip.popupProperties()['data-wrap']).toBe(true);
+    expect(tooltip.popupProperties()['style']).toEqual({ '--_tp-tooltip-max-width': '16rem' });
+  });
+});

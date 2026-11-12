@@ -5423,6 +5423,7 @@ type Tags = {
     | 'invalid'
     | 'keepMounted'
     | 'label'
+    | 'maxWidth'
     | 'modal'
     | 'motionPolicy'
     | 'offset'
@@ -5448,7 +5449,8 @@ type Tags = {
     | 'sideOffset'
     | 'sticky'
     | 'trackCursorAxis'
-    | 'triggerIdentifier',
+    | 'triggerIdentifier'
+    | 'wrap',
     {
       'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
       'tp-open-change': foundationSurfaceState.TpSurfaceOpenChangeEvent;

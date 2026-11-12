@@ -216,11 +216,19 @@ export const colorPickerStyles = css`
     max-inline-size: 100%;
   }
 
-  /* The fill is slotted into the Toggle; it covers the Toggle's own box (flat-tree containing block). */
+  /* A flat region draws the strip's cells gapless and square (its edges are transparent). */
+  @container style(--tp-edge: transparent) {
+    tp-toggle-group.swatches {
+      --_tp-color-picker-flat: 1;
+    }
+  }
+
+  /* The fill is slotted into the Toggle and positioned against it (flat-tree containing block): a
+     rounded chip inset by half the gap, or, in a flat region, the whole gapless cell. */
   .swatch {
     position: absolute;
-    inset: 0;
-    border-radius: inherit;
+    inset: calc(var(--tp-space-1) / 2 * (1 - var(--_tp-color-picker-flat, 0)));
+    border-radius: calc(var(--tp-radius-sm) * (1 - var(--_tp-color-picker-flat, 0)));
     pointer-events: none;
   }
 

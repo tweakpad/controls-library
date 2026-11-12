@@ -21,6 +21,8 @@ export class TpTooltip extends TpHoverSurface {
   static override properties = {
     ...TpHoverSurface.properties,
     describes: { type: String, reflect: true },
+    wrap: { type: Boolean, reflect: true },
+    maxWidth: { type: String, attribute: 'max-width' },
   } satisfies PropertyDeclarations;
   /**
    * `trigger` makes the text the trigger's accessible description; `none` keeps the tooltip visual
@@ -28,6 +30,16 @@ export class TpTooltip extends TpHoverSurface {
    * "Play" and its shortcut.
    */
   describes: TooltipDescribes = 'trigger';
+  /**
+   * Wraps the text onto more lines at `max-width`, or at the available width without one. By
+   * default the text stays on one line.
+   */
+  wrap = false;
+  /**
+   * The widest the tooltip grows, as a CSS length such as `16rem`; the available width otherwise.
+   * Text that stays on one line is cropped at this width.
+   */
+  maxWidth = '';
   constructor() {
     super();
     this.side = 'block-start';
@@ -55,7 +67,11 @@ export class TpTooltip extends TpHoverSurface {
     return this.describes !== 'none';
   }
   protected override popupProperties(): Record<string, unknown> {
-    const properties = super.popupProperties();
+    const properties = {
+      ...super.popupProperties(),
+      'data-wrap': this.wrap,
+      style: this.maxWidth.trim() ? { '--_tp-tooltip-max-width': this.maxWidth.trim() } : {},
+    };
     return this.describes === 'none' ? { ...properties, 'aria-hidden': 'true' } : properties;
   }
   protected override get defaultHoverDelay(): number {

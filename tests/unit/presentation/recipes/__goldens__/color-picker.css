@@ -255,7 +255,7 @@
 /* color-picker-field */
 &{min-inline-size:calc(var(--tp-spacing) * 14)}
 /* color-picker-swatch-grid */
-&[part~="toggle-group"]{display:flex;flex-wrap:wrap;gap:0;inline-size:fit-content;border-radius:var(--tp-radius-md);overflow:hidden;box-shadow:0 0 0 var(--tp-border-width) var(--tp-hairline)}
+&[part~="toggle-group"]{display:flex;flex-wrap:wrap;gap:0;inline-size:fit-content;border-radius:calc(var(--tp-radius-md) * var(--_tp-color-picker-flat, 0));overflow:hidden;box-shadow:0 0 0 calc(var(--tp-border-width) * var(--_tp-color-picker-flat, 0)) var(--tp-hairline)}
 /* color-picker-swatch */
 &{display:block}
 /* color-picker-swatches */

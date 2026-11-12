@@ -157,8 +157,13 @@ export const selectStyles = css`
     min-block-size: 0;
     overflow: auto;
     overscroll-behavior: contain;
-    scroll-padding-block: var(--_tp-select-scroll-up-height, 0)
-      var(--_tp-select-scroll-down-height, 0);
+
+    /* Rows revealed by scrolling keep the list's own padding, or clear the scroll arrows. */
+    scroll-padding-block: max(
+        var(--_tp-popup-spacing, 0px),
+        var(--_tp-select-scroll-up-height, 0px)
+      )
+      max(var(--_tp-popup-spacing, 0px), var(--_tp-select-scroll-down-height, 0px));
     max-block-size: min(var(--tp-available-height, 80vh), calc(var(--tp-spacing) * 120));
     outline: 0;
 

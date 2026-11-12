@@ -28,6 +28,16 @@ const extents = (unit: string): Record<string, string> => ({
 });
 
 const tile = 'var(--tp-space-2)';
+/**
+ * A color chip in its cell: half the gap as a transparent border, the fill clipped inside it, and
+ * the outer radius grown by that border so the fill keeps the chip radius.
+ */
+const chip = {
+  border: 'var(--_tp-color-palette-chip-border) solid transparent',
+  'border-radius':
+    'calc(var(--_tp-color-palette-chip-radius) + var(--_tp-color-palette-chip-border))',
+  'background-clip': 'padding-box',
+};
 const fill = swatchFill('var(--_tp-color-palette-paint, none)', tile);
 // The transparency checker of the swatch fill, repeated under a blended palette.
 const checker =
@@ -42,6 +52,14 @@ export const colorPaletteAppearance: PresentationDictionary = {
         // The list's insets: the same as the toolbar's, on both sides of the centered cells.
         '--_tp-color-palette-chrome': 'calc(var(--tp-space-2) * 2)',
         '--_tp-color-palette-space': 'var(--tp-space-2)',
+        // Color chips: rounded and apart by a gap, or gapless squares in a flat region
+        // (`--_tp-color-palette-flat`, set by the widget from the appearance). Each chip keeps its
+        // cell: half the gap is a transparent border around its fill.
+        '--_tp-color-palette-chip-gap':
+          'calc(var(--tp-space-1) * (1 - var(--_tp-color-palette-flat, 0)))',
+        '--_tp-color-palette-chip-radius':
+          'calc(var(--tp-radius-sm) * (1 - var(--_tp-color-palette-flat, 0)))',
+        '--_tp-color-palette-chip-border': 'calc(var(--_tp-color-palette-chip-gap) / 2)',
         color: 'var(--tp-popover-foreground)',
         'font-size': 'var(--tp-text-sm)',
       },
@@ -61,7 +79,7 @@ export const colorPaletteAppearance: PresentationDictionary = {
     {
       declarations: {
         gap: 'var(--tp-space-1)',
-        padding: 'var(--_tp-color-palette-space) var(--_tp-color-palette-space) 0',
+        padding: 'var(--_tp-color-palette-space)',
       },
     },
   ],
@@ -97,9 +115,8 @@ export const colorPaletteAppearance: PresentationDictionary = {
     {
       declarations: {
         ...fill,
+        ...chip,
         color: 'var(--_tp-color-palette-contrast, var(--tp-popover-foreground))',
-        border: '0',
-        'border-radius': '0',
         outline: '0',
         'font-size': 'var(--tp-text-xs)',
         'line-height': 'var(--tp-leading-tight)',
@@ -118,10 +135,13 @@ export const colorPaletteAppearance: PresentationDictionary = {
     // A color of a palette leaves the selection mark to its row.
     { selector: '&[data-selected][data-member]', declarations: { 'box-shadow': 'none' } },
     // A palette shown as a gradient: every option paints its own stretch of the palette's
-    // row-wide blend over the transparency checker, so the row reads as one gradient.
+    // row-wide blend over the transparency checker, so the row reads as one gradient; the row is
+    // the one chip, so its stretches meet without a gap.
     {
       selector: "&[data-paint='blend']",
       declarations: {
+        border: '0',
+        'border-radius': '0',
         'background-image': `var(--_tp-color-palette-blend), ${checker}, ${checker}`,
         'background-size': `var(--_tp-color-palette-blend-size), ${tile} ${tile}, ${tile} ${tile}`,
         'background-position': `var(--_tp-color-palette-blend-x) 0, 0 0, calc(${tile} / 2) calc(${tile} / 2)`,
@@ -153,6 +173,7 @@ export const colorPaletteAppearance: PresentationDictionary = {
     {
       declarations: {
         ...swatchFill('var(--_tp-color-palette-swatch-paint, none)', 'var(--tp-space-2)'),
+        ...chip,
         'box-shadow': 'var(--_tp-color-palette-mark, none)',
       },
     },
@@ -188,7 +209,7 @@ export const colorPaletteAppearance: PresentationDictionary = {
   // The source info's text: in a Tooltip the source, then its license; in the Preview Card of a
   // described collection the source (a link when it has one), the description and the license.
   'color-palette-attribution': [
-    { declarations: { display: 'grid', 'max-inline-size': '18rem' } },
+    { declarations: { display: 'grid' } },
     {
       selector: '& a, & .source-name',
       declarations: {

@@ -216,7 +216,7 @@ An explicit disabled `defaultValue` is honored initially. If a selected tab is r
 
 ### Panel mounting
 
-Inactive panels are detached from the DOM after their exit and restored on activation, so heavy content costs nothing while hidden. Add `keep-mounted` to a panel that must stay in the document, for example one holding form fields that still submit, and it is kept hidden and inert instead. Custom elements inside them receive disconnect/connect callbacks. The public `panels` getter includes retained and detached nodes. Keep application references to panels that need updating while detached; a host `querySelector` cannot find them. Remove a panel by calling `remove()` on that node, including while detached.
+Inactive panels are detached from the DOM after their exit and restored on activation, so heavy content costs nothing while hidden. Add `keep-mounted` to a panel that must stay in the document, for example one holding form fields that still submit, and it is kept hidden and inert instead. Custom elements inside them receive disconnect/connect callbacks. The public `panels` getter includes retained and detached nodes. Keep application references to panels that need updating while detached; a host `querySelector` cannot find them. Remove a panel by calling `remove()` on that node, including while detached. Tabs without panels, which switch a view rendered elsewhere, are only as tall as their tab list.
 
 ### Full width
 

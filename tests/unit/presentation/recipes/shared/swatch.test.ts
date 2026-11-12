@@ -23,7 +23,7 @@ describe('shared swatch fill box', () => {
     ]);
   });
 
-  it('rounds the recent strip, not its gapless cells, with the medium radius (`cinp-q8`)', () => {
+  it('rounds the flat recent strip, not its gapless cells, with the medium radius (`cinp-q8`)', () => {
     expect(swatchCorner).toBe('var(--tp-radius-md)');
     const item = colorPickerAppearance['color-picker-swatch-item']?.find(
       (rule) => rule.selector === '&[part~="toggle"]',
@@ -32,7 +32,10 @@ describe('shared swatch fill box', () => {
     const strip = colorPickerStructure['color-picker-swatch-grid']?.find(
       (rule) => rule.selector === '&[part~="toggle-group"]',
     );
-    expect(strip?.declarations['border-radius']).toBe(swatchCorner);
+    // Only a flat region's strip is one rounded, edged run; elsewhere its cells are chips.
+    expect(strip?.declarations['border-radius']).toBe(
+      `calc(${swatchCorner} * var(--_tp-color-picker-flat, 0))`,
+    );
     expect(strip?.declarations.gap).toBe('0');
   });
 

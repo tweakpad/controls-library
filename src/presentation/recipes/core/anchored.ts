@@ -25,8 +25,10 @@ export const tooltipCoreAppearance: PresentationDictionary = {
     ...surfaceAppearance,
     ...anchoredPresenceAppearance,
     rule({
-      // At most 20rem wide (space-16 × 5), capped by the available width.
-      'max-inline-size': 'min(calc(var(--tp-space-16) * 5), var(--tp-available-width))',
+      // As wide as its text, up to `max-width` when one is set, and never wider than the space.
+      'max-inline-size': 'min(var(--_tp-tooltip-max-width, 100vw), var(--tp-available-width))',
+      // One line unless `wrap` is set; a line wider than the tooltip is cropped.
+      'white-space': 'nowrap',
       padding: 'var(--tp-space-1-5) var(--tp-space-3)',
       gap: 'var(--tp-space-1-5)',
       border: '0',
@@ -37,8 +39,11 @@ export const tooltipCoreAppearance: PresentationDictionary = {
       'line-height': 'var(--tp-leading-normal)',
       'box-shadow': 'none',
     }),
-    // The content is one centered row: an icon, the label and its Kbd elements side by side.
-    rule({ 'flex-direction': 'row', 'align-items': 'center' }, '& .body'),
+    // The content is one centered row: an icon, the label and its Kbd elements side by side. The
+    // row shrinks to the tooltip, so wrapped text breaks at its width and one line is cropped.
+    rule({ 'flex-direction': 'row', 'align-items': 'center', overflow: 'hidden' }, '& .body'),
+    rule({ flex: '0 1 auto', 'min-inline-size': '0' }, '& .scroll-content'),
+    rule({ 'white-space': 'normal' }, '&[data-wrap]'),
   ],
   'tooltip-arrow': [rule({ fill: 'var(--tp-foreground)' })],
 };

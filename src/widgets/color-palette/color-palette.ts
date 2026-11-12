@@ -1424,6 +1424,7 @@ export class TpColorPalette extends TpFormElement<string> {
                 class: 'row',
                 role: 'presentation',
                 'data-palette': unit.palette,
+                'data-blend': !!unit.palette && unit.slots.some((option) => option.blend),
                 // A palette is selected as a whole: its row carries the mark, not the color.
                 'data-selected':
                   !!unit.palette && unit.slots.some((option) => option.key === selected),
@@ -1571,7 +1572,7 @@ export class TpColorPalette extends TpFormElement<string> {
                 >${license ? html`<span class="source-license">${license}</span>` : nothing}</tp-stack
               ></tp-preview-card
             >`
-          : html`<tp-tooltip class="source"
+          : html`<tp-tooltip class="source" wrap max-width="18rem"
               >${icon}<span part="color-palette-attribution"
                 ><span class="credit-line">${sourceName}</span>${
                   license ? html`<span class="credit-line">${license}</span>` : nothing

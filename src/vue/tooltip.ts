@@ -46,6 +46,7 @@ export const Tooltip = /*#__PURE__*/ createBinding(TpTooltip, 'Tooltip', {
   | 'invalid'
   | 'keepMounted'
   | 'label'
+  | 'maxWidth'
   | 'modal'
   | 'motionPolicy'
   | 'offset'
@@ -73,7 +74,8 @@ export const Tooltip = /*#__PURE__*/ createBinding(TpTooltip, 'Tooltip', {
   | 'sideOffset'
   | 'sticky'
   | 'trackCursorAxis'
-  | 'triggerIdentifier',
+  | 'triggerIdentifier'
+  | 'wrap',
   {
     'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
     'tp-open-change': foundationSurfaceState.TpSurfaceOpenChangeEvent;

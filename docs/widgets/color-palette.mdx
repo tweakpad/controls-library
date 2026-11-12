@@ -1,6 +1,6 @@
 ---
 title: Color palette
-description: Chooses a color from swatch collections of any size, as a gapless grid or list of colors, or as palettes shown as hard stops or gradients, with grouping and sorting.
+description: Chooses a color from swatch collections of any size, as a grid or list of colors, or as palettes shown as hard stops or gradients, with grouping and sorting.
 tag: tp-color-palette
 ---
 
@@ -11,7 +11,7 @@ tag: tp-color-palette
 
 ## Usage
 
-The value is the color text the collection gives for the chosen swatch, and it submits with a form under `name`. Colors sit next to each other without gaps or lines between them, so small differences in grading stay visible. The list takes focus as one control: the arrow keys move through the grid, letters jump to a color by name, and Enter or Space picks. The list is virtualized, so a collection of several hundred colors stays fast. The palette always offers its built-in default collection, and `collections` loads more.
+The value is the color text the collection gives for the chosen swatch, and it submits with a form under `name`. Colors are rounded chips with a small gap between them; in a flat region (`appearance="flat"`) they meet as square cells without gaps or lines between them, so small differences in grading stay visible. The list takes focus as one control: the arrow keys move through the grid, letters jump to a color by name, and Enter or Space picks. The list is virtualized, so a collection of several hundred colors stays fast. The palette always offers its built-in default collection, and `collections` loads more.
 
 A pick of a different color proposes a cancelable `tp-value-change` whose metadata names the swatch and the collection, followed by `tp-value-commit`. Supply `value` for a controlled palette or `defaultValue` for an uncontrolled one; the mode stays fixed for the element's lifetime. The same rule applies to the mode, collection, layout, palette style, grouping, sort, sort direction, size and favorites lanes.
 
