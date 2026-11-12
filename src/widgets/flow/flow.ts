@@ -1121,10 +1121,7 @@ export class TpFlow extends TpFormElement<FlowDocument> {
     this.requestUpdate('value', previous);
   }
 
-  /**
-   * The pan and zoom of the canvas, `x y zoom` as an attribute; setting it makes the viewport
-   * controlled.
-   */
+  /** The pan and zoom of the canvas, `x y zoom` as an attribute. */
   get viewport(): FlowViewport {
     return this.#viewportState.value;
   }
@@ -1139,10 +1136,7 @@ export class TpFlow extends TpFormElement<FlowDocument> {
     this.requestUpdate('viewport', previous);
   }
 
-  /**
-   * The selected nodes and edges, JSON as an attribute; setting it makes the selection controlled.
-   * It is never written into the document.
-   */
+  /** The selected nodes and edges, JSON as an attribute; never written into the document. */
   get selection(): FlowSelection {
     return this.#selectionState.value;
   }
@@ -1159,8 +1153,8 @@ export class TpFlow extends TpFormElement<FlowDocument> {
   }
 
   /**
-   * The pointer tool: select, where a drag on the pane draws a marquee, or pan; setting it makes
-   * the tool controlled.
+   * The pointer tool: select, where a drag on the pane draws a marquee, or pan.
+   * @default 'select'
    */
   get tool(): FlowTool {
     return this.#toolState.value;
@@ -1176,8 +1170,8 @@ export class TpFlow extends TpFormElement<FlowDocument> {
   }
 
   /**
-   * Design for editing, or view for reading and monitoring with editing off; setting it makes the
-   * mode controlled.
+   * Design for editing, or view for reading and monitoring with editing off.
+   * @default 'design'
    */
   get mode(): FlowMode {
     return this.#modeState.value;
@@ -1192,7 +1186,7 @@ export class TpFlow extends TpFormElement<FlowDocument> {
     this.requestUpdate('mode', previous);
   }
 
-  /** Whether the node library shows; setting it makes the open state controlled. */
+  /** Whether the node library shows. */
   get paletteOpen(): boolean {
     return this.#paletteState.value;
   }
@@ -1206,7 +1200,7 @@ export class TpFlow extends TpFormElement<FlowDocument> {
     this.requestUpdate('paletteOpen', previous);
   }
 
-  /** Whether the inspector panel shows; setting it makes the open state controlled. */
+  /** Whether the inspector panel shows. */
   get inspectorOpen(): boolean {
     return this.#inspectorState.value;
   }

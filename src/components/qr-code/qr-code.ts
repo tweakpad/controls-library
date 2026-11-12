@@ -179,7 +179,7 @@ export class TpQrCode extends TpElement {
     return { ...DEFAULT_QR_CODE_MESSAGES, ...this.messages };
   }
 
-  /** `empty` without a value, `encoded`, or `error` when the value does not fit. */
+  /** The outcome of encoding the current value, an error when the value does not fit in a code. */
   get status(): QrCodeStatus {
     return this.#encode().status;
   }

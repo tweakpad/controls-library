@@ -92,9 +92,8 @@ export class TpMoGlowBorder extends SurfaceBorderElement {
   static override styles = [...SurfaceBorderElement.styles, moGlowBorderStyles];
 
   /**
-   * When the glow lights and moves: `none`, `always`, `hover`, `focus` (while focus is inside)
-   * or `pointer` (lit by the pointer, `track-target` or `trackPoint`). Unset, `always` when
-   * `motion` names a motion, and `pointer` otherwise.
+   * When the glow lights and moves; unset, it is always on when `motion` names a motion, and
+   * follows the pointer otherwise.
    */
   trigger: GlowBorderTrigger | '' = '';
   /** Tokens of `comets`, `sweep`, `pulse` and `glint`, which combine. Unset, `comets`. */
@@ -103,7 +102,7 @@ export class TpMoGlowBorder extends SurfaceBorderElement {
   lights = 2;
   /** Distance between consecutive comets, as a fraction of the border; even when unset. */
   lightSpacing: number | null = null;
-  /** Which way comets, the sweep and the glint go: `cw` or `ccw`. */
+  /** Which way comets, the sweep and the glint go, clockwise or counterclockwise. */
   rotation: GlowBorderRotation = 'cw';
   /** A point in viewport pixels that lights the border instead of the pointer. */
   trackPoint: PointerPoint | null = null;

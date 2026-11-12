@@ -152,6 +152,20 @@ body:has(.sbdocs-wrapper) {
   overflow-x: auto;
 }
 
+/* Controls only control: the docs page's Controls table (the one args table with a Control column)
+   keeps the name and the control. Each row's description, values and default are in the API
+   Reference below, so a fact appears once on the page. */
+.sbdocs .docblock-argstable:has(thead th:nth-child(4)) {
+  display: table;
+  inline-size: 100%;
+}
+
+.sbdocs
+  .docblock-argstable:has(thead th:nth-child(4))
+  :is(thead th, tbody td):is(:nth-child(2), :nth-child(3)):not(:last-child) {
+  display: none;
+}
+
 /* A long type definition in an API row wraps inside its column instead of widening the table. */
 .sbdocs .docblock-argstable td code {
   white-space: normal;

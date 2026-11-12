@@ -72,7 +72,7 @@ export class TpMediaHotkey extends MediaBindingElement implements MediaHotkeyInp
 
   /** The key pattern, such as `k, Space` or `Mod+ArrowRight`: comma-separated alternatives. */
   keys = '';
-  /** The media request the keys run, such as `toggle-paused` or `seek-by`. */
+  /** The media request the keys run, such as toggling playback or seeking by an amount. */
   action: MediaRequestAction | '' = '';
   /** The request's value in place of its default, such as the seconds of a `seek-by`. */
   value: number | null = null;

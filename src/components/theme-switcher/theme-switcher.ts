@@ -98,8 +98,8 @@ export class TpThemeSwitcher extends TpElement {
   ];
 
   /**
-   * The control: `switch` flips between light and dark, `button` cycles dark, light and system from
-   * one icon button, and `group` shows all three as a segmented Toggle group.
+   * The control: a switch that flips between light and dark, an icon button that cycles dark, light
+   * and system, or a segmented Toggle group that shows all three.
    */
   variant: ThemeSwitcherVariant = 'switch';
   /** The preference to start with when nothing is stored yet and the page does not own `value`. */
@@ -141,7 +141,10 @@ export class TpThemeSwitcher extends TpElement {
     onCommit: (value, _previous, reason) => this.#apply(value, reason),
   });
 
-  /** The selected preference. */
+  /**
+   * The selected preference.
+   * @default 'system'
+   */
   get value(): ColorSchemePreference {
     return this.#state.value;
   }

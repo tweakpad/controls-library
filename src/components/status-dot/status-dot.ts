@@ -163,7 +163,7 @@ export class TpStatusDot extends TpElement {
   showLabel = false;
   /** Presents the label in a tooltip while it is not shown. */
   tooltip = true;
-  /** Looping motion of the dot: `none`, `pulse` or `ping`. */
+  /** Looping motion of the dot: a fade in and out, or a ring spreading from it. */
   motion: StatusDotMotion = 'none';
 
   #labelShown = false;

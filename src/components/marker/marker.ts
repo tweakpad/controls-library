@@ -71,7 +71,7 @@ export class TpMarker extends TpElement {
     `,
     shimmerStyles(':host([shimmer]) .content'),
   ];
-  /** Visual treatment only: `separator` sets the content between two rules, `border` above one. */
+  /** The rules drawn with the content, one on each side of it or one beneath it, with no change in behavior. */
   variant: 'default' | 'separator' | 'border' = 'default';
   /** Colors the text and the icon: `accent`, `success` or `danger` for an outcome the words also state. */
   tone = 'neutral';

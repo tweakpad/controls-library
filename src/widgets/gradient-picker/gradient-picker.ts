@@ -363,14 +363,17 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
   defaultValue: GradientPickerValue | undefined;
   /** The selected index when `selected` is not set; `-1` selects none. */
   defaultSelected: number | undefined;
-  /** `linear` edits stops along a track; `field` edits color anchors on a field. */
+  /** Whether the picker edits color stops along a track or color anchors on a field. */
   variant: GradientPickerVariant = 'linear';
   /**
    * The color space colors mix in, for the preview and `sample()`; match the renderer that draws
    * the gradient.
    */
   interpolation: GradientInterpolation = 'oklab';
-  /** Field: how an anchor's weight falls off with distance. */
+  /**
+   * Field: how an anchor's weight falls off with distance.
+   * @default 'inverse-distance'
+   */
   falloff: FieldGradientFalloff = FIELD_GRADIENT_DEFAULTS.falloff;
   /** Field: the falloff's power, from 0.4 to 6; higher keeps each anchor's color closer to it. */
   power = FIELD_GRADIENT_DEFAULTS.power;
@@ -379,8 +382,10 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
   /** Field: how many waves the domain warp lays across the field, from 0.3 to 4. */
   warpFrequency = FIELD_GRADIENT_DEFAULTS.warpFrequency;
   /**
-   * Field: `equirectangular` reads the field as a sphere's longitude and latitude, so it wraps at
-   * its left and right edges, as an environment map does; `plane` measures straight across.
+   * Field: how distances are measured, either across a sphere's longitude and latitude so the
+   * field wraps at its left and right edges as an environment map does, or straight across a flat
+   * plane.
+   * @default 'equirectangular'
    */
   projection: FieldGradientProjection = FIELD_GRADIENT_DEFAULTS.projection;
   /** The fewest stops the gradient keeps (2 linear, 1 field by default); removing below it is refused. */
@@ -471,7 +476,6 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
 
   /**
    * The stops in gradient order (`linear`), or the anchors in their given order (`field`).
-   * Setting it makes the element controlled.
    */
   override get value(): GradientPickerValue {
     return this.#state.value;
@@ -483,7 +487,7 @@ export class TpGradientPicker extends TpFormElement<GradientPickerValue> {
     this.requestUpdate('value', previous);
   }
 
-  /** The selected index, `-1` for none. Setting it makes the selection controlled. */
+  /** The selected index, `-1` for none. */
   get selected(): number {
     const index = this.#selectedState.value;
     return Number.isInteger(index) && index >= 0 && index < this.value.length ? index : -1;

@@ -301,7 +301,7 @@ export class TpSelect extends Scrollable(TpFormElement)<unknown> {
   /** A custom test of an item against the query; `null` turns filtering off. */
   filter:
     ((item: unknown, query: string, text: (item: unknown) => string) => boolean) | null | undefined;
-  /** How the query matches items: `contains` (default), `prefix`, `exact` or ranked `fuzzy`. */
+  /** How the query matches the text of items; fuzzy matching also ranks the results. */
   matching: SearchMatching = 'contains';
   /** Supplies results instead of matching items: a server endpoint or another search engine. */
   source: SearchSource | undefined;
@@ -320,8 +320,8 @@ export class TpSelect extends Scrollable(TpFormElement)<unknown> {
   /** Locale of matching and typeahead, when it differs from the page's. */
   locale: string | undefined;
   /**
-   * How the query completes: `list` filters the list, `inline` previews the highlighted option's
-   * text after the caret, `both` does both and `none` neither.
+   * How the query completes: by filtering the list, by previewing the highlighted option's text
+   * after the caret, both, or neither.
    */
   completionMode: SelectCompletionMode = 'list';
   /**
@@ -385,10 +385,7 @@ export class TpSelect extends Scrollable(TpFormElement)<unknown> {
   /** Called when the highlight moves, with the option's value, its index and the reason. */
   onItemHighlighted:
     ((value: unknown, details: { index: number; reason: ChangeReason }) => void) | undefined;
-  /**
-   * The query of a searchable Select. Setting it controls the query: accept proposals in
-   * `onInputValueChange`.
-   */
+  /** The query of a searchable Select. */
   get inputValue(): string {
     return this.#query.value;
   }
@@ -554,7 +551,7 @@ export class TpSelect extends Scrollable(TpFormElement)<unknown> {
   }
   /** Keeps the popup in view after the trigger scrolls out of the boundary. */
   sticky = false;
-  /** Positions the popup with `absolute` or `fixed` CSS positioning. */
+  /** The CSS positioning scheme that places the popup. */
   positionMethod: PositioningStrategy = 'absolute';
   /**
    * What receives focus when the list opens: the trigger, the first option, the popup, an element
@@ -650,10 +647,7 @@ export class TpSelect extends Scrollable(TpFormElement)<unknown> {
     this.requestUpdate('value', previous);
     if (this.hasUpdated) this.#selection.sync();
   }
-  /**
-   * Whether the list is open. Setting it controls the open state: accept proposals in
-   * `onOpenChange`.
-   */
+  /** Whether the list is open. */
   get open(): boolean {
     return this.searchable && this.inline ? !this.effectiveDisabled : this.#surface.open;
   }

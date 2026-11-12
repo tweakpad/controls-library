@@ -49,9 +49,9 @@ it locally.
    4. Methods, Slots, CSS parts and CSS custom properties, each only when the element has rows
       for it.
 
-   The same tables repeat for every tag in the frontmatter `parts`. A named type keeps its name
-   with its values (a choice list, Controls' select) or its definition; `check-docs.mjs` fails one
-   with neither.
+   The same tables repeat for every tag in the frontmatter `parts`. Each fact appears once: values
+   in the type (a named type with its values or its definition), the default in Default, meaning
+   in the description; Controls only controls. `check-docs.mjs` fails a row that breaks this.
 
 5. **Related** (generated, **website only**): the components and widgets that render this element,
    and the patterns built from it. At most four cards show; the rest open from a library

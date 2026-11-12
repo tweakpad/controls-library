@@ -189,8 +189,8 @@ export class TpColorInput extends TpFormElement<string> {
   /** Keeps the alpha channel; without it every value is opaque. */
   alpha = false;
   /**
-   * `native` opens the browser's color picker from the swatch. `none` makes the swatch a button
-   * that never opens it, so another picker, such as a Color picker popup, can own the color.
+   * Whether the swatch opens the browser's color picker, or stays a button that never opens it so
+   * another picker, such as a Color picker popup, can own the color.
    */
   picker: ColorInputPicker = 'native';
   /** `inline` shows the label, the value text and the chip in one compact row. */
@@ -256,7 +256,7 @@ export class TpColorInput extends TpFormElement<string> {
     this.#valueEditor = (element as TpInput | undefined) ?? null;
   };
 
-  /** The color, serialized in `format`; empty for no color. Setting it makes the input controlled. */
+  /** The color, serialized in `format`; empty for no color. */
   override get value(): string {
     return this.#state.value;
   }

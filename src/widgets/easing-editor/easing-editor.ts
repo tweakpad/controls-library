@@ -387,10 +387,7 @@ export class TpEasingEditor extends TpFormElement<string> {
       this.#durationState.set(this.#clampDuration(next), 'programmatic');
     this.requestUpdate('duration', previous);
   }
-  /**
-   * Id of the active export adapter, whose text the footer shows and copies; setting it makes the
-   * choice controlled.
-   */
+  /** Id of the active export adapter, whose text the footer shows and copies. */
   get adapter(): string {
     return this.#adapterState.value;
   }
@@ -428,7 +425,7 @@ export class TpEasingEditor extends TpFormElement<string> {
   get kind(): EasingKind | null {
     return this.#curve?.kind ?? null;
   }
-  /** `spring` for springs, `ease` for every other kind; null when empty. */
+  /** The family of the current curve, springs apart from every other kind; null when empty. */
   get category(): EasingCategory | null {
     const kind = this.kind;
     return kind ? categoryOf(kind) : null;

@@ -96,7 +96,7 @@ export class TpMediaTime extends TpMediaElement {
     `,
   ];
 
-  /** `current`, `duration`, `remaining`, or `pointer` (inside a time-slider preview). */
+  /** Which time is shown: the current position, the duration, the time remaining, or the pointer's position inside a time-slider preview. */
   type: MediaTimeType = 'current';
   /** Render a button that switches between elapsed (or duration) and remaining time. */
   toggle = false;

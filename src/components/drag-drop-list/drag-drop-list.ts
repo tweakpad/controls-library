@@ -155,7 +155,7 @@ export class TpDragDropList<T = unknown> extends TpElement {
   override orientation: 'vertical' | 'horizontal' = 'vertical';
   /** Where a pointer picks a row up: its handle, or anywhere on the row; the handle stays the keyboard target. */
   activation: 'handle' | 'item' = 'handle';
-  /** How a drop rearranges the list: `move` inserts the item, `swap` exchanges it with the item it lands on. */
+  /** How a drop rearranges the list: by inserting the item, or by exchanging it with the item it lands on. */
   reorderMode: 'move' | 'swap' = 'move';
   /** The row treatment, shared with List item. */
   variant: 'ghost' | 'outline' | 'subdued' = 'ghost';

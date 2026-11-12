@@ -69,7 +69,7 @@ export class TpEmptyState extends TpElement {
   override title = 'Nothing here';
   /** Why the view is empty or what to do next, when the `description` slot is empty. */
   description = '';
-  /** `icon` sizes a single Icon in the media slot to the icon role; `plain` shows illustrations and avatars as authored. */
+  /** Whether a single Icon in the media slot is sized to the icon role, or illustrations and avatars show as authored. */
   mediaTreatment: 'plain' | 'icon' = 'plain';
   readonly #slotsChanged = (): void => {
     this.requestUpdate();

@@ -139,7 +139,10 @@ export class TpDrawer extends TpDialog {
   set activeSnapPoint(value: DrawerSnapPoint | null | undefined) {
     this.snapPoint = value;
   }
-  /** The physical direction a swipe closes the drawer in; setting it picks the matching `edge`. */
+  /**
+   * The physical direction a swipe closes the drawer in; setting it picks the matching `edge`.
+   * @default 'down'
+   */
   get swipeDirection(): DrawerDirection {
     return directions[resolveSide(edges.includes(this.edge) ? this.edge : 'block-end', this)]!;
   }
@@ -149,7 +152,10 @@ export class TpDrawer extends TpDialog {
     this.#normalizeEdge();
     this.requestUpdate('swipeDirection');
   }
-  /** The physical side the drawer is attached to; setting it picks the matching `edge`. */
+  /**
+   * The physical side the drawer is attached to; setting it picks the matching `edge`.
+   * @default 'bottom'
+   */
   get side(): 'left' | 'right' | 'top' | 'bottom' {
     return resolveSide(this.edge, this);
   }

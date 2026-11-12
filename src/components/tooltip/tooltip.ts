@@ -25,9 +25,9 @@ export class TpTooltip extends TpHoverSurface {
     maxWidth: { type: String, attribute: 'max-width' },
   } satisfies PropertyDeclarations;
   /**
-   * `trigger` makes the text the trigger's accessible description; `none` keeps the tooltip visual
-   * only, for a trigger whose name already says the same, such as a Play button whose tooltip shows
-   * "Play" and its shortcut.
+   * Whether the text becomes the trigger's accessible description or stays visual only, for a
+   * trigger whose name already says the same, such as a Play button whose tooltip shows "Play" and
+   * its shortcut.
    */
   describes: TooltipDescribes = 'trigger';
   /**

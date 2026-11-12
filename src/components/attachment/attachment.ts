@@ -177,7 +177,7 @@ export class TpAttachment extends TpElement {
   errorMessage = '';
   /** The attachment's density. */
   size: 'xs' | 'sm' | 'default' = 'default';
-  /** The application's upload status: `idle` before upload, `uploading` and `processing` while busy. */
+  /** The application's upload status, which sets the busy, error or finished presentation. */
   status: AttachmentStatus = 'idle';
   /** Presents the media as a file mark or as an image that fills the media area. */
   mediaTreatment: 'mark' | 'image' = 'mark';

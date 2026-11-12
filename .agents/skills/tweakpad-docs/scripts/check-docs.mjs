@@ -24,7 +24,9 @@ import { pathToFileURL } from 'node:url';
 
 export const root = resolve(import.meta.dirname, '../../../..');
 const { parseDoc, slugify } = await import(pathToFileURL(join(root, 'src/docs/parse.ts')).href);
-const { elementApi, unlistedChoices } = await import(pathToFileURL(join(root, 'src/docs/api.ts')).href);
+const { elementApi, repeatedValues, unlistedChoices } = await import(
+  pathToFileURL(join(root, 'src/docs/api.ts')).href
+);
 
 export const DISPOSITIONS = new Set([
   'in-A',
@@ -279,13 +281,15 @@ export function checkPage(id, options = {}) {
         if (!listed.has(item)) problems.push(`${id}: ledger has no row for B item "${item}"`);
     }
   }
-  // API rows: every choice-list attribute lists its values (Controls' select, the site's list).
+  // API rows: every named type is listed or defined, and no description repeats the type's values.
   const manifestPath = join(base, 'dist/custom-elements.json');
   if (existsSync(manifestPath)) {
     const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
     for (const tag of [page.tag, ...(page.parts ?? [])]) {
       const api = tag && elementApi(manifest, tag);
-      if (api) for (const problem of unlistedChoices(api)) problems.push(`${id}: ${tag} ${problem}`);
+      if (api)
+        for (const problem of [...unlistedChoices(api), ...repeatedValues(api)])
+          problems.push(`${id}: ${tag} ${problem}`);
     }
   }
   return problems;
@@ -321,7 +325,12 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   let ok = problems.length === 0;
   if (!args.includes('--no-tests')) {
     ok =
-      run('npx', ['vitest', 'run', 'tests/unit/docs/docs.test.ts', 'tests/unit/stories/stories.test.ts']) && ok;
+      run('npx', [
+        'vitest',
+        'run',
+        'tests/unit/docs/docs.test.ts',
+        'tests/unit/stories/stories.test.ts',
+      ]) && ok;
     if (
       existsSync(join(root, 'dist/docs/index.js')) &&
       existsSync(join(root, 'dist/custom-elements.json'))

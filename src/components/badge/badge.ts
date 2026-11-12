@@ -50,7 +50,7 @@ export class TpBadge extends TpElement {
       }
     `,
   ];
-  /** Visual emphasis only: `destructive`, `success` and `warning` are the status pills, `outline` and `secondary` neutral metadata. */
+  /** Visual emphasis only, from status pills to neutral metadata. */
   variant:
     'default' | 'secondary' | 'destructive' | 'success' | 'warning' | 'outline' | 'ghost' | 'link' =
     'default';

@@ -97,7 +97,7 @@ export class TpPagination extends TpElement {
   pages = 1;
   /** Accessible name of the navigation landmark. */
   label = 'Pagination';
-  /** `text` sizes numbered links to their content, for large page numbers; `icon` keeps them square. */
+  /** How numbered links are sized: to their content, for large page numbers, or kept square. */
   pageLinkVariant: 'text' | 'icon' = 'icon';
   /** Visible and accessible name of the previous link, for localization. */
   previousLabel = 'Previous';

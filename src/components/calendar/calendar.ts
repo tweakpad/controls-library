@@ -218,7 +218,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
   /** How many consecutive months are shown side by side. */
   visibleMonths = 1;
   /**
-   * The first month shown, as any date in it. Setting it controls navigation: accept proposals in
+   * The first month shown, as any date in it; accept navigation proposals in
    * `onDisplayedMonthChange`.
    */
   displayedMonth: string | undefined = undefined;

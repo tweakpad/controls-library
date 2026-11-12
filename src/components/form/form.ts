@@ -113,6 +113,7 @@ export class TpForm extends TpElement {
   /**
    * When the Fields inside validate unless they set their own: on submit, when a control loses
    * focus, or on every change.
+   * @default 'on-submit'
    */
   get validationMode(): 'on-submit' | 'on-blur' | 'on-change' {
     const value = this.getAttribute('validation-mode');
@@ -135,7 +136,10 @@ export class TpForm extends TpElement {
   #submissionValidation = false;
   #prevalidated = false;
   #policyActions = new Set<HTMLElement>();
-  /** An older name for `validationMode`, used when `validation-mode` is not set. */
+  /**
+   * An older name for `validationMode`, used when `validation-mode` is not set.
+   * @default 'on-submit'
+   */
   get validationTiming(): 'on-submit' | 'on-blur' | 'on-change' {
     const value = this.getAttribute('validation-timing');
     return value === 'on-blur' || value === 'on-change' ? value : 'on-submit';
@@ -146,6 +150,7 @@ export class TpForm extends TpElement {
   /**
    * Whether the browser's own constraint bubbles may show; `suppressed` leaves error display to the
    * Fields.
+   * @default 'enabled'
    */
   get nativeValidation(): 'enabled' | 'suppressed' {
     return this.getAttribute('native-validation') === 'suppressed' ? 'suppressed' : 'enabled';
@@ -157,6 +162,7 @@ export class TpForm extends TpElement {
   /**
    * When submit Buttons are disabled: never, while any Field is invalid, or while a validation is
    * pending.
+   * @default 'always-enabled'
    */
   get submissionPolicy(): 'always-enabled' | 'disable-while-invalid' | 'disable-while-pending' {
     const value = this.getAttribute('submission-policy');

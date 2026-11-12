@@ -138,9 +138,9 @@ export class TpTextTransform extends TpElement {
   decimals: number | null = null;
   /** Formatting and case-mapping locale; the owner locale when empty. */
   locale = '';
-  /** Where the omission goes: `none`, `start`, `middle` or `end`. */
+  /** Where the omission goes when the text is truncated, if it is truncated at all. */
   truncate: TruncatePosition = 'none';
-  /** The unit truncation removes: `chars` (grapheme clusters) or `words`. */
+  /** The unit truncation removes, with characters counted as grapheme clusters. */
   truncateBy: TruncateUnit = 'chars';
   /** The most units kept; truncates at the end when `truncate` is `none`. */
   maxLength: number | null = null;

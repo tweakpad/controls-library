@@ -73,7 +73,7 @@ export class TpMediaControls extends TpMediaElement {
     mediaSurfacePreferenceStyles(":host(:not([visibility='always'])) ::slotted(*)"),
   ];
 
-  /** `auto` follows controls visibility; `always` stays visible (audio layout). */
+  /** Whether the controls follow the player's controls visibility or always stay visible, as in the audio layout. */
   visibility: MediaControlsVisibility = 'auto';
 
   readonly #activity = this.select((state) => ({

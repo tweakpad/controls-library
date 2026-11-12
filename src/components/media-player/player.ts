@@ -208,9 +208,9 @@ export class TpMediaPlayer extends TpElement implements MediaPlayerApi {
   idleDelay = DEFAULT_MEDIA_IDLE_DELAY;
   /** Allow hiding while the pointer is over the controls. */
   hideOverControls = false;
-  /** `default` registers the default key map; `none` keeps only `tp-media-hotkey` bindings. */
+  /** Whether the player registers its default key map or keeps only its `tp-media-hotkey` bindings. */
   hotkeys: MediaHotkeysMode = 'default';
-  /** `player` listens on the container; `document` routes to the most recently active player. */
+  /** Where the player listens for keys: on its own container, or on the document, routed to the most recently active player. */
   hotkeyScope: MediaHotkeyScope = 'player';
   /** `default` registers the default video tap-gesture set. */
   gestures: MediaGesturesMode = 'none';

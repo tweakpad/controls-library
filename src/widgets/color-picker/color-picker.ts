@@ -459,8 +459,9 @@ export class TpColorPicker extends TpFormElement<string> {
     this.requestUpdate('value', previous);
   }
   /**
-   * The active format the value is serialized in; setting it makes the format choice controlled.
-   * Any CSS color goes in, and `value` reads back in this format.
+   * The format the value is serialized in; any CSS color goes in, and `value` reads back in this
+   * format.
+   * @default 'hex'
    */
   get format(): ColorFormat {
     return this.#formatState.value;
@@ -476,7 +477,10 @@ export class TpColorPicker extends TpFormElement<string> {
     } else if (next) this.#formatState.set(next, 'programmatic');
     this.requestUpdate('format', previous);
   }
-  /** The active view among `views`; setting it makes the view choice controlled. */
+  /**
+   * The active view among `views`.
+   * @default 'area'
+   */
   get view(): ColorPickerView {
     return this.#viewState.value;
   }
@@ -490,8 +494,8 @@ export class TpColorPicker extends TpFormElement<string> {
     this.requestUpdate('view', previous);
   }
   /**
-   * The harmony rule that derives extra handles on the wheel; setting it makes the rule controlled,
-   * so the Harmony Select only proposes.
+   * The harmony rule that derives extra handles on the wheel.
+   * @default 'none'
    */
   get harmony(): HarmonyRule {
     return this.#harmonyState.value;

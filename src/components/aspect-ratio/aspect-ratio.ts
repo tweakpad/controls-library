@@ -62,7 +62,7 @@ export class TpAspectRatio extends TpElement {
     `,
   ];
   #ratio = 16 / 9;
-  /** How an image or a video fills the box: `cover` crops, `contain` letterboxes, `fill` stretches. */
+  /** How an image or a video fills the box, such as cropped, letterboxed or stretched. */
   fit: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down' = 'fill';
   /** The width divided by the height, such as `1.7778` for 16:9 or `1` for a square; always set it. */
   get ratio(): number {

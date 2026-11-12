@@ -233,7 +233,9 @@ const preview = definePreview({
   ],
   parameters: {
     a11y: { test: 'error' },
-    controls: { expanded: true },
+    // Controls only control: name and control. The API Reference below holds each row's
+    // description, values and default, so a fact appears once on the page.
+    controls: { expanded: false },
     // Sidebar sections: the library pages first, then foundational components, Motion (grouped by
     // what moves: Text, then Surface) and widgets.
     options: {

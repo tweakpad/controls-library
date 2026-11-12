@@ -314,9 +314,9 @@ export class TpDialog extends Scrollable(TpElement) {
     if (this.hasUpdated) this.#state.sync(true);
   }
   /**
-   * Requested modality. `container` scopes modality to `container`; when that cannot apply, the
-   * document modality is used with a diagnostic. Values a family member does not support
-   * normalize to `modal`.
+   * How the dialog blocks the page around it; container modality blocks only the `container`
+   * element.
+   * @default 'modal'
    */
   get modality(): DialogModality {
     return this.#modality;

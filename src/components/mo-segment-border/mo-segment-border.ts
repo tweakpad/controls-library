@@ -54,8 +54,8 @@ export class TpMoSegmentBorder extends SurfaceBorderElement {
   static override styles = [...SurfaceBorderElement.styles, moSegmentBorderStyles];
 
   /**
-   * When the segments play: `hover` (default), `focus` (while focus is inside), `always` (once the
-   * border is in view) or `none` (they rest at their first state).
+   * When the segments play, where focus means while focus is inside, always means once the border is
+   * in view and none leaves them at their first state; unset, they play on hover.
    */
   trigger: SegmentBorderTrigger | '' = '';
 

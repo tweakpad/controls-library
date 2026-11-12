@@ -90,7 +90,7 @@ export class TpSkeleton extends TpElement {
   label = 'Loading';
   /** Set to `false` to hold this placeholder still while others keep moving. */
   animated = true;
-  /** How the placeholder moves: `pulse` fades it, `sweep` passes a highlight across it, `none` holds it still. */
+  /** How the placeholder moves: it fades, a highlight passes across it, or it holds still. */
   motion: 'pulse' | 'sweep' | 'none' = 'pulse';
   get #active(): boolean {
     return this.animated && this.motion !== 'none';

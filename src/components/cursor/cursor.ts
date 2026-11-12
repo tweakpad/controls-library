@@ -142,7 +142,7 @@ export class TpCursor extends TpElement implements CursorParticipant {
   restSpeed = DEFAULT_REST.restSpeed;
   /** Distance in pixels below which the follower may settle. */
   restDelta = DEFAULT_REST.restDelta;
-  /** `document` follows everywhere; `region` only inside the region element. */
+  /** Where the cursor follows the pointer: anywhere in the document, or only inside the region element. */
   scope: CursorScope = 'document';
   /** Region element id for `scope="region"`; the parent element when empty. */
   region = '';

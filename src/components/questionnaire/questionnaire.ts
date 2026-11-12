@@ -116,8 +116,8 @@ export class TpQuestionnaire extends TpElement {
    */
   actions: QuestionnaireActions = {};
   /**
-   * How people move between questions: `linear` lets them advance only from a valid or skipped
-   * question, `free` lets them visit any question.
+   * How people move between questions: in order, advancing only from a valid or skipped question,
+   * or freely to any question.
    */
   flow: QuestionnaireFlow = 'linear';
   /**

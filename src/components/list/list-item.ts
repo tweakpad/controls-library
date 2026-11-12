@@ -139,11 +139,11 @@ export class TpListItem extends TpElement {
   value = '';
   /** Supporting text under the title, when the `description` slot is empty. */
   description = '';
-  /** Visual treatment only: `outline` draws a boundary and `subdued` fills the row. */
+  /** The visual treatment of the row, a boundary around it or a fill behind it, with no change in behavior. */
   variant: 'ghost' | 'outline' | 'subdued' = 'ghost';
-  /** The row density; `sm` and `xs` suit tight panels and menus. */
+  /** The row density; the smaller sizes suit tight panels and menus. */
   size: 'xs' | 'sm' | 'default' = 'default';
-  /** What the `media` slot holds, so it gets the matching extent: `icon` for an Icon, `image` for a square thumbnail. */
+  /** What the `media` slot holds, an Icon or a square thumbnail, so it gets the matching extent. */
   mediaTreatment: 'plain' | 'icon' | 'image' = 'plain';
   #releaseSlots: (() => void) | undefined;
   #sync = (): void => {

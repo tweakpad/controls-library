@@ -228,7 +228,7 @@ export class TpTabs extends Scrollable(TpElement) {
   defaultValue: unknown = undefined;
   /** Called with each selection proposal before `tp-value-change` is dispatched; cancel it to keep the current tab. */
   onValueChange: ((event: TpValueChangeEvent<unknown>) => void) | undefined;
-  /** `manual` selects on Enter or Space; `automatic` selects as focus moves, for panels that are cheap to show. */
+  /** Whether a tab is selected only on Enter or Space, or as soon as focus moves to it, for panels that are cheap to show. */
   activation: 'automatic' | 'manual' = 'manual';
   /** Whether arrow keys wrap from the last tab to the first; set the property to `false` to stop at the ends. */
   loopFocus = true;
@@ -239,13 +239,13 @@ export class TpTabs extends Scrollable(TpElement) {
   fullWidth = false;
   /** Shows the indicator before any tab is selected and measured. */
   renderBeforeActivation = false;
-  /** `enclosed` for tabs that switch a contained surface, `underline` for lighter page-level navigation. */
+  /** The look: enclosed tabs for switching a contained surface, or an underline for lighter page-level navigation. */
   variant: 'enclosed' | 'underline' = 'enclosed';
   /** Accessible name of the tab list. */
   label = '';
-  /** Which way the last selection moved: `left`, `right`, `up`, `down` or `none`. */
+  /** Which way the last selection moved. */
   activationDirection: TabsActivationDirection = 'none';
-  /** The selected tab's value. Set before the first render, it makes selection controlled: write each accepted proposal back to it. */
+  /** The selected tab's value; a page that owns it writes each accepted proposal back. */
   get value(): unknown {
     return this.#selection ? this.#selection.value : this.#input;
   }

@@ -168,7 +168,10 @@ export class TpToggleGroup
     this.requestUpdate('multiple', previous);
     this.requestUpdate('selectionMode');
   }
-  /** The same choice as `multiple`, as a word: `single` or `multiple`. */
+  /**
+   * Whether one Toggle or several can be pressed at once; it mirrors the multiple attribute.
+   * @default 'single'
+   */
   get selectionMode(): 'single' | 'multiple' {
     return this.multiple ? 'multiple' : 'single';
   }

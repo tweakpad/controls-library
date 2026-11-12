@@ -110,7 +110,7 @@ export class TpBubble extends TpElement {
   reactionSide: 'block-start' | 'block-end' = 'block-end';
   /** The inline edge the reactions line up with, independent of the message's alignment. */
   reactionsAlign: 'start' | 'end' = 'end';
-  /** The message's treatment: one per sender, `ghost` for unframed full-width text, `destructive` for a failed delivery. */
+  /** The message's treatment, such as one per sender, unframed full-width text or a failed delivery. */
   variant: 'default' | 'secondary' | 'subdued' | 'tinted' | 'outline' | 'ghost' | 'destructive' =
     'secondary';
   /** The name of the message's group for assistive technology; empty removes the group role. */

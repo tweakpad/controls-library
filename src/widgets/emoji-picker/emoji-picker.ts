@@ -316,10 +316,7 @@ export class TpEmojiPicker extends TpFormElement<string> {
     if (this.hasUpdated) this.#state.sync();
     this.requestUpdate('value', previous);
   }
-  /**
-   * The search text that filters the emoji by name and keyword; setting it makes the search
-   * controlled.
-   */
+  /** The search text that filters the emoji by name and keyword. */
   get query(): string {
     return this.#queryState.value;
   }
@@ -333,7 +330,8 @@ export class TpEmojiPicker extends TpFormElement<string> {
     this.requestUpdate('query', previous);
   }
   /**
-   * The skin tone applied to emoji that accept one; setting it makes the tone choice controlled.
+   * The skin tone applied to emoji that accept one.
+   * @default 'none'
    */
   get skinTone(): SkinTone {
     return this.#toneState.value;

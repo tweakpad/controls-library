@@ -130,11 +130,11 @@ export class TpMenu extends TpHoverSurface implements MenuItemOwner {
   ];
   /** The value of the last activated command. */
   value = '';
-  /** `trigger` opens from a press on the trigger; `context` turns the trigger into a context target that opens the menu at the pointer on a right-click, Shift+F10 or a long touch. */
+  /** How the menu opens: from a press on the trigger, or at the pointer when the trigger acts as a context target, on a right-click, Shift+F10 or a long touch. */
   invocation: 'trigger' | 'context' = 'trigger';
   /** The `id` of a trigger elsewhere in the document. */
   for = '';
-  /** Default treatment of the items, `ghost` or `destructive`; an item's own `variant` wins. */
+  /** The treatment the items take by default; an item's own `variant` wins. */
   itemVariant: 'ghost' | 'destructive' = 'ghost';
   /** Whether the arrow keys wrap from the last item to the first; set the property to `false` to stop at the ends. */
   loopFocus = true;

@@ -206,20 +206,21 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
   /** The fewest steps kept between neighboring thumbs of a range. */
   minStepsBetweenValues = 0;
   /**
-   * `bar` paints a thumbless track; the Thumb stays as the keyboard and accessibility input.
-   * `inline` paints one compact control-height bar with the label and the value inside it, for
-   * stacked controls; the value shows without further setup and an enclosing Field's label moves
-   * into the bar.
+   * How the slider is drawn: a track with a thumb, a thumbless track, or a compact bar that shows
+   * its label and value inside it.
    */
   variant: SliderVariant = 'default';
   /**
-   * Whether a thumb centers on its value or stays inside the track at the ends (`edge`);
-   * `delayed-edge` centers until the first interaction.
+   * Whether a thumb centers on its value, stays inside the track at the ends, or centers only
+   * until the first interaction.
    */
   thumbAlignment: SliderThumbAlignment = 'center';
   #collisionBehavior: SliderThumbCollisionBehavior = 'push';
   #canonicalCollisionAuthored = false;
-  /** What a thumb dragged into its neighbor does: push it along, swap places with it, or stop. */
+  /**
+   * What a thumb dragged into its neighbor does: push it along, swap places with it, or stop.
+   * @default 'push'
+   */
   get thumbCollisionBehavior(): SliderThumbCollisionBehavior {
     return this.#collisionBehavior;
   }
@@ -229,7 +230,7 @@ export class TpSlider extends TpFormElement<SliderValue | undefined> implements 
     this.#canonicalCollisionAuthored = true;
     this.requestUpdate('thumbCollisionBehavior', previous);
   }
-  /** Older name for `thumbCollisionBehavior`: `prevent` stops at the neighbor, `swap` swaps. */
+  /** Older name for `thumbCollisionBehavior` that either stops a thumb at its neighbor or swaps the two. */
   thumbCrossing: 'prevent' | 'swap' | undefined;
   /** Visible label above the track, and the accessible name of the thumbs. */
   label = '';

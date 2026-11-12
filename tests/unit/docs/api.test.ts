@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { elementApi, unlistedChoices, type Manifest } from '../../../src/docs/api.js';
+import {
+  elementApi,
+  repeatedValues,
+  unlistedChoices,
+  type Manifest,
+} from '../../../src/docs/api.js';
 
 const manifest = (inheritedFrom: string) =>
   ({
@@ -143,6 +148,18 @@ describe('API table rules', () => {
       { name: 'Size', text: 'number | string' },
     ]);
     expect(unlistedChoices(rows)).toEqual([]);
+  });
+
+  it('reports a description that repeats the values the type lists', () => {
+    const repeated = structuredClone(control) as unknown as Manifest;
+    const mode = (
+      repeated.modules[0]!.declarations![0]!.attributes as { name: string; description: string }[]
+    ).find((attribute) => attribute.name === 'mode')!;
+    mode.description = 'Either `a` or `b`.';
+    expect(repeatedValues(elementApi(repeated, 'tp-control')!)).toEqual([
+      'mode: the description repeats the values the type lists',
+    ]);
+    expect(repeatedValues(api)).toEqual([]);
   });
 
   it('reports a named attribute type whose values are not listed', () => {

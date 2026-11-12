@@ -29,7 +29,7 @@ export class TpDescriptionListItem extends TpElement {
 
   /** The name of the value, presented as the term. */
   label = '';
-  /** Puts the label above the value (`stacked`), as for a long value, or beside it (`inline`); unset follows the list. */
+  /** Puts the label above the value, as for a long value, or beside it; unset follows the list. */
   layout: 'inline' | 'stacked' | null = null;
 
   protected override render() {

@@ -19,7 +19,7 @@ export class TpKbdGroup extends KbdElement {
   }
   static override presentation = kbdPresentation;
   static override properties = { ...KbdElement.properties, separator: { type: String } };
-  /** What sits between the children: `plus` for a chord, `none` for adjacent keycaps, `then` for a sequence. */
+  /** What sits between the children: a plus sign for a chord, a word for a sequence, or nothing for adjacent keycaps. */
   separator: KbdSeparator = 'plus';
   #members = new Set<KbdElement>();
   #observer: MutationObserver | undefined;

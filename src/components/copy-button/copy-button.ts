@@ -104,8 +104,8 @@ export class TpCopyButton extends TpElement {
   /** Shows the label as text beside the Icon instead of an Icon-only button. */
   showLabel = false;
   /**
-   * The paint of the composed Button: `ghost` beside inline values, `outline` or `secondary` when
-   * copying is the main action.
+   * The paint of the composed Button: quiet beside inline values, stronger when copying is the
+   * main action.
    */
   variant: CopyButtonVariant = 'ghost';
   /** The size of the composed Button; Icon-only buttons take the square size of the same height. */

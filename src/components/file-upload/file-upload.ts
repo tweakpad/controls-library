@@ -217,15 +217,15 @@ export class TpFileUpload extends TpFormElement<readonly File[]> {
   /** Stops a file dropped next to the drop surface from opening in the browser tab. */
   preventDocumentDrop = true;
   /**
-   * Clipboard paste scope: `none`, `control` (while focus is in the control or the pointer is
-   * over it) or `document` (also pastes elsewhere on the page outside editable fields).
+   * Where pasting adds files from the clipboard: nowhere, while focus is in the control or the
+   * pointer is over it, or also anywhere on the page outside editable fields.
    */
   paste: FileUploadPaste = 'none';
   /** Picks and reads whole folders, keeping each file's relative path. */
   directory = false;
-  /** Which camera the picker prefers on mobile devices: `user` or `environment`. */
+  /** Which camera the picker prefers on mobile devices: the front one, the back one, or neither. */
   capture: FileUploadCapture = '';
-  /** Lists files as rows (`stack`) or as image tiles with an Add tile at the end (`grid`). */
+  /** Lists files as rows or as image tiles with an Add tile at the end. */
   layout: FileUploadLayout = 'stack';
   /** Density of the drop surface. */
   size: FileUploadSize = 'default';

@@ -442,7 +442,7 @@ export class TpMediaVideoLayout extends TpMediaLayoutElement {
   #settingsTooltip: TpTooltip | undefined;
   #settingsMenu: TpMediaSettingsMenu | undefined;
 
-  /** The current variant (`on-demand`, `live`, `live-dvr`). */
+  /** The kind of stream the layout presents, read from the media: on demand, live, or live with a seekable window. */
   get variant(): MediaVideoLayoutVariant {
     return mediaVideoLayoutVariant(this.layoutState.value);
   }

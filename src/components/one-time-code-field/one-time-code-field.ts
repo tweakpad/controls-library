@@ -171,9 +171,8 @@ export class TpOneTimeCodeField extends TpFormElement {
   /** A character shown in each empty slot. */
   placeholder = '';
   /**
-   * How the slots are drawn: `default` joins each group into one boxed strip, `underline` puts
-   * every character on its own line, and `bubbles` makes every slot a separate circle. Groups keep
-   * their separator in every variant.
+   * How the slots are drawn: each group as one boxed strip, each character on a line, or each slot
+   * as a circle.
    */
   variant: OneTimeCodeVariant = 'default';
   /**

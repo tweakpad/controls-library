@@ -117,7 +117,7 @@ export class TpButton extends TpElement {
     `,
   ];
 
-  /** The form action: `submit` and `reset` act on the owning form; the default `button` never submits by accident. */
+  /** What pressing the Button does to its owning form, if anything. */
   type: ButtonType = 'button';
   /** Visual emphasis only; `href`, not the `link` treatment, makes the Button navigate. */
   variant: 'default' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link' = 'default';

@@ -145,8 +145,9 @@ export class TpToggle extends TpFormElement {
     this.requestUpdate('pressed', previous);
   }
   /**
-   * The paint: `ghost` shows a fill only while pressed or hovered, `outline` adds a border for a
-   * Toggle that stands alone.
+   * The paint: a fill only while pressed or hovered, or an added border for a Toggle that stands
+   * alone.
+   * @default 'ghost'
    */
   get variant(): 'ghost' | 'outline' {
     return this.#owner?.variant ?? this.#variant;
@@ -159,6 +160,7 @@ export class TpToggle extends TpFormElement {
   /**
    * The height and padding, matching the Button sizes; the `icon-*` sizes make a square Toggle for
    * an Icon alone.
+   * @default 'default'
    */
   get size(): ToggleSize {
     return this.#owner?.size ?? this.#size;

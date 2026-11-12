@@ -182,7 +182,7 @@ export class TpTableOfContents extends TpElement {
   scrollRootId: string | null = null;
   /** The reading line, in pixels or a percentage of the scroll container; without it, the container's `scroll-padding-block-start`. */
   activationOffset: string | number | null = null;
-  /** `fragment` uses native fragment navigation; `scroll` leaves the URL untouched. */
+  /** How a link reaches its target: native fragment navigation, or a scroll that leaves the URL untouched. */
   navigation: 'fragment' | 'scroll' = 'fragment';
   /** How the content scrolls when navigating; `auto` follows the scroll root's CSS. */
   scrollBehavior: ScrollBehavior = 'smooth';
@@ -194,7 +194,7 @@ export class TpTableOfContents extends TpElement {
   label = '';
   /** Replaces built-in text, such as the default "On this page" title. */
   messages: TableOfContentsMessages = {};
-  /** `list` shows the title and list in place; `compact` shows marks that open them in a card. */
+  /** Whether the title and list show in place or as compact marks that open them in a card. */
   variant: 'list' | 'compact' = 'list';
   /** Compact: the side of the trigger the card grows toward; it flips when it does not fit. */
   side: 'inline-start' | 'inline-end' = 'inline-start';

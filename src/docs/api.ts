@@ -359,6 +359,19 @@ function propertyRows(members: ManifestMember[]): ApiProperty[] {
 }
 
 /**
+ * Rows that say a fact twice: a description that quotes two or more of the row's own values, which
+ * the type already lists. A description says what the row does; the values live in the type.
+ */
+export function repeatedValues(api: ElementApi): string[] {
+  return [...api.attributes, ...api.properties]
+    .filter(
+      (row) =>
+        (row.values ?? []).filter((value) => row.description.includes(`\`${value}\``)).length >= 2,
+    )
+    .map((row) => `${row.name}: the description repeats the values the type lists`);
+}
+
+/**
  * Attributes a reader cannot fill in from the docs: one typed by a name (`SortDirection`) that the
  * docs neither list the values of (a choice list, Controls' select) nor define (`PanelExtent =
  * number | string`). A name alone tells a reader nothing.
