@@ -1620,12 +1620,18 @@ export async function assertPreview(): Promise<Report> {
   // The range eases to fit the overshoot (S-13); measure once it has settled.
   await new Promise((resolve) => setTimeout(resolve, 400));
   await settle(target);
+  // A scale preview ends smaller by the curve's overshoot, so the peak meets the graph's edge.
+  const extent =
+    Number.parseFloat(
+      getComputedStyle(shape).getPropertyValue('--_tp-easing-editor-preview-extent'),
+    ) || 1;
   checks.push(
     check(
-      'the square still fills the area with an overshoot shown',
-      Math.abs(shape.offsetHeight - layer.offsetHeight) <= 1 &&
-        Math.abs(shape.offsetWidth - layer.offsetWidth) <= 1,
-      [shape.offsetWidth, shape.offsetHeight, layer.offsetWidth, layer.offsetHeight],
+      'a scale preview of an overshoot ends smaller by its peak',
+      extent > 1 &&
+        Math.abs(shape.offsetHeight * extent - layer.offsetHeight) <= 1 &&
+        Math.abs(shape.offsetWidth * extent - layer.offsetWidth) <= 1,
+      [extent, shape.offsetWidth, shape.offsetHeight, layer.offsetWidth, layer.offsetHeight],
     ),
   );
   {
