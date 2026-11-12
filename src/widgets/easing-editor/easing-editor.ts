@@ -1013,19 +1013,20 @@ export class TpEasingEditor extends TpFormElement<string> {
       return;
     }
     const current = this.#curve;
-    const converted = current
-      ? convertEasingCurve(current, next === 'spring' ? 'spring' : 'bezier')
-      : parseEasingCurve(DEFAULT_CURVES[next])!;
-    const accepted = this.#proposeCurve(
-      converted,
-      interactionReason(event.detail.sourceEvent),
-      event.detail.sourceEvent,
-      {
-        immediate: true,
-        surface: 'tabs',
-        conversion: current !== null,
-      },
+    const start = parseEasingCurve(DEFAULT_CURVES[next])!;
+    const reason = interactionReason(event.detail.sourceEvent);
+    const source = event.detail.sourceEvent;
+    let accepted = this.#proposeCurve(
+      current ? convertEasingCurve(current, next === 'spring' ? 'spring' : 'bezier') : start,
+      reason,
+      source,
+      { immediate: true, surface: 'tabs', conversion: current !== null },
     );
+    // A refused conversion (an owner vetoing the converted shape, such as a spring's overshoot as
+    // a cubic Bézier) falls back to the category's starting curve, so the Tabs never stay stuck on
+    // the other category; only refusing that curve too keeps the current one.
+    if (!accepted && current)
+      accepted = this.#proposeCurve(start, reason, source, { immediate: true, surface: 'tabs' });
     if (!accepted && event.cancelable) event.preventDefault();
   };
 
@@ -1427,6 +1428,7 @@ export class TpEasingEditor extends TpFormElement<string> {
         content: html`<tp-scroll-area
           axis="y"
           scrollbar-visibility="on-hover"
+          scroll-edge-fade
           label=${this.#dimensionLabel(strings.presets)}
           ><div class="presets-list">${groups}</div></tp-scroll-area
         >`,

@@ -508,6 +508,25 @@ export async function assertKinds(): Promise<Report> {
       { category: target.category, tab: tabs.value },
     ),
   );
+  // An owner that refuses only the converted shape still lets the Tabs switch: the category's
+  // starting curve follows.
+  const vetoConversion = (event: Event) => {
+    const detail = (event as CustomEvent<{ metadata?: { conversion?: boolean } }>).detail;
+    if (detail.metadata?.conversion) event.preventDefault();
+  };
+  target.addEventListener('tp-value-change', vetoConversion);
+  tab('spring').click();
+  await settle(target);
+  target.removeEventListener('tp-value-change', vetoConversion);
+  checks.push(
+    check(
+      'a refused conversion falls back to the category starting curve',
+      target.category === 'spring' &&
+        tabs.value === 'spring' &&
+        target.value === 'spring(1 100 10)',
+      { category: target.category, tab: tabs.value, value: target.value },
+    ),
+  );
   captured.stop();
   target.remove();
   return report(checks);
