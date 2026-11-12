@@ -20,9 +20,17 @@ import { isColorFormat, type ColorFormat } from '../../foundation/color/types.js
 import { infoIcon } from '../../icons/info.js';
 import { colorIdentity, resolveColorCollection } from '../../foundation/color-palette/parse.js';
 import { defaultColorCollection } from '../../foundation/color-palette/collections/default.js';
+import {
+  isColorCollectionLoader,
+  loadColorCollection,
+  loadedColorCollection,
+} from '../../foundation/color-palette/load.js';
 import type {
   ColorCollection,
   ColorCollectionAttribution,
+  ColorCollectionEntry,
+  ColorCollectionLoader,
+  ColorCollectionStatus,
   PaletteGrouping,
   PaletteSort,
   ResolvedColorCollection,
@@ -50,6 +58,7 @@ import { TpTextTransform } from '../../components/text-transform/text-transform.
 import { TpPreviewCard } from '../../components/preview-card/preview-card.js';
 import { TpStack } from '../../components/stack/stack.js';
 import { TpToggle } from '../../components/toggle/toggle.js';
+import { TpSpinner } from '../../components/spinner/spinner.js';
 import { PaletteList, optionKey } from './list.js';
 import {
   buildListModel,
@@ -80,6 +89,20 @@ import { renderToolbar } from './views/toolbar.js';
 
 export type ColorPaletteValueChangeCallback = (event: TpValueChangeEvent<string>) => void;
 export type ColorPaletteValueCommitCallback = (event: TpValueCommitEvent<string>) => void;
+/** Called with each loading status change of a collection loader and the collection's id. */
+export type ColorPaletteLoadingStatusCallback = (
+  status: ColorCollectionStatus,
+  collection: string,
+) => void;
+
+/** A collection offered by the palette: a document, resolved, or a loader and what it loaded. */
+interface CollectionEntry {
+  readonly id: string;
+  readonly label: string;
+  readonly loader?: ColorCollectionLoader;
+  /** Absent while a loader has not loaded. */
+  readonly resolved?: ResolvedColorCollection;
+}
 /** The detail of the palette's `tp-value-change`. */
 export type ColorPaletteChangeDetail = TpValueChangeEvent<string>['detail'];
 
@@ -183,6 +206,8 @@ const oneOf =
  * picked `swatch` and the `collection` id.
  * @fires tp-value-commit - The settled color, right after an accepted pick.
  * @fires tp-collection-change - Cancelable proposal of another active collection.
+ * @fires tp-loading-status-change - Each loading status change of a collection loader;
+ * `detail.status`, `detail.collection` (its id) and, on a failure, `detail.error`.
  * @fires tp-mode-change - Cancelable proposal of another mode.
  * @fires tp-grouping-change - Cancelable proposal of another grouping of the grid.
  * @fires tp-sort-change - Cancelable proposal of another sort of the grid.
@@ -215,6 +240,7 @@ export class TpColorPalette extends TpFormElement<string> {
       TpPreviewCard,
       TpStack,
       TpToggle,
+      TpSpinner,
     ];
   }
   static override presentation = colorPalettePresentation;
@@ -252,17 +278,20 @@ export class TpColorPalette extends TpFormElement<string> {
     strings: { attribute: false },
     onValueChange: { attribute: false },
     onValueCommitted: { attribute: false },
+    onLoadingStatusChange: { attribute: false },
   };
   static override styles = [TpElement.styles, colorPaletteStyles];
 
   /** Starting color of an uncontrolled palette; form reset returns to it. */
   defaultValue: string | undefined;
   /**
-   * The collections loaded besides the built-in default collection, which the Color collections menu
-   * always offers first, as documents or typed modules. Import more from `@tweakpad/ui/color-palette/collections/<id>`, or parse a fetched
-   * document with `parseColorCollection`.
+   * The collections offered besides the built-in default collection, which the Color collections
+   * menu always offers first: documents or typed modules, imported from
+   * `@tweakpad/ui/color-palette/collections/<id>`, or loaders, which the palette calls only when
+   * their collection becomes active. `colorCollectionCatalog` offers every shipped collection as a
+   * loader; a loader can also fetch a document and parse it with `parseColorCollection`.
    */
-  collections: readonly ColorCollection[] = [];
+  collections: readonly ColorCollectionEntry[] = [];
   /** Starting collection id of an uncontrolled collection choice. */
   defaultCollection: string | undefined;
   /** Starting mode of an uncontrolled mode choice. */
@@ -309,6 +338,8 @@ export class TpColorPalette extends TpFormElement<string> {
   onValueChange: ColorPaletteValueChangeCallback | undefined;
   /** Called with each settled pick. */
   onValueCommitted: ColorPaletteValueCommitCallback | undefined;
+  /** Called with each loading status change of a collection loader, before the event. */
+  onLoadingStatusChange: ColorPaletteLoadingStatusCallback | undefined;
 
   #provided: string | undefined;
   #strings: ColorPaletteStrings = resolveStrings();
@@ -321,6 +352,10 @@ export class TpColorPalette extends TpFormElement<string> {
   #composition: object | undefined;
   /** The list state that a toolbar change reveals the value against. */
   #revealKey: string | undefined;
+  /** This palette's view of each loader: its status, and the token of its pending load. */
+  #loads = new Map<ColorCollectionLoader, { status: ColorCollectionStatus; token?: object }>();
+  /** Bumped when a load settles, so the entries are rebuilt with the loaded collection. */
+  #loadVersion = 0;
 
   readonly #state = new ControllableState<string>({
     host: this,
@@ -589,11 +624,18 @@ export class TpColorPalette extends TpFormElement<string> {
 
   // ---- read-only state ---------------------------------------------------------------------
 
-  /** The active collection, parsed: the chosen one, otherwise the first loaded, or the default. */
+  /**
+   * The active collection, parsed: the chosen one, otherwise the first of `collections`, or the
+   * default. While a loader's collection has not loaded it has its id and name and no colors.
+   */
   get activeCollection(): ResolvedColorCollection {
-    const resolved = this.#resolved();
-    const id = this.#collection.state.value;
-    return resolved.find((collection) => collection.id === id) ?? resolved[1] ?? resolved[0]!;
+    const entry = this.#activeEntry();
+    return entry.resolved ?? placeholder(entry);
+  }
+  /** Loading status of the active collection; documents are `loaded`. */
+  get collectionStatus(): ColorCollectionStatus {
+    const loader = this.#activeEntry().loader;
+    return loader ? this.#statusOf(loader) : 'loaded';
   }
   /** The highlighted color with where it is listed, or null. */
   get activeSwatch(): ColorPaletteSwatchInfo | null {
@@ -633,6 +675,10 @@ export class TpColorPalette extends TpFormElement<string> {
   override disconnectedCallback(): void {
     this.#probeObserver?.disconnect();
     this.#probeObserver = undefined;
+    // A load cut short by disconnection is ignored and starts again on reconnection; the shared
+    // request itself finishes, so the next start finds its document.
+    for (const [loader, load] of this.#loads)
+      if (load.status === 'loading') this.#loads.delete(loader);
     super.disconnectedCallback();
   }
 
@@ -641,20 +687,23 @@ export class TpColorPalette extends TpFormElement<string> {
     if (changed.has('strings')) this.#strings = resolveStrings(this.strings);
     this.#state.initialize();
     for (const lane of this.#lanes()) lane.state.initialize();
+    // Only the active collection loads; the others wait until they are chosen.
+    const loader = this.#activeEntry().loader;
+    if (loader && this.isConnected && this.#statusOf(loader) === 'idle') this.#load(loader);
     if (changed.has('columns') && !this.#validColumns() && this.columns !== DEFAULT_COLUMNS)
       this.diagnose(
         'color-palette-columns',
         `columns must be a positive integer; ${String(this.columns)} uses ${DEFAULT_COLUMNS}.`,
       );
-    for (const collection of this.#resolved())
-      for (const issue of collection.issues)
+    for (const { resolved: collection } of this.#entries())
+      for (const issue of collection?.issues ?? [])
         reportDiagnostic(
           this,
           { code: issue.code, message: issue.message, severity: 'warning' },
           { once: this.#reported },
         );
     const id = this.#collection.state.value;
-    if (id && !this.#resolved().some((collection) => collection.id === id))
+    if (id && !this.#entries().some((entry) => entry.id === id))
       reportDiagnostic(
         this,
         {
@@ -670,6 +719,10 @@ export class TpColorPalette extends TpFormElement<string> {
   protected override updated(changed: PropertyValues<this>): void {
     super.updated(changed);
     this.toggleAttribute('data-empty', !this.value);
+    const status = this.collectionStatus;
+    this.setAttribute('data-status', status);
+    this.toggleAttribute('data-loading', status === 'loading' || status === 'idle');
+    this.toggleAttribute('data-error', status === 'error');
     this.setAttribute('data-mode', this.mode);
     this.setAttribute('data-grouping', this.grouping);
     this.setAttribute('data-sort', this.sort);
@@ -726,20 +779,97 @@ export class TpColorPalette extends TpFormElement<string> {
     ] as unknown as readonly Lane<unknown>[];
   }
 
-  #resolvedCache:
-    { source: readonly ColorCollection[]; resolved: ResolvedColorCollection[] } | undefined;
-  #resolved(): ResolvedColorCollection[] {
+  #entriesCache:
+    | { source: readonly ColorCollectionEntry[]; version: number; entries: CollectionEntry[] }
+    | undefined;
+  /**
+   * The offered collections: the default first, then `collections` in order (a given default is
+   * not repeated), each loader with its collection once loaded.
+   */
+  #entries(): CollectionEntry[] {
     const source = this.collections ?? [];
-    if (this.#resolvedCache?.source !== source) {
-      // The default collection comes first, then the loaded ones; a loaded default is not repeated.
-      const loaded = source.filter((entry) => entry.id !== defaultColorCollection.id);
-      this.#resolvedCache = {
-        source,
-        resolved: [defaultColorCollection, ...loaded].map(resolveColorCollection),
+    const cached = this.#entriesCache;
+    if (cached?.source === source && cached.version === this.#loadVersion) return cached.entries;
+    const given = source.filter((entry) => entry && entry.id !== defaultColorCollection.id);
+    const entries = [defaultColorCollection, ...given].map((entry): CollectionEntry => {
+      if (!isColorCollectionLoader(entry)) {
+        const resolved = resolveColorCollection(entry);
+        return { id: resolved.id, label: resolved.name ?? resolved.id, resolved };
+      }
+      const document = loadedColorCollection(entry);
+      const resolved = document ? resolveColorCollection(named(document, entry.id)) : undefined;
+      return {
+        id: entry.id,
+        label: resolved?.name ?? entry.name ?? entry.id,
+        loader: entry,
+        ...(resolved ? { resolved } : {}),
       };
-    }
-    return this.#resolvedCache.resolved;
+    });
+    this.#entriesCache = { source, version: this.#loadVersion, entries };
+    return entries;
   }
+
+  /** The chosen collection, otherwise the first given one, or the default. */
+  #activeEntry(): CollectionEntry {
+    const entries = this.#entries();
+    const id = this.#collection.state.value;
+    return entries.find((entry) => entry.id === id) ?? entries[1] ?? entries[0]!;
+  }
+
+  /** This palette's status of a loader: `loaded` at once when another palette loaded it. */
+  #statusOf(loader: ColorCollectionLoader): ColorCollectionStatus {
+    const status = this.#loads.get(loader)?.status;
+    if (status) return status;
+    return loadedColorCollection(loader) ? 'loaded' : 'idle';
+  }
+
+  #setStatus(loader: ColorCollectionLoader, status: ColorCollectionStatus, error?: unknown): void {
+    const token = status === 'loading' ? {} : undefined;
+    this.#loads.set(loader, { status, ...(token ? { token } : {}) });
+    if (status !== 'loading') this.#loadVersion++;
+    this.onLoadingStatusChange?.(status, loader.id);
+    this.emit('tp-loading-status-change', {
+      status,
+      collection: loader.id,
+      ...(status === 'error' ? { error } : {}),
+    });
+    this.requestUpdate();
+  }
+
+  /** Loads a collection; Retry calls it again after a failure. */
+  #load(loader: ColorCollectionLoader): void {
+    this.#setStatus(loader, 'loading');
+    const token = this.#loads.get(loader)?.token;
+    loadColorCollection(loader).then(
+      (document) => {
+        if (this.#loads.get(loader)?.token !== token) return;
+        if (document.id !== loader.id)
+          reportDiagnostic(
+            this,
+            {
+              code: 'color-palette-collection-load',
+              message: `The loader "${loader.id}" loaded the collection "${document.id}"; it is offered as "${loader.id}".`,
+              severity: 'warning',
+            },
+            { once: this.#reported },
+          );
+        this.#setStatus(loader, 'loaded');
+      },
+      (error: unknown) => {
+        if (this.#loads.get(loader)?.token !== token) return;
+        this.diagnose(
+          'color-palette-collection-load',
+          `The collection "${loader.id}" could not be loaded: ${error instanceof Error ? error.message : String(error)}`,
+        );
+        this.#setStatus(loader, 'error', error);
+      },
+    );
+  }
+
+  #retry = (): void => {
+    const loader = this.#activeEntry().loader;
+    if (loader && this.#statusOf(loader) === 'error') this.#load(loader);
+  };
 
   #modes(): readonly ColorPaletteMode[] {
     const modes = (this.modes ?? []).filter((mode) => MODES.includes(mode));
@@ -1381,6 +1511,10 @@ export class TpColorPalette extends TpFormElement<string> {
 
   /** The listbox: its mounted groups, label rows and option rows, with spaces for the rest. */
   #renderList(model: PaletteListModel, label: string, state: Record<string, unknown>): unknown {
+    // The favorites do not depend on the collection; the colors and palettes wait for it.
+    const status = this.mode === 'favorites' ? 'loaded' : this.collectionStatus;
+    if (status === 'error') return this.#renderLoadError();
+    if (status !== 'loaded') return this.#renderLoading();
     if (!model.units.length) return this.#renderEmpty();
     const highlighted = this.#list.highlighted;
     const selected = this.#selectedKey();
@@ -1532,6 +1666,15 @@ export class TpColorPalette extends TpFormElement<string> {
       } else if (this.mode === 'favorites') {
         // Nothing chosen: what the mode lists, the favorites or the active library.
         text = count(this.favorites.length, strings.favoriteCountOne, strings.favoriteCount);
+      } else if (this.collectionStatus !== 'loaded') {
+        // A collection still loading, or that failed to: its name and what is happening.
+        const failed = this.collectionStatus === 'error';
+        text = named(
+          collection.name ?? collection.id,
+          html`<span class="status-count"
+            >${failed ? strings.loadErrorShort : strings.loading}</span
+          >`,
+        );
       } else {
         const name = collection.name ?? collection.id;
         text = named(
@@ -1633,6 +1776,39 @@ export class TpColorPalette extends TpFormElement<string> {
     ></tp-toggle>`;
   }
 
+  /** While the collection loads: a Spinner and the collection's name, where the error would show. */
+  #renderLoading(): unknown {
+    return html`<tp-empty-state
+      class="empty"
+      part="color-palette-loading"
+      media-treatment="icon"
+      .title=${this.activeCollection.name ?? ''}
+      .description=${this.#strings.loading}
+      ><tp-spinner slot="media" size="lg" label=""></tp-spinner
+    ></tp-empty-state>`;
+  }
+
+  /** The collection failed to load: what happened and a Retry Button that loads it again. */
+  #renderLoadError(): unknown {
+    const strings = this.#strings;
+    return html`<tp-empty-state
+      class="empty"
+      media-treatment="icon"
+      .title=${fillTemplate(strings.loadError, { name: this.activeCollection.name ?? '' })}
+      .description=${strings.loadErrorHint}
+      ><tp-icon slot="media" .icon=${paletteIcon} aria-hidden="true"></tp-icon
+      ><tp-button
+        slot="actions"
+        class="retry"
+        part="color-palette-retry"
+        variant="outline"
+        size="sm"
+        @click=${this.#retry}
+        >${strings.retry}</tp-button
+      ></tp-empty-state
+    >`;
+  }
+
   /**
    * The empty state of the mode: how to add favorites, or that the collection has no palettes or
    * no colors.
@@ -1709,13 +1885,13 @@ export class TpColorPalette extends TpFormElement<string> {
     };
     const label = this.label || strings.label;
     const model = this.#listModel();
-    const resolved = this.#resolved();
+    const entries = this.#entries();
     const toolbar = this.toolbar
       ? renderToolbar({
           strings,
           modes: this.#modes(),
           mode: this.mode,
-          collections: resolved.map((entry) => ({ id: entry.id, label: entry.name ?? entry.id })),
+          collections: entries.map((entry) => ({ id: entry.id, label: entry.label })),
           collection: collection.id,
           layout: this.layout,
           paletteStyle: this.paletteStyle,
@@ -1741,6 +1917,11 @@ export class TpColorPalette extends TpFormElement<string> {
         'data-layout': this.layout,
         'data-palette-style': this.paletteStyle,
         'data-empty': !this.value,
+        'aria-busy':
+          this.mode !== 'favorites' &&
+          (this.collectionStatus === 'loading' || this.collectionStatus === 'idle')
+            ? 'true'
+            : undefined,
         'data-disabled': this.effectiveDisabled,
         'data-readonly': this.readOnly,
         style: {
@@ -1758,6 +1939,38 @@ export class TpColorPalette extends TpFormElement<string> {
         >${this.#renderStatus(model, collection)}`,
     });
   }
+}
+
+const placeholders = new WeakMap<CollectionEntry, ResolvedColorCollection>();
+/** A collection that has not loaded yet: its id and name, no colors and no palettes. */
+function placeholder(entry: CollectionEntry): ResolvedColorCollection {
+  let resolved = placeholders.get(entry);
+  if (!resolved) {
+    const source: ColorCollection = { id: entry.id, name: entry.label, colors: [] };
+    resolved = {
+      id: entry.id,
+      name: entry.label,
+      groups: [],
+      swatches: [],
+      palettes: [],
+      issues: [],
+      source,
+    };
+    placeholders.set(entry, resolved);
+  }
+  return resolved;
+}
+
+const renamed = new WeakMap<ColorCollection, ColorCollection>();
+/** A loaded document under its loader's id, so the menu and `collection` keep one identity. */
+function named(document: ColorCollection, id: string): ColorCollection {
+  if (document.id === id) return document;
+  let copy = renamed.get(document);
+  if (!copy) {
+    copy = { ...document, id };
+    renamed.set(document, copy);
+  }
+  return copy;
 }
 
 /** The element id of an option, from its key. */

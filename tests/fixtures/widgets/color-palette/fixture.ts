@@ -11,56 +11,25 @@ if (built)
 await import(/* @vite-ignore */ built ? '/dist/register.js' : '/src/register.ts');
 await import(/* @vite-ignore */ built ? '/dist/register/widgets.js' : '/src/register/widgets.ts');
 const api = await import(/* @vite-ignore */ built ? '/dist/widgets.js' : '/src/widgets/index.ts');
-const named = await import(
-  /* @vite-ignore */ built
-    ? '/dist/color-palette/collections/css-named.js'
-    : '/src/foundation/color-palette/collections/css-named/index.ts'
-);
-const riso = await import(
-  /* @vite-ignore */ built
-    ? '/dist/color-palette/collections/riso.js'
-    : '/src/foundation/color-palette/collections/riso/index.ts'
-);
-const brewer = await import(
-  /* @vite-ignore */ built
-    ? '/dist/color-palette/collections/colorbrewer.js'
-    : '/src/foundation/color-palette/collections/colorbrewer/index.ts'
-);
-const nippon = await import(
-  /* @vite-ignore */ built
-    ? '/dist/color-palette/collections/nippon.js'
-    : '/src/foundation/color-palette/collections/nippon/index.ts'
-);
-const wada = await import(
-  /* @vite-ignore */ built
-    ? '/dist/color-palette/collections/sanzo-wada.js'
-    : '/src/foundation/color-palette/collections/sanzo-wada/index.ts'
-);
-const wes = await import(
-  /* @vite-ignore */ built
-    ? '/dist/color-palette/collections/wes-anderson.js'
-    : '/src/foundation/color-palette/collections/wes-anderson/index.ts'
-);
-const corbusier = await import(
-  /* @vite-ignore */ built
-    ? '/dist/color-palette/collections/le-corbusier.js'
-    : '/src/foundation/color-palette/collections/le-corbusier/index.ts'
-);
-const werner = await import(
-  /* @vite-ignore */ built
-    ? '/dist/color-palette/collections/werner.js'
-    : '/src/foundation/color-palette/collections/werner/index.ts'
-);
-const lospec = await import(
-  /* @vite-ignore */ built
-    ? '/dist/color-palette/collections/lospec.js'
-    : '/src/foundation/color-palette/collections/lospec/index.ts'
-);
-const nice = await import(
-  /* @vite-ignore */ built
-    ? '/dist/color-palette/collections/nice-color-palettes.js'
-    : '/src/foundation/color-palette/collections/nice-color-palettes/index.ts'
-);
+/** A loader that answers after `delay` ms, failing first when `failures` is above zero. */
+function slowLoader(id: string, name: string, delay: number, failures = 0) {
+  let left = failures;
+  return {
+    id,
+    name,
+    calls: 0,
+    load(this: { calls: number }) {
+      this.calls++;
+      return new Promise<{ id: string; name: string; colors: string[] }>((resolve, reject) =>
+        setTimeout(() => {
+          if (left-- > 0) reject(new Error('The collection server is not reachable.'));
+          else
+            resolve({ id, name, colors: ['#e4572e', '#29335c', '#f3a712', '#a8c686', '#669bbc'] });
+        }, delay),
+      );
+    },
+  };
+}
 
 /** About 600 colors: 24 hues × 25 lightness and chroma steps, a stress test for the window. */
 function stressCollection() {
@@ -122,20 +91,12 @@ for (const type of LANES)
 const byId = (id: string) => document.getElementById(id) as HTMLElement & Record<string, unknown>;
 const collections = byId('collections');
 if (collections)
-  collections.collections = [
-    named.default,
-    riso.default,
-    brewer.default,
-    nippon.default,
-    wada.default,
-    wes.default,
-    corbusier.default,
-    werner.default,
-    lospec.default,
-    nice.default,
-    api.defaultColorCollection,
-    api.reducedColorCollection,
-  ];
+  // Every shipped collection as a loader: only the active one downloads.
+  collections.collections = [...api.colorCollectionCatalog, api.reducedColorCollection];
+const loading = byId('loading');
+if (loading) loading.collections = [slowLoader('slow', 'Slow collection', 1500)];
+const failing = byId('failing');
+if (failing) failing.collections = [slowLoader('flaky', 'Flaky collection', 600, 1)];
 const large = byId('large');
 if (large) large.collections = [stressCollection()];
 

@@ -10,7 +10,7 @@ import type * as widgetsColorPaletteTypes from '../../widgets/color-palette/type
 
 /** `<tp-color-palette>` as a Vue component. */
 export const ColorPalette = /*#__PURE__*/ createBinding(TpColorPalette, 'ColorPalette', {
-  callbacks: ['onValueChange', 'onValueCommitted'],
+  callbacks: ['onLoadingStatusChange', 'onValueChange', 'onValueCommitted'],
   lanes: { value: 'onValueChange' },
   model: 'value',
 }) as ElementBinding<
@@ -44,6 +44,7 @@ export const ColorPalette = /*#__PURE__*/ createBinding(TpColorPalette, 'ColorPa
   | 'modes'
   | 'motionPolicy'
   | 'name'
+  | 'onLoadingStatusChange'
   | 'onValueChange'
   | 'onValueCommitted'
   | 'orientation'
@@ -73,6 +74,11 @@ export const ColorPalette = /*#__PURE__*/ createBinding(TpColorPalette, 'ColorPa
     }>;
     'tp-grouping-change': foundationEvents.TpValueChangeEvent<foundationColorPaletteTypes.PaletteGrouping>;
     'tp-layout-change': foundationEvents.TpValueChangeEvent<widgetsColorPaletteTypes.ColorPaletteLayout>;
+    'tp-loading-status-change': CustomEvent<{
+      error?: unknown;
+      status: foundationColorPaletteTypes.ColorCollectionStatus;
+      collection: string;
+    }>;
     'tp-mode-change': foundationEvents.TpValueChangeEvent<widgetsColorPaletteTypes.ColorPaletteMode>;
     'tp-palette-style-change': foundationEvents.TpValueChangeEvent<widgetsColorPaletteTypes.ColorPalettePaletteStyle>;
     'tp-size-change': foundationEvents.TpValueChangeEvent<widgetsColorPaletteTypes.ColorPaletteSize>;

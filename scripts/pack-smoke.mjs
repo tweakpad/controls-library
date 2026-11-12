@@ -381,7 +381,7 @@ run(
   [
     '--input-type=module',
     '-e',
-    "const { defaultColorCollection, resolveColorCollection, groupSwatches } = await import('@tweakpad/ui/color-palette'); const { default: named } = await import('@tweakpad/ui/color-palette/collections/css-named'); const { default: riso } = await import('@tweakpad/ui/color-palette/collections/riso'); const resolved = resolveColorCollection(defaultColorCollection); const inks = resolveColorCollection(riso); if (groupSwatches(resolved, 'hue').length < 2 || resolveColorCollection(named).swatches.length !== 148 || inks.swatches.length !== 79 || inks.palettes.length !== 92) process.exit(1);",
+    "const { defaultColorCollection, resolveColorCollection, groupSwatches, colorCollectionCatalog, loadColorCollection } = await import('@tweakpad/ui/color-palette'); const { default: named } = await import('@tweakpad/ui/color-palette/collections/css-named'); const { default: riso } = await import('@tweakpad/ui/color-palette/collections/riso'); const resolved = resolveColorCollection(defaultColorCollection); const inks = resolveColorCollection(riso); const lazy = await loadColorCollection(colorCollectionCatalog.find((entry) => entry.id === 'riso')); if (groupSwatches(resolved, 'hue').length < 2 || resolveColorCollection(named).swatches.length !== 148 || inks.swatches.length !== 79 || inks.palettes.length !== 92 || lazy !== riso) process.exit(1);",
   ],
   consumer,
 );

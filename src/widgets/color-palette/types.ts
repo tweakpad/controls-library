@@ -58,6 +58,14 @@ export interface ColorPaletteStrings {
   emptyHint: string;
   palettesEmpty: string;
   palettesHint: string;
+  /** Status bar text beside the name of a collection that is loading. */
+  loading: string;
+  /** Title of a collection that failed to load; `{name}` is its name. */
+  loadError: string;
+  loadErrorHint: string;
+  /** Status bar text beside the name of a collection that failed to load. */
+  loadErrorShort: string;
+  retry: string;
   modes: string;
   modeColors: string;
   modePalettes: string;

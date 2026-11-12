@@ -2,6 +2,9 @@ export type {
   ColorCollection,
   ColorCollectionAttribution,
   ColorCollectionColor,
+  ColorCollectionEntry,
+  ColorCollectionLoader,
+  ColorCollectionStatus,
   ColorCollectionGroup,
   ColorCollectionPalette,
   ColorCollectionSwatch,
@@ -16,9 +19,11 @@ export type {
 export { MAX_PALETTE_STOPS } from './types.js';
 export { colorIdentity, parseColorCollection, resolveColorCollection } from './parse.js';
 export { findSwatch, groupSwatches } from './model.js';
+export { isColorCollectionLoader, loadColorCollection, loadedColorCollection } from './load.js';
 export { colorCollectionSchema } from './schema.js';
 export { defaultColorCollection } from './collections/default.js';
 export { reducedColorCollection } from './collections/reduced.js';
+export { colorCollectionCatalog } from './collections/catalog.js';
 export {
   HUE_FAMILIES,
   hueFamily,

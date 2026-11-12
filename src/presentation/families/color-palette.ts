@@ -94,6 +94,17 @@ const definition: ComponentDefinition = {
       description:
         "The active collection's source and license in the source info's Tooltip, or its source link, description and license in a Preview Card.",
     },
+    {
+      name: 'color-palette-loading',
+      axes: ['size'],
+      description:
+        "The Spinner and the collection's name in the list's place while the active collection loads.",
+    },
+    {
+      name: 'color-palette-retry',
+      axes: ['size'],
+      description: 'The Button in the load error that loads the active collection again.',
+    },
   ],
 };
 
@@ -109,6 +120,8 @@ export const colorPalettePresentation = definePresentation({
       '[part~="color-palette-source"]': 'color-palette-source',
       '[part~="color-palette-favorite-toggle"]': 'color-palette-favorite-toggle',
       '[part~="color-palette-attribution"]': 'color-palette-attribution',
+      '[part~="color-palette-loading"]': 'color-palette-loading',
+      '[part~="color-palette-retry"]': 'color-palette-retry',
       '[part~="color-palette-list"]': 'color-palette-list',
       '[part~="color-palette-group"]': 'color-palette-group',
       '[part~="color-palette-group-label"]': 'color-palette-group-label',

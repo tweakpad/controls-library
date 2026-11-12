@@ -84,46 +84,40 @@ A collection is a JSON document: its colors as color texts or as records with a 
 }`}
 />
 
+`colorCollectionCatalog` offers every collection of the table except the default and the reduced one as a loader: Color collections lists them all, and a collection downloads only when it becomes active. While it loads, the list shows a Spinner with the collection's name; when it fails, the list shows the error with a Retry Button. `collectionStatus` and the host's `data-status` give the active collection's state (`idle`, `loading`, `loaded` or `error`), and `tp-loading-status-change` reports each change with the collection's id.
+
 <Preview
   title="Several collections"
   code={`<tp-color-palette id="color-palette-collections" label="Ink"></tp-color-palette>`}
-  script={`import { reducedColorCollection } from '@tweakpad/ui/color-palette';
-import { cssNamedColors } from '@tweakpad/ui/color-palette/collections/css-named';
-import { risoInks } from '@tweakpad/ui/color-palette/collections/riso';
-import { colorBrewer } from '@tweakpad/ui/color-palette/collections/colorbrewer';
-import { nipponColors } from '@tweakpad/ui/color-palette/collections/nippon';
-import { sanzoWada } from '@tweakpad/ui/color-palette/collections/sanzo-wada';
-import { wesAnderson } from '@tweakpad/ui/color-palette/collections/wes-anderson';
-import { leCorbusier } from '@tweakpad/ui/color-palette/collections/le-corbusier';
-import { wernerColors } from '@tweakpad/ui/color-palette/collections/werner';
-import { lospecPalettes } from '@tweakpad/ui/color-palette/collections/lospec';
-import { niceColorPalettes } from '@tweakpad/ui/color-palette/collections/nice-color-palettes';
+  script={`import { colorCollectionCatalog, reducedColorCollection } from '@tweakpad/ui/color-palette';
 
 document.querySelector('#color-palette-collections').collections = [
-  risoInks,
-  colorBrewer,
-  nipponColors,
-  sanzoWada,
-  wesAnderson,
-  leCorbusier,
-  wernerColors,
-  lospecPalettes,
-  niceColorPalettes,
-  cssNamedColors,
+  ...colorCollectionCatalog,
   reducedColorCollection,
 ];`}
 />
 
-A document fetched at run time goes through `parseColorCollection`, which drops malformed entries and lists them as issues; colors that do not parse are reported as diagnostics when the palette shows the collection.
+A loader is an `id`, a `name` for the menu, and a `load` function that returns the document, or a module whose default export is the document. A document fetched at run time goes through `parseColorCollection`, which drops malformed entries and lists them as issues; colors that do not parse are reported as diagnostics when the palette shows the collection. Documents and loaders mix in one list.
 
 <Code
   label="Loading a collection"
   language="typescript"
   code={`import { parseColorCollection } from '@tweakpad/ui/color-palette';
+import { risoInks } from '@tweakpad/ui/color-palette/collections/riso';
 
-const response = await fetch('/collections/riso.json');
-const { collection, issues } = parseColorCollection(await response.json());
-palette.collections = [collection];`}
+palette.collections = [
+  risoInks,
+  {
+    id: 'brand',
+    name: 'Brand colors',
+    load: async () => parseColorCollection(await (await fetch('/collections/brand.json')).json()).collection,
+  },
+  {
+    id: 'colorbrewer',
+    name: 'ColorBrewer',
+    load: () => import('@tweakpad/ui/color-palette/collections/colorbrewer'),
+  },
+];`}
 />
 
 ### Grouping and sorting

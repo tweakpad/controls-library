@@ -224,6 +224,8 @@ export const colorPaletteAppearance: PresentationDictionary = {
       declarations: { color: 'var(--tp-muted-foreground)', 'font-size': 'var(--tp-text-xs)' },
     },
   ],
+  'color-palette-loading': [],
+  'color-palette-retry': [],
 };
 
 /** Geometry that a replaced dictionary keeps. */

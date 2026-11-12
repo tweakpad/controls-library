@@ -41,6 +41,7 @@ export type ColorPaletteProps = ElementProps<
   | 'modes'
   | 'motionPolicy'
   | 'name'
+  | 'onLoadingStatusChange'
   | 'onValueChange'
   | 'onValueCommitted'
   | 'orientation'
@@ -70,6 +71,11 @@ export type ColorPaletteProps = ElementProps<
     }>;
     onTpGroupingChange: foundationEvents.TpValueChangeEvent<foundationColorPaletteTypes.PaletteGrouping>;
     onTpLayoutChange: foundationEvents.TpValueChangeEvent<widgetsColorPaletteTypes.ColorPaletteLayout>;
+    onTpLoadingStatusChange: CustomEvent<{
+      error?: unknown;
+      status: foundationColorPaletteTypes.ColorCollectionStatus;
+      collection: string;
+    }>;
     onTpModeChange: foundationEvents.TpValueChangeEvent<widgetsColorPaletteTypes.ColorPaletteMode>;
     onTpPaletteStyleChange: foundationEvents.TpValueChangeEvent<widgetsColorPaletteTypes.ColorPalettePaletteStyle>;
     onTpSizeChange: foundationEvents.TpValueChangeEvent<widgetsColorPaletteTypes.ColorPaletteSize>;
@@ -90,6 +96,7 @@ export const ColorPalette = /*#__PURE__*/ createBinding<ColorPaletteProps>(
     onTpFieldValue: 'tp-field-value',
     onTpGroupingChange: 'tp-grouping-change',
     onTpLayoutChange: 'tp-layout-change',
+    onTpLoadingStatusChange: 'tp-loading-status-change',
     onTpModeChange: 'tp-mode-change',
     onTpPaletteStyleChange: 'tp-palette-style-change',
     onTpSizeChange: 'tp-size-change',
@@ -98,5 +105,5 @@ export const ColorPalette = /*#__PURE__*/ createBinding<ColorPaletteProps>(
     onTpValueChange: 'tp-value-change',
     onTpValueCommit: 'tp-value-commit',
   },
-  ['onValueChange', 'onValueCommitted'],
+  ['onLoadingStatusChange', 'onValueChange', 'onValueCommitted'],
 );

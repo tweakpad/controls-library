@@ -58,7 +58,10 @@ import {
 import { contrastColor } from '../../foundation/color/contrast.js';
 import { ringSegments } from './palette-ring.js';
 import { parseColor } from '../../foundation/color/parse.js';
-import type { ColorCollection } from '../../foundation/color-palette/types.js';
+import type {
+  ColorCollection,
+  ColorCollectionEntry,
+} from '../../foundation/color-palette/types.js';
 import {
   displayColor,
   flatGradient,
@@ -322,11 +325,13 @@ export class TpColorPicker extends TpFormElement<string> {
   /** Recent colors supplied by the application; the widget keeps no history of its own. */
   recent: readonly string[] = [];
   /**
-   * Swatch collections for the swatches view, after the saved and recent colors; import them from
-   * `@tweakpad/ui/color-palette/collections/<id>` or parse fetched documents. The palette's default
-   * collection is always offered first; the view opens on the saved colors or the first collection.
+   * Swatch collections for the swatches view, after the saved and recent colors: documents
+   * imported from `@tweakpad/ui/color-palette/collections/<id>`, or loaders, such as
+   * `colorCollectionCatalog`, that the palette calls only when their collection becomes active.
+   * The palette's default collection is always offered first; the view opens on the saved colors
+   * or the first collection.
    */
-  collections: readonly ColorCollection[] = [];
+  collections: readonly ColorCollectionEntry[] = [];
   /**
    * Lets the mouse wheel step the hovered surface or Slider; off so that scrolling the page never
    * edits the color.
@@ -373,7 +378,8 @@ export class TpColorPicker extends TpFormElement<string> {
   /** The value when the popup opened; the comparison swatch restores it. */
   #original: string | undefined;
   #customHandles: readonly Hsv[] = [];
-  #paletteSource: { key: readonly unknown[]; collections: readonly ColorCollection[] } | undefined;
+  #paletteSource:
+    { key: readonly unknown[]; collections: readonly ColorCollectionEntry[] } | undefined;
   #numberFields = new Map<string, NumberFieldBinding>();
   #registeredParts = new Map<Element, () => void>();
   #composed = new WeakSet<Element>();
@@ -1309,7 +1315,7 @@ export class TpColorPicker extends TpFormElement<string> {
   };
 
   /** The swatches view's collections: the saved and recent colors, then `collections`. */
-  #paletteCollections(): readonly ColorCollection[] {
+  #paletteCollections(): readonly ColorCollectionEntry[] {
     const strings = this.#strings;
     const key = [this.swatches, this.recent, this.collections, strings] as const;
     const cached = this.#paletteSource;

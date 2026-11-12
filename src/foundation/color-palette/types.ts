@@ -60,6 +60,29 @@ export interface ColorCollection {
   readonly palettes?: readonly ColorCollectionPalette[];
 }
 
+/**
+ * A collection loaded when it is first needed: its `id` and `name` are known up front, so a menu
+ * can offer it, and `load` fetches the document, such as a dynamic import of
+ * `@tweakpad/ui/color-palette/collections/<id>` or a fetched JSON document parsed with
+ * `parseColorCollection`. The document's own id is ignored; the loader's id names it.
+ */
+export interface ColorCollectionLoader {
+  readonly id: string;
+  /** Name offered before the document loads; the document's name replaces it once loaded. */
+  readonly name?: string;
+  /**
+   * Fetches the document, or a module whose default export is the document. It is called once
+   * per loader object; every palette offering the loader shares the result.
+   */
+  load(): Promise<ColorCollection | { default: ColorCollection }>;
+}
+
+/** A collection given as a document, or as a loader that fetches one when it is needed. */
+export type ColorCollectionEntry = ColorCollection | ColorCollectionLoader;
+
+/** Loading state of a collection: documents are `loaded` from the start. */
+export type ColorCollectionStatus = 'idle' | 'loading' | 'loaded' | 'error';
+
 /** A parsed collection color. */
 export interface PaletteSwatch {
   /** Unique within its collection. */
