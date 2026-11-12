@@ -1008,6 +1008,13 @@ export abstract class TpAnchoredSurface extends Scrollable(TpElement) {
       if (!next.has(element)) {
         cleanup();
         this.#slotTriggers.delete(element);
+        // A replaced current trigger hands an open surface to the next one: the update picks it,
+        // describes or controls it and positions against it.
+        if (element === this.trigger) {
+          this.trigger = null;
+          this.stopPosition();
+          this.requestUpdate();
+        }
       }
     for (const element of next)
       if (!this.#slotTriggers.has(element))

@@ -108,6 +108,15 @@ const wait = async (host: TpSelect): Promise<void> => {
   );
   await bounded(host.updateComplete, 'settled update');
 };
+/** The resolved extent of an icon size token in a document, measured on a probe. */
+const tokenExtent = (target: Document, size: 'xs' | 'sm' | 'md' | 'lg'): number => {
+  const probe = target.createElement('div');
+  probe.style.inlineSize = `var(--tp-icon-size-${size})`;
+  target.body.append(probe);
+  const extent = probe.getBoundingClientRect().width;
+  probe.remove();
+  return extent;
+};
 const settle = async (host: TpSelect): Promise<void> => {
   await wait(host);
   await delay(180);
@@ -557,11 +566,13 @@ async function apiChecks() {
     await wait(host);
     assertion(host.highlightedValue === 'dotless', 'inherited Turkish matching');
   });
-  await test('Modal lease observes new outside descendants inside shadow scopes', async () => {
+  await test('Modal lease covers outside descendants inside shadow scopes and spares late ones', async () => {
     const scope = document.createElement('div');
     const root = scope.attachShadow({ mode: 'open' });
     const inside = document.createElement('div');
-    root.append(inside);
+    const sibling = document.createElement('tp-button');
+    sibling.textContent = 'Sibling';
+    root.append(inside, sibling);
     document.body.append(scope);
     cleanups.push(() => scope.remove());
     const host = await make({ modal: true });
@@ -569,14 +580,17 @@ async function apiChecks() {
     await wait(host);
     host.setOpen(true);
     await wait(host);
-    const outside = document.createElement('tp-button');
-    outside.textContent = 'Outside';
-    root.append(outside);
+    assertion(sibling.hasAttribute('inert'), 'shadow sibling not inert');
+    // Elements inserted after the lease by another owner (an extension or password manager
+    // overlay) stay interactive (Foundation outside-inert, as `markOthers`).
+    const late = document.createElement('tp-button');
+    late.textContent = 'Late';
+    root.append(late);
     await wait(host);
-    assertion(outside.hasAttribute('inert'), 'new shadow sibling not inert');
+    assertion(!late.hasAttribute('inert'), 'late shadow sibling made inert');
     host.close();
     await wait(host);
-    assertion(!outside.hasAttribute('inert'), 'lease did not restore shadow sibling');
+    assertion(!sibling.hasAttribute('inert'), 'lease did not restore shadow sibling');
   });
   await test('Typeahead preserves exact prefix, unmatched reset, open reset, and IME', async () => {
     const host = await make({
@@ -648,7 +662,8 @@ async function apiChecks() {
     await delay(120);
     assertion(renders === atEdgeRenders, 'repeat timer kept rendering after directional edge');
     host.close();
-    await settle(host);
+    // The popup leaves after its exit motion, which may outlast `settle`.
+    for (let elapsed = 0; host.popupElement && elapsed < 1500; elapsed += 50) await delay(50);
     assertion(!host.popupElement, 'closed scroll popup retained unexpectedly');
   });
   await test('Constrained popup clips overlay scroll controls and keeps focus and Arrow visible', async () => {
@@ -817,7 +832,7 @@ async function apiChecks() {
     const freshControl = freshButton.shadowRoot!.querySelector<HTMLElement>('[part~=button]')!;
     assertion(
       freshIcon.shadowRoot!.querySelector('svg') &&
-        Math.abs(freshIcon.getBoundingClientRect().width - 16) < 0.5 &&
+        Math.abs(freshIcon.getBoundingClientRect().width - tokenExtent(target, 'sm')) < 0.5 &&
         target.defaultView!.getComputedStyle(freshControl).alignItems === 'center' &&
         freshControl.getBoundingClientRect().height > 0,
       'first foreign constituent structural/recipe paint',
@@ -969,7 +984,7 @@ async function apiChecks() {
     ];
     await Promise.all(icons.map((icon) => bounded(icon.updateComplete, 'measured icon')));
     const visible = icons.filter((icon) => icon.getBoundingClientRect().width > 0);
-    const expected = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const expected = tokenExtent(document, 'sm');
     assertion(
       visible.length >= 4 &&
         visible.every(
