@@ -6,13 +6,14 @@ export type EasingEditorSize = 'sm' | 'default' | 'lg';
 export type EasingCategory = 'ease' | 'spring';
 export const EASING_CATEGORIES: readonly EasingCategory[] = ['ease', 'spring'];
 /** What the background preview square animates; `none` hides the preview. */
-export type EasingPreviewMode = 'none' | 'scale' | 'scale-x' | 'scale-y' | 'rotation';
+export type EasingPreviewMode = 'none' | 'scale' | 'scale-x' | 'scale-y' | 'rotation' | 'fade';
 export const EASING_PREVIEW_MODES: readonly EasingPreviewMode[] = [
   'none',
   'scale',
   'scale-x',
   'scale-y',
   'rotation',
+  'fade',
 ];
 /** The modes the header Button cycles through on each press. */
 export const EASING_PREVIEW_CYCLE: readonly EasingPreviewMode[] = [
@@ -20,6 +21,7 @@ export const EASING_PREVIEW_CYCLE: readonly EasingPreviewMode[] = [
   'scale-x',
   'scale-y',
   'rotation',
+  'fade',
 ];
 export type EasingEditorSurface = 'graph' | 'slider' | 'preset' | 'tabs' | 'point' | 'expression';
 
@@ -114,6 +116,7 @@ export interface EasingEditorStrings {
   readonly previewScaleX: string;
   readonly previewScaleY: string;
   readonly previewRotation: string;
+  readonly previewFade: string;
   readonly frames: string;
   readonly export: string;
   readonly expression: string;

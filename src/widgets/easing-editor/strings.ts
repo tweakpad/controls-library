@@ -50,6 +50,7 @@ export const DEFAULT_STRINGS: EasingEditorStrings = {
   previewScaleX: 'Scale X',
   previewScaleY: 'Scale Y',
   previewRotation: 'Rotation',
+  previewFade: 'Fade',
   frames: 'Frames',
   export: 'Export format',
   expression: 'Easing expression',

@@ -3,7 +3,7 @@ import type { EasingPreviewMode } from './types.js';
 /**
  * Keyframes of the background preview square per mode (Widgets 6.2 Anatomy, graph preview
  * layer): the scale modes grow it from the center from 0 to 1, uniformly or along one axis;
- * rotation turns it half a revolution.
+ * rotation turns it half a revolution; fade raises its opacity from 0 to 1.
  */
 export function previewKeyframes(mode: EasingPreviewMode): Keyframe[] {
   switch (mode) {
@@ -15,6 +15,8 @@ export function previewKeyframes(mode: EasingPreviewMode): Keyframe[] {
       return [{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }];
     case 'rotation':
       return [{ transform: 'rotate(0deg)' }, { transform: 'rotate(180deg)' }];
+    case 'fade':
+      return [{ opacity: 0 }, { opacity: 1 }];
     case 'none':
       return [];
   }

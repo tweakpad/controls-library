@@ -179,6 +179,7 @@ describe('easing editor presets and adapters', () => {
       { transform: 'rotate(0deg)' },
       { transform: 'rotate(180deg)' },
     ]);
+    expect(previewKeyframes('fade')).toEqual([{ opacity: 0 }, { opacity: 1 }]);
     expect(previewKeyframes('none')).toEqual([]);
   });
 });

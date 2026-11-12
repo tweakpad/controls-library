@@ -1611,6 +1611,9 @@ export async function assertPreview(): Promise<Report> {
   );
   pressToggle(modeButton()!);
   await settle(target);
+  checks.push(check('rotation is followed by fade', target.preview === 'fade', target.preview));
+  pressToggle(modeButton()!);
+  await settle(target);
   checks.push(check('the cycle wraps to scale', target.preview === 'scale', target.preview));
   target.setValue('cubic-bezier(0.34, 1.56, 0.64, 1)');
   await settle(target);

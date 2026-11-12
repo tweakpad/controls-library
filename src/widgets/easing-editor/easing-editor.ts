@@ -113,6 +113,7 @@ const PREVIEW_MODE_STRING_KEYS: Readonly<Record<EasingPreviewMode, keyof EasingE
   'scale-x': 'previewScaleX',
   'scale-y': 'previewScaleY',
   rotation: 'previewRotation',
+  fade: 'previewFade',
 };
 /** The curve an empty editor starts from when a category Tab is chosen. */
 const DEFAULT_CURVES: Readonly<Record<EasingCategory, string>> = {

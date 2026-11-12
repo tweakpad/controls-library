@@ -38,4 +38,5 @@
 | Kind | A text | Reason |
 | --- | --- | --- |
 
+| prose | `duration` is the time in seconds that the preview | User request 2026-11-12: a `fade` preview mode joins the list of `preview` values. |
 | prose | Spring rows (mass, stiffness, damping, velocity) and parametric rows | Approved contract 74703da7: no Copy action; editable-value composes a persistent adjacent Input, leaving the bar draggable. |

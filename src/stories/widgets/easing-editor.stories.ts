@@ -55,7 +55,7 @@ const meta: Meta<Args> = {
     presetPicker: { control: 'boolean' },
     preview: {
       control: 'select',
-      options: ['none', 'scale', 'scale-x', 'scale-y', 'rotation'],
+      options: ['none', 'scale', 'scale-x', 'scale-y', 'rotation', 'fade'],
     },
     previewControls: { control: 'boolean' },
     frames: { control: 'boolean' },
