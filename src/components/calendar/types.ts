@@ -5,7 +5,7 @@ export type CalendarDateMatcher = ReadonlySet<string> | ((date: string) => boole
 export type CalendarTodayIndicator = 'fill' | 'underline' | 'dot' | 'none';
 /** A small colored dot under a day's number. */
 export interface CalendarDayMarker {
-  /** Theme status color of the dot; `default` when omitted. */
+  /** Theme status color of the dot; without it or `color`, the dot takes the theme's foreground. */
   variant?: StatusDotVariant;
   /** Any CSS color, replacing the variant color; a token is recommended. */
   color?: string;

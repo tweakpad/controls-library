@@ -74,7 +74,7 @@ calendar.unavailableDates = (date) => booked.has(date);
 calendar.disabledDates = (date) => [0, 6].includes(new Date(date + 'T00:00').getDay());`}
 />
 
-Disabled and unavailable dates are skipped by keyboard movement and cannot be selected; unavailable ones carry a separate `data-unavailable` marker for styling. Unavailable dates are crossed out at full strength; disabled dates are dimmed.
+Disabled and unavailable dates are skipped by keyboard movement and cannot be selected; unavailable ones carry a separate `data-unavailable` marker for styling. Unavailable dates are crossed out and dimmed; disabled dates are only dimmed.
 
 ### Custom day content
 
@@ -462,6 +462,6 @@ calendar.dayMarkers = new Map([
 ]);`}
 />
 
-`crossedOutDates` crosses out days that can still be selected, here full classes that take a waitlist. Unavailable dates are crossed out and cannot be selected, and disabled dates, such as the days before `min`, are dimmed. A day both crossed out and disabled is crossed out and dimmed.
+`crossedOutDates` crosses out days that can still be selected, here full classes that take a waitlist. Unavailable dates are crossed out, dimmed and cannot be selected, and disabled dates, such as the days before `min`, are only dimmed.
 
-`dayMarkers` puts up to three dots under a day's number, as a `Map` or a function from the date to a list of markers. Each marker takes a Status dot `variant` or any CSS `color`, and its `label` is read after the date. `today-indicator` marks today with the muted fill (`fill`, the default), an underlined number (`underline`), a dot (`dot`), or not at all (`none`).
+`dayMarkers` puts up to three dots under a day's number, as a `Map` or a function from the date to a list of markers. Each marker takes a Status dot `variant` or any CSS `color`, and is drawn in the text color, white on dark themes and black on light ones, when it has neither; its `label` is read after the date. `today-indicator` marks today with the muted fill (`fill`, the default), an underlined number (`underline`), a dot (`dot`), or not at all (`none`).

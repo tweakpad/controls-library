@@ -301,8 +301,8 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
   /** Accessible name of the calendar. */
   label = 'Date';
   /**
-   * Dates that cannot be chosen because they are taken, such as booked nights; crossed out at full
-   * strength, apart from dimmed disabled dates.
+   * Dates that cannot be chosen because they are taken, such as booked nights; crossed out and
+   * dimmed, apart from disabled dates, which are only dimmed.
    */
   unavailableDates: CalendarDateMatcher;
   /** Dates that are shown dimmed and cannot be focused or selected. */
@@ -825,9 +825,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
         this.#modifierNames.map((key) => [key, this.#matches(this.dayModifiers[key], date)]),
       ),
       markers:
-        today && this.todayIndicator === 'dot'
-          ? Object.freeze([{ variant: 'default' as const }, ...dayMarkers])
-          : dayMarkers,
+        today && this.todayIndicator === 'dot' ? Object.freeze([{}, ...dayMarkers]) : dayMarkers,
     };
     // Custom markers first (names already exclude built-ins): built-in state and
     // date identity always win.
@@ -905,7 +903,10 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     })}${number}`;
   }
 
-  /** Up to three passive dots centered under the day's content. */
+  /**
+   * Up to three passive dots centered under the day's content. A marker with neither a variant nor
+   * a color takes the theme's foreground: white on dark themes, black on light ones.
+   */
   #renderMarkers(markers: readonly CalendarDayMarker[]): unknown {
     if (!markers.length) return nothing;
     return this.#part('day-markers', {
@@ -918,7 +919,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
             html`<tp-status-dot
               .variant=${marker.variant ?? 'default'}
               .tooltip=${false}
-              style=${marker.color ? `--_tp-calendar-marker-color:${marker.color}` : nothing}
+              style=${marker.color || !marker.variant ? `--_tp-calendar-marker-color:${marker.color ?? 'var(--tp-foreground)'}` : nothing}
             ></tp-status-dot>`,
         ),
     });

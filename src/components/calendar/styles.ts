@@ -263,9 +263,4 @@ export const calendarStyles = css`
   .footer[hidden] {
     display: none;
   }
-
-  /* Unavailable days are crossed out at full strength; disabled ones stay dimmed. */
-  .day-cell[data-unavailable]:not([data-disabled]) .day {
-    opacity: 1;
-  }
 `;
