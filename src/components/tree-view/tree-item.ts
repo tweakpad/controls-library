@@ -37,7 +37,7 @@ const NAMED_SLOTS = new Set(['leading', 'trailing', 'indicator', 'handle']);
  * @slot leading - Content before the label, such as an icon.
  * @slot trailing - Content after the label, such as a badge or an action.
  * @slot indicator - Replaces the default disclosure chevron.
- * @csspart row - The pressable line; `data-selected`, `data-expanded`, `data-disabled`.
+ * @csspart row - The pressable line; `data-selected`, `data-current`, `data-expanded`, `data-disabled`.
  * @csspart indent - Indentation and guides.
  * @csspart indicator - The disclosure indicator region.
  * @csspart checkbox - The checked indicator; `data-checked`, `data-indeterminate`.
@@ -360,6 +360,7 @@ export class TpTreeItem extends TpElement {
     set('aria-posinset', String(state.posInSet));
     set('aria-expanded', state.expandable ? String(state.expanded) : null);
     set('aria-selected', state.selected === undefined ? null : String(state.selected));
+    set('aria-current', state.current ? 'true' : null);
     set(
       'aria-checked',
       state.checked === undefined
@@ -375,6 +376,7 @@ export class TpTreeItem extends TpElement {
     set('data-guides', state.guides);
     this.toggleAttribute('data-expanded', state.expandable && state.expanded);
     this.toggleAttribute('data-selected', Boolean(state.selected));
+    this.toggleAttribute('data-current', Boolean(state.current));
     this.toggleAttribute('data-loading', state.status === 'loading');
     this.toggleAttribute('data-error', state.status === 'error');
   }
@@ -451,6 +453,7 @@ export class TpTreeItem extends TpElement {
       class="row"
       style=${`--_tp-tree-depth:${depth}`}
       ?data-selected=${Boolean(state?.selected)}
+      ?data-current=${Boolean(state?.current)}
       ?data-expanded=${expanded}
       ?data-disabled=${Boolean(state?.disabled)}
       ?data-dragging=${Boolean(state?.dragging)}

@@ -9,6 +9,8 @@ import type { TpEmojiPicker } from '../../widgets/emoji-picker/emoji-picker.js';
 import type { TpFlow } from '../../widgets/flow/flow.js';
 import type { TpGradientPicker } from '../../widgets/gradient-picker/gradient-picker.js';
 import type { TpGradientStop } from '../../widgets/gradient-picker/gradient-stop.js';
+import type { TpLayer, TpLayerState, TpLayerStateValue } from '../../widgets/layers/layer.js';
+import type { TpLayers } from '../../widgets/layers/layers.js';
 import type { TpPlot } from '../../widgets/plot/plot.js';
 import type { TpTextEditor } from '../../widgets/text-editor/text-editor.js';
 import type * as foundationColorPaletteTypes from '../../foundation/color-palette/types.js';
@@ -31,6 +33,7 @@ import type * as widgetsColorPickerTypes from '../../widgets/color-picker/types.
 import type * as widgetsEmojiPickerTypes from '../../widgets/emoji-picker/types.js';
 import type * as widgetsFlowTypes from '../../widgets/flow/types.js';
 import type * as widgetsGradientPickerGradientPicker from '../../widgets/gradient-picker/gradient-picker.js';
+import type * as widgetsLayersTypes from '../../widgets/layers/types.js';
 import type * as widgetsPlotTypes from '../../widgets/plot/types.js';
 import type * as widgetsTextEditorTypes from '../../widgets/text-editor/types.js';
 
@@ -487,6 +490,101 @@ type Tags = {
     {
       'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
       'tp-gradient-stop-change': Event;
+    }
+  >;
+  'tp-layer': Tag<
+    TpLayer,
+    | 'appearance'
+    | 'canRemove'
+    | 'canRename'
+    | 'data'
+    | 'density'
+    | 'disabled'
+    | 'group'
+    | 'invalid'
+    | 'label'
+    | 'motionPolicy'
+    | 'orientation'
+    | 'partContracts'
+    | 'partPresentation'
+    | 'readOnly'
+    | 'required',
+    { 'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>; 'tp-layer-change': Event }
+  >;
+  'tp-layer-state': Tag<
+    TpLayerState,
+    | 'appearance'
+    | 'density'
+    | 'disabled'
+    | 'invalid'
+    | 'label'
+    | 'motionPolicy'
+    | 'name'
+    | 'orientation'
+    | 'partContracts'
+    | 'partPresentation'
+    | 'readOnly'
+    | 'required'
+    | 'scope'
+    | 'value',
+    { 'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>; 'tp-layer-change': Event }
+  >;
+  'tp-layer-state-value': Tag<
+    TpLayerStateValue,
+    | 'appearance'
+    | 'density'
+    | 'dims'
+    | 'disabled'
+    | 'display'
+    | 'invalid'
+    | 'label'
+    | 'motionPolicy'
+    | 'orientation'
+    | 'partContracts'
+    | 'partPresentation'
+    | 'readOnly'
+    | 'required'
+    | 'value',
+    { 'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>; 'tp-layer-change': Event }
+  >;
+  'tp-layers': Tag<
+    TpLayers,
+    | 'active'
+    | 'appearance'
+    | 'canDrop'
+    | 'canRemove'
+    | 'canRename'
+    | 'canReorder'
+    | 'createLayerId'
+    | 'defaultActive'
+    | 'defaultExpanded'
+    | 'defaultLayers'
+    | 'defaultValue'
+    | 'density'
+    | 'disabled'
+    | 'expanded'
+    | 'invalid'
+    | 'label'
+    | 'layers'
+    | 'messages'
+    | 'motionPolicy'
+    | 'orientation'
+    | 'partContracts'
+    | 'partPresentation'
+    | 'readOnly'
+    | 'renderLayer'
+    | 'required'
+    | 'size'
+    | 'value',
+    {
+      'tp-active-change': foundationEvents.TpValueChangeEvent<string | null>;
+      'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
+      'tp-expanded-change': foundationEvents.TpValueChangeEvent<readonly string[]>;
+      'tp-layers-change': foundationEvents.TpValueChangeEvent<
+        readonly widgetsLayersTypes.Layer<unknown>[]
+      >;
+      'tp-value-change': foundationEvents.TpValueChangeEvent<readonly string[]>;
+      'tp-value-commit': foundationEvents.TpValueCommitEvent<readonly string[]>;
     }
   >;
   'tp-plot': Tag<

@@ -49,6 +49,12 @@ const examples = {
   'tp-text-editor': () => html`<tp-text-editor label="Field notes" name="notes"></tp-text-editor>`,
   'tp-color-palette': () =>
     html`<tp-color-palette label="Fill" default-value="#3a89fa"></tp-color-palette>`,
+  'tp-layers': () =>
+    html`<tp-layers label="Scene" default-value='["sun"]'>
+      <tp-layer id="sun" label="Sun"></tp-layer>
+      <tp-layer id="clouds" label="Clouds"></tp-layer>
+      <tp-layer id="sky" label="Sky"></tp-layer>
+    </tp-layers>`,
 } satisfies Record<WidgetTag, () => TemplateResult>;
 
 export function renderWidgetExample(tagName: WidgetTag): TemplateResult {

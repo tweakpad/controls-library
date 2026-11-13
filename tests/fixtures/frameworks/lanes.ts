@@ -421,6 +421,20 @@ export const laneRows: LaneRow[] = [
     props: { label: 'Fill' },
   },
   {
+    entry: 'tp-layers',
+    binding: 'Layers',
+    lane: 'value',
+    initial: ['sun'],
+    propose: call('selectLayers', ['moon']),
+    props: {
+      label: 'Scene',
+      defaultLayers: [
+        { id: 'sun', label: 'Sun' },
+        { id: 'moon', label: 'Moon' },
+      ],
+    },
+  },
+  {
     entry: 'tp-emoji-picker',
     binding: 'EmojiPicker',
     lane: 'value',

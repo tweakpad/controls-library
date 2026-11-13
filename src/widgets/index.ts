@@ -2,6 +2,7 @@
 // aggregates. Registration lives in `@tweakpad/ui/register/widgets`. One line per widget folder,
 // alphabetical, mirroring `src/components/index.ts`:
 export * from './color-palette/index.js';
+export * from './layers/index.js';
 export * from './color-picker/index.js';
 export * from './easing-editor/index.js';
 export * from './emoji-picker/index.js';

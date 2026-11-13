@@ -7,6 +7,7 @@ export type {
   TreeLoadStatus,
   TreeMove,
   TreeSelectionMode,
+  TreeSelectionBehavior,
   TreeViewDropTarget,
   TreeViewExpansionTrigger,
   TreeViewGuides,

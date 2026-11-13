@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Layers verification</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      body {
+        margin: 0;
+        background: var(--tp-background);
+        color: var(--tp-foreground);
+        font-family: var(--tp-font-sans);
+      }
+      main {
+        margin: 24px auto;
+        padding: 20px;
+        max-width: 1100px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        align-items: start;
+      }
+      tp-card {
+        inline-size: 18rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <tp-card>
+        <tp-layers id="markup" label="markup" can-rename can-remove default-expanded='["scene"]'>
+          <tp-layer id="title" label="Title" can-rename="false">
+            <tp-icon data-icon="text"></tp-icon>
+            <tp-layer-state name="visibility" label="Visibility" value="visible">
+              <tp-layer-state-value value="visible"><tp-icon data-icon="eye"></tp-icon></tp-layer-state-value>
+              <tp-layer-state-value value="hidden" dims><tp-icon data-icon="eye-off"></tp-icon></tp-layer-state-value>
+              <tp-layer-state-value value="solo" label="Solo"><tp-icon data-icon="target"></tp-icon></tp-layer-state-value>
+            </tp-layer-state>
+            <tp-layer-state name="locked" label="Lock" value="unlocked">
+              <tp-layer-state-value value="locked"><tp-icon data-icon="lock"></tp-icon></tp-layer-state-value>
+              <tp-layer-state-value value="unlocked" display="hover"><tp-icon data-icon="lock"></tp-icon></tp-layer-state-value>
+            </tp-layer-state>
+          </tp-layer>
+          <tp-layer id="scene" label="Scene with a long label that has to ellipsize">
+            <tp-layer id="sun" label="Sun">
+              <tp-layer-state name="visibility" label="Visibility" value="visible" scope="selection">
+                <tp-layer-state-value value="visible"><tp-icon data-icon="eye"></tp-icon></tp-layer-state-value>
+                <tp-layer-state-value value="hidden" dims><tp-icon data-icon="eye-off"></tp-icon></tp-layer-state-value>
+              </tp-layer-state>
+            </tp-layer>
+            <tp-layer id="fog" label="Fog">
+              <tp-layer-state name="visibility" label="Visibility" value="hidden" scope="selection">
+                <tp-layer-state-value value="visible"><tp-icon data-icon="eye"></tp-icon></tp-layer-state-value>
+                <tp-layer-state-value value="hidden" dims><tp-icon data-icon="eye-off"></tp-icon></tp-layer-state-value>
+              </tp-layer-state>
+            </tp-layer>
+          </tp-layer>
+          <tp-layer id="frozen" label="Frozen">
+            <tp-layer-state name="enabled" label="Enabled" value="false">
+              <tp-layer-state-value value="true"><tp-icon data-icon="power"></tp-icon></tp-layer-state-value>
+              <tp-layer-state-value value="false" label="Disabled"><tp-icon data-icon="power-off"></tp-icon></tp-layer-state-value>
+            </tp-layer-state>
+          </tp-layer>
+          <tp-layer id="ground" label="Ground" can-remove="false"></tp-layer>
+          <tp-layer id="folder" label="Empty group" group></tp-layer>
+        </tp-layers>
+      </tp-card>
+      <tp-card id="controlled-card"></tp-card>
+      <tp-card dir="rtl">
+        <tp-layers id="rtl" label="rtl" default-value='["b"]'>
+          <tp-layer id="rtl-a" label="Alpha"></tp-layer>
+          <tp-layer id="b" label="Beta"></tp-layer>
+        </tp-layers>
+      </tp-card>
+      <tp-card>
+        <tp-layers id="sm" label="sm" size="sm" default-value='["sm-b"]'>
+          <tp-layer id="sm-a" label="Small one"></tp-layer>
+          <tp-layer id="sm-b" label="Small two"></tp-layer>
+        </tp-layers>
+      </tp-card>
+      <tp-card>
+        <tp-layers id="empty" label="empty"><span slot="empty">No layers yet</span></tp-layers>
+      </tp-card>
+      <p>After layers</p>
+    </main>
+    <script type="module" src="./fixture.ts"></script>
+  </body>
+</html>

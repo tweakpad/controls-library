@@ -1,0 +1,280 @@
+---
+title: Layers
+description: A stack of layers people select, reorder, group, rename and change the states of, as in an image or design editor, with one active layer the app's properties follow.
+tag: tp-layers
+parts: [tp-layer, tp-layer-state, tp-layer-state-value]
+---
+
+<Preview
+  title="Layers"
+  code={`<tp-card style="inline-size: 18rem">
+  <tp-layers id="layers-hero" label="Poster" can-rename can-remove default-expanded='["hero-night"]' default-value='["hero-moon"]'>
+    <tp-layer id="hero-headline" label="Headline">
+      <tp-icon data-icon="text"></tp-icon>
+      <tp-layer-state name="visibility" label="Visibility" value="visible">
+        <tp-layer-state-value value="visible"><tp-icon data-icon="eye"></tp-icon></tp-layer-state-value>
+        <tp-layer-state-value value="hidden" dims><tp-icon data-icon="eye-off"></tp-icon></tp-layer-state-value>
+      </tp-layer-state>
+      <tp-layer-state name="locked" label="Lock" value="locked">
+        <tp-layer-state-value value="locked"><tp-icon data-icon="lock"></tp-icon></tp-layer-state-value>
+        <tp-layer-state-value value="unlocked" display="hover"><tp-icon data-icon="lock"></tp-icon></tp-layer-state-value>
+      </tp-layer-state>
+    </tp-layer>
+    <tp-layer id="hero-night" label="Night sky">
+      <tp-icon data-icon="folder"></tp-icon>
+      <tp-layer id="hero-moon" label="Moon"><tp-icon data-icon="image"></tp-icon></tp-layer>
+      <tp-layer id="hero-stars" label="Stars"><tp-icon data-icon="image"></tp-icon></tp-layer>
+    </tp-layer>
+    <tp-layer id="hero-paper" label="Paper texture"><tp-icon data-icon="image"></tp-icon></tp-layer>
+  </tp-layers>
+</tp-card>`}
+  script={`import { eyeIcon } from '@tweakpad/ui/icons/eye';
+import { eyeOffIcon } from '@tweakpad/ui/icons/eye-off';
+import { lockIcon } from '@tweakpad/ui/icons/lock';
+import { fileTextIcon } from '@tweakpad/ui/icons/file-text';
+import { folderIcon } from '@tweakpad/ui/icons/folder';
+import { imageIcon } from '@tweakpad/ui/icons/image';
+
+const icons = { eye: eyeIcon, 'eye-off': eyeOffIcon, lock: lockIcon, text: fileTextIcon, folder: folderIcon, image: imageIcon };
+for (const icon of document.querySelectorAll('#layers-hero tp-icon')) icon.icon = icons[icon.dataset.icon];`}
+/>
+
+## Usage
+
+Each `tp-layer` child is a layer: its `id`, its `label`, a `tp-icon` shown before the label, and `tp-layer` children when it is a group. The top of the list is the first layer. Every change people make is a cancelable `tp-layers-change` whose `detail.metadata.change` says what happened (`move`, `rename`, `state`, `add`, `duplicate`, `remove`, `group` or `ungroup`); once accepted, the stack writes it back into its `tp-layer` children, so the markup always shows the current stack.
+
+Several layers can be selected at once, and one of them is the active layer: the one the last press or arrow key reached. A properties panel follows `active`; actions such as remove or duplicate work on `value`, the selected ids.
+
+### States
+
+A layer's states are its `tp-layer-state` children, and only that layer has them: one layer can have a visibility and a lock, another a visibility alone, another none. A state has a `name`, the `label` of its control, its current `value` and, as `tp-layer-state-value` children, every value it can take, in the order a press on its control steps through them. The control shows the current value's `tp-icon`; a value without one shows nothing, `display="hover"` shows it only while the row is hovered or has focus, and `dims` dims the layer's label, and a group's contents, while the layer has that value.
+
+Here visibility has three values and swaps its icon, and the lock shows while locked and, unlocked, only on the row's hover.
+
+<Preview
+  title="Visibility and lock"
+  code={`<tp-card style="inline-size: 18rem">
+  <tp-layers id="layers-states" label="Track sheet">
+    <tp-layer id="states-notes" label="Annotations">
+      <tp-layer-state name="visibility" label="Visibility" value="visible">
+        <tp-layer-state-value value="visible"><tp-icon data-icon="eye"></tp-icon></tp-layer-state-value>
+        <tp-layer-state-value value="hidden" dims><tp-icon data-icon="eye-off"></tp-icon></tp-layer-state-value>
+        <tp-layer-state-value value="solo" label="Solo"><tp-icon data-icon="pin"></tp-icon></tp-layer-state-value>
+      </tp-layer-state>
+      <tp-layer-state name="locked" label="Lock" value="unlocked">
+        <tp-layer-state-value value="locked"><tp-icon data-icon="lock"></tp-icon></tp-layer-state-value>
+        <tp-layer-state-value value="unlocked" display="hover"><tp-icon data-icon="lock"></tp-icon></tp-layer-state-value>
+      </tp-layer-state>
+    </tp-layer>
+    <tp-layer id="states-grid" label="Grid">
+      <tp-layer-state name="visibility" label="Visibility" value="hidden">
+        <tp-layer-state-value value="visible"><tp-icon data-icon="eye"></tp-icon></tp-layer-state-value>
+        <tp-layer-state-value value="hidden" dims><tp-icon data-icon="eye-off"></tp-icon></tp-layer-state-value>
+      </tp-layer-state>
+    </tp-layer>
+    <tp-layer id="states-scan" label="Scan"></tp-layer>
+  </tp-layers>
+</tp-card>`}
+  script={`import { eyeIcon } from '@tweakpad/ui/icons/eye';
+import { eyeOffIcon } from '@tweakpad/ui/icons/eye-off';
+import { lockIcon } from '@tweakpad/ui/icons/lock';
+import { pinIcon } from '@tweakpad/ui/icons/pin';
+
+const icons = { eye: eyeIcon, 'eye-off': eyeOffIcon, lock: lockIcon, pin: pinIcon };
+for (const icon of document.querySelectorAll('#layers-states tp-icon')) icon.icon = icons[icon.dataset.icon];`}
+/>
+
+`scope="selection"` makes a press on a selected row change every selected layer with a state of the same name. `getLayerState(id, name)` reads a value, and `setLayerState(ids, name, value)` proposes a change from code.
+
+### Enabled
+
+`enabled` is the one state every layer has, without a control. A layer whose `enabled` state is `false` is frozen: it shows dimmed, and it can be neither selected, moved, renamed nor removed, and its other controls are inactive. Declaring the state with icons for `true` and `false` gives it a control, which stays usable so the layer can be turned back on.
+
+<Preview
+  title="A frozen layer"
+  code={`<tp-card style="inline-size: 18rem">
+  <tp-layers id="layers-enabled" label="Adjustments">
+    <tp-layer id="enabled-curves" label="Curves">
+      <tp-layer-state name="enabled" label="Enabled" value="false">
+        <tp-layer-state-value value="true" label="On"><tp-icon data-icon="on"></tp-icon></tp-layer-state-value>
+        <tp-layer-state-value value="false" label="Off"><tp-icon data-icon="off"></tp-icon></tp-layer-state-value>
+      </tp-layer-state>
+    </tp-layer>
+    <tp-layer id="enabled-grain" label="Grain"></tp-layer>
+  </tp-layers>
+</tp-card>`}
+  script={`import { circleCheckIcon } from '@tweakpad/ui/icons/circle-check';
+import { banIcon } from '@tweakpad/ui/icons/ban';
+
+const icons = { on: circleCheckIcon, off: banIcon };
+for (const icon of document.querySelectorAll('#layers-enabled tp-icon')) icon.icon = icons[icon.dataset.icon];`}
+/>
+
+### Selection and the active layer
+
+A press or an arrow key selects one layer and makes it active. Shift extends the selection from the last layer pressed, and Control or Command adds or removes a layer; the layer pressed becomes active, and removing the active one passes it to the nearest selected layer. `tp-value-change` proposes the selection and `tp-active-change` the active layer, as one change: both apply or neither does.
+
+<Preview
+  title="Properties of the active layer"
+  code={`<tp-stack gap="3" align="center">
+  <tp-card style="inline-size: 18rem">
+    <tp-layers id="layers-active" label="Map" default-value='["active-tides"]'>
+      <tp-layer id="active-labels" label="Harbor labels"></tp-layer>
+      <tp-layer id="active-tides" label="Tide chart"></tp-layer>
+      <tp-layer id="active-coast" label="Coastline"></tp-layer>
+    </tp-layers>
+  </tp-card>
+  <output
+    id="layers-active-output"
+    style="color: var(--tp-muted-foreground); font-size: var(--tp-text-sm)"
+    >Editing Tide chart</output
+  >
+</tp-stack>`}
+  script={`const layers = document.querySelector('#layers-active');
+const output = document.querySelector('#layers-active-output');
+layers.addEventListener('tp-active-change', (event) => {
+  const active = event.detail.value && layers.getLayer(event.detail.value);
+  output.textContent = active ? \`Editing \${active.layer.label}\` : 'Nothing selected';
+});`}
+/>
+
+### Groups
+
+A `tp-layer` with `tp-layer` children is a group, and `group` makes an empty one: its chevron expands it, and layers are dragged into it, out of it or between groups. `default-expanded` or a controlled `expanded` lists the open groups. `groupLayers()` wraps the selection in a new group where its first layer was, and `ungroupLayers()` puts a group's layers back in its place.
+
+### Renaming, removing and duplicating
+
+`can-rename` lets people rename a layer with a double-click or F2: Enter or leaving the field proposes the label, and Escape keeps the old one. `can-remove` lets them remove the selected layers with Delete or Backspace; the layer that takes the active layer's place becomes active. A `tp-layer`'s own `can-rename` and `can-remove` override the stack's for that layer, so `can-remove="false"` keeps a background in place while the other layers can go.
+
+`addLayer()` adds a layer above the active one and selects it, `duplicateLayers()` places a copy above each selected layer, and `removeLayers()` and `moveLayers()` work from code; each goes through the same proposals as the people's own changes. Copies and new groups get ids no other element on the page uses; `createLayerId` supplies your own.
+
+### Header, footer and the empty stack
+
+The `header`, `footer` and `empty` slots hold the stack's own controls; the widget leaves what they do to the app. Here the header shows or hides a panel of controls that follows the active layer and clears the stack, the footer adds lights from a Menu and duplicates or removes the selected ones, and the `empty` slot shows while no light is left. Switching the panel is the app's: it listens to `tp-active-change` and shows the active layer's controls.
+
+<Preview
+  title="Panel controls"
+  code={`<tp-card style="inline-size: 18rem">
+  <tp-stack gap="3">
+    <tp-layers id="layers-bars" label="Lights" can-rename can-remove default-value='["bars-key"]'>
+      <tp-layer id="bars-key" label="Key light"></tp-layer>
+      <tp-layer id="bars-fill" label="Fill light"></tp-layer>
+      <tp-toggle slot="header" variant="ghost" size="icon-sm" default-pressed aria-label="Properties"
+        ><tp-icon data-icon="settings"></tp-icon
+      ></tp-toggle>
+      <tp-button slot="header" variant="ghost" size="sm" data-action="clear">Clear</tp-button>
+      <tp-empty-state slot="empty" title="No lights" description="Add a light to light the scene.">
+        <tp-button slot="actions" variant="outline" size="sm" data-kind="point">Add a light</tp-button>
+      </tp-empty-state>
+      <tp-menu slot="footer">
+        <tp-button slot="trigger" variant="ghost" size="icon-sm" data-icon="plus" aria-label="Add light"></tp-button>
+        <tp-menu-item data-kind="point">Point light</tp-menu-item>
+        <tp-menu-item data-kind="spot">Spot light</tp-menu-item>
+      </tp-menu>
+      <tp-button slot="footer" variant="ghost" size="icon-sm" data-icon="copy" data-action="duplicate" aria-label="Duplicate"></tp-button>
+      <tp-button slot="footer" variant="ghost" size="icon-sm" data-icon="trash" data-action="remove" aria-label="Remove"></tp-button>
+    </tp-layers>
+    <div id="layers-bars-panel"></div>
+  </tp-stack>
+</tp-card>`}
+  script={`import { html, nothing, render } from 'lit';
+import { plusIcon } from '@tweakpad/ui/icons/plus';
+import { copyIcon } from '@tweakpad/ui/icons/copy';
+import { trashIcon } from '@tweakpad/ui/icons/trash';
+import { settingsIcon } from '@tweakpad/ui/icons/settings';
+
+const layers = document.querySelector('#layers-bars');
+const panel = document.querySelector('#layers-bars-panel');
+const icons = { plus: plusIcon, copy: copyIcon, trash: trashIcon, settings: settingsIcon };
+for (const element of layers.querySelectorAll('[data-icon]')) element.icon = icons[element.dataset.icon];
+
+// The panel follows the active layer: each light keeps its own intensity.
+const levels = new Map([['bars-key', 80], ['bars-fill', 40]]);
+let open = true;
+const draw = () => {
+  const id = layers.active;
+  const label = id ? \`\${layers.getLayer(id).layer.label} intensity\` : 'Intensity';
+  render(
+    open
+      ? html\`<tp-slider
+          label=\${label}
+          .value=\${id ? (levels.get(id) ?? 50) : 0}
+          ?disabled=\${!id}
+          @tp-value-change=\${(event) => {
+            levels.set(id, event.detail.value);
+            draw();
+          }}
+        ></tp-slider>\`
+      : nothing,
+    panel,
+  );
+};
+layers.addEventListener('tp-active-change', () => queueMicrotask(draw));
+layers.querySelector('tp-toggle').addEventListener('tp-value-change', (event) => {
+  open = event.detail.value;
+  draw();
+});
+draw();
+
+let count = 0;
+for (const adder of layers.querySelectorAll('[data-kind]'))
+  adder.addEventListener('click', () => {
+    count += 1;
+    const kind = adder.dataset.kind === 'spot' ? 'Spot light' : 'Point light';
+    layers.addLayer({ id: \`bars-\${adder.dataset.kind}-\${count}\`, label: \`\${kind} \${count}\` });
+  });
+layers.querySelector('[data-action="clear"]').addEventListener('click', () => layers.removeLayers(layers.layers.map((layer) => layer.id)));
+layers.querySelector('[data-action="duplicate"]').addEventListener('click', () => layers.duplicateLayers());
+layers.querySelector('[data-action="remove"]').addEventListener('click', () => layers.removeLayers());`}
+/>
+
+### Records
+
+Where a framework renders the children, pass records instead: `defaultLayers` starts a stack the widget owns, and `layers` makes it controlled, ignoring any `tp-layer` children. A record has the same parts as the markup, `{ id, label, icon, children, states, data }`, each state `{ name, label, value, values, scope }` and each value `{ value, label, icon, display, dims }`. Each proposal names its new value in `detail.value`; write it back to accept it, or cancel the event to refuse it. A change that also moves the selection, such as a removal, proposes every lane it changes together.
+
+<Code
+  language="typescript"
+  code={`layers.layers = scene.layers;
+layers.addEventListener('tp-layers-change', (event) => {
+  scene.layers = event.detail.value;
+  layers.layers = scene.layers;
+});
+layers.addEventListener('tp-value-change', (event) => {
+  layers.value = event.detail.value;
+});
+layers.addEventListener('tp-active-change', (event) => {
+  layers.active = event.detail.value;
+});`}
+/>
+
+### Rules
+
+`canDrop(move)` refuses a move before the list offers it, from the layer, its new group and its index; a layer only goes into a group either way. For any other rule, cancel the `tp-layers-change` that breaks it.
+
+<Code
+  language="typescript"
+  code={`// Nothing goes below the background, and the background stays.
+layers.canDrop = (move) => move.toParentId !== null || move.toIndex < stack.length - 1;
+layers.addEventListener('tp-layers-change', (event) => {
+  const change = event.detail.metadata.change;
+  if (change.action === 'remove' && change.ids.includes('background')) event.preventDefault();
+});`}
+/>
+
+### Keyboard
+
+The list is one tab stop; the state controls in each row are tab stops of their own.
+
+| Key | Action |
+| --- | --- |
+| <Keys keys="ArrowUp" />, <Keys keys="ArrowDown" /> | Select the layer above or below and make it active |
+| <Keys keys="shift+ArrowUp" />, <Keys keys="shift+ArrowDown" /> | Extend the selection |
+| <Keys keys="ArrowRight" />, <Keys keys="ArrowLeft" /> | Expand or collapse a group, or move into or out of it |
+| <Keys keys="Home" />, <Keys keys="End" /> | Select the top or bottom layer |
+| <Keys keys="mod+a" /> | Select every layer |
+| <Keys keys="Space" /> | Add the focused layer to the selection, or take it out |
+| <Keys keys="F2" /> | Rename the layer, when renaming is allowed |
+| <Keys keys="Enter" />, <Keys keys="Escape" /> | While renaming: keep or cancel the new label |
+| <Keys keys="Delete" />, <Keys keys="Backspace" /> | Remove the selected layers, when removing is allowed |
+| <Keys keys="alt+ArrowUp" />, <Keys keys="alt+ArrowDown" /> | Move the selected layers one place up or down in their group |
+| <Keys keys="mod+Enter" /> | Pick up the layer to move it with the arrows; Enter drops it, Escape puts it back |

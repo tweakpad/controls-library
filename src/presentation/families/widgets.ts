@@ -7,6 +7,7 @@ import { flowPresentation } from './flow.js';
 import { emojiPickerPresentation } from './emoji-picker.js';
 import { plotPresentation } from './plot.js';
 import { textEditorPresentation } from './text-editor.js';
+import { layersPresentation } from './layers.js';
 
 /**
  * Every widget family, in widget catalog order. Widgets never import this list; each widget
@@ -22,4 +23,5 @@ export const widgetPresentationFamilies: readonly PresentationFamily[] = [
   plotPresentation,
   textEditorPresentation,
   colorPalettePresentation,
+  layersPresentation,
 ];

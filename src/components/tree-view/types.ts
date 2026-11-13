@@ -21,6 +21,12 @@ export interface TreeViewItem {
 }
 
 export type TreeViewExpansionTrigger = 'item' | 'indicator';
+/**
+ * How presses and arrow keys select in a tree that offers selection: `toggle` presses add or
+ * remove an item and arrows only move focus; `replace` presses and arrows select the item alone,
+ * while Control or Command toggles and Shift extends.
+ */
+export type TreeSelectionBehavior = 'toggle' | 'replace';
 export type TreeViewGuides = 'line' | 'none';
 export type TreeViewSize = 'sm' | 'default';
 
@@ -37,6 +43,8 @@ export interface TreeItemState {
   readonly selected: boolean | undefined;
   /** Undefined without checkbox selection. */
   readonly checked: TreeCheckedState | undefined;
+  /** The item `isItemCurrent` names, such as the active layer of a selection. */
+  readonly current: boolean;
   readonly disabled: boolean;
   readonly status: TreeLoadStatus;
   readonly tabStop: boolean;

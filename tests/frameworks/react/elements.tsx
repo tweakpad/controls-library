@@ -207,6 +207,10 @@ import {
   Flow,
   GradientPicker,
   GradientStop,
+  Layer,
+  LayerState,
+  LayerStateValue,
+  Layers,
   Plot,
   TextEditor,
 } from '../../../src/react/widgets/index.js';
@@ -442,6 +446,12 @@ import type { TpEmojiPicker as TpEmojiPickerType } from '../../../src/widgets/em
 import type { TpFlow as TpFlowType } from '../../../src/widgets/flow/flow.js';
 import type { TpGradientPicker as TpGradientPickerType } from '../../../src/widgets/gradient-picker/gradient-picker.js';
 import type { TpGradientStop as TpGradientStopType } from '../../../src/widgets/gradient-picker/gradient-stop.js';
+import type {
+  TpLayer as TpLayerType,
+  TpLayerState as TpLayerStateType,
+  TpLayerStateValue as TpLayerStateValueType,
+} from '../../../src/widgets/layers/layer.js';
+import type { TpLayers as TpLayersType } from '../../../src/widgets/layers/layers.js';
 import type { TpPlot as TpPlotType } from '../../../src/widgets/plot/plot.js';
 import type { TpTextEditor as TpTextEditorType } from '../../../src/widgets/text-editor/text-editor.js';
 
@@ -672,6 +682,10 @@ export const elements: ReactElement[] = [
   <Flow ref={(element: TpFlowType | null) => void element} />,
   <GradientPicker ref={(element: TpGradientPickerType | null) => void element} />,
   <GradientStop ref={(element: TpGradientStopType | null) => void element} />,
+  <Layer ref={(element: TpLayerType | null) => void element} />,
+  <LayerState ref={(element: TpLayerStateType | null) => void element} />,
+  <LayerStateValue ref={(element: TpLayerStateValueType | null) => void element} />,
+  <Layers ref={(element: TpLayersType | null) => void element} />,
   <Plot ref={(element: TpPlotType | null) => void element} />,
   <TextEditor ref={(element: TpTextEditorType | null) => void element} />,
 ];

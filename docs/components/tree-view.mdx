@@ -51,7 +51,7 @@ Forms: with `name`, each selected identifier is submitted as one entry, in tree 
 
 `selection-mode="multiple"` with `checkbox-selection` shows a checked indicator in every row. `selection-propagation` cascades a parent's selection to its descendants and derives mixed parents.
 
-Multiple: pressing or Space toggles; Shift extends from the anchor; Control/Command toggles without moving the anchor; Shift+Arrow extends while moving; Shift+Space selects the range; Control+Shift+Home/End selects to an end; Control+A selects every visible enabled item.
+Multiple: pressing or Space toggles; Shift extends from the anchor; Control/Command toggles without moving the anchor; Shift+Arrow extends while moving; Shift+Space selects the range; Control+Shift+Home/End selects to an end; Control+A selects every visible enabled item. With `selection-behavior="replace"`, a press or an arrow key selects the item alone instead, as in a file manager, and each selection proposal names the item acted on in `detail.metadata.item`.
 
 <Preview
   width="2"
@@ -172,7 +172,7 @@ A tree you drag yourself can reuse the level rule. `projectDepth(rows, index, re
 
 ### Custom rows
 
-In records mode, `renderItem(item, state)` returns each row's content, so the artwork can follow the row's state. Here folders open their icon while expanded and show a child count in the `trailing` slot, built with `html` from `lit`. `canDrop` vetoes moves before they are offered, so files cannot hold other items, and Enter or a press on a row fires `tp-action`.
+In records mode, `renderItem(item, state)` returns each row's content, so the artwork can follow the row's state. Here folders open their icon while expanded and show a child count in the `trailing` slot, built with `html` from `lit`. `canDrop` vetoes moves before they are offered, so files cannot hold other items, and Enter or a press on a row fires `tp-action`. `isItemCurrent` marks one record as current, such as the active one of a selection, with `aria-current` and `data-current`.
 
 <Preview
   title="Rendered rows"

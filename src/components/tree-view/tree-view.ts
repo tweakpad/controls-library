@@ -57,6 +57,7 @@ import { TreeReorder } from './reorder.js';
 import type {
   TreeItemOwner,
   TreeItemState,
+  TreeSelectionBehavior,
   TreeViewDropTarget,
   TreeViewExpansionTrigger,
   TreeViewGuides,
@@ -134,6 +135,7 @@ export class TpTreeView<T = TreeViewItem>
     items: { attribute: false, noAccessor: true },
     defaultItems: { attribute: false },
     selectionMode: { type: String, attribute: 'selection-mode', reflect: true },
+    selectionBehavior: { type: String, attribute: 'selection-behavior', reflect: true },
     selectionPropagation: { type: Boolean, attribute: 'selection-propagation', reflect: true },
     checkboxSelection: { type: Boolean, attribute: 'checkbox-selection', reflect: true },
     expansionTrigger: { type: String, attribute: 'expansion-trigger', reflect: true },
@@ -151,6 +153,7 @@ export class TpTreeView<T = TreeViewItem>
     getItemLabel: { attribute: false },
     getItemChildren: { attribute: false },
     isItemDisabled: { attribute: false },
+    isItemCurrent: { attribute: false },
     itemHasChildren: { attribute: false },
     withItemChildren: { attribute: false },
     renderItem: { attribute: false },
@@ -221,6 +224,12 @@ export class TpTreeView<T = TreeViewItem>
 
   /** How many items can be selected: none, one, or several with Shift and Ctrl or Cmd. */
   selectionMode: TreeSelectionMode = 'single';
+  /**
+   * How presses and arrow keys select: by default a press adds or removes an item and arrows only
+   * move focus; replacing, a press or an arrow selects the item alone while Control or Command
+   * toggles and Shift extends, as in a file manager.
+   */
+  selectionBehavior: TreeSelectionBehavior = 'toggle';
   /** Selecting a parent selects its descendants, and a parent shows checked or mixed from its children. */
   selectionPropagation = false;
   /** Shows a checkbox on each item; a press on the box toggles it without changing the rest of the selection. */
@@ -257,6 +266,11 @@ export class TpTreeView<T = TreeViewItem>
     (item as TreeViewItem).children as readonly T[] | null | undefined;
   /** Whether a record is disabled; defaults to its `disabled`. */
   isItemDisabled: (item: T) => boolean = (item) => Boolean((item as TreeViewItem).disabled);
+  /**
+   * Names the current item, such as the active one of a selection: it gets `aria-current` and
+   * `data-current`. Call `requestUpdate()` when the answer changes.
+   */
+  isItemCurrent: ((item: T) => boolean) | null = null;
   /** Whether a record has children to load on first expansion; defaults to its `hasChildren`. */
   itemHasChildren: (item: T) => boolean = (item) => Boolean((item as TreeViewItem).hasChildren);
   /** Produces a record with new children when a reorder changes them. */
@@ -589,7 +603,13 @@ export class TpTreeView<T = TreeViewItem>
     }
     if (!this.#action(id, event)) return;
     if (!node.disabled) {
-      const mode = event.shiftKey ? 'range' : event.ctrlKey || event.metaKey ? 'toggle' : 'press';
+      const mode = event.shiftKey
+        ? 'range'
+        : event.ctrlKey || event.metaKey
+          ? 'toggle'
+          : this.selectionBehavior === 'replace'
+            ? 'replace'
+            : 'press';
       this.#select(
         id,
         mode,
@@ -904,6 +924,7 @@ export class TpTreeView<T = TreeViewItem>
       expandable,
       expanded: expandable && this.#expandedSet.has(id),
       selected: this.selectionMode === 'none' ? undefined : this.#selected.has(id),
+      current: records && this.isItemCurrent !== null && this.isItemCurrent(node.item as T),
       checked: this.checkboxSelection
         ? (this.#checked?.get(id) ?? this.#selected.has(id))
         : undefined,
@@ -1186,8 +1207,16 @@ export class TpTreeView<T = TreeViewItem>
 
   // ── Selection ──────────────────────────────────────────────────────────────
 
-  #setSelection(next: readonly string[], reason: ChangeReason, source?: Event): boolean {
-    return this.#selection.set(constrainSelection(next, this.selectionMode), reason, source);
+  /** `item` is the item the press or key acted on, reported as `metadata.item`; null for all or none. */
+  #setSelection(
+    next: readonly string[],
+    reason: ChangeReason,
+    source?: Event,
+    item: string | null = null,
+  ): boolean {
+    return this.#selection.set(constrainSelection(next, this.selectionMode), reason, source, {
+      metadata: { item },
+    });
   }
 
   #select(
@@ -1208,6 +1237,7 @@ export class TpTreeView<T = TreeViewItem>
         propagate ? propagateSelection(this.#model, [], id, true) : [id],
         reason,
         source,
+        id,
       );
       return;
     }
@@ -1223,7 +1253,7 @@ export class TpTreeView<T = TreeViewItem>
       let next: string[] = union ? unionIds(current, range) : range;
       if (propagate)
         for (const value of range) next = propagateSelection(this.#model, next, value, true);
-      this.#setSelection(next, reason, source);
+      this.#setSelection(next, reason, source, id);
       return;
     }
     const selected =
@@ -1232,7 +1262,7 @@ export class TpTreeView<T = TreeViewItem>
     const next = propagate
       ? propagateSelection(this.#model, current, id, selected)
       : toggleId(current, id, selected);
-    this.#setSelection(next, reason, source);
+    this.#setSelection(next, reason, source, id);
   }
 
   /** A range extends from the last toggled item, else from the item focused before it. */
@@ -1316,6 +1346,8 @@ export class TpTreeView<T = TreeViewItem>
         if (action.extend) this.#defaultAnchor();
         void this.focusItem(action.id);
         if (action.extend) this.#select(action.id, 'range', 'keyboard', event);
+        else if (this.selectionBehavior === 'replace' && !this.#model.get(action.id)?.disabled)
+          this.#select(action.id, 'replace', 'keyboard', event);
         return;
       case 'expand':
         if (!this.#model.get(action.id)?.disabled)
@@ -1358,7 +1390,7 @@ export class TpTreeView<T = TreeViewItem>
           this.#rows.indexOf(action.id),
           (id) => !this.#model.get(id)?.disabled,
         );
-        this.#setSelection(unionIds(this.value, range), 'keyboard', event);
+        this.#setSelection(unionIds(this.value, range), 'keyboard', event, action.id);
         void this.focusItem(action.id);
         return;
       }

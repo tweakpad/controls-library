@@ -9,6 +9,8 @@ import { TpEmojiPicker } from '../widgets/emoji-picker/emoji-picker.js';
 import { TpPlot } from '../widgets/plot/plot.js';
 import { TpTextEditor } from '../widgets/text-editor/text-editor.js';
 import { TpColorPalette } from '../widgets/color-palette/color-palette.js';
+import { TpLayers } from '../widgets/layers/layers.js';
+import { TpLayer, TpLayerState, TpLayerStateValue } from '../widgets/layers/layer.js';
 import { defineElement } from '../foundation/define.js';
 
 defineElement(TpColorPicker.tagName, TpColorPicker);
@@ -20,5 +22,9 @@ defineElement(TpEmojiPicker.tagName, TpEmojiPicker);
 defineElement(TpPlot.tagName, TpPlot);
 defineElement(TpTextEditor.tagName, TpTextEditor);
 defineElement(TpColorPalette.tagName, TpColorPalette);
+defineElement(TpLayers.tagName, TpLayers);
+defineElement(TpLayer.tagName, TpLayer);
+defineElement(TpLayerState.tagName, TpLayerState);
+defineElement(TpLayerStateValue.tagName, TpLayerStateValue);
 
 export * from '../widgets/index.js';
