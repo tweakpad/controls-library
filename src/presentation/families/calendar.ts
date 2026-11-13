@@ -105,7 +105,11 @@ const definition: ComponentDefinition = {
     },
     {
       name: 'calendar-day-number',
-      description: 'The day number inside a strip day.',
+      description: 'The number inside a day, crossed out or underlined by its state.',
+    },
+    {
+      name: 'calendar-day-markers',
+      description: "The row of marker dots centered under a day's number.",
     },
     {
       name: 'calendar-footer',
@@ -136,6 +140,7 @@ export const calendarPresentation = definePresentation({
       '[part~="calendar-days"]': 'calendar-days',
       '[part~="calendar-day-weekday"]': 'calendar-day-weekday',
       '[part~="calendar-day-number"]': 'calendar-day-number',
+      '[part~="calendar-day-markers"]': 'calendar-day-markers',
     },
   },
   sources: [calendarAppearance],

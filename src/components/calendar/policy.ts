@@ -1,4 +1,5 @@
 import type { CalendarAdapter } from '../../foundation/calendar.js';
+import type { CalendarDayMarker, CalendarDayMarkers } from './types.js';
 
 /**
  * Built-in `data-*` names published on day cells, day Button hosts and native day
@@ -12,6 +13,9 @@ export const calendarBuiltInDayMarkers: readonly string[] = Object.freeze([
   'outside',
   'disabled',
   'unavailable',
+  'crossed-out',
+  'today-indicator',
+  'markers',
   'focused',
   'focus-visible',
   'range-start',
@@ -22,6 +26,18 @@ export const calendarBuiltInDayMarkers: readonly string[] = Object.freeze([
 ]);
 
 const modifierNamePattern = /^[a-z][a-z0-9-]*$/u;
+
+const noMarkers: readonly CalendarDayMarker[] = Object.freeze([]);
+
+/** The markers `source` gives `date`, as a frozen list; empty when it gives none. */
+export function calendarDayMarkers(
+  source: CalendarDayMarkers,
+  date: string,
+): readonly CalendarDayMarker[] {
+  const markers = typeof source === 'function' ? source(date) : source?.get(date);
+  if (!markers?.length) return noMarkers;
+  return Object.freeze(markers.filter((marker) => marker && typeof marker === 'object'));
+}
 
 /** Split `dayModifiers` names into published markers and ignored (invalid or built-in) names. */
 export function partitionCalendarModifiers(names: readonly string[]): {

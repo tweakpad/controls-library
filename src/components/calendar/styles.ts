@@ -135,18 +135,41 @@ export const calendarStyles = css`
     min-inline-size: 0;
   }
 
+  /* Positioned, so the marker dots anchor to the day button and never move its content. */
   .day::part(button) {
+    position: relative;
     inline-size: 100%;
     block-size: 100%;
     min-block-size: 0;
     padding: 0;
   }
 
+  .day-markers {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 2px;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  /* A marker's own color, when it has one, replaces the dot's variant color. */
+  .day-markers > tp-status-dot {
+    --tp-status-dot-color: var(--_tp-calendar-marker-color);
+  }
+
+  /* Static, so the marker dots anchor to the button's bottom edge instead of the label. */
   .day::part(button-label) {
+    position: static;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  /* With markers, every grid day's content rises alike, leaving the dots room under it. */
+  .root[data-markers] .grid .day::part(button-label) {
+    padding-block-end: 6px;
   }
 
   .day:focus-within {
@@ -239,5 +262,10 @@ export const calendarStyles = css`
 
   .footer[hidden] {
     display: none;
+  }
+
+  /* Unavailable days are crossed out at full strength; disabled ones stay dimmed. */
+  .day-cell[data-unavailable]:not([data-disabled]) .day {
+    opacity: 1;
   }
 `;

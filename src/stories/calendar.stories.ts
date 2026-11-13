@@ -6,12 +6,14 @@ import type {
   CalendarCaptionLayout,
   CalendarMessages,
   CalendarVariant,
+  CalendarTodayIndicator,
 } from '../components/calendar/index.js';
 import type { CalendarSelectionMode } from '../foundation/calendar.js';
 
 interface Args {
   variant: CalendarVariant;
   visibleDays: number;
+  todayIndicator: CalendarTodayIndicator;
   selectionMode: CalendarSelectionMode;
   captionLayout: CalendarCaptionLayout;
   visibleMonths: number;
@@ -35,6 +37,7 @@ const meta = {
   args: {
     variant: 'grid',
     visibleDays: 5,
+    todayIndicator: 'fill',
     selectionMode: 'single',
     captionLayout: 'label',
     visibleMonths: 1,
@@ -53,6 +56,7 @@ const meta = {
   argTypes: {
     variant: { control: 'inline-radio', options: ['grid', 'strip'] },
     visibleDays: { control: { type: 'number', min: 1, max: 9 } },
+    todayIndicator: { control: 'inline-radio', options: ['fill', 'underline', 'dot', 'none'] },
     selectionMode: { control: 'select', options: ['single', 'multiple', 'range'] },
     captionLayout: {
       control: 'select',
@@ -87,6 +91,7 @@ const meta = {
       label="Date"
       .variant=${args.variant}
       .visibleDays=${args.visibleDays}
+      .todayIndicator=${args.todayIndicator}
       .selectionMode=${args.selectionMode}
       .captionLayout=${args.captionLayout}
       .visibleMonths=${args.visibleMonths}

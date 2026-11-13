@@ -3,6 +3,7 @@ import { gregorianCalendarAdapter as adapter } from '../../../../src/foundation/
 import {
   calendarBuiltInDayMarkers,
   calendarCanDisplay,
+  calendarDayMarkers,
   calendarNearestYearMonth,
   calendarStripAnchorInMonth,
   calendarStripClamp,
@@ -27,6 +28,9 @@ describe('calendar day modifiers', () => {
         'outside',
         'disabled',
         'unavailable',
+        'crossed-out',
+        'today-indicator',
+        'markers',
         'focused',
         'range-start',
         'range-middle',
@@ -160,5 +164,34 @@ describe('calendar day strip', () => {
     expect(calendarStripReveal(adapter, '2025-11-02', 5, '2025-10-30')).toBe('2025-11-01');
     expect(calendarStripReveal(adapter, '2025-11-02', 5, '2025-12-02')).toBe('2025-12-02');
     expect(calendarStripReveal(adapter, '2025-11-02', 5, '2025-10-01')).toBe('2025-10-01');
+  });
+});
+
+describe('calendar day markers', () => {
+  const payday = { variant: 'success' as const, label: 'Payday' };
+
+  it('reads markers from a map or a function, as a frozen list', () => {
+    const map = new Map([['2026-06-03', [payday]]]);
+    const fromMap = calendarDayMarkers(map, '2026-06-03');
+    expect(fromMap).toEqual([payday]);
+    expect(Object.isFrozen(fromMap)).toBe(true);
+    expect(
+      calendarDayMarkers((date) => (date.endsWith('03') ? [payday] : undefined), '2026-06-03'),
+    ).toEqual([payday]);
+  });
+
+  it('gives no markers for missing, empty or absent sources', () => {
+    expect(calendarDayMarkers(undefined, '2026-06-03')).toEqual([]);
+    expect(calendarDayMarkers(new Map(), '2026-06-03')).toEqual([]);
+    expect(calendarDayMarkers(() => [], '2026-06-03')).toEqual([]);
+  });
+
+  it('never lets a modifier take a decoration marker name', () => {
+    expect(
+      partitionCalendarModifiers(['crossed-out', 'today-indicator', 'markers', 'payday']),
+    ).toEqual({
+      accepted: ['payday'],
+      ignored: ['crossed-out', 'today-indicator', 'markers'],
+    });
   });
 });

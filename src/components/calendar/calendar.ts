@@ -34,6 +34,7 @@ import { calendarStyles } from './styles.js';
 import {
   calendarBuiltInDayMarkers,
   calendarCanDisplay,
+  calendarDayMarkers,
   calendarNearestYearMonth,
   calendarStripAnchorInMonth,
   calendarStripClamp,
@@ -53,6 +54,9 @@ import type {
   CalendarMessages,
   CalendarValidityCode,
   CalendarVariant,
+  CalendarDayMarker,
+  CalendarDayMarkers,
+  CalendarTodayIndicator,
 } from './types.js';
 
 import { compositeControl } from '../../foundation/composite-control.js';
@@ -62,6 +66,7 @@ import type { PartRenderOptions, PartState } from '../../foundation/part.js';
 import { calendarPresentation } from '../../presentation/families/calendar.js';
 import { TpButton } from '../button/button.js';
 import { TpNativeSelect } from '../native-select/native-select.js';
+import { TpStatusDot } from '../status-dot/status-dot.js';
 import type { CustomElementConstructorWithTag } from '../../foundation/define.js';
 const calendarValueConverter = {
   fromAttribute(value: string | null): CalendarValue {
@@ -139,7 +144,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
   static tagName = 'tp-calendar';
   /** Library elements this element renders; defining it defines them too. */
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {
-    return [TpButton, TpNativeSelect];
+    return [TpButton, TpNativeSelect, TpStatusDot];
   }
   static override presentation = calendarPresentation;
   static override properties = {
@@ -169,6 +174,9 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     today: { type: String },
     label: { type: String },
     unavailableDates: { attribute: false },
+    crossedOutDates: { attribute: false },
+    dayMarkers: { attribute: false },
+    todayIndicator: { type: String, attribute: 'today-indicator' },
     disabledDates: { attribute: false },
     hiddenDates: { attribute: false },
     calendarAdapter: { attribute: false },
@@ -293,12 +301,21 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
   /** Accessible name of the calendar. */
   label = 'Date';
   /**
-   * Dates that cannot be chosen because they are taken, such as booked nights; marked apart from
-   * disabled dates.
+   * Dates that cannot be chosen because they are taken, such as booked nights; crossed out at full
+   * strength, apart from dimmed disabled dates.
    */
   unavailableDates: CalendarDateMatcher;
-  /** Dates that are shown but cannot be focused or selected. */
+  /** Dates that are shown dimmed and cannot be focused or selected. */
   disabledDates: CalendarDateMatcher;
+  /** Dates crossed out that can still be selected; disabled ones are crossed out and dimmed. */
+  crossedOutDates: CalendarDateMatcher;
+  /**
+   * Small colored dots under each date's number, at most three; their labels are read after the
+   * date.
+   */
+  dayMarkers: CalendarDayMarkers;
+  /** How today is marked: the muted fill, an underlined number, a dot under it, or nothing. */
+  todayIndicator: CalendarTodayIndicator = 'fill';
   /** Dates left as empty cells, keeping the grid's shape. */
   hiddenDates: CalendarDateMatcher;
   /** Date arithmetic and formatting, to show a calendar system other than the Gregorian one. */
@@ -382,6 +399,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
         'data-readonly': this.readOnly,
         'data-required': this.required,
         'data-invalid': this.invalid,
+        'data-markers': !!this.dayMarkers || this.todayIndicator === 'dot',
       },
       content: html`${
         this.#isStrip()
@@ -783,15 +801,18 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
       this.#matches(this.disabledDates, date) || !this.#withinSelectionBounds(date);
     const disabled = this.effectiveDisabled || unavailable || disabledDate;
     const range = isCalendarRange(this.#selection) ? this.#selection : undefined;
+    const today = this.calendarAdapter.normalize(this.today) === date;
+    const dayMarkers = calendarDayMarkers(this.dayMarkers, date);
     const state: CalendarDayState = {
       date,
       month,
       label: this.calendarAdapter.format(date, this.#locale(), 'accessible'),
       selected: this.#isSelected(date),
-      today: this.calendarAdapter.normalize(this.today) === date,
+      today,
       outside,
       disabled,
       unavailable,
+      crossedOut: unavailable || this.#matches(this.crossedOutDates, date),
       focused: this.#focusedDate === date,
       rangeStart: range?.from === date,
       rangeEnd: (range?.to ?? range?.from) === date,
@@ -803,6 +824,10 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
       modifiers: Object.fromEntries(
         this.#modifierNames.map((key) => [key, this.#matches(this.dayModifiers[key], date)]),
       ),
+      markers:
+        today && this.todayIndicator === 'dot'
+          ? Object.freeze([{ variant: 'default' as const }, ...dayMarkers])
+          : dayMarkers,
     };
     // Custom markers first (names already exclude built-ins): built-in state and
     // date identity always win.
@@ -816,6 +841,9 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
       'data-outside': outside,
       'data-disabled': disabledDate || this.effectiveDisabled,
       'data-unavailable': unavailable,
+      'data-crossed-out': state.crossedOut,
+      'data-today-indicator': today ? this.todayIndicator : null,
+      'data-markers': state.markers.length > 0,
       'data-focused': state.focused,
       'data-range-start': state.rangeStart,
       'data-range-middle': state.rangeMiddle,
@@ -834,7 +862,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
         variant="ghost"
         size="sm"
         .disabled=${disabled}
-        .ariaLabel=${this.messages.day?.(state) ?? state.label}
+        .ariaLabel=${this.messages.day?.(state) ?? this.#dayName(state)}
         data-date=${date}
         data-roving=${date === rovingDate && !outside ? '0' : '-1'}
         .partContracts=${{ button: { ...this.partContracts['calendar-day'], hostProperties: { ...this.partContracts['calendar-day']?.hostProperties, ...markers, 'aria-current': state.today ? 'date' : null } } }}
@@ -842,32 +870,58 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
         @keydown=${this.#dayKeyDown}
         @focusin=${this.#dayFocus}
       >
-        ${this.renderDay?.(state) ?? this.#dayContent(date, markers)}
+        ${this.renderDay?.(state) ?? this.#dayContent(date, markers)}${this.#renderMarkers(state.markers)}
       </tp-button>
     </span>`;
   }
 
+  /** The date, then the labels of its markers. */
+  #dayName(state: CalendarDayState): string {
+    const labels = state.markers.map((marker) => marker.label).filter(Boolean);
+    return labels.length ? `${state.label}, ${labels.join(', ')}` : state.label;
+  }
+
   /** The day number, under its weekday in the strip. */
   #dayContent(date: string, markers: Record<string, unknown>): unknown {
-    const number =
-      this.formatters.day?.(date) ?? this.calendarAdapter.format(date, this.#locale(), 'day');
-    if (!this.#isStrip()) return number;
-    const day = this.calendarAdapter.dayOfWeek(date);
     const state = {
       'data-selected': markers['data-selected'],
-      'data-today': markers['data-today'],
+      'data-today-indicator': markers['data-today-indicator'],
       'data-range-middle': markers['data-range-middle'],
+      'data-crossed-out': markers['data-crossed-out'],
     };
+    const number = this.#part('day-number', {
+      tag: 'span',
+      properties: { class: 'day-number', 'data-strip': this.#isStrip(), ...state },
+      content:
+        this.formatters.day?.(date) ?? this.calendarAdapter.format(date, this.#locale(), 'day'),
+    });
+    if (!this.#isStrip()) return number;
+    const day = this.calendarAdapter.dayOfWeek(date);
     return html`${this.#part('day-weekday', {
       tag: 'span',
       properties: { class: 'day-weekday', ...state },
       content:
         this.formatters.weekday?.(day) ?? this.calendarAdapter.weekdayLabel(day, this.#locale()),
-    })}${this.#part('day-number', {
+    })}${number}`;
+  }
+
+  /** Up to three passive dots centered under the day's content. */
+  #renderMarkers(markers: readonly CalendarDayMarker[]): unknown {
+    if (!markers.length) return nothing;
+    return this.#part('day-markers', {
       tag: 'span',
-      properties: { class: 'day-number', ...state },
-      content: number,
-    })}`;
+      properties: { class: 'day-markers' },
+      content: markers
+        .slice(0, 3)
+        .map(
+          (marker) =>
+            html`<tp-status-dot
+              .variant=${marker.variant ?? 'default'}
+              .tooltip=${false}
+              style=${marker.color ? `--_tp-calendar-marker-color:${marker.color}` : nothing}
+            ></tp-status-dot>`,
+        ),
+    });
   }
 
   protected override willUpdate(changed: PropertyValues<this>): void {

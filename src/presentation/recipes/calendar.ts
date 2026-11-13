@@ -33,6 +33,11 @@ export const calendarAppearance: PresentationDictionary = {
       selector: '& .day-cell[data-range-end]:not([data-range-start])::after',
       declarations: { ...rangeBacking, 'inset-inline-start': '0' },
     },
+    // Marker dots on a selected day take its foreground, so they show on the primary fill.
+    {
+      selector: '& .day-cell[data-selected]:not([data-range-middle]) .day-markers > tp-status-dot',
+      declarations: { '--tp-status-dot-color': 'currentColor' },
+    },
     // Range middles round where a week row or the strip starts or ends.
     {
       selector:
@@ -101,10 +106,10 @@ export const calendarAppearance: PresentationDictionary = {
     },
     { selector: '&::before', declarations: { transition: 'none' } },
     // Hover never covers a day's own selected, today or range fill.
-    fillHidden('&:is([data-today], [data-selected], [data-range-middle])'),
+    fillHidden("&:is([data-today-indicator='fill'], [data-selected], [data-range-middle])"),
     { selector: '&[data-outside]', declarations: { color: 'var(--tp-muted-foreground)' } },
     {
-      selector: '&[data-today]:not([data-selected])',
+      selector: "&[data-today-indicator='fill']:not([data-selected])",
       declarations: { background: 'var(--tp-muted)', color: 'var(--tp-foreground)' },
     },
     {
@@ -135,16 +140,39 @@ export const calendarAppearance: PresentationDictionary = {
     },
     // On a filled day the weekday takes the day's own color.
     {
-      selector: '&:is([data-selected], [data-today], [data-range-middle])',
+      selector: "&:is([data-selected], [data-today-indicator='fill'], [data-range-middle])",
       declarations: { color: 'inherit' },
     },
   ],
+  // In the strip the number is set larger under its weekday.
   'calendar-day-number': [
     {
+      selector: '&[data-strip]',
       declarations: {
         'font-size': 'var(--tp-text-base)',
         'line-height': 'var(--tp-leading-tight)',
         'font-weight': 'var(--tp-font-medium)',
+      },
+    },
+    { selector: '&[data-crossed-out]', declarations: { 'text-decoration-line': 'line-through' } },
+    {
+      selector: "&[data-today-indicator='underline']",
+      declarations: {
+        'text-decoration-line': 'underline',
+        'text-decoration-thickness': '2px',
+        'text-underline-offset': '0.2em',
+      },
+    },
+    {
+      selector: "&[data-crossed-out][data-today-indicator='underline']",
+      declarations: { 'text-decoration-line': 'underline line-through' },
+    },
+  ],
+  'calendar-day-markers': [
+    {
+      declarations: {
+        gap: '2px',
+        '--tp-status-dot-size': 'calc(var(--tp-spacing) * 1.25)',
       },
     },
   ],

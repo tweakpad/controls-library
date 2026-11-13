@@ -74,7 +74,7 @@ calendar.unavailableDates = (date) => booked.has(date);
 calendar.disabledDates = (date) => [0, 6].includes(new Date(date + 'T00:00').getDay());`}
 />
 
-Disabled and unavailable dates are skipped by keyboard movement and cannot be selected; unavailable ones carry a separate `data-unavailable` marker for styling.
+Disabled and unavailable dates are skipped by keyboard movement and cannot be selected; unavailable ones carry a separate `data-unavailable` marker for styling. Unavailable dates are crossed out at full strength; disabled dates are dimmed.
 
 ### Custom day content
 
@@ -428,3 +428,40 @@ One day is in the tab order. Arrow keys move by day and week, Home and End to th
 />
 
 A single selection stays in the middle of the strip: the arrows beside the days select the previous or next day, skipping days that cannot be selected, and a day pressed at either side slides to the middle. With a range, several dates or `readonly`, the arrows slide the days a day at a time instead, or a whole row with `paged-navigation`. `visible-days` sets how many days show. Longer jumps fade the new days in, and reduced motion or `motion-policy="reduce"` moves them at once. The caption names the month of the middle day; its arrows move to the same day of the previous or next month. Selection modes, bounds and custom day content work as they do in the grid. From the keyboard, Home and End reach the first and last day shown, and moving focus past either end brings the days along.
+
+### Crossed-out days and markers
+
+<Preview
+  title="Class schedule"
+  code={`<tp-card section-colors="off" style="inline-size:fit-content">
+  <tp-calendar
+    id="calendar-classes"
+    label="Class date"
+    today="2026-09-08"
+    min="2026-09-08"
+    today-indicator="underline"
+    default-value="2026-09-10"
+  ></tp-calendar>
+</tp-card>`}
+  script={`await customElements.whenDefined('tp-calendar');
+const calendar = document.getElementById('calendar-classes');
+const yoga = { variant: 'success', label: 'Yoga' };
+const spin = { variant: 'warning', label: 'Spin' };
+const strength = { color: 'var(--tp-chart-1)', label: 'Strength' };
+// Full classes still take a waitlist; the studio is closed on the 19th.
+calendar.crossedOutDates = new Set(['2026-09-11', '2026-09-16']);
+calendar.unavailableDates = new Set(['2026-09-19']);
+calendar.dayMarkers = new Map([
+  ['2026-09-09', [yoga]],
+  ['2026-09-10', [yoga, spin]],
+  ['2026-09-11', [spin]],
+  ['2026-09-15', [yoga, spin, strength]],
+  ['2026-09-16', [strength]],
+  ['2026-09-17', [yoga]],
+  ['2026-09-22', [spin, strength]],
+]);`}
+/>
+
+`crossedOutDates` crosses out days that can still be selected, here full classes that take a waitlist. Unavailable dates are crossed out and cannot be selected, and disabled dates, such as the days before `min`, are dimmed. A day both crossed out and disabled is crossed out and dimmed.
+
+`dayMarkers` puts up to three dots under a day's number, as a `Map` or a function from the date to a list of markers. Each marker takes a Status dot `variant` or any CSS `color`, and its `label` is read after the date. `today-indicator` marks today with the muted fill (`fill`, the default), an underlined number (`underline`), a dot (`dot`), or not at all (`none`).
