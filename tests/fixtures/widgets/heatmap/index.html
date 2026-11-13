@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Heatmap verification</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      body {
+        margin: 0;
+        background: var(--tp-background);
+        color: var(--tp-foreground);
+        font-family: var(--tp-font-sans);
+      }
+      main {
+        margin: 24px auto;
+        padding: 20px;
+        max-width: 1100px;
+        display: grid;
+        gap: 32px;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        align-items: start;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <tp-heatmap id="year" label="year" today="2026-11-13"></tp-heatmap>
+      <div class="row">
+        <tp-heatmap
+          id="vertical"
+          label="vertical"
+          columns="month"
+          rows="day-of-month"
+          start="2026-01-01"
+          end="2026-12-31"
+          today="2026-11-13"
+          style="inline-size: 18rem"
+        ></tp-heatmap>
+        <tp-heatmap
+          id="scroll"
+          label="scroll"
+          fit="scroll"
+          today="2026-11-13"
+          style="inline-size: 16rem"
+        ></tp-heatmap>
+        <tp-heatmap
+          id="scroll-vertical"
+          label="scroll vertical"
+          fit="scroll"
+          columns="weekday"
+          rows="week"
+          today="2026-11-13"
+          style="block-size: 12rem"
+        ></tp-heatmap>
+        <tp-heatmap
+          id="trim"
+          label="trim"
+          fit="trim"
+          today="2026-11-13"
+          style="inline-size: 14rem"
+        ></tp-heatmap>
+      </div>
+      <div class="row">
+        <tp-heatmap
+          id="hours"
+          label="hours"
+          unit="hour"
+          columns="hour-of-day"
+          rows="weekday"
+          start="2026-11-01T00"
+          end="2026-11-13T23"
+          color="chart-2"
+        ></tp-heatmap>
+        <tp-heatmap
+          id="square"
+          label="square"
+          unit="index"
+          start="0"
+          end="255"
+          columns="16"
+          shape="circle"
+          style="inline-size: 14rem"
+        ></tp-heatmap>
+      </div>
+      <div class="row">
+        <tp-heatmap
+          id="range"
+          label="range"
+          selection-mode="range"
+          today="2026-11-13"
+          size="sm"
+        ></tp-heatmap>
+        <tp-heatmap id="rtl" dir="rtl" label="rtl" today="2026-11-13" size="sm"></tp-heatmap>
+        <tp-heatmap id="loading" label="loading" loading size="xs"></tp-heatmap>
+      </div>
+      <p>After heatmaps</p>
+    </main>
+    <script type="module" src="./fixture.ts"></script>
+  </body>
+</html>

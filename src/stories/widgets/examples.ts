@@ -1,5 +1,7 @@
 import { html, type TemplateResult } from 'lit';
 import type { widgetCatalog } from '../../widgets/catalog.js';
+import { todayCalendarDate } from '../../foundation/calendar.js';
+import { focusSessions } from './heatmap-samples.js';
 
 export type WidgetTag = (typeof widgetCatalog)[number][1];
 
@@ -55,6 +57,12 @@ const examples = {
       <tp-layer id="clouds" label="Clouds"></tp-layer>
       <tp-layer id="sky" label="Sky"></tp-layer>
     </tp-layers>`,
+  'tp-heatmap': () =>
+    html`<tp-heatmap
+      label="Focus sessions"
+      size="sm"
+      .data=${focusSessions(todayCalendarDate())}
+    ></tp-heatmap>`,
 } satisfies Record<WidgetTag, () => TemplateResult>;
 
 export function renderWidgetExample(tagName: WidgetTag): TemplateResult {

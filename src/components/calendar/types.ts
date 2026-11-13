@@ -1,6 +1,8 @@
 import type { StatusDotVariant } from '../status-dot/status-dot.js';
 
-export type CalendarDateMatcher = ReadonlySet<string> | ((date: string) => boolean) | undefined;
+import type { CalendarDateMatcher } from '../../foundation/calendar.js';
+
+export type { CalendarDateMatcher };
 /** How today is marked: the muted fill, an underlined number, a dot under it, or nothing. */
 export type CalendarTodayIndicator = 'fill' | 'underline' | 'dot' | 'none';
 /** A small colored dot under a day's number. */

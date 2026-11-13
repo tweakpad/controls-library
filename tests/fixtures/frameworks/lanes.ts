@@ -435,6 +435,19 @@ export const laneRows: LaneRow[] = [
     },
   },
   {
+    entry: 'tp-heatmap',
+    binding: 'Heatmap',
+    lane: 'value',
+    initial: '2026-06-12',
+    propose: call('setValue', '2026-06-15'),
+    props: {
+      label: 'Sessions',
+      selectionMode: 'single',
+      today: '2026-06-20',
+      data: [{ key: '2026-06-12', value: 3 }],
+    },
+  },
+  {
     entry: 'tp-emoji-picker',
     binding: 'EmojiPicker',
     lane: 'value',

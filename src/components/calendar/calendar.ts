@@ -4,7 +4,6 @@ import type { PropertyValues } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
 import { createId } from '../../foundation/id.js';
 import { resolveLocale } from '../../foundation/services.js';
-import { dateTimeFormatter } from '../../foundation/date-locale.js';
 import { TpElement } from '../../foundation/element.js';
 import { TpFormElement } from '../../foundation/form-element.js';
 import { TpValueChangeEvent } from '../../foundation/events.js';
@@ -16,12 +15,18 @@ import {
 } from '../../foundation/motion.js';
 import {
   calendarGridDates,
+  calendarMonthLabel,
   calendarSelectionProposal,
   calendarValueDates,
   gregorianCalendarAdapter,
   isCalendarRange,
+  localeWeekInfo,
+  matchesCalendarDate,
   normalizeCalendarValue,
+  resolveWeekStart,
   sameCalendarValue,
+  startOfWeek,
+  todayCalendarDate,
 } from '../../foundation/calendar.js';
 import type {
   CalendarAdapter,
@@ -60,6 +65,8 @@ import type {
 } from './types.js';
 
 import { compositeControl } from '../../foundation/composite-control.js';
+import { LabelFit } from '../../foundation/label-fit.js';
+import { gridKeyMove } from '../../foundation/grid-navigation.js';
 import { navigationKeyPreempted } from '../../foundation/collection.js';
 import { chevronRightIcon } from '../../icons/chevron-right.js';
 import type { PartRenderOptions, PartState } from '../../foundation/part.js';
@@ -90,15 +97,6 @@ function cloneCalendarValue(value: CalendarValue): CalendarValue {
   if (Array.isArray(value)) return [...value];
   if (isCalendarRange(value)) return { ...value };
   return value;
-}
-
-function localCalendarDate(): string {
-  const now = new Date();
-  return `${String(now.getFullYear()).padStart(4, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-}
-
-function moduloCalendar(value: number, divisor: number): number {
-  return ((value % divisor) + divisor) % divisor;
 }
 
 /**
@@ -297,7 +295,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
   /** First day of the week, from 0 for Sunday to 6; negative follows the locale. */
   weekStartsOn = -1;
   /** The date marked as today. */
-  today = localCalendarDate();
+  today = todayCalendarDate();
   /** Accessible name of the calendar. */
   label = 'Date';
   /**
@@ -652,17 +650,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     return this.locale || resolveLocale(this);
   }
   #monthLabel(date: string): string {
-    if (this.calendarAdapter === gregorianCalendarAdapter) {
-      const value = new Date(0);
-      const p = this.calendarAdapter.parts(date);
-      value.setUTCFullYear(p.year, p.month - 1, p.day);
-      return dateTimeFormatter(this.#locale(), {
-        calendar: 'gregory',
-        month: 'short',
-        timeZone: 'UTC',
-      }).format(value);
-    }
-    return this.calendarAdapter.format(date, this.#locale(), 'month');
+    return calendarMonthLabel(this.calendarAdapter, date, this.#locale(), 'short');
   }
 
   /**
@@ -692,48 +680,15 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
   }
 
   /** Whether a short weekday label overflows its cell, so the headers show the narrow labels. */
-  #narrowWeekdays = false;
-  #weekdayObserver: ResizeObserver | undefined;
-  #observedWeekdays: readonly Element[] = [];
+  readonly #weekdayFit = new LabelFit(this);
 
   /** Observes the first month's short labels and their cell, whose sizes decide the label form. */
   #observeWeekdays(): void {
     const labels = [
       ...this.renderRoot.querySelectorAll<HTMLElement>('.month:first-of-type .weekday-short'),
     ];
-    const targets = labels.length ? [labels[0]!.parentElement!, ...labels] : [];
-    if (
-      targets.length === this.#observedWeekdays.length &&
-      targets.every((target, index) => target === this.#observedWeekdays[index])
-    )
-      return;
-    this.#weekdayObserver?.disconnect();
-    this.#observedWeekdays = targets;
-    if (!targets.length) {
-      if (this.#narrowWeekdays) {
-        this.#narrowWeekdays = false;
-        this.requestUpdate();
-      }
-      return;
-    }
-    this.#weekdayObserver ??= new (this.ownerDocument.defaultView ?? window).ResizeObserver(
-      this.#measureWeekdays,
-    );
-    for (const target of targets) this.#weekdayObserver.observe(target);
+    this.#weekdayFit.observe(labels[0]?.parentElement, labels);
   }
-
-  /** Layout widths, which a scaling entrance transform leaves untouched. */
-  readonly #measureWeekdays = (): void => {
-    const [cell, ...labels] = this.#observedWeekdays as HTMLElement[];
-    if (!cell || !cell.isConnected) return;
-    const style = getComputedStyle(cell);
-    const available =
-      cell.clientWidth - parseFloat(style.paddingInlineStart) - parseFloat(style.paddingInlineEnd);
-    const narrow = available > 0 && labels.some((label) => label.offsetWidth > available);
-    if (narrow === this.#narrowWeekdays) return;
-    this.#narrowWeekdays = narrow;
-    this.requestUpdate();
-  };
 
   #renderMonth(month: string, monthIndex: number): unknown {
     const weekStart = this.#resolvedWeekStart();
@@ -757,7 +712,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
           'aria-labelledby': `${this.#calendarId}-month-${monthIndex}`,
           'aria-multiselectable': this.selectionMode !== 'single' ? 'true' : null,
           'data-week-numbers': weekNumbers,
-          'data-narrow-weekdays': this.#narrowWeekdays,
+          'data-narrow-weekdays': this.#weekdayFit.narrow,
         },
         content: html` ${this.#part('weekdays', {
           properties: { class: 'weekdays', role: 'row' },
@@ -1334,8 +1289,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     this.#registered.clear();
     this.#focusGeneration += 1;
     this.#pendingFocusDate = '';
-    this.#weekdayObserver?.disconnect();
-    this.#observedWeekdays = [];
+    this.#weekdayFit.disconnect();
     this.#endSlide();
     this.#renderedStart = '';
     super.disconnectedCallback();
@@ -1367,7 +1321,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
       this.calendarAdapter.normalize(this.today);
     this.#displayed = initialMonth
       ? this.calendarAdapter.startOfMonth(initialMonth)
-      : this.calendarAdapter.startOfMonth(localCalendarDate());
+      : this.calendarAdapter.startOfMonth(todayCalendarDate());
     // The strip centers on the selection or today, moved to the same day of a displayed month
     // that does not hold it.
     this.#stripAnchor =
@@ -1436,50 +1390,28 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
       return;
     const current = (event.currentTarget as HTMLButtonElement).dataset.date;
     if (!current) return;
+    const move = gridKeyMove(event, this.direction === 'rtl');
     let target: string | null = null;
     let direction = 1;
-    const horizontal = this.direction === 'rtl' ? -1 : 1;
-    if (event.key === 'ArrowRight') {
-      direction = horizontal;
-      target = this.calendarAdapter.addDays(current, horizontal);
-    } else if (event.key === 'ArrowLeft') {
-      direction = -horizontal;
-      target = this.calendarAdapter.addDays(current, -horizontal);
-    } else if (event.key === 'ArrowDown') {
-      direction = 1;
-      target = this.calendarAdapter.addDays(current, 7);
-    } else if (event.key === 'ArrowUp') {
-      direction = -1;
-      target = this.calendarAdapter.addDays(current, -7);
-    } else if ((event.key === 'Home' || event.key === 'End') && this.#isStrip()) {
+    if (move?.kind === 'step') {
+      // A column is one day, a row one week; the step's sign is the direction in time.
+      const days = move.columns + move.rows * 7;
+      direction = days < 0 ? -1 : 1;
+      target = this.calendarAdapter.addDays(current, days);
+    } else if (move && move.kind !== 'page' && this.#isStrip()) {
       // The strip's Home and End reach its first and last day.
       const dates = calendarStripDates(this.calendarAdapter, this.#stripAnchor, this.visibleDays);
-      direction = event.key === 'Home' ? 1 : -1;
-      target = (event.key === 'Home' ? dates[0] : dates.at(-1)) ?? null;
-    } else if (event.key === 'Home') {
-      direction = -1;
-      const offset = moduloCalendar(
-        this.calendarAdapter.dayOfWeek(current) - this.#resolvedWeekStart(),
-        7,
-      );
-      target = this.calendarAdapter.addDays(current, -offset);
-    } else if (event.key === 'End') {
-      direction = 1;
-      const offset = moduloCalendar(
-        this.calendarAdapter.dayOfWeek(current) - this.#resolvedWeekStart(),
-        7,
-      );
-      target = this.calendarAdapter.addDays(current, 6 - offset);
-    } else if (event.key === 'PageUp') {
-      direction = -1;
-      target = event.shiftKey
-        ? this.calendarAdapter.addYears(current, -1)
-        : this.calendarAdapter.addMonths(current, -1);
-    } else if (event.key === 'PageDown') {
-      direction = 1;
-      target = event.shiftKey
-        ? this.calendarAdapter.addYears(current, 1)
-        : this.calendarAdapter.addMonths(current, 1);
+      direction = move.edge === 'start' ? 1 : -1;
+      target = (move.edge === 'start' ? dates[0] : dates.at(-1)) ?? null;
+    } else if (move && move.kind !== 'page') {
+      const weekStart = startOfWeek(current, this.#resolvedWeekStart(), this.calendarAdapter);
+      direction = move.edge === 'start' ? -1 : 1;
+      target = move.edge === 'start' ? weekStart : this.calendarAdapter.addDays(weekStart, 6);
+    } else if (move) {
+      direction = move.direction;
+      target = move.large
+        ? this.calendarAdapter.addYears(current, move.direction)
+        : this.calendarAdapter.addMonths(current, move.direction);
     }
     if (!target) return;
     event.preventDefault();
@@ -1694,7 +1626,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
   }
 
   #matches(matcher: CalendarDateMatcher, date: string): boolean {
-    return typeof matcher === 'function' ? matcher(date) : Boolean(matcher?.has(date));
+    return matchesCalendarDate(matcher, date);
   }
 
   #sameMonth(left: string, right: string): boolean {
@@ -1707,26 +1639,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
   }
 
   #resolvedWeekStart(): number {
-    if (Number.isInteger(this.weekStartsOn) && this.weekStartsOn >= 0 && this.weekStartsOn <= 6)
-      return this.weekStartsOn;
-    try {
-      const locale = new Intl.Locale(this.#locale() || 'en-US');
-      const weekInfo =
-        (
-          locale as Intl.Locale & {
-            weekInfo?: { firstDay: number };
-            getWeekInfo?: () => { firstDay: number };
-          }
-        ).weekInfo ??
-        (
-          locale as Intl.Locale & {
-            getWeekInfo?: () => { firstDay: number };
-          }
-        ).getWeekInfo?.();
-      return weekInfo ? weekInfo.firstDay % 7 : 0;
-    } catch {
-      return 0;
-    }
+    return resolveWeekStart(this.weekStartsOn, this.#locale());
   }
 
   #navigationLabel(direction: 'previous' | 'next'): string {
@@ -1890,15 +1803,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
   }
 
   #minimalWeekDays(): number {
-    try {
-      const locale = new Intl.Locale(this.#locale() ?? 'en-US') as Intl.Locale & {
-        getWeekInfo?: () => { minimalDays: number };
-        weekInfo?: { minimalDays: number };
-      };
-      return (locale.getWeekInfo?.() ?? locale.weekInfo)?.minimalDays ?? 1;
-    } catch {
-      return 1;
-    }
+    return localeWeekInfo(this.#locale()).minimalDays;
   }
 
   #dayButton(date: string): HTMLButtonElement | null {

@@ -8,10 +8,12 @@ import type { TpEmojiPicker } from '../../widgets/emoji-picker/emoji-picker.js';
 import type { TpFlow } from '../../widgets/flow/flow.js';
 import type { TpGradientPicker } from '../../widgets/gradient-picker/gradient-picker.js';
 import type { TpGradientStop } from '../../widgets/gradient-picker/gradient-stop.js';
+import type { TpHeatmap } from '../../widgets/heatmap/heatmap.js';
 import type { TpLayer, TpLayerState, TpLayerStateValue } from '../../widgets/layers/layer.js';
 import type { TpLayers } from '../../widgets/layers/layers.js';
 import type { TpPlot } from '../../widgets/plot/plot.js';
 import type { TpTextEditor } from '../../widgets/text-editor/text-editor.js';
+import type * as foundationCalendar from '../../foundation/calendar.js';
 import type * as foundationColorPaletteTypes from '../../foundation/color-palette/types.js';
 import type * as foundationColorPalette from '../../foundation/color/palette.js';
 import type * as foundationColorTypes from '../../foundation/color/types.js';
@@ -32,6 +34,7 @@ import type * as widgetsColorPickerTypes from '../../widgets/color-picker/types.
 import type * as widgetsEmojiPickerTypes from '../../widgets/emoji-picker/types.js';
 import type * as widgetsFlowTypes from '../../widgets/flow/types.js';
 import type * as widgetsGradientPickerGradientPicker from '../../widgets/gradient-picker/gradient-picker.js';
+import type * as widgetsHeatmapTypes from '../../widgets/heatmap/types.js';
 import type * as widgetsLayersTypes from '../../widgets/layers/types.js';
 import type * as widgetsPlotTypes from '../../widgets/plot/types.js';
 import type * as widgetsTextEditorTypes from '../../widgets/text-editor/types.js';
@@ -490,6 +493,66 @@ type Tags = {
     {
       'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
       'tp-gradient-stop-change': Event;
+    }
+  >;
+  'tp-heatmap': Tag<
+    TpHeatmap,
+    | 'aggregate'
+    | 'appearance'
+    | 'calendarAdapter'
+    | 'color'
+    | 'colors'
+    | 'columnLabels'
+    | 'columns'
+    | 'data'
+    | 'dayModifiers'
+    | 'defaultValue'
+    | 'density'
+    | 'disabled'
+    | 'disabledCells'
+    | 'domain'
+    | 'end'
+    | 'fit'
+    | 'formatters'
+    | 'interaction'
+    | 'invalid'
+    | 'label'
+    | 'legend'
+    | 'levels'
+    | 'loading'
+    | 'locale'
+    | 'maxHints'
+    | 'maximumSelectionCount'
+    | 'messages'
+    | 'minimumSelectionCount'
+    | 'motionPolicy'
+    | 'orientation'
+    | 'partContracts'
+    | 'partPresentation'
+    | 'rangeExclusion'
+    | 'readOnly'
+    | 'renderTooltip'
+    | 'required'
+    | 'rowLabels'
+    | 'rows'
+    | 'scale'
+    | 'scrollAnchor'
+    | 'selectionMode'
+    | 'shape'
+    | 'size'
+    | 'start'
+    | 'thresholds'
+    | 'today'
+    | 'tooltip'
+    | 'unit'
+    | 'value'
+    | 'weekStartsOn',
+    {
+      'tp-cell-activate': CustomEvent<widgetsHeatmapTypes.HeatmapActivateDetail>;
+      'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
+      'tp-inspection-change': CustomEvent<widgetsHeatmapTypes.HeatmapInspectionDetail>;
+      'tp-value-change': foundationEvents.TpValueChangeEvent<foundationCalendar.CalendarValue>;
+      'tp-value-commit': foundationEvents.TpValueCommitEvent<foundationCalendar.CalendarValue>;
     }
   >;
   'tp-layer': Tag<

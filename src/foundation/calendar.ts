@@ -34,14 +34,37 @@ export interface CalendarAdapter {
    * `narrow` the locale's shortest form, usually one character, for cells too small for it.
    */
   weekdayLabel(dayOfWeek: number, locale: string | undefined, width?: 'short' | 'narrow'): string;
+  /**
+   * The label of a date's month without its year: `long` (March), `short` (Mar) or `narrow`
+   * (M). Without it, labels fall back to `format(date, locale, 'month')`.
+   */
+  monthLabel?(date: string, locale: string | undefined, width: CalendarLabelWidth): string;
   weekNumber?(date: string, weekStartsOn: number, minimalDays: number): number;
 }
+
+/** Label forms, from the full name to the locale's shortest form. */
+export type CalendarLabelWidth = 'long' | 'short' | 'narrow';
+
+/**
+ * Dates a policy applies to: a set of ISO dates or a predicate of one. Undefined matches no date.
+ */
+export type CalendarDateMatcher = ReadonlySet<string> | ((date: string) => boolean) | undefined;
+
+/**
+ * The order selection walks: the keys it accepts, their order, the number of steps between two
+ * keys and the key a number of steps away. A calendar adapter is one, over days; a date-keyed grid
+ * passes its own over its cells.
+ */
+export type CalendarSelectionOrder = Pick<
+  CalendarAdapter,
+  'normalize' | 'compare' | 'differenceInDays' | 'addDays'
+>;
 
 export interface CalendarSelectionRequest {
   mode: CalendarSelectionMode;
   current: CalendarValue;
   date: string;
-  adapter: CalendarAdapter;
+  adapter: CalendarSelectionOrder;
   required: boolean;
   minimumSelectionCount: number;
   maximumSelectionCount: number;
@@ -124,7 +147,88 @@ export const gregorianCalendarAdapter: CalendarAdapter = {
   weekdayLabel(dayOfWeek, locale, width = 'short') {
     return gregorianWeekdayLabels(locale, width)[modulo(dayOfWeek, 7)]!;
   },
+  monthLabel(date, locale, width) {
+    const parts = requireIsoDate(date);
+    const instant = new Date(0);
+    instant.setUTCFullYear(parts.year, parts.month - 1, 1);
+    return dateTimeFormatter(locale, {
+      calendar: 'gregory',
+      month: width,
+      timeZone: 'UTC',
+    }).format(instant);
+  },
 };
+
+/** A date's month label in the requested form, through the adapter's own labels when it has them. */
+export function calendarMonthLabel(
+  adapter: CalendarAdapter,
+  date: string,
+  locale: string | undefined,
+  width: CalendarLabelWidth,
+): string {
+  return adapter.monthLabel?.(date, locale, width) ?? adapter.format(date, locale, 'month');
+}
+
+interface LocaleWeekInfo {
+  firstDay: number;
+  minimalDays: number;
+}
+
+type LocaleWithWeekInfo = Intl.Locale & {
+  weekInfo?: Partial<LocaleWeekInfo>;
+  getWeekInfo?: () => Partial<LocaleWeekInfo>;
+};
+
+/** The locale's week rules: first day (0 = Sunday) and the minimal days of a year's first week. */
+export function localeWeekInfo(locale: string | undefined): LocaleWeekInfo {
+  try {
+    const value = new Intl.Locale(locale || 'en-US') as LocaleWithWeekInfo;
+    const info = value.getWeekInfo?.() ?? value.weekInfo;
+    return { firstDay: (info?.firstDay ?? 0) % 7, minimalDays: info?.minimalDays ?? 1 };
+  } catch {
+    return { firstDay: 0, minimalDays: 1 };
+  }
+}
+
+/** An explicit week start from 0 (Sunday) to 6, or the locale's when it is out of that range. */
+export function resolveWeekStart(weekStartsOn: number, locale: string | undefined): number {
+  return Number.isInteger(weekStartsOn) && weekStartsOn >= 0 && weekStartsOn <= 6
+    ? weekStartsOn
+    : localeWeekInfo(locale).firstDay;
+}
+
+/** Today's date in the local time zone, as an ISO date. */
+export function todayCalendarDate(): string {
+  const now = new Date();
+  return `${String(now.getFullYear()).padStart(4, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+}
+
+/** The first day of the week holding `date`. */
+export function startOfWeek(date: string, weekStartsOn: number, adapter: CalendarAdapter): string {
+  return adapter.addDays(date, -modulo(adapter.dayOfWeek(date) - weekStartsOn, 7));
+}
+
+/** Whether a date matcher covers `date`. */
+export function matchesCalendarDate(matcher: CalendarDateMatcher, date: string): boolean {
+  return typeof matcher === 'function' ? matcher(date) : Boolean(matcher?.has(date));
+}
+
+/**
+ * The complete weeks covering `start` to `end` (inclusive), each its seven consecutive dates from
+ * the week start; days of the first and last week outside the range are included.
+ */
+export function calendarWeeks(
+  start: string,
+  end: string,
+  weekStartsOn: number,
+  adapter: CalendarAdapter,
+): string[][] {
+  const first = startOfWeek(start, weekStartsOn, adapter);
+  const count = Math.max(0, Math.floor(adapter.differenceInDays(end, first) / 7) + 1);
+  return Array.from({ length: count }, (_, week) =>
+    Array.from({ length: 7 }, (_, day) => adapter.addDays(first, week * 7 + day)),
+  );
+}
 
 const weekdayLabelCache = new Map<string, readonly string[]>();
 
@@ -159,7 +263,7 @@ function gregorianWeekdayLabels(
 export function normalizeCalendarValue(
   mode: CalendarSelectionMode,
   value: CalendarValue,
-  adapter: CalendarAdapter,
+  adapter: CalendarSelectionOrder,
 ): CalendarValue {
   if (mode === 'single') {
     const candidate = typeof value === 'string' ? value : undefined;
@@ -187,7 +291,7 @@ export function sameCalendarValue(
   mode: CalendarSelectionMode,
   left: CalendarValue,
   right: CalendarValue,
-  adapter: CalendarAdapter,
+  adapter: CalendarSelectionOrder,
 ): boolean {
   const normalizedLeft = normalizeCalendarValue(mode, left, adapter);
   const normalizedRight = normalizeCalendarValue(mode, right, adapter);
@@ -251,17 +355,20 @@ export function calendarGridDates(
   fixedWeeks = true,
 ): string[] {
   const start = adapter.startOfMonth(month);
-  const offset = modulo(adapter.dayOfWeek(start) - weekStartsOn, 7);
-  const first = adapter.addDays(start, -offset);
-  const days = adapter.differenceInDays(adapter.addMonths(start, 1), start);
-  const length = fixedWeeks ? 42 : Math.ceil((offset + days) / 7) * 7;
-  return Array.from({ length }, (_, index) => adapter.addDays(first, index));
+  const last = adapter.addDays(adapter.addMonths(start, 1), -1);
+  const weeks = calendarWeeks(start, last, weekStartsOn, adapter);
+  if (fixedWeeks)
+    while (weeks.length < 6)
+      weeks.push(
+        Array.from({ length: 7 }, (_, day) => adapter.addDays(weeks.at(-1)![6]!, day + 1)),
+      );
+  return weeks.flat();
 }
 
 export function calendarValueDates(
   mode: CalendarSelectionMode,
   value: CalendarValue,
-  adapter: CalendarAdapter,
+  adapter: CalendarSelectionOrder,
 ): string[] {
   const normalized = normalizeCalendarValue(mode, value, adapter);
   if (typeof normalized === 'string') return [normalized];

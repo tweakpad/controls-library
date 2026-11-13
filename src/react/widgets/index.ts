@@ -5,6 +5,7 @@ export * from './easing-editor.js';
 export * from './emoji-picker.js';
 export * from './flow.js';
 export * from './gradient-picker.js';
+export * from './heatmap.js';
 export * from './layers.js';
 export * from './plot.js';
 export * from './text-editor.js';

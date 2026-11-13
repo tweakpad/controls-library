@@ -1,0 +1,184 @@
+---
+title: Heatmap
+description: Values as a grid of colored cells, such as activity over a year, in any arrangement of dates, times or your own units, with a legend, tooltips and optional selection.
+tag: tp-heatmap
+---
+
+<Preview
+  title="Heatmap"
+  align="stretch"
+  code={`<tp-heatmap id="heatmap-hero" label="Focus sessions"></tp-heatmap>`}
+  script={`const day = (offset) => new Date(Date.now() - offset * 864e5).toISOString().slice(0, 10);
+document.querySelector('#heatmap-hero').data = Array.from({ length: 371 }, (_, offset) => ({
+  key: day(offset),
+  value: Math.round(Math.random() ** 2 * 8),
+}));`}
+/>
+
+## Usage
+
+Each datum has a `key` and a `value`. By default keys are ISO dates, and the heatmap shows the year ending today: one column per week, one row per weekday, with month and weekday labels and a legend. Days without a datum show the empty color. Data outside the range is left out, and values that land on the same cell are combined by `aggregate` (`sum` by default).
+
+<Code
+  language="typescript"
+  code={`heatmap.data = [
+  { key: '2026-03-04', value: 3 },
+  { key: '2026-03-05', value: 7, hint: 'Release Atlas shipped' },
+];`}
+/>
+
+### Arrangements
+
+`columns` and `rows` choose where each key goes. Week columns by weekday rows is the default; swap them for a vertical year, or place months by days of the month. A cell only exists where a date lands, so a month without a 30th or 31st leaves a gap. `start` and `end` set the range.
+
+<Preview
+  title="Months by day of the month"
+  code={`<tp-heatmap id="heatmap-months" label="Focus sessions" columns="month" rows="day-of-month" start="2026-01-01" end="2026-12-31" style="max-inline-size: 20rem"></tp-heatmap>`}
+  script={`const heatmap = document.querySelector('#heatmap-months');
+const start = Date.UTC(2026, 0, 1);
+heatmap.data = Array.from({ length: 365 }, (_, offset) => ({
+  key: new Date(start + offset * 864e5).toISOString().slice(0, 10),
+  value: Math.round(Math.random() ** 3 * 8),
+}));`}
+/>
+
+Other units place other keys. With `unit="hour"`, keys are `2026-03-04T14` and `columns="hour-of-day" rows="weekday"` shows a week's rhythm, combining every week of the range on its weekday. `unit` also takes `week`, `month`, `year` and `index`.
+
+<Preview
+  title="Weekdays by hour"
+  align="stretch"
+  code={`<tp-heatmap id="heatmap-hours" label="Check-ins" unit="hour" columns="hour-of-day" rows="weekday" row-labels="all" color="chart-2"></tp-heatmap>`}
+  script={`const heatmap = document.querySelector('#heatmap-hours');
+const now = Date.now();
+heatmap.data = Array.from({ length: 14 * 24 }, (_, offset) => {
+  const at = new Date(now - offset * 36e5);
+  const hour = at.getUTCHours();
+  return { key: at.toISOString().slice(0, 13), value: hour > 7 && hour < 19 ? Math.round(Math.random() * 6) : 0 };
+});`}
+/>
+
+### Wrapped sequences
+
+A number wraps the range: `columns="16"` puts sixteen keys on each row and adds rows as needed (`rows` wraps by column instead). With `unit="index"`, keys are integers from `start` to `end`.
+
+<Preview
+  title="Wrapped sequence"
+  code={`<tp-heatmap id="heatmap-square" label="Samples" unit="index" start="0" end="255" columns="16" shape="circle" color="destructive" style="inline-size: 16rem"></tp-heatmap>`}
+  script={`document.querySelector('#heatmap-square').data = Array.from({ length: 256 }, (_, key) => ({
+  key,
+  value: Math.round(Math.random() ** 2 * 10),
+}));`}
+/>
+
+### Custom axes
+
+For keys of your own, set `unit="custom"` and give `columns` and `rows` an axis: its ticks in order, and the tick a key lands on. Every pair of ticks is a cell.
+
+<Code
+  language="typescript"
+  code={`heatmap.unit = 'custom';
+heatmap.rows = {
+  ticks: [{ id: 'north', label: 'North' }, { id: 'harbor', label: 'Harbor' }],
+  of: (key) => key.studio,
+};
+heatmap.columns = {
+  ticks: [1, 2, 3, 4].map((week) => ({ id: week, label: \`W\${week}\` })),
+  of: (key) => key.week,
+};
+heatmap.data = [{ key: { studio: 'harbor', week: 2 }, value: 4 }];`}
+/>
+
+### Levels and colors
+
+Values map to `levels` colors, level 0 being no value. The levels split the values into equal steps from zero to the largest value; `scale="quantile"` gives each level an equal share of the values instead, and `thresholds` sets the lower bound of each level. A datum's `level` overrides its cell's. `color` takes a theme color such as `primary`, `success` or `chart-1` to `chart-5`, or any CSS color; `colors` replaces the ramp with one color per level.
+
+<Preview
+  title="Colors"
+  align="stretch"
+  code={`<tp-heatmap id="heatmap-colors" label="Focus sessions" color="chart-3" levels="4" scale="quantile"></tp-heatmap>`}
+  script={`const day = (offset) => new Date(Date.now() - offset * 864e5).toISOString().slice(0, 10);
+document.querySelector('#heatmap-colors').data = Array.from({ length: 371 }, (_, offset) => ({
+  key: day(offset),
+  value: Math.round(Math.random() ** 2 * 8),
+}));`}
+/>
+
+### Size and shape
+
+`size` sets the cells, their spacing and the label text, from `xs` to `lg`. `shape` makes the cells `square`, `rounded` or `circle`.
+
+<Preview
+  title="Size and shape"
+  align="stretch"
+  code={`<tp-heatmap id="heatmap-large" label="Focus sessions" size="lg" shape="circle" fit="scroll"></tp-heatmap>`}
+  script={`const day = (offset) => new Date(Date.now() - offset * 864e5).toISOString().slice(0, 10);
+document.querySelector('#heatmap-large').data = Array.from({ length: 371 }, (_, offset) => ({
+  key: day(offset),
+  value: Math.round(Math.random() ** 2 * 8),
+}));`}
+/>
+
+### Fit
+
+By default the cells stretch to fill the available width; when the width is too small for them at their size, the grid scrolls instead. With `fit="scroll"` they always keep their size and the grid scrolls, horizontally or vertically. A scrolling grid starts at the latest data and stays there as data arrives, and its edges shade while more cells lie beyond them. `scroll-anchor="start"` starts at the beginning of the range instead. `fit="trim"` drops the oldest columns that do not fit.
+
+<Preview
+  title="Scroll"
+  code={`<tp-heatmap id="heatmap-scroll" label="Focus sessions" fit="scroll" style="inline-size: 16rem"></tp-heatmap>`}
+  script={`const day = (offset) => new Date(Date.now() - offset * 864e5).toISOString().slice(0, 10);
+document.querySelector('#heatmap-scroll').data = Array.from({ length: 371 }, (_, offset) => ({
+  key: day(offset),
+  value: Math.round(Math.random() ** 2 * 8),
+}));`}
+/>
+
+### Labels
+
+`column-labels` and `row-labels` show `all` labels, every other one (`alternate`) or `none`. With `auto`, week columns mark where each month starts, weekday rows read every other day, and labels switch to their shortest form when the cells are too small for them. Labels follow the `locale` and the week starts on the locale's first day unless `week-starts-on` sets one.
+
+### Tooltips and hints
+
+Hovering or focusing a cell shows its value and date in a tooltip. A datum's `hint` adds a line of your own, which keyboard and screen reader users hear too; `renderTooltip` replaces the whole content, and `messages.cell` changes the wording, for example to name the unit.
+
+<Preview
+  title="Hints"
+  align="stretch"
+  code={`<tp-heatmap id="heatmap-hints" label="Releases" color="chart-4"></tp-heatmap>`}
+  script={`const heatmap = document.querySelector('#heatmap-hints');
+const day = (offset) => new Date(Date.now() - offset * 864e5).toISOString().slice(0, 10);
+heatmap.messages = { cell: (cell, value, where) => \`\${value} deploys on \${where}\` };
+heatmap.data = ['Atlas', 'Birch', 'Cedar', 'Dune', 'Ember'].map((name, index) => ({
+  key: day(index * 40 + 3),
+  value: 4 + index,
+  hint: \`Release \${name} shipped\`,
+}));`}
+/>
+
+### Selection
+
+`selection-mode` lets people select a cell (`single`), several (`multiple`) or a run of cells (`range`), as in a calendar. `value` holds the selected keys, and each change is a cancelable `tp-value-change`. Every click or Enter also fires `tp-cell-activate`, selectable or not.
+
+<Preview
+  title="Range selection"
+  align="stretch"
+  code={`<tp-heatmap id="heatmap-range" label="Focus sessions" selection-mode="range"></tp-heatmap>`}
+  script={`const day = (offset) => new Date(Date.now() - offset * 864e5).toISOString().slice(0, 10);
+document.querySelector('#heatmap-range').data = Array.from({ length: 371 }, (_, offset) => ({
+  key: day(offset),
+  value: Math.round(Math.random() ** 2 * 8),
+}));`}
+/>
+
+### Keyboard
+
+The grid is one tab stop; `interaction="none"` makes it a passive figure without one.
+
+| Key | Action |
+| --- | --- |
+| <Keys keys="ArrowLeft" />, <Keys keys="ArrowRight" />, <Keys keys="ArrowUp" />, <Keys keys="ArrowDown" /> | Move to the next cell in that direction, skipping gaps |
+| <Keys keys="Home" />, <Keys keys="End" /> | Move to the first or last cell of the row |
+| <Keys keys="mod+Home" />, <Keys keys="mod+End" /> | Move to the first or last cell of the range |
+| <Keys keys="PageUp" />, <Keys keys="PageDown" /> | Move a month back or forward; with dates in other arrangements, a group of columns |
+| <Keys keys="shift+PageUp" />, <Keys keys="shift+PageDown" /> | Move a year back or forward |
+| <Keys keys="Enter" />, <Keys keys="Space" /> | Activate the cell, selecting it when selection is on |
+| <Keys keys="Escape" /> | Close the tooltip |
