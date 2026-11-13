@@ -32,6 +32,7 @@ export type DragDropListProps<T = DragDropListDefaults[0]> = ElementProps<
   | 'group'
   | 'instructions'
   | 'invalid'
+  | 'isItemSelected'
   | 'keyboardTransition'
   | 'label'
   | 'manager'

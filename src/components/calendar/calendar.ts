@@ -1,12 +1,19 @@
 import { bindPart } from '../../foundation/part.js';
 import { html, nothing } from 'lit';
 import type { PropertyValues } from 'lit';
+import { repeat } from 'lit/directives/repeat.js';
 import { createId } from '../../foundation/id.js';
 import { resolveLocale } from '../../foundation/services.js';
 import { dateTimeFormatter } from '../../foundation/date-locale.js';
 import { TpElement } from '../../foundation/element.js';
 import { TpFormElement } from '../../foundation/form-element.js';
 import { TpValueChangeEvent } from '../../foundation/events.js';
+import {
+  prepareMotion,
+  resolveMotionTiming,
+  stateRole,
+  type MotionHandle,
+} from '../../foundation/motion.js';
 import {
   calendarGridDates,
   calendarSelectionProposal,
@@ -28,6 +35,11 @@ import {
   calendarBuiltInDayMarkers,
   calendarCanDisplay,
   calendarNearestYearMonth,
+  calendarStripAnchorInMonth,
+  calendarStripClamp,
+  calendarStripDates,
+  calendarStripReveal,
+  calendarStripStart,
   calendarYearMonths,
   calendarYearNavigable,
   containsInteractiveContent,
@@ -40,6 +52,7 @@ import type {
   CalendarCaptionLayout,
   CalendarMessages,
   CalendarValidityCode,
+  CalendarVariant,
 } from './types.js';
 
 import { compositeControl } from '../../foundation/composite-control.js';
@@ -83,6 +96,14 @@ function moduloCalendar(value: number, divisor: number): number {
   return ((value % divisor) + divisor) % divisor;
 }
 
+/**
+ * Calendar motion roles. `strip` slides the strip's days to their new place when they move; a
+ * `tp-motion-request` listener can claim it, and reduced motion settles it at once.
+ */
+export const calendarMotionRoles = {
+  strip: stateRole('strip'),
+};
+
 /** Developer diagnostics for rejected programmatic selections; not localized. */
 /** Calendars whose `value` was written since their last update; see `#revealSelection`. */
 const valueWritten = new WeakSet<TpCalendar>();
@@ -102,8 +123,8 @@ const defaultValidityMessages: Record<CalendarValidityCode, string> = {
 
 /**
  * Month grids that select one date, several dates or a date range, as date-only ISO strings that
- * never shift with time zones. Days and navigation are Buttons; caption dropdowns are Native
- * Selects.
+ * never shift with time zones; the `strip` variant shows a few consecutive days under the month
+ * caption instead. Days and navigation are Buttons; caption dropdowns are Native Selects.
  *
  * @slot footer - Content under the months, such as a summary of the selection; an empty footer
  * takes no space.
@@ -124,6 +145,8 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
   static override properties = {
     ...TpFormElement.properties,
     value: { converter: calendarValueConverter },
+    variant: { type: String, reflect: true },
+    visibleDays: { type: Number, attribute: 'visible-days' },
     selectionMode: { type: String, attribute: 'selection-mode', reflect: true },
     min: { type: String },
     max: { type: String },
@@ -172,15 +195,23 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     this.requestUpdate();
   }
   /**
+   * Month grids, or a strip of consecutive days under the month caption. In single selection the
+   * strip keeps the selected day in its middle and its arrows select the previous or next day;
+   * otherwise its arrows move the days a day at a time.
+   */
+  variant: CalendarVariant = 'grid';
+  /** How many consecutive days the strip shows, centered on the day whose month the caption names. */
+  visibleDays = 5;
+  /**
    * The month caption as text, or as dropdowns for the month and year, the month only or the year
    * only.
    */
   captionLayout: CalendarCaptionLayout = 'label';
-  /** Always shows six weeks, so the height does not change between months. */
+  /** Always shows six weeks, so the height does not change between months; grids only. */
   fixedWeeks = false;
-  /** Adds a column of week numbers, following the locale's week rules. */
+  /** Adds a column of week numbers, following the locale's week rules; grids only. */
   showWeekNumber = false;
-  /** Button variant of the previous and next month controls. */
+  /** Button variant of the previous and next month and strip controls. */
   buttonVariant: TpButton['variant'] = 'ghost';
   /**
    * Renders passive content inside each day button from its state; return `undefined` for the plain
@@ -215,7 +246,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
    * several dates are separated by spaces and a range is written `from/to`.
    */
   defaultValue: CalendarValue = undefined;
-  /** How many consecutive months are shown side by side. */
+  /** How many consecutive months are shown side by side; grids only. */
   visibleMonths = 1;
   /**
    * The first month shown, as any date in it; accept navigation proposals in
@@ -241,11 +272,14 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
    * there.
    */
   rangeExclusion: 'reject' | 'restart' = 'reject';
-  /** Moves the previous and next controls by all visible months instead of one. */
+  /**
+   * Moves the previous and next controls by all visible months instead of one; in the strip, moves
+   * its day controls by all visible days.
+   */
   pagedNavigation = false;
   /** Whether a previous or next control that cannot move is disabled or removed. */
   disabledNavigation: 'disable' | 'hide' = 'disable';
-  /** Shows the days of adjacent months that fill the first and last weeks. */
+  /** Shows the days of adjacent months that fill the first and last weeks; grids only. */
   showOutsideDays = true;
   /**
    * Locale of captions, weekdays, day numbers and accessible dates, when it differs from the
@@ -288,6 +322,10 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
   #selection: CalendarValue = undefined;
   #defaultSelection: CalendarValue = undefined;
   #displayed = '';
+  /** The strip's middle day, always in the displayed month. */
+  #stripAnchor = '';
+  /** A middle day whose month a controlled owner has not accepted yet; used when it does. */
+  #proposedStripAnchor = '';
   #focusedDate = '';
   #pendingFocusDate = '';
   #focusGeneration = 0;
@@ -345,10 +383,14 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
         'data-required': this.required,
         'data-invalid': this.invalid,
       },
-      content: html`${this.#part('months', {
-        properties: { class: 'months' },
-        content: months.map((month, index) => this.#renderMonth(month, index)),
-      })}
+      content: html`${
+        this.#isStrip()
+          ? this.#renderStrip()
+          : this.#part('months', {
+              properties: { class: 'months' },
+              content: months.map((month, index) => this.#renderMonth(month, index)),
+            })
+      }
       ${this.#part('footer', {
         properties: { class: 'footer', hidden: !this.#hasFooter },
         content: html`<slot name="footer" @slotchange=${this.#footerChanged}></slot>`,
@@ -379,6 +421,97 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
       .disabled=${this.effectiveDisabled || !available}
       .partContracts=${{ button: this.partContracts[`calendar-${name}`] ?? {} }}
       @click=${previous ? this.#previousMonth : this.#nextMonth}
+    ></tp-button>`;
+  }
+
+  /**
+   * The month header over one row of consecutive days, with controls at both ends that move the row
+   * a day, or a page of days, at a time.
+   */
+  #renderStrip(): unknown {
+    const slide = this.#slideRange;
+    const dates = slide
+      ? Array.from({ length: slide.count }, (_, index) =>
+          this.calendarAdapter.addDays(slide.start, index),
+        )
+      : calendarStripDates(this.calendarAdapter, this.#stripAnchor, this.visibleDays);
+    const rovingDate = this.#rovingDate();
+    return html`${this.#part('header', {
+      properties: { class: 'header' },
+      content: html`${this.#renderNavigation(true)} ${this.#renderCaption(this.#displayed, 0)}
+      ${this.#renderNavigation(false)}`,
+    })}
+    ${this.#part('strip', {
+      properties: { class: 'strip' },
+      content: html`${this.#renderStripNavigation(true)}
+      ${this.#part('days', {
+        properties: {
+          class: 'days',
+          role: 'grid',
+          'aria-labelledby': `${this.#calendarId}-month-0`,
+          'aria-multiselectable': this.selectionMode !== 'single' ? 'true' : null,
+          style: { '--_tp-calendar-visible-days': String(this.visibleDays) },
+        },
+        // Days are keyed by date, so a move keeps every shown day, and its focus, in place.
+        content: html`<div
+          class="strip-row"
+          role="row"
+          ?data-sliding=${!!slide}
+          style=${slide ? `--_tp-calendar-strip-count:${slide.count};--_tp-calendar-strip-track:${slide.track}px` : nothing}
+        >
+          ${repeat(
+            dates,
+            (date) => date,
+            (date) => this.#renderDay(date, this.calendarAdapter.startOfMonth(date), rovingDate),
+          )}
+        </div>`,
+      })}
+      ${this.#renderStripNavigation(false)}`,
+    })}`;
+  }
+
+  #renderStripNavigation(previous: boolean): unknown {
+    const name = previous ? 'strip-previous' : 'strip-next';
+    let available: boolean;
+    let label: string;
+    if (this.#arrowsSelect()) {
+      // Single selection: the controls select the previous or next selectable day.
+      const date = this.#arrowDate(previous ? -1 : 1);
+      available = date !== null;
+      const message = previous ? this.messages.previousDay : this.messages.nextDay;
+      label =
+        typeof message === 'function'
+          ? message(date ?? '')
+          : (message ?? (previous ? 'Previous day' : 'Next day'));
+    } else {
+      const step = (previous ? -1 : 1) * this.#stripStep();
+      const target = calendarStripClamp(
+        this.calendarAdapter,
+        this.calendarAdapter.addDays(this.#stripAnchor, step),
+        this.visibleDays,
+        this.navigationStart,
+        this.navigationEnd,
+      );
+      available = this.calendarAdapter.compare(target, this.#stripAnchor) !== 0;
+      const start = calendarStripStart(this.calendarAdapter, target, this.visibleDays);
+      const message = previous ? this.messages.previousDays : this.messages.nextDays;
+      label =
+        typeof message === 'function'
+          ? message(start)
+          : (message ?? (previous ? 'Earlier days' : 'Later days'));
+    }
+    if (!available && this.disabledNavigation === 'hide') return nothing;
+    return html`<tp-button
+      class=${`navigation ${previous ? 'previous' : 'next'} strip-navigation`}
+      data-calendar-part=${`calendar-${name}`}
+      exportparts=${`button:calendar-${name}`}
+      .variant=${this.buttonVariant}
+      size="icon-sm"
+      .icon=${chevronRightIcon}
+      .ariaLabel=${label}
+      .disabled=${this.effectiveDisabled || !available}
+      .partContracts=${{ button: this.partContracts[`calendar-${name}`] ?? {} }}
+      @click=${previous ? this.#previousDays : this.#nextDays}
     ></tp-button>`;
   }
 
@@ -709,9 +842,32 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
         @keydown=${this.#dayKeyDown}
         @focusin=${this.#dayFocus}
       >
-        ${this.renderDay?.(state) ?? this.formatters.day?.(date) ?? this.calendarAdapter.format(date, this.#locale(), 'day')}
+        ${this.renderDay?.(state) ?? this.#dayContent(date, markers)}
       </tp-button>
     </span>`;
+  }
+
+  /** The day number, under its weekday in the strip. */
+  #dayContent(date: string, markers: Record<string, unknown>): unknown {
+    const number =
+      this.formatters.day?.(date) ?? this.calendarAdapter.format(date, this.#locale(), 'day');
+    if (!this.#isStrip()) return number;
+    const day = this.calendarAdapter.dayOfWeek(date);
+    const state = {
+      'data-selected': markers['data-selected'],
+      'data-today': markers['data-today'],
+      'data-range-middle': markers['data-range-middle'],
+    };
+    return html`${this.#part('day-weekday', {
+      tag: 'span',
+      properties: { class: 'day-weekday', ...state },
+      content:
+        this.formatters.weekday?.(day) ?? this.calendarAdapter.weekdayLabel(day, this.#locale()),
+    })}${this.#part('day-number', {
+      tag: 'span',
+      properties: { class: 'day-number', ...state },
+      content: number,
+    })}`;
   }
 
   protected override willUpdate(changed: PropertyValues<this>): void {
@@ -719,6 +875,9 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     if (!this.#initialized) {
       this.#initialize();
       valueWritten.delete(this);
+      this.#syncStripAnchor();
+      this.#centeredSelection = (this.#isStrip() && this.#singleSelection()) || '';
+      this.#prepareSlide();
       return;
     }
     if (changed.has('calendarAdapter') || changed.has('selectionMode')) {
@@ -759,7 +918,281 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     } else if (!this.#monthControlled && changed.has('displayedMonth') && this.displayedMonth) {
       this.#diagnose('Calendar cannot change from uncontrolled to controlled displayed month.');
     }
+    this.#syncStripAnchor();
     if (valueWritten.delete(this) && this.#selectionControlled) this.#revealSelection();
+    this.#centerSelection(changed);
+    this.#prepareSlide();
+  }
+
+  /** The strip's first day at the last render; empty for grids. */
+  #renderedStart = '';
+  /** While the strip slides: the days it renders, the moved-away ones included, and their width. */
+  #slideRange: { start: string; count: number; track: number } | null = null;
+  /** A slide to start after the render: its translations, or a fade-in for a jump. */
+  #pendingSlide: { from: number; to: number } | { fade: number } | null = null;
+  #slideMotion: MotionHandle | undefined;
+  #slideAnimation: Animation | undefined;
+
+  /**
+   * Prepares the slide from the strip as it is seen, mid-slide included, to its new first day.
+   * Moves within two strips render the days in between, so leaving days slide out as new ones
+   * slide in; longer jumps fade the new days in from their side. Reduced motion, a disabled motion
+   * policy or a missing token set move the strip at once.
+   */
+  #prepareSlide(): void {
+    const adapter = this.calendarAdapter;
+    const strip = this.#isStrip() && !this.#configurationError();
+    const start = strip ? calendarStripStart(adapter, this.#stripAnchor, this.visibleDays) : '';
+    const previous = this.#renderedStart;
+    this.#renderedStart = start;
+    if (!previous || !start || !this.hasUpdated || adapter.compare(previous, start) === 0) {
+      if (!strip) this.#endSlide();
+      return;
+    }
+    const row = this.renderRoot.querySelector<HTMLElement>('.strip-row');
+    const cell = row?.querySelector<HTMLElement>('.day-cell');
+    const sign = this.direction === 'rtl' ? -1 : 1;
+    // Layout widths, which a scaling entrance transform leaves untouched.
+    const track = cell ? Number.parseFloat(getComputedStyle(cell).width) : 0;
+    let visible = adapter.differenceInDays(previous, start);
+    const running = this.#slideRange;
+    if (running && row && track > 0) {
+      const offset = new DOMMatrixReadOnly(getComputedStyle(row).transform).m41;
+      visible = adapter.differenceInDays(running.start, start) - (sign * offset) / track;
+    }
+    this.#endSlide();
+    this.#renderedFrom = previous;
+    if (!row || !(track > 0) || resolveMotionTiming(this).duration <= 0) return;
+    if (Math.abs(visible) > this.visibleDays * 2) {
+      this.#pendingSlide = { fade: Math.sign(visible) };
+      return;
+    }
+    const first = Math.min(0, Math.floor(visible));
+    const last = Math.max(0, Math.ceil(visible));
+    this.#slideRange = {
+      start: adapter.addDays(start, first),
+      count: this.visibleDays + last - first,
+      track,
+    };
+    this.#pendingSlide = { from: -sign * (visible - first) * track, to: sign * first * track };
+  }
+
+  /** Plays the prepared slide on the rendered row, through the claimable strip motion role. */
+  #playSlide(): void {
+    const pending = this.#pendingSlide;
+    this.#pendingSlide = null;
+    const row = this.renderRoot.querySelector<HTMLElement>('.strip-row');
+    if (!pending || !row) return this.#endSlide(true);
+    const keyframes =
+      'fade' in pending
+        ? [
+            {
+              opacity: 0,
+              transform: `translateX(${(this.direction === 'rtl' ? 1 : -1) * pending.fade * this.#slideTrack(row) * 0.5}px)`,
+            },
+            { opacity: 1, transform: 'none' },
+          ]
+        : [
+            { transform: `translateX(${pending.from}px)` },
+            { transform: `translateX(${pending.to}px)` },
+          ];
+    const motion = prepareMotion(
+      this,
+      row,
+      calendarMotionRoles.strip,
+      {
+        phase: 'change',
+        fromState: this.#renderedFrom,
+        toState: this.#renderedStart,
+      },
+      {
+        play: () => {
+          const animation = row.animate(keyframes, {
+            ...resolveMotionTiming(this),
+            fill: 'forwards',
+          });
+          this.#slideAnimation = animation;
+          return {
+            finished: animation.finished.then(() => undefined),
+            cancel: () => animation.cancel(),
+          };
+        },
+      },
+    );
+    this.#slideMotion = motion;
+    void motion.finished.then(() => {
+      if (this.#slideMotion === motion) this.#endSlide(true);
+    });
+    motion.start();
+  }
+
+  #slideTrack(row: HTMLElement): number {
+    const cell = row.querySelector<HTMLElement>('.day-cell');
+    return cell ? Number.parseFloat(getComputedStyle(cell).width) || 0 : 0;
+  }
+
+  /** The strip's first day before the latest move, reported as the motion's from-state. */
+  #renderedFrom = '';
+
+  /**
+   * Ends a slide: the strip drops the moved-away days and its translation in the same render, so
+   * the last frame and the settled strip match.
+   */
+  #endSlide(render = false): void {
+    const animation = this.#slideAnimation;
+    const motion = this.#slideMotion;
+    this.#slideMotion = undefined;
+    this.#slideAnimation = undefined;
+    this.#pendingSlide = null;
+    if (motion) motion.cancel();
+    if (!this.#slideRange) {
+      animation?.cancel();
+      return;
+    }
+    this.#slideRange = null;
+    if (!render) {
+      animation?.cancel();
+      return;
+    }
+    // The settled render lands in this frame; the held last frame is released after it.
+    this.requestUpdate();
+    void this.updateComplete.then(() => animation?.cancel());
+  }
+
+  /**
+   * Keeps the strip's middle day in the displayed month: a month changed by its controls, caption
+   * dropdowns or owner keeps the day number, and the strip stays inside the navigation bounds.
+   */
+  #syncStripAnchor(): void {
+    const adapter = this.calendarAdapter;
+    if (!this.#stripAnchor || !adapter.normalize(this.#stripAnchor))
+      this.#stripAnchor = this.#displayed;
+    if (adapter.compare(adapter.startOfMonth(this.#stripAnchor), this.#displayed) !== 0) {
+      const proposed = this.#proposedStripAnchor;
+      this.#stripAnchor =
+        proposed && adapter.compare(adapter.startOfMonth(proposed), this.#displayed) === 0
+          ? proposed
+          : calendarStripAnchorInMonth(adapter, this.#stripAnchor, this.#displayed);
+      this.#proposedStripAnchor = '';
+    }
+    if (!this.#isStrip() || this.#configurationError()) return;
+    const clamped = calendarStripClamp(
+      adapter,
+      this.#stripAnchor,
+      this.visibleDays,
+      this.navigationStart,
+      this.navigationEnd,
+    );
+    // Clamping never moves the middle day out of the displayed month.
+    if (adapter.compare(adapter.startOfMonth(clamped), this.#displayed) === 0)
+      this.#stripAnchor = clamped;
+  }
+
+  #isStrip(): boolean {
+    return this.variant === 'strip';
+  }
+
+  /** Months the displayed-month bounds and reveals cover: one under the strip. */
+  #monthCount(): number {
+    return this.#isStrip() ? 1 : this.visibleMonths;
+  }
+
+  #stripStep(): number {
+    return this.pagedNavigation ? this.visibleDays : 1;
+  }
+
+  #previousDays = (event: MouseEvent): void => this.#stripControl(-1, event);
+
+  #nextDays = (event: MouseEvent): void => this.#stripControl(1, event);
+
+  #stripControl(direction: number, event: MouseEvent): void {
+    if (!this.#arrowsSelect()) {
+      this.#moveStrip(
+        this.calendarAdapter.addDays(this.#stripAnchor, direction * this.#stripStep()),
+        event,
+      );
+      return;
+    }
+    const date = this.#arrowDate(direction);
+    if (date) this.#requestSelection(date, 'selection', event);
+  }
+
+  /** Whether the strip controls change a single selection instead of moving the days. */
+  #arrowsSelect(): boolean {
+    return this.#isStrip() && this.selectionMode === 'single' && !this.readOnly;
+  }
+
+  /** The single selection's date, or none. */
+  #singleSelection(): string | undefined {
+    if (this.selectionMode !== 'single') return undefined;
+    return calendarValueDates('single', this.#selection, this.calendarAdapter)[0];
+  }
+
+  /**
+   * The selectable day a strip control selects: one day (a row with `paged-navigation`) from the
+   * selection, or from the middle day without one, then on to the next selectable day that
+   * navigation can show.
+   */
+  #arrowDate(direction: number): string | null {
+    const adapter = this.calendarAdapter;
+    const step = this.pagedNavigation ? this.visibleDays : 1;
+    let date = adapter.addDays(this.#singleSelection() ?? this.#stripAnchor, direction * step);
+    for (let attempt = 0; attempt < 3660; attempt += 1) {
+      if (!this.#canReveal(date)) return null;
+      if (this.#isDateSelectable(date)) return date;
+      date = adapter.addDays(date, direction);
+    }
+    return null;
+  }
+
+  /** The single selection the strip last centered; a new one is centered once. */
+  #centeredSelection = '';
+
+  /**
+   * Keeps a single selection in the middle of the strip: a newly committed or written date, from
+   * a press, a strip control or the owner, slides to the center.
+   */
+  #centerSelection(changed: PropertyValues<this>): void {
+    if (changed.has('variant') || changed.has('selectionMode') || changed.has('visibleDays'))
+      this.#centeredSelection = '';
+    const date = this.#isStrip() ? this.#singleSelection() : undefined;
+    if (!date || date === this.#centeredSelection) return;
+    this.#centeredSelection = date;
+    if (this.calendarAdapter.compare(date, this.#stripAnchor) !== 0)
+      this.#moveStrip(date, new Event('value'));
+  }
+
+  /**
+   * Moves the strip's middle day, kept inside the navigation bounds; a move into another month is
+   * the cancelable displayed-month proposal, and a rejected one leaves the strip where it was.
+   * Returns whether the strip shows the requested middle day.
+   */
+  #moveStrip(anchor: string, sourceEvent: Event): boolean {
+    const adapter = this.calendarAdapter;
+    const next = calendarStripClamp(
+      adapter,
+      anchor,
+      this.visibleDays,
+      this.navigationStart,
+      this.navigationEnd,
+    );
+    if (adapter.compare(next, this.#stripAnchor) === 0) return false;
+    this.#proposedStripAnchor = '';
+    const previous = this.#stripAnchor;
+    this.#stripAnchor = next;
+    const month = adapter.startOfMonth(next);
+    if (
+      adapter.compare(month, this.#displayed) !== 0 &&
+      (!this.#requestDisplayedMonth(month, sourceEvent) ||
+        adapter.compare(month, this.#displayed) !== 0)
+    ) {
+      this.#stripAnchor = previous;
+      this.#proposedStripAnchor = next;
+      this.requestUpdate();
+      return false;
+    }
+    this.requestUpdate();
+    return true;
   }
 
   /**
@@ -771,6 +1204,11 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     const months = this.#visibleMonthStarts();
     const first = dates[0];
     if (!first || !months.length) return;
+    if (this.#isStrip()) {
+      // The strip centers on the selection when none of its dates is shown.
+      if (!dates.some((date) => this.#inStrip(date))) this.#moveStrip(first, new Event('value'));
+      return;
+    }
     const weekStart = this.#resolvedWeekStart();
     const shown = (date: string) =>
       months.some(
@@ -792,6 +1230,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
 
   protected override updated(changed: PropertyValues<this>): void {
     super.updated(changed);
+    if (this.#pendingSlide) this.#playSlide();
     this.#observeWeekdays();
     void this.#syncChildren();
     this.#syncFormState();
@@ -842,6 +1281,8 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     this.#pendingFocusDate = '';
     this.#weekdayObserver?.disconnect();
     this.#observedWeekdays = [];
+    this.#endSlide();
+    this.#renderedStart = '';
     super.disconnectedCallback();
   }
 
@@ -872,6 +1313,10 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     this.#displayed = initialMonth
       ? this.calendarAdapter.startOfMonth(initialMonth)
       : this.calendarAdapter.startOfMonth(localCalendarDate());
+    // The strip centers on the selection or today, moved to the same day of a displayed month
+    // that does not hold it.
+    this.#stripAnchor =
+      firstSelection || this.calendarAdapter.normalize(this.today) || this.#displayed;
   }
 
   #requestSelection(value: CalendarValue, reason: ChangeReason, sourceEvent: Event): boolean {
@@ -951,6 +1396,11 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     } else if (event.key === 'ArrowUp') {
       direction = -1;
       target = this.calendarAdapter.addDays(current, -7);
+    } else if ((event.key === 'Home' || event.key === 'End') && this.#isStrip()) {
+      // The strip's Home and End reach its first and last day.
+      const dates = calendarStripDates(this.calendarAdapter, this.#stripAnchor, this.visibleDays);
+      direction = event.key === 'Home' ? 1 : -1;
+      target = (event.key === 'Home' ? dates[0] : dates.at(-1)) ?? null;
     } else if (event.key === 'Home') {
       direction = -1;
       const offset = moduloCalendar(
@@ -1022,6 +1472,21 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
   }
 
   #revealAndFocus(date: string, sourceEvent: Event): void {
+    if (this.#isStrip()) {
+      const anchor = calendarStripReveal(
+        this.calendarAdapter,
+        this.#stripAnchor,
+        this.visibleDays,
+        date,
+      );
+      if (this.calendarAdapter.compare(anchor, this.#stripAnchor) !== 0)
+        this.#moveStrip(anchor, sourceEvent);
+      if (!this.#inStrip(date)) return;
+      this.#focusedDate = date;
+      this.#pendingFocusDate = date;
+      this.requestUpdate();
+      return;
+    }
     const targetMonth = this.calendarAdapter.startOfMonth(date);
     const visibleMonths = this.#visibleMonthStarts();
     const first = visibleMonths[0];
@@ -1030,7 +1495,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     let display = this.#displayed;
     if (this.calendarAdapter.compare(targetMonth, first) < 0) display = targetMonth;
     else if (this.calendarAdapter.compare(targetMonth, last) > 0)
-      display = this.calendarAdapter.addMonths(targetMonth, -(this.visibleMonths - 1));
+      display = this.calendarAdapter.addMonths(targetMonth, -(this.#monthCount() - 1));
     if (!this.#canDisplay(display)) return;
     if (
       this.calendarAdapter.compare(display, this.#displayed) !== 0 &&
@@ -1053,7 +1518,7 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
 
   #canReveal(date: string): boolean {
     const month = this.calendarAdapter.startOfMonth(date);
-    const last = this.calendarAdapter.addMonths(month, this.visibleMonths - 1);
+    const last = this.calendarAdapter.addMonths(month, this.#monthCount() - 1);
     if (this.navigationStart) {
       const lower = this.calendarAdapter.startOfMonth(this.navigationStart);
       if (this.calendarAdapter.compare(last, lower) < 0) return false;
@@ -1073,27 +1538,39 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     return calendarCanDisplay(
       this.calendarAdapter,
       start,
-      this.visibleMonths,
+      this.#monthCount(),
       this.navigationStart,
       this.navigationEnd,
     );
   }
 
   #navigationStep(): number {
-    return this.pagedNavigation ? this.visibleMonths : 1;
+    return this.pagedNavigation && !this.#isStrip() ? this.visibleMonths : 1;
   }
 
   #visibleMonthStarts(): string[] {
-    return Array.from({ length: Math.max(0, this.visibleMonths) }, (_, index) =>
+    return Array.from({ length: Math.max(0, this.#monthCount()) }, (_, index) =>
       this.calendarAdapter.addMonths(this.#displayed, index),
     );
+  }
+
+  /** Whether the strip shows `date`. */
+  #inStrip(date: string): boolean {
+    const start = calendarStripStart(this.calendarAdapter, this.#stripAnchor, this.visibleDays);
+    const offset = this.calendarAdapter.differenceInDays(date, start);
+    return offset >= 0 && offset < this.visibleDays;
   }
 
   #rovingDate(): string {
     const visible = this.#visibleMonthStarts();
     if (!visible.length) return '';
-    const first = visible[0]!;
-    const afterLast = this.calendarAdapter.addMonths(visible.at(-1)!, 1);
+    const strip = this.#isStrip();
+    const first = strip
+      ? calendarStripStart(this.calendarAdapter, this.#stripAnchor, this.visibleDays)
+      : visible[0]!;
+    const afterLast = strip
+      ? this.calendarAdapter.addDays(first, this.visibleDays)
+      : this.calendarAdapter.addMonths(visible.at(-1)!, 1);
     const inInterval = (date: string) =>
       this.calendarAdapter.compare(date, first) >= 0 &&
       this.calendarAdapter.compare(date, afterLast) < 0;
@@ -1111,6 +1588,12 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
     if (selected) return selected;
     const today = this.calendarAdapter.normalize(this.today);
     if (today && inInterval(today) && this.#isDateFocusable(today)) return today;
+    if (strip)
+      return (
+        calendarStripDates(this.calendarAdapter, this.#stripAnchor, this.visibleDays).find((date) =>
+          this.#isDateFocusable(date),
+        ) ?? ''
+      );
     for (const month of visible) {
       const dates = calendarGridDates(month, this.#resolvedWeekStart(), this.calendarAdapter);
       const candidate = dates.find(
@@ -1205,6 +1688,8 @@ export class TpCalendar extends TpFormElement<CalendarValue> {
   #configurationError(): string | null {
     if (!Number.isInteger(this.visibleMonths) || this.visibleMonths <= 0)
       return 'Calendar visibleMonths must be a positive integer.';
+    if (!Number.isInteger(this.visibleDays) || this.visibleDays <= 0)
+      return 'Calendar visibleDays must be a positive integer.';
     if (
       !Number.isInteger(this.minimumSelectionCount) ||
       this.minimumSelectionCount < 0 ||

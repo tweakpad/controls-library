@@ -5,10 +5,13 @@ import type {
   TpCalendar,
   CalendarCaptionLayout,
   CalendarMessages,
+  CalendarVariant,
 } from '../components/calendar/index.js';
 import type { CalendarSelectionMode } from '../foundation/calendar.js';
 
 interface Args {
+  variant: CalendarVariant;
+  visibleDays: number;
   selectionMode: CalendarSelectionMode;
   captionLayout: CalendarCaptionLayout;
   visibleMonths: number;
@@ -30,6 +33,8 @@ const meta = {
   component: 'tp-calendar',
   parameters: { docs: libraryDocs('components/calendar') },
   args: {
+    variant: 'grid',
+    visibleDays: 5,
     selectionMode: 'single',
     captionLayout: 'label',
     visibleMonths: 1,
@@ -46,6 +51,8 @@ const meta = {
     required: false,
   },
   argTypes: {
+    variant: { control: 'inline-radio', options: ['grid', 'strip'] },
+    visibleDays: { control: { type: 'number', min: 1, max: 9 } },
     selectionMode: { control: 'select', options: ['single', 'multiple', 'range'] },
     captionLayout: {
       control: 'select',
@@ -59,7 +66,7 @@ const meta = {
     buttonVariant: {
       control: 'select',
       options: ['ghost', 'outline', 'secondary', 'default'],
-      description: 'Button variant for the previous and next month controls.',
+      description: 'Button variant for the previous and next month and strip controls.',
     },
     weekStartsOn: {
       control: { type: 'number', min: -1, max: 6 },
@@ -69,7 +76,7 @@ const meta = {
     messages: {
       control: 'object',
       description:
-        'User-facing strings: previous, next, monthDropdown, yearDropdown, weekNumberHeader (strings here; previous/next, day and validity also accept functions in code).',
+        'User-facing strings: previous, next, previousDay, nextDay, previousDays, nextDays, monthDropdown, yearDropdown, weekNumberHeader (strings here; previous/next, the strip controls, day and validity also accept functions in code).',
     },
     disabled: { control: 'boolean' },
     readOnly: { control: 'boolean' },
@@ -78,6 +85,8 @@ const meta = {
   render: (args) =>
     html`<tp-calendar
       label="Date"
+      .variant=${args.variant}
+      .visibleDays=${args.visibleDays}
       .selectionMode=${args.selectionMode}
       .captionLayout=${args.captionLayout}
       .visibleMonths=${args.visibleMonths}

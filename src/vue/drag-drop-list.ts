@@ -34,6 +34,7 @@ export const DragDropList = /*#__PURE__*/ createBinding(TpDragDropList, 'DragDro
   | 'group'
   | 'instructions'
   | 'invalid'
+  | 'isItemSelected'
   | 'keyboardTransition'
   | 'label'
   | 'manager'

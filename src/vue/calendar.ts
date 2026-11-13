@@ -59,6 +59,8 @@ export const Calendar = /*#__PURE__*/ createBinding(TpCalendar, 'Calendar', {
   | 'today'
   | 'unavailableDates'
   | 'value'
+  | 'variant'
+  | 'visibleDays'
   | 'visibleMonths'
   | 'weekStartsOn',
   {

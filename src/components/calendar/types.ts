@@ -1,5 +1,7 @@
 export type CalendarDateMatcher = ReadonlySet<string> | ((date: string) => boolean) | undefined;
 export type CalendarCaptionLayout = 'label' | 'dropdown' | 'dropdown-months' | 'dropdown-years';
+/** Month grids, or a strip of consecutive days under the month caption. */
+export type CalendarVariant = 'grid' | 'strip';
 export interface CalendarDayState {
   date: string;
   month: string;
@@ -37,6 +39,20 @@ export interface CalendarMessages {
   previous?: string | ((month: string, caption: string) => string);
   /** Next-month control name; `month` is the target month's first day, `caption` its formatted name. */
   next?: string | ((month: string, caption: string) => string);
+  /**
+   * Name of the strip control that shows earlier days, outside single selection; `start` is the
+   * first day it would show.
+   */
+  previousDays?: string | ((start: string) => string);
+  /**
+   * Name of the strip control that shows later days, outside single selection; `start` is the
+   * first day it would show.
+   */
+  nextDays?: string | ((start: string) => string);
+  /** Name of the strip control that selects the previous day in single selection; `date` is that day. */
+  previousDay?: string | ((date: string) => string);
+  /** Name of the strip control that selects the next day in single selection; `date` is that day. */
+  nextDay?: string | ((date: string) => string);
   /** Accessible name of the month selector. */
   monthDropdown?: string;
   /** Accessible name of the year selector. */

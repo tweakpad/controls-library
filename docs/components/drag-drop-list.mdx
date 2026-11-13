@@ -138,6 +138,35 @@ list.defaultValue = [
 document.querySelector('#drag-drop-list-rich').prepend(list);`}
 />
 
+### Selection
+
+The list keeps no selection of its own. `isItemSelected` tells it which rows show as selected, from the item and its index, and the context's `selected` flag carries the answer to `renderItem`. Call `requestUpdate()` on the list when your selection changes. A selected row keeps its place in drags and keyboard moves like any other.
+
+<Preview
+  width="5"
+  title="Selected row"
+  align="stretch"
+  code={`<div id="drag-drop-list-selection"></div>`}
+  script={`import { html } from 'lit';
+
+const list = document.createElement('tp-drag-drop-list');
+list.label = 'Layer order';
+list.activation = 'item';
+list.size = 'sm';
+let selected = 'sun';
+list.isItemSelected = (item) => item.id === selected;
+list.renderItem = (item) => html\`<span @click=\${() => {
+  selected = item.id;
+  list.requestUpdate();
+}}>\${item.label}</span>\`;
+list.defaultValue = [
+  { id: 'moon', label: 'Moon' },
+  { id: 'sun', label: 'Sun' },
+  { id: 'clouds', label: 'Clouds' },
+];
+document.querySelector('#drag-drop-list-selection').append(list);`}
+/>
+
 ### Horizontal
 
 `orientation="horizontal"` lays the items out in a row and moves them with the left and right arrow keys, mirrored for right-to-left text.

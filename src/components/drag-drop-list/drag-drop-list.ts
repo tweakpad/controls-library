@@ -68,6 +68,7 @@ const complexProperties = Object.fromEntries(
     'getItemLabel',
     'renderItem',
     'getItemOptions',
+    'isItemSelected',
     'manager',
     'group',
     'type',
@@ -103,6 +104,10 @@ type AccessibilityRegion = 'instructions' | 'announcements';
  * @csspart list - The native ordered list.
  * @csspart item - The list element around each row.
  * @csspart handle - The grip Button that picks a row up.
+ * @csspart row - Each row's List item surface: its padding, height, radius and fill.
+ * @csspart row-media - Each row's media area, which holds the grip.
+ * @csspart row-content - Each row's title and description.
+ * @csspart row-actions - Each row's actions, at its inline end.
  * @csspart empty - The row shown while the list has no items.
  * @csspart placeholder - The stand-in that keeps the dragged row's place.
  * @csspart overlay - The custom drag overlay drawn by `renderOverlay`.
@@ -148,6 +153,11 @@ export class TpDragDropList<T = unknown> extends TpElement {
   renderItem: ((item: T, context: DragDropItemContext<T>) => unknown) | undefined;
   /** Per-item drag settings, such as disabling dragging or dropping for one item. */
   getItemOptions: ((item: T, context: DragDropItemContext<T>) => DragDropItemOptions) | undefined;
+  /**
+   * Whether an item's row shows as selected. The list keeps no selection of its own: the owner
+   * decides, and calls `requestUpdate()` when its selection changes.
+   */
+  isItemSelected: ((item: T, index: number) => boolean) | undefined;
   /** The drag manager shared by lists that exchange items; a list without one owns its own. */
   manager: DragDropManager | undefined;
   /** The identity of this list among lists sharing a manager; unique and stable. */
@@ -409,6 +419,7 @@ export class TpDragDropList<T = unknown> extends TpElement {
       dragging: entity?.isDragging ?? false,
       dropping: entity?.isDropping ?? false,
       dropTarget: entity?.isDropTarget ?? false,
+      selected: this.isItemSelected?.(record.item, record.index) ?? false,
       disabled: participation.dragDisabled,
       dragDisabled: participation.dragDisabled,
       dropDisabled: participation.dropDisabled,
@@ -472,6 +483,16 @@ export class TpDragDropList<T = unknown> extends TpElement {
         ].map((key) => [key, merged[key as keyof ManagerOptions]]),
       ),
     };
+  }
+  #syncQueued = false;
+  /** Syncs once after a render's handles settle: one pass per microtask, not one per handle. */
+  #queueSync(): void {
+    if (this.#syncQueued) return;
+    this.#syncQueued = true;
+    queueMicrotask(() => {
+      this.#syncQueued = false;
+      if (this.isConnected) this.#syncEntities();
+    });
   }
   #syncEntities(): void {
     const manager = this.#connectedManager,
@@ -661,10 +682,7 @@ export class TpDragDropList<T = unknown> extends TpElement {
         (callback = (element) => {
           if (element) values.set(id, element);
           else values.delete(id);
-          if (handle)
-            queueMicrotask(() => {
-              if (this.isConnected) this.#syncEntities();
-            });
+          if (handle) this.#queueSync();
         }),
       );
     return callback;
@@ -701,7 +719,12 @@ export class TpDragDropList<T = unknown> extends TpElement {
       },
       protectedProperties: ['.partContracts'],
     });
-    return html`<tp-list-item .variant=${this.variant} .size=${this.size}
+    // The row's parts are exported so a page can fit the rows to its own density.
+    return html`<tp-list-item
+      .variant=${this.variant}
+      .size=${this.size}
+      .selected=${context.selected}
+      exportparts="list-item:row, list-item-media:row-media, list-item-content:row-content, list-item-actions:row-actions"
       >${handle}${content}</tp-list-item
     >`;
   }
@@ -729,6 +752,7 @@ export class TpDragDropList<T = unknown> extends TpElement {
                 'data-dropping': context.dropping,
                 'data-drop-target': context.dropTarget,
                 'data-drop-disabled': context.dropDisabled,
+                'data-selected': context.selected,
               },
               content: this.#row(record),
             });

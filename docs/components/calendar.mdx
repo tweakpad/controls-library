@@ -415,3 +415,16 @@ For a controlled Calendar, set `value` and assign the proposed value synchronous
 ### Keyboard
 
 One day is in the tab order. Arrow keys move by day and week, Home and End to the week's edges, Page Up and Page Down by month, and Shift with Page Up or Page Down by year. Enter and Space select the focused day. Movement skips disabled and hidden dates and reveals other months within the navigation bounds. Consumed keys and keys carrying Alt, Ctrl or Meta are left to the browser.
+
+### Day strip
+
+`variant="strip"` replaces the month grid with a row of consecutive days under the month caption, for picking a day close to today.
+
+<Preview
+  title="Day strip"
+  code={`<tp-card section-colors="off" style="inline-size:fit-content">
+  <tp-calendar label="Pickup day" name="pickup" variant="strip" today="2026-06-29" default-value="2026-07-01"></tp-calendar>
+</tp-card>`}
+/>
+
+A single selection stays in the middle of the strip: the arrows beside the days select the previous or next day, skipping days that cannot be selected, and a day pressed at either side slides to the middle. With a range, several dates or `readonly`, the arrows slide the days a day at a time instead, or a whole row with `paged-navigation`. `visible-days` sets how many days show. Longer jumps fade the new days in, and reduced motion or `motion-policy="reduce"` moves them at once. The caption names the month of the middle day; its arrows move to the same day of the previous or next month. Selection modes, bounds and custom day content work as they do in the grid. From the keyboard, Home and End reach the first and last day shown, and moving focus past either end brings the days along.

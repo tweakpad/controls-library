@@ -10,7 +10,7 @@ const definition: ComponentDefinition = {
   parts: [
     {
       name: 'calendar',
-      description: 'The root group around the months and the footer.',
+      description: 'The root group around the months, or the strip, and the footer.',
     },
     {
       // No Foundation part: synthesized Navigation/Caption arrangement.
@@ -84,6 +84,30 @@ const definition: ComponentDefinition = {
       description: 'The week number at the start of a week row.',
     },
     {
+      name: 'calendar-strip',
+      description: 'The strip variant: its row of days between the strip controls.',
+    },
+    {
+      name: 'calendar-strip-previous',
+      description: 'The native button inside the Button that shows earlier days.',
+    },
+    {
+      name: 'calendar-strip-next',
+      description: 'The native button inside the Button that shows later days.',
+    },
+    {
+      name: 'calendar-days',
+      description: "The grid of the strip's days.",
+    },
+    {
+      name: 'calendar-day-weekday',
+      description: 'The weekday name inside a strip day.',
+    },
+    {
+      name: 'calendar-day-number',
+      description: 'The day number inside a strip day.',
+    },
+    {
       name: 'calendar-footer',
       description: 'The container of the footer slot.',
     },
@@ -108,6 +132,10 @@ export const calendarPresentation = definePresentation({
       '[part~="calendar-week-number"]': 'calendar-week-number',
       '[part~="calendar-footer"]': 'calendar-footer',
       '[part~="calendar-month-grid"]': 'calendar-month-grid',
+      '[part~="calendar-strip"]': 'calendar-strip',
+      '[part~="calendar-days"]': 'calendar-days',
+      '[part~="calendar-day-weekday"]': 'calendar-day-weekday',
+      '[part~="calendar-day-number"]': 'calendar-day-number',
     },
   },
   sources: [calendarAppearance],

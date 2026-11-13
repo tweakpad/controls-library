@@ -743,6 +743,8 @@ type Tags = {
     | 'today'
     | 'unavailableDates'
     | 'value'
+    | 'variant'
+    | 'visibleDays'
     | 'visibleMonths'
     | 'weekStartsOn',
     {
@@ -1352,6 +1354,7 @@ type Tags = {
     | 'group'
     | 'instructions'
     | 'invalid'
+    | 'isItemSelected'
     | 'keyboardTransition'
     | 'label'
     | 'manager'

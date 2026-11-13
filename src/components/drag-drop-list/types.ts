@@ -11,6 +11,8 @@ export interface DragDropItemContext<T> {
   dragging: boolean;
   dropping: boolean;
   dropTarget: boolean;
+  /** The row shows as selected, as `isItemSelected` decides. */
+  selected: boolean;
   /** Drag participation is disabled; kept as the handle/drag lane alias of dragDisabled. */
   disabled: boolean;
   /** List, read-only, duplicate or item draggable lane disables dragging this item. */

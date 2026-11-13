@@ -56,6 +56,8 @@ export type CalendarProps = ElementProps<
   | 'today'
   | 'unavailableDates'
   | 'value'
+  | 'variant'
+  | 'visibleDays'
   | 'visibleMonths'
   | 'weekStartsOn',
   {

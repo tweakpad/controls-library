@@ -4,6 +4,11 @@ import {
   calendarBuiltInDayMarkers,
   calendarCanDisplay,
   calendarNearestYearMonth,
+  calendarStripAnchorInMonth,
+  calendarStripClamp,
+  calendarStripDates,
+  calendarStripReveal,
+  calendarStripStart,
   calendarYearMonths,
   calendarYearNavigable,
   containsInteractiveContent,
@@ -110,5 +115,50 @@ describe('calendar custom day content', () => {
 
   it('detects interactive content inside open shadow roots of composed elements', () => {
     expect(containsInteractiveContent(node(passive, [], [node(tag('button'))]))).toBe(true);
+  });
+});
+
+describe('calendar day strip', () => {
+  it('centers its days on the middle day', () => {
+    expect(calendarStripDates(adapter, '2025-11-02', 5)).toEqual([
+      '2025-10-31',
+      '2025-11-01',
+      '2025-11-02',
+      '2025-11-03',
+      '2025-11-04',
+    ]);
+    // An even count puts the middle day just before the center.
+    expect(calendarStripStart(adapter, '2025-11-02', 4)).toBe('2025-11-01');
+    expect(calendarStripDates(adapter, '2025-11-02', 1)).toEqual(['2025-11-02']);
+  });
+
+  it('keeps the day number in another month, or the month end when it is shorter', () => {
+    expect(calendarStripAnchorInMonth(adapter, '2025-10-14', '2025-12-01')).toBe('2025-12-14');
+    expect(calendarStripAnchorInMonth(adapter, '2025-10-31', '2025-11-01')).toBe('2025-11-30');
+    expect(calendarStripAnchorInMonth(adapter, '2024-01-31', '2024-02-01')).toBe('2024-02-29');
+  });
+
+  it('stays inside the months of the navigation bounds', () => {
+    expect(calendarStripClamp(adapter, '2026-06-01', 5, '2026-06-01', '2026-06-30')).toBe(
+      '2026-06-03',
+    );
+    expect(calendarStripClamp(adapter, '2026-06-30', 5, '2026-06-01', '2026-06-30')).toBe(
+      '2026-06-28',
+    );
+    expect(calendarStripClamp(adapter, '2026-06-15', 5, '2026-06-01', '2026-06-30')).toBe(
+      '2026-06-15',
+    );
+    expect(calendarStripClamp(adapter, '2026-06-01', 5, '', '')).toBe('2026-06-01');
+    // Bounds narrower than the strip keep its start inside them.
+    const narrow = calendarStripClamp(adapter, '2026-02-10', 40, '2026-02-01', '2026-02-28');
+    expect(calendarStripStart(adapter, narrow, 40)).toBe('2026-02-01');
+  });
+
+  it('moves just far enough to show a date, and centers on a distant one', () => {
+    expect(calendarStripReveal(adapter, '2025-11-02', 5, '2025-11-03')).toBe('2025-11-02');
+    expect(calendarStripReveal(adapter, '2025-11-02', 5, '2025-11-05')).toBe('2025-11-03');
+    expect(calendarStripReveal(adapter, '2025-11-02', 5, '2025-10-30')).toBe('2025-11-01');
+    expect(calendarStripReveal(adapter, '2025-11-02', 5, '2025-12-02')).toBe('2025-12-02');
+    expect(calendarStripReveal(adapter, '2025-11-02', 5, '2025-10-01')).toBe('2025-10-01');
   });
 });

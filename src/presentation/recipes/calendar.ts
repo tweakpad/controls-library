@@ -33,10 +33,10 @@ export const calendarAppearance: PresentationDictionary = {
       selector: '& .day-cell[data-range-end]:not([data-range-start])::after',
       declarations: { ...rangeBacking, 'inset-inline-start': '0' },
     },
-    // Range middles round where a week row starts or ends.
+    // Range middles round where a week row or the strip starts or ends.
     {
       selector:
-        '& .week > .day-cell:nth-child(1 of .day-cell)[data-range-middle] .day::part(button)',
+        '& :is(.week, .strip-row) > .day-cell:nth-child(1 of .day-cell)[data-range-middle] .day::part(button)',
       declarations: {
         'border-start-start-radius': 'var(--tp-radius-md)',
         'border-end-start-radius': 'var(--tp-radius-md)',
@@ -44,7 +44,7 @@ export const calendarAppearance: PresentationDictionary = {
     },
     {
       selector:
-        '& .week > .day-cell:nth-last-child(1 of .day-cell)[data-range-middle] .day::part(button)',
+        '& :is(.week, .strip-row) > .day-cell:nth-last-child(1 of .day-cell)[data-range-middle] .day::part(button)',
       declarations: {
         'border-start-end-radius': 'var(--tp-radius-md)',
         'border-end-end-radius': 'var(--tp-radius-md)',
@@ -122,6 +122,30 @@ export const calendarAppearance: PresentationDictionary = {
     {
       selector: '&[data-range-middle][data-outside]',
       declarations: { color: 'var(--tp-muted-foreground)' },
+    },
+  ],
+  'calendar-strip': [{ declarations: { gap: 'var(--tp-space-1)' } }],
+  'calendar-day-weekday': [
+    {
+      declarations: {
+        color: 'var(--tp-muted-foreground)',
+        'font-size': 'var(--tp-text-xs)',
+        'line-height': 'var(--tp-leading-tight)',
+      },
+    },
+    // On a filled day the weekday takes the day's own color.
+    {
+      selector: '&:is([data-selected], [data-today], [data-range-middle])',
+      declarations: { color: 'inherit' },
+    },
+  ],
+  'calendar-day-number': [
+    {
+      declarations: {
+        'font-size': 'var(--tp-text-base)',
+        'line-height': 'var(--tp-leading-tight)',
+        'font-weight': 'var(--tp-font-medium)',
+      },
     },
   ],
   'calendar-footer': [{ declarations: { 'font-size': 'var(--tp-text-sm)' } }],

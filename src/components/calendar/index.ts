@@ -4,6 +4,7 @@ export type {
   CalendarDayState,
   CalendarFormatters,
   CalendarCaptionLayout,
+  CalendarVariant,
   CalendarMessages,
   CalendarValidityCode,
 } from './types.js';

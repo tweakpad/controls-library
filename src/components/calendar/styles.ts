@@ -154,8 +154,9 @@ export const calendarStyles = css`
     z-index: 2;
   }
 
-  /* A range interior spans its whole column, so the band stays continuous across wide columns. */
-  .day-cell[data-range-middle] .day {
+  /* A range interior spans its whole column, so the band stays continuous across wide columns;
+     strip days always fill theirs. */
+  :is(.day-cell[data-range-middle], .strip-row > .day-cell) .day {
     inline-size: 100%;
   }
 
@@ -184,6 +185,56 @@ export const calendarStyles = css`
 
   .grid[data-narrow-weekdays] .weekday-narrow {
     display: inline;
+  }
+
+  /* The strip: one row of consecutive days between its day controls. Days share the row's inline
+     size, each a weekday over a day number. */
+  .strip {
+    display: flex;
+    align-items: center;
+    min-inline-size: 0;
+  }
+
+  .strip .navigation {
+    position: static;
+    flex: none;
+  }
+
+  /* Days prefer one and a half cells, give way to the cell size where room is short, and share
+     any wider inline size. */
+  .days {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    flex: 1 1 auto;
+    inline-size: calc(var(--_tp-calendar-visible-days, 5) * var(--tp-calendar-cell-size) * 1.5);
+    min-inline-size: 0;
+  }
+
+  /* While the strip slides it renders the days moving out as well, one fixed-width column each,
+     and clips them to its own box. */
+  .days:has(> .strip-row[data-sliding]) {
+    overflow: clip;
+  }
+
+  .strip-row[data-sliding] {
+    grid-template-columns: repeat(var(--_tp-calendar-strip-count), var(--_tp-calendar-strip-track));
+  }
+
+  .strip-row {
+    display: grid;
+    grid-template-columns: repeat(
+      var(--_tp-calendar-visible-days, 5),
+      minmax(var(--tp-calendar-cell-size), 1fr)
+    );
+  }
+
+  .strip-row > .day-cell {
+    block-size: calc(var(--tp-calendar-cell-size) * 2);
+  }
+
+  .day-weekday,
+  .day-number {
+    white-space: nowrap;
   }
 
   .footer[hidden] {

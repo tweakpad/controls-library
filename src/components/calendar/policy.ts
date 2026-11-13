@@ -54,6 +54,78 @@ export function calendarCanDisplay(
   return true;
 }
 
+/** The first day of a strip of `days` consecutive days centered on `anchor`. */
+export function calendarStripStart(adapter: CalendarAdapter, anchor: string, days: number): string {
+  return adapter.addDays(anchor, -Math.floor((days - 1) / 2));
+}
+
+/** The `days` consecutive dates of a strip centered on `anchor`. */
+export function calendarStripDates(
+  adapter: CalendarAdapter,
+  anchor: string,
+  days: number,
+): string[] {
+  const start = calendarStripStart(adapter, anchor, days);
+  return Array.from({ length: Math.max(0, days) }, (_, index) => adapter.addDays(start, index));
+}
+
+/** The day of `month` with `anchor`'s day number, or the month's last day when it is shorter. */
+export function calendarStripAnchorInMonth(
+  adapter: CalendarAdapter,
+  anchor: string,
+  month: string,
+): string {
+  const start = adapter.startOfMonth(month);
+  const length = adapter.differenceInDays(adapter.addMonths(start, 1), start);
+  return adapter.addDays(start, Math.min(adapter.parts(anchor).day, length) - 1);
+}
+
+/**
+ * The anchor nearest `anchor` whose strip stays inside the navigation bounds: from the first day
+ * of `navigationStart`'s month to the last day of `navigationEnd`'s. Bounds narrower than the
+ * strip keep its start inside them.
+ */
+export function calendarStripClamp(
+  adapter: CalendarAdapter,
+  anchor: string,
+  days: number,
+  navigationStart: string,
+  navigationEnd: string,
+): string {
+  let next = anchor;
+  if (navigationEnd) {
+    const upper = adapter.addDays(adapter.addMonths(adapter.startOfMonth(navigationEnd), 1), -1);
+    const last = adapter.addDays(calendarStripStart(adapter, next, days), days - 1);
+    const over = adapter.differenceInDays(last, upper);
+    if (over > 0) next = adapter.addDays(next, -over);
+  }
+  if (navigationStart) {
+    const lower = adapter.startOfMonth(navigationStart);
+    const under = adapter.differenceInDays(lower, calendarStripStart(adapter, next, days));
+    if (under > 0) next = adapter.addDays(next, under);
+  }
+  return next;
+}
+
+/**
+ * The anchor that brings `date` into a strip centered on `anchor`, or `anchor` when the date is
+ * already shown: the strip moves just far enough to show it at its edge, and centers on it when
+ * that move is longer than the strip.
+ */
+export function calendarStripReveal(
+  adapter: CalendarAdapter,
+  anchor: string,
+  days: number,
+  date: string,
+): string {
+  const start = calendarStripStart(adapter, anchor, days);
+  const before = adapter.differenceInDays(start, date);
+  const after = adapter.differenceInDays(date, adapter.addDays(start, days - 1));
+  if (before > 0) return before > days ? date : adapter.addDays(anchor, -before);
+  if (after > 0) return after > days ? date : adapter.addDays(anchor, after);
+  return anchor;
+}
+
 /** Every adapter month that shares `month`'s year, in order. */
 export function calendarYearMonths(adapter: CalendarAdapter, month: string): string[] {
   const year = adapter.parts(month).year;
