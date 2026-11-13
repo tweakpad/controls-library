@@ -1,4 +1,5 @@
 import { css, html, nothing, type PropertyValues } from 'lit';
+import { affectsEnvironment } from '../../foundation/composed-environment.js';
 import { defaultTrue } from '../../foundation/converters.js';
 import { TpElement } from '../../foundation/element.js';
 import { ControllableState } from '../../foundation/controllable-state.js';
@@ -568,11 +569,18 @@ export class TpMap extends TpElement implements MapApi {
       '(prefers-color-scheme: dark)',
       this.#schemeChanged,
     );
-    this.#schemeObserver = view ? new view.MutationObserver(this.#schemeChanged) : undefined;
+    // Inline style writes that touch no scheme or theme property, such as an animation on the
+    // body, leave the colors as they are and skip the style read.
+    this.#schemeObserver = view
+      ? new view.MutationObserver((records) => {
+          if (records.some(affectsEnvironment)) this.#schemeChanged();
+        })
+      : undefined;
     for (const element of [this.ownerDocument.documentElement, this.ownerDocument.body])
       if (element)
         this.#schemeObserver?.observe(element, {
           attributes: true,
+          attributeOldValue: true,
           attributeFilter: ['class', 'style', 'data-theme', 'data-color-scheme'],
         });
     this.#releaseChildren = observeSubtree(this, () => this.#assignSlots(), {

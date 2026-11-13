@@ -13,6 +13,7 @@ import { interactiveTargetInPath } from '../../foundation/interactive-target.js'
 import type { HostProperties } from '../../foundation/part.js';
 import { inlineIconStyles, renderInlineIcon } from '../shared/inline-icon.js';
 import { createId } from '../../foundation/id.js';
+import { observeNativeLabels } from './native-labels.js';
 import type { ChangeReason } from '../../foundation/types.js';
 import { checkIcon } from '../../icons/check.js';
 import { minusIcon } from '../../icons/minus.js';
@@ -163,6 +164,7 @@ export class TpCheckbox extends TpFormElement {
   #focusVisible = false;
   #nativeLabelText = '';
   #nativeLabelObserver: MutationObserver | null = null;
+  #releaseNativeLabels: (() => void) | undefined;
   #presence = new PresenceController(this, {
     surface: () => this.renderRoot.querySelector('[part~="checkbox-indicator"]'),
     keepMounted: () => this.keepMounted,
@@ -539,21 +541,14 @@ export class TpCheckbox extends TpFormElement {
     super.connectedCallback();
     this.addEventListener('click', this.#hostClick);
     this.#syncNativeLabels();
+    // Labels anywhere in the tree, through one observer shared by every control in it.
+    this.#releaseNativeLabels = observeNativeLabels(this.getRootNode(), this.#syncNativeLabels);
     const Observer = this.ownerDocument.defaultView?.MutationObserver;
     if (Observer) {
-      this.#nativeLabelObserver = new Observer((records) => {
-        this.#syncNativeLabels();
-        if (
-          records.some((record) => record.target === this && record.attributeName === 'aria-label')
-        )
-          this.requestUpdate();
-      });
-      this.#nativeLabelObserver.observe(this.getRootNode(), {
-        childList: true,
-        subtree: true,
-        characterData: true,
+      this.#nativeLabelObserver = new Observer(() => this.requestUpdate());
+      this.#nativeLabelObserver.observe(this, {
         attributes: true,
-        attributeFilter: ['for', 'id', 'aria-label'],
+        attributeFilter: ['aria-label'],
       });
     }
     // Switch reuses Boolean/form behavior, but is not a CheckboxGroup constituent.
@@ -599,6 +594,8 @@ export class TpCheckbox extends TpFormElement {
     this.removeEventListener('click', this.#hostClick);
     this.#nativeLabelObserver?.disconnect();
     this.#nativeLabelObserver = null;
+    this.#releaseNativeLabels?.();
+    this.#releaseNativeLabels = undefined;
     const owner = this.#group;
     this.checkboxGroup = null;
     this.#space = false;

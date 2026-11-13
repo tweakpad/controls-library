@@ -7,6 +7,7 @@ import { repeat } from 'lit/directives/repeat.js';
 import { hiddenStyles } from '../shared/control-styles.js';
 import { TpElement } from '../../foundation/element.js';
 import { CleanupScope } from '../../foundation/services.js';
+import { ComposedEnvironmentObserver } from '../../foundation/composed-environment.js';
 import { observeMediaQuery, observeResize } from '../../foundation/observation.js';
 import {
   composedContains,
@@ -287,7 +288,7 @@ export class TpToast extends TpElement {
   #portalStyles: GeneratedStyleResource | null = null;
   #portalTheme: HTMLDivElement | null = null;
   #observer: MutationObserver | null = null;
-  #themeObserver: MutationObserver | null = null;
+  readonly #themeObserver = new ComposedEnvironmentObserver(this, () => this.#inheritPortalTheme());
   #returnFocus: Element | null = null;
   #hovered = false;
   #focused = false;
@@ -351,27 +352,8 @@ export class TpToast extends TpElement {
           this.manager.remove(identifier, view.toast.lifecycleKey);
       }
     });
-    this.#themeObserver = new (this.ownerDocument.defaultView ?? window).MutationObserver(
-      (records) => {
-        if (
-          records.some((record) => record.target instanceof Element && record.target.contains(this))
-        )
-          this.#inheritPortalTheme();
-      },
-    );
-    this.#themeObserver.observe(this.ownerDocument.documentElement, {
-      subtree: true,
-      attributes: true,
-      attributeFilter: [
-        'class',
-        'style',
-        'data-theme',
-        'dir',
-        'motion-policy',
-        'density',
-        'appearance',
-      ],
-    });
+    // Only the toast's own composed ancestors can change the theme its portal copies.
+    this.#themeObserver.connect();
   }
   override disconnectedCallback(): void {
     this.#scope?.dispose();
@@ -379,7 +361,7 @@ export class TpToast extends TpElement {
     this.#unsubscribe?.();
     this.#unsubscribe = null;
     this.#observer?.disconnect();
-    this.#themeObserver?.disconnect();
+    this.#themeObserver.disconnect();
     for (const gesture of this.#gestures.values()) gesture.reset();
     this.#gestures.clear();
     this.#outputs.clear();

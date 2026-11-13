@@ -2,9 +2,8 @@ import { css, html, nothing } from 'lit';
 import type { PropertyValues } from 'lit';
 import { TpElement } from '../../foundation/element.js';
 import { createId } from '../../foundation/id.js';
-import { composedParent } from '../../foundation/focus.js';
+import { ComposedEnvironmentObserver } from '../../foundation/composed-environment.js';
 import { resolveLocale } from '../../foundation/services.js';
-import { observeMediaQuery } from '../../foundation/observation.js';
 import { prepareMotion, resolvesReducedMotion } from '../../foundation/motion.js';
 import type { MotionHandle } from '../../foundation/motion.js';
 import { progressMotionRoles } from './motion.js';
@@ -164,8 +163,9 @@ export class TpProgress extends TpElement {
   #ambient = false;
   #reduced = false;
   #observer: MutationObserver | null = null;
-  #releaseMedia: (() => void) | undefined;
+  readonly #environment = new ComposedEnvironmentObserver(this, () => this.requestUpdate());
   #contentSignature = '';
+  #observedLabels: { key: string; labels: readonly Element[] } | null = null;
   #diagnostics = new Set<string>();
   readonly #rootReference = (element: HTMLElement | null): void => {
     this.#root = element;
@@ -204,45 +204,20 @@ export class TpProgress extends TpElement {
   }
   override connectedCallback(): void {
     super.connectedCallback();
-    const ownerWindow = this.ownerDocument.defaultView;
-    this.#releaseMedia = observeMediaQuery(
-      ownerWindow,
-      '(prefers-reduced-motion: reduce)',
-      this.#contentChanged,
-    );
-    const Observer = ownerWindow?.MutationObserver;
-    if (Observer) {
-      this.#observer = new Observer(this.#contentChanged);
-      const scopes = new Set<Node>([this.ownerDocument, this.getRootNode()]);
-      for (let node: Node | null = composedParent(this); node; node = composedParent(node))
-        scopes.add(node.getRootNode());
-      for (const scope of scopes)
-        this.#observer.observe(scope, {
-          childList: true,
-          subtree: true,
-          characterData: true,
-          attributes: true,
-          attributeFilter: [
-            'id',
-            'lang',
-            'dir',
-            'aria-label',
-            'aria-labelledby',
-            'motion-policy',
-            'slot',
-            'class',
-            'style',
-          ],
-        });
-    }
+    // Direction, language and motion policy come from the composed chain only; content is the
+    // host's own subtree and the elements that label it, never the whole document.
+    this.#environment.connect();
+    const Observer = this.ownerDocument.defaultView?.MutationObserver;
+    if (Observer) this.#observer = new Observer(this.#contentChanged);
+    this.#observedLabels = null;
+    this.#observeContent();
     this.#contentSignature = this.#signature();
     this.requestUpdate();
   }
   override disconnectedCallback(): void {
     this.#observer?.disconnect();
     this.#observer = null;
-    this.#releaseMedia?.();
-    this.#releaseMedia = undefined;
+    this.#environment.disconnect();
     this.#valueMotion?.cancel();
     this.#ambientMotion?.cancel();
     this.#valueMotion = this.#ambientMotion = null;
@@ -251,11 +226,55 @@ export class TpProgress extends TpElement {
     super.disconnectedCallback();
   }
   readonly #contentChanged = (): void => {
+    this.#observeContent();
     const signature = this.#signature();
     if (signature === this.#contentSignature) return;
     this.#contentSignature = signature;
     this.requestUpdate();
   };
+  /**
+   * Observes the host's subtree and the `aria-labelledby` targets, and the children of their
+   * ancestors so their removal is seen. While a referenced id names no element yet, it also watches
+   * the tree for elements and ids appearing, without text or styles.
+   */
+  #observeContent(): void {
+    const observer = this.#observer;
+    if (!observer) return;
+    const ids = this.#labelIds();
+    const labels = this.#externalLabels();
+    const unresolved = labels.length < ids.length;
+    const key = JSON.stringify([ids, unresolved]);
+    const previous = this.#observedLabels;
+    if (
+      previous?.key === key &&
+      previous.labels.length === labels.length &&
+      previous.labels.every((label, index) => label === labels[index])
+    )
+      return;
+    this.#observedLabels = { key, labels };
+    // The caller reads the signature right after, so pending records need no delivery.
+    observer.takeRecords();
+    observer.disconnect();
+    const content = { childList: true, subtree: true, characterData: true, attributes: true };
+    // One registration per node: observing a node again replaces its earlier options.
+    const targets = new Map<Node, MutationObserverInit>([
+      [this, { ...content, attributeFilter: ['slot', 'id'] }],
+    ]);
+    for (const label of labels) targets.set(label, { ...content, attributeFilter: ['id'] });
+    if (unresolved)
+      for (const scope of [this.getRootNode(), this.ownerDocument])
+        targets.set(scope, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['id'],
+        });
+    // A label's removal is a child change of one of its ancestors.
+    for (const label of labels)
+      for (let node = label.parentNode; node; node = node.parentNode)
+        if (!targets.has(node)) targets.set(node, { childList: true });
+    for (const [target, options] of targets) observer.observe(target, options);
+  }
   #slots(name: string): HTMLElement[] {
     return [...this.querySelectorAll<HTMLElement>(`[slot="${name}"]`)].filter(
       (element) => element.parentElement?.closest<HTMLElement>('tp-progress') === this,
@@ -268,6 +287,14 @@ export class TpProgress extends TpElement {
       (!!contract && ('content' in contract || !!contract.renderDelegate))
     );
   }
+  /** The ids `aria-labelledby` names, unless the part supplies the label elements themselves. */
+  #labelIds(): string[] {
+    const properties = this.partContracts.progress?.hostProperties ?? {};
+    if (Array.isArray(properties['.ariaLabelledByElements'])) return [];
+    return String(properties['aria-labelledby'] ?? this.getAttribute('aria-labelledby') ?? '')
+      .split(/\s+/u)
+      .filter(Boolean);
+  }
   #externalLabels(): Element[] {
     const properties = this.partContracts.progress?.hostProperties ?? {};
     const supplied = properties['.ariaLabelledByElements'];
@@ -275,11 +302,8 @@ export class TpProgress extends TpElement {
       return supplied.filter(
         (element): element is Element => element instanceof this.ownerDocument.defaultView!.Element,
       );
-    const ids = String(properties['aria-labelledby'] ?? this.getAttribute('aria-labelledby') ?? '')
-      .split(/\s+/u)
-      .filter(Boolean);
     const scope = this.getRootNode() as Document | ShadowRoot;
-    return ids.flatMap((id) => {
+    return this.#labelIds().flatMap((id) => {
       const element = scope.getElementById?.(id) ?? this.ownerDocument.getElementById(id);
       return element ? [element] : [];
     });
@@ -289,9 +313,6 @@ export class TpProgress extends TpElement {
       this.#slots('label').map((element) => [element.id, element.textContent]),
       this.#slots('output').map((element) => [element.id, element.textContent]),
       this.#externalLabels().map((element) => [element.id, element.textContent]),
-      resolveLocale(this),
-      this.direction,
-      resolvesReducedMotion(this),
     ]);
   }
   protected override willUpdate(changed: PropertyValues<this>): void {
@@ -320,6 +341,8 @@ export class TpProgress extends TpElement {
       this.toggleAttribute(`data-${status}`, this.#state.status === status);
     this.#syncName();
     this.#syncMotion();
+    // `aria-labelledby` or the part's label elements may have changed.
+    this.#contentChanged();
   }
   #syncName(): void {
     if (!this.#root) return;

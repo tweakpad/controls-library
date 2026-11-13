@@ -1,4 +1,5 @@
 import { composedParent } from './focus.js';
+import { resolvesReducedMotion } from './motion.js';
 import { themeTokens } from './generated-style.js';
 import { POSITIONING_PROPERTIES } from './positioning-properties.js';
 import { resolveLocale } from './services.js';
@@ -60,7 +61,10 @@ export function affectsEnvironment(
   return false;
 }
 
-/** Observe a component's composed inheritance chain, not unrelated page mutations. */
+/**
+ * Observe a component's composed inheritance chain, not unrelated page mutations: its direction,
+ * writing mode, color scheme, language, motion policy and theme tokens.
+ */
 export class ComposedEnvironmentObserver {
   #observer: MutationObserver | null = null;
   #slots: HTMLSlotElement[] = [];
@@ -85,6 +89,7 @@ export class ComposedEnvironmentObserver {
         attributeFilter: [
           'dir',
           'lang',
+          'motion-policy',
           'class',
           'style',
           'slot',
@@ -116,6 +121,7 @@ export class ComposedEnvironmentObserver {
       style.writingMode,
       style.colorScheme,
       resolveLocale(this.owner),
+      resolvesReducedMotion(this.owner),
       ...[...tokens.keys()].sort().map((key) => `${key}:${tokens.get(key)}`),
     ]);
   }
