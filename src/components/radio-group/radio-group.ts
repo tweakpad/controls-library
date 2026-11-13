@@ -1,5 +1,6 @@
 import { css, html } from 'lit';
 import type { PropertyValues } from 'lit';
+import { upgradedMembers } from '../../foundation/upgrade.js';
 import { TpElement } from '../../foundation/element.js';
 import { TpFormElement } from '../../foundation/form-element.js';
 import { ControllableState } from '../../foundation/controllable-state.js';
@@ -206,14 +207,18 @@ export class TpRadioGroup extends TpFormElement<unknown> implements RadioSelecti
     });
   };
   #syncMembers(): void {
-    const members = [
-      ...this.querySelectorAll<Member>(
-        'tp-radio-group-item,button[value],input[type="radio"][value]',
+    // An Item that has not upgraded yet joins once it has; it is not a native member meanwhile.
+    const members = upgradedMembers(
+      [
+        ...this.querySelectorAll<Member>(
+          'tp-radio-group-item,button[value],input[type="radio"][value]',
+        ),
+      ].filter(
+        (member) =>
+          member.closest('tp-radio-group') === this &&
+          !member.parentElement?.closest('tp-radio-group-item'),
       ),
-    ].filter(
-      (member) =>
-        member.closest('tp-radio-group') === this &&
-        !member.parentElement?.closest('tp-radio-group-item'),
+      this.memberChanged,
     );
     for (const previous of this.#members) if (!members.includes(previous)) this.#release(previous);
     this.#members = members;

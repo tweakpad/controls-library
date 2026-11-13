@@ -12,6 +12,7 @@ import type {
   ToolbarRegistration,
 } from '../../foundation/toolbar.js';
 import { toolbarItemOwner, whenToolbar } from '../../foundation/toolbar-membership.js';
+import { upgradedMembers } from '../../foundation/upgrade.js';
 import type { ChangeReason } from '../../foundation/types.js';
 import { setPartComposition } from '../../presentation/controller.js';
 import { toggleGroupJoinedPresentation } from '../../presentation/recipes/toggle-group.js';
@@ -314,8 +315,12 @@ export class TpToggleGroup
     });
   };
   #syncMembers(): void {
-    const members = [...this.querySelectorAll<TpToggle>('tp-toggle')].filter(
-      (member) => member.closest('tp-toggle-group') === this,
+    // A Toggle that has not upgraded yet joins once it has.
+    const members = upgradedMembers(
+      [...this.querySelectorAll<TpToggle>('tp-toggle')].filter(
+        (member) => member.closest('tp-toggle-group') === this,
+      ),
+      this.#schedule,
     );
     for (const previous of this.#members) if (!members.includes(previous)) this.#release(previous);
     this.#members = members;

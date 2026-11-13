@@ -1,3 +1,4 @@
+import { upgradedMembers } from '../../foundation/upgrade.js';
 import { arrowKeys } from '../../foundation/collection.js';
 import { css, html, nothing, type PropertyValues } from 'lit';
 import { ref } from 'lit/directives/ref.js';
@@ -307,8 +308,18 @@ export class TpNavigationMenu extends TpHoverSurface implements NavigationMenuOw
       const previousActive = previous.find((member) => member.value === this.value);
       const values = new Set<string>();
       const next: NavigationMember[] = [];
-      for (const host of [...this.children].filter(
+      const children = [...this.children].filter(
         (node): node is HTMLElement => node.namespaceURI === 'http://www.w3.org/1999/xhtml',
+      );
+      // An Item that has not upgraded yet joins once it has; it is not a native item meanwhile.
+      const items = new Set(
+        upgradedMembers(
+          children.filter((node) => node.localName === TpNavigationMenuItem.tagName),
+          this.itemChanged,
+        ),
+      );
+      for (const host of children.filter(
+        (node) => node.localName !== TpNavigationMenuItem.tagName || items.has(node),
       )) {
         const custom = host instanceof TpNavigationMenuItem;
         const value = custom

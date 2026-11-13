@@ -1,5 +1,6 @@
 import { css, html, nothing, unsafeCSS } from 'lit';
 import type { PropertyValues } from 'lit';
+import { upgradedMembers } from '../../foundation/upgrade.js';
 import { TpElement } from '../../foundation/element.js';
 import { visuallyHiddenRule } from '../../foundation/visually-hidden.js';
 import { dispatchTpEvent } from '../../foundation/events.js';
@@ -608,7 +609,10 @@ export class TpField extends TpElement {
         (!group || group === this || group.closest('tp-field') !== this)
       );
     });
-    const next = members[0] ?? null;
+    // A library control that has not upgraded yet is not adopted as a native one: the Field
+    // waits for it, so its initial value and owned attributes come from the upgraded control.
+    const next =
+      members[0] && upgradedMembers([members[0]], this.#queue).length ? members[0] : null;
     if (next !== this.#control) {
       this.#cancel();
       this.#release();

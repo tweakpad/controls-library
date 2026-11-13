@@ -6,6 +6,7 @@ import { TpSurfaceOpenChangeEvent } from '../../foundation/surface-state.js';
 import type { TpValueChangeEvent } from '../../foundation/events.js';
 import type { ChangeReason } from '../../foundation/types.js';
 import { createId } from '../../foundation/id.js';
+import { upgradedMembers } from '../../foundation/upgrade.js';
 import { componentHandlingPrevented } from '../../foundation/part.js';
 import type { TpMenu, MenuBarOwner, MenuPartTarget } from '../menu/menu.js';
 import { setPartComposition } from '../../presentation/controller.js';
@@ -200,9 +201,13 @@ export class TpMenubar extends TpElement implements MenuBarOwner {
   }
   #sync = (): void => {
     if (!this.isConnected) return;
-    const menus = [...this.querySelectorAll<TpMenu>('tp-menu')].filter(
-      (menu) => (menu.closest('tp-menubar') as Element | null) === this && !menu.parentMenu,
-    );
+    // A Menu that has not upgraded yet joins once it has.
+    const menus = upgradedMembers(
+      [...this.querySelectorAll<TpMenu>('tp-menu')].filter(
+        (menu) => (menu.closest('tp-menubar') as Element | null) === this,
+      ),
+      this.#sync,
+    ).filter((menu) => !menu.parentMenu);
     const previous = this.#members;
     const previousActive = previous.find((member) => member.identifier === this.value);
     const next: Member[] = [];

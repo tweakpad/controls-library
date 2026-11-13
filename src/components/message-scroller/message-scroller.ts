@@ -1,5 +1,6 @@
 import { css, html, type PropertyValues } from 'lit';
 import { hiddenStyles } from '../shared/control-styles.js';
+import { isUpgraded } from '../../foundation/upgrade.js';
 import { createId } from '../../foundation/id.js';
 import { TpElement } from '../../foundation/element.js';
 import { ControllableState } from '../../foundation/controllable-state.js';
@@ -122,12 +123,17 @@ export class TpMessageScroller extends TpElement {
         ...this.querySelectorAll<TpMessageScrollerItem>('tp-message-scroller-item'),
       ].filter((row) => messageScrollerOwner(row) === this);
       if (items.length)
-        return items.map((row) => ({
-          id: this.#rowId(row, row.messageId),
-          anchor: row.scrollAnchor,
-          element: row,
-          addressable: !!row.messageId,
-        }));
+        return items.map((row) => {
+          // An Item that has not upgraded yet reads as it will once it has, from its attributes.
+          const upgraded = isUpgraded(row);
+          const messageId = upgraded ? row.messageId : (row.getAttribute('message-id') ?? '');
+          return {
+            id: this.#rowId(row, messageId),
+            anchor: upgraded ? row.scrollAnchor : row.hasAttribute('scroll-anchor'),
+            element: row,
+            addressable: !!messageId,
+          };
+        });
       // Preserve the original direct-message composition while new addressable rows use Item.
       const content = this.#part('message-scroller-content')?.member;
       return [...(this.#explicit && content ? content.children : this.children)]

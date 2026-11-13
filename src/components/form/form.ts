@@ -1,7 +1,6 @@
 import { TpElement } from '../../foundation/element.js';
 import { ValidationRun } from '../../foundation/validation.js';
-import type { TpField } from '../field/index.js';
-import { fieldSubmission } from '../field/field.js';
+import { fieldSubmission, TpField } from '../field/field.js';
 import { fieldValues } from '../field/field-state.js';
 import { isAvailable } from '../../foundation/focus.js';
 import { formPresentation } from '../../presentation/families/form.js';
@@ -77,8 +76,7 @@ export class TpForm extends TpElement {
   }
   set errors(value: Record<string, string | readonly string[]>) {
     this.#errors = value ?? {};
-    for (const field of this.querySelectorAll<TpField>('tp-field'))
-      if (field.closest('tp-form') === this && !field.fieldSet) field.requestUpdate();
+    for (const field of this.#fields()) field.requestUpdate();
     this.#updateActions();
   }
   /**
@@ -105,9 +103,7 @@ export class TpForm extends TpElement {
   /** The current values of the named Fields inside the Form; repeated names collect into a list. */
   get values(): Record<string, unknown> {
     return fieldValues(
-      [...this.querySelectorAll<TpField>('tp-field')]
-        .filter((field) => field.closest('tp-form') === this && !field.fieldSet)
-        .map((field) => ({ name: field.effectiveName, value: field.value })),
+      this.#fields().map((field) => ({ name: field.effectiveName, value: field.value })),
     );
   }
   /**
@@ -125,7 +121,7 @@ export class TpForm extends TpElement {
   }
   set validationMode(value: 'on-submit' | 'on-blur' | 'on-change') {
     this.setAttribute('validation-mode', value);
-    for (const field of this.querySelectorAll<TpField>('tp-field')) field.requestUpdate();
+    for (const field of this.#fields(true)) field.requestUpdate();
   }
   #form: HTMLFormElement | null = null;
   #observer: MutationObserver | null = null;
@@ -205,9 +201,16 @@ export class TpForm extends TpElement {
     for (const field of this.#fields()) field.requestUpdate();
     this.#updateActions();
   }
-  #fields(): TpField[] {
-    return [...this.querySelectorAll<TpField>('tp-field')].filter(
-      (field) => field.closest('tp-form') === this && !field.fieldSet,
+  /**
+   * The Fields inside the Form, without group Fields unless `includeGroups`. A Field that has not
+   * upgraded yet is left out: it reads the Form's settings itself on its first update.
+   */
+  #fields(includeGroups = false): TpField[] {
+    return [...this.querySelectorAll('tp-field')].filter(
+      (field): field is TpField =>
+        field instanceof TpField &&
+        field.closest('tp-form') === this &&
+        (includeGroups || !field.fieldSet),
     );
   }
   protected override createRenderRoot(): HTMLElement {
@@ -321,12 +324,7 @@ export class TpForm extends TpElement {
     // Let the initiating submit collect its submitter before a pending policy
     // disables that action. Field validation and host submission stay synchronous.
     queueMicrotask(this.#updateActions);
-    const fields = [...this.querySelectorAll<TpField>('tp-field')].filter(
-      (field) =>
-        field.closest('tp-form') === this &&
-        !field.fieldSet &&
-        (!name || field.effectiveName === name),
-    );
+    const fields = this.#fields().filter((field) => !name || field.effectiveName === name);
     void Promise.all(
       fields.map(
         (field) =>
@@ -403,9 +401,7 @@ export class TpForm extends TpElement {
     } finally {
       this.#submissionValidation = false;
     }
-    const fields = [...this.querySelectorAll<TpField>('tp-field')].filter(
-      (field) => field.closest('tp-form') === this && !field.fieldSet,
-    );
+    const fields = this.#fields();
     const invalid = fields.filter(
       (field) => !field.effectiveDisabled && field.validityState.validity.valid === false,
     );
