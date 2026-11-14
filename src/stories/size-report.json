@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-13T23:02:30.364Z",
+  "generatedAt": "2026-11-14T13:27:47.653Z",
   "version": "0.4.0",
   "method": "Each row imports and registers one component or widget from its public package entry. Rolldown tree-shakes and minifies an independent production JavaScript bundle, then measures its output before and after gzip. Required dependencies and embedded styles are included; Lit, optional engines, source maps and the separate global stylesheet are excluded. Each row's React and Vue sizes import its binding from @tweakpad/ui/react and @tweakpad/ui/vue the same way (the framework excluded); each adapter is measured alone. Sizes use kB of 1000 bytes.",
   "lit": { "bytes": 15977, "gzip": 6060 },
   "reactAdapter": { "bytes": 1100, "gzip": 603 },
   "vueAdapter": { "bytes": 1440, "gzip": 779 },
   "full": { "bytes": 2080051, "gzip": 587593 },
-  "fullWidgets": { "bytes": 2010864, "gzip": 583363 },
+  "fullWidgets": { "bytes": 2016963, "gzip": 585205 },
   "components": [
     {
       "name": "Flow",
@@ -425,6 +425,17 @@
       ]
     },
     {
+      "name": "Heatmap",
+      "tagName": "tp-heatmap",
+      "section": "widgets",
+      "react": { "bytes": 243380, "gzip": 72572 },
+      "vue": { "bytes": 243584, "gzip": 72702 },
+      "bytes": 242264,
+      "gzip": 72184,
+      "modules": 98,
+      "includes": ["tp-scroll-area", "tp-toggle", "tp-toggle-group", "tp-tooltip"]
+    },
+    {
       "name": "QR code",
       "tagName": "tp-qr-code",
       "section": "components",
@@ -454,17 +465,6 @@
       "gzip": 66209,
       "modules": 90,
       "includes": ["tp-button", "tp-icon", "tp-progress", "tp-spinner"]
-    },
-    {
-      "name": "Heatmap",
-      "tagName": "tp-heatmap",
-      "section": "widgets",
-      "react": { "bytes": 202459, "gzip": 61097 },
-      "vue": { "bytes": 202676, "gzip": 61248 },
-      "bytes": 201407,
-      "gzip": 60726,
-      "modules": 77,
-      "includes": ["tp-scroll-area", "tp-tooltip"]
     },
     {
       "name": "Slider",
