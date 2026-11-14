@@ -70,7 +70,7 @@ export type HeatmapProps = ElementProps<
     onTpCellActivate: CustomEvent<widgetsHeatmapTypes.HeatmapActivateDetail>;
     onTpDiagnostic: CustomEvent<foundationServices.Diagnostic>;
     onTpInspectionChange: CustomEvent<widgetsHeatmapTypes.HeatmapInspectionDetail>;
-    onTpLevelFilterChange: foundationEvents.TpValueChangeEvent<readonly number[]>;
+    onTpLevelFilterChange: foundationEvents.TpValueChangeEvent<readonly number[] | null>;
     onTpValueChange: foundationEvents.TpValueChangeEvent<foundationCalendar.CalendarValue>;
     onTpValueCommit: foundationEvents.TpValueCommitEvent<foundationCalendar.CalendarValue>;
   }

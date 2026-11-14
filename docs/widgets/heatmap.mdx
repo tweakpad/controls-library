@@ -105,7 +105,7 @@ document.querySelector('#heatmap-colors').data = Array.from({ length: 371 }, (_,
 
 ### Legend filter
 
-`legend-filter` turns each legend level with values into a toggle, all pressed at first. Unpressing a level hides it: its swatch is crossed out and its cells show as empty. At least one level stays shown. `levelFilter` holds the shown levels, empty when every level shows, and each change is a cancelable `tp-level-filter-change`.
+`legend-filter` turns each legend level with values into a toggle, all pressed at first. Unpressing a level hides it: its swatch is crossed out and its cells show as empty. `levelFilter` holds the shown levels, `null` when every level shows, and each change is a cancelable `tp-level-filter-change`.
 
 <Preview
   title="Legend filter"
