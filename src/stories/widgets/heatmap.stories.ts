@@ -3,6 +3,8 @@ import { html } from 'lit';
 import { todayCalendarDate } from '../../foundation/calendar.js';
 import type {
   HeatmapAxis,
+  HeatmapCellState,
+  HeatmapColor,
   HeatmapFit,
   HeatmapLabels,
   HeatmapSelectionMode,
@@ -16,11 +18,12 @@ interface Args {
   size: HeatmapSize;
   shape: HeatmapShape;
   fit: HeatmapFit;
-  color: string;
+  color: HeatmapColor;
   levels: number;
   columnLabels: HeatmapLabels;
   rowLabels: HeatmapLabels;
   legend: boolean;
+  legendFilter: boolean;
   tooltip: boolean;
   loading: boolean;
   selectionMode: HeatmapSelectionMode;
@@ -44,6 +47,7 @@ const meta: Meta<Args> = {
     columnLabels: 'auto',
     rowLabels: 'auto',
     legend: true,
+    legendFilter: false,
     tooltip: true,
     loading: false,
     selectionMode: 'none',
@@ -55,12 +59,13 @@ const meta: Meta<Args> = {
     fit: { control: 'select', options: ['stretch', 'scroll', 'trim'] },
     color: {
       control: 'select',
-      options: ['primary', 'chart-1', 'chart-2', 'chart-3', 'chart-4', 'chart-5', 'success'],
+      options: ['primary', 'success', 'warning', 'destructive'],
     },
     levels: { control: { type: 'number', min: 2, max: 9 } },
     columnLabels: { control: 'select', options: ['auto', 'all', 'alternate', 'none'] },
     rowLabels: { control: 'select', options: ['auto', 'all', 'alternate', 'none'] },
     legend: { control: 'boolean' },
+    legendFilter: { control: 'boolean' },
     tooltip: { control: 'boolean' },
     loading: { control: 'boolean' },
     selectionMode: { control: 'select', options: ['none', 'single', 'multiple', 'range'] },
@@ -78,11 +83,15 @@ const meta: Meta<Args> = {
       .columnLabels=${args.columnLabels}
       .rowLabels=${args.rowLabels}
       .legend=${args.legend}
+      .legendFilter=${args.legendFilter}
       .tooltip=${args.tooltip}
       .loading=${args.loading}
       .selectionMode=${args.selectionMode}
       .weekStartsOn=${args.weekStartsOn}
-      .messages=${{ cell: (_: unknown, value: string, where: string) => `${value} sessions on ${where}` }}
+      .messages=${{
+        cell: (cell: HeatmapCellState, value: string, where: string) =>
+          cell.value === null ? `No sessions on ${where}` : `${value} sessions on ${where}`,
+      }}
     ></tp-heatmap>`,
 };
 export default meta;
@@ -132,7 +141,7 @@ export const ShapesAndColors: Story = {
         end="255"
         columns="16"
         shape="square"
-        color="chart-2"
+        color="success"
         .legend=${false}
         .data=${sequenceValues(256, 'squares')}
       ></tp-heatmap>
@@ -149,13 +158,7 @@ export const Vertical: Story = {
       rows="day-of-month"
       start=${`${today.slice(0, 4)}-01-01`}
       end=${`${today.slice(0, 4)}-12-31`}
-      .colors=${[
-        'var(--tp-muted)',
-        'color-mix(in oklab, var(--tp-chart-5) 25%, var(--tp-muted))',
-        'color-mix(in oklab, var(--tp-chart-1) 45%, var(--tp-muted))',
-        'color-mix(in oklab, var(--tp-chart-5) 70%, var(--tp-muted))',
-        'var(--tp-chart-5)',
-      ]}
+      .colors=${['muted', 'destructive-subtle', 'warning', 'destructive']}
       .data=${focusSessions(`${today.slice(0, 4)}-12-31`, 365)}
     ></tp-heatmap>`,
 };
@@ -170,7 +173,7 @@ export const WeekdaysByHour: Story = {
       columns="hour-of-day"
       rows="weekday"
       row-labels="all"
-      color="chart-2"
+      color="success"
       .data=${hourlyCheckIns(today)}
     ></tp-heatmap>`,
 };
@@ -202,7 +205,7 @@ export const CustomAxes: Story = {
       unit="custom"
       .rows=${studios}
       .columns=${weeks}
-      color="chart-4"
+      color="warning"
       .data=${studioTicks.flatMap((studio, row) =>
         weekTicks.map((week) => ({
           key: { studio: studio.id, week: week.id },
@@ -249,7 +252,11 @@ export const Selection: Story = {
         .data=${sessions}
         @tp-value-commit=${(event: CustomEvent<{ value: unknown }>) => {
           const output = (event.currentTarget as HTMLElement).nextElementSibling;
-          if (output) output.textContent = JSON.stringify(event.detail.value);
+          if (output)
+            output.textContent =
+              event.detail.value === undefined
+                ? 'Nothing selected'
+                : JSON.stringify(event.detail.value);
         }}
       ></tp-heatmap>
       <output style="display: block; margin-block-start: var(--tp-space-2)"

@@ -8,8 +8,8 @@ import type * as widgetsHeatmapTypes from '../../widgets/heatmap/types.js';
 
 /** `<tp-heatmap>` as a Vue component. */
 export const Heatmap = /*#__PURE__*/ createBinding(TpHeatmap, 'Heatmap', {
-  callbacks: ['onInspectionChange', 'onValueChange'],
-  lanes: { value: 'onValueChange' },
+  callbacks: ['onInspectionChange', 'onLevelFilterChange', 'onValueChange'],
+  lanes: { levelFilter: 'onLevelFilterChange', value: 'onValueChange' },
   model: 'value',
 }) as ElementBinding<
   TpHeatmap,
@@ -22,6 +22,7 @@ export const Heatmap = /*#__PURE__*/ createBinding(TpHeatmap, 'Heatmap', {
   | 'columns'
   | 'data'
   | 'dayModifiers'
+  | 'defaultLevelFilter'
   | 'defaultValue'
   | 'density'
   | 'disabled'
@@ -34,6 +35,8 @@ export const Heatmap = /*#__PURE__*/ createBinding(TpHeatmap, 'Heatmap', {
   | 'invalid'
   | 'label'
   | 'legend'
+  | 'legendFilter'
+  | 'levelFilter'
   | 'levels'
   | 'loading'
   | 'locale'
@@ -43,6 +46,7 @@ export const Heatmap = /*#__PURE__*/ createBinding(TpHeatmap, 'Heatmap', {
   | 'minimumSelectionCount'
   | 'motionPolicy'
   | 'onInspectionChange'
+  | 'onLevelFilterChange'
   | 'onValueChange'
   | 'orientation'
   | 'partContracts'
@@ -69,9 +73,10 @@ export const Heatmap = /*#__PURE__*/ createBinding(TpHeatmap, 'Heatmap', {
     'tp-cell-activate': CustomEvent<widgetsHeatmapTypes.HeatmapActivateDetail>;
     'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
     'tp-inspection-change': CustomEvent<widgetsHeatmapTypes.HeatmapInspectionDetail>;
+    'tp-level-filter-change': foundationEvents.TpValueChangeEvent<readonly number[]>;
     'tp-value-change': foundationEvents.TpValueChangeEvent<foundationCalendar.CalendarValue>;
     'tp-value-commit': foundationEvents.TpValueCommitEvent<foundationCalendar.CalendarValue>;
   },
-  'value',
+  'levelFilter' | 'value',
   'value'
 >;

@@ -73,6 +73,9 @@ export interface HeatmapDatum<K = unknown> {
   hint?: unknown;
 }
 
+/** An interface color role pair a heatmap paints with, from its subtle to its strong color. */
+export type HeatmapColor = 'primary' | 'success' | 'warning' | 'destructive';
+
 /** How the values that land on one cell combine. */
 export type HeatmapAggregate = 'sum' | 'mean' | 'max' | 'min' | 'count';
 /** How values map to the levels when no thresholds are given. */
@@ -133,7 +136,9 @@ export interface HeatmapMessages {
   less: string;
   more: string;
   /** The legend swatch of one level. */
-  level(level: number, from: string, to: string): string;
+  levelRange(level: number, from: string, to: string): string;
+  /** The accessible name of the legend's level toggles. */
+  filter: string;
   /** The hints line past `maxHints`. */
   moreHints(count: number): string;
 }

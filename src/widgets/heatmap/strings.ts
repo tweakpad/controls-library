@@ -7,8 +7,9 @@ export const DEFAULT_HEATMAP_MESSAGES: Required<HeatmapMessages> = Object.freeze
   noValue: 'No data',
   less: 'Less',
   more: 'More',
-  level: (level: number, from: string, to: string) =>
+  levelRange: (level: number, from: string, to: string) =>
     level === 0 ? 'No value' : from === to ? to : `${from} to ${to}`,
+  filter: 'Filter by level',
   moreHints: (count: number) => `+${count} more`,
 });
 

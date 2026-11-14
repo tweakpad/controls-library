@@ -1,7 +1,9 @@
 import { html, nothing, type PropertyValues, type TemplateResult } from 'lit';
+import { guard } from 'lit/directives/guard.js';
 import { TpElement } from '../../foundation/element.js';
-import { ControllableState } from '../../foundation/controllable-state.js';
-import { TpValueCommitEvent, type TpValueChangeEvent } from '../../foundation/events.js';
+import { ControllableState, orderedValuesEqual } from '../../foundation/controllable-state.js';
+import { containNestedEvents } from '../../foundation/nested-events.js';
+import { TpValueChangeEvent, TpValueCommitEvent } from '../../foundation/events.js';
 import type { ChangeReason } from '../../foundation/types.js';
 import { defaultTrue } from '../../foundation/converters.js';
 import { resolveLocale } from '../../foundation/services.js';
@@ -34,6 +36,8 @@ import type { CustomElementConstructorWithTag } from '../../foundation/define.js
 import { heatmapPresentation } from '../../presentation/families/heatmap.js';
 import { TpTooltip } from '../../components/tooltip/tooltip.js';
 import { TpScrollArea } from '../../components/scroll-area/scroll-area.js';
+import { TpToggleGroup } from '../../components/toggle-group/toggle-group.js';
+import { TpToggle } from '../../components/toggle/toggle.js';
 import { buildHeatmapModel, type HeatmapCellModel, type HeatmapModel } from './model.js';
 import { DEFAULT_HEATMAP_MESSAGES, resolveHeatmapMessages } from './strings.js';
 import { heatmapStyles } from './styles.js';
@@ -41,6 +45,7 @@ import type {
   HeatmapActivateDetail,
   HeatmapAggregate,
   HeatmapCellState,
+  HeatmapColor,
   HeatmapDatum,
   HeatmapFit,
   HeatmapFormatters,
@@ -56,6 +61,13 @@ import type {
   HeatmapSummary,
   HeatmapUnit,
 } from './types.js';
+
+/** The selected cell ids, with a range's ends. */
+interface SelectedCells {
+  ids: Set<string>;
+  from?: string;
+  to?: string;
+}
 
 /** Calendar's value attribute form: dates separated by spaces, a range as `from/to`. */
 const valueConverter = {
@@ -88,19 +100,55 @@ const projectionConverter = {
   },
 };
 
-/** Theme color roles `color` accepts by name; any other value is a CSS color. */
-const COLOR_ROLES = new Set([
+/** A level list attribute: levels separated by spaces or commas, or a JSON array. */
+const levelListConverter = {
+  fromAttribute(value: string | null): readonly number[] | undefined {
+    if (value === null) return undefined;
+    const parts = value.trim().startsWith('[')
+      ? (JSON.parse(value) as unknown[])
+      : value.split(/[\s,]+/u).filter(Boolean);
+    return normalizeLevels(parts.map(Number));
+  },
+  toAttribute(value: readonly number[] | null | undefined): string | null {
+    return value ? value.join(' ') : null;
+  },
+};
+
+/** Unique non-negative integer levels in ascending order. */
+function normalizeLevels(levels: readonly number[]): number[] {
+  return [...new Set(levels.filter((level) => Number.isInteger(level) && level >= 0))].sort(
+    (a, b) => a - b,
+  );
+}
+
+/**
+ * The interface color roles a heatmap paints with, each a subtle and a strong color the theme
+ * defines for both schemes. Levels run from the subtle color to the strong one, so every level
+ * stays anchored to the theme's own colors.
+ */
+const COLOR_FAMILIES = [
   'primary',
   'success',
   'warning',
   'destructive',
-  'info',
-  'chart-1',
-  'chart-2',
-  'chart-3',
-  'chart-4',
-  'chart-5',
-]);
+] as const satisfies readonly HeatmapColor[];
+
+function familyColors(family: HeatmapColor): { strong: string; subtle: string } {
+  return { strong: `var(--tp-${family})`, subtle: `var(--tp-${family}-subtle)` };
+}
+
+/**
+ * A library color by name, for an explicit ramp: `muted` (the empty color), a role (its strong
+ * color) or `<role>-subtle`; undefined for any other text.
+ */
+function libraryColor(name: string): string | undefined {
+  if (name === 'muted') return 'var(--tp-muted)';
+  const subtle = name.endsWith('-subtle');
+  const family = (subtle ? name.slice(0, -'-subtle'.length) : name) as HeatmapColor;
+  if (!(COLOR_FAMILIES as readonly string[]).includes(family)) return undefined;
+  const colors = familyColors(family);
+  return subtle ? colors.subtle : colors.strong;
+}
 
 /**
  * Values as a grid of colored cells, such as activity over a year. Each datum has a key (a date,
@@ -113,19 +161,21 @@ const COLOR_ROLES = new Set([
  * @slot footer - Content at the start of the legend row, such as a total.
  * @fires tp-value-change - Cancelable proposal of the selected cells (with `selection-mode`).
  * @fires tp-value-commit - After the selection changes.
+ * @fires tp-level-filter-change - Cancelable proposal of the levels the legend filter shows.
  * @fires tp-inspection-change - The hovered or focused cell changed, or inspection ended.
  * @fires tp-cell-activate - A cell was clicked or activated with Enter or Space.
  * @cssprop --tp-heatmap-cell-size - The cell size, and the minimum cell size with `fit="stretch"`.
  * @cssprop --tp-heatmap-gap - The space between cells.
  * @cssprop --tp-heatmap-radius - The cell corner radius; `shape` sets it by default.
- * @cssprop --tp-heatmap-color - The ramp's end color; `color` sets it.
+ * @cssprop --tp-heatmap-color - The ramp's strong color; `color` sets it from an interface role.
+ * @cssprop --tp-heatmap-subtle-color - The ramp's first color after the empty one; `color` sets it.
  * @cssprop --tp-heatmap-empty-color - The color of level 0, where the ramp starts.
  */
 export class TpHeatmap extends TpElement {
   static tagName = 'tp-heatmap';
   /** Library elements this element renders; defining it defines them too. */
   static get elementDependencies(): readonly CustomElementConstructorWithTag[] {
-    return [TpTooltip, TpScrollArea];
+    return [TpTooltip, TpScrollArea, TpToggleGroup, TpToggle];
   }
   static override presentation = heatmapPresentation;
   static override properties = {
@@ -173,6 +223,10 @@ export class TpHeatmap extends TpElement {
     messages: { attribute: false },
     onValueChange: { attribute: false },
     onInspectionChange: { attribute: false },
+    legendFilter: { type: Boolean, attribute: 'legend-filter' },
+    levelFilter: { noAccessor: true, attribute: 'level-filter', converter: levelListConverter },
+    defaultLevelFilter: { attribute: 'default-level-filter', converter: levelListConverter },
+    onLevelFilterChange: { attribute: false },
   };
   static override styles = [TpElement.styles, heatmapStyles];
 
@@ -211,9 +265,12 @@ export class TpHeatmap extends TpElement {
   thresholds: readonly number[] | undefined;
   /** The `[min, max]` of the linear scale; defaults to zero and the largest value. */
   domain: readonly [number, number] | undefined;
-  /** The end color of the ramp: a theme role (`primary`, `chart-1`…`chart-5`, `success`…) or a CSS color. */
-  color = 'primary';
-  /** One CSS color per level, replacing the ramp; its length sets the number of levels. */
+  /** The interface color role whose subtle and strong colors bound the ramp. */
+  color: HeatmapColor = 'primary';
+  /**
+   * One library color per level, replacing the ramp: `muted`, a role (its strong color) or
+   * `<role>-subtle`; its length sets the number of levels.
+   */
   colors: readonly string[] | undefined;
   /** Cell size, gap and label text. */
   size: HeatmapSize = 'default';
@@ -233,6 +290,15 @@ export class TpHeatmap extends TpElement {
   rowLabels: HeatmapLabels = 'auto';
   /** Shows the Less–More legend under the grid. */
   legend = true;
+  /**
+   * Makes each legend level with values a toggle that shows or hides its level's cells; at least
+   * one level stays shown.
+   */
+  legendFilter = false;
+  /** The levels the grid shows at first render, when the page does not own `levelFilter`. */
+  defaultLevelFilter: readonly number[] | undefined;
+  /** Called with each proposed level filter before it commits. */
+  onLevelFilterChange: ((event: TpValueChangeEvent<readonly number[] | null>) => void) | undefined;
   /** The accessible name of the grid. */
   label = 'Heatmap';
   /** Shows the cells as loading placeholders. */
@@ -297,6 +363,44 @@ export class TpHeatmap extends TpElement {
     diagnostic: (message) => this.diagnose('value', message, { once: true }),
   });
 
+  #providedLevelFilter: readonly number[] | null | undefined;
+  readonly #levelFilter = new ControllableState<readonly number[] | null>({
+    host: this,
+    onChange: (event) => this.onLevelFilterChange?.(event),
+    initialValue: null,
+    readControlledValue: () => this.#providedLevelFilter,
+    readDefaultValue: () => this.defaultLevelFilter,
+    hasDefaultValue: () => this.defaultLevelFilter !== undefined,
+    equals: (a, b) => (a === null || b === null ? a === b : orderedValuesEqual(a, b)),
+    eventFactory: (value, previous, reason, source, options) =>
+      new TpValueChangeEvent(value, previous, reason, source, options, 'tp-level-filter-change'),
+    onCommit: (_value, previous) => this.requestUpdate('levelFilter', previous),
+    diagnostic: (message) => this.diagnose('levelFilter', message, { once: true }),
+  });
+
+  /**
+   * The levels the grid shows; the others paint as empty. Null shows every level; an empty list
+   * shows none.
+   */
+  get levelFilter(): readonly number[] | null {
+    return this.#levelFilter.value;
+  }
+  set levelFilter(value: readonly number[] | null | undefined) {
+    const previous = this.levelFilter;
+    this.#providedLevelFilter = value ? normalizeLevels(value) : value;
+    if (this.hasUpdated) this.#levelFilter.sync();
+    this.requestUpdate('levelFilter', previous);
+  }
+
+  constructor() {
+    super();
+    // The legend's Toggle group proposes its own value; the heatmap republishes it as its filter.
+    containNestedEvents(this, {
+      types: ['tp-value-change', 'tp-value-commit', 'tp-field-value'],
+      on: 'root',
+    });
+  }
+
   /** The selected cells: an id, ids, or a `{ from, to }` range, by `selection-mode`. */
   get value(): CalendarValue {
     return this.#selection.value;
@@ -336,9 +440,10 @@ export class TpHeatmap extends TpElement {
   /** Moves focus to a cell by id, scrolling it into view. */
   focusCell(id: string): void {
     if (!this.#ensureModel().byId.has(id)) return;
-    this.#focusedId = id;
-    this.requestUpdate();
-    void this.updateComplete.then(() => this.#cellElement(id)?.focus());
+    void this.updateComplete.then(() => {
+      this.#rove(id);
+      this.#cellElement(id)?.focus();
+    });
   }
 
   // Model --------------------------------------------------------------------------------------
@@ -363,7 +468,7 @@ export class TpHeatmap extends TpElement {
       weekStart: resolveWeekStart(this.weekStartsOn, locale),
       minimalDays: localeWeekInfo(locale).minimalDays,
       locale,
-      levels: this.colors?.length ? this.colors.length : this.levels,
+      levels: this.#explicitRamp()?.length ?? this.levels,
       scale: this.scale,
       thresholds: this.thresholds,
       domain: this.domain,
@@ -402,7 +507,7 @@ export class TpHeatmap extends TpElement {
     return this.selectionMode;
   }
 
-  #selectedIds(): { ids: Set<string>; from?: string; to?: string } {
+  #selectedIds(): SelectedCells {
     const mode = this.#mode();
     if (mode === 'none') return { ids: new Set() };
     const value = normalizeCalendarValue(mode, this.value, this.#order);
@@ -496,8 +601,15 @@ export class TpHeatmap extends TpElement {
     }
   }
 
+  /** Whether the last render rebuilt the cells, so layout-dependent work must run again. */
+  #cellsRendered = false;
+
   protected override updated(changed: PropertyValues<this>): void {
     super.updated(changed);
+    // An update that only moved the inspection (the tooltip) changes no layout: skip the reads.
+    const layout = this.#cellsRendered || changed.size > 0;
+    this.#cellsRendered = false;
+    if (!layout) return;
     this.#observeLayout();
     this.#columnFit.observe(this.renderRoot.querySelector<HTMLElement>('.column-label[data-fit]'), [
       ...this.renderRoot.querySelectorAll<HTMLElement>('.column-label[data-fit] .label-short'),
@@ -508,6 +620,7 @@ export class TpHeatmap extends TpElement {
 
   override connectedCallback(): void {
     super.connectedCallback();
+    this.ownerDocument.addEventListener('pointerdown', this.#outsidePress, true);
     if (this.hasUpdated) {
       this.#observedRoot = null;
       this.#observedViewport = null;
@@ -516,6 +629,7 @@ export class TpHeatmap extends TpElement {
   }
 
   override disconnectedCallback(): void {
+    this.ownerDocument.removeEventListener('pointerdown', this.#outsidePress, true);
     this.#releaseResize?.();
     this.#releaseScroll?.();
     this.#releaseHost?.();
@@ -713,7 +827,12 @@ export class TpHeatmap extends TpElement {
   #inspect(id: string | null, source: 'pointer' | 'keyboard'): void {
     if (this.interaction === 'none') id = null;
     if ((this.#inspected?.id ?? null) === id) return;
+    // The marker moves without rendering the cells again; only the tooltip renders.
+    if (this.#inspected) this.#cellElement(this.#inspected.id)?.removeAttribute('data-focused');
+    if (id !== null) this.#cellElement(id)?.setAttribute('data-focused', '');
     this.#inspected = id === null ? null : { id, source };
+    // A closing tooltip keeps the last cell's content and anchor while it fades out.
+    if (id !== null) this.#tooltipId = id;
     this.requestUpdate();
     const cell = id === null ? undefined : this.#ensureModel().byId.get(id);
     const detail: HeatmapInspectionDetail = {
@@ -736,7 +855,7 @@ export class TpHeatmap extends TpElement {
   readonly #focusIn = (event: FocusEvent): void => {
     const cell = this.#cellFromEvent(event);
     if (!cell) return;
-    this.#focusedId = cell.id;
+    this.#rove(cell.id);
     this.#inspect(cell.id, 'keyboard');
   };
 
@@ -746,6 +865,31 @@ export class TpHeatmap extends TpElement {
     if (this.#inspected?.source === 'keyboard') this.#inspect(null, 'keyboard');
   };
 
+  /** A press outside the heatmap clears the selection, unless one is required. */
+  readonly #outsidePress = (event: PointerEvent): void => {
+    if (event.composedPath().includes(this)) return;
+    const mode = this.#mode();
+    if (mode === 'none' || this.required) return;
+    const empty = normalizeCalendarValue(mode, undefined, this.#order);
+    if (sameCalendarValue(mode, this.value, empty, this.#order)) return;
+    this.#selection.set(empty, 'outside-press', event);
+  };
+
+  /** The levels with values (1 and up), each a toggle of the legend filter. */
+  #valueLevels(): number[] {
+    return Array.from({ length: this.#ensureModel().levels - 1 }, (_, index) => index + 1);
+  }
+
+  /**
+   * A legend toggle shows (pressed) or hides (unpressed) its level; showing every level is no
+   * filter at all.
+   */
+  readonly #legendChange = (event: TpValueChangeEvent<readonly string[]>): void => {
+    const shown = normalizeLevels(event.detail.value.map(Number)).filter((level) => level > 0);
+    const all = shown.length === this.#valueLevels().length;
+    this.#levelFilter.set(all ? null : shown, event.detail.reason, event);
+  };
+
   readonly #click = (event: MouseEvent): void => {
     const cell = this.#cellFromEvent(event);
     if (cell) this.#activate(cell, 'selection', event);
@@ -753,7 +897,7 @@ export class TpHeatmap extends TpElement {
 
   #activate(cell: HeatmapCellModel, reason: ChangeReason, sourceEvent: Event): void {
     if (this.interaction === 'none') return;
-    this.#focusedId = cell.id;
+    this.#rove(cell.id);
     const detail: HeatmapActivateDetail = { cell: this.#cellState(cell), sourceEvent };
     this.emit('tp-cell-activate', detail);
     const mode = this.#mode();
@@ -814,14 +958,22 @@ export class TpHeatmap extends TpElement {
     }
     event.preventDefault();
     if (!target) return;
-    this.#focusedId = target.id;
-    this.requestUpdate();
-    void this.updateComplete.then(() => {
-      const element = this.#cellElement(target.id);
-      element?.focus();
-      element?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-    });
+    this.#rove(target.id);
+    const element = this.#cellElement(target.id);
+    element?.focus();
+    element?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   };
+
+  /** Moves the grid's one tab stop to a cell, without rendering the cells again. */
+  #rove(id: string): void {
+    if (id === this.#focusedId) return;
+    const previous = this.renderRoot.querySelector<HTMLElement>('.cell[tabindex="0"]');
+    const next = this.#cellElement(id);
+    this.#focusedId = id;
+    if (!next || this.interaction === 'none') return;
+    previous?.setAttribute('tabindex', '-1');
+    next.setAttribute('tabindex', '0');
+  }
 
   /** The visible cells as a sparse grid, the trimmed columns left out. */
   #visibleGrid(model: HeatmapModel): GridCells {
@@ -861,19 +1013,43 @@ export class TpHeatmap extends TpElement {
 
   // Rendering ----------------------------------------------------------------------------------
 
-  #colorValue(): string {
-    return COLOR_ROLES.has(this.color)
-      ? `var(--tp-${this.color})`
-      : this.color || 'var(--tp-primary)';
+  /** The ramp's family; an unknown name reports a diagnostic and falls back to `primary`. */
+  #family(): HeatmapColor {
+    if ((COLOR_FAMILIES as readonly string[]).includes(this.color)) return this.color;
+    this.diagnose('color', `"${String(this.color)}" is not a heatmap color role.`, {
+      once: true,
+      defer: true,
+    });
+    return 'primary';
   }
 
-  /** The color of a level: an explicit ramp entry, or a mix from the empty color to `color`. */
+  /** The explicit ramp, resolved to library colors; undefined when `colors` names any other. */
+  #explicitRamp(): string[] | undefined {
+    if (!this.colors?.length) return undefined;
+    const ramp = this.colors.map(libraryColor);
+    if (ramp.every((color): color is string => color !== undefined)) return ramp;
+    this.diagnose('colors', '`colors` takes library color names only.', {
+      once: true,
+      defer: true,
+    });
+    return undefined;
+  }
+
+  #colorStyle(): string {
+    const { strong, subtle } = familyColors(this.#family());
+    return `--_color: var(--tp-heatmap-color, ${strong}); --_color-subtle: var(--tp-heatmap-subtle-color, ${subtle})`;
+  }
+
+  /**
+   * The color of a level: an explicit ramp entry, or level 0's empty color and then the family's
+   * subtle color rising to its strong color.
+   */
   #levelColor(level: number, levels: number): string {
-    if (this.colors?.length) return this.colors[Math.min(level, this.colors.length - 1)]!;
+    const ramp = this.#explicitRamp();
+    if (ramp) return ramp[Math.min(level, ramp.length - 1)]!;
     if (level <= 0) return 'var(--tp-heatmap-empty-color, var(--_empty))';
-    // Level 1 starts visibly off the empty color; the last level is the full color.
-    const share = Math.round(25 + (75 * (level - 1)) / Math.max(1, levels - 2));
-    return `color-mix(in oklab, var(--_color) ${Math.min(100, share)}%, var(--tp-heatmap-empty-color, var(--_empty)))`;
+    const share = Math.round(15 + (85 * (level - 1)) / Math.max(1, levels - 2));
+    return `color-mix(in oklab, var(--_color) ${Math.min(100, share)}%, var(--_color-subtle))`;
   }
 
   #labelMode(axis: 'columns' | 'rows'): HeatmapLabels {
@@ -957,11 +1133,7 @@ export class TpHeatmap extends TpElement {
     >`;
   }
 
-  #renderCell(
-    cell: HeatmapCellModel,
-    selection: { ids: Set<string>; from?: string; to?: string },
-    focusable: string,
-  ): TemplateResult {
+  #renderCell(cell: HeatmapCellModel, selection: SelectedCells, focusable: string): TemplateResult {
     const model = this.#ensureModel();
     const state = this.#cellState(cell, selection.ids);
     const hints = state.hints.filter((hint): hint is string => typeof hint === 'string');
@@ -975,9 +1147,9 @@ export class TpHeatmap extends TpElement {
       data-level=${this.loading ? 0 : cell.level}
       ?data-empty=${cell.value === null}
       ?data-today=${state.today}
+      ?data-filtered=${this.levelFilter !== null && !this.levelFilter.includes(cell.level)}
       ?data-selected=${state.selected}
       ?data-disabled=${state.disabled}
-      ?data-focused=${this.#inspected?.id === cell.id}
       ?data-range-start=${inRange && cell.id === selection.from}
       ?data-range-end=${inRange && cell.id === (selection.to ?? selection.from)}
       ?data-range-middle=${inRange && cell.id !== selection.from && cell.id !== (selection.to ?? selection.from)}
@@ -990,8 +1162,11 @@ export class TpHeatmap extends TpElement {
     ></span>`;
   }
 
+  /** The cell the tooltip shows: the inspected one, or the last one while the tooltip closes. */
+  #tooltipId = '';
+
   #renderTooltipContent(): unknown {
-    const id = this.#inspected?.id;
+    const id = this.#tooltipId;
     const cell = id === undefined ? undefined : this.#ensureModel().byId.get(id);
     if (!cell) return nothing;
     const state = this.#cellState(cell);
@@ -1008,35 +1183,75 @@ export class TpHeatmap extends TpElement {
     if (!this.legend) return nothing;
     const messages = resolveHeatmapMessages(this.messages);
     const levels = Array.from({ length: model.levels }, (_, level) => level);
+    // Levels the filter hides are crossed out.
+    const filter = this.legendFilter ? this.levelFilter : null;
+    const swatch = (level: number) =>
+      html`<span
+        class="legend-cell"
+        part="heatmap-legend-cell"
+        ?data-excluded=${level > 0 && filter !== null && !filter.includes(level)}
+        data-level=${level}
+        style="--tp-heatmap-level-color: ${this.#levelColor(level, model.levels)}"
+      ></span>`;
+    // Whole-number data reads in whole-number bounds: a level holds the integers in its range.
+    const integral = model.cells.every(
+      (cell) => cell.value === null || Number.isInteger(cell.value),
+    );
+    const title = (level: number) => {
+      const range = level === 0 ? undefined : model.scale.ranges[level - 1];
+      if (!range) return messages.levelRange(0, '', '');
+      const to = integral ? Math.floor(range[1]) : range[1];
+      const from = integral ? Math.min(to, Math.floor(range[0]) + 1) : range[0];
+      return messages.levelRange(level, this.#formatValue(from), this.#formatValue(to));
+    };
+    if (this.legendFilter)
+      // Each level with values is a Toggle of the library's Toggle group; the pressed ones filter
+      // the grid. Level 0 (no value) already paints as empty, which is what a filtered cell
+      // shows, so it stays a plain swatch with nothing to toggle.
+      return html`<div class="legend" part="heatmap-legend">
+        <span class="legend-text" aria-hidden="true">${messages.less}</span>
+        <span title=${title(0)} aria-hidden="true">${swatch(0)}</span>
+        <tp-toggle-group
+          class="legend-filter"
+          multiple
+          size="icon-xs"
+          spacing="0"
+          .label=${messages.filter}
+          .value=${(this.levelFilter ?? this.#valueLevels()).map(String)}
+          @tp-value-change=${this.#legendChange}
+        >
+          ${levels
+            .slice(1)
+            .map(
+              (level) =>
+                html`<tp-toggle value=${level} aria-label=${title(level)}
+                  >${swatch(level)}</tp-toggle
+                >`,
+            )}
+        </tp-toggle-group>
+        <span class="legend-text" aria-hidden="true">${messages.more}</span>
+      </div>`;
     return html`<div class="legend" part="heatmap-legend" aria-hidden="true">
       <span class="legend-text">${messages.less}</span>
-      ${levels.map((level) => {
-        const range = level === 0 ? undefined : model.scale.ranges[level - 1];
-        const title = range
-          ? messages.level(level, this.#formatValue(range[0]), this.#formatValue(range[1]))
-          : messages.level(0, '', '');
-        return html`<span
-          class="legend-cell"
-          part="heatmap-legend-cell"
-          data-level=${level}
-          title=${title}
-          style="--tp-heatmap-level-color: ${this.#levelColor(level, model.levels)}"
-        ></span>`;
-      })}
+      ${levels.map((level) => html`<span title=${title(level)}>${swatch(level)}</span>`)}
       <span class="legend-text">${messages.more}</span>
     </div>`;
   }
 
   override render(): unknown {
     const model = this.#ensureModel();
-    const selection = this.#selectedIds();
-    const visibleCells = model.cells.filter((cell) => cell.column >= this.#trim);
+    // Computed only when the cells render (see the guard below), once per render.
+    let selectionCache: SelectedCells | undefined;
+    const selection = () => (selectionCache ??= this.#selectedIds());
+    const visibleCells = () => model.cells.filter((cell) => cell.column >= this.#trim);
     // The tab stop: the focused cell, then a selected one, then today, then the latest cell.
     const visible = (id: string) => (model.byId.get(id)?.column ?? -1) >= this.#trim;
-    const focusable =
-      [this.#focusedId, ...selection.ids, this.today].find((id) => id && visible(id)) ??
-      visibleCells.at(-1)?.id ??
-      '';
+    let focusableCache: string | undefined;
+    const focusable = () =>
+      (focusableCache ??=
+        [this.#focusedId, ...selection().ids, this.today].find((id) => id && visible(id)) ??
+        visibleCells().at(-1)?.id ??
+        '');
     const rowMode = this.#labelMode('rows');
     const rowLabels =
       rowMode === 'none'
@@ -1050,7 +1265,11 @@ export class TpHeatmap extends TpElement {
                 : model.rows.map((_, row) => this.#renderRowLabel(model, row, rowMode))
             }
           </div>`;
-    const rowsOfCells = model.rows.map((_, row) => visibleCells.filter((cell) => cell.row === row));
+    const rowsOfCells = () => {
+      const rows: HeatmapCellModel[][] = model.rows.map(() => []);
+      for (const cell of visibleCells()) rows[cell.row]!.push(cell);
+      return rows;
+    };
     // The grid holds the rows; each row names itself with a hidden row header, while the visible
     // labels are a separate strip that scrolls with the cells.
     const multiselectable = this.#mode() === 'multiple' || this.#mode() === 'range';
@@ -1068,21 +1287,43 @@ export class TpHeatmap extends TpElement {
       @click=${this.#click}
       @keydown=${this.#keyDown}
     >
-      ${rowsOfCells.map(
-        (row, index) =>
-          html`<div class="row" role="row" style="--_row: ${index + 1}">
-            ${
-              model.rows[index]!.label('long')
-                ? html`<span class="visually-hidden" role="rowheader"
-                    >${model.rows[index]!.label('long')}</span
-                  >`
-                : nothing
-            }
-            ${row.map((cell) => this.#renderCell(cell, selection, focusable))}
-          </div>`,
+      ${guard(
+        [
+          model,
+          this.value,
+          this.selectionMode,
+          this.levelFilter,
+          this.loading,
+          this.#trim,
+          this.interaction,
+          this.messages,
+          this.formatters,
+          this.dayModifiers,
+          this.disabledCells,
+          this.colors,
+          this.color,
+          this.#locale(),
+        ],
+        () => {
+          // Hovering and keyboard moves never come here: they update one marker and the tooltip.
+          this.#cellsRendered = true;
+          return rowsOfCells().map(
+            (row, index) =>
+              html`<div class="row" role="row" style="--_row: ${index + 1}">
+                ${
+                  model.rows[index]!.label('long')
+                    ? html`<span class="visually-hidden" role="rowheader"
+                        >${model.rows[index]!.label('long')}</span
+                      >`
+                    : nothing
+                }
+                ${row.map((cell) => this.#renderCell(cell, selection(), focusable()))}
+              </div>`,
+          );
+        },
       )}
     </div>`;
-    const inspected = this.#inspected ? this.#cellElement(this.#inspected.id) : null;
+    const anchor = this.#tooltipId ? this.#cellElement(this.#tooltipId) : null;
     const footerFilled = this.legend || this.#footerFilled;
     return this.renderPart('heatmap', Object.freeze({ size: this.size, shape: this.shape }), {
       tag: 'div',
@@ -1092,7 +1333,7 @@ export class TpHeatmap extends TpElement {
         'data-size': this.size,
         'data-shape': this.shape,
         'data-scroll': this.#scrolling,
-        style: `--_color: ${this.#colorValue()}`,
+        style: this.#colorStyle(),
       },
       content: html`<div
           class="plot"
@@ -1121,8 +1362,8 @@ export class TpHeatmap extends TpElement {
             ? html`<tp-tooltip
                 part="heatmap-tooltip"
                 describes="none"
-                .open=${Boolean(inspected)}
-                .anchor=${inspected ?? undefined}
+                .open=${Boolean(this.#inspected && anchor)}
+                .anchor=${anchor ?? undefined}
                 .showArrow=${false}
               >
                 ${this.#renderTooltipContent()}

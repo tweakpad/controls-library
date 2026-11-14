@@ -19,6 +19,7 @@ export type HeatmapProps = ElementProps<
   | 'columns'
   | 'data'
   | 'dayModifiers'
+  | 'defaultLevelFilter'
   | 'defaultValue'
   | 'density'
   | 'disabled'
@@ -31,6 +32,8 @@ export type HeatmapProps = ElementProps<
   | 'invalid'
   | 'label'
   | 'legend'
+  | 'legendFilter'
+  | 'levelFilter'
   | 'levels'
   | 'loading'
   | 'locale'
@@ -40,6 +43,7 @@ export type HeatmapProps = ElementProps<
   | 'minimumSelectionCount'
   | 'motionPolicy'
   | 'onInspectionChange'
+  | 'onLevelFilterChange'
   | 'onValueChange'
   | 'orientation'
   | 'partContracts'
@@ -66,6 +70,7 @@ export type HeatmapProps = ElementProps<
     onTpCellActivate: CustomEvent<widgetsHeatmapTypes.HeatmapActivateDetail>;
     onTpDiagnostic: CustomEvent<foundationServices.Diagnostic>;
     onTpInspectionChange: CustomEvent<widgetsHeatmapTypes.HeatmapInspectionDetail>;
+    onTpLevelFilterChange: foundationEvents.TpValueChangeEvent<readonly number[]>;
     onTpValueChange: foundationEvents.TpValueChangeEvent<foundationCalendar.CalendarValue>;
     onTpValueCommit: foundationEvents.TpValueCommitEvent<foundationCalendar.CalendarValue>;
   }
@@ -78,8 +83,9 @@ export const Heatmap = /*#__PURE__*/ createBinding<HeatmapProps>(
     onTpCellActivate: 'tp-cell-activate',
     onTpDiagnostic: 'tp-diagnostic',
     onTpInspectionChange: 'tp-inspection-change',
+    onTpLevelFilterChange: 'tp-level-filter-change',
     onTpValueChange: 'tp-value-change',
     onTpValueCommit: 'tp-value-commit',
   },
-  ['onInspectionChange', 'onValueChange'],
+  ['onInspectionChange', 'onLevelFilterChange', 'onValueChange'],
 );

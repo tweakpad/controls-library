@@ -503,6 +503,7 @@ type Tags = {
     | 'columns'
     | 'data'
     | 'dayModifiers'
+    | 'defaultLevelFilter'
     | 'defaultValue'
     | 'density'
     | 'disabled'
@@ -515,6 +516,8 @@ type Tags = {
     | 'invalid'
     | 'label'
     | 'legend'
+    | 'legendFilter'
+    | 'levelFilter'
     | 'levels'
     | 'loading'
     | 'locale'
@@ -548,6 +551,7 @@ type Tags = {
       'tp-cell-activate': CustomEvent<widgetsHeatmapTypes.HeatmapActivateDetail>;
       'tp-diagnostic': CustomEvent<foundationServices.Diagnostic>;
       'tp-inspection-change': CustomEvent<widgetsHeatmapTypes.HeatmapInspectionDetail>;
+      'tp-level-filter-change': foundationEvents.TpValueChangeEvent<readonly number[]>;
       'tp-value-change': foundationEvents.TpValueChangeEvent<foundationCalendar.CalendarValue>;
       'tp-value-commit': foundationEvents.TpValueCommitEvent<foundationCalendar.CalendarValue>;
     }

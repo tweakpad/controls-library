@@ -47,7 +47,7 @@ Other units place other keys. With `unit="hour"`, keys are `2026-03-04T14` and `
 <Preview
   title="Weekdays by hour"
   align="stretch"
-  code={`<tp-heatmap id="heatmap-hours" label="Check-ins" unit="hour" columns="hour-of-day" rows="weekday" row-labels="all" color="chart-2"></tp-heatmap>`}
+  code={`<tp-heatmap id="heatmap-hours" label="Check-ins" unit="hour" columns="hour-of-day" rows="weekday" row-labels="all" color="success"></tp-heatmap>`}
   script={`const heatmap = document.querySelector('#heatmap-hours');
 const now = Date.now();
 heatmap.data = Array.from({ length: 14 * 24 }, (_, offset) => {
@@ -90,14 +90,29 @@ heatmap.data = [{ key: { studio: 'harbor', week: 2 }, value: 4 }];`}
 
 ### Levels and colors
 
-Values map to `levels` colors, level 0 being no value. The levels split the values into equal steps from zero to the largest value; `scale="quantile"` gives each level an equal share of the values instead, and `thresholds` sets the lower bound of each level. A datum's `level` overrides its cell's. `color` takes a theme color such as `primary`, `success` or `chart-1` to `chart-5`, or any CSS color; `colors` replaces the ramp with one color per level.
+Values map to `levels` colors, level 0 being no value. The levels split the values into equal steps from zero to the largest value; `scale="quantile"` gives each level an equal share of the values instead, and `thresholds` sets the lower bound of each level. A datum's `level` overrides its cell's. `color` picks the theme color the levels use: `primary`, `success`, `warning` or `destructive`. The levels rise from its subtle color to its strong one, in both color schemes. `colors` replaces the ramp with one theme color per level: `muted`, one of those colors or its `-subtle` form.
 
 <Preview
   title="Colors"
   align="stretch"
-  code={`<tp-heatmap id="heatmap-colors" label="Focus sessions" color="chart-3" levels="4" scale="quantile"></tp-heatmap>`}
+  code={`<tp-heatmap id="heatmap-colors" label="Focus sessions" color="success" levels="4" scale="quantile"></tp-heatmap>`}
   script={`const day = (offset) => new Date(Date.now() - offset * 864e5).toISOString().slice(0, 10);
 document.querySelector('#heatmap-colors').data = Array.from({ length: 371 }, (_, offset) => ({
+  key: day(offset),
+  value: Math.round(Math.random() ** 2 * 8),
+}));`}
+/>
+
+### Legend filter
+
+`legend-filter` turns each legend level with values into a toggle, all pressed at first. Unpressing a level hides it: its swatch is crossed out and its cells show as empty. At least one level stays shown. `levelFilter` holds the shown levels, empty when every level shows, and each change is a cancelable `tp-level-filter-change`.
+
+<Preview
+  title="Legend filter"
+  align="stretch"
+  code={`<tp-heatmap id="heatmap-filter" label="Focus sessions" legend-filter default-level-filter="3 4"></tp-heatmap>`}
+  script={`const day = (offset) => new Date(Date.now() - offset * 864e5).toISOString().slice(0, 10);
+document.querySelector('#heatmap-filter').data = Array.from({ length: 371 }, (_, offset) => ({
   key: day(offset),
   value: Math.round(Math.random() ** 2 * 8),
 }));`}
@@ -143,7 +158,7 @@ Hovering or focusing a cell shows its value and date in a tooltip. A datum's `hi
 <Preview
   title="Hints"
   align="stretch"
-  code={`<tp-heatmap id="heatmap-hints" label="Releases" color="chart-4"></tp-heatmap>`}
+  code={`<tp-heatmap id="heatmap-hints" label="Releases" color="warning"></tp-heatmap>`}
   script={`const heatmap = document.querySelector('#heatmap-hints');
 const day = (offset) => new Date(Date.now() - offset * 864e5).toISOString().slice(0, 10);
 heatmap.messages = { cell: (cell, value, where) => \`\${value} deploys on \${where}\` };
@@ -156,7 +171,7 @@ heatmap.data = ['Atlas', 'Birch', 'Cedar', 'Dune', 'Ember'].map((name, index) =>
 
 ### Selection
 
-`selection-mode` lets people select a cell (`single`), several (`multiple`) or a run of cells (`range`), as in a calendar. `value` holds the selected keys, and each change is a cancelable `tp-value-change`. Every click or Enter also fires `tp-cell-activate`, selectable or not.
+`selection-mode` lets people select a cell (`single`), several (`multiple`) or a run of cells (`range`), as in a calendar. `value` holds the selected keys, and each change is a cancelable `tp-value-change`. A press outside the heatmap clears the selection, unless `required` keeps one. Every click or Enter also fires `tp-cell-activate`, selectable or not.
 
 <Preview
   title="Range selection"

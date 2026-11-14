@@ -34,6 +34,10 @@ export const heatmapStyles = css`
     min-inline-size: 0;
     min-block-size: 0;
 
+    /* The plot takes the width its container gives and never widens it: stretched cells that
+       do not fit scroll instead, also inside flex and grid items sized by their content. */
+    contain: inline-size;
+
     /* Cells that do not fit are cut off, but the rings of edge cells stay whole. */
     overflow: clip;
     overflow-clip-margin: calc(var(--tp-ring-width, 2px) + var(--tp-ring-offset, 2px) + 1px);
@@ -147,9 +151,12 @@ export const heatmapStyles = css`
     white-space: nowrap;
   }
 
+  /* Row labels sit against the cells: at the inline end of their column. */
   .row-label {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    text-align: end;
   }
 
   .column-label {
@@ -249,6 +256,7 @@ export const heatmapStyles = css`
 
   .legend-cell {
     display: block;
+    flex: none;
     inline-size: var(--_legend-cell);
     block-size: var(--_legend-cell);
   }
